@@ -1,0 +1,13 @@
+subprojects {
+	./Renderer
+}
+
+includepaths {
+	./Sprites
+}
+
+files {
+	(Sprites)
+	Sprite.h
+	Sprite.cpp
+}

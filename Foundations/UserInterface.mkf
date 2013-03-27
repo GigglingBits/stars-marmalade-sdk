@@ -1,0 +1,24 @@
+includepaths {
+	./UserInterface
+}
+
+files {
+	(UserInterface)
+	InputManager.h
+	InputManager.cpp
+
+	PinchGesture.h
+	PinchGesture.cpp
+
+	ButtonCommandId.h
+	Button.h
+	Button.cpp
+	ButtonPanel.h
+	ButtonPanel.cpp
+
+	Curtain.h
+	Curtain.cpp
+
+	Window.h
+	Window.cpp
+}

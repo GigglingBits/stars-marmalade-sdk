@@ -1,0 +1,38 @@
+subprojects {
+	iwhttp
+}
+
+includepaths {
+	./Utilities
+}
+
+files {
+	(Utilities)
+	Debug.h 
+
+	Downloader.h
+	Downloader.cpp
+
+	Functor.h
+	Event.h
+	EventTimer.h
+
+	FrequencyCounter.h
+	FrequencyCounter.cpp
+
+	DeviceInfo.h
+	DeviceInfo.cpp
+
+	Oscillator.h
+	Oscillator.cpp
+
+	Stopwatch.h
+	Stopwatch.cpp
+	Timer.h
+	Timer.cpp
+
+	ThreadPool.h
+	ThreadPool.cpp
+	ThreadPoolTask.h
+	ThreadPoolTask.cpp
+}

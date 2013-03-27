@@ -1,0 +1,13 @@
+subprojects {
+	"$MARMALADE_ROOT/extensions/s3eDialog"
+}
+
+includepaths {
+	./Logging
+}
+
+files {
+	(Logging)
+	LogManager.h
+	LogManager.cpp
+}

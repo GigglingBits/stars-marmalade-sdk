@@ -1,0 +1,23 @@
+options {
+	arm-fpu=1 # Box2D will not work without FPU
+}
+
+subprojects {
+	../Box2D/box2d
+	./Utilities
+}
+
+includepaths {
+	./Physics
+	../Box2D/Box2D
+}
+
+files {
+	(Physics)
+	World.h
+	World.cpp
+	ContactListener.h
+	ContactListener.cpp
+	RayCaster.h
+	RayCaster.cpp
+}

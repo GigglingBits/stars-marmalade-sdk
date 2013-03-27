@@ -1,0 +1,13 @@
+subprojects {
+	"$MARMALADE_ROOT/examples/SoundEngine"
+}
+
+includepaths {
+	./Sound
+}
+
+files {
+	(Sound)	
+	SoundEngine.h
+	SoundEngine.cpp
+}
