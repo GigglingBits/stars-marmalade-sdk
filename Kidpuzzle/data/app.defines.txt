@@ -1,0 +1,1 @@
+TIXML_USE_STL	Enables STL support in TinyXML

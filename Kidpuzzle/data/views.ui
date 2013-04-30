@@ -1,0 +1,48 @@
+CIwUIScrollableView {
+    name					"view"
+    pos						{ 50, 50 }
+    sizeToContent			true
+
+	CIwUILayoutHorizontal {
+	}
+}
+
+CIwUILabel {
+	name					"tile"
+	pos						{ 50, 50 }
+	size					{ 250, 150 }
+	sizeMax					{ 250, 150 }
+	sizeToContent			false
+	alignH					centre
+	alignV					middle
+	border					{ 20 10 }
+	font					"janda22"
+	textColour				{ 0, 0, 255 }
+	caption					"The most versatile layout is CIwUILayoutGrid. It allows for placing elements into cells of a grid of arbitrary size."
+}
+
+CIwUIButton {
+	name 			"LevelButton"
+	pos         	{ 50, 50 }
+    size			{ 250, 150 }
+	sizeMax			{ 250, 150 }
+	sizeMin			{ 250, 150 }
+    font        	"janda22"
+	textColour  	{ 0, 0, 255 }
+    caption    		"I am a button"
+	alignH 			"centre"
+	alignV 			"middle"
+	margin  		{ 10, 10 }
+
+	buttonUp {
+        drawableType "border"
+		texture	"button_up"
+        border  { 12, 12 }
+    }
+
+    buttonDown {
+		drawableType "border"
+		texture "button_down"
+        border  { 12, 12 }
+    }
+}
