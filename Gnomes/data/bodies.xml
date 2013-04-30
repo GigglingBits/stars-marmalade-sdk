@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Design space
+============
+The design space is the coordinate system used for designing objects and levels.
+
+Origin:       Lower left
+Orientation:  x is right, y is up
+Units:        Meters
+Rotation:     Radians, CCW
+
+Polygons must be convex and be defined CCW.
+
+
+Screen space
+============
+The screen space is the coordinate system used by the display.
+Origin:       top left
+Orientation:  x is right, y is down
+Units:        Meters
+Rotation:     Radians, CCW?
+
+
+Children and ports
+==================
+Ports are used by joints. Unspecified ports are interpreted as the origin 
+of the body. Unspecified bodies are interpreted as the current body, i.e. 
+the bodie that owns the joint.
+-->
+
+<root xmlns="http://www.gigglingbits.com" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
+      fileformatversion="2">
+  <bodies>
+
+    <!-- gameplay -->
+    <body id="gnome_arm_left" type="dynamic" fixture="gnome" resilience="1.0">
+      <shape type="polygon">
+        <point x="0.0" y="-0.2" />
+        <point x="0.04" y="0.05" />
+        <point x="-0.04" y="0.05" />
+      </shape>
+      <texture image="gnome_arm_left" />
+    </body>
+
+    <body id="gnome_arm_right" type="dynamic" fixture="gnome" resilience="1.0">
+      <shape type="polygon">
+        <point x="0.0" y="-0.2" />
+        <point x="0.04" y="0.05" />
+        <point x="-0.04" y="0.05" />
+      </shape>
+      <texture image="gnome_arm_right" />
+    </body>
+
+    <body id="gnome_leg_left" type="dynamic" fixture="gnome" resilience="1.0">
+      <shape type="polygon">
+        <point x="0.0" y="-0.2" />
+        <point x="0.075" y="0.0" />
+        <point x="-0.075" y="0.0" />
+      </shape>
+      <texture image="gnome_leg_left" />
+    </body>
+
+    <body id="gnome_leg_right" type="dynamic" fixture="gnome" resilience="1.0">
+      <shape type="polygon">
+        <point x="0.0" y="-0.2" />
+        <point x="0.075" y="0.0" />
+        <point x="-0.075" y="0.0" />
+      </shape>
+      <texture image="gnome_leg_right" />
+    </body>
+
+    <body id="gnome_body" type="dynamic" fixture="gnome" resilience="1.0">
+      <shape type="polygon">
+        <point x="-0.2" y="-0.275" />
+        <point x="0.2" y="-0.275" />
+        <point x="0.2" y="0.0" />
+        <point x="-0.2" y="0.0" />
+      </shape>
+      <texture image="gnome_body" />
+      <port id="shoulder_left" x="-0.075" y="-0.05" />
+      <port id ="shoulder_right" x="0.075" y="-0.05" />
+      <port id="hip_left" x="-0.04" y="-0.225" />
+      <port id="hip_right" x="0.04" y="-0.225" />
+      <child id="arm_left " body="gnome_arm_left" port="shoulder_left" jointtype="revolute" />
+      <child id="arm_right" body="gnome_arm_right" port="shoulder_right" jointtype="revolute" />
+      <child id="leg_left" body="gnome_leg_left" port="hip_left" jointtype="revolute" />
+      <child id="leg_right" body="gnome_leg_right" port="hip_right" jointtype="revolute" />
+    </body>
+
+    <body id="gnome_head" type="dynamic" resilience="1.0">
+      <shape type="polygon">
+        <point x="-0.17" y="-0.25" />
+        <point x="0.17" y="-0.25" />
+        <point x="0.17" y="0.0" />
+        <point x="0.0" y="0.4" />
+        <point x="-0.17" y="0.0" />
+      </shape>
+      <fixture friction="0.0" restitution="0.0" density="0.5" sensor="1" />
+      <texture image="gnome_head" />
+    </body>
+    
+    <body id="gnome" type="hero" texture="none" resilience="1.0" revolve="0">
+      <shape type="polygon">
+        <point x="-0.125" y="0.0" />
+        <point x="0.125" y="0.0" />
+        <point x="0.2" y="0.15" />
+        <point x="0.2" y="0.4" />
+        <point x="0.1" y="0.6" />
+        <point x="-0.1" y="0.6" />
+        <point x="-0.2" y="0.4" />
+        <point x="-0.2" y="0.15" />
+      </shape>
+      <fixture friction="0.6" restitution="0.5" density="3.5" />
+      <port id="backbone" x="0.0" y="0.425" />
+      <port id="neck" x="0.0" y="0.525" />
+      <child id="body" body="gnome_body" port="backbone" jointtype="weld" />
+      <child id="head" body="gnome_head" port="neck" jointtype="revolute" />
+    </body>
+
+    <body id="portal" type="target" resilience="1.0">
+      <texture image="portal" />
+      <fixture friction="0.6" restitution="0.5" density="0.5" sensor="1" />
+      <shape type="polygon">
+        <point x="-0.7" y="0.0" />
+        <point x="0.7" y="0.0" />
+        <point x="0.7" y="1.0" />
+        <point x="-0.7" y="1.0" />
+      </shape>
+    </body>
+
+    <body id="ufo" type="target" resilience="1.0">
+      <texture image="ufo" />
+      <fixture friction="0.6" restitution="0.5" density="0.0" sensor="1" />
+      <shape type="polygon">
+        <point x="-0.7" y="0.0" />
+        <point x="0.0" y="-0.5" />
+        <point x="0.7" y="0.0" />
+        <point x="0.0" y="0.5" />
+      </shape>
+    </body>
+
+    <body id="monster" type="monster" resilience="1.0" revolve="0">
+      <texture>
+        <frame id="idle" image="monster00000" />
+        <frame id="blink" image="monster00001" duration="100" next="idle" />
+        <frame id="jump" image="monster00002" duration="200" next="jump1" />
+        <frame id="jump1" image="monster00003" duration="200" next="jump2" />
+        <frame id="jump2" image="monster00004" duration="200" next="jump3" />
+        <frame id="jump3" image="monster00005" duration="200" next="jump4" />
+        <frame id="jump4" image="monster00006" duration="200" next="jump5" />
+        <frame id="jump5" image="monster00007" duration="1000" next="idle" />
+      </texture>
+      <fixture friction="0.6" restitution="0.2" density="0.8" sensor="0" />
+      <shape type="polygon">
+        <point x="-0.3" y="0.0" />
+        <point x="0.3" y="0.0" />
+        <point x="0.3" y="0.6" />
+        <point x="-0.3" y="0.6" />
+      </shape>
+    </body>
+
+    <body id="catapult_pillow" type="catapult" texture="shade" resilience="1.0" drag="0">
+      <fixture friction="0.0" restitution="0.0" density="0.0001" sensor="1" />
+      <shape type="polygon">
+        <point x="-0.2" y="0.0" />
+        <point x="0.2" y="0.0" />
+        <point x="0.2" y="0.1" />
+        <point x="-0.2" y="0.1" />
+      </shape>
+      <port id="bottom" x="0.0" y="0.05" />
+    </body>
+
+    <body id="catapult_head" type="dynamic" texture="shade" resilience="1.0" drag="0">
+      <fixture friction="0.6" restitution="0.2" density="0.05" sensor="0" />
+      <shape type="polygon">
+        <point x="-0.2" y="0.0" />
+        <point x="0.2" y="0.0" />
+        <point x="0.5" y="0.2" />
+        <point x="-0.5" y="0.2" />
+      </shape>
+      <port id="bottom" x="0.0" y="0.0" />
+      <port id="top" x="0.0" y="0.2" />
+    </body>
+
+    <body id="catapult_stalk" type="dynamic" texture="shade" resilience="1.0" drag="0">
+      <fixture friction="0.6" restitution="0.2" density="0.2" sensor="0" />
+      <shape type="polygon">
+        <point x="-0.1" y="0.0" />
+        <point x="0.1" y="0.0" />
+        <point x="0.07" y="0.2" />
+        <point x="-0.07" y="0.2" />
+      </shape>
+      <port id="bottom" x="0.0" y="0.0" />
+      <port id="top" x="0.0" y="0.2" />
+    </body>
+
+    <body id="catapult" type="dynamic" texture="shade" resilience="1.0" drag="1" revolve="0">
+      <fixture friction="0.8" restitution="0.0" density="0.5" sensor="0" />
+      <shape type="polygon">
+        <point x="-0.5" y="0.0" />
+        <point x="0.5" y="0.0" />
+        <point x="0.1" y="0.2" />
+        <point x="-0.1" y="0.2" />
+      </shape>
+      <port id="top" x="0.0" y="0.2" />
+      <child id="s1" body="catapult_stalk" />
+      <child id="s2" body="catapult_stalk" />
+      <child id="s3" body="catapult_stalk" />
+      <child id="h" body="catapult_head" />
+      <child id="p" body="catapult_pillow" />
+      <joint id ="j0" childa="" porta="top" childb="s1" portb="bottom" jointtype="weld" />
+      <joint id ="j1" childa="s1" porta="top" childb="s2" portb="bottom" jointtype="weld" />
+      <joint id ="j2" childa="s2" porta="top" childb="s3" portb="bottom" jointtype="weld" />
+      <joint id ="jh" childa="s3" porta="top" childb="h" portb="bottom" jointtype="weld" />
+      <joint id ="jp" childa="h" porta="top" childb="p" portb="bottom" jointtype="weld" />
+    </body>
+
+    <body id="bridge_element" type="dynamic" texture="shade" resilience="1.0" drag="0">
+      <fixture friction="0.8" restitution="0.1" density="60.0" sensor="0" />
+      <shape type="polygon">
+        <point x="-0.15" y="-0.06" />
+        <point x="0.15" y="-0.06" />
+        <point x="0.15" y="0.06" />
+        <point x="-0.15" y="0.06" />
+      </shape>
+      <port id="left" x="-0.15" y="0.0" />
+      <port id="right" x="0.15" y="0.0" />
+    </body>
+
+    <body id="bridge_pole" type="dynamic" texture="shade" resilience="1.0" drag="0" revolve="0">
+      <fixture friction="0.8" restitution="0.0" density="0.5" sensor="1" />
+      <shape type="polygon">
+        <point x="-0.1" y="0.0" />
+        <point x="0.1" y="0.0" />
+        <point x="0.1" y="0.5" />
+        <point x="-0.1" y="0.5" />
+      </shape>
+      <port id="origin" x="0.0" y="0.0" />
+    </body>
+
+    <body id="bridge" type="static" texture="none" resilience="1.0" drag="0" revolve="0">
+      <fixture friction="0.8" restitution="0.0" density="0.5" sensor="1" />
+      <shape type="polygon">
+        <point x="0.0" y="0.0" />
+        <point x="3.5" y="0.0" />
+        <point x="3.5" y="0.1" />
+        <point x="0.0" y="0.1" />
+      </shape>
+      <port id="left" x="0.2" y="0.0" />
+      <port id="right" x="3.3" y="0.0" />
+      <port id="left_e" x="0.3" y="0.1" />
+      <port id="right_e" x="3.2" y="0.1" />
+      <child id="left_pole" body="bridge_pole" />
+      <child id="right_pole" body="bridge_pole" />
+      <child id="e1" body="bridge_element" />
+      <child id="e2" body="bridge_element" />
+      <child id="e3" body="bridge_element" />
+      <child id="e4" body="bridge_element" />
+      <child id="e5" body="bridge_element" />
+      <child id="e6" body="bridge_element" />
+      <joint id ="lp" childa="" porta="left" childb="left_pole" portb="origin" jointtype="revolute" />
+      <joint id ="e1" childa="" porta="left_e" childb="e1" portb="left" jointtype="string" />
+      <joint id ="e2" childa="e1" porta="right" childb="e2" portb="left" jointtype="string" />
+      <joint id ="e3" childa="e2" porta="right" childb="e3" portb="left" jointtype="string" />
+      <joint id ="e4" childa="e3" porta="right" childb="e4" portb="left" jointtype="string" />
+      <joint id ="e5" childa="e4" porta="right" childb="e5" portb="left" jointtype="string" />
+      <joint id ="e6" childa="e5" porta="right" childb="e6" portb="left" jointtype="string" />
+      <joint id ="e7" childa="e6" porta="right" childb="" portb="right_e" jointtype="string" />
+      <joint id ="rp" childa="" porta="right" childb="right_pole" portb="origin" jointtype="revolute" />
+    </body>
+
+    <!-- infrastructure -->
+    <body id="wall" type="static" fixture="stone" shape="wall" texture="dirt" resilience="1" />
+    <body id="podest" type="static" fixture="stone" texture="ground" resilience="1" >
+      <shape type="polygon">
+        <point x="0" y="0" />
+        <point x="4" y="0" />
+        <point x="4" y="0.3" />
+        <point x="0" y="0.3" />
+      </shape>
+    </body>
+
+    <body id="shortpodest" type="static" fixture="stone" texture="ground" resilience="1" >
+      <shape type="polygon">
+        <point x="0" y="0" />
+        <point x="3" y="0" />
+        <point x="3" y="0.3" />
+        <point x="0" y="0.3" />
+      </shape>
+    </body>
+
+    <body id="grass" type="static" fixture="sensor" texture="grass" resilience="1">
+      <shape type="polygon">
+        <point x="0.0" y="-0.1" />
+        <point x="1.0" y="-0.1" />
+        <point x="1.0" y="0.15" />
+        <point x="0.0" y="0.15" />
+      </shape>
+    </body>
+
+    <body id="button" type="static" fixture="stone" shape="square" texture="button" resilience="1" />
+
+    <body id="poly" type="static" fixture="stone" shape="poly" texture="dirt" resilience="1" />
+
+    <!-- other objects -->
+    <body id="box" type="dynamic" fixture="box" shape="box" texture="brick" resilience="0.5" />
+    <body id="stick" type="dynamic" fixture="wood" shape="stick" texture="stick" resilience="0.5" />
+    <body id="ice" type="dynamic" fixture="ice" shape="square" texture="ice_cube" resilience="0.5" />
+    <body id="stone" type="dynamic" fixture="stone" shape="ball" texture="stone" resilience="0.5" />
+  </bodies>
+
+  <effects>
+    <effect id="pang" duration="250">
+      <texture>
+        <frame id="01" image="Pang00001" duration="50" next="02" />
+        <frame id="02" image="Pang00002" duration="50" next="03" />
+        <frame id="03" image="Pang00003" duration="50" next="04" />
+        <frame id="04" image="Pang00004" duration="50" next="05" />
+        <frame id="05" image="Pang00005" duration="50" next="06" />
+        <frame id="06" image="Pang00006" duration="200" next="18" />
+        <frame id="18" image="Pang00018" duration="50" next="19" />
+        <frame id="19" image="Pang00019" duration="50" next="20" />
+        <frame id="20" image="Pang00020" />
+      </texture>
+      <shape type="polygon">
+        <point x="-0.25" y="-0.2" />
+        <point x="0.25" y="-0.2" />
+        <point x="0.25" y="0.2" />
+        <point x="-0.25" y="0.2" />
+      </shape>
+    </effect>
+    <effect id="text" type="splashtext" texture="none" duration="1500">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.2" />
+        <point x="0.25" y="-0.2" />
+        <point x="0.25" y="0.2" />
+        <point x="-0.25" y="0.2" />
+      </shape>
+    </effect>
+    <effect id="smoke_jump" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="0" />
+        <point x="0.25" y="0" />
+        <point x="0.25" y="0.4" />
+        <point x="-0.25" y="0.4" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_jump_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_jump_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_jump_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_jump_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_jump_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_jump_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_jump_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_jump_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_jump_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_jump_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_plume" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_plume_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_plume_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_plume_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_plume_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_plume_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_plume_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_plume_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_plume_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_plume_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_plume_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_puff" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_puff_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_puff_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_puff_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_puff_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_puff_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_puff_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_puff_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_puff_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_puff_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_puff_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_right" duration="1500">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_right_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_right_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_right_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_right_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_right_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_right_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_right_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_right_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_right_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_right_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+  </effects>
+
+  <textures>
+    <texture id="none" colour="0x00000000" />
+    <texture id="shade" colour="0x77343423" />
+    <texture id="aimingdevice" image="crosshair" />
+    <texture id="statspanel" image="wood_frame" />
+
+    <!-- level stats buttons -->
+    <texture id="hero_stats">
+      <frame id="faded" image="gnome_mini_faded" />
+      <frame id="rescued" image="gnome_mini" />
+      <frame id="killed" image="gnome_mini_crossed" />
+    </texture>
+   
+    <texture id="ground" pattern="dirt" />
+    <texture id="dirt" pattern="dirt_framed" />
+
+    <texture id="brick" image="brick" healthlevel="100">
+      <frame id="brick" image="brick_broken1" healthlevel="80" />
+      <frame id="brick" image="brick_broken2" healthlevel="60" />
+      <frame id="brick" image="brick_broken3" healthlevel="20" />
+    </texture>
+
+    <texture id="grass" image="grass" />
+
+    <texture id="platform01" image="platform_01" />
+
+    <texture id="stick" image="stick" />
+    <texture id="stone" image="stone" />
+    <texture id="ice_cube" image="ice_cube" />
+    <texture id="button" colour="0xff343423" />
+
+    <texture id="button_social" image="button_social" />
+    <texture id="button_achievements" image="button_achievements" />
+    <texture id="button_leaderboards" image="button_leaderboards" />
+
+    <texture id="button_options" image="button_options" />
+    <texture id="button_help" image="button_help" />
+    <texture id="button_music" image="button_music" />
+    <texture id="button_music_mute" image="button_music_mute" />
+    <texture id="button_soundfx_mute" image="button_soundfx_mute" />
+    <texture id="button_soundfx" image="button_soundfx" />
+
+    <texture id="button_level" image="button_level" />
+    <texture id="button_play" image="button_play" />
+
+    <texture id="button_plain" image="button_plain" />
+    <texture id="button_toggle_hud" image="button_toggle_hud" />
+    <texture id="button_restart" image="button_restart" />
+    <texture id="button_reload" image="button_reload" />
+    <texture id="button_reload_local" image="button_reload_local" />
+    <texture id="button_next" image="button_play" />
+    <texture id="button_quit" image="button_quit" />
+
+    <texture id="titlemenu_bg" image="background_image_titlemenu" />
+    <texture id="levelmenu_bg" image="background_image_levelmenu" />
+    <texture id="preamble_bg" image="background_image_preamble" />
+
+    <texture id="levelstats_bg">
+      <frame id="win" image="background_image_won" />
+      <frame id="lost" image="background_image_lost" />
+    </texture>
+  </textures>
+
+  <fixtures>
+    <fixture id="none" friction="0.0" restitution="0.0" density="0.0" />
+    <fixture id="sensor" friction="0.0" restitution="0.0" density="0.1" sensor="1" />
+    <fixture id="rubber" friction="0.8" restitution="0.65" density="1.0" />
+    <fixture id="ground" friction="0.8" restitution="0.2" density="3.0" />
+    <fixture id="ice" friction="0.04" restitution="0.1" density="3.0" />
+    <fixture id="stone" friction="0.4" restitution="0.1" density="3.0" />
+    <fixture id="box" friction="0.2" restitution="0.3" density="3.0" />
+    <fixture id="wood" friction="0.2" restitution="0.4" density="1.5" />
+    <fixture id="paper" friction="0.5" restitution="0.001" density="0.5" />
+    <fixture id="hero" friction="0.8" restitution="0.01" density="1.5" />
+    <fixture id="gnome" friction="0.8" restitution="0.3" density="1.5" sensor="1" />
+  </fixtures>
+
+  <shapes>
+    <shape id="dino" type="rectangle" width="1.2" height="0.9" />
+    <shape id="dude" type="rectangle" width="0.8" height="1.2" />
+    <shape id="box" type="rectangle" width="0.8" height="0.5" />
+    <shape id="stick" type="rectangle" width="1.8" height="0.1" />
+    <shape id="croc" type="rectangle" width="1.5" height="0.5" />
+    <shape id="square" type="rectangle" width="0.7" height="0.7" />
+    <shape id="bigball" type="circle" width="1.5" />
+    <shape id="ball" type="circle" width="0.30" />
+    <shape id="smallball" type="circle" width="0.27" />
+    <shape id="rect" type="rectangle" width="10" height="3" />
+    <shape id="person" type="rectangle" width="0.5" height="1.5" />
+    <shape id="ground" type="polygon">
+      <point x="0" y="-1" />
+      <point x="5" y="-1" />
+      <point x="5" y="0.2" />
+      <point x="3" y="0.2001" />
+      <point x="0" y="0.2" />
+    </shape>
+    <shape id="wall" type="rectangle" width="1" height="20" />
+    <shape id="poly" type="polygon">
+      <point x="0" y="0" />
+      <point x="0.4" y="0" />
+      <point x="0" y="1.3" />
+    </shape>
+
+    <shape id="platform01" type="rectangle" width="1.5" height="0.5" />
+  </shapes>
+
+</root>

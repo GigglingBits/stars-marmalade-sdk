@@ -1,0 +1,141 @@
+CIwResGroup
+{
+	name "sprites"
+
+	sprites/image_missing.png
+
+	sprites/touch.png
+	sprites/crosshair.png
+
+	sprites/button_social.png
+	sprites/button_achievements.png
+	sprites/button_leaderboards.png
+
+	sprites/button_options.png
+	sprites/button_music.png
+	sprites/button_music_mute.png
+	sprites/button_soundfx.png
+	sprites/button_soundfx_mute.png
+	sprites/button_help.png
+
+	sprites/button_level.png
+	sprites/button_play.png
+
+	sprites/button_plain.png
+	sprites/button_quit.png
+	sprites/button_reload.png
+	sprites/button_reload_local.png
+	sprites/button_restart.png
+	sprites/button_toggle_hud.png
+
+	sprites/portal.png
+	sprites/ufo.png
+
+	sprites/gnome_mini.png
+	sprites/gnome_mini_faded.png
+	sprites/gnome_mini_crossed.png
+
+	sprites/gnome_head.png
+	sprites/gnome_body.png
+	sprites/gnome_arm_left.png
+	sprites/gnome_arm_right.png
+	sprites/gnome_leg_left.png
+	sprites/gnome_leg_right.png
+
+	sprites/monster00000.png
+	sprites/monster00001.png
+	sprites/monster00002.png
+	sprites/monster00003.png
+	sprites/monster00004.png
+	sprites/monster00005.png
+	sprites/monster00006.png
+	sprites/monster00007.png
+
+	sprites/brick.png
+	sprites/brick_broken1.png
+	sprites/brick_broken2.png
+	sprites/brick_broken3.png
+
+	sprites/bricks.png
+
+	sprites/Pang00001.png
+	sprites/Pang00002.png
+	sprites/Pang00003.png
+	sprites/Pang00004.png
+	sprites/Pang00005.png
+	sprites/Pang00006.png
+	sprites/Pang00018.png
+	sprites/Pang00019.png
+	sprites/Pang00020.png
+
+	sprites/smoke_jump_0001.png
+	sprites/smoke_jump_0002.png
+	sprites/smoke_jump_0003.png
+	sprites/smoke_jump_0004.png
+	sprites/smoke_jump_0005.png
+	sprites/smoke_jump_0006.png
+	sprites/smoke_jump_0007.png
+	sprites/smoke_jump_0008.png
+	sprites/smoke_jump_0009.png
+	sprites/smoke_jump_0010.png
+	
+	sprites/smoke_plume_0001.png
+	sprites/smoke_plume_0002.png
+	sprites/smoke_plume_0003.png
+	sprites/smoke_plume_0004.png
+	sprites/smoke_plume_0005.png
+	sprites/smoke_plume_0006.png
+	sprites/smoke_plume_0007.png
+	sprites/smoke_plume_0008.png
+	sprites/smoke_plume_0009.png
+	sprites/smoke_plume_0010.png
+
+	sprites/smoke_puff_0001.png
+	sprites/smoke_puff_0002.png
+	sprites/smoke_puff_0003.png
+	sprites/smoke_puff_0004.png
+	sprites/smoke_puff_0005.png
+	sprites/smoke_puff_0006.png
+	sprites/smoke_puff_0007.png
+	sprites/smoke_puff_0008.png
+	sprites/smoke_puff_0009.png
+	sprites/smoke_puff_0010.png
+	
+	sprites/smoke_right_0001.png
+	sprites/smoke_right_0002.png
+	sprites/smoke_right_0003.png
+	sprites/smoke_right_0004.png
+	sprites/smoke_right_0005.png
+	sprites/smoke_right_0006.png
+	sprites/smoke_right_0007.png
+	sprites/smoke_right_0008.png
+	sprites/smoke_right_0009.png
+	sprites/smoke_right_0010.png
+
+	sprites/ice_cube.png
+
+	sprites/grass.png
+	sprites/stick.png
+	sprites/Stone.png
+
+	sprites/dirt.png
+	sprites/dirt_framed.png
+	
+	sprites/clouds_sky.png
+	sprites/clouds_far.png
+	sprites/clouds_near.png
+
+	sprites/grid_sky.png
+	sprites/grid_far.png
+	sprites/grid_near.png
+
+	sprites/platform_01.png
+	
+    sprites/background_image_titlemenu.png
+    sprites/background_image_levelmenu.png
+    sprites/background_image_preamble.png
+    sprites/background_image_lost.png
+    sprites/background_image_won.png
+    
+	sprites/wood_frame.png
+}
