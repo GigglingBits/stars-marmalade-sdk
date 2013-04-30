@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns="http://www.gigglingbits.com"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
+      fileformatversion="2">
+  <levels>
+
+    <level name="earth_1" width="7.0" height="7.0" background="background_level_earth">
+      <preamble file="stories/intro.mp4">
+        Drag the star to catch the nuggets. The nuggets make it stronger.
+      </preamble>
+      <sprite body="nugget" pos="3.5" delay="0" />
+      <sprite body="nugget" pos="3.5" delay="1000" />
+      <sprite body="nugget" pos="1.0" delay="1000" />
+      <sprite body="nugget" pos="6.0" delay="1000" />
+      <sprite body="nugget" pos="4.5" delay="1000" />
+      <sprite body="nugget" pos="2.5" delay="0" />
+      <sprite body="nugget" pos="3.5" delay="300" />
+      <sprite body="nugget" pos="3.5" delay="2000" />
+      <sprite body="nugget" pos="3.5" delay="1000" />
+    </level>
+
+    <level name="earth_2" width="7.0" height="7.0" background="background_level_earth">
+      <preamble file="rom://stories/catch_nuggets/index.html">
+        Catch all nuggets to get max points.
+      </preamble>
+
+      <sprite body="nugget" pos="1.0" delay="1000" />
+      <sprite body="nugget" pos="1.5" delay="1000" />
+      <sprite body="nugget" pos="2.0" delay="500" />
+      <sprite body="nugget" pos="2.5" delay="500" />
+      <sprite body="nugget" pos="3.0" delay="500" />
+      <sprite body="nugget" pos="3.5" delay="500" />
+      <sprite body="nugget" pos="4.0" delay="500" />
+      <sprite body="nugget" pos="4.5" delay="500" />
+      <sprite body="nugget" pos="5.0" delay="500" />
+      <sprite body="nugget" pos="5.5" delay="500" />
+      <sprite body="nugget" pos="6.0" delay="500" />
+      <sprite body="nugget" pos="3.5" delay="0" />
+      <sprite body="nugget" pos="3.5" delay="1000" />
+      <sprite body="nugget" pos="1.0" delay="1000" />
+      <sprite body="nugget" pos="6.0" delay="0" />
+      <sprite body="nugget" pos="4.5" delay="1000" />
+      <sprite body="nugget" pos="2.5" delay="500" />
+      <sprite body="nugget" pos="3.5" delay="1000" />
+      <sprite body="nugget" pos="3.5" delay="500" />
+      <sprite body="nugget" pos="3.5" delay="1000" />
+    </level>
+
+    <level name="earth_3" width="7.0" height="7.0" background="background_level_earth">
+      <preamble file="rom://stories/dodge_objects/index.html">
+        Beware of flying objects.
+      </preamble>
+      <sprite body="bird_01" pos="2.0" delay="100" />
+      <sprite body="bird_01" pos="3.0" delay="100" />
+      <sprite body="bird_01" pos="4.0" delay="100" />
+      <sprite body="bird_01" pos="5.0" delay="100" />
+      <sprite body="bird_01" pos="4.0" delay="100" />
+      <sprite body="bird_01" pos="3.0" delay="100" />
+      <sprite body="bird_01" pos="2.0" delay="100" />
+      <sprite body="bird_01" pos="1.0" delay="100" />
+      <sprite body="bird_02" pos="3.0" delay="1000" />
+      <sprite body="airplane" pos="4.0" delay="1000" />
+      <sprite body="jetfighter" pos="4.0" delay="1000" />
+      <sprite body="missile" pos="4.0" delay="1000" />
+      <sprite body="nugget" pos="5.0" delay="1000" />
+      <sprite body="bird_01" pos="2.0" delay="1000" />
+      <sprite body="bird_02" pos="3.0" delay="1000" />
+      <sprite body="airplane" pos="4.0" delay="1000" />
+      <sprite body="jetfighter" pos="4.0" delay="1000" />
+      <sprite body="missile" pos="4.0" delay="1000" />
+      <sprite body="nugget" pos="5.0" delay="1000" />
+      <sprite body="bird_01" pos="2.0" delay="1000" />
+      <sprite body="bird_02" pos="3.0" delay="1000" />
+      <sprite body="airplane" pos="4.0" delay="1000" />
+      <sprite body="jetfighter" pos="4.0" delay="1000" />
+      <sprite body="missile" pos="4.0" delay="1000" />
+      <sprite body="nugget" pos="5.0" delay="1000" />
+      <sprite body="bird_01" pos="2.0" delay="1000" />
+      <sprite body="bird_02" pos="3.0" delay="1000" />
+      <sprite body="airplane" pos="4.0" delay="1000" />
+      <sprite body="jetfighter" pos="4.0" delay="1000" />
+      <sprite body="missile" pos="4.0" delay="1000" />
+      <sprite body="nugget" pos="5.0" delay="1000" />
+      <sprite body="bird_01" pos="2.0" delay="1000" />
+      <sprite body="bird_02" pos="3.0" delay="1000" />
+      <sprite body="airplane" pos="4.0" delay="1000" />
+      <sprite body="jetfighter" pos="4.0" delay="1000" />
+      <sprite body="missile" pos="4.0" delay="1000" />
+      <sprite body="nugget" pos="5.0" delay="1000" />
+      <sprite body="planet_moon" pos="3.5" delay="4000" />
+    </level>
+
+    <level name="earth_4" width="7.0" height="7.0" background="background_level_earth">
+      <sprite body="bird_01" pos="5.0" delay="100" />
+      <sprite body="bird_01" pos="5.0" delay="100000" />
+    </level>
+
+      <level name="mars_1" width="7.0" height="7.0" background="background_level_mars">
+          <sprite body="nugget" pos="3.5" delay="0" />
+          <sprite body="nugget" pos="3.5" delay="1000" />
+          <sprite body="nugget" pos="1.0" delay="1000" />
+          <sprite body="nugget" pos="6.0" delay="1000" />
+          <sprite body="nugget" pos="4.5" delay="1000" />
+          <sprite body="nugget" pos="2.5" delay="0" />
+          <sprite body="nugget" pos="3.5" delay="300" />
+          <sprite body="nugget" pos="3.5" delay="2000" />
+          <sprite body="nugget" pos="3.5" delay="1000" />
+      </level>
+      
+      <level name="jupiter_1" width="7.0" height="7.0" background="background_level_jupiter">
+          <sprite body="nugget" pos="3.5" delay="0" />
+          <sprite body="nugget" pos="3.5" delay="1000" />
+          <sprite body="nugget" pos="1.0" delay="1000" />
+          <sprite body="nugget" pos="6.0" delay="1000" />
+          <sprite body="nugget" pos="4.5" delay="1000" />
+          <sprite body="nugget" pos="2.5" delay="0" />
+          <sprite body="nugget" pos="3.5" delay="300" />
+          <sprite body="nugget" pos="3.5" delay="2000" />
+          <sprite body="nugget" pos="3.5" delay="1000" />
+      </level>
+  </levels>
+</root>

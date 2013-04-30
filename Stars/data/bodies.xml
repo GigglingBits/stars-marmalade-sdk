@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Design space
+============
+The design space is the coordinate system used for designing objects and levels.
+
+Origin:       Lower left
+Orientation:  x is right, y is up
+Units:        Meters
+Rotation:     Radians, CCW
+
+Polygons must be convex and be defined CCW.
+
+
+Screen space
+============
+The screen space is the coordinate system used by the display.
+Origin:       top left
+Orientation:  x is right, y is down
+Units:        Meters
+Rotation:     Radians, CCW?
+
+
+Children and ports
+==================
+Ports are used by joints. Unspecified ports are interpreted as the origin 
+of the body. Unspecified bodies are interpreted as the current body, i.e. 
+the bodie that owns the joint.
+-->
+
+<root xmlns="http://www.gigglingbits.com"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
+      fileformatversion="2">
+  <bodies>
+
+    <!-- gameplay -->
+    <body id="star" type="star" texture="star" resilience="0.8" revolve="0" drag="1">
+      <shape type="polygon">
+        <point x="-0.6" y="-0.75" />
+        <point x="0.6" y="-0.75" />
+        <point x="0.75" y="0.3" />
+        <point x="0.0" y="0.75" />
+        <point x="-0.75" y="0.3" />
+      </shape>
+      <port id="center" x="0.0" y="0.0" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="nugget" type="buff" resilience="1.0" revolve="1" drag="0">
+      <texture image="star_nugget" />
+      <shape type="rectangle" width="0.4" height="0.4" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="airplane" type="dynamic" resilience="0.0" revolve="0" drag="0">
+      <texture image="airplane" />
+      <shape type="rectangle" width="2.4" height="0.8" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="jetfighter" type="dynamic" resilience="0.0" revolve="0" drag="0">
+      <texture image="jetfighter" />
+      <shape type="rectangle" width="2.4" height="0.8" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="missile" type="dynamic" resilience="0.0" revolve="0" drag="0">
+      <texture image="jetfighter_missile" />
+      <shape type="rectangle" width="1.4" height="0.4" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="bird_01" type="dynamic" resilience="1.0" revolve="0" drag="0">
+      <texture image="bird_01" />
+      <shape type="rectangle" width="1.2" height="0.7" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="bird_02" type="dynamic" resilience="0.2" revolve="0" drag="0">
+      <texture image="bird_02" />
+      <shape type="rectangle" width="0.9" height="0.5" />
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="planet_earth" type="target" resilience="1.0" revolve="0" drag="0">
+      <texture image="planet_earth" />
+      <shape type="polygon">
+        <point x="0" y="-5" />
+        <point x="10" y="-5" />
+        <point x="10" y="5" />
+        <point x="0" y="5" />
+      </shape>
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+    <body id="planet_moon" type="target" resilience="1.0" revolve="0" drag="0">
+      <texture image="planet_moon" />
+      <shape type="polygon">
+        <point x="0" y="-5" />
+        <point x="10" y="-5" />
+        <point x="10" y="5" />
+        <point x="0" y="5" />
+      </shape>
+      <fixture friction="0.6" restitution="0.5" density="1.0" />
+    </body>
+
+  </bodies>
+
+  <effects>
+    <effect id="text" type="splashtext" texture="none" duration="1500">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.2" />
+        <point x="0.25" y="-0.2" />
+        <point x="0.25" y="0.2" />
+        <point x="-0.25" y="0.2" />
+      </shape>
+    </effect>
+    <effect id="smoke_jump" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="0" />
+        <point x="0.25" y="0" />
+        <point x="0.25" y="0.4" />
+        <point x="-0.25" y="0.4" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_jump_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_jump_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_jump_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_jump_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_jump_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_jump_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_jump_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_jump_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_jump_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_jump_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_plume" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_plume_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_plume_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_plume_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_plume_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_plume_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_plume_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_plume_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_plume_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_plume_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_plume_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_puff" duration="300">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="01" image="smoke_puff_0001" duration="30" next="02" />
+        <frame id="02" image="smoke_puff_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_puff_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_puff_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_puff_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_puff_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_puff_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_puff_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_puff_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_puff_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="smoke_right" duration="1500">
+      <shape type="polygon">
+        <point x="-0.25" y="-0.25" />
+        <point x="0.25" y="-0.25" />
+        <point x="0.25" y="0.25" />
+        <point x="-0.25" y="0.25" />
+      </shape>
+      <texture>
+        <frame id="02" image="smoke_right_0002" duration="30" next="03" />
+        <frame id="03" image="smoke_right_0003" duration="30" next="04" />
+        <frame id="04" image="smoke_right_0004" duration="30" next="05" />
+        <frame id="05" image="smoke_right_0005" duration="30" next="06" />
+        <frame id="06" image="smoke_right_0006" duration="30" next="07" />
+        <frame id="07" image="smoke_right_0007" duration="30" next="08" />
+        <frame id="08" image="smoke_right_0008" duration="30" next="09" />
+        <frame id="09" image="smoke_right_0009" duration="30" next="10" />
+        <frame id="10" image="smoke_right_0010" duration="30" next="11" />
+        <frame id="11" colour="0x000000" />
+      </texture>
+    </effect>
+    <effect id="cloud01sky" duration="20000">
+      <shape type="rectangle" width="0.4" height="0.2" />
+      <texture image="cloud_01" />
+    </effect>
+    <effect id="cloud02sky" duration="20000">
+      <shape type="rectangle" width="0.4" height="0.2" />
+      <texture image="cloud_02" />
+    </effect>
+    <effect id="cloud03sky" duration="20000">
+      <shape type="rectangle" width="0.4" height="0.2" />
+      <texture image="cloud_03" />
+    </effect>
+    <effect id="cloud01far" duration="20000">
+      <shape type="rectangle" width="1.4" height="0.5" />
+      <texture image="cloud_01" />
+    </effect>
+    <effect id="cloud02far" duration="20000">
+      <shape type="rectangle" width="1.4" height="0.5" />
+      <texture image="cloud_02" />
+    </effect>
+    <effect id="cloud03far" duration="20000">
+      <shape type="rectangle" width="1.4" height="0.5" />
+      <texture image="cloud_03" />
+    </effect>
+    <effect id="cloud01near" duration="20000">
+      <shape type="rectangle" width="2.4" height="1.2" />
+      <texture image="cloud_01" />
+    </effect>
+    <effect id="cloud02near" duration="20000">
+      <shape type="rectangle" width="2.4" height="1.2" />
+      <texture image="cloud_02" />
+    </effect>
+    <effect id="cloud03near" duration="20000">
+      <shape type="rectangle" width="2.4" height="1.2" />
+      <texture image="cloud_03" />
+    </effect>
+  </effects>
+
+  <textures>
+    <texture id="none" colour="0x00000000" />
+    <texture id="shade" colour="0x77343423" />
+    <texture id="aimingdevice" image="crosshair" />
+
+    <texture id="statspanel" image="wood_frame" />
+
+    <texture id="star">
+      <frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
+      <frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
+      <frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
+      <frame id="happy_03" image="Happy-star_kollision_03" />
+
+      <frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
+      <frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
+      <frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
+
+      <!--
+      <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
+      <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />
+      <frame id="09" image="Happy-star_kollision_09" duration="30" next="10" />
+      <frame id="10" image="Happy-star_kollision_10" duration="30" next="09" />
+      <frame id="11" image="Happy-star_kollision_11" duration="30" next="09" />
+      <frame id="12" image="Happy-star_kollision_12" duration="30" next="09" />
+      <frame id="13" image="Happy-star_kollision_13" duration="30" next="09" />
+      <frame id="14" image="Happy-star_kollision_14" duration="30" next="09" />
+      -->
+    </texture>
+
+    <texture id="touch" image="touch" />
+
+    <texture id="button_social" image="button_social" />
+    <texture id="button_achievements" image="button_achievements" />
+    <texture id="button_leaderboards" image="button_leaderboards" />
+
+    <texture id="button_options" image="button_options" />
+    <texture id="button_credits" image="button_credits" />
+    <texture id="button_music" image="button_music" />
+    <texture id="button_music_mute" image="button_music_mute" />
+    <texture id="button_soundfx_mute" image="button_soundfx_mute" />
+    <texture id="button_soundfx" image="button_soundfx" />
+
+    <texture id="button_level" image="button_level" />
+    <texture id="button_play" image="button_play" />
+
+    <texture id="button_plain" image="button_plain" />
+    <texture id="button_toggle_hud" image="button_toggle_hud" />
+    <texture id="button_restart" image="button_restart" />
+    <texture id="button_reload" image="button_reload" />
+    <texture id="button_reload_local" image="button_reload_local" />
+    <texture id="button_next" image="button_play" />
+    <texture id="button_quit" image="button_quit" />
+
+    <texture id="button_arrow_left" image="button_arrow_left" />
+    <texture id="button_arrow_right" image="button_arrow_right" />
+
+      <texture id="button_completion">
+          <frame id="won" image="Happy-star_kollision_03"/>
+          <frame id="lost" image="Happy-star_kollision_18"/>
+      </texture>
+      
+      <texture id="button_planet">
+          <frame id="earth" image="planet_earth"/>
+          <frame id="mars" image="planet_mars"/>
+          <frame id="jupiter" image="planet_jupiter"/>
+      </texture>
+      
+    <texture id="button_planet_name">
+        <frame id="earth" image="planet_earth_name"/>
+        <frame id="mars" image="planet_mars_name"/>
+        <frame id="jupiter" image="planet_jupiter_name"/>
+    </texture>
+      
+      <texture id="titlemenu_bg">
+          <frame id="earth" image="background_menu_earth"/>
+          <frame id="mars" image="background_menu_mars"/>
+          <frame id="jupiter" image="background_menu_jupiter"/>
+      </texture>
+      <texture id="levelmenu_bg">
+          <frame id="earth" image="background_menu_earth"/>
+          <frame id="mars" image="background_menu_mars"/>
+          <frame id="jupiter" image="background_menu_jupiter"/>
+      </texture>
+      <texture id="preamble_bg">
+          <frame id="earth" image="background_menu_earth"/>
+          <frame id="mars" image="background_menu_mars"/>
+          <frame id="jupiter" image="background_menu_jupiter"/>
+      </texture>
+
+    <texture id="levelstats_bg">
+      <frame id="win" image="background_won" />
+      <frame id="lost" image="background_lost" />
+    </texture>
+  </textures>
+
+  <fixtures>
+    <fixture id="none" friction="0.0" restitution="0.0" density="0.0" />
+    <fixture id="sensor" friction="0.0" restitution="0.0" density="0.1" sensor="1" />
+    <fixture id="rubber" friction="0.8" restitution="0.65" density="1.0" />
+    <fixture id="ground" friction="0.8" restitution="0.2" density="3.0" />
+    <fixture id="ice" friction="0.04" restitution="0.1" density="3.0" />
+    <fixture id="stone" friction="0.4" restitution="0.1" density="3.0" />
+    <fixture id="box" friction="0.2" restitution="0.3" density="3.0" />
+    <fixture id="wood" friction="0.2" restitution="0.4" density="1.5" />
+    <fixture id="paper" friction="0.5" restitution="0.001" density="0.5" />
+    <fixture id="hero" friction="0.8" restitution="0.01" density="1.5" />
+    <fixture id="gnome" friction="0.8" restitution="0.3" density="1.5" sensor="1" />
+  </fixtures>
+
+  <shapes>
+    <shape id="dino" type="rectangle" width="1.2" height="0.9" />
+    <shape id="dude" type="rectangle" width="0.8" height="1.2" />
+    <shape id="box" type="rectangle" width="0.8" height="0.5" />
+    <shape id="stick" type="rectangle" width="1.8" height="0.1" />
+    <shape id="croc" type="rectangle" width="1.5" height="0.5" />
+    <shape id="square" type="rectangle" width="0.7" height="0.7" />
+    <shape id="bigball" type="circle" width="1.5" />
+    <shape id="ball" type="circle" width="0.30" />
+    <shape id="smallball" type="circle" width="0.27" />
+    <shape id="rect" type="rectangle" width="10" height="3" />
+    <shape id="person" type="rectangle" width="0.5" height="1.5" />
+    <shape id="ground" type="polygon">
+      <point x="0" y="-1" />
+      <point x="5" y="-1" />
+      <point x="5" y="0.2" />
+      <point x="3" y="0.2001" />
+      <point x="0" y="0.2" />
+    </shape>
+    <shape id="wall" type="rectangle" width="1" height="20" />
+    <shape id="poly" type="polygon">
+      <point x="0" y="0" />
+      <point x="0.4" y="0" />
+      <point x="0" y="1.3" />
+    </shape>
+
+    <shape id="platform01" type="rectangle" width="1.5" height="0.5" />
+  </shapes>
+
+</root>
