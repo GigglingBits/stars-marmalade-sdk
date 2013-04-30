@@ -1,0 +1,118 @@
+CIwResGroup
+{
+	name "sprites"
+
+	sprites/image_missing.png
+
+	sprites/touch.png
+	sprites/crosshair.png
+
+	sprites/button_social.png
+	sprites/button_achievements.png
+	sprites/button_leaderboards.png
+
+	sprites/button_options.png
+	sprites/button_music.png
+	sprites/button_music_mute.png
+	sprites/button_soundfx.png
+	sprites/button_soundfx_mute.png
+	sprites/button_credits.png
+
+	sprites/button_level.png
+	sprites/button_play.png
+
+	sprites/button_plain.png
+	sprites/button_quit.png
+	sprites/button_reload.png
+	sprites/button_reload_local.png
+	sprites/button_restart.png
+	sprites/button_toggle_hud.png
+
+	sprites/Happy-star_kollision_03.png
+	sprites/Happy-star_kollision_04.png
+	sprites/Happy-star_kollision_05.png
+	sprites/Happy-star_kollision_06.png
+	sprites/Happy-star_kollision_07.png
+	sprites/Happy-star_kollision_08.png
+	sprites/Happy-star_kollision_09.png
+	sprites/Happy-star_kollision_10.png
+	sprites/Happy-star_kollision_11.png
+	sprites/Happy-star_kollision_12.png
+	sprites/Happy-star_kollision_13.png
+	sprites/Happy-star_kollision_14.png
+	sprites/Happy-star_kollision_15.png
+	sprites/Happy-star_kollision_17.png
+	sprites/Happy-star_kollision_18.png
+
+	sprites/yellow-star.png
+	sprites/red-star.png
+
+	sprites/planet_earth.png
+	sprites/planet_moon.png
+
+	sprites/bird_01.png
+	sprites/bird_02.png
+	sprites/airplane.png
+	sprites/jetfighter.png
+	sprites/jetfighter_missile.png
+
+	sprites/cloud_01.png
+	sprites/cloud_02.png
+	sprites/cloud_03.png
+
+	sprites/star_nugget.png
+
+	sprites/smoke_jump_0001.png
+	sprites/smoke_jump_0002.png
+	sprites/smoke_jump_0003.png
+	sprites/smoke_jump_0004.png
+	sprites/smoke_jump_0005.png
+	sprites/smoke_jump_0006.png
+	sprites/smoke_jump_0007.png
+	sprites/smoke_jump_0008.png
+	sprites/smoke_jump_0009.png
+	sprites/smoke_jump_0010.png
+	
+	sprites/smoke_plume_0001.png
+	sprites/smoke_plume_0002.png
+	sprites/smoke_plume_0003.png
+	sprites/smoke_plume_0004.png
+	sprites/smoke_plume_0005.png
+	sprites/smoke_plume_0006.png
+	sprites/smoke_plume_0007.png
+	sprites/smoke_plume_0008.png
+	sprites/smoke_plume_0009.png
+	sprites/smoke_plume_0010.png
+
+	sprites/smoke_puff_0001.png
+	sprites/smoke_puff_0002.png
+	sprites/smoke_puff_0003.png
+	sprites/smoke_puff_0004.png
+	sprites/smoke_puff_0005.png
+	sprites/smoke_puff_0006.png
+	sprites/smoke_puff_0007.png
+	sprites/smoke_puff_0008.png
+	sprites/smoke_puff_0009.png
+	sprites/smoke_puff_0010.png
+	
+	sprites/smoke_right_0001.png
+	sprites/smoke_right_0002.png
+	sprites/smoke_right_0003.png
+	sprites/smoke_right_0004.png
+	sprites/smoke_right_0005.png
+	sprites/smoke_right_0006.png
+	sprites/smoke_right_0007.png
+	sprites/smoke_right_0008.png
+	sprites/smoke_right_0009.png
+	sprites/smoke_right_0010.png
+
+	sprites/background.png
+
+    sprites/background_image_titlemenu.png
+    sprites/background_image_levelmenu.png
+    sprites/background_image_preamble.png
+    sprites/background_image_lost.png
+    sprites/background_image_won.png
+    
+	sprites/wood_frame.png
+}

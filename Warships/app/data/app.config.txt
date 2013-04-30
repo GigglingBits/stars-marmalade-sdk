@@ -1,0 +1,30 @@
+# This .config.txt file documents configuration settings for your
+# application
+# The syntax is similar to that in .icf files:
+#
+# [GroupName]
+# Setting     Documentation for setting
+#
+# e.g.
+# [MyApplicationGroup]
+# MySetting   Description of what MySetting is for, its default values, etc
+
+[Game]
+showstats				Show statistical information on the screen
+
+maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
+worldmargin				Number of meters of margin around the world. Limits the pan-out.
+
+bodies					Name of the file containing the body definitions
+levels					Name of the file containing the level definitions
+
+httpbodies				Name of the file containing the body definitions, available as HTTP download
+httplevels				Name of the file containing the level definitions, available as HTTP download
+
+introsong				Name of the sound file containing the intro song
+levelsong				Name of the sound file containing the level song
+lostsong				Name of the sound file containing the lost song
+wonsong					Name of the sound file containing the won song
+
+webviewexts				List of filename extensions that should be played in the WebView extension
+videoviewexts			List of filename extensions that should be played in the VideoView extension

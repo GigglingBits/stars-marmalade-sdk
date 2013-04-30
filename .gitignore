@@ -16,9 +16,10 @@ Gnomes/build_gnomes_vc11/
 Gnomes/build_gnomes_xcode/
 Gnomes/artwork/
 
-Warships
 Warships/app/build_warships_vc11/
 Warships/app/build_warships_xcode/
+Warships/server/Server/bin/
+Warships/server/Server/obj/
 
 Kidbook/build_kidbook_vc11/
 Kidbook/build_kidbook_xcode/

@@ -1,0 +1,10 @@
+CIwResGroup
+{
+	name fonts
+
+	"fonts/terminal6.gxfont"
+	"fonts/arial14.gxfont"
+	"fonts/janda10.gxfont"
+	"fonts/janda16.gxfont"
+	"fonts/janda22.gxfont"
+}
