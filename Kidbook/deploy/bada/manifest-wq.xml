@@ -1,0 +1,34 @@
+<?xml version='1.0' ?>
+<Manifest>
+    <Id>y6t739fm25</Id>
+    <Secret>08E74C3C12CEC6F42A39B485DC46BC86</Secret>
+  <AppVersion>1.6.0</AppVersion>
+  <ManifestVersion>1.1</ManifestVersion>
+    <Privileges>
+        <Privilege>
+            <Name>LOCATION</Name>
+        </Privilege>
+        <Privilege>
+            <Name>IMAGE</Name>
+        </Privilege>
+        <Privilege>
+            <Name>HTTP</Name>
+        </Privilege>
+        <Privilege>
+            <Name>NET</Name>
+        </Privilege>
+        <Privilege>
+            <Name>SOCKET</Name>
+        </Privilege>
+        <Privilege>
+            <Name>SYSTEM_SERVICE</Name>
+        </Privilege>
+        <Privilege>
+            <Name>WEB_SERVICE</Name>
+        </Privilege>
+    </Privileges>
+    <DeviceProfile>
+        <APIVersion>1.1</APIVersion>
+        <CPU>ARM9</CPU>
+    </DeviceProfile>
+</Manifest>

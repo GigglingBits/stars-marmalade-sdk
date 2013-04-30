@@ -1,0 +1,118 @@
+####################################################
+[S3E]
+####################################################
+
+MemSizeDebug=10000000
+MemSize=18000000
+
+IOSDispScaleFactor=200
+
+DispFixRot=2
+
+{OS=bada}
+	SplashscreenBkR=255
+	SplashscreenBkG=255
+	SplashscreenBkB=255
+	SplashscreenWidth=300
+	SplashscreenHeight=220
+	SplashscreenFile=splashscreen.jpg
+	SplashscreenMinTime=1000
+
+{OS=android}
+	SplashscreenBkR=255
+	SplashscreenBkG=255
+	SplashscreenBkB=255
+	SplashscreenWidth=300
+	SplashscreenHeight=220
+	SplashscreenFile=splashscreen.jpg
+	SplashscreenMinTime=1000
+
+#	SysGlesVersion=1
+
+#    MemSizeDebug=10000000
+#    MemSize=28000000
+
+{OS=QNX}
+	SplashscreenBkR=255
+	SplashscreenBkG=255
+	SplashscreenBkB=255
+	SplashscreenWidth=300
+	SplashscreenHeight=220
+	SplashscreenFile=splashscreen.jpg
+	SplashscreenMinTime=1000
+
+{OS=windows}
+	SplashscreenBkR=255
+	SplashscreenBkG=255
+	SplashscreenBkB=255
+	SplashscreenWidth=300
+	SplashscreenHeight=220
+	SplashscreenFile=splashscreen.jpg
+	SplashscreenMinTime=1500
+
+	MemSizeDebug=45000000
+	MemSize=50000000
+
+	SysGlesVersion=2
+
+	WinFullScreen=1
+	WinAllowAltEnter=1
+	WinWidth=1024
+	WinHeight=768
+
+{}
+
+
+####################################################
+[Util]
+####################################################
+#MemoryBreakpoint = 13750
+
+####################################################
+[Gx]
+####################################################
+DataCacheSize=131072 # 132k of data cache needed for font
+
+{OS=winmobile}
+	NumTPages=64
+
+{OS=android}
+	NumTPagesNoMipMap=512
+
+{OS=bada}
+	NumTPages=64
+
+{OS=windows}
+	DataCacheSize=524288 # needed for font
+
+{}
+
+####################################################
+[GxFont]
+####################################################
+CacheTextureMaxSize=1024 # due to large font size
+
+####################################################
+[Kidbook]
+####################################################
+#language=en
+
+anim-constant=0.8
+
+autorotate=0
+showstats=0
+
+{OS=bada}
+	exitbutton=1
+
+{OS=Windows}
+	helpbutton=1
+{}
+
+enable-speech=0
+enable-text=1
+
+#pagemap-file=MiniPageMap.xml
+pagemap-file=PageMap.xml
+
+help-file=help.txt

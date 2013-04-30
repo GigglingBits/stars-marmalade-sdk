@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<root>
+  <map width="3" height="3">
+    <page id="horse2" name="Horse" sound="horse.mp3">
+      <focuspoint x="0.3204134" y="0.4537445" />
+      <speech sound="horse.mp3" />
+    </page>
+    <page id="alligator" name="Alligator">
+      <focuspoint x="0.751938" y="0.4581498" />
+      <speech sound="" />
+    </page>
+    <page id="parrot" name="Parrot">
+      <focuspoint x="0.4186046" y="0.3788546" />
+      <speech sound="" />
+    </page>
+    <page id="seagull2" name="Seagull">
+      <focuspoint x="0.6356589" y="0.4537445" />
+      <speech sound="" />
+    </page>
+    <page id="IMG_0619" name="Wolf">
+      <focuspoint x="0.5" y="0.5" />
+      <speech sound="" />
+    </page>
+    <page id="gnu" name="Gnu">
+      <focuspoint x="0.5" y="0.5" />
+      <speech sound="" />
+    </page>
+    <page id="lizard" name="Lizard">
+      <focuspoint x="0.3" y="0.5" />
+      <speech sound="" />
+    </page>
+    <page id="peacock" name="Peacock">
+      <focuspoint x="0.6" y="0.5" />
+      <speech sound="" />
+    </page>
+    <page id="squirel" name="Squirel">
+      <focuspoint x="0.35" y="0.5" />
+      <speech sound="" />
+    </page>
+  </map>
+</root>

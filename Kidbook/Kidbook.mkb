@@ -1,0 +1,234 @@
+#!/usr/bin/env mkb
+options {
+#	strict
+#	enable-exceptions
+#	offline
+}
+
+subprojects {
+	# empty section required because auto-derbh bug in the mkb interpreter
+}
+
+defines {
+	# Define for TTF rendering support.
+	# Must be before iwgxfont subproject is first included.
+	IW_GXFONT_TTF
+    
+	# needed due to bug with sub-pixel rendering in the 6.1.1 IwGx API
+	# IW_USE_LEGACY_MODULES
+}
+
+deployments {
+	name='Kidbook'
+	caption='Kidbook'
+	manufacturer='Giggling Bits'
+	provider='Oliver C. Lanz'
+	copyright='2010-2013'
+
+	version-major=1
+	version-minor=7
+	version-revision=2
+
+	icon='marketing/icons/'
+	
+	app-icf=data/app.icf
+	embed-icf='1'
+
+	networking=0
+
+	["iOS"]
+	iphone
+	iphone-appid='com.marmalade.kidbook.animals'
+	iphone-splash=marketing/splashscreen-320x480.png
+	iphone-enable-4inch-retina='1'
+	iphone-prerendered-icon='0'
+	iphone-icon=marketing/icons/icon_57x57.png
+	iphone-icon-high-res=marketing/icons/icon_114x114.png
+	iphone-icon-ipad=marketing/icons/icon_72x72.png
+	iphone-icon-ipad-high-res=marketing/icons/icon_144x144.png
+	iphone-icon-settings='marketing/icons/icon_29x29.png'
+	iphone-icon-settings-high-res='marketing/icons/icon_58x58.png'
+	iphone-icon-ipad-search='marketing/icons/icon_50x50.png'
+	iphone-icon-ipad-search-high-res='marketing/icons/icon_100x100.png'
+	itunes-artwork=marketing/icons/icon_512x512.png
+	assets='HighRes'
+
+	["Android"]
+	android
+	android-pkgname='com.marmalade.kidbook.animals'
+	android-icon=marketing/icons/icon_48x48.png
+	android-icon-ldpi=marketing/icons/icon_36x36.png
+	android-icon-mdpi=marketing/icons/icon_48x48.png
+	android-icon-hdpi=marketing/icons/icon_72x72.png
+	android-manifest=deploy/android/AndroidManifest.xml
+	android-keystore=deploy/android/my-release-key.keystore
+	android-aliasname='GigglingBits'
+	android-keypass='123456'
+	android-storepass='123456'
+	assets='HighRes'
+
+	["Blackberry"]
+	playbook
+
+	blackberry-author='Giggling Bits'
+	blackberry-authorid='gYAAgBPNfjf8Ah_MRwCSAMjlL5U'
+	blackberry-cskpass='123456'
+	blackberry-storepass='123456'
+	blackberry-keystore='deploy/qnx/author.p12'
+	blackberry-playbook-icon='marketing/icons/icon_1024x1024.png'
+
+	playbook-icon='marketing/icons'
+	playbook-access-shared=0
+	assets='HighRes'
+
+	["Windows(x86)"]
+	win32
+	win32-icon='marketing/icons'
+	assets='XHighRes'
+
+	["BadaWVGA"]
+	bada
+	bada-icon=marketing/icons/icon_96x96.png
+	bada-appid='w58powj0vy'
+	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
+	bada-manifest=deploy/bada/manifest.xml
+	assets='HighRes'
+
+	["BadaHVGA"]
+	bada
+	bada-icon=marketing/icons/icon_96x96.png
+	bada-appid='w58powj0vy'
+	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
+	bada-manifest=deploy/bada/manifest.xml
+	assets='MedRes'
+
+	["BadaWQVGA"]
+	bada
+	bada-icon=marketing/icons/icon_96x96.png
+	bada-appid='y6t739fm25'
+	bada-appsecret='08E74C3C12CEC6F42A39B485DC46BC86'
+	bada-manifest=deploy/bada/manifest-wq.xml
+	assets='LowRes'
+}
+
+packages {
+	tinyxml
+	libjpeg
+}
+
+subprojects {
+	iw2d
+	iwui
+	iwgxfont
+
+	tinyxml
+	libjpeg
+
+	../Foundations/Renderer
+	../Foundations/Utilities
+}
+
+files {
+	["Source/Engine"]
+	(source)	
+	Application.h
+	Application.cpp
+	AutoRotate.h
+	AutoRotate.cpp
+	BaseBrick.h
+	BaseBrick.cpp
+	BrickMetrics.h
+	BrickMetrics.cpp
+	Controller.h
+	Controller.cpp
+	Configuration.h
+	Configuration.cpp
+	Directions.h
+	Main.cpp
+	Page.h
+	Page.cpp
+	PageMap.h
+	PageMap.cpp
+	Test.h
+	Test.cpp
+	Welcome.h
+	Welcome.cpp
+
+	["Source/UI"]
+	(source)	
+	Button.h
+	Button.cpp
+	Spectator.h
+	Spectator.cpp
+	Toolbar.h
+	Toolbar.cpp
+	TextBox.h
+	TextBox.cpp
+
+	["Source/Graphics"]
+	(source)	
+	Image2D.h
+	Image2D.cpp
+	IwJPEG.h	
+	IwJPEG.cpp	
+	JpegDecompressor.h
+	JpegDecompressor.cpp
+	JpegFile.h
+	JpegFile.cpp
+
+	["Source/Data"]
+	(data)
+	fonts.group
+	MiniPageMap.xml
+	PageMap.xml
+	help.txt
+}
+
+assets {
+	(data)
+	splashscreen.jpg
+	PageMap.xml
+	help.txt
+
+	buttons/.
+	fonts/.
+	thumbnails/.
+	sounds/.
+	#speech/.
+
+	(data-ram/data-gles1, data)
+	fonts.group.bin
+
+	["XHighRes"]
+	<include "Default"> 
+	(data/xhi) 
+	.
+
+	["HighRes"]
+	<include "Default"> 
+	(data/hig) 
+	.
+
+	["MedRes"]
+	<include "Default"> 
+	(data/med) 
+	.
+
+	["LowRes"]
+	<include "Default"> 
+	(data/low) 
+	.
+}
+
+#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
+deployments
+{
+	["Android"]
+	["BadaHVGA"]
+	["BadaWQVGA"]
+	["BadaWVGA"]
+	["Blackberry"]
+	["Default"]
+	["Windows(x86)"]
+	["iOS"]
+}

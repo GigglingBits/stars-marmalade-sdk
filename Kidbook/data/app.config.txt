@@ -1,0 +1,27 @@
+# This .config.txt file documents configuration settings for your
+# application
+# The syntax is similar to that in .icf files:
+#
+# [GroupName]
+# Setting     Documentation for setting
+#
+# e.g.
+# [MyApplicationGroup]
+# MySetting   Description of what MySetting is for, its default values, etc
+
+[Kidbook]
+showstats		1 enables the stats on the screen
+autorotate		1 enables application based rotation
+
+exitbutton		1 shows the exit button
+helpbutton		1 shows the help button
+
+language		Define the language of the app (language-country code pair using the ISO 639 format, e.g. "en")
+locale			Define the app locale (language-country code pair using the ISO 639 and ISO 3166 formats, e.g. "en_GB")
+enable-speech	1 enables the speech
+enable-text		1 enables the text
+
+anim-constant	factor for calculating speed of animation
+
+pagemap-file	file containing the current page map
+help-file		file containing the help text

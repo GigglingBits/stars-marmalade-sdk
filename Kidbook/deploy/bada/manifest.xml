@@ -1,0 +1,46 @@
+<?xml version='1.0' ?>
+<Manifest>
+    <Id>w58powj0vy</Id>
+    <Secret>7980CB6558A5269DEC396AD985C83244</Secret>
+  <AppVersion>1.6.6</AppVersion>
+  <ManifestVersion>1.2</ManifestVersion>
+  <AppType>C++App</AppType>
+    <Privileges>
+        <Privilege>
+            <Name>LOCAL_CONTENT</Name>
+        </Privilege>
+        <Privilege>
+            <Name>LOCATION</Name>
+        </Privilege>
+        <Privilege>
+            <Name>CAMERA</Name>
+        </Privilege>
+        <Privilege>
+            <Name>IMAGE</Name>
+        </Privilege>
+        <Privilege>
+            <Name>HTTP</Name>
+        </Privilege>
+        <Privilege>
+            <Name>NET</Name>
+        </Privilege>
+        <Privilege>
+            <Name>SOCKET</Name>
+        </Privilege>
+        <Privilege>
+            <Name>ADDRESSBOOK</Name>
+        </Privilege>
+        <Privilege>
+            <Name>SYSTEM_SERVICE</Name>
+        </Privilege>
+        <Privilege>
+            <Name>TELEPHONY</Name>
+        </Privilege>
+        <Privilege>
+            <Name>WEB_SERVICE</Name>
+        </Privilege>
+    </Privileges>
+    <DeviceProfile>
+        <APIVersion>2.0</APIVersion>
+    </DeviceProfile>
+</Manifest>

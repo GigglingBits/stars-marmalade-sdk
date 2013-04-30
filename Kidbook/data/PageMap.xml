@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <map cols="9" rows="9">
+    <page id="lion">
+      <focuspoint x="0.5394832" y="0.3788546" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Löwe</text>
+      <text lang="da">Løve</text>
+      <text lang="en">Lion</text>
+      <text lang="ko">사자</text>
+      <text lang="sv">Lejon</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="caterpillar">
+      <focuspoint x="0.245478" y="0.4977974" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Raupe</text>
+      <text lang="da">Larve</text>
+      <text lang="en">Caterpillar</text>
+      <text lang="ko">모충</text>
+      <text lang="sv">Larv</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="elephant">
+      <focuspoint x="0.369509" y="0.4273128" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Elefant</text>
+      <text lang="da">Elefant</text>
+      <text lang="en">Elephant</text>
+      <text lang="ko">코끼리</text>
+      <text lang="sv">Elefant</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="dragonfly">
+      <focuspoint x="0.6925064" y="0.5682819" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Libelle</text>
+      <text lang="da">Sølvsmed</text>
+      <text lang="en">Dragonfly</text>
+      <text lang="ko">잠자리</text>
+      <text lang="sv">Trollslända</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="owl">
+      <focuspoint x="0.5081654" y="0.3083701" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Eule</text>
+      <text lang="da">Ugle</text>
+      <text lang="en">Owl</text>
+      <text lang="ko">부엉이</text>
+      <text lang="sv">Uggla</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="seagull">
+      <focuspoint x="0.4857881" y="0.5638766" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Möve</text>
+      <text lang="da">Måge</text>
+      <text lang="en">Sea gull</text>
+      <text lang="ko">갈매기</text>
+      <text lang="sv">Fiskmås</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="penguin">
+      <focuspoint x="0.4832041" y="0.4185022" />
+      <sound file="penguins.mp3" />
+      <speech file="" />
+      <text lang="de">Pinguin</text>
+      <text lang="da">Pingvin</text>
+      <text lang="en">Penguin</text>
+      <text lang="ko">펭귄</text>
+      <text lang="sv">Pingvin</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="bee">
+      <focuspoint x="0.3436693" y="0.4140969" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Biene</text>
+      <text lang="da">Bi</text>
+      <text lang="en">Bee</text>
+      <text lang="ko">벌</text>
+      <text lang="sv">Bi</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="lemur">
+      <focuspoint x="0.6589147" y="0.5066079" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Lemure</text>
+      <text lang="da">Lemur</text>
+      <text lang="en">Lemur</text>
+      <text lang="ko">여우원숭이</text>
+      <text lang="sv">Lemur</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="cow2">
+      <focuspoint x="0.7286822" y="0.4625551" />
+      <sound file="cow.mp3" />
+      <speech file="" />
+      <text lang="de">Kuh</text>
+      <text lang="da">Ko</text>
+      <text lang="en">Cow</text>
+      <text lang="ko">암소</text>
+      <text lang="sv">Ko</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="leopard">
+      <focuspoint x="0.374677" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Leopard</text>
+      <text lang="da">Leopard</text>
+      <text lang="en">Leopard</text>
+      <text lang="ko">표범</text>
+      <text lang="sv">Leopard</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="stingray">
+      <focuspoint x="0.3901809" y="0.5991189" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Rochen</text>
+      <text lang="da">Rokke</text>
+      <text lang="en">Stingray</text>
+      <text lang="ko">노랑가오리</text>
+      <text lang="sv">Rocka</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="ladybird">
+      <focuspoint x="0.4883721" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Maikäfer</text>
+      <text lang="da">Mariehøne</text>
+      <text lang="en">Ladybird</text>
+      <text lang="ko">무당벌레</text>
+      <text lang="sv">Nyckelpiga</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="dolphin">
+      <focuspoint x="0.669251" y="0.4625551" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Delphin</text>
+      <text lang="da">Delfin</text>
+      <text lang="en">Dolphin</text>
+      <text lang="ko">돌고래</text>
+      <text lang="sv">Delfin</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="chameleon">
+      <focuspoint x="0.496124" y="0.3480176" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Chamäleon</text>
+      <text lang="da">Kamæleon</text>
+      <text lang="en">Chameleon</text>
+      <text lang="ko">카멜레온</text>
+      <text lang="sv">Kameleont</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="grasshopper">
+      <focuspoint x="0.5788113" y="0.5638766" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Grashüpfer</text>
+      <text lang="da">Græshoppe</text>
+      <text lang="en">Grasshopper</text>
+      <text lang="ko">메뚜기</text>
+      <text lang="sv">Gräshoppa</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="chicken">
+      <focuspoint x="0.2635659" y="0.4008811" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Huhn</text>
+      <text lang="da">Kylling</text>
+      <text lang="en">Chicken</text>
+      <text lang="ko">닭</text>
+      <text lang="sv">Kyckling</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="duck">
+      <focuspoint x="0.73385" y="0.4405286" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Ente</text>
+      <text lang="da">And</text>
+      <text lang="en">Duck</text>
+      <text lang="ko">오리</text>
+      <text lang="sv">Gräsand</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="sheep">
+      <focuspoint x="0.3229974" y="0.4801762" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Schaf</text>
+      <text lang="da">Får</text>
+      <text lang="en">Sheep</text>
+      <text lang="ko">양</text>
+      <text lang="sv">Får</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="polarbear">
+      <focuspoint x="0.6770026" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Eisbär</text>
+      <text lang="da">Isbjørn</text>
+      <text lang="en">Polarbear</text>
+      <text lang="ko">흰곰</text>
+      <text lang="sv">Isbjörn</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="seastar">
+      <focuspoint x="0.4418605" y="0.4537445" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Seestern</text>
+      <text lang="da">Søstjerne</text>
+      <text lang="en">Seastar</text>
+      <text lang="ko">불가사리</text>
+      <text lang="sv">Sjöstjärna</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="cow">
+      <focuspoint x="0.3824289" y="0.4493392" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Kuh</text>
+      <text lang="da">Ko</text>
+      <text lang="en">Cow</text>
+      <text lang="ko">암소</text>
+      <text lang="sv">Ko</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="spider">
+      <focuspoint x="0.3509561" y="0.5188546" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Spinne</text>
+      <text lang="da">Edderkop</text>
+      <text lang="en">Spider</text>
+      <text lang="ko">거미</text>
+      <text lang="sv">Spindel</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="rhino">
+      <focuspoint x="0.3229974" y="0.5462555" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Nashorn</text>
+      <text lang="da">Næsehorn</text>
+      <text lang="en">Rhinoceros</text>
+      <text lang="ko">꼬뿔소</text>
+      <text lang="sv">Noshörning</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="camel">
+      <focuspoint x="0.3953488" y="0.4713656" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Kamel</text>
+      <text lang="da">Kamel</text>
+      <text lang="en">Camel</text>
+      <text lang="ko">낙타</text>
+      <text lang="sv">Kamel</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="pig">
+      <focuspoint x="0.2795866" y="0.4801762" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Schwein</text>
+      <text lang="da">Gris</text>
+      <text lang="en">Pig</text>
+      <text lang="ko">돼지</text>
+      <text lang="sv">Gris</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="goat">
+      <focuspoint x="0.4909561" y="0.5286344" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Ziege</text>
+      <text lang="da">Ged</text>
+      <text lang="en">Goat</text>
+      <text lang="ko">염소</text>
+      <text lang="sv">Get</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="butterfly">
+      <focuspoint x="0.4134367" y="0.5022026" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Schmetterling</text>
+      <text lang="da">Sommerfugl</text>
+      <text lang="en">Butterfly</text>
+      <text lang="ko">나비</text>
+      <text lang="sv">Fjäril</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="deer">
+      <focuspoint x="0.5891473" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Hirsch</text>
+      <text lang="da">Dådyr</text>
+      <text lang="en">Deer</text>
+      <text lang="ko">사슴</text>
+      <text lang="sv">Hjort</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="dog2">
+      <focuspoint x="0.7028424" y="0.4449339" />
+      <sound file="dog.mp3" />
+      <speech file="" />
+      <text lang="de">Hund</text>
+      <text lang="da">Hund</text>
+      <text lang="en">Dog</text>
+      <text lang="ko">개</text>
+      <text lang="sv">Hund</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="frog2">
+      <focuspoint x="0.5503876" y="0.4581498" />
+      <sound file="frog.mp3" />
+      <speech file="" />
+      <text lang="de">Frosch</text>
+      <text lang="da">Frø</text>
+      <text lang="en">Frog</text>
+      <text lang="ko">개구리</text>
+      <text lang="sv">Groda</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="frog">
+      <focuspoint x="0.5839793" y="0.4625551" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Frosch</text>
+      <text lang="da">Frø</text>
+      <text lang="en">Frog</text>
+      <text lang="ko">개구리</text>
+      <text lang="sv">Groda</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="gecko">
+      <focuspoint x="0.3333333" y="0.4625551" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Eidechse</text>
+      <text lang="da">Firben</text>
+      <text lang="en">Lizard</text>
+      <text lang="ko">도마뱀</text>
+      <text lang="sv">Ödla</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="stork">
+      <focuspoint x="0.5348837" y="0.4537445" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Storch</text>
+      <text lang="da">Stork</text>
+      <text lang="en">Stork</text>
+      <text lang="ko">황새</text>
+      <text lang="sv">Stork</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="hedgehog">
+      <focuspoint x="0.6048837" y="0.6037445" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Igel</text>
+      <text lang="da">Pindsvin</text>
+      <text lang="en">Hedgehog</text>
+      <text lang="ko">고슴도치</text>
+      <text lang="sv">Igelkott</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="grizzly">
+      <focuspoint x="0.6020672" y="0.4537445" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Braunbär</text>
+      <text lang="da">Brun bjørn</text>
+      <text lang="en">Brown Bear</text>
+      <text lang="ko">불곰</text>
+      <text lang="sv">Brunbjörn</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="waterbuffalo">
+      <focuspoint x="0.3469251" y="0.4405286" />
+      <sound file="water_buffalo.mp3" />
+      <speech file="" />
+      <text lang="de">Wasserbüffel</text>
+      <text lang="da">Vandbøffel</text>
+      <text lang="en">Water buffalo</text>
+      <text lang="ko">물소</text>
+      <text lang="sv">Vattenbuffel</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="clownfish">
+      <focuspoint x="0.5400517" y="0.4185022" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fisch</text>
+      <text lang="da">Klovnefisk</text>
+      <text lang="en">Clownfish</text>
+      <text lang="ko">흰동가리</text>
+      <text lang="sv">Clownfisk</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="fly2">
+      <focuspoint x="0.6046512" y="0.4449339" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fliege</text>
+      <text lang="da">Flue</text>
+      <text lang="en">Fly</text>
+      <text lang="ko">파리</text>
+      <text lang="sv">Fluga</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="zebra">
+      <focuspoint x="0.4392765" y="0.4889868" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Zebra</text>
+      <text lang="da">Zebra</text>
+      <text lang="en">Zebra</text>
+      <text lang="ko">얼룩말</text>
+      <text lang="sv">Zebra</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="ant">
+      <focuspoint x="0.4108527" y="0.4669603" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Ameise</text>
+      <text lang="da">Myre</text>
+      <text lang="en">Ant</text>
+      <text lang="ko">개미</text>
+      <text lang="sv">Myra</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="cat">
+      <focuspoint x="0.374677" y="0.3392071" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Katze</text>
+      <text lang="da">Kat</text>
+      <text lang="en">Cat</text>
+      <text lang="ko">고양이</text>
+      <text lang="sv">Katt</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="crab">
+      <focuspoint x="0.498708" y="0.4052863" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Krebs</text>
+      <text lang="da">Krabbe</text>
+      <text lang="en">Crab</text>
+      <text lang="ko">게</text>
+      <text lang="sv">Krabba</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="rooster">
+      <focuspoint x="0.6054" y="0.5063" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Hahn</text>
+      <text lang="da">Hane</text>
+      <text lang="en">Rooster</text>
+      <text lang="ko">수탉</text>
+      <text lang="sv">Tupp</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="kangaroo">
+      <focuspoint x="0.5204134" y="0.3449339" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Känguru</text>
+      <text lang="da">Kænguru</text>
+      <text lang="en">Kangaroo</text>
+      <text lang="ko">캥거루</text>
+      <text lang="sv">Känguru</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="dog4">
+      <focuspoint x="0.5607235" y="0.4801762" />
+      <sound file="dog.mp3" />
+      <speech file="" />
+      <text lang="de">Hund</text>
+      <text lang="da">Hund</text>
+      <text lang="en">Dog</text>
+      <text lang="ko">개</text>
+      <text lang="sv">Hund</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="flamingo">
+      <focuspoint x="0.6408269" y="0.4096916" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Flamingo</text>
+      <text lang="da">Flamingo</text>
+      <text lang="en">Flamingo</text>
+      <text lang="ko">홍학</text>
+      <text lang="sv">Flamingo</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="fish2">
+      <focuspoint x="0.6175711" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fisch</text>
+      <text lang="da">Fisk</text>
+      <text lang="en">Fish</text>
+      <text lang="ko">물고기</text>
+      <text lang="sv">Fisk</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="hippo">
+      <focuspoint x="0.4728682" y="0.4669603" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Nilpferd</text>
+      <text lang="da">Flodhest</text>
+      <text lang="en">Hippopotamus</text>
+      <text lang="ko">하마</text>
+      <text lang="sv">Flodhäst</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="turtle">
+      <focuspoint x="0.5245478" y="0.5506608" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Schildkröte</text>
+      <text lang="da">Skildpadde</text>
+      <text lang="en">Tortoise</text>
+      <text lang="ko">거북</text>
+      <text lang="sv">Skjöldpadda</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="tiger">
+      <focuspoint x="0.4728682" y="0.5506608" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Tiger</text>
+      <text lang="da">Tiger</text>
+      <text lang="en">Tiger</text>
+      <text lang="ko">호랑이</text>
+      <text lang="sv">Tiger</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="gibbon">
+      <focuspoint x="0.4857881" y="0.3594714" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Gibbon</text>
+      <text lang="da">Gibbon</text>
+      <text lang="en">Gibbon</text>
+      <text lang="ko">긴팔원숭이</text>
+      <text lang="sv">Gibbon</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="sealion">
+      <focuspoint x="0.4392765" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Seelöwe</text>
+      <text lang="da">Søløve</text>
+      <text lang="en">Sea lion</text>
+      <text lang="ko">바다사자</text>
+      <text lang="sv">Sjölejon</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="seaturtle">
+      <focuspoint x="0.3901809" y="0.3832599" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Wasserschildkröte</text>
+      <text lang="da">Skildpadde</text>
+      <text lang="en">Sea turtle</text>
+      <text lang="ko">바다거북</text>
+      <text lang="sv">Havsskjöldpadda</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="wolf">
+      <focuspoint x="0.5426357" y="0.4229075" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Wolf</text>
+      <text lang="da">Ulv</text>
+      <text lang="en">Wolf</text>
+      <text lang="ko">늑대</text>
+      <text lang="sv">Varg</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="goose">
+      <focuspoint x="0.496124" y="0.2202643" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Gans</text>
+      <text lang="da">Gås</text>
+      <text lang="en">Goose</text>
+      <text lang="ko">거위</text>
+      <text lang="sv">Gås</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="fish1">
+      <focuspoint x="0.4392765" y="0.5506608" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fisch</text>
+      <text lang="da">Fisk</text>
+      <text lang="en">Fish</text>
+      <text lang="ko">물고기</text>
+      <text lang="sv">Fisk</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="shark">
+      <focuspoint x="0.3824289" y="0.4801762" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Hai</text>
+      <text lang="da">Haj</text>
+      <text lang="en">Shark</text>
+      <text lang="ko">상어</text>
+      <text lang="sv">Haj</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="dog3">
+      <focuspoint x="0.498708" y="0.3920705" />
+      <sound file="dog2.mp3" />
+      <speech file="" />
+      <text lang="de">Hund</text>
+      <text lang="da">Hund</text>
+      <text lang="en">Dog</text>
+      <text lang="ko">개</text>
+      <text lang="sv">Hund</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="fly">
+      <focuspoint x="0.5710594" y="0.4185022" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fliege</text>
+      <text lang="da">Flue</text>
+      <text lang="en">Fly</text>
+      <text lang="ko">파리</text>
+      <text lang="sv">Fluga</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="chimpanzee">
+      <focuspoint x="0.5116279" y="0.4757709" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Chimpanse</text>
+      <text lang="da">Chimpanse</text>
+      <text lang="en">Chimpanzee</text>
+      <text lang="ko">침팬지</text>
+      <text lang="sv">Schimpans</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="giraf">
+      <focuspoint x="0.4883721" y="0.4229075" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Giraffe</text>
+      <text lang="da">Giraf</text>
+      <text lang="en">Giraf</text>
+      <text lang="ko">기린</text>
+      <text lang="sv">Giraff</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="horse">
+      <focuspoint x="0.5762274" y="0.3832599" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Pferd</text>
+      <text lang="da">Hest</text>
+      <text lang="en">Horse</text>
+      <text lang="ko">말</text>
+      <text lang="sv">Häst</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="alligator">
+      <focuspoint x="0.751938" y="0.4581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Alligator</text>
+      <text lang="da">Alligator</text>
+      <text lang="en">Alligator</text>
+      <text lang="ko">악어</text>
+      <text lang="sv">Alligator</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="parrot">
+      <focuspoint x="0.4186046" y="0.3788546" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Papagei</text>
+      <text lang="da">Papegøje</text>
+      <text lang="en">Parrot</text>
+      <text lang="ko">앵무새</text>
+      <text lang="sv">Papegoja</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="seagull2">
+      <focuspoint x="0.6356589" y="0.4537445" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Seemöve</text>
+      <text lang="da">Måge</text>
+      <text lang="en">Seagull</text>
+      <text lang="ko">갈매기</text>
+      <text lang="sv">Fiskmås</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="gnu">
+      <focuspoint x="0.5" y="0.5" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Gnu</text>
+      <text lang="da">Gnu</text>
+      <text lang="en">Gnu</text>
+      <text lang="ko">누</text>
+      <text lang="sv">Gnu</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="iguana">
+      <focuspoint x="0.3" y="0.5" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Leguan</text>
+      <text lang="da">Leguan</text>
+      <text lang="en">Iguana</text>
+      <text lang="ko">이구아나</text>
+      <text lang="sv">Leguan</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="peacock">
+      <focuspoint x="0.6" y="0.5" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Pfau</text>
+      <text lang="da">Påfugl</text>
+      <text lang="en">Peacock</text>
+      <text lang="ko">공작</text>
+      <text lang="sv">Påfågel</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="squirel">
+      <focuspoint x="0.35" y="0.5" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Eichhörnchen</text>
+      <text lang="da">Egern</text>
+      <text lang="en">Squirrel</text>
+      <text lang="ko">다람쥐</text>
+      <text lang="sv">Ekorre</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="pigeon">
+      <focuspoint x="0.4" y="0.3" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Taube</text>
+      <text lang="da">Due</text>
+      <text lang="en">Pigeon</text>
+      <text lang="ko">비둘기</text>
+      <text lang="sv">Duva</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="horse2">
+      <focuspoint x="0.3204134" y="0.4537445" />
+      <sound file="horse.mp3" />
+      <speech file="" />
+      <text lang="de">Pferd</text>
+      <text lang="da">Hest</text>
+      <text lang="en">Horse</text>
+      <text lang="ko">말</text>
+      <text lang="sv">Häst</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="seal">
+      <focuspoint x="0.5592765" y="0.5581498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Seehund</text>
+      <text lang="da">Sæl</text>
+      <text lang="en">Seal</text>
+      <text lang="ko">바다표범</text>
+      <text lang="sv">Säl</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="lioness">
+      <focuspoint x="0.4092765" y="0.30581498" />
+      <sound file="lion.mp3" />
+      <speech file="" />
+      <text lang="de">Löwin</text>
+      <text lang="da">Løvinde</text>
+      <text lang="en">Lioness</text>
+      <text lang="ko">암사자</text>
+      <text lang="sv">Lioness</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="fox">
+      <focuspoint x="0.3592765" y="0.4081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Fuchs</text>
+      <text lang="da">Ræv</text>
+      <text lang="en">Fox</text>
+      <text lang="ko">여우</text>
+      <text lang="sv">Räv</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="gorilla">
+      <focuspoint x="0.5092765" y="0.4081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Gorilla</text>
+      <text lang="da">Gorilla</text>
+      <text lang="en">Gorilla</text>
+      <text lang="ko">고릴라</text>
+      <text lang="sv">Gorilla</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="rabbit">
+      <focuspoint x="0.6092765" y="0.5081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Kaninchen</text>
+      <text lang="da">Kanin</text>
+      <text lang="en">Rabbit</text>
+      <text lang="ko">토끼</text>
+      <text lang="sv">Kanin</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="mouse">
+      <focuspoint x="0.3092765" y="0.5081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Maus</text>
+      <text lang="da">Mus</text>
+      <text lang="en">Mouse</text>
+      <text lang="ko">쥐</text>
+      <text lang="sv">Mus</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="beaver">
+      <focuspoint x="0.3092765" y="0.6081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Biber</text>
+      <text lang="da">Bæver</text>
+      <text lang="en">Beaver</text>
+      <text lang="ko">비버</text>
+      <text lang="sv">Bäver</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="raccoon">
+      <focuspoint x="0.5092765" y="0.4081498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Waschbär</text>
+      <text lang="da">Vaskebjørn</text>
+      <text lang="en">Raccoon</text>
+      <text lang="ko">너구리</text>
+      <text lang="sv">Tvättbjörn</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+    <page id="humpbackwhale">
+      <focuspoint x="0.6092765" y="0.4881498" />
+      <sound file="" />
+      <speech file="" />
+      <text lang="de">Buckelwal</text>
+      <text lang="da">Pukkelhval</text>
+      <text lang="en">Humpback whale</text>
+      <text lang="ko">향유 고래</text>
+      <text lang="sv">Knölval</text>
+      <text lang="fr"></text>
+      <text lang="es"></text>
+    </page>
+  </map>
+</root>
+    

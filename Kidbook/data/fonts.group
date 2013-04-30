@@ -1,0 +1,12 @@
+CIwResGroup
+{
+	name Fonts
+
+	CIwGxFont
+	{
+		name "Font"
+
+		ttf ".\fonts\comic.ttf"
+		ttfPointSize 16
+	}
+}
