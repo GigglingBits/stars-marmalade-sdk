@@ -14,12 +14,14 @@ enum ButtonCommandId {
 	eButtonCommandIdSetHeroFocus,
 
 	// application navigation
+	eButtonCommandIdOpenTitleMenu,
 	eButtonCommandIdOpenLevelMenu,
-	eButtonCommandIdOpenLevel,
+	
+    eButtonCommandIdOpenWorld,
+    eButtonCommandIdOpenLevel,
+	eButtonCommandIdOpenNextLevel,
 	eButtonCommandIdRestartLevel,
-	eButtonCommandIdNextLevel,
-	eButtonCommandIdNextWorld,
-	eButtonCommandIdPreviousWorld,
+	eButtonCommandIdQuitLevel,
 
 	// application interaction
 	eButtonCommandIdSocial,
