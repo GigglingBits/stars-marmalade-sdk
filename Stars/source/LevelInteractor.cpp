@@ -3,7 +3,7 @@
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
 	m_rxGame(game),
-    m_xTouchpad(camera.GetViewport().GetViewportSize()) {
+    m_xTouchpad() {
 
 	InputManager& im = InputManager::GetInstance();
 	im.TouchBeginEvent.AddListener<LevelInteractor>(this, &LevelInteractor::TouchBeginEventHandler);

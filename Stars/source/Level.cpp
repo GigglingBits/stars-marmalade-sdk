@@ -99,6 +99,9 @@ void Level::OnUpdate(const FrameData& frame) {
 		}
 	}
 
+	// interaction
+	m_xInteractor.Update(frame);
+	
 	// scene and widgets
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackground.Update(frame);
@@ -118,6 +121,8 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xStatsPanel.Render(renderer, frame);
 	m_xAppPanel.Render(renderer, frame);
+	
+	m_xInteractor.Render(renderer, frame);
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {

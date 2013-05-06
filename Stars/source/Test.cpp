@@ -1,3 +1,4 @@
+
 #include <string>
 #include "s3e.h"
 
@@ -13,6 +14,7 @@
 #include "Oscillator.h"
 #include "FrameData.h"
 #include "PinchGesture.h"
+#include "Touchpad.h"
 
 #define DBG_FILE NULL //"memdbg.txt"
 
@@ -67,7 +69,11 @@ void Test::RunTest() {
 	RunPinchGestureTest();
 	Evaluate(systemcheckpoint, testcheckpoint);
 	s3eDeviceYield(0);
-
+	
+	RunTouchpadTest();
+	Evaluate(systemcheckpoint, testcheckpoint);
+	s3eDeviceYield(0);
+	
 	IwMemBucketPop();
 	IwMemBucketPop();
 }
@@ -418,4 +424,39 @@ void Test::RunPinchGestureTest() {
 		IwAssert(MYAPP, pinch.IsPinching() == false);
 		IwAssert(MYAPP, info.movement == expectedtranslation);
 	}
+}
+
+void Test::RunTouchpadTest() {
+	IW_CALLSTACK_SELF;
+	Touchpad t;
+	
+	CIwSVec2 touchpadsize(320, 240);
+	CIwSVec2 touchpadpos(320, 240);
+	CIwSVec2 touchpos(320, 240);
+	
+	t.SetPosition(touchpadpos);
+	t.SetSize(touchpadsize);
+	
+	// center touch
+	IwAssert(MYAPP, t.SetTouch(touchpos));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2::g_Zero);
+
+	// center inbounds
+	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 120)));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0, -1.0));
+
+	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 120)));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0, -1.0));
+
+	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 360)));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0, 1.0));
+
+	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 360)));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0, 1.0));
+
+	// center inbounds
+	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 119)));
+	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 119)));
+	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 361)));
+	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 361)));
 }
