@@ -16,12 +16,10 @@ public:
     void SetPosition(const CIwSVec2& center);
     void SetSize(const CIwSVec2& size);
 
+    bool HitTest(const CIwSVec2& screenpos);
 	bool SetTouch(const CIwSVec2& screenpos);
 
-	CIwFVec2 GetTouchVectorNormalized();
-	
-private:
-    bool HitTest(const CIwSVec2& screenpos);
+	CIwFVec2 GetTouchVectorNormalized();	
     
 private:
     virtual void OnUpdate(const FrameData& frame);

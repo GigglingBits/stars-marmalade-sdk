@@ -21,25 +21,34 @@ LevelInteractor::~LevelInteractor() {
 void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	ClearTouchSpec(touch);
 
-	// analyze hit point (was a non-star, draggable object hit?)
-	typedef std::map<std::string, Sprite*> SpriteMap;
-	SpriteMap sprites = m_rxGame.GetSpriteMap();
-	for (SpriteMap::iterator it = sprites.begin(); it != sprites.end(); it++) {
-		if (Body* body = dynamic_cast<Body*>(it->second)) {
-			if (body->HitTest(touch.worldendpos) && body->CanDrag() && !body->IsDragging()) {
-				touch.targetsprite = it->first;
-				touch.gesturetype = eGestureTypeDragObject;
-				break;
+	// check if touch originates on touchpad
+	if (m_xTouchpad.HitTest(touch.screenstartpos)) {
+		if (Star* star = m_rxGame.GetStar()) {
+			touch.gesturetype = eGestureTypeTouchpadNavigation;
+			touch.targetsprite = star->GetId();
+		}
+		
+	} else {
+		// analyze hit point (was a non-star, draggable object hit?)
+		typedef std::map<std::string, Sprite*> SpriteMap;
+		SpriteMap sprites = m_rxGame.GetSpriteMap();
+		for (SpriteMap::iterator it = sprites.begin(); it != sprites.end(); it++) {
+			if (Body* body = dynamic_cast<Body*>(it->second)) {
+				if (body->HitTest(touch.worldendpos) && body->CanDrag() && !body->IsDragging()) {
+					touch.targetsprite = it->first;
+					touch.gesturetype = eGestureTypeDragObject;
+					break;
+				}
 			}
 		}
-	}
 
-	if (touch.gesturetype == eGestureTypeNone) {
 		// nothing draggable hit? make it a drag on the star
-		Star* star = m_rxGame.GetStar();
-		if (star && star->IsDragging()) {
-			touch.gesturetype = eGestureTypeDragStar;
-			touch.targetsprite = star->GetId();
+		if (touch.gesturetype == eGestureTypeNone) {
+			Star* star = m_rxGame.GetStar();
+			if (star && star->IsDragging()) {
+				touch.gesturetype = eGestureTypeDragStar;
+				touch.targetsprite = star->GetId();
+			}
 		}
 	}
 }
@@ -49,8 +58,21 @@ void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 	touch.targetsprite.clear();
 }
 
+CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
+	const CIwSVec2& vsize = m_rxCamera.GetViewport().GetViewportSize();
+
+	m_xTouchpad.SetTouch(pos);
+	const CIwFVec2& norm = m_xTouchpad.GetTouchVectorNormalized();
+
+	CIwSVec2 screenpos(
+		(int16)((vsize.x / 2) + norm.x * (vsize.x / 2)),
+		(int16)((vsize.y / 2) + norm.y * (vsize.y /2)));
+	return m_rxCamera.GetViewport().ScreenToWorld(screenpos);
+}
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
+	m_xTouchpad.SetSize(CIwSVec2(150, 150));
+	m_xTouchpad.SetPosition(CIwSVec2(100, 100));
     m_xTouchpad.Update(frame);
 }
 
@@ -80,6 +102,13 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 			// body does no longer exist, e.g. must have died
 			ClearTouchSpec(touch);
 		}
+
+	// do navigation
+	} else if (touch.gesturetype == eGestureTypeTouchpadNavigation) {
+		if (Star* star = m_rxGame.GetStar()) {
+			star->StartDragging(star->GetCenter());
+			star->MoveDragging(GetTouchpadMove(touch.screenstartpos));
+		}
 	}
 
 	m_xTouchRecorder[args.id] = touch;
@@ -99,6 +128,12 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 			// body does no longer exist, e.g. it must have died
 			ClearTouchSpec(touch);
 		}
+
+	// do navigation
+	} else if (touch.gesturetype == eGestureTypeTouchpadNavigation) {
+		if (Star* star = m_rxGame.GetStar()) {
+			star->MoveDragging(GetTouchpadMove(touch.screenendpos));
+		}
 	}
 }
 
@@ -115,6 +150,13 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 		} else if (Body* body = m_rxGame.FindSprite<Body>(touch.targetsprite)) {
 			body->MoveDragging(touch.worldendpos);
 			body->EndDragging();
+		}
+
+	// do navigation
+	} else if (touch.gesturetype == eGestureTypeTouchpadNavigation) {
+		if (Star* star = m_rxGame.GetStar()) {
+			star->MoveDragging(GetTouchpadMove(touch.screenendpos));
+			star->EndDragging();
 		}
 	}
 

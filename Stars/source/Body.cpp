@@ -173,7 +173,7 @@ bool Body::StartDragging(const CIwFVec2& target) {
 		return false;
 	}
 	if (!HitTest(target)) {
-		// don't allow draggin to be started outside the body
+		// don't allow dragging to be started outside the body
 		return false;
 	}
 	if (m_pxBody->GetType() != b2_dynamicBody) {

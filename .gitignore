@@ -26,3 +26,5 @@ Kidbook/build_kidbook_vc11/
 Kidbook/build_kidbook_xcode/
 Kidbook/originals/
 Kidbook/dist/
+
+*.mkb~

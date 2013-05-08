@@ -441,22 +441,26 @@ void Test::RunTouchpadTest() {
 	IwAssert(MYAPP, t.SetTouch(touchpos));
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2::g_Zero);
 
-	// center inbounds
+	// touch inbounds
 	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 120)));
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0, -1.0));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, -1.0f));
 
 	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 120)));
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0, -1.0));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, -1.0f));
 
 	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 360)));
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0, 1.0));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, 1.0f));
 
 	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 360)));
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0, 1.0));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, 1.0f));
 
-	// center inbounds
+	// touch outbounds
 	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 119)));
 	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 119)));
 	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 361)));
 	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 361)));
+	
+	// touch with floating points
+	IwAssert(MYAPP, t.SetTouch(CIwSVec2(240, 180)));
+	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-0.5f, -0.5f));
 }

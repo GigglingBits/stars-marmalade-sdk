@@ -16,7 +16,8 @@ private:
 	enum eGestureType {
 		eGestureTypeNone = 0,
 		eGestureTypeDragObject = 1,
-		eGestureTypeDragStar = 2
+		eGestureTypeDragStar = 2,
+		eGestureTypeTouchpadNavigation = 3
 	};
 
 	// monitor the touch input
@@ -43,9 +44,11 @@ private:
 	void EvaluateTouchPurpose(TouchSpec& touch);
 	void ClearTouchSpec(TouchSpec& touch);
 
+	CIwFVec2 GetTouchpadMove(const CIwSVec2& touch);
+
     virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-    
+
 	void TouchBeginEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	void TouchMoveEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	void TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);

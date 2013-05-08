@@ -114,8 +114,8 @@ void TitleMenu::OnDoLayout(const CIwSVec2& screensize) {
 	button.x = screencenter.x + (extents / 2) - (2 * button.w);
 	m_xButtonAchievements.SetPosition(button);
     
-    button.w = extents / 1.5;
-    button.h = extents / 1.5;
+    button.w = (int16)(extents / 1.5f);
+    button.h = (int16)(extents / 1.5f);
     button.x = screencenter.x - (button.w / 2);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPlanet.SetPosition(button);

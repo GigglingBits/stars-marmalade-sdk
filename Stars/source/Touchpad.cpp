@@ -24,8 +24,8 @@ CIwFVec2 Touchpad::GetTouchVectorNormalized() {
 	CIwSVec2 touchcenteroffset = m_xTouchPos - m_xCenterPos;
 	
 	CIwFVec2 touchvec;
-	touchvec.x = touchcenteroffset.x / (m_xSize.x / 2);
-	touchvec.y = touchcenteroffset.y / (m_xSize.y / 2);
+	touchvec.x = touchcenteroffset.x / (m_xSize.x / 2.0f);
+	touchvec.y = touchcenteroffset.y / (m_xSize.y / 2.0f);
 	return touchvec;
 }
 
