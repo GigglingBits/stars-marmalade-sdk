@@ -71,8 +71,10 @@ CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
 }
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
-	m_xTouchpad.SetSize(CIwSVec2(150, 150));
-	m_xTouchpad.SetPosition(CIwSVec2(100, 100));
+	const CIwSVec2& framesize = frame.GetScreensize();
+	
+	m_xTouchpad.SetSize(CIwSVec2(framesize.x / 4, framesize.y / 4));
+	m_xTouchpad.SetPosition(CIwSVec2(framesize.x / 8 * 7, framesize.y / 8 * 7));
     m_xTouchpad.Update(frame);
 }
 
