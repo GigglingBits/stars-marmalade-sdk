@@ -95,17 +95,28 @@ the bodie that owns the joint.
       <fixture friction="0.6" restitution="0.5" density="1.0" />
     </body>
 
-    <body id="planet_moon" type="target" resilience="1.0" revolve="0" drag="0">
-      <texture image="planet_moon" />
-      <shape type="polygon">
-        <point x="0" y="-5" />
-        <point x="10" y="-5" />
-        <point x="10" y="5" />
-        <point x="0" y="5" />
-      </shape>
-      <fixture friction="0.6" restitution="0.5" density="1.0" />
-    </body>
-
+	  <body id="planet_mars" type="target" resilience="1.0" revolve="0" drag="0">
+		  <texture image="planet_mars" />
+		  <shape type="polygon">
+			  <point x="0" y="-5" />
+			  <point x="10" y="-5" />
+			  <point x="10" y="5" />
+			  <point x="0" y="5" />
+		  </shape>
+		  <fixture friction="0.6" restitution="0.5" density="1.0" />
+	  </body>
+	  
+	  <body id="planet_jupiter" type="target" resilience="1.0" revolve="0" drag="0">
+		  <texture image="planet_jupiter" />
+		  <shape type="polygon">
+			  <point x="0" y="-5" />
+			  <point x="10" y="-5" />
+			  <point x="10" y="5" />
+			  <point x="0" y="5" />
+		  </shape>
+		  <fixture friction="0.6" restitution="0.5" density="1.0" />
+	  </body>
+	  
   </bodies>
 
   <effects>
