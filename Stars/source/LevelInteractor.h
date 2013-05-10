@@ -16,8 +16,7 @@ private:
 	enum eGestureType {
 		eGestureTypeNone = 0,
 		eGestureTypeDragObject = 1,
-		eGestureTypeDragStar = 2,
-		eGestureTypeTouchpadNavigation = 3
+		eGestureTypeDragStar = 2
 	};
 
 	// monitor the touch input

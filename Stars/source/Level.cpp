@@ -52,8 +52,8 @@ void Level::CreateStar() {
 	if (star) {
 		star->SetPosition(CIwFVec2(2.0f, 2.0f), 0.0f);
 		Add(star);
-		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
-		star->StartDragging(star->GetPosition());
+//		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
+//		star->StartDragging(star->GetPosition());
 	}
 }
 

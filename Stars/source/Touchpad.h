@@ -10,14 +10,18 @@ private:
 
 	CIwSVec2 m_xTouchPos;	// position of the touch
 
+	bool m_bIsTouching;
+	
 public:
     Touchpad();
 
     void SetPosition(const CIwSVec2& center);
     void SetSize(const CIwSVec2& size);
 
-    bool HitTest(const CIwSVec2& screenpos);
-	bool SetTouch(const CIwSVec2& screenpos);
+    bool HitTest(const CIwSVec2& touchpos);
+
+	void SetTouch(const CIwSVec2& touchpos);
+	void UnsetTouch();
 
 	CIwFVec2 GetTouchVectorNormalized();	
     

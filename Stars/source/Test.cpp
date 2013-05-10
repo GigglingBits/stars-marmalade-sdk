@@ -431,36 +431,49 @@ void Test::RunTouchpadTest() {
 	Touchpad t;
 	
 	CIwSVec2 touchpadsize(320, 240);
-	CIwSVec2 touchpadpos(320, 240);
-	CIwSVec2 touchpos(320, 240);
-	
-	t.SetPosition(touchpadpos);
 	t.SetSize(touchpadsize);
-	
+
+	CIwSVec2 touchpadpos(320, 240);
+	t.SetPosition(touchpadpos);
+
 	// center touch
-	IwAssert(MYAPP, t.SetTouch(touchpos));
+	CIwSVec2 touchpos(320, 240);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2::g_Zero);
 
 	// touch inbounds
-	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 120)));
+	touchpos = CIwSVec2(160, 120);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, -1.0f));
 
-	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 120)));
+	touchpos = CIwSVec2(480, 120);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, -1.0f));
 
-	IwAssert(MYAPP, t.SetTouch(CIwSVec2(480, 360)));
+	touchpos = CIwSVec2(480, 360);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, 1.0f));
 
-	IwAssert(MYAPP, t.SetTouch(CIwSVec2(160, 360)));
+	touchpos = CIwSVec2(160, 360);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, 1.0f));
 
-	// touch outbounds
-	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 119)));
-	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 119)));
-	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(481, 361)));
-	IwAssert(MYAPP, !t.SetTouch(CIwSVec2(159, 361)));
-	
-	// touch with floating points
-	IwAssert(MYAPP, t.SetTouch(CIwSVec2(240, 180)));
+	// touch inbounds with floating points
+	touchpos = CIwSVec2(240, 180);
+	IwAssert(MYAPP, t.HitTest(touchpos));
+	t.SetTouch(touchpos);
 	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-0.5f, -0.5f));
+	
+	// touch outbounds
+	IwAssert(MYAPP, !t.HitTest(CIwSVec2(159, 119)));
+	IwAssert(MYAPP, !t.HitTest(CIwSVec2(481, 119)));
+	IwAssert(MYAPP, !t.HitTest(CIwSVec2(481, 361)));
+	IwAssert(MYAPP, !t.HitTest(CIwSVec2(159, 361)));
 }
+
+
