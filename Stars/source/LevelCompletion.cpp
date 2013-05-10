@@ -11,7 +11,7 @@ LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
-	m_xButtonNext(eButtonCommandIdOpenLevel, s3eKeyFirst) {
+	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyFirst) {
 
 	m_bIsCompleted = IsCompleted(info);
 	m_sCompletionText = GenerateCompletionText(info);
