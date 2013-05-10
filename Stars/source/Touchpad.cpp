@@ -34,6 +34,12 @@ CIwFVec2 Touchpad::GetTouchVectorNormalized() {
 	CIwFVec2 touchvec;
 	touchvec.x = touchcenteroffset.x / (m_xSize.x / 2.0f);
 	touchvec.y = touchcenteroffset.y / (m_xSize.y / 2.0f);
+	
+	touchvec.x = std::max<float>(touchvec.x, -1.0f);
+	touchvec.y = std::max<float>(touchvec.y, -1.0f);
+	touchvec.x = std::min<float>(touchvec.x, 1.0f);
+	touchvec.y = std::min<float>(touchvec.y, 1.0f);
+	
 	return touchvec;
 }
 

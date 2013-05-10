@@ -50,6 +50,11 @@ void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 }
 
 CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
+	// use scale to reduce the area of the sceen that is
+	// used for navigaton, so that we don't navigate all the
+	// way out to the border of the screen.
+	const float scale = 0.9f;
+	
 	// get normalized position on touchpad
 	m_xTouchpad.SetTouch(pos);
 	const CIwFVec2& norm = m_xTouchpad.GetTouchVectorNormalized();
@@ -57,16 +62,14 @@ CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
 	// map to position on screen
 	const CIwSVec2& vsize = m_rxCamera.GetViewport().GetViewportSize();
 	CIwSVec2 screenpos(
-		(int16)((vsize.x / 2) + norm.x * (vsize.x / 2)),
-		(int16)((vsize.y / 2) + norm.y * (vsize.y /2)));
+		(int16)((vsize.x / 2) + norm.x * scale * (vsize.x / 2)),
+		(int16)((vsize.y / 2) + norm.y * scale * (vsize.y /2)));
 	return m_rxCamera.GetViewport().ScreenToWorld(screenpos);
 }
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
 	const CIwSVec2& framesize = frame.GetScreensize();
-	
 	m_xTouchpad.SetSize(CIwSVec2(framesize.x / 4, framesize.y / 4));
-	//m_xTouchpad.SetPosition(CIwSVec2(framesize.x / 8 * 7, framesize.y / 8 * 7));
     m_xTouchpad.Update(frame);
 }
 
