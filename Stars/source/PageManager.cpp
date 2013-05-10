@@ -53,7 +53,7 @@ Page* PageManager::CreateDefaultPage() {
 
 void PageManager::StartLevel() {
 	IW_CALLSTACK_SELF;
-	SetNextPage(FactoryManager::GetPreambleFactory().Create(m_xPageSettings.GetLevelKey()));
+	SetNextPage(FactoryManager::GetLevelFactory().Create(m_xPageSettings.GetLevelKey()));
 }
 
 void PageManager::StartNextLevel() {

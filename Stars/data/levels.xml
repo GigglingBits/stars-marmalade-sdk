@@ -3,14 +3,22 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
       fileformatversion="2">
-  <levels>
+
+	<preambles>
+		 <preamble name="earth_1" file="stories/intro.mp4">
+			 Drag the star to catch the nuggets. The nuggets make it stronger.
+		 </preamble>
+		 <preamble name="earth_2" file="rom://stories/catch_nuggets/index.html">
+			 Catch all nuggets to get max points.
+		 </preamble>
+		 <preamble name="earth_3" file="rom://stories/dodge_objects/index.html">
+			 Beware of flying objects.
+		 </preamble>
+	</preambles>
+	
+	<levels>
 
     <level name="earth_1" width="7.0" height="7.0" background="background_level_earth">
-      <!--
-	   <preamble file="stories/intro.mp4">
-        Drag the star to catch the nuggets. The nuggets make it stronger.
-      </preamble>
-	   -->
       <sprite body="nugget" pos="3.5" delay="0" />
       <sprite body="nugget" pos="3.5" delay="1000" />
       <sprite body="nugget" pos="1.0" delay="1000" />
@@ -24,11 +32,6 @@
     </level>
 
     <level name="earth_2" width="7.0" height="7.0" background="background_level_earth">
-      <!--
-	   <preamble file="rom://stories/catch_nuggets/index.html">
-        Catch all nuggets to get max points.
-      </preamble>
-	   -->
       <sprite body="nugget" pos="1.0" delay="1000" />
       <sprite body="nugget" pos="1.5" delay="1000" />
       <sprite body="nugget" pos="2.0" delay="500" />
@@ -53,11 +56,6 @@
     </level>
 
     <level name="earth_3" width="7.0" height="7.0" background="background_level_earth">
-		<!--
-      <preamble file="rom://stories/dodge_objects/index.html">
-        Beware of flying objects.
-      </preamble>
-		 -->
       <sprite body="bird_01" pos="2.0" delay="100" />
       <sprite body="bird_01" pos="3.0" delay="100" />
       <sprite body="bird_01" pos="4.0" delay="100" />

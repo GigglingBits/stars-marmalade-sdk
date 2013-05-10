@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-PreambleFactory::PreambleFactory() : FactoryBase<PreambleTemplate, Preamble>("root", "levels", "level") {
+PreambleFactory::PreambleFactory() : FactoryBase<PreambleTemplate, Preamble>("root", "preambles", "preamble") {
 }
 
 std::string PreambleFactory::PopulateConfig(TiXmlElement* node, PreambleTemplate& conf) {
