@@ -63,12 +63,14 @@ void Star::OnUpdate(const FrameData& frame) {
 	}
 	
 	// flip the texture according to movement
-	CIwFVec2* center;
-	if (IsDragging() && (center = GetPort("center"))) {
+	if (IsDragging()) {
 		// look in drag direction
 		CIwFVec2 target = GetDragTarget();
-		GetTexture().SetHorizontalFlip((GetPosition() + *center).x - 0.2f > target.x);
+		GetTexture().SetHorizontalFlip(GetPosition().x - 0.2f > target.x);
+		
+		//ShowEffect("smoke_plume");
 	} else {
+		// look in movement direction
 		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 	}
 }
