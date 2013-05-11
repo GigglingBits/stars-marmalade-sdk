@@ -57,9 +57,19 @@ void Star::OnUpdate(const FrameData& frame) {
 	if (IsDragging()) {
 		float distance = (GetDragTarget() - GetPosition()).GetLength();
 		SetDragForce(
-			(distance + 10.0f)	// the larger the distance, the larger the force to be applied
-			* 10.0f							// just a constant to amplify the effect
-			* GetMass());					// larger bodies require more force to move
+			(distance + 20.0f)		// the larger the distance, the larger the force to be applied
+			* 5.0f					// just a constant to amplify the effect
+			* GetMass());			// larger bodies require more force to move
+	}
+	
+	// flip the texture according to movement
+	CIwFVec2* center;
+	if (IsDragging() && (center = GetPort("center"))) {
+		// look in drag direction
+		CIwFVec2 target = GetDragTarget();
+		GetTexture().SetHorizontalFlip((GetPosition() + *center).x - 0.2f > target.x);
+	} else {
+		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 	}
 }
 
@@ -80,6 +90,7 @@ void Star::SetTextureFrame(std::string id) {
 }
 
 void Star::OnRender(Renderer& renderer, const FrameData& frame) {
+	/*
 	if (IsDragging()) {
 		CIwFVec2* center = GetPort("center");
 		CIwFVec2 target = GetDragTarget();
@@ -95,7 +106,7 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 			renderer.Draw(verts, *m_pxTouchTexture);
 		}
 	}
-
+	*/
 	Body::OnRender(renderer, frame);
 }
 

@@ -191,6 +191,7 @@ bool Body::StartDragging(const CIwFVec2& target) {
 	def.bodyA = &m_xWorld.GetAnchorBody();
 	def.bodyB = m_pxBody;
 	def.maxForce = 0.0f; //30.0f * m_pxBody->GetMass();
+	def.dampingRatio = 1.0f;
 	
 	b2Joint* joint = m_pxBody->GetWorld()->CreateJoint(&def);
 	m_pxDragHandle = dynamic_cast<b2MouseJoint*>(joint);

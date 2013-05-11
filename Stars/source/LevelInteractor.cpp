@@ -63,7 +63,7 @@ CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
 	const CIwSVec2& vsize = m_rxCamera.GetViewport().GetViewportSize();
 	CIwSVec2 screenpos(
 		(int16)((vsize.x / 2) + norm.x * scale * (vsize.x / 2)),
-		(int16)((vsize.y / 2) + norm.y * scale * (vsize.y /2)));
+		(int16)((vsize.y / 2) + norm.y * scale * (vsize.y / 2)));
 	return m_rxCamera.GetViewport().ScreenToWorld(screenpos);
 }
 
