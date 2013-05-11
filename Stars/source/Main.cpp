@@ -56,7 +56,7 @@ void Initialize() {
 	DeviceInfo::Initialize();
 	LogManager::Initialize();
 
-	World::SetDefaultGravity(-1.5f, 0.0f);
+	World::SetDefaultGravity(0.0f, 0.0f);
 
 	std::srand((unsigned int)s3eTimerGetUST());
 }
