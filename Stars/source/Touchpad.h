@@ -23,9 +23,11 @@ public:
 	void SetTouch(const CIwSVec2& touchpos);
 	void UnsetTouch();
 
-	CIwFVec2 GetTouchVectorNormalized();	
+	CIwFVec2 GetTouchVectorNormalized();
     
 private:
+	void AdjustPosition();
+	
     virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 };

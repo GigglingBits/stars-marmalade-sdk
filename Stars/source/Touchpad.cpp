@@ -49,6 +49,16 @@ bool Touchpad::HitTest(const CIwSVec2& touchpos) {
 }
 
 void Touchpad::OnUpdate(const FrameData& frame) {
+	if(!m_bIsTouching) {
+		return;
+	}
+
+	// move the touchpad to optomal position (100% on screen)
+	CIwSVec2 optimalpos;
+	m_xCenterPos.x = std::max<int16>(m_xSize.x / 2, m_xCenterPos.x);
+	m_xCenterPos.y = std::max<int16>(m_xSize.y / 2, m_xCenterPos.y);
+	m_xCenterPos.x = std::min<int16>(frame.GetScreensize().x - (m_xSize.x / 2), m_xCenterPos.x);
+	m_xCenterPos.y = std::min<int16>(frame.GetScreensize().y - (m_xSize.y / 2), m_xCenterPos.y);
 }
 
 void Touchpad::OnRender(Renderer& renderer, const FrameData& frame) {
