@@ -37,7 +37,7 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	// nothing draggable hit? make it a drag on the star
 	if (touch.gesturetype == eGestureTypeNone) {
 		Star* star = m_rxGame.GetStar();
-		if (star && !star->IsDragging()) {
+		if (star && !m_xTouchpad.IsTouching()) {
 			touch.gesturetype = eGestureTypeDragStar;
 			touch.targetsprite = star->GetId();
 		}
@@ -47,24 +47,6 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 	touch.gesturetype = eGestureTypeNone;
 	touch.targetsprite.clear();
-}
-
-CIwFVec2 LevelInteractor::GetTouchpadMove(const CIwSVec2& pos) {
-	// use scale to reduce the area of the sceen that is
-	// used for navigaton, so that we don't navigate all the
-	// way out to the border of the screen.
-	const float scale = 0.9f;
-	
-	// get normalized position on touchpad
-	m_xTouchpad.SetTouch(pos);
-	const CIwFVec2& norm = m_xTouchpad.GetTouchVectorNormalized();
-
-	// map to position on screen
-	const CIwSVec2& vsize = m_rxCamera.GetViewport().GetViewportSize();
-	CIwSVec2 screenpos(
-		(int16)((vsize.x / 2) + norm.x * scale * (vsize.x / 2)),
-		(int16)((vsize.y / 2) + norm.y * scale * (vsize.y / 2)));
-	return m_rxCamera.GetViewport().ScreenToWorld(screenpos);
 }
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
@@ -90,7 +72,7 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 	// do the dragging
 	if (touch.gesturetype == eGestureTypeDragObject) {
 		if (Body* body = m_rxGame.FindSprite<Body>(touch.targetsprite)) {
-			body->StartDragging(body->GetCenter());
+			body->BeginDragging(body->GetCenter());
 			body->MoveDragging(touch.worldendpos);			
 		} else {
 			// body does no longer exist, e.g. must have died
@@ -99,13 +81,10 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 
 	// do navigation
 	} else if (touch.gesturetype == eGestureTypeDragStar) {
-		if (Star* star = m_rxGame.GetStar()) {
-			IwAssertMsg(MYAPP, !star->IsDragging(), ("Already dragging; this call is unintentional."));
-			m_xTouchpad.SetPosition(touch.screenstartpos);
-			m_xTouchpad.SetTouch(touch.screenendpos);
-			star->StartDragging(star->GetCenter());
-			star->MoveDragging(GetTouchpadMove(touch.screenstartpos));
-		}
+		IwAssertMsg(MYAPP, !m_xTouchpad.IsTouching(), ("Already dragging; this call is unintentional."));
+		m_xTouchpad.SetPosition(touch.screenstartpos);
+		m_xTouchpad.SetTouch(touch.screenendpos);
+		BeginMoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
 	}
 
 	m_xTouchRecorder[args.id] = touch;
@@ -128,10 +107,9 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 
 	// do navigation
 	} else if (touch.gesturetype == eGestureTypeDragStar) {
-		if (Star* star = m_rxGame.GetStar()) {
-			m_xTouchpad.SetTouch(touch.screenendpos);
-			star->MoveDragging(GetTouchpadMove(touch.screenendpos));
-		}
+		IwAssertMsg(MYAPP, m_xTouchpad.IsTouching(), ("Not dragging; this call is unintentional."));
+		m_xTouchpad.SetTouch(touch.screenendpos);
+		MoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
 	}
 }
 
@@ -150,12 +128,10 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 
 	// do navigation
 	} else if (touch.gesturetype == eGestureTypeDragStar) {
-		if (Star* star = m_rxGame.GetStar()) {
-			m_xTouchpad.SetTouch(touch.screenendpos);
-			star->MoveDragging(GetTouchpadMove(touch.screenendpos));
-			m_xTouchpad.UnsetTouch();
-			star->EndDragging();
-		}
+		IwAssertMsg(MYAPP, m_xTouchpad.IsTouching(), ("Not dragging; this call is unintentional."));
+		m_xTouchpad.SetTouch(touch.screenendpos);
+		EndMoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
+		m_xTouchpad.UnsetTouch();
 	}
 
 	// delete

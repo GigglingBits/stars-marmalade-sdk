@@ -168,7 +168,7 @@ void Body::SetDragForce(float maxforce) {
 	}
 }
 
-bool Body::StartDragging(const CIwFVec2& target) {
+bool Body::BeginDragging(const CIwFVec2& target) {
 	if (!m_bCanDrag) {
 		return false;
 	}

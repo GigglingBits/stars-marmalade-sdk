@@ -20,10 +20,16 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
+	m_xInteractor.BeginMoveStar.AddListener(this, &Level::BeginMoveStarEventHandler);
+	m_xInteractor.MoveStar.AddListener(this, &Level::MoveStarEventHandler);
+	m_xInteractor.EndMoveStar.AddListener(this, &Level::EndMoveStarEventHandler);
 }
 
 Level::~Level() {
 	// detach event handlers
+	m_xInteractor.EndMoveStar.RemoveListener(this, &Level::EndMoveStarEventHandler);
+	m_xInteractor.MoveStar.RemoveListener(this, &Level::MoveStarEventHandler);
+	m_xInteractor.BeginMoveStar.RemoveListener(this, &Level::BeginMoveStarEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
 
@@ -52,8 +58,8 @@ void Level::CreateStar() {
 	if (star) {
 		star->SetPosition(CIwFVec2(2.0f, 2.0f), 0.0f);
 		Add(star);
-//		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
-//		star->StartDragging(star->GetPosition());
+		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
+		star->BeginDragging(star->GetPosition());
 	}
 }
 
@@ -76,6 +82,59 @@ bool Level::GetCompletionInfo(GameFoundation::CompletionInfo& info) {
 		return true;
 	}
 	return false;
+}
+
+float Level::GetStarMoveForce() {
+	return 10.0f;
+}
+
+float Level::GetStarRestForce() {
+	return 10.0f;	
+}
+
+CIwFVec2 Level::GetStarRestPosition() {
+	return m_xCamera.GetViewport().GetCenterPosition();
+}
+
+CIwFVec2 Level::CalculateStarMoveTarget(const CIwFVec2& normalpos) {
+	// use scale to reduce the area of the sceen that is
+	// used for navigaton, so that we don't navigate all the
+	// way out to the border of the screen.
+	const float scale = 0.9f;
+ 
+	// map to position on screen
+	const CIwSVec2& vsize = m_xCamera.GetViewport().GetViewportSize();
+	CIwSVec2 screenpos(
+		(int16)((vsize.x / 2) + normalpos.x * scale * (vsize.x / 2)),
+		(int16)((vsize.y / 2) + normalpos.y * scale * (vsize.y / 2)));
+
+	return m_xCamera.GetViewport().ScreenToWorld(screenpos);
+}
+
+void Level::BeginMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		//star->SetDragForce(GetStarMoveForce());
+		star->MoveDragging(CalculateStarMoveTarget(normalpos));
+	}
+}
+
+void Level::MoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		star->MoveDragging(CalculateStarMoveTarget(normalpos));
+	}	
+}
+
+void Level::EndMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		//star->SetDragForce(GetStarRestForce());
+		star->MoveDragging(GetStarRestPosition());
+	}	
 }
 
 void Level::OnUpdate(const FrameData& frame) {

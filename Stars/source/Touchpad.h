@@ -20,6 +20,8 @@ public:
 
     bool HitTest(const CIwSVec2& touchpos);
 
+	bool IsTouching();
+	
 	void SetTouch(const CIwSVec2& touchpos);
 	void UnsetTouch();
 

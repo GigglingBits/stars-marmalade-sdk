@@ -18,6 +18,10 @@ void Touchpad::SetSize(const CIwSVec2& size) {
 	m_xSize = size;
 }
 
+bool Touchpad::IsTouching() {
+	return m_bIsTouching;
+}
+
 void Touchpad::SetTouch(const CIwSVec2& touchpos) {
 	m_bIsTouching = true;
 	m_xTouchPos = touchpos;

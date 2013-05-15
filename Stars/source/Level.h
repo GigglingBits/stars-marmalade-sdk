@@ -53,14 +53,21 @@ private:
 
 	void CreateHud();
 	void DestroyHud();
-
-	void SetPaused();
-
-	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
-
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
+	float GetStarMoveForce();
+	float GetStarRestForce();
+	CIwFVec2 GetStarRestPosition();
+	CIwFVec2 CalculateStarMoveTarget(const CIwFVec2& normalpos);
+
+	void BeginMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos);
+	void MoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos);
+	void EndMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos);
+	
+	void SetPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
+
+	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
 };
 
 #endif

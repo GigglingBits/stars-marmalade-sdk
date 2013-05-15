@@ -154,7 +154,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 }
 
 bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
-	const float limit = 10.0f; // meters
+	const float limit = 30.0f; // meters
 
 	// only works if world is rooted at 0/0
 	CIwFVec2 bounds(
