@@ -4,7 +4,7 @@
 showstats=0
 
 maxvisibleworldsize=8	# see max 8 meters on screen
-worldmargin=2			# add 3 meters of margin around the wold
+worldmargin=2			# add 2 meters of margin around the wold
 
 bodies=bodies.xml
 levels=levels.xml
@@ -51,8 +51,8 @@ SplashScreenFile=splashscreen-320x480.jpg
 IOSDispScaleFactor=200
 DispFixRot=2
 
-MemSize=45000000
-MemSizeDebug=40000000
+MemSize=75000000
+MemSizeDebug=70000000
 
 SysTraceToFile=0
 
