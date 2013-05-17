@@ -56,7 +56,7 @@ void Level::CreateStar() {
 	Star* star = dynamic_cast<Star*>(FactoryManager::GetBodyFactory().Create("star"));
 	IwAssertMsg(MYAPP, star, ("Could not add star to level. It seems to be of a wrong type. Check its body definition."));
 	if (star) {
-		star->SetPosition(CIwFVec2(2.0f, 2.0f), 0.0f);
+		star->SetPosition(GetStarRestPosition(), 0.0f);
 		Add(star);
 		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
 		star->BeginDragging(star->GetPosition());
@@ -93,7 +93,7 @@ float Level::GetStarRestForce() {
 }
 
 CIwFVec2 Level::GetStarRestPosition() {
-	return m_xCamera.GetViewport().GetCenterPosition();
+	return CIwFVec2(m_xWorldSize.x / 3.0f, m_xWorldSize.y / 2.0f);
 }
 
 CIwFVec2 Level::CalculateStarMoveTarget(const CIwFVec2& normalpos) {

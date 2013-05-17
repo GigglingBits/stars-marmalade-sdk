@@ -81,7 +81,7 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 
 	// do navigation
 	} else if (touch.gesturetype == eGestureTypeDragStar) {
-		IwAssertMsg(MYAPP, !m_xTouchpad.IsTouching(), ("Already dragging; this call is unintentional."));
+		IwAssertMsg(MYAPP, !m_xTouchpad.IsTouching(), ("Already touching; this call is unintentional."));
 		m_xTouchpad.SetPosition(touch.screenstartpos);
 		m_xTouchpad.SetTouch(touch.screenendpos);
 		BeginMoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
