@@ -48,6 +48,8 @@ public:
 	void SetDefaultRederingLayer();
 	void SetRederingLayer(RenderingLayer renderinglayer);
 
+	void SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system);
+
 public:
 	// drawing to world (world coordinates)
 	void Draw(VertexStreamWorld& shape, Texture& texture);
@@ -112,10 +114,6 @@ private:
 	CIwFVec2* CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwTexture* image);
 #endif
 	void CalculateAABB(CIwSVec2 vertices[], int count, CIwSVec2& topleft, CIwSVec2& bottomright);
-
-	// infrastructure
-	void LoadFonts();
-	void UnloadFonts();
 };
 
 #endif

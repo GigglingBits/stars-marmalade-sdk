@@ -17,6 +17,9 @@ App::App() {
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
 	im.ButtonReleasedEvent.AddListener<App>(this, &App::ButtonReleasedEventHandler);
+	
+	// set the rendeer up
+	m_xRenderer.SetFonts("jellybelly22", "jellybelly16", "jellybelly10", "terminal6");
 }
 
 App::~App() {

@@ -6,36 +6,32 @@ Renderer::Renderer() {
 	m_xScreenOffset = CIwSVec2::g_Zero;
 	m_eCurrentRenderingLayer = eRenderingLayerDynamicGameObjects;
 
-	LoadFonts();
+	memset(m_apxFonts, 0, sizeof(m_apxFonts));
+	
+	IwGetResManager()->LoadGroup("fonts.group");
 }
 
 Renderer::~Renderer() {
-	UnloadFonts();
+	IwGetResManager()->DestroyGroup("fonts");
 }
 
-void Renderer::LoadFonts() {
-	IwGetResManager()->LoadGroup("fonts.group");
+void Renderer::SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system) {
 
 	CIwGxFont* font;
-	font = (CIwGxFont*)IwGetResManager()->GetResNamed("janda22", "CIwGxFont");
+	font = (CIwGxFont*)IwGetResManager()->GetResNamed(large.c_str(), "CIwGxFont");
 	m_apxFonts[eFontTypeLarge] = font;
 
-	font = (CIwGxFont*)IwGetResManager()->GetResNamed("janda16", "CIwGxFont");
+	font = (CIwGxFont*)IwGetResManager()->GetResNamed(normal.c_str(), "CIwGxFont");
 	m_apxFonts[eFontTypeNormal] = font;
 
-	font = (CIwGxFont*)IwGetResManager()->GetResNamed("janda10", "CIwGxFont");
+	font = (CIwGxFont*)IwGetResManager()->GetResNamed(small.c_str(), "CIwGxFont");
 	m_apxFonts[eFontTypeSmall] = font;
 
-	font = (CIwGxFont*)IwGetResManager()->GetResNamed("terminal6", "CIwGxFont");
+	font = (CIwGxFont*)IwGetResManager()->GetResNamed(system.c_str(), "CIwGxFont");
 	m_apxFonts[eFontTypeSystem] = font;
 
 	IwGxFontSetFont(font);
 }
-
-void Renderer::UnloadFonts() {
-	IwGetResManager()->DestroyGroup("fonts");
-}
-
 
 CIwMaterial* Renderer::CreateGxCacheMaterial(CIwTexture* texture) {
 	CIwMaterial* mat = IW_GX_ALLOC_MATERIAL();
@@ -456,7 +452,10 @@ void Renderer::DrawText(const char* text, const CIwRect& rect, FontType font, bo
 		IwGxFontSetAlignmentVer(IW_GX_FONT_ALIGN_BOTTOM);
 	}
 
-	IwGxFontSetFont(m_apxFonts[font]);
+	if (m_apxFonts[font]) {
+		IwAssertMsg(MYAPP, m_apxFonts[font], ("Cannot draw text because font %i is not set. Please load the fonts before drawing text.", font));
+		IwGxFontSetFont(m_apxFonts[font]);
+	}
 
 	IwGxFontSetRect(rect);
 	IwGxFontSetCol(col);
