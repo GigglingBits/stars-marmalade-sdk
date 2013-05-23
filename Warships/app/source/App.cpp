@@ -17,6 +17,9 @@ App::App() {
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
 	im.ButtonReleasedEvent.AddListener<App>(this, &App::ButtonReleasedEventHandler);
+	
+	// set up the renderer
+	m_xRenderer.SetFonts("janda22", "janda16", "janda10", "terminal6");
 }
 
 App::~App() {
@@ -143,7 +146,7 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 
 void App::ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args) {
 	IW_CALLSTACK_SELF;
-	if  (args.cmdid == eButtonCommandIdNextLevel) {
+	if  (args.cmdid == eButtonCommandIdOpenNextLevel) {
 		m_xPageManager.NextLevel();
 
 	} else if (args.cmdid == eButtonCommandIdRestartLevel) {

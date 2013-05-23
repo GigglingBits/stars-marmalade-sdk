@@ -96,7 +96,7 @@ void Test::RunInputControllerTest() {
 
 	// button spec
 	InputManager::VirtualButton btn;
-	btn.cmdid = eButtonCommandIdNextLevel; // just arbitrary command
+	btn.cmdid = eButtonCommandIdOpenNextLevel; // just arbitrary command
 	btn.rect.Make(10, 10, 10, 10);
 
 	// point to press
