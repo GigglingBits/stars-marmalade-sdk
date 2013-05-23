@@ -16,6 +16,7 @@ private:
 
 	std::string m_sText;
 	uint32 m_uiTextCol;
+	Renderer::FontType m_eFontType;
 
 	bool m_bHideWhenDisabled;
 	bool m_bDown;
@@ -27,7 +28,7 @@ public:
 	void SetEnabled(bool enabled);
 
 	void SetUserData(long userdata);
-	void SetText(const std::string& text, uint32 colour = 0xff222222);
+	void SetText(const std::string& text, uint32 colour = 0xff222222, Renderer::FontType font = Renderer::eFontTypeNormal);
 	void SetTexture(Texture* texture);
 	void SetTextureFrame(const std::string& frame);
 

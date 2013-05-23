@@ -52,7 +52,7 @@ void LevelMenu::Initialize() {
 
 		char buf[8];
 		snprintf(buf, sizeof(buf), "%i", level);
-		m_apxButtons[i]->SetText(buf, 0xffffffff);
+		m_apxButtons[i]->SetText(buf, 0xffffffff, Renderer::eFontTypeLarge);
 		m_apxButtons[i]->SetTexture(FactoryManager::GetTextureFactory().Create("button_level"));
 	}
 

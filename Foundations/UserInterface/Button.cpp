@@ -50,9 +50,10 @@ void Button::SetTextureFrame(const std::string& frame) {
 	}
 }
 
-void Button::SetText(const std::string& text, uint32 colour) {
+void Button::SetText(const std::string& text, uint32 colour, Renderer::FontType font) {
 	m_sText = text;
 	m_uiTextCol = colour;
+	m_eFontType = font;
 }
 
 void Button::SetEnabled(bool enabled) {
@@ -92,7 +93,7 @@ void Button::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	if (!m_sText.empty()) {
-		renderer.DrawText(m_sText, m_xButton.rect, Renderer::eFontTypeNormal, m_uiTextCol); 
+		renderer.DrawText(m_sText, m_xButton.rect, m_eFontType, m_uiTextCol);
 	}
 
 	if (m_bDown) {
