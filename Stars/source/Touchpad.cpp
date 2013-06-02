@@ -66,15 +66,13 @@ void Touchpad::OnUpdate(const FrameData& frame) {
 }
 
 void Touchpad::OnRender(Renderer& renderer, const FrameData& frame) {
-	if(!m_bIsTouching) {
-		return;
-	}
-	
     VertexStreamScreen verts;
     verts.SetRect(
 				  m_xCenterPos.x - (m_xSize.x / 2),
 				  m_xCenterPos.y - (m_xSize.y / 2),
 				  m_xSize.x,
 				  m_xSize.y);
-    renderer.DrawPolygon(verts.GetVerts(), verts.GetVertCount(), 0xffffffff, 0x44aaaaaa);
+	uint32 framecol = m_bIsTouching ? 0xffffffff : 0x44ffffff;
+	uint32 bodycol = m_bIsTouching ? 0xaaffffff : 0x44ffffff;
+    renderer.DrawPolygon(verts.GetVerts(), verts.GetVertCount(), framecol, bodycol);
 }

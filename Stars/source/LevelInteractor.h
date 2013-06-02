@@ -7,6 +7,7 @@
 #include "Renderable.h"
 
 #include "Touchpad.h"
+#include "TouchRecorder.h"
 
 class LevelInteractor : public Renderable {
 private:
@@ -16,7 +17,8 @@ private:
 	enum eGestureType {
 		eGestureTypeNone = 0,
 		eGestureTypeDragObject = 1,
-		eGestureTypeDragStar = 2
+		eGestureTypeMoveStar = 2,
+		eGestureTypeDrawStarPath = 3
 	};
 
 	// monitor the touch input
@@ -30,10 +32,11 @@ private:
 
 		std::string targetsprite;
 	};
-	typedef std::map<TouchId, TouchSpec> TouchRecorder;
-	TouchRecorder m_xTouchRecorder;
+	typedef std::map<TouchId, TouchSpec> TouchMap;
+	TouchMap m_xTouchMap;
     
     Touchpad m_xTouchpad;
+    TouchRecorder m_xRecorder;
 
 public:
 	LevelInteractor(Camera& camera, GameFoundation& game);

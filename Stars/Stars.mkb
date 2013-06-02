@@ -115,11 +115,13 @@ files {
 	LevelCompletion.cpp
 	LevelStatsPanel.h
 	LevelStatsPanel.cpp
-	Touchpad.h
-	Touchpad.cpp
 
 	LevelInteractor.h
 	LevelInteractor.cpp
+	TouchRecorder.h
+	TouchRecorder.cpp
+	Touchpad.h
+	Touchpad.cpp
 
 	BodyGenerator.h
 	BodyGenerator.cpp
