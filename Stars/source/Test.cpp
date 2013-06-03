@@ -14,7 +14,6 @@
 #include "Oscillator.h"
 #include "FrameData.h"
 #include "PinchGesture.h"
-#include "Touchpad.h"
 
 #define DBG_FILE NULL //"memdbg.txt"
 
@@ -67,10 +66,6 @@ void Test::RunTest() {
 	s3eDeviceYield(0);
 
 	RunPinchGestureTest();
-	Evaluate(systemcheckpoint, testcheckpoint);
-	s3eDeviceYield(0);
-	
-	RunTouchpadTest();
 	Evaluate(systemcheckpoint, testcheckpoint);
 	s3eDeviceYield(0);
 	
@@ -425,55 +420,4 @@ void Test::RunPinchGestureTest() {
 		IwAssert(MYAPP, info.movement == expectedtranslation);
 	}
 }
-
-void Test::RunTouchpadTest() {
-	IW_CALLSTACK_SELF;
-	Touchpad t;
-	
-	CIwSVec2 touchpadsize(320, 240);
-	t.SetSize(touchpadsize);
-
-	CIwSVec2 touchpadpos(320, 240);
-	t.SetPosition(touchpadpos);
-
-	// center touch
-	CIwSVec2 touchpos(320, 240);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2::g_Zero);
-
-	// touch inbounds
-	touchpos = CIwSVec2(160, 120);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, -1.0f));
-
-	touchpos = CIwSVec2(480, 120);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, -1.0f));
-
-	touchpos = CIwSVec2(480, 360);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(1.0f, 1.0f));
-
-	touchpos = CIwSVec2(160, 360);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-1.0f, 1.0f));
-
-	// touch inbounds with floating points
-	touchpos = CIwSVec2(240, 180);
-	IwAssert(MYAPP, t.HitTest(touchpos));
-	t.SetTouch(touchpos);
-	IwAssert(MYAPP, t.GetTouchVectorNormalized() == CIwFVec2(-0.5f, -0.5f));
-	
-	// touch outbounds
-	IwAssert(MYAPP, !t.HitTest(CIwSVec2(159, 119)));
-	IwAssert(MYAPP, !t.HitTest(CIwSVec2(481, 119)));
-	IwAssert(MYAPP, !t.HitTest(CIwSVec2(481, 361)));
-	IwAssert(MYAPP, !t.HitTest(CIwSVec2(159, 361)));
-}
-
 

@@ -57,8 +57,8 @@ void Star::OnUpdate(const FrameData& frame) {
 	if (IsDragging()) {
 		float distance = (GetDragTarget() - GetPosition()).GetLength();
 		SetDragForce(
-			(distance + 20.0f)		// the larger the distance, the larger the force to be applied
-			* 5.0f					// just a constant to amplify the effect
+			(distance + 50.0f)		// the larger the distance, the larger the force to be applied
+			* 2.0f					// just a constant to amplify the effect
 			* GetMass());			// larger bodies require more force to move
 	}
 	

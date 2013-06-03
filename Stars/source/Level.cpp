@@ -20,9 +20,6 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
-	m_xInteractor.BeginMoveStar.AddListener(this, &Level::BeginMoveStarEventHandler);
-	m_xInteractor.MoveStar.AddListener(this, &Level::MoveStarEventHandler);
-	m_xInteractor.EndMoveStar.AddListener(this, &Level::EndMoveStarEventHandler);
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 }
@@ -31,9 +28,6 @@ Level::~Level() {
 	// detach event handlers
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
-	m_xInteractor.EndMoveStar.RemoveListener(this, &Level::EndMoveStarEventHandler);
-	m_xInteractor.MoveStar.RemoveListener(this, &Level::MoveStarEventHandler);
-	m_xInteractor.BeginMoveStar.RemoveListener(this, &Level::BeginMoveStarEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
 
@@ -113,30 +107,6 @@ CIwFVec2 Level::CalculateStarMoveTarget(const CIwFVec2& normalpos) {
 		(int16)((vsize.y / 2) + normalpos.y * scale * (vsize.y / 2)));
 
 	return m_xCamera.GetViewport().ScreenToWorld(screenpos);
-}
-
-void Level::BeginMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
-	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(CalculateStarMoveTarget(normalpos));
-	}
-}
-
-void Level::MoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
-	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(CalculateStarMoveTarget(normalpos));
-	}	
-}
-
-void Level::EndMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec2& normalpos) {
-	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(GetStarRestPosition());
-	}	
 }
 
 void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {

@@ -2,8 +2,7 @@
 
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
-	m_rxGame(game),
-    m_xTouchpad() {
+	m_rxGame(game) {
 
 	InputManager& im = InputManager::GetInstance();
 	im.TouchBeginEvent.AddListener<LevelInteractor>(this, &LevelInteractor::TouchBeginEventHandler);
@@ -34,17 +33,8 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 		}
 	}
 
-	// nothing draggable hit? try the touchpad
-	if (touch.gesturetype == eGestureTypeNone && m_xTouchpad.HitTest(touch.screenstartpos)) {
-		Star* star = m_rxGame.GetStar();
-		if (star && !m_xTouchpad.IsTouching()) {
-			touch.gesturetype = eGestureTypeMoveStar;
-			touch.targetsprite = star->GetId();
-		}
-	}
-	
 	// nothing draggable hit? start recording the path of the touch 
-	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording() && !m_xTouchpad.IsTouching() && m_rxGame.StarHitTest(touch.worldstartpos)) {
+	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording() && m_rxGame.StarHitTest(touch.worldstartpos)) {
 		touch.gesturetype = eGestureTypeDrawStarPath;
 	}
 }
@@ -55,15 +45,9 @@ void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 }
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
-	const CIwSVec2& framesize = frame.GetScreensize();
-	m_xTouchpad.SetSize(CIwSVec2(framesize.x / 4, framesize.y / 4));
-	m_xTouchpad.SetPosition(CIwSVec2(framesize.x / 4 * 3, framesize.y / 4 * 3));
-    m_xTouchpad.Update(frame);
 }
 
 void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
-    m_xTouchpad.Render(renderer, frame);
-	
 	uint16 count = m_xRecorder.GetSampleCount();
 	if (count > 0) {
 		renderer.DrawPolygon(
@@ -94,12 +78,6 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 			ClearTouchSpec(touch);
 		}
 
-		// do navigation
-	} else if (touch.gesturetype == eGestureTypeMoveStar) {
-		IwAssertMsg(MYAPP, !m_xTouchpad.IsTouching(), ("Already touching; this call is unintentional."));
-		m_xTouchpad.SetTouch(touch.screenendpos);
-		BeginMoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
-	
 	// do path recording
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, !m_xRecorder.IsRecording(), ("Already recording; this call is unintentional."));
@@ -127,12 +105,6 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 			ClearTouchSpec(touch);
 		}
 
-	// do navigation
-	} else if (touch.gesturetype == eGestureTypeMoveStar) {
-		IwAssertMsg(MYAPP, m_xTouchpad.IsTouching(), ("Not dragging; this call is unintentional."));
-		m_xTouchpad.SetTouch(touch.screenendpos);
-		MoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
-		
 	// do path recording
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
@@ -153,13 +125,6 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 			body->EndDragging();
 		}
 
-	// do navigation
-	} else if (touch.gesturetype == eGestureTypeMoveStar) {
-		IwAssertMsg(MYAPP, m_xTouchpad.IsTouching(), ("Not dragging; this call is unintentional."));
-		m_xTouchpad.SetTouch(touch.screenendpos);
-		EndMoveStar.Invoke(*this, m_xTouchpad.GetTouchVectorNormalized());
-		m_xTouchpad.UnsetTouch();
-		
 	// do path recording
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));

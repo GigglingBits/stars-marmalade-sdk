@@ -6,7 +6,6 @@
 #include "InputManager.h"
 #include "Renderable.h"
 
-#include "Touchpad.h"
 #include "TouchRecorder.h"
 
 class LevelInteractor : public Renderable {
@@ -17,8 +16,7 @@ private:
 	enum eGestureType {
 		eGestureTypeNone = 0,
 		eGestureTypeDragObject = 1,
-		eGestureTypeMoveStar = 2,
-		eGestureTypeDrawStarPath = 3
+		eGestureTypeDrawStarPath = 2
 	};
 
 	// monitor the touch input
@@ -35,7 +33,6 @@ private:
 	typedef std::map<TouchId, TouchSpec> TouchMap;
 	TouchMap m_xTouchMap;
     
-    Touchpad m_xTouchpad;
     TouchRecorder m_xRecorder;
 
 public:
@@ -54,10 +51,6 @@ private:
 	void TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	
 public:
-	Event<LevelInteractor, CIwFVec2> BeginMoveStar;
-	Event<LevelInteractor, CIwFVec2> MoveStar;
-	Event<LevelInteractor, CIwFVec2> EndMoveStar;
-	
 	struct PathEventArgs {
 		int count;
 		CIwFVec2* samplepos;

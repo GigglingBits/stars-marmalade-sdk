@@ -120,8 +120,6 @@ files {
 	LevelInteractor.cpp
 	TouchRecorder.h
 	TouchRecorder.cpp
-	Touchpad.h
-	Touchpad.cpp
 
 	BodyGenerator.h
 	BodyGenerator.cpp
