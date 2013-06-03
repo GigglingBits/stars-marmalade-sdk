@@ -101,7 +101,6 @@ void Star::SetTextureFrame(std::string id) {
 }
 
 void Star::OnRender(Renderer& renderer, const FrameData& frame) {
-	/*
 	if (IsDragging()) {
 		CIwFVec2* center = GetPort("center");
 		CIwFVec2 target = GetDragTarget();
@@ -117,7 +116,7 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 			renderer.Draw(verts, *m_pxTouchTexture);
 		}
 	}
-	*/
+
 	Body::OnRender(renderer, frame);
 }
 

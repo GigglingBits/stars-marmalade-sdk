@@ -51,8 +51,8 @@ SplashScreenFile=splashscreen-320x480.jpg
 IOSDispScaleFactor=200
 DispFixRot=2
 
-MemSize=75000000
-MemSizeDebug=70000000
+MemSize=150000000
+MemSizeDebug=140000000
 
 SysTraceToFile=0
 
