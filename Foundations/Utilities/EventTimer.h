@@ -7,10 +7,10 @@
 template<typename TPayload>
 class EventTimer {
 private:
-	typedef struct {
+	struct EventSpec {
 		uint32 Delay;
 		TPayload Payload;
-	} EventSpec;
+	};
 
 private: 
 	std::queue<EventSpec> m_xPayloads;

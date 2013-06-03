@@ -44,7 +44,7 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	}
 	
 	// nothing draggable hit? start recording the path of the touch 
-	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording()) {
+	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording() && !m_xTouchpad.IsTouching() && m_rxGame.StarHitTest(touch.worldstartpos)) {
 		touch.gesturetype = eGestureTypeDrawStarPath;
 	}
 }
@@ -105,6 +105,8 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 		IwAssertMsg(MYAPP, !m_xRecorder.IsRecording(), ("Already recording; this call is unintentional."));
 		m_xRecorder.StartRecording();
 		m_xRecorder.Record(touch.worldstartpos);
+		
+		BeginDrawPath.Invoke(*this, touch.worldstartpos);
 	}
 
 	m_xTouchMap[args.id] = touch;
@@ -162,7 +164,14 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		m_xRecorder.Record(touch.worldendpos);
+		
+		PathEventArgs args;
+		args.count = m_xRecorder.GetSampleCount();
+		args.samplepos = m_xRecorder.GetSamples();
+
 		m_xRecorder.EndRecording();
+
+		EndDrawPath.Invoke(*this, args);
 	}
 
 	// delete

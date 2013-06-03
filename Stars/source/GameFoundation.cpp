@@ -49,6 +49,11 @@ Star* GameFoundation::GetStar() {
 	return m_pxStar;
 }
 
+bool GameFoundation::StarHitTest(CIwFVec2 position) {
+	Star* star = GetStar();
+	return star && star->HitTest(position);
+}
+
 Sprite* GameFoundation::FindSprite(const std::string& id) {
 	SpriteMap::iterator it = m_xSpriteMap.find(id);
 	if (it == m_xSpriteMap.end()) {

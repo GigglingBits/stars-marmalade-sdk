@@ -34,10 +34,10 @@ private:
 	RayCaster m_xRayCaster;
 	ContactListener m_xContactListener;
 
-	typedef struct {
+	struct BodySpec {
 		std::string Body;
 		float YPos;
-	} BodySpec;
+	};
 	EventTimer<BodySpec> m_xBodyTimer;
 
 	typedef std::map<std::string, Sprite*> SpriteMap;
@@ -70,6 +70,7 @@ public:
 
 	// interaction
 	bool RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend);
+	bool StarHitTest(CIwFVec2 position);
 
 	// game state
 	CIwFVec2 GetGravity();

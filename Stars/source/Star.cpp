@@ -73,6 +73,15 @@ void Star::OnUpdate(const FrameData& frame) {
 		// look in movement direction
 		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 	}
+	
+	// prepare positin for next frame
+	if (!m_xPath.empty()) {
+		uint64 now = frame.GetTimeMs();
+		if (m_xPath.front().schedule < now) {
+			MoveDragging(m_xPath.front().position);
+			m_xPath.pop();
+		}
+	}
 }
 
 void Star::Jump(const CIwFVec2& impulse) {
@@ -112,6 +121,15 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 	Body::OnRender(renderer, frame);
 }
 
+void Star::SetPath(int samplecount, const CIwFVec2* samplepoints) {
+	uint64 now = s3eTimerGetMs();
+	for (int i = 0; i < samplecount; i++) {
+		SchedulePoint schedule;
+		schedule.schedule = now + i * 100; // for now, just use 20ms per sample
+		schedule.position = samplepoints[i];
+		m_xPath.push(schedule);
+	}
+}
 
 /****
  * State machine 

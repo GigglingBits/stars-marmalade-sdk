@@ -9,14 +9,14 @@
 
 class BodyTemplate {
 public:
-	typedef struct {
+	struct JointElement {
 		std::string JointName;
 		std::string ChildA;
 		std::string PortA;
 		std::string ChildB;
 		std::string PortB;
 		BodyJoint::eJointType JointType;
-	} JointElement;
+	};
 	
 	typedef std::map<std::string, CIwFVec2> PortMap;
 	typedef std::map<std::string, std::string> ChildMap;

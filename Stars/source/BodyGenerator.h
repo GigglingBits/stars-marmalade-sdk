@@ -11,10 +11,10 @@ private:
 	GameFoundation& m_rxGameFoundation;
 	float m_fXPos;
 
-	typedef struct {
+	struct BodySpec {
 		std::string Body;
 		float YPos;
-	} BodySpec;
+	};
 	EventTimer<BodySpec> m_xTimer;
 
 public:

@@ -57,7 +57,13 @@ public:
 	Event<LevelInteractor, CIwFVec2> BeginMoveStar;
 	Event<LevelInteractor, CIwFVec2> MoveStar;
 	Event<LevelInteractor, CIwFVec2> EndMoveStar;
-
+	
+	struct PathEventArgs {
+		int count;
+		CIwFVec2* samplepos;
+	};
+	Event<LevelInteractor, CIwFVec2> BeginDrawPath;
+	Event<LevelInteractor, PathEventArgs> EndDrawPath;
 };
 
 #endif

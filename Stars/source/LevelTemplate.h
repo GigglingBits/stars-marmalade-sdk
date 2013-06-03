@@ -7,11 +7,11 @@
 
 class LevelTemplate {
 public:
-	typedef struct {
+	struct LevelElement {
 		std::string BodyName;
 		float Position;
 		uint16 Delay;
-	} LevelElement;
+	};
 	typedef std::queue<LevelElement> ElementQueue;
 
 private:

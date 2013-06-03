@@ -23,10 +23,14 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_xInteractor.BeginMoveStar.AddListener(this, &Level::BeginMoveStarEventHandler);
 	m_xInteractor.MoveStar.AddListener(this, &Level::MoveStarEventHandler);
 	m_xInteractor.EndMoveStar.AddListener(this, &Level::EndMoveStarEventHandler);
+	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
+	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 }
 
 Level::~Level() {
 	// detach event handlers
+	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
+	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndMoveStar.RemoveListener(this, &Level::EndMoveStarEventHandler);
 	m_xInteractor.MoveStar.RemoveListener(this, &Level::MoveStarEventHandler);
 	m_xInteractor.BeginMoveStar.RemoveListener(this, &Level::BeginMoveStarEventHandler);
@@ -115,7 +119,6 @@ void Level::BeginMoveStarEventHandler(const LevelInteractor& sender, const CIwFV
 	IW_CALLSTACK_SELF;
 	if (Star* star = m_xGame.GetStar()) {
 		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		//star->SetDragForce(GetStarMoveForce());
 		star->MoveDragging(CalculateStarMoveTarget(normalpos));
 	}
 }
@@ -132,9 +135,26 @@ void Level::EndMoveStarEventHandler(const LevelInteractor& sender, const CIwFVec
 	IW_CALLSTACK_SELF;
 	if (Star* star = m_xGame.GetStar()) {
 		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		//star->SetDragForce(GetStarRestForce());
 		star->MoveDragging(GetStarRestPosition());
 	}	
+}
+
+void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		star->MoveDragging(pos);
+	}
+}
+
+void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		if (path.count > 0) {
+			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+			star->SetPath(path.count, path.samplepos);
+		}
+	}
 }
 
 void Level::OnUpdate(const FrameData& frame) {

@@ -1,6 +1,7 @@
 #ifndef __STAR_H__
 #define __STAR_H__
 
+#include <queue>
 #include "Body.h"
 
 class Star : public Body {
@@ -32,6 +33,13 @@ private:
 	StateBase* m_pxCurrentState;
 	Texture* m_pxTouchTexture;
 
+private:
+	struct SchedulePoint {
+		uint64 schedule;
+		CIwFVec2 position;
+	};
+	std::queue<SchedulePoint> m_xPath;
+	
 public:
 	Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 	virtual ~Star();
@@ -51,6 +59,8 @@ public:
 	void Attack();
 	void Sit();
 
+	void SetPath(int samplecount, const CIwFVec2* samplepoints);
+	
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 };
