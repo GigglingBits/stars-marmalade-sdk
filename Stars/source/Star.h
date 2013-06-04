@@ -63,6 +63,9 @@ public:
 	
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+	
+private:
+	void UpdateTargetPosition(uint16 frameduration);
 };
 
 #endif

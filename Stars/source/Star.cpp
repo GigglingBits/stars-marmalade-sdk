@@ -53,12 +53,14 @@ void Star::OnUpdate(const FrameData& frame) {
 	Body::OnUpdate(frame);
 	GetCurrentState().Update(frame.GetSimulatedDurationMs());
 
+	UpdateTargetPosition(frame.GetSimulatedDurationMs());
+	
 	// adjust drag force
 	if (IsDragging()) {
 		float distance = (GetDragTarget() - GetPosition()).GetLength();
 		SetDragForce(
-			(distance + 50.0f)		// the larger the distance, the larger the force to be applied
-			* 2.0f					// just a constant to amplify the effect
+			(distance + 20.0f)		// the larger the distance, the larger the force to be applied
+			* 3.0f					// just a constant to amplify the effect
 			* GetMass());			// larger bodies require more force to move
 	}
 	
@@ -73,15 +75,36 @@ void Star::OnUpdate(const FrameData& frame) {
 		// look in movement direction
 		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 	}
+}
+
+void Star::UpdateTargetPosition(uint16 frameduration) {
+	if (m_xPath.empty()) {
+		return;
+	}
 	
-	// prepare positin for next frame
-	if (!m_xPath.empty()) {
-		uint64 now = frame.GetTimeMs();
-		if (m_xPath.front().schedule < now) {
-			MoveDragging(m_xPath.front().position);
+	// distance to be travelled during this frame
+	const float velocity = 10.0f; // m/s
+	float framedistance = velocity * ((float)frameduration / 1000.0f);
+	
+	// identify the point on the path
+	CIwFVec2 dragtarget = GetDragTarget();
+	while (m_xPath.empty() || framedistance > 0.0f) {
+		CIwFVec2 step = m_xPath.front().position - dragtarget;
+		float stepdistance = step.GetLength();
+		if (stepdistance <= 0.0f) {
 			m_xPath.pop();
+		} else if (framedistance >= stepdistance) {
+			framedistance -= stepdistance;
+			dragtarget = m_xPath.front().position;
+			m_xPath.pop();
+		} else {
+			dragtarget += step * (framedistance / stepdistance);
+			break;
 		}
 	}
+	
+	// move to new place
+	MoveDragging(dragtarget);
 }
 
 void Star::Jump(const CIwFVec2& impulse) {
