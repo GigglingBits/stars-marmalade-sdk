@@ -13,6 +13,8 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	SetState(new IdleState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	m_pxTouchTexture = FactoryManager::GetTextureFactory().Create("touch");
+		
+	m_pxAnchorPoint = NULL;
 }
 
 Star::~Star() {
@@ -23,6 +25,10 @@ Star::~Star() {
 
 	if (m_pxCurrentState) {
 		delete m_pxCurrentState;
+	}
+
+	if (m_pxAnchorPoint) {
+		delete m_pxAnchorPoint;
 	}
 }
 
@@ -89,18 +95,23 @@ void Star::UpdateTargetPosition(uint16 frameduration) {
 	// identify the point on the path
 	CIwFVec2 dragtarget = GetDragTarget();
 	while (m_xPath.empty() || framedistance > 0.0f) {
-		CIwFVec2 step = m_xPath.front().position - dragtarget;
+		CIwFVec2 step = m_xPath.front() - dragtarget;
 		float stepdistance = step.GetLength();
 		if (stepdistance <= 0.0f) {
 			m_xPath.pop();
 		} else if (framedistance >= stepdistance) {
 			framedistance -= stepdistance;
-			dragtarget = m_xPath.front().position;
+			dragtarget = m_xPath.front();
 			m_xPath.pop();
 		} else {
 			dragtarget += step * (framedistance / stepdistance);
 			break;
 		}
+	}
+	
+	// park the star
+	if (m_xPath.empty() && m_pxAnchorPoint) {
+		m_xPath.push(*m_pxAnchorPoint);
 	}
 	
 	// move to new place
@@ -143,13 +154,20 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 	Body::OnRender(renderer, frame);
 }
 
+void Star::SetAnchor(const CIwFVec2& point) {
+	if (m_pxAnchorPoint) {
+		delete m_pxAnchorPoint;
+	}
+	m_pxAnchorPoint = new CIwFVec2(point);
+	
+	if (!m_xPath.empty()) {
+		MoveDragging(*m_pxAnchorPoint);
+	}
+}
+
 void Star::SetPath(int samplecount, const CIwFVec2* samplepoints) {
-	uint64 now = s3eTimerGetMs();
 	for (int i = 0; i < samplecount; i++) {
-		SchedulePoint schedule;
-		schedule.schedule = now + i * 100; // for now, just use 20ms per sample
-		schedule.position = samplepoints[i];
-		m_xPath.push(schedule);
+		m_xPath.push(samplepoints[i]);
 	}
 }
 

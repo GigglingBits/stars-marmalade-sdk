@@ -57,7 +57,8 @@ void Level::CreateStar() {
 		star->SetPosition(GetStarRestPosition(), 0.0f);
 		Add(star);
 		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
-		star->BeginDragging(star->GetPosition());
+		star->BeginDragging(GetStarRestPosition());
+		star->SetAnchor(GetStarRestPosition());
 	}
 }
 
@@ -113,7 +114,7 @@ void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFV
 	IW_CALLSTACK_SELF;
 	if (Star* star = m_xGame.GetStar()) {
 		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(pos);
+		star->MoveDragging(star->GetPosition());
 	}
 }
 

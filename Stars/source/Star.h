@@ -34,11 +34,8 @@ private:
 	Texture* m_pxTouchTexture;
 
 private:
-	struct SchedulePoint {
-		uint64 schedule;
-		CIwFVec2 position;
-	};
-	std::queue<SchedulePoint> m_xPath;
+	std::queue<CIwFVec2> m_xPath;
+	CIwFVec2* m_pxAnchorPoint;
 	
 public:
 	Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
@@ -59,6 +56,7 @@ public:
 	void Attack();
 	void Sit();
 
+	void SetAnchor(const CIwFVec2& point);
 	void SetPath(int samplecount, const CIwFVec2* samplepoints);
 	
 protected:
