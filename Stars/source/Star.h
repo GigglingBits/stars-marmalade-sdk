@@ -17,6 +17,7 @@ public:
 		virtual void Initialize() {};
 
 		virtual void Stay() {};
+		virtual void FollowPath() {};
 		virtual void Jump(const CIwFVec2& impulse) {};
 		virtual void Attack() {};
 		virtual void Collide(Body& body) {};
@@ -26,6 +27,7 @@ public:
 
 protected:
 	class IdleState;
+	class FollowPathState;
 	class JumpingState;
 	class SmashingState;
 
@@ -35,7 +37,7 @@ private:
 
 private:
 	std::queue<CIwFVec2> m_xPath;
-	CIwFVec2* m_pxAnchorPoint;
+	float m_fAnchorLine;
 	
 public:
 	Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
@@ -50,20 +52,16 @@ public:
 	void SetState(StateBase* newstate);
 	StateBase& GetCurrentState();
 
+	void SetAnchorLine(float xpos);
 	void SetTextureFrame(std::string id);
 
-	void Jump(const CIwFVec2& impulse); 
+	void FollowPath(int samplecount, const CIwFVec2* samplepoints);
+	void Jump(const CIwFVec2& impulse);
 	void Attack();
 	void Sit();
-
-	void SetAnchor(const CIwFVec2& point);
-	void SetPath(int samplecount, const CIwFVec2* samplepoints);
 	
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	
-private:
-	void UpdateTargetPosition(uint16 frameduration);
 };
 
 #endif

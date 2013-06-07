@@ -14,7 +14,7 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	GetHealthManager().SetResilience(0.0f);
 	m_pxTouchTexture = FactoryManager::GetTextureFactory().Create("touch");
 		
-	m_pxAnchorPoint = NULL;
+	m_fAnchorLine = 0.0f;
 }
 
 Star::~Star() {
@@ -25,10 +25,6 @@ Star::~Star() {
 
 	if (m_pxCurrentState) {
 		delete m_pxCurrentState;
-	}
-
-	if (m_pxAnchorPoint) {
-		delete m_pxAnchorPoint;
 	}
 }
 
@@ -59,8 +55,6 @@ void Star::OnUpdate(const FrameData& frame) {
 	Body::OnUpdate(frame);
 	GetCurrentState().Update(frame.GetSimulatedDurationMs());
 
-	UpdateTargetPosition(frame.GetSimulatedDurationMs());
-	
 	// adjust drag force
 	if (IsDragging()) {
 		float distance = (GetDragTarget() - GetPosition()).GetLength();
@@ -81,41 +75,6 @@ void Star::OnUpdate(const FrameData& frame) {
 		// look in movement direction
 		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 	}
-}
-
-void Star::UpdateTargetPosition(uint16 frameduration) {
-	if (m_xPath.empty()) {
-		return;
-	}
-	
-	// distance to be travelled during this frame
-	const float velocity = 10.0f; // m/s
-	float framedistance = velocity * ((float)frameduration / 1000.0f);
-	
-	// identify the point on the path
-	CIwFVec2 dragtarget = GetDragTarget();
-	while (m_xPath.empty() || framedistance > 0.0f) {
-		CIwFVec2 step = m_xPath.front() - dragtarget;
-		float stepdistance = step.GetLength();
-		if (stepdistance <= 0.0f) {
-			m_xPath.pop();
-		} else if (framedistance >= stepdistance) {
-			framedistance -= stepdistance;
-			dragtarget = m_xPath.front();
-			m_xPath.pop();
-		} else {
-			dragtarget += step * (framedistance / stepdistance);
-			break;
-		}
-	}
-	
-	// park the star
-	if (m_xPath.empty() && m_pxAnchorPoint) {
-		m_xPath.push(*m_pxAnchorPoint);
-	}
-	
-	// move to new place
-	MoveDragging(dragtarget);
 }
 
 void Star::Jump(const CIwFVec2& impulse) {
@@ -154,21 +113,21 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 	Body::OnRender(renderer, frame);
 }
 
-void Star::SetAnchor(const CIwFVec2& point) {
-	if (m_pxAnchorPoint) {
-		delete m_pxAnchorPoint;
-	}
-	m_pxAnchorPoint = new CIwFVec2(point);
+void Star::SetAnchorLine(float xpos) {
+	m_fAnchorLine = xpos;
 	
-	if (!m_xPath.empty()) {
-		MoveDragging(*m_pxAnchorPoint);
+	if (m_xPath.empty()) {
+		CIwFVec2 anchortarget(GetDragTarget());
+		anchortarget.x = m_fAnchorLine;
+		MoveDragging(anchortarget);
 	}
 }
 
-void Star::SetPath(int samplecount, const CIwFVec2* samplepoints) {
+void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints) {
 	for (int i = 0; i < samplecount; i++) {
 		m_xPath.push(samplepoints[i]);
 	}
+	GetCurrentState().FollowPath();
 }
 
 /****
@@ -184,6 +143,6 @@ void Star::SetState(Star::StateBase* newstate) {
 }
 
 Star::StateBase& Star::GetCurrentState() {
-	IwAssertMsg(MYAPP, m_pxCurrentState, ("State is empty. This is a program error."));
+	IwAssertMsg(MYAPP, m_pxCurrentState, ("Program error. State must not be empty."));
 	return *m_pxCurrentState;
 }

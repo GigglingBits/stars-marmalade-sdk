@@ -57,8 +57,7 @@ private:
 
 	float GetStarMoveForce();
 	float GetStarRestForce();
-	CIwFVec2 GetStarRestPosition();
-	CIwFVec2 CalculateStarMoveTarget(const CIwFVec2& normalpos);
+	CIwFVec2 GetStarStartPosition();
 
 	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
 	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);

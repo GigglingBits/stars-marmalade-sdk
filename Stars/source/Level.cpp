@@ -54,11 +54,11 @@ void Level::CreateStar() {
 	Star* star = dynamic_cast<Star*>(FactoryManager::GetBodyFactory().Create("star"));
 	IwAssertMsg(MYAPP, star, ("Could not add star to level. It seems to be of a wrong type. Check its body definition."));
 	if (star) {
-		star->SetPosition(GetStarRestPosition(), 0.0f);
+		star->SetPosition(GetStarStartPosition(), 0.0f);
 		Add(star);
 		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
-		star->BeginDragging(GetStarRestPosition());
-		star->SetAnchor(GetStarRestPosition());
+		star->BeginDragging(GetStarStartPosition());
+		star->SetAnchorLine(GetStarStartPosition().x);
 	}
 }
 
@@ -91,23 +91,8 @@ float Level::GetStarRestForce() {
 	return 10.0f;	
 }
 
-CIwFVec2 Level::GetStarRestPosition() {
-	return CIwFVec2(m_xWorldSize.x / 3.0f, m_xWorldSize.y / 2.0f);
-}
-
-CIwFVec2 Level::CalculateStarMoveTarget(const CIwFVec2& normalpos) {
-	// use scale to reduce the area of the sceen that is
-	// used for navigaton, so that we don't navigate all the
-	// way out to the border of the screen.
-	const float scale = 0.9f;
- 
-	// map to position on screen
-	const CIwSVec2& vsize = m_xCamera.GetViewport().GetViewportSize();
-	CIwSVec2 screenpos(
-		(int16)((vsize.x / 2) + normalpos.x * scale * (vsize.x / 2)),
-		(int16)((vsize.y / 2) + normalpos.y * scale * (vsize.y / 2)));
-
-	return m_xCamera.GetViewport().ScreenToWorld(screenpos);
+CIwFVec2 Level::GetStarStartPosition() {
+	return CIwFVec2(m_xWorldSize.x / 4.0f, m_xWorldSize.y / 2.0f);
 }
 
 void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
@@ -123,7 +108,7 @@ void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInterac
 	if (Star* star = m_xGame.GetStar()) {
 		if (path.count > 0) {
 			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-			star->SetPath(path.count, path.samplepos);
+			star->FollowPath(path.count, path.samplepos);
 		}
 	}
 }

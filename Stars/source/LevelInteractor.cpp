@@ -49,7 +49,8 @@ void LevelInteractor::OnUpdate(const FrameData& frame) {
 
 void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
 	uint16 count = m_xRecorder.GetSampleCount();
-	if (count > 0) {
+	if (count > 1) {
+		// polygon needs at least 2 vertices
 		renderer.DrawPolygon(
 			m_xRecorder.GetSamples(),
 			count,

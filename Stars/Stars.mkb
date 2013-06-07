@@ -26,6 +26,10 @@ deployments {
 	version-minor=0
 	version-revision=1
 
+	icon='data/icons/'
+	splashscreen='data/splashscreens/'
+	splashscreen-use-all='1'
+
 	app-icf=data/app.icf
 	embed-icf='1'
 
@@ -34,11 +38,11 @@ deployments {
 	["iOS"]
 	iphone
 	iphone-appid='com.gigglingbits.stars'
-	iphone-icon='artwork/icons/icon-57x57.png'
-	iphone-icon-ipad='artwork/icons/icon-72x72.png'
-	iphone-icon-high-res='artwork/icons/icon-114x114.png'
-	itunes-artwork='artwork/icons/icon-512x512.png'
-	iphone-no-splash='1'
+	#iphone-icon='artwork/icons/icon-57x57.png'
+	#iphone-icon-ipad='artwork/icons/icon-72x72.png'
+	#iphone-icon-high-res='artwork/icons/icon-114x114.png'
+	#itunes-artwork='artwork/icons/icon-512x512.png'
+	#iphone-no-splash='1'
 	iphone-enable-4inch-retina='1'
 	#iphone-splash='artwork/splashscreen-320x480.png'
 }
@@ -120,9 +124,6 @@ files {
 	LevelInteractor.cpp
 	TouchRecorder.h
 	TouchRecorder.cpp
-
-	BodyGenerator.h
-	BodyGenerator.cpp
 
 	["Sources/Game Logic/Factories"]
 	(source)
@@ -223,7 +224,6 @@ files {
 assets 
 {
 	(data)		
-	splashscreen-320x480.jpg
 	bodies.xml
 	levels.xml
 	test.xml

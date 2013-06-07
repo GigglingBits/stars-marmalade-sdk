@@ -257,15 +257,17 @@ the bodie that owns the joint.
     <texture id="statspanel" image="wood_frame" />
 
     <texture id="star">
-      <frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
-      <frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
-      <frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
-      <frame id="happy_03" image="Happy-star_kollision_03" />
+		<frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
+		<frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
+		<frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
+		<frame id="happy_03" image="Happy-star_kollision_03" />
 
-      <frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
-      <frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
-      <frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
-
+		<frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
+		<frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
+		<frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
+		
+		<frame id="followpath" image="Happy-star_followpath" />
+		
       <!--
       <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
       <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />

@@ -11,6 +11,17 @@ public:
 	IdleState(Star& context) : StateBase(context) {};
 	virtual void Initialize();
 	virtual void Collide(Body& body);
+	virtual void FollowPath();
+};
+
+/////////////////////////////////////////////////////////////
+// Follow path
+/////////////////////////////////////////////////////////////
+class Star::FollowPathState : public Star::StateBase {
+public:
+	FollowPathState(Star& context) : StateBase(context) {};
+	virtual void Initialize();
+	virtual void Update(uint16 timestep);
 };
 
 /////////////////////////////////////////////////////////////

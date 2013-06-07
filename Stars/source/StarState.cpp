@@ -3,11 +3,15 @@
 #include "SoundEngine.h"
 #include "Buff.h"
 
-/****
- * Idle state
- **/
+/////////////////////////////////////////////////////////////
+// Idle
+/////////////////////////////////////////////////////////////
 void Star::IdleState::Initialize() {
-	m_rxContext.SetTextureFrame("happy"); 
+	m_rxContext.SetTextureFrame("happy");
+	
+	CIwFVec2 parkposition = m_rxContext.GetDragTarget();
+	parkposition.x = m_rxContext.m_fAnchorLine;
+	m_rxContext.MoveDragging(parkposition);
 }
 
 void Star::IdleState::Collide(Body& body) {
@@ -24,10 +28,53 @@ void Star::IdleState::Collide(Body& body) {
 	}
 }
 
+void Star::IdleState::FollowPath() {
+	m_rxContext.SetState(new FollowPathState(m_rxContext));
+}
 
-/****
- * Jumping state
- **/
+/////////////////////////////////////////////////////////////
+// Follow path
+/////////////////////////////////////////////////////////////
+void Star::FollowPathState::Initialize() {
+	m_rxContext.SetTextureFrame("followpath");
+}
+
+void Star::FollowPathState::Update(uint16 timestep) {
+	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
+	if (path.empty()) {
+		m_rxContext.SetState(new IdleState(m_rxContext));
+		return;
+	}
+	
+	// distance to be travelled during this frame
+	const float velocity = 10.0f; // m/s
+	float framedistance = velocity * ((float)timestep / 1000.0f);
+	
+	// identify the point on the path
+	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
+	while (path.empty() || framedistance > 0.0f) {
+		CIwFVec2 step = path.front() - dragtarget;
+		float stepdistance = step.GetLength();
+		if (stepdistance <= 0.0f) {
+			path.pop();
+		} else if (framedistance >= stepdistance) {
+			framedistance -= stepdistance;
+			dragtarget = path.front();
+			path.pop();
+		} else {
+			dragtarget += step * (framedistance / stepdistance);
+			break;
+		}
+	}
+	
+	// move to new place
+	m_rxContext.MoveDragging(dragtarget);
+}
+
+
+/////////////////////////////////////////////////////////////
+// Jumping
+/////////////////////////////////////////////////////////////
 void Star::JumpingState::Initialize() {
 	m_rxContext.SetTextureFrame("jump"); 	
 }
@@ -51,9 +98,9 @@ void Star::JumpingState::Update(uint16 timestep) {
 }
 
 
-/****
- * Smashing state
- **/ 
+/////////////////////////////////////////////////////////////
+// Smashing
+/////////////////////////////////////////////////////////////
 void Star::SmashingState::Initialize() {
 	m_rxContext.SetTextureFrame("smash"); 	
 }

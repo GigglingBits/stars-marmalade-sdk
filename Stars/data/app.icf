@@ -43,16 +43,16 @@ SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
 
-SplashScreenWidth=480
-SplashScreenHeight=320
-SplashScreenMinTime=1000
-SplashScreenFile=splashscreen-320x480.jpg
+#SplashScreenWidth=480
+#SplashScreenHeight=320
+#SplashScreenMinTime=1000
+#SplashScreenFile=splashscreen-320x480.jpg
 
 IOSDispScaleFactor=200
 DispFixRot=2
 
-MemSize=150000000
-MemSizeDebug=140000000
+MemSize=100000000
+MemSizeDebug=90000000
 
 SysTraceToFile=0
 
