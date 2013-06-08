@@ -5,16 +5,14 @@
 #include "IwGeomFVec2.h"
 #include "s3e.h"
 
-#define TOUCH_REC_MAX_SAMPLE_COUNT	200		// seconds
-#define TOUCH_REC_MAX_RESOLUTION	40		// n / seconds
+#define TOUCH_REC_MAX_RESOLUTION	40		// samples / second
 
 class TouchRecorder {
 private:
 	uint64 m_ulStartTimeMS;
 
-	uint16 m_uiCursor;
-	uint16 m_auiSample[TOUCH_REC_MAX_SAMPLE_COUNT];
-	CIwFVec2 m_axPoints[TOUCH_REC_MAX_SAMPLE_COUNT];
+	uint16 m_uiLastSample;
+	std::vector<CIwFVec2> m_xPoints;
 
 public:
 	TouchRecorder();
