@@ -44,6 +44,7 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 
 	if (otherbody.GetTypeName() == Buff::TypeName()) {
 		GetHealthManager().RenewLife();
+		otherbody.GetHealthManager().Kill();
 	} else if (otherbody.GetTypeName() == Target::TypeName()) {
 		GetHealthManager().RenewLife();
 	} else {
