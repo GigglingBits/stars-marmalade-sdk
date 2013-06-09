@@ -1,0 +1,69 @@
+#!/usr/bin/env mkb
+
+# Web Marmalade Project
+
+if {{ option use_prebuilt }}
+{
+    subproject "$MARMALADE_ROOT/web/wmApplication/wmApplication_prebuilt"
+}
+else
+{
+    subproject "$MARMALADE_ROOT/web/wmApplication/wmApplication"
+}
+
+assets
+{
+    (data)
+    webassets
+    iwaudiocapture
+
+    [including_iwui_style]
+    <include, Default>
+    (data)
+    #Fonts only needed when defaulting to IwUI in IwAudioCapture (which IwNUI uses)
+    #This helps reduce the package size on iOS and Android
+    iwui_style
+}
+
+deployments
+{
+    ["Windows"]
+    win32
+    arch=x86
+    assets=including_iwui_style
+
+    ["Mac OS X"]
+    osx
+    arch=x86
+    assets=including_iwui_style
+
+    # Ensure subsequent options set on "Default" configuration
+    ["Default"]
+}
+
+options
+{
+    builddir = build_temp
+}
+
+#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
+deployments
+{
+	["Default"]
+	android-pkgname='com.gigglingbits.rydendahl.oldengaard'
+	caption='Training'
+	copyright='2013'
+	icon='icons/1024x1024.png'
+	iphone-appid='com.gigglingbits.rydendahl.oldengaard'
+	iphone-enable-4inch-retina='1'
+	long-caption='Training der virker!'
+	manufacturer='Giggling Bits'
+	name='Training'
+	provider='Rydendahl Mediegrafisk'
+	splashscreen='splashscreen/900x1200.png'
+	version-major=0
+	version-minor=0
+	version-revision=1
+	["Mac OS X"]
+	["Windows"]
+}
