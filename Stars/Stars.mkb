@@ -122,8 +122,8 @@ files {
 
 	LevelInteractor.h
 	LevelInteractor.cpp
-	TouchRecorder.h
-	TouchRecorder.cpp
+	PathRecorder.h
+	PathRecorder.cpp
 
 	["Sources/Game Logic/Factories"]
 	(source)

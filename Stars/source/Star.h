@@ -37,6 +37,7 @@ private:
 
 private:
 	std::queue<CIwFVec2> m_xPath;
+	float m_fPathSpeed;
 	float m_fAnchorLine;
 	
 public:
@@ -55,10 +56,12 @@ public:
 	void SetAnchorLine(float xpos);
 	void SetTextureFrame(std::string id);
 
-	void FollowPath(int samplecount, const CIwFVec2* samplepoints);
+	void FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed);
 	void Jump(const CIwFVec2& impulse);
 	void Attack();
 	void Sit();
+	
+	bool IsFollowingPath();
 	
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

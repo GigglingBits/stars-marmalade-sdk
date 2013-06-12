@@ -60,8 +60,8 @@ void Star::OnUpdate(const FrameData& frame) {
 	if (IsDragging()) {
 		float distance = (GetDragTarget() - GetPosition()).GetLength();
 		SetDragForce(
-			(distance + 20.0f)		// the larger the distance, the larger the force to be applied
-			* 3.0f					// just a constant to amplify the effect
+			distance				// the larger the distance, the larger the force to be applied
+			* 50.0f					// just a constant to amplify the effect
 			* GetMass());			// larger bodies require more force to move
 	}
 	
@@ -124,11 +124,18 @@ void Star::SetAnchorLine(float xpos) {
 	}
 }
 
-void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints) {
+void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed) {
+	m_fPathSpeed = speed;
 	for (int i = 0; i < samplecount; i++) {
 		m_xPath.push(samplepoints[i]);
 	}
 	GetCurrentState().FollowPath();
+}
+
+bool Star::IsFollowingPath() {
+	// RRR: this should have been solved by checking the state, rather than
+	///     the type! But I didn't find a simple way to test the state.
+	return !m_xPath.empty();
 }
 
 /****

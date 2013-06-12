@@ -78,11 +78,23 @@ Configuration::Configuration() {
 	} else {
 		MaxVisibleWorldSize = 20.0f;
 	}
-
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "worldmargin", tmpstr)) {
 		WorldMargin = atof(tmpstr);
 	} else {
 		WorldMargin = 5.0f;
+	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {
+		PathSpeed = atof(tmpstr);
+	} else {
+		PathSpeed = 2.0f;
+	}
+
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathmaxlength", tmpstr)) {
+		PathMaxLength = atof(tmpstr);
+	} else {
+		PathMaxLength = 10.0f;
 	}
 }
 

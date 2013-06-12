@@ -108,7 +108,7 @@ void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInterac
 	if (Star* star = m_xGame.GetStar()) {
 		if (path.count > 0) {
 			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-			star->FollowPath(path.count, path.samplepos);
+			star->FollowPath(path.count, path.samplepos, Configuration::GetInstance().PathSpeed);
 		}
 	}
 }

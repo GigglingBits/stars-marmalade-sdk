@@ -47,7 +47,7 @@ void Star::FollowPathState::Update(uint16 timestep) {
 	}
 	
 	// distance to be travelled during this frame
-	const float velocity = 10.0f; // m/s
+	const float velocity = m_rxContext.m_fPathSpeed; // m/s
 	float framedistance = velocity * ((float)timestep / 1000.0f);
 	
 	// identify the point on the path

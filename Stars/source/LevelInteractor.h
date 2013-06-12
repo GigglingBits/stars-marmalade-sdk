@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "Renderable.h"
 
-#include "TouchRecorder.h"
+#include "PathRecorder.h"
 
 class LevelInteractor : public Renderable {
 private:
@@ -33,7 +33,7 @@ private:
 	typedef std::map<TouchId, TouchSpec> TouchMap;
 	TouchMap m_xTouchMap;
     
-    TouchRecorder m_xRecorder;
+    PathRecorder m_xRecorder;
 
 public:
 	LevelInteractor(Camera& camera, GameFoundation& game);

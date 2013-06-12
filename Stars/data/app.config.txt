@@ -15,6 +15,9 @@ showstats				Show statistical information on the screen
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
 
+pathspeed				Speed of the star along the path in meters per second.
+pathmaxlength			Max length of the path in meters.
+
 bodies					Name of the file containing the body definitions
 levels					Name of the file containing the level definitions
 

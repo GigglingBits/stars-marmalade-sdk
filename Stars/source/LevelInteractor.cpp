@@ -1,4 +1,5 @@
 #include "LevelInteractor.h"
+#include "Configuration.h"
 
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
@@ -34,8 +35,11 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	}
 
 	// nothing draggable hit? start recording the path of the touch 
-	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording() && m_rxGame.StarHitTest(touch.worldstartpos)) {
-		touch.gesturetype = eGestureTypeDrawStarPath;
+	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording()) {
+		Star* star = m_rxGame.GetStar();
+		if (star && !star->IsFollowingPath()) {
+			touch.gesturetype = eGestureTypeDrawStarPath;
+		}
 	}
 }
 
@@ -48,14 +52,24 @@ void LevelInteractor::OnUpdate(const FrameData& frame) {
 }
 
 void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
-	uint16 count = m_xRecorder.GetSampleCount();
+	uint16 count = m_xRecorder.GetPointCount();
 	if (count > 1) {
 		// polygon needs at least 2 vertices
 		renderer.DrawPolygon(
-			m_xRecorder.GetSamples(),
+			m_xRecorder.GetPoints(),
 			count,
 			0xffffffff,
 			0x00000000);
+		
+		// draw length
+		CIwFVec2 pos = m_xRecorder.GetPoints()[count - 1];
+		const int len = 50;
+		char buf[len];
+		snprintf(buf, len, "length: %.2fm", m_xRecorder.GetLength());
+		renderer.DrawText(
+			std::string(buf), pos,
+		    Renderer::eFontTypeSystem, 0xffffffff);
+
 	}
 }
 
@@ -109,7 +123,9 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 	// do path recording
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
-		m_xRecorder.Record(touch.worldendpos);
+		if (Configuration::GetInstance().PathMaxLength > m_xRecorder.GetLength()) {
+			m_xRecorder.Record(touch.worldendpos);
+		}
 	}
 }
 
@@ -132,8 +148,8 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 		m_xRecorder.Record(touch.worldendpos);
 		
 		PathEventArgs args;
-		args.count = m_xRecorder.GetSampleCount();
-		args.samplepos = m_xRecorder.GetSamples();
+		args.count = m_xRecorder.GetPointCount();
+		args.samplepos = m_xRecorder.GetPoints();
 
 		m_xRecorder.EndRecording();
 

@@ -20,6 +20,9 @@ public:
 	double MaxVisibleWorldSize;
 	double WorldMargin;
 
+	double PathSpeed;
+	double PathMaxLength;
+
 	std::string BodiesFile;
 	std::string LevelsFile;
 
