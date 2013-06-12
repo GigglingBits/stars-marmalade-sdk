@@ -27,7 +27,7 @@ deployments {
 
 	version-major=1
 	version-minor=7
-	version-revision=2
+	version-revision=3
 
 	icon='marketing/icons/'
 	
