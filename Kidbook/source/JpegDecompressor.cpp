@@ -59,6 +59,8 @@ bool JpegDecompressor::Step() {
 			StepCreateTexture();
 			m_eNextStep = eDone;
 			break;
+		default:
+			break;
 	}
 
 	return true;
@@ -108,7 +110,6 @@ bool JpegDecompressor::StepDecompressBody() {
 
 void JpegDecompressor::StepReduceColours() {
 	// initial colour splace is 24 bit; reduce to 16bit
-	int len24bit = m_iOutputSize;
 	char* data24bit = m_pxOutputData;
 	
 	int len16bit = m_xCompressionInfo.image_width * m_xCompressionInfo.image_height * sizeof(uint16);

@@ -5,8 +5,8 @@
 #include "Page.h"
 
 PageMap::PageMap() {
-	int m_iRowCount = 0;
-	int m_iColCount = 0;	
+	m_iRowCount = 0;
+	m_iColCount = 0;
 }
 
 PageMap::PageMap(const std::string& filename, const std::string& lang, const std::string& locale) {

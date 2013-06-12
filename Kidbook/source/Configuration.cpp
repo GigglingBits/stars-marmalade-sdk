@@ -116,6 +116,7 @@ const char* Configuration::GetDeviceLanguage() {
 		case S3E_DEVICE_LANGUAGE_SWEDISH: return "sv";
 		//case S3E_DEVICE_LANGUAGE_SPANISH: return "es";
 		//case S3E_DEVICE_LANGUAGE_FRENCH: return "fr";
+		default: return "";
 	}
 	return "";
 }

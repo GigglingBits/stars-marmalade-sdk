@@ -1,8 +1,6 @@
 #!/usr/bin/env mkb
 options {
-#	strict
-#	enable-exceptions
-#	offline
+	strict
 }
 
 subprojects {
@@ -13,9 +11,6 @@ defines {
 	# Define for TTF rendering support.
 	# Must be before iwgxfont subproject is first included.
 	IW_GXFONT_TTF
-    
-	# needed due to bug with sub-pixel rendering in the 6.1.1 IwGx API
-	# IW_USE_LEGACY_MODULES
 }
 
 deployments {
@@ -27,7 +22,7 @@ deployments {
 
 	version-major=1
 	version-minor=7
-	version-revision=3
+	version-revision=4
 
 	icon='marketing/icons/'
 	
@@ -39,27 +34,14 @@ deployments {
 	["iOS"]
 	iphone
 	iphone-appid='com.marmalade.kidbook.animals'
-	iphone-splash=marketing/splashscreen-320x480.png
+	iphone-splash=marketing/splashscreens/splashscreen-320x480.png
 	iphone-enable-4inch-retina='1'
 	iphone-prerendered-icon='0'
-	iphone-icon=marketing/icons/icon_57x57.png
-	iphone-icon-high-res=marketing/icons/icon_114x114.png
-	iphone-icon-ipad=marketing/icons/icon_72x72.png
-	iphone-icon-ipad-high-res=marketing/icons/icon_144x144.png
-	iphone-icon-settings='marketing/icons/icon_29x29.png'
-	iphone-icon-settings-high-res='marketing/icons/icon_58x58.png'
-	iphone-icon-ipad-search='marketing/icons/icon_50x50.png'
-	iphone-icon-ipad-search-high-res='marketing/icons/icon_100x100.png'
-	itunes-artwork=marketing/icons/icon_512x512.png
 	assets='HighRes'
 
 	["Android"]
 	android
 	android-pkgname='com.marmalade.kidbook.animals'
-	android-icon=marketing/icons/icon_48x48.png
-	android-icon-ldpi=marketing/icons/icon_36x36.png
-	android-icon-mdpi=marketing/icons/icon_48x48.png
-	android-icon-hdpi=marketing/icons/icon_72x72.png
 	android-manifest=deploy/android/AndroidManifest.xml
 	android-keystore=deploy/android/my-release-key.keystore
 	android-aliasname='GigglingBits'
@@ -75,20 +57,16 @@ deployments {
 	blackberry-cskpass='123456'
 	blackberry-storepass='123456'
 	blackberry-keystore='deploy/qnx/author.p12'
-	blackberry-playbook-icon='marketing/icons/icon_1024x1024.png'
 
-	playbook-icon='marketing/icons'
 	playbook-access-shared=0
 	assets='HighRes'
 
 	["Windows(x86)"]
 	win32
-	win32-icon='marketing/icons'
 	assets='XHighRes'
 
 	["BadaWVGA"]
 	bada
-	bada-icon=marketing/icons/icon_96x96.png
 	bada-appid='w58powj0vy'
 	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
 	bada-manifest=deploy/bada/manifest.xml
@@ -96,7 +74,6 @@ deployments {
 
 	["BadaHVGA"]
 	bada
-	bada-icon=marketing/icons/icon_96x96.png
 	bada-appid='w58powj0vy'
 	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
 	bada-manifest=deploy/bada/manifest.xml
@@ -104,7 +81,6 @@ deployments {
 
 	["BadaWQVGA"]
 	bada
-	bada-icon=marketing/icons/icon_96x96.png
 	bada-appid='y6t739fm25'
 	bada-appsecret='08E74C3C12CEC6F42A39B485DC46BC86'
 	bada-manifest=deploy/bada/manifest-wq.xml

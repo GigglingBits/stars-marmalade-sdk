@@ -43,7 +43,6 @@ void Application::Update() {
 	const uint32 maxtimeavailable = 15; // milliseconds
 	bool first = true;
 	bool morework = true;
-	uint32 elapsed = 0;
 	do {
 		morework = Update(first);
 		first = false;
