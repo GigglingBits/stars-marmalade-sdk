@@ -93,11 +93,11 @@ void Image2D::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 		CIwSVec2 texturesize(m_pxImage->GetWidth(), m_pxImage->GetHeight());
 		CIwRect textureregion = CalculateTextureRegion(texturesize, m_xTexelFocusPoint, CIwSVec2(itemregion.w, itemregion.h));
 
-		Iw2DDrawImageRegion(m_pxImage, 
-			CIwSVec2(itemregion.x, itemregion.y), 
-			CIwSVec2(itemregion.w, itemregion.h), 
-			CIwSVec2(textureregion.x, textureregion.y), 
-			CIwSVec2(textureregion.w, textureregion.h));
+		Iw2DDrawImageRegion(m_pxImage,
+			CIwFVec2(itemregion.x, itemregion.y),
+			CIwFVec2(itemregion.w, itemregion.h),
+			CIwFVec2(textureregion.x, textureregion.y),
+			CIwFVec2(textureregion.w, textureregion.h));
 	}
 }
 

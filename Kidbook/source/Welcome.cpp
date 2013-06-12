@@ -83,12 +83,12 @@ void Welcome::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 	uint32 orig = Iw2DGetColour().Get();
 	Iw2DSetColour(0xbb000000);
 	Iw2DFillRect(
-		CIwSVec2(itemregion.x, itemregion.y), 
-		CIwSVec2(itemregion.w, itemregion.h));
+		CIwFVec2(itemregion.x, itemregion.y),
+		CIwFVec2(itemregion.w, itemregion.h));
 	
 	Iw2DSetColour(0xffffffff);
 	Iw2DDrawRect(
-		CIwSVec2(itemregion.x, itemregion.y), 
-		CIwSVec2(itemregion.w, itemregion.h));
+		CIwFVec2(itemregion.x, itemregion.y),
+		CIwFVec2(itemregion.w, itemregion.h));
 	Iw2DSetColour(orig);
 }

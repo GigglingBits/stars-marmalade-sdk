@@ -105,6 +105,9 @@ showstats=0
 {OS=bada}
 	exitbutton=1
 
+{OS=android}
+	exitbutton=1
+
 {OS=Windows}
 	helpbutton=1
 {}

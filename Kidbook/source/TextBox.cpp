@@ -56,8 +56,8 @@ void TextBox::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 		CIwColour oldcol = Iw2DGetColour();
 		Iw2DSetColour(m_iAlpha << 24 | gray << 16 | gray << 8 | gray << 0);
 		Iw2DFillRect(
-			CIwSVec2(itemregion.x, itemregion.y), 
-			CIwSVec2(itemregion.w, itemregion.h));
+			CIwFVec2(itemregion.x, itemregion.y),
+			CIwFVec2(itemregion.w, itemregion.h));
 		Iw2DSetColour(oldcol);
 	}
 

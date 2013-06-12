@@ -67,7 +67,7 @@ void Button::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 	CIw2DImage* pImage = m_bEnabled ? m_pxFaceEnabled : m_pxFaceDisabled;
 	if (pImage) {
 		Iw2DSetColour(0xffffffff);
-		Iw2DDrawImage(pImage, CIwSVec2(itemregion.x, itemregion.y), CIwSVec2(itemregion.w, itemregion.h));
+		Iw2DDrawImage(pImage, CIwFVec2(itemregion.x, itemregion.y), CIwFVec2(itemregion.w, itemregion.h));
 	}
 	m_xFaceRegion = itemregion;
 }
