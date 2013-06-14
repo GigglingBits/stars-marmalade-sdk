@@ -45,6 +45,7 @@ void PageSettings::UpdateKeys() {
 const std::string PageSettings::GetWorldKey(WorldId world) {
     switch (world) {
         case eWorldIdEarth: { return "earth"; }
+        case eWorldIdSky: { return "sky"; }
         case eWorldIdMars: { return "mars"; }
         case eWorldIdJupiter: { return "jupiter"; }
         default:

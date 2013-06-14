@@ -290,7 +290,7 @@ void Test::RunLevelTest() {
 	filenames.push_back("test.xml");
 	FactoryManager::InitializeFromFiles(filenames);
 
-	Page* p = new Level(CIwFVec2(15.0f, 10.0f), "background_level_earth");
+	Page* p = new Level(CIwFVec2(15.0f, 10.0f), "world_earth_background");
 	CIwSVec2 pos(IwGxGetDeviceWidth(), IwGxGetDisplayHeight());
 	p->Update(FrameData());
 

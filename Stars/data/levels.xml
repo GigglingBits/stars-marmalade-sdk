@@ -18,7 +18,7 @@
 	
 	<levels>
 
-    <level name="earth_1" width="8.0" height="8.0" background="background_level_earth">
+    <level name="earth_1" width="8.0" height="8.0" background="world_earth_background">
       <sprite body="nugget" pos="3.5" delay="0" />
       <sprite body="nugget" pos="3.5" delay="1000" />
       <sprite body="nugget" pos="1.0" delay="1000" />
@@ -30,7 +30,7 @@
       <sprite body="nugget" pos="3.5" delay="1000" />
     </level>
 
-    <level name="earth_2" width="8.0" height="8.0" background="background_level_earth">
+    <level name="earth_2" width="8.0" height="8.0" background="world_earth_background">
       <sprite body="nugget" pos="1.0" delay="1000" />
       <sprite body="nugget" pos="1.5" delay="1000" />
       <sprite body="nugget" pos="2.0" delay="500" />
@@ -53,7 +53,7 @@
       <sprite body="nugget" pos="3.5" delay="1000" />
     </level>
 
-    <level name="earth_3" width="8.0" height="8.0" background="background_level_earth">
+    <level name="earth_3" width="8.0" height="8.0" background="world_earth_background">
       <sprite body="bird_01" pos="2.0" delay="100" />
       <sprite body="bird_01" pos="3.0" delay="100" />
       <sprite body="bird_01" pos="4.0" delay="100" />
@@ -93,24 +93,36 @@
       <sprite body="nugget" pos="5.0" delay="1000" />
     </level>
 
-    <level name="earth_4" width="8.0" height="8.0" background="background_level_earth">
+    <level name="earth_4" width="8.0" height="8.0" background="world_earth_background">
       <sprite body="bird_01" pos="5.0" delay="100" />
       <sprite body="bird_01" pos="5.0" delay="100000" />
     </level>
 
-      <level name="mars_1" width="8.0" height="8.0" background="background_level_mars">
-          <sprite body="nugget" pos="3.5" delay="0" />
-          <sprite body="nugget" pos="3.5" delay="1000" />
-          <sprite body="nugget" pos="1.0" delay="1000" />
-          <sprite body="nugget" pos="6.0" delay="1000" />
-          <sprite body="nugget" pos="4.5" delay="1000" />
-          <sprite body="nugget" pos="2.5" delay="0" />
-          <sprite body="nugget" pos="3.5" delay="300" />
-          <sprite body="nugget" pos="3.5" delay="2000" />
-          <sprite body="nugget" pos="3.5" delay="1000" />
-      </level>
-      
-      <level name="jupiter_1" width="8.0" height="8.0" background="background_level_jupiter">
+		<level name="sky_1" width="8.0" height="8.0" background="world_sky_background">
+			<sprite body="nugget" pos="3.5" delay="0" />
+			<sprite body="nugget" pos="3.5" delay="1000" />
+			<sprite body="nugget" pos="1.0" delay="1000" />
+			<sprite body="nugget" pos="6.0" delay="1000" />
+			<sprite body="nugget" pos="4.5" delay="1000" />
+			<sprite body="nugget" pos="2.5" delay="0" />
+			<sprite body="nugget" pos="3.5" delay="300" />
+			<sprite body="nugget" pos="3.5" delay="2000" />
+			<sprite body="nugget" pos="3.5" delay="1000" />
+		</level>
+		
+		<level name="mars_1" width="8.0" height="8.0" background="world_mars_background">
+			<sprite body="nugget" pos="3.5" delay="0" />
+			<sprite body="nugget" pos="3.5" delay="1000" />
+			<sprite body="nugget" pos="1.0" delay="1000" />
+			<sprite body="nugget" pos="6.0" delay="1000" />
+			<sprite body="nugget" pos="4.5" delay="1000" />
+			<sprite body="nugget" pos="2.5" delay="0" />
+			<sprite body="nugget" pos="3.5" delay="300" />
+			<sprite body="nugget" pos="3.5" delay="2000" />
+			<sprite body="nugget" pos="3.5" delay="1000" />
+		</level>
+		
+      <level name="jupiter_1" width="8.0" height="8.0" background="world_jupiter_background">
           <sprite body="nugget" pos="3.5" delay="0" />
           <sprite body="nugget" pos="3.5" delay="1000" />
           <sprite body="nugget" pos="1.0" delay="1000" />

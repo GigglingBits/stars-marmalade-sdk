@@ -84,8 +84,8 @@ the bodie that owns the joint.
       <fixture friction="0.6" restitution="0.5" density="1.0" />
     </body>
 
-    <body id="planet_earth" type="target" resilience="1.0" revolve="0" drag="0">
-      <texture image="planet_earth" />
+    <body id="world_earth" type="target" resilience="1.0" revolve="0" drag="0">
+      <texture image="world_earth" />
       <shape type="polygon">
         <point x="0" y="-5" />
         <point x="10" y="-5" />
@@ -95,8 +95,8 @@ the bodie that owns the joint.
       <fixture friction="0.6" restitution="0.5" density="1.0" />
     </body>
 
-	  <body id="planet_mars" type="target" resilience="1.0" revolve="0" drag="0">
-		  <texture image="planet_mars" />
+	  <body id="world_mars" type="target" resilience="1.0" revolve="0" drag="0">
+		  <texture image="world_mars" />
 		  <shape type="polygon">
 			  <point x="0" y="-5" />
 			  <point x="10" y="-5" />
@@ -106,8 +106,8 @@ the bodie that owns the joint.
 		  <fixture friction="0.6" restitution="0.5" density="1.0" />
 	  </body>
 	  
-	  <body id="planet_jupiter" type="target" resilience="1.0" revolve="0" drag="0">
-		  <texture image="planet_jupiter" />
+	  <body id="world_jupiter" type="target" resilience="1.0" revolve="0" drag="0">
+		  <texture image="world_jupiter" />
 		  <shape type="polygon">
 			  <point x="0" y="-5" />
 			  <point x="10" y="-5" />
@@ -313,31 +313,36 @@ the bodie that owns the joint.
       </texture>
       
       <texture id="button_planet">
-          <frame id="earth" image="planet_earth"/>
-          <frame id="mars" image="planet_mars"/>
-          <frame id="jupiter" image="planet_jupiter"/>
+          <frame id="earth" image="world_earth"/>
+          <frame id="sky" image="world_sky"/>
+          <frame id="mars" image="world_mars"/>
+          <frame id="jupiter" image="world_jupiter"/>
       </texture>
       
-    <texture id="button_planet_name">
-        <frame id="earth" image="planet_earth_name"/>
-        <frame id="mars" image="planet_mars_name"/>
-        <frame id="jupiter" image="planet_jupiter_name"/>
+    <texture id="button_world_name">
+        <frame id="earth" image="world_earth_name"/>
+        <frame id="sky" image="world_sky_name"/>
+        <frame id="mars" image="world_mars_name"/>
+        <frame id="jupiter" image="world_jupiter_name"/>
     </texture>
       
       <texture id="titlemenu_bg">
-          <frame id="earth" image="background_menu_earth"/>
-          <frame id="mars" image="background_menu_mars"/>
-          <frame id="jupiter" image="background_menu_jupiter"/>
+          <frame id="earth" image="world_earth_background"/>
+          <frame id="sky" image="world_sky_background"/>
+          <frame id="mars" image="world_mars_background"/>
+          <frame id="jupiter" image="world_jupiter_background"/>
       </texture>
       <texture id="levelmenu_bg">
-          <frame id="earth" image="background_menu_earth"/>
-          <frame id="mars" image="background_menu_mars"/>
-          <frame id="jupiter" image="background_menu_jupiter"/>
+          <frame id="earth" image="world_earth_background"/>
+          <frame id="sky" image="world_sky_background"/>
+          <frame id="mars" image="world_mars_background"/>
+          <frame id="jupiter" image="world_jupiter_background"/>
       </texture>
       <texture id="preamble_bg">
-          <frame id="earth" image="background_menu_earth"/>
-          <frame id="mars" image="background_menu_mars"/>
-          <frame id="jupiter" image="background_menu_jupiter"/>
+          <frame id="earth" image="world_earth_background"/>
+          <frame id="sky" image="world_sky_background"/>
+          <frame id="mars" image="world_mars_background"/>
+          <frame id="jupiter" image="world_jupiter_background"/>
       </texture>
 
     <texture id="levelstats_bg">

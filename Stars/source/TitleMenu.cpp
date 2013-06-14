@@ -48,7 +48,7 @@ void TitleMenu::Initialize() {
 	m_xPanelOptions.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_options"));
 
     m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
-	m_xButtonPlanetName.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet_name"));
+	m_xButtonPlanetName.SetTexture(FactoryManager::GetTextureFactory().Create("button_world_name"));
     SetWorld(m_eWorld);
     
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);

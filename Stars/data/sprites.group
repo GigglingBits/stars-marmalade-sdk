@@ -52,24 +52,23 @@ CIwResGroup
 	sprites/yellow-star.png
 	sprites/red-star.png
 
-    sprites/background_menu_earth.png
-    sprites/background_menu_mars.png
-    sprites/background_menu_jupiter.png
-
-    sprites/background_level_earth.png
-    sprites/background_level_mars.png
-    sprites/background_level_jupiter.png
+    sprites/world_earth_background.png
+    sprites/world_sky_background.png
+    sprites/world_mars_background.png
+    sprites/world_jupiter_background.png
 
     sprites/background_lost.png
     sprites/background_won.png
 
-	sprites/planet_earth.png
-	sprites/planet_mars.png
-	sprites/planet_jupiter.png
+	sprites/world_earth.png
+	sprites/world_sky.png
+	sprites/world_mars.png
+	sprites/world_jupiter.png
 
-	sprites/planet_earth_name.png
-	sprites/planet_mars_name.png
-	sprites/planet_jupiter_name.png
+	sprites/world_earth_name.png
+	sprites/world_sky_name.png
+	sprites/world_mars_name.png
+	sprites/world_jupiter_name.png
 
 	sprites/bird_01.png
 	sprites/bird_02.png
