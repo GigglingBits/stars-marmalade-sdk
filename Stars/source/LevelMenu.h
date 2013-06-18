@@ -7,6 +7,7 @@
 #include "Body.h"
 #include "Camera.h"
 #include "Button.h"
+#include "ButtonEx.h"
 #include "OptionsPanel.h"
 
 #define LVLMENU_BTN_COLS 4
@@ -18,11 +19,13 @@ private:
 	Camera m_xCamera;
 	
 	Texture* m_pxBackground;
-	Button* m_apxButtons[LVLMENU_BTN_COUNT];
+	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT];
 
 	Button m_xButtonTitleMenu;
 	Button m_xButtonAchievements;
 	OptionsPanel m_xPanelOptions;
+	
+	PageSettings::WorldId m_eWorldId;
 
 public:
 	LevelMenu(PageSettings::WorldId world);
@@ -36,6 +39,9 @@ protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
+	bool CheckLevelConfiguration(PageSettings::WorldId world, int level);
+	void EnableButtons(bool enable);
+	
 	Button* GetButton(int col, int row);
 	void ChangeState(bool enable, const ButtonPanel& except);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);

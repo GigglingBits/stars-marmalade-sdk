@@ -19,6 +19,8 @@ CIwResGroup
 	sprites/button_credits.png
 
 	sprites/button_level.png
+	sprites/button_level_pressed.png
+	sprites/button_level_locked.png
 	sprites/button_play.png
 
 	sprites/button_plain.png

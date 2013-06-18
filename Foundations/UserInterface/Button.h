@@ -26,9 +26,12 @@ public:
 	virtual ~Button();
 
 	void SetEnabled(bool enabled);
+	bool IsEnabled();
 
 	void SetUserData(long userdata);
+
 	void SetText(const std::string& text, uint32 colour = 0xff222222, Renderer::FontType font = Renderer::eFontTypeNormal);
+
 	void SetTexture(Texture* texture);
 	void SetTextureFrame(const std::string& frame);
 
@@ -38,8 +41,14 @@ public:
 	void SetHideWhenDisabled(bool hide);
 
 protected:
+	bool IsPressed();
+	bool IsTextureLoaded();
+	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+
+	virtual void OnTextureLoaded(Texture& texture);
+	virtual void OnStateChanged(bool enabled, bool pressed);
 
 private:
 	void PressedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args);

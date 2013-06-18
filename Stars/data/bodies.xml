@@ -293,7 +293,11 @@ the bodie that owns the joint.
     <texture id="button_soundfx_mute" image="button_soundfx_mute" />
     <texture id="button_soundfx" image="button_soundfx" />
 
-    <texture id="button_level" image="button_level" />
+    <texture id="button_level">
+	  <frame id="released" image="button_level"/>
+	  <frame id="pressed" image="button_level_pressed"/>
+	  <frame id="disabled" image="button_level_locked"/>
+	</texture>
     <texture id="button_play" image="button_play" />
 
     <texture id="button_plain" image="button_plain" />

@@ -47,6 +47,15 @@ uint32 Texture::GetColour() {
 	return 0;
 }
 
+bool Texture::ContainsFrame(const std::string name) {
+	for (FrameList::iterator i = m_xFrames.begin(); i != m_xFrames.end(); i++) {
+		if (i->id == name) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void Texture::LoadFrames(TextureTemplate& texturedef) {
 	IW_CALLSTACK_SELF;
 

@@ -13,6 +13,10 @@ files {
 	ButtonCommandId.h
 	Button.h
 	Button.cpp
+	Button.h
+	Button.cpp
+	ButtonEx.h
+	ButtonEx.cpp
 	ButtonPanel.h
 	ButtonPanel.cpp
 

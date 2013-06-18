@@ -11,6 +11,8 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
     m_xButtonTitleMenu(eButtonCommandIdOpenTitleMenu, s3eKeyFirst),
 	m_xButtonAchievements(eButtonCommandIdAchievements, s3eKeyFirst) {
 
+	m_eWorldId = world;
+		
     m_pxBackground = FactoryManager::GetTextureFactory().Create("levelmenu_bg");
     if (m_pxBackground) {
         std::string worldframe = PageSettings::GetWorldKey(world);
@@ -47,9 +49,9 @@ void LevelMenu::Initialize() {
         int level = i + 1; // index is zero based; levels start with 1
         
 		if (!m_apxButtons[i]) {
-			m_apxButtons[i] = new Button(eButtonCommandIdOpenLevel, s3eKeyFirst, level);
+			m_apxButtons[i] = new ButtonEx(eButtonCommandIdOpenLevel, s3eKeyFirst, level);
 		}
-
+		
 		char buf[8];
 		snprintf(buf, sizeof(buf), "%i", level);
 		m_apxButtons[i]->SetText(buf, 0xffffffff, Renderer::eFontTypeLarge);
@@ -135,7 +137,8 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 			}
 		}
 	}
-
+	EnableButtons(true);
+	
     // remaining buttons
 	button.h = extents / 7;
 	button.w = button.h;
@@ -156,13 +159,23 @@ void LevelMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, c
 }
 
 void LevelMenu::ChangeState(bool enable, const ButtonPanel& except) {
-	for (int i = 0; i < LVLMENU_BTN_COUNT; i++) {
-		if (m_apxButtons[i]) {
-			m_apxButtons[i]->SetEnabled(enable);
-		}
-	}
-
+	EnableButtons(enable);
 	m_xButtonAchievements.SetEnabled(enable);
 
 	if (&except != &m_xPanelOptions) m_xPanelOptions.SetEnabled(enable);
+}
+
+void LevelMenu::EnableButtons(bool enable) {
+	for (int i = 0; i < LVLMENU_BTN_COUNT; i++) {
+		if (m_apxButtons[i]) {
+			m_apxButtons[i]->SetEnabled(enable && CheckLevelConfiguration(m_eWorldId, i + 1));
+		}
+	}
+}
+
+bool LevelMenu::CheckLevelConfiguration(PageSettings::WorldId world, int level) {
+	PageSettings settings;
+	settings.SetWorld(world);
+	settings.SetLevel(level);
+	return FactoryManager::GetLevelFactory().ConfigExists(settings.GetLevelKey());
 }

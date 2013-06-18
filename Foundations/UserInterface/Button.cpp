@@ -14,6 +14,8 @@ Button::Button(ButtonCommandId cmdid, s3eKey key, long userdata)
 
 	m_xButton.PressedEvent.AddListener<Button>(this, &Button::PressedEventHandler);
 	m_xButton.ReleasedEvent.AddListener<Button>(this, &Button::ReleasedEventHandler);
+	
+	OnStateChanged(m_xButton.enabled, m_bDown);
 }
 
 Button::~Button() {
@@ -38,6 +40,7 @@ void Button::SetTexture(Texture* texture) {
 		delete m_pxTexture;
 	}
 	m_pxTexture = texture;
+	OnTextureLoaded(*m_pxTexture);
 }
 
 void Button::SetTextureFrame(const std::string& frame) {
@@ -50,6 +53,10 @@ void Button::SetTextureFrame(const std::string& frame) {
 	}
 }
 
+bool Button::IsTextureLoaded() {
+	return m_pxTexture != NULL;
+}
+
 void Button::SetText(const std::string& text, uint32 colour, Renderer::FontType font) {
 	m_sText = text;
 	m_uiTextCol = colour;
@@ -58,6 +65,15 @@ void Button::SetText(const std::string& text, uint32 colour, Renderer::FontType 
 
 void Button::SetEnabled(bool enabled) {
 	m_xButton.enabled = enabled;
+	OnStateChanged(m_xButton.enabled, m_bDown);
+}
+
+bool Button::IsEnabled() {
+	return m_xButton.enabled;
+}
+
+bool Button::IsPressed() {
+	return m_bDown;
 }
 
 void Button::SetHideWhenDisabled(bool hide) {
@@ -101,6 +117,14 @@ void Button::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 }
 
+void Button::OnTextureLoaded(Texture& texture) {
+	; // override, if needed
+}
+
+void Button::OnStateChanged(bool enabled, bool pressed) {
+	; // override, if needed
+}
+
 void Button::PressedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
 	IwAssertMsg(MYAPP, m_xButton.enabled, ("Did not expect this handler to be called when the button was disabled!"));
 
@@ -120,6 +144,7 @@ void Button::PressedEventHandler(const InputManager::VirtualButton& sender, cons
 		pargs->handled = true;
 		m_bDown = false;
 	}
+	OnStateChanged(m_xButton.enabled, m_bDown);
 }
 
 void Button::ReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
@@ -136,4 +161,5 @@ void Button::ReleasedEventHandler(const InputManager::VirtualButton& sender, con
 		pargs->handled = true;
 	}
 	m_bDown = false;
+	OnStateChanged(m_xButton.enabled, m_bDown);
 }

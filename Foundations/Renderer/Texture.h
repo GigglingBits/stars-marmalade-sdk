@@ -35,6 +35,8 @@ public:
 	bool IsColour();
 	uint32 GetColour();
 
+	bool ContainsFrame(const std::string name);
+	
 	bool SelectFirstFrame();
 	bool SelectFrame(const std::string& id);
 	bool SelectFrame(const std::string& id, int health);
