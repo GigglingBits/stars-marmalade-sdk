@@ -90,6 +90,10 @@ void Star::FollowPathState::Update(uint16 timestep) {
 	
 	// move to new place
 	m_rxContext.MoveDragging(dragtarget);
+	
+	
+	// draw effect
+	m_rxContext.ShowEffect("smoke_plume");
 }
 
 

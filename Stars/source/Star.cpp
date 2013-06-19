@@ -70,8 +70,6 @@ void Star::OnUpdate(const FrameData& frame) {
 		// look in drag direction
 		CIwFVec2 target = GetDragTarget();
 		GetTexture().SetHorizontalFlip(GetPosition().x - 0.2f > target.x);
-		
-		//ShowEffect("smoke_plume");
 	} else {
 		// look in movement direction
 		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
