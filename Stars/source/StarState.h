@@ -12,6 +12,7 @@ public:
 	virtual void Initialize();
 	virtual void Collide(Body& body);
 	virtual void FollowPath();
+	virtual void Update(uint16 timestep);
 };
 
 /////////////////////////////////////////////////////////////

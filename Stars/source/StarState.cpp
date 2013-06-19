@@ -8,10 +8,6 @@
 /////////////////////////////////////////////////////////////
 void Star::IdleState::Initialize() {
 	m_rxContext.SetTextureFrame("happy");
-	
-	CIwFVec2 parkposition = m_rxContext.GetDragTarget();
-	parkposition.x = m_rxContext.m_fAnchorLine;
-	m_rxContext.MoveDragging(parkposition);
 }
 
 void Star::IdleState::Collide(Body& body) {
@@ -31,6 +27,31 @@ void Star::IdleState::Collide(Body& body) {
 void Star::IdleState::FollowPath() {
 	m_rxContext.SetState(new FollowPathState(m_rxContext));
 }
+
+void Star::IdleState::Update(uint16 timestep) {
+	// distance to be travelled during this frame
+	const float velocity = m_rxContext.m_fPathSpeed / 2.0f; // m/s
+	float framedistance = velocity * ((float)timestep / 1000.0f);
+	
+	// identify the point on the path
+	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
+	CIwFVec2 parkposition = dragtarget;
+	parkposition.x = m_rxContext.m_fAnchorLine;
+	CIwFVec2 step = parkposition - dragtarget;
+	
+	float stepdistance = step.GetLength();
+	if (stepdistance <= 0.0f) {
+		return;
+	} else if (framedistance >= stepdistance) {
+		dragtarget = parkposition;
+	} else {
+		dragtarget += step * (framedistance / stepdistance);
+	}
+	
+	// move to new place
+	m_rxContext.MoveDragging(dragtarget);
+}
+
 
 /////////////////////////////////////////////////////////////
 // Follow path
