@@ -1,7 +1,6 @@
 #include "ButtonEx.h"
 
 #include "Debug.h"
-#include "FactoryManager.h"
 
 ButtonEx::ButtonEx(ButtonCommandId cmdid, s3eKey key, long userdata)
 	: Button(cmdid, key, userdata) {
