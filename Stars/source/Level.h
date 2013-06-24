@@ -34,8 +34,6 @@ private:
 
 	int m_iCompletionTimer;
 
-	bool m_bIsPaused;
-
 public:
 	Level(const CIwFVec2& worldsize, std::string background);
 	virtual ~Level();
@@ -58,7 +56,6 @@ private:
 
 	void CreateHud();
 	void DestroyHud();
-	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args);
@@ -71,6 +68,7 @@ private:
 	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
 	
 	void SetPaused();
+	bool IsPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
 
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);

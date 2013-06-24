@@ -9,7 +9,6 @@
 #include "FactoryManager.h"
 
 Level::Level(const CIwFVec2& worldsize, std::string background) :
-	m_bIsPaused(false),
 	m_xWorldSize(worldsize),
 	m_xGame(worldsize), 
 	m_xBackground(background, m_xGame), 
@@ -22,7 +21,6 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
-	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 		
@@ -45,7 +43,7 @@ Level::~Level() {
 
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
-	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
+
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
 
 	SoundEngine::StopMusicFile();
@@ -92,7 +90,11 @@ void Level::Add(Body* body) {
 
 void Level::SetPaused() {
 	m_xAppPanel.ShowPanel();
-	IwAssertMsg(MYAPP, m_bIsPaused, ("Pause requested, but did not work."));
+	IwAssertMsg(MYAPP, IsPaused(), ("Pause requested, but did not work."));
+}
+
+bool Level::IsPaused() {
+	return m_xAppPanel.IsPanelVisible();
 }
 
 bool Level::GetCompletionInfo(GameFoundation::CompletionInfo& info) {
@@ -169,7 +171,7 @@ void Level::OnUpdate(const FrameData& frame) {
 
 	m_xAppPanel.Update(frame);
 
-	if (m_bIsPaused) {
+	if (IsPaused()) {
 		return;
 	}
 
@@ -225,10 +227,6 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 	CIwSVec2 centeroffset(IwGxGetScreenWidth() / 2, IwGxGetScreenHeight() / 2);
 	soundpixelpos -= centeroffset;
 	return CIwFVec2(soundpixelpos.x / (float)centeroffset.x, soundpixelpos.y / (float)centeroffset.y);
-}
-
-void Level::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	m_bIsPaused = !args.IsOpen;
 }
 
 int32 Level::AppPausedCallback(void* systemData, void* userData) {
