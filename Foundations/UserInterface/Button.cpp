@@ -4,7 +4,7 @@
 #include "Debug.h"
 
 Button::Button(ButtonCommandId cmdid, s3eKey key, long userdata)
-	: m_pxTexture(NULL), m_bDown(false), m_bHideWhenDisabled(true) {
+	: m_pxTexture(NULL), m_bDown(false), m_bHideWhenDisabled(true), m_bShadedWhenPressed(true) {
 
 	m_xButton.cmdid = cmdid;
 	m_xButton.key = key;
@@ -29,6 +29,10 @@ Button::~Button() {
 
 void Button::SetUserData(long userdata) {
 	m_xButton.userdata = userdata;
+}
+
+long Button::GetUserData() const {
+	return m_xButton.userdata;
 }
 
 void Button::SetTexture(Texture* texture) {
@@ -80,6 +84,10 @@ void Button::SetHideWhenDisabled(bool hide) {
 	m_bHideWhenDisabled = hide;
 }
 
+void Button::SetShadedWhenPressed(bool shaded) {
+	m_bShadedWhenPressed = shaded;
+}
+
 void Button::SetPosition(const CIwRect& rect) {
 	m_xButton.rect = rect;
 	m_xButtonVerts.SetRect(rect);
@@ -112,7 +120,7 @@ void Button::OnRender(Renderer& renderer, const FrameData& frame) {
 		renderer.DrawText(m_sText, m_xButton.rect, m_eFontType, m_uiTextCol);
 	}
 
-	if (m_bDown) {
+	if (m_bShadedWhenPressed && m_bDown) {
 		renderer.DrawRect(m_xButton.rect, 0x00000000, 0x77000000);
 	}
 }
@@ -133,6 +141,8 @@ void Button::PressedEventHandler(const InputManager::VirtualButton& sender, cons
 
 	if (m_xButton.enabled) {
 		EventArgs newargs;
+		newargs.id = sender.cmdid;
+		newargs.userdata = sender.userdata;
 		newargs.handled = false;
 		PressedEvent.Invoke(*this, newargs);
 		pargs->handled = newargs.handled;
@@ -153,6 +163,8 @@ void Button::ReleasedEventHandler(const InputManager::VirtualButton& sender, con
 
 	if (m_xButton.enabled || m_bDown) {
 		EventArgs newargs;
+		newargs.id = sender.cmdid;
+		newargs.userdata = sender.userdata;
 		newargs.handled = false;
 		ReleasedEvent.Invoke(*this, newargs);
 		pargs->handled = newargs.handled;

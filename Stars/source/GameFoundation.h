@@ -72,6 +72,9 @@ public:
 	bool RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend);
 	bool StarHitTest(CIwFVec2 position);
 
+	// managed effects
+	void AddSplashText(std::string text, const CIwFVec2& position);
+
 	// game state
 	CIwFVec2 GetGravity();
 	bool IsCompleted();
@@ -88,8 +91,6 @@ private:
 	void EnqueueCreateSplashText(std::string text, const CIwFVec2& position);
 
 	bool CheckOutOfBounds(const CIwFVec2& pos);
-
-	void AddSplashText(std::string text, const CIwFVec2& position);
 
 	void Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity);
 	void CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args);

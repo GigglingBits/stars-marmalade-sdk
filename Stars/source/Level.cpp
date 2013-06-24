@@ -15,6 +15,9 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_xBackground(background, m_xGame), 
 	m_xInteractor(m_xCamera, m_xGame),
 	m_iCompletionTimer(0),
+	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
+	m_xButtonHit(eButtonCommandIdStarHit, s3eKey2),
+	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey3),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP) {
 
 	// attach event handlers
@@ -22,10 +25,24 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
+		
+	m_xButtonBlock.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonBlock.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
+	m_xButtonHit.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonHit.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
+	m_xButtonAttack.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonAttack.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
 }
 
 Level::~Level() {
 	// detach event handlers
+	m_xButtonBlock.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonBlock.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
+	m_xButtonHit.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonHit.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
+	m_xButtonAttack.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
+	m_xButtonAttack.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
+
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::ButtonPanelStateChangedEventHandler);
@@ -37,6 +54,9 @@ Level::~Level() {
 void Level::Initialize() {
 	m_xAppPanel.Initialize();
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
+	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
+	m_xButtonHit.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_hit"));
+	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 
 	m_xStatsPanel.Initialize();
 
@@ -113,6 +133,37 @@ void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInterac
 	}
 }
 
+void Level::OnDoLayout(const CIwSVec2& screensize) {
+	// set up the optics according to level definition
+	float maxvisibleworldsize = (float)Configuration::GetInstance().MaxVisibleWorldSize;
+	m_xCamera.SetGeometry(m_xWorldSize, screensize, maxvisibleworldsize);
+	m_xCamera.SetWorldFocus(m_xWorldSize / 2.0f);
+	m_xCamera.ZoomOut();
+	
+	// create background image to fit the level
+	float bgmargin = (float) Configuration::GetInstance().WorldMargin;
+	m_xBackground.SetGeometry(m_xWorldSize, screensize, bgmargin);
+
+	// action buttons
+	CIwRect rect;
+	rect.w = 120;
+	rect.h = 80;
+	rect.x = 10;
+	rect.y = 10;
+	m_xButtonBlock.SetPosition(rect);
+	rect.y += 100;
+	m_xButtonHit.SetPosition(rect);
+	rect.y += 100;
+	m_xButtonAttack.SetPosition(rect);
+	
+	// app panel
+	uint32 btnsize = 60;
+	uint32 btnmargin = 15;
+	m_xAppPanel.GetMainButton().SetPosition(
+		CIwRect(screensize.x - (btnsize + btnmargin),
+		btnmargin, btnsize, btnsize));
+}
+
 void Level::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
@@ -140,7 +191,12 @@ void Level::OnUpdate(const FrameData& frame) {
 	// scene and widgets
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackground.Update(frame);
-
+	
+	// buttons
+	m_xButtonBlock.Update(frame);
+	m_xButtonHit.Update(frame);
+	m_xButtonAttack.Update(frame);
+	
 	// progress indicator
 	float progress = m_xGame.GetCompletionDegree();
 	m_xStatsPanel.SetProgress(progress);
@@ -158,24 +214,10 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xAppPanel.Render(renderer, frame);
 	
 	m_xInteractor.Render(renderer, frame);
-}
-
-void Level::OnDoLayout(const CIwSVec2& screensize) {
-	// set up the optics according to level definition
-	float maxvisibleworldsize = (float)Configuration::GetInstance().MaxVisibleWorldSize;
-	m_xCamera.SetGeometry(m_xWorldSize, screensize, maxvisibleworldsize);
-	m_xCamera.SetWorldFocus(m_xWorldSize / 2.0f);
-	m_xCamera.ZoomOut();
-
-	// create background image to fit the level
-	float bgmargin = (float) Configuration::GetInstance().WorldMargin;
-	m_xBackground.SetGeometry(m_xWorldSize, screensize, bgmargin);
-
-	// app panel
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
-	m_xAppPanel.GetMainButton().SetPosition(
-		CIwRect(screensize.x - (btnsize + btnmargin), btnmargin, btnsize, btnsize));
+	
+	m_xButtonBlock.Render(renderer, frame);
+	m_xButtonHit.Render(renderer, frame);
+	m_xButtonAttack.Render(renderer, frame);
 }
 
 CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
@@ -195,4 +237,60 @@ int32 Level::AppPausedCallback(void* systemData, void* userData) {
 	Level* lvl = (Level*) userData;
 	lvl->SetPaused();
 	return 0;
+}
+
+void Level::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
+	Star* star = m_xGame.GetStar();
+	if (!star) {
+		IwAssertMsg(MYAPP, star, ("Cannot initiate action. Star not founnd."));
+		return;
+	}
+	
+	switch (args.id) {
+		case eButtonCommandIdStarBlock:
+			m_xButtonHit.SetEnabled(false);
+			m_xButtonAttack.SetEnabled(false);
+			star->BeginBlock();
+			break;
+		case eButtonCommandIdStarHit:
+			m_xButtonBlock.SetEnabled(false);
+			m_xButtonAttack.SetEnabled(false);
+			star->BeginHit();
+			break;
+		case eButtonCommandIdStarAttack:
+			m_xButtonBlock.SetEnabled(false);
+			m_xButtonHit.SetEnabled(false);
+			star->BeginAttack();
+			break;
+		default:
+			break;
+	}
+}
+
+void Level::ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args) {
+	Star* star = m_xGame.GetStar();
+	if (!star) {
+		IwAssertMsg(MYAPP, star, ("Cannot finish action. Star not founnd."));
+		return;
+	}
+	
+	switch (args.id) {
+		case eButtonCommandIdStarBlock:
+			m_xButtonHit.SetEnabled(true);
+			m_xButtonAttack.SetEnabled(true);
+			star->EndBlock();
+			break;
+		case eButtonCommandIdStarHit:
+			m_xButtonBlock.SetEnabled(true);
+			m_xButtonAttack.SetEnabled(true);
+			star->EndHit();
+			break;
+		case eButtonCommandIdStarAttack:
+			m_xButtonBlock.SetEnabled(true);
+			m_xButtonHit.SetEnabled(true);
+			star->EndAttack();
+			break;
+		default:
+			break;
+	}
 }

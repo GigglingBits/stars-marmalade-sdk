@@ -19,6 +19,7 @@ private:
 	Renderer::FontType m_eFontType;
 
 	bool m_bHideWhenDisabled;
+	bool m_bShadedWhenPressed;
 	bool m_bDown;
 
 public:
@@ -29,6 +30,7 @@ public:
 	bool IsEnabled();
 
 	void SetUserData(long userdata);
+	long GetUserData() const;
 
 	void SetText(const std::string& text, uint32 colour = 0xff222222, Renderer::FontType font = Renderer::eFontTypeNormal);
 
@@ -39,6 +41,7 @@ public:
 	void SetPosition(const CIwRect& rect);
 
 	void SetHideWhenDisabled(bool hide);
+	void SetShadedWhenPressed(bool shaded);
 
 protected:
 	bool IsPressed();
@@ -56,6 +59,8 @@ private:
 
 public:
 	struct EventArgs {
+		ButtonCommandId id;
+		long userdata;
 		bool handled;
 	};
 	Event<Button, EventArgs> PressedEvent;

@@ -267,7 +267,13 @@ the bodie that owns the joint.
 		<frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
 		
 		<frame id="followpath" image="Happy-star_followpath" />
-		
+
+		<frame id="block" image="red-star" />
+
+		<frame id="hit" image="red-star" />
+
+		<frame id="attack" image="red-star" />
+
       <!--
       <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
       <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />
@@ -298,7 +304,23 @@ the bodie that owns the joint.
 	  <frame id="pressed" image="button_level_pressed"/>
 	  <frame id="disabled" image="button_level_locked"/>
 	</texture>
-    <texture id="button_play" image="button_play" />
+	  <texture id="button_play" image="button_play" />
+
+	  <texture id="button_action_block">
+		  <frame id="released" image="button_action_block"/>
+		  <frame id="pressed" image="button_action_block_pressed"/>
+		  <frame id="disabled" image="button_action_block_disabled"/>
+	  </texture>
+	  <texture id="button_action_hit">
+		  <frame id="released" image="button_action_hit"/>
+		  <frame id="pressed" image="button_action_hit_pressed"/>
+		  <frame id="disabled" image="button_action_hit_disabled"/>
+	  </texture>
+	  <texture id="button_action_attack">
+		  <frame id="released" image="button_action_attack"/>
+		  <frame id="pressed" image="button_action_attack_pressed"/>
+		  <frame id="disabled" image="button_action_attack_disabled"/>
+	  </texture>
 
     <texture id="button_plain" image="button_plain" />
     <texture id="button_toggle_hud" image="button_toggle_hud" />

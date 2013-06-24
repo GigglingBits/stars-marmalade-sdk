@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "LevelInteractor.h"
 #include "LevelStatsPanel.h"
+#include "ButtonEx.h"
 
 #define LEVEL_COMPLETION_DELAY 3000
 
@@ -24,6 +25,10 @@ private:
 
 	AppPanel m_xAppPanel;
 
+	ButtonEx m_xButtonBlock;
+	ButtonEx m_xButtonHit;
+	ButtonEx m_xButtonAttack;
+	
 	LevelInteractor m_xInteractor;
 	LevelStatsPanel m_xStatsPanel;
 
@@ -54,6 +59,9 @@ private:
 	void CreateHud();
 	void DestroyHud();
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
+
+	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
+	void ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args);
 
 	float GetStarMoveForce();
 	float GetStarRestForce();

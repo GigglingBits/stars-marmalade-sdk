@@ -11,7 +11,9 @@ enum ButtonCommandId {
 	//eButtonCommandIdRight			= 4,
 
 	// game actions
-	eButtonCommandIdSetHeroFocus,
+	eButtonCommandIdStarBlock,
+	eButtonCommandIdStarHit,
+	eButtonCommandIdStarAttack,
 
 	// application navigation
 	eButtonCommandIdOpenTitleMenu,

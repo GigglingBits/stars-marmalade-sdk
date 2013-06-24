@@ -1,16 +1,18 @@
 #include "Star.h"
 #include "Target.h"
 #include "Buff.h"
-#include "StarState.h"
+#include "StarMotionState.h"
+#include "StarAttackState.h"
 #include "FactoryManager.h"
 
 /****
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Body(id, bodydef, fixturedef, texturedef), m_pxCurrentState(NULL) {
+	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL) {
 	GetBody().SetBullet(true);
-	SetState(new IdleState(*this));
+	SetState(new RetractingState(*this));
+	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	m_pxTouchTexture = FactoryManager::GetTextureFactory().Create("touch");
 		
@@ -23,8 +25,12 @@ Star::~Star() {
 		m_pxTouchTexture = NULL;
 	}
 
-	if (m_pxCurrentState) {
-		delete m_pxCurrentState;
+	if (m_pxMotionState) {
+		delete m_pxMotionState;
+	}
+
+	if (m_pxAttackState) {
+		delete m_pxAttackState;
 	}
 }
 
@@ -40,7 +46,7 @@ const char* Star::TypeName() {
 void Star::OnColliding(Body& thisbody, Body& otherbody) {
 	IW_CALLSTACK_SELF;
 
-	GetCurrentState().Collide(otherbody);
+	GetAttackState().Collide(otherbody);
 
 	if (otherbody.GetTypeName() == Buff::TypeName()) {
 		GetHealthManager().RenewLife();
@@ -54,7 +60,8 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 
 void Star::OnUpdate(const FrameData& frame) {
 	Body::OnUpdate(frame);
-	GetCurrentState().Update(frame.GetSimulatedDurationMs());
+	GetMotionState().Update(frame.GetSimulatedDurationMs());
+	GetAttackState().Update(frame.GetSimulatedDurationMs());
 
 	// adjust drag force
 	if (IsDragging()) {
@@ -76,16 +83,21 @@ void Star::OnUpdate(const FrameData& frame) {
 	}
 }
 
-void Star::Jump(const CIwFVec2& impulse) {
-	GetCurrentState().Jump(impulse);
+void Star::SetMotionTextureFrame(const std::string& name) {
+	m_sMotionTextureFrame = name;
+	if (m_sAttackTextureFrame.empty()) {
+		SetTextureFrame(m_sMotionTextureFrame);
+	}
 }
 
-void Star::Attack() {
-	GetCurrentState().Attack();
+void Star::SetAttackTextureFrame(const std::string& name) {
+	m_sAttackTextureFrame = name;
+	SetTextureFrame(m_sAttackTextureFrame);
 }
 
-void Star::Sit() {
-	GetCurrentState().Stay();
+void Star::ClearAttackTextureFrame() {
+	m_sAttackTextureFrame.clear();
+	SetTextureFrame(m_sMotionTextureFrame);
 }
 
 void Star::SetTextureFrame(std::string id) {
@@ -127,7 +139,7 @@ void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed
 	for (int i = 0; i < samplecount; i++) {
 		m_xPath.push(samplepoints[i]);
 	}
-	GetCurrentState().FollowPath();
+	GetMotionState().FollowPath();
 }
 
 bool Star::IsFollowingPath() {
@@ -136,19 +148,65 @@ bool Star::IsFollowingPath() {
 	return !m_xPath.empty();
 }
 
+void Star::ShowTextEffect(const std::string& text) {
+	IW_CALLSTACK_SELF;
+	if (GameFoundation* game = GetGameFoundation()) {
+		game->AddSplashText(text, GetPosition());
+	}	
+}
+
+void Star::BeginBlock() {
+	GetAttackState().BeginBlock();
+}
+
+void Star::EndBlock() {
+	GetAttackState().EndBlock();
+}
+
+void Star::BeginHit() {
+	GetAttackState().BeginHit();
+}
+
+void Star::EndHit() {
+	GetAttackState().EndHit();
+}
+
+void Star::BeginAttack() {
+	GetAttackState().BeginAttack();
+}
+
+void Star::EndAttack() {
+	GetAttackState().EndAttack();
+}
+
+
 /****
  * State machine 
  **/
-void Star::SetState(Star::StateBase* newstate) {
+void Star::SetState(Star::MotionStateBase* newstate) {
 	IwAssertMsg(MYAPP, newstate, ("Empty state must not be set."));
-	if (m_pxCurrentState) {
-		delete m_pxCurrentState;
+	if (m_pxMotionState) {
+		delete m_pxMotionState;
 	}
 	newstate->Initialize();
-	m_pxCurrentState = newstate;
+	m_pxMotionState = newstate;
 }
 
-Star::StateBase& Star::GetCurrentState() {
-	IwAssertMsg(MYAPP, m_pxCurrentState, ("Program error. State must not be empty."));
-	return *m_pxCurrentState;
+void Star::SetState(Star::AttackStateBase* newstate) {
+	IwAssertMsg(MYAPP, newstate, ("Empty state must not be set."));
+	if (m_pxAttackState) {
+		delete m_pxAttackState;
+	}
+	newstate->Initialize();
+	m_pxAttackState = newstate;
+}
+
+Star::MotionStateBase& Star::GetMotionState() {
+	IwAssertMsg(MYAPP, m_pxMotionState, ("Program error. State must not be empty."));
+	return *m_pxMotionState;
+}
+
+Star::AttackStateBase& Star::GetAttackState() {
+	IwAssertMsg(MYAPP, m_pxAttackState, ("Program error. State must not be empty."));
+	return *m_pxAttackState;
 }

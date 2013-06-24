@@ -173,8 +173,10 @@ files {
 
 	Star.h
 	Star.cpp
-	StarState.h
-	StarState.cpp
+	StarMotionState.h
+	StarMotionState.cpp
+	StarAttackState.h
+	StarAttackState.cpp
 
 	Target.h
 	Target.cpp

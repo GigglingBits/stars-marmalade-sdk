@@ -1,50 +1,60 @@
-#ifndef __STARSTATE_H__
-#define __STARSTATE_H__
+#ifndef __STARATTACKSTATE_H__
+#define __STARATTACKSTATE_H__
 
 #include "Star.h"
 
 /////////////////////////////////////////////////////////////
-// Idle
+// Peaceful
 /////////////////////////////////////////////////////////////
-class Star::IdleState : public Star::StateBase {
+class Star::PeacefulState : public Star::AttackStateBase {
 public:
-	IdleState(Star& context) : StateBase(context) {};
+	PeacefulState(Star& context) : AttackStateBase(context) {};
 	virtual void Initialize();
-	virtual void Collide(Body& body);
-	virtual void FollowPath();
-	virtual void Update(uint16 timestep);
-};
+	
+	virtual void BeginBlock();
+	virtual void BeginHit();
+	virtual void BeginAttack();
 
-/////////////////////////////////////////////////////////////
-// Follow path
-/////////////////////////////////////////////////////////////
-class Star::FollowPathState : public Star::StateBase {
-public:
-	FollowPathState(Star& context) : StateBase(context) {};
-	virtual void Initialize();
-	virtual void Update(uint16 timestep);
-};
-
-/////////////////////////////////////////////////////////////
-// Jumping
-/////////////////////////////////////////////////////////////
-class Star::JumpingState : public Star::StateBase {
-public:
-	JumpingState(Star& context) : StateBase(context) {};
-	virtual void Initialize();
-	virtual void Attack();
 	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);
 };
 
 /////////////////////////////////////////////////////////////
-// Smashing
+// Block
 /////////////////////////////////////////////////////////////
-class Star::SmashingState : public Star::StateBase {
+class Star::BlockState : public Star::AttackStateBase {
 public:
-	SmashingState(Star& context) : StateBase(context) {};
+	BlockState(Star& context) : AttackStateBase(context) {};
 	virtual void Initialize();
-	virtual void Collide(Body& body);
+	
+	virtual void EndBlock();
+	
+	virtual void Update(uint16 timestep);
+};
+
+/////////////////////////////////////////////////////////////
+// Hit
+/////////////////////////////////////////////////////////////
+class Star::HitState : public Star::AttackStateBase {
+public:
+	HitState(Star& context) : AttackStateBase(context) {};
+	virtual void Initialize();
+	
+	virtual void EndHit();
+	
+	virtual void Update(uint16 timestep);
+};
+
+/////////////////////////////////////////////////////////////
+// Attack
+/////////////////////////////////////////////////////////////
+class Star::AttackState : public Star::AttackStateBase {
+public:
+	AttackState(Star& context) : AttackStateBase(context) {};
+	virtual void Initialize();
+	
+	virtual void EndAttack();
+	
 	virtual void Update(uint16 timestep);
 };
 

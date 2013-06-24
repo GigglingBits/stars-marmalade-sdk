@@ -6,6 +6,7 @@
 ButtonEx::ButtonEx(ButtonCommandId cmdid, s3eKey key, long userdata)
 	: Button(cmdid, key, userdata) {
 	SetHideWhenDisabled(false);
+	SetShadedWhenPressed(false);
 }
 
 void ButtonEx::OnTextureLoaded(Texture& texture) {
