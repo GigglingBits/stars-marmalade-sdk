@@ -29,8 +29,9 @@ void Initialize() {
 
 	IwGxInit();
 	{
+#if defined (IW_USE_LEGACY_MODULES)
 		IwGxMipMappingOff();
-
+#endif
 		IwGxLightingOn(); // required only for IwGxFont colouring
 		IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
 

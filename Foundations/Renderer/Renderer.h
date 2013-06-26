@@ -82,10 +82,18 @@ public:
 	void DebugDrawCoords(const CIwSVec2& point);
 
 private:
+	// create Gx cached streams
+	CIwFVec2* CreatGxCacheVertexStream(CIwSVec2 vertices[], int count);
+	CIwFVec2* CreatGxCacheVertexStream(CIwFVec2 vertices[], int count);
+	CIwColour* CreatGxCacheColourStream(uint32 cols[], int count);
+	CIwMaterial* CreateGxCacheMaterial(CIwTexture* texture);
+	CIwMaterial* CreateGxCacheMaterial(uint colour);
+	CIwFVec2* CreatGxCacheUvStream(CIwFVec2 vertices[], int count, CIwTexture* image);
+	
 	// drawing to screen (sub-pixel coordinates)
-	void DrawPolygonSubPixel(CIwSVec2 vertices[], int count, uint32 framecol, uint32 bodycol);
-	void DrawPolygonSubPixel(CIwSVec2 vertices[], int count, CIwColour framecols[], CIwColour bodycols[]);
-	void DrawPolygonSubPixel(CIwSVec2 vertices[], int count, CIwTexture* image, bool flipped);
+	void DrawPolygonSubPixel(CIwFVec2 vertices[], int count, uint32 framecol, uint32 bodycol);
+	void DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwColour framecols[], CIwColour bodycols[]);
+	void DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwTexture* image, bool flipped);
 
 	// drawing to screen (pixel coordinates)
 	void DrawText(const char* text, const CIwRect& rect, FontType font, bool center, uint32 col);
@@ -97,23 +105,8 @@ private:
 	template <class TVertexStream, class TVertex>
 	void DrawTexture(TVertexStream& shape, Texture& texture);
 
-	// conversion to sub-pixel
-	INLINE iwsfixed ConvertSFixedFromInt(int16 a);
-	INLINE iwsfixed ConvertSFixedFromFloat(float a);
-
-	CIwSVec2* CreatGxCacheVertexStream(CIwSVec2 vertices[], int count);
-	CIwSVec2* CreatGxCacheVertexStream(CIwFVec2 vertices[], int count);
-	CIwColour* CreatGxCacheColourStream(uint32 cols[], int count);
-
 	// utility functions
-	CIwMaterial* CreateGxCacheMaterial(CIwTexture* texture);
-	CIwMaterial* CreateGxCacheMaterial(uint colour);
-#if defined (IW_USE_LEGACY_MODULES)
-	CIwSVec2* CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwTexture* image);
-#else 
-	CIwFVec2* CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwTexture* image);
-#endif
-	void CalculateAABB(CIwSVec2 vertices[], int count, CIwSVec2& topleft, CIwSVec2& bottomright);
+	void CalculateAABB(CIwFVec2 vertices[], int count, CIwFVec2& topleft, CIwFVec2& bottomright);
 };
 
 #endif

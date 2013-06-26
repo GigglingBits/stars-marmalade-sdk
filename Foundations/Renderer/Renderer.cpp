@@ -127,7 +127,7 @@ void Renderer::DrawRect(const CIwRect& rect, uint32 framecol, uint32 bodycol) {
 	vertices[3].x = rect.x + rect.w, vertices[3].y = rect.y;
 	vertices[4].x = rect.x, vertices[4].y = rect.y;
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, framecol, bodycol);
 }
 
@@ -143,7 +143,7 @@ void Renderer::DrawImage(CIwTexture* image, const CIwFVec2& pos, const CIwFVec2&
 	vertices[2].x = pos.x + size.x, vertices[2].y = pos.y + size.y;
 	vertices[3].x = pos.x, vertices[3].y = pos.y + size.y;
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream((CIwFVec2*)vertices, count);	
+	CIwFVec2* polystream = CreatGxCacheVertexStream((CIwFVec2*)vertices, count);
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
@@ -152,7 +152,7 @@ void Renderer::DrawImage(CIwTexture* image, CIwFVec2* vertices, int count, bool 
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);	
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
@@ -161,7 +161,7 @@ void Renderer::DrawImage(CIwTexture* image, CIwSVec2* vertices, int count, bool 
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);	
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
@@ -179,19 +179,15 @@ void Renderer::DrawPolygon(TVertex vertices[], int count, CIwTexture* image) {
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);	
-#if defined (IW_USE_LEGACY_MODULES)
-	CIwSVec2* wrapuv = CreatGxCacheUvStream(polystream, count, image);	
-#else 
-	CIwFVec2* wrapuv = CreatGxCacheUvStream(polystream, count, image);	
-#endif
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* wrapuv = CreatGxCacheUvStream(polystream, count, image);
 	IwGxSetUVStream(wrapuv);
 
 	IwGxSetColStream(NULL);
 
 	IwGxSetMaterial(CreateGxCacheMaterial(image));
 
-	IwGxSetVertStreamScreenSpaceSubPixel(polystream, count);
+	IwGxSetVertStreamScreenSpace(polystream, count);
 
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
@@ -199,28 +195,9 @@ void Renderer::DrawPolygon(TVertex vertices[], int count, CIwTexture* image) {
 	IwGxSetScreenSpaceSlot(slot);
 }
 
-void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, CIwTexture* image, bool flipped) {
+void Renderer::DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwTexture* image, bool flipped) {
 	IW_CALLSTACK_SELF;
 
-#if defined (IW_USE_LEGACY_MODULES)
-	// standard orientation
-	static const CIwSVec2 standarduv[4] = {
-		CIwSVec2(0 << 12, 1 << 12),
-		CIwSVec2(1 << 12, 1 << 12),
-		CIwSVec2(1 << 12, 0 << 12),
-		CIwSVec2(0 << 12, 0 << 12),
-	};
-
-	// horizontally flipped orientation
-	static const CIwSVec2 flippeduv[4] = {
-		CIwSVec2(1 << 12, 1 << 12),
-		CIwSVec2(0 << 12, 1 << 12),
-		CIwSVec2(0 << 12, 0 << 12),
-		CIwSVec2(1 << 12, 0 << 12),
-	};
-
-	IwGxSetUVStream((CIwSVec2*)(flipped ? flippeduv : standarduv));
-#else
 	// standard orientation
 	static const CIwFVec2 standarduv[4] = {
 		CIwFVec2(0.0f, 1.0f),
@@ -238,13 +215,12 @@ void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, CIwTexture* i
 	};
 
 	IwGxSetUVStream((CIwFVec2*)(flipped ? flippeduv : standarduv));
-#endif
 
 	IwGxSetColStream(NULL);
 
 	IwGxSetMaterial(CreateGxCacheMaterial(image));
 
-	IwGxSetVertStreamScreenSpaceSubPixel(vertices, count);
+	IwGxSetVertStreamScreenSpace(vertices, count);
 
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
@@ -262,7 +238,7 @@ void Renderer::DrawPolygon(CIwFVec2 vertices[], int count, uint32 framecol, uint
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, framecol, bodycol);
 }
 
@@ -276,7 +252,7 @@ void Renderer::DrawPolygon(CIwFVec2 vertices[], int count, uint32 framecols[], u
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	CIwColour* framecolstream = framecols ? CreatGxCacheColourStream(framecols, count) : NULL;
 	CIwColour* bodycolstream = bodycols ? CreatGxCacheColourStream(bodycols, count) : NULL;
 	DrawPolygonSubPixel(polystream, count, framecolstream, bodycolstream);
@@ -292,7 +268,7 @@ void Renderer::DrawPolygon(CIwSVec2 vertices[], int count, uint32 framecol, uint
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, framecol, bodycol);
 }
 
@@ -306,13 +282,13 @@ void Renderer::DrawPolygon(CIwSVec2 vertices[], int count, uint32 framecols[], u
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream(vertices, count);
+	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	CIwColour* framecolstream = framecols ? CreatGxCacheColourStream(framecols, count) : NULL;
 	CIwColour* bodycolstream = bodycols ? CreatGxCacheColourStream(bodycols, count) : NULL;
 	DrawPolygonSubPixel(polystream, count, framecolstream, bodycolstream);
 }
 
-void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, uint32 framecol, uint32 bodycol) {
+void Renderer::DrawPolygonSubPixel(CIwFVec2 vertices[], int count, uint32 framecol, uint32 bodycol) {
 	IW_CALLSTACK_SELF;
 
 	if (!(bodycol || framecol)) {
@@ -323,7 +299,7 @@ void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, uint32 framec
 	IwGxSetColStream(NULL);
 
 	// set stream once, use it for 2 primitive drawing instructions
-	IwGxSetVertStreamScreenSpaceSubPixel(vertices, count);
+	IwGxSetVertStreamScreenSpace(vertices, count);
 
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
@@ -338,12 +314,12 @@ void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, uint32 framec
 	IwGxSetScreenSpaceSlot(slot);
 }
 
-void Renderer::DrawPolygonSubPixel(CIwSVec2 vertices[], int count, CIwColour framecols[], CIwColour bodycols[]) {
+void Renderer::DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwColour framecols[], CIwColour bodycols[]) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetUVStream(NULL);
 
-	IwGxSetVertStreamScreenSpaceSubPixel(vertices, count);
+	IwGxSetVertStreamScreenSpace(vertices, count);
 
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
@@ -396,7 +372,7 @@ void Renderer::DrawImage(CIwTexture* image, const CIwSVec2& pos, const CIwSVec2&
 	vertices[2].x = pos.x + size.x, vertices[2].y = pos.y;
 	vertices[3].x = pos.x, vertices[3].y = pos.y;
 
-	CIwSVec2* polystream = CreatGxCacheVertexStream((CIwSVec2*)vertices, count);	
+	CIwFVec2* polystream = CreatGxCacheVertexStream((CIwSVec2*)vertices, count);
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
@@ -523,41 +499,25 @@ void Renderer::DebugDrawCoords(const CIwFVec2& point) {
 #endif
 }
 
-iwsfixed Renderer::ConvertSFixedFromInt(int16 a) {
-#ifdef IW_DEBUG
-    int32 fix32 = ((int32)a) << 3;
-    IwAssertMsgN(349,GEOM, fix32 >> 31 == fix32 >> 15, ("Conversion overflow in renderer. Graphics issues may occur."));
-#endif
-    return (iwsfixed)(a << 3);
-}
-
-iwsfixed Renderer::ConvertSFixedFromFloat(float a) {
-#ifdef IW_DEBUG
-    int32 fix32 = (int32)(a * (float)(1 << 3));
-    IwAssertMsgN(349,GEOM, fix32 >> 31 == fix32 >> 15, ("Conversion overflow in renderer. Graphics issues may occur."));
-#endif
-    return (iwsfixed)(a * (float)(1 << 3));
-}
-
-CIwSVec2* Renderer::CreatGxCacheVertexStream(CIwSVec2 vertices[], int count) {
+CIwFVec2* Renderer::CreatGxCacheVertexStream(CIwSVec2 vertices[], int count) {
 	IwAssertMsg(MYAPP, count > 0 && vertices, ("Trying to allocate empty stream. This should probably never happen?"));
 
-	CIwSVec2* polystream = IW_GX_ALLOC(CIwSVec2, count);
+	CIwFVec2* polystream = IW_GX_ALLOC(CIwFVec2, count);
 	for (int i = 0; i < count; i++) {
-		polystream[i].x = ConvertSFixedFromInt(vertices[i].x);
-		polystream[i].y = ConvertSFixedFromInt(vertices[i].y);
+		polystream[i].x = vertices[i].x;
+		polystream[i].y = vertices[i].y;
 	}
 	return polystream;
 }
 
-CIwSVec2* Renderer::CreatGxCacheVertexStream(CIwFVec2 vertices[], int count){
+CIwFVec2* Renderer::CreatGxCacheVertexStream(CIwFVec2 vertices[], int count){
 	IwAssertMsg(MYAPP, count > 0 && vertices, ("Trying to allocate empty stream. This should probably never happen?"));
 
-	CIwSVec2* polystream = IW_GX_ALLOC(CIwSVec2, count);
+	CIwFVec2* polystream = IW_GX_ALLOC(CIwFVec2, count);
 	for (int i = 0; i < count; i++) {
 		CIwSVec2 v = m_xViewport.WorldToScreen(vertices[i]);
-		polystream[i].x = ConvertSFixedFromInt(v.x);
-		polystream[i].y = ConvertSFixedFromInt(v.y);	
+		polystream[i].x = v.x;
+		polystream[i].y = v.y;
 	}
 	return polystream;
 }
@@ -572,23 +532,10 @@ CIwColour* Renderer::CreatGxCacheColourStream(uint32 cols[], int count) {
 	return gxcols;
 }
 
-#if defined (IW_USE_LEGACY_MODULES)
-CIwSVec2* Renderer::CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwTexture* image) {
-#else
-CIwFVec2* Renderer::CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwTexture* image) {
-#endif
-// get aabb
-	CIwSVec2 topleft(0, 0), bottomright(0, 0);
+CIwFVec2* Renderer::CreatGxCacheUvStream(CIwFVec2 vertices[], int count, CIwTexture* image) {
+	// get aabb
+	CIwFVec2 topleft(0.0f, 0.0f), bottomright(0.0f, 0.0f);
 	CalculateAABB(vertices, count, topleft, bottomright);
-
-	// assert that aabb does not exceed 15x15 tiles
-	// (would actually 16x16, but we need 1 reserve for the alignment)
-	IwAssertMsg(MYAPP, 
-		bottomright.x - topleft.x < ConvertSFixedFromInt(15 * image->GetWidth()), 
-		("Polygon is too wide for the texture. UV map cannot be calculated."));
-	IwAssertMsg(MYAPP, 
-		bottomright.y - topleft.y < ConvertSFixedFromInt(15 * image->GetHeight()), 
-		("Polygon is too tall for the texture. UV map cannot be calculated."));
 
 	// center of aabb
 	int16 texturewidth = image->GetWidth();
@@ -598,36 +545,25 @@ CIwFVec2* Renderer::CreatGxCacheUvStream(CIwSVec2 vertices[], int count, CIwText
 		topleft.y + ((bottomright.y - topleft.y) / 2));
 
 	// align with tiles
-	uvorigin.x -= uvorigin.x % ConvertSFixedFromInt(texturewidth);
-	uvorigin.y -= uvorigin.y % ConvertSFixedFromInt(textureheight);
+	uvorigin.x -= uvorigin.x % texturewidth;
+	uvorigin.y -= uvorigin.y % textureheight;
 
 	// allocate UV cache and convert/rescale coordinates relative to aabb center and tile size
-#if defined (IW_USE_LEGACY_MODULES)
-	CIwSVec2* uvstream = IW_GX_ALLOC(CIwSVec2, count);
-#else
 	CIwFVec2* uvstream = IW_GX_ALLOC(CIwFVec2, count);
-#endif
 	for (int i = 0; i < count; i++) {
 		// TODO: Clean up for better efficiency; I just needed this for debugging
-		CIwSVec2 v(vertices[i] - uvorigin);
+		CIwFVec2 v(vertices[i] - uvorigin);
 		float x = (float) v.x;
 		float y = (float) v.y;
-		x /= (1 << 3);
-		y /= (1 << 3);
 		x /= texturewidth;
 		y /= textureheight;
-#if defined (IW_USE_LEGACY_MODULES)
-		uvstream[i].x = IW_FIXED_FROM_FLOAT(x);
-		uvstream[i].y = IW_FIXED_FROM_FLOAT(y);
-#else
 		uvstream[i].x = x;
 		uvstream[i].y = y;
-#endif
 	}
 	return uvstream;
 }
 
-void Renderer::CalculateAABB(CIwSVec2 vertices[], int count, CIwSVec2& topleft, CIwSVec2& bottomright) {
+void Renderer::CalculateAABB(CIwFVec2 vertices[], int count, CIwFVec2& topleft, CIwFVec2& bottomright) {
 	// this function works in screenspace
 	if (count < 1) {
 		return;
@@ -637,9 +573,9 @@ void Renderer::CalculateAABB(CIwSVec2 vertices[], int count, CIwSVec2& topleft, 
 	bottomright = vertices[0];
 
 	for (int i = 1; i < count; i++) {
-		topleft.x = std::min<int16>(vertices[i].x, topleft.x);
-		topleft.y = std::min<int16>(vertices[i].y, topleft.y);
-		bottomright.x = std::max<int16>(vertices[i].x, bottomright.x);
-		bottomright.y = std::max<int16>(vertices[i].y, bottomright.y);
+		topleft.x = std::min<float>(vertices[i].x, topleft.x);
+		topleft.y = std::min<float>(vertices[i].y, topleft.y);
+		bottomright.x = std::max<float>(vertices[i].x, bottomright.x);
+		bottomright.y = std::max<float>(vertices[i].y, bottomright.y);
 	}
 }

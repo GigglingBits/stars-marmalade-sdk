@@ -13,9 +13,6 @@ defines {
 	# Define for TTF rendering support.
 	# Must be before iwgxfont subproject is first included.
 	IW_GXFONT_TTF
-
-	# needed due to bug with sub-pixel rendering in the 6.1.1 IwGx API
-	IW_USE_LEGACY_MODULES
 }
 
 deployments {

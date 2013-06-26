@@ -29,8 +29,7 @@ void Initialize() {
 
 	IwGxInit();
 	{
-		IwGxMipMappingOff();
-
+		//IwGxMipMappingOff();
 		IwGxLightingOn(); // required only for IwGxFont colouring
 		IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
 

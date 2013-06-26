@@ -29,6 +29,7 @@ public:
 	void SetCenterPosition(const CIwFVec2& point);
  	const CIwFVec2& GetCenterPosition() const;
 	CIwSVec2 GetScreenViewOffset() const;
+	CIwFVec2 GetScreenViewOffsetF() const;
 
 	// conversions:
 	// world:	the simulated area
@@ -42,6 +43,15 @@ public:
 
 	CIwSVec2 WorldToView(const CIwFVec2& worldpoint) const;
 	CIwFVec2 ViewToWorld(const CIwSVec2& viewpoint) const;
+
+	CIwFVec2 WorldToScreenF(const CIwFVec2& worldpoint) const;
+	CIwFVec2 ScreenToWorldF(const CIwFVec2& screenpoint) const;
+	
+	CIwFVec2 ScreenToViewF(const CIwFVec2& screenpoint) const;
+	CIwFVec2 ViewToScreenF(const CIwFVec2& viewpoint) const;
+	
+	CIwFVec2 WorldToViewF(const CIwFVec2& worldpoint) const;
+	CIwFVec2 ViewToWorldF(const CIwFVec2& viewpoint) const;
 
 private:
 	void UpdateWorldSizePx();

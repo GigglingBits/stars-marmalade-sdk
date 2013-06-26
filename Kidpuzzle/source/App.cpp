@@ -137,7 +137,7 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 
 void App::ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args) {
 	IW_CALLSTACK_SELF;
-	if  (args.cmdid == eButtonCommandIdNextLevel) {
+	if  (args.cmdid == eButtonCommandIdOpenNextLevel) {
 		m_xPageManager.NextLevel();
 
 	} else if (args.cmdid == eButtonCommandIdRestartLevel) {

@@ -9,11 +9,6 @@ options {
 subprojects {
 }
 
-defines {
-	# needed due to bug with sub-pixel rendering in the 6.1.1 IwGx API
-	IW_USE_LEGACY_MODULES
-}
-
 deployments {
 	name='Stars'
 	caption='Stars'

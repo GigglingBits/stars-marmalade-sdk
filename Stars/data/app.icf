@@ -3,7 +3,7 @@
 ####################################################
 showstats=0
 
-maxvisibleworldsize=8	# see max 8 meters on screen
+maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
 
 pathspeed=7				# meters per second
@@ -77,7 +77,6 @@ KeyAbsBSK=B				# not used
 [Gx]
 ####################################################
 DataCacheSize=262144
-#DisplayFrameRate=1
 NumTPages=256
 NumU256PaletteCacheBlocks=32
 VertCacheSize=4096

@@ -57,6 +57,10 @@ CIwSVec2 Viewport::GetScreenViewOffset() const {
 	return -m_xViewportScreenPos;
 }
 
+CIwFVec2 Viewport::GetScreenViewOffsetF() const {
+	return CIwFVec2(-m_xViewportScreenPos.x, -m_xViewportScreenPos.y);
+}
+
 const CIwSVec2& Viewport::GetViewportSize() const {
 	return m_xViewportScreenSize;
 }
@@ -72,23 +76,23 @@ void Viewport::UpdateViewportScreenPos() {
 
 CIwSVec2 Viewport::WorldToScreen(const CIwFVec2& worldpoint) const {
 	CIwSVec2 screenpoint;
-
+	
 	// scaling
 	screenpoint.x = (int16)(m_fWorldToScreenFactor * worldpoint.x);
 	screenpoint.y = (int16)(m_fWorldToScreenFactor * worldpoint.y);
-
-	// convert coord space (screen coords are upside down) 
+	
+	// convert coord space (screen coords are upside down)
 	screenpoint.y = m_xWorldSizePx.y - screenpoint.y;
-
+	
 	return screenpoint;
 }
 
 CIwFVec2 Viewport::ScreenToWorld(const CIwSVec2& screenpoint) const {
 	CIwFVec2 worldpoint;
-
-	// convert coord space (screen coords are upside down) 
+	
+	// convert coord space (screen coords are upside down)
 	int16 y = m_xWorldSizePx.y - screenpoint.y;
-
+	
 	// scaling
 	worldpoint.x = (float)screenpoint.x / m_fWorldToScreenFactor;
 	worldpoint.y = (float)y / m_fWorldToScreenFactor;
@@ -110,6 +114,47 @@ CIwSVec2 Viewport::WorldToView(const CIwFVec2& worldpoint) const {
 
 CIwFVec2 Viewport::ViewToWorld(const CIwSVec2& viewpoint) const {
 	return ScreenToWorld(ViewToScreen(viewpoint));
+}
+
+CIwFVec2 Viewport::WorldToScreenF(const CIwFVec2& worldpoint) const {
+	CIwFVec2 screenpoint;
+	
+	// scaling
+	screenpoint = worldpoint * m_fWorldToScreenFactor;
+	
+	// convert coord space (screen coords are upside down)
+	screenpoint.y = m_xWorldSizePx.y - screenpoint.y;
+	
+	return screenpoint;
+}
+
+CIwFVec2 Viewport::ScreenToWorldF(const CIwFVec2& screenpoint) const {
+	CIwFVec2 worldpoint;
+	
+	// convert coord space (screen coords are upside down)
+	float y = m_xWorldSizePx.y - screenpoint.y;
+	
+	// scaling
+	worldpoint.x = screenpoint.x / m_fWorldToScreenFactor;
+	worldpoint.y = y / m_fWorldToScreenFactor;
+	
+	return worldpoint;
+}
+
+CIwFVec2 Viewport::ScreenToViewF(const CIwFVec2& screenpoint) const {
+	return screenpoint + GetScreenViewOffsetF();
+}
+
+CIwFVec2 Viewport::ViewToScreenF(const CIwFVec2& viewpoint) const {
+	return viewpoint - GetScreenViewOffsetF();
+}
+
+CIwFVec2 Viewport::WorldToViewF(const CIwFVec2& worldpoint) const {
+	return ScreenToViewF(WorldToScreenF(worldpoint));
+}
+
+CIwFVec2 Viewport::ViewToWorldF(const CIwFVec2& viewpoint) const {
+	return ScreenToWorldF(ViewToScreenF(viewpoint));
 }
 
 Viewport Viewport::operator=(const Viewport& viewport) {

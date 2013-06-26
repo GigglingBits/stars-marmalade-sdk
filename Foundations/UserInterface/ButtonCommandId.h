@@ -10,11 +10,6 @@ enum ButtonCommandId {
 	//eButtonCommandIdLeft			= 3,
 	//eButtonCommandIdRight			= 4,
 
-	// game actions
-	eButtonCommandIdStarBlock,
-	eButtonCommandIdStarHit,
-	eButtonCommandIdStarAttack,
-
 	// application navigation
 	eButtonCommandIdOpenTitleMenu,
 	eButtonCommandIdOpenLevelMenu,
@@ -36,6 +31,14 @@ enum ButtonCommandId {
 	eButtonCommandIdCredits,
 	eButtonCommandIdToggleHud,
 	eButtonCommandIdReload,
+	
+	// star game actions
+	eButtonCommandIdStarBlock,
+	eButtonCommandIdStarHit,
+	eButtonCommandIdStarAttack,
+	
+	// gnome game actions
+	eButtonCommandIdSetHeroFocus,
 };
 
 #endif
