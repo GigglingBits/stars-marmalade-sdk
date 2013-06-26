@@ -34,7 +34,6 @@ enum ButtonCommandId {
 	
 	// star game actions
 	eButtonCommandIdStarBlock,
-	eButtonCommandIdStarHit,
 	eButtonCommandIdStarAttack,
 	
 	// gnome game actions

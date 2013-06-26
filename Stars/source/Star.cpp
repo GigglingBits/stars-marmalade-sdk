@@ -163,14 +163,6 @@ void Star::EndBlock() {
 	GetAttackState().EndBlock();
 }
 
-void Star::BeginHit() {
-	GetAttackState().BeginHit();
-}
-
-void Star::EndHit() {
-	GetAttackState().EndHit();
-}
-
 void Star::BeginAttack() {
 	GetAttackState().BeginAttack();
 }

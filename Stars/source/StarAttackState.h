@@ -12,7 +12,6 @@ public:
 	virtual void Initialize();
 	
 	virtual void BeginBlock();
-	virtual void BeginHit();
 	virtual void BeginAttack();
 
 	virtual void Collide(Body& body);
@@ -28,19 +27,6 @@ public:
 	virtual void Initialize();
 	
 	virtual void EndBlock();
-	
-	virtual void Update(uint16 timestep);
-};
-
-/////////////////////////////////////////////////////////////
-// Hit
-/////////////////////////////////////////////////////////////
-class Star::HitState : public Star::AttackStateBase {
-public:
-	HitState(Star& context) : AttackStateBase(context) {};
-	virtual void Initialize();
-	
-	virtual void EndHit();
 	
 	virtual void Update(uint16 timestep);
 };

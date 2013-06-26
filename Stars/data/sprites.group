@@ -26,9 +26,6 @@ CIwResGroup
 	sprites/button_action_block.png
 	sprites/button_action_block_pressed.png
 	sprites/button_action_block_disabled.png
-	sprites/button_action_hit.png
-	sprites/button_action_hit_pressed.png
-	sprites/button_action_hit_disabled.png
 	sprites/button_action_attack.png
 	sprites/button_action_attack_pressed.png
 	sprites/button_action_attack_disabled.png

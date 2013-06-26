@@ -32,8 +32,6 @@ public:
 		
 		virtual void BeginBlock() {};
 		virtual void EndBlock() {};
-		virtual void BeginHit() {};
-		virtual void EndHit() {};
 		virtual void BeginAttack() {};
 		virtual void EndAttack() {};
 		
@@ -47,7 +45,6 @@ protected:
 
 	class PeacefulState;
 	class BlockState;
-	class HitState;
 	class AttackState;
 	
 private:
@@ -80,8 +77,6 @@ public:
 	
 	void BeginBlock();
 	void EndBlock();
-	void BeginHit();
-	void EndHit();
 	void BeginAttack();
 	void EndAttack();
 	

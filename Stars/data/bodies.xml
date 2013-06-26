@@ -311,11 +311,6 @@ the bodie that owns the joint.
 		  <frame id="pressed" image="button_action_block_pressed"/>
 		  <frame id="disabled" image="button_action_block_disabled"/>
 	  </texture>
-	  <texture id="button_action_hit">
-		  <frame id="released" image="button_action_hit"/>
-		  <frame id="pressed" image="button_action_hit_pressed"/>
-		  <frame id="disabled" image="button_action_hit_disabled"/>
-	  </texture>
 	  <texture id="button_action_attack">
 		  <frame id="released" image="button_action_attack"/>
 		  <frame id="pressed" image="button_action_attack_pressed"/>

@@ -15,8 +15,7 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_xInteractor(m_xCamera, m_xGame),
 	m_iCompletionTimer(0),
 	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
-	m_xButtonHit(eButtonCommandIdStarHit, s3eKey2),
-	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey3),
+	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP) {
 
 	// attach event handlers
@@ -26,8 +25,6 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 		
 	m_xButtonBlock.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
-	m_xButtonHit.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
-	m_xButtonHit.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.AddListener(this, &Level::ButtonPressedEventHandler);
 	m_xButtonAttack.ReleasedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
 }
@@ -36,8 +33,6 @@ Level::~Level() {
 	// detach event handlers
 	m_xButtonBlock.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
-	m_xButtonHit.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
-	m_xButtonHit.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
 	m_xButtonAttack.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
 
@@ -53,7 +48,6 @@ void Level::Initialize() {
 	m_xAppPanel.Initialize();
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
-	m_xButtonHit.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_hit"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 
 	m_xStatsPanel.Initialize();
@@ -150,11 +144,9 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	CIwRect rect;
 	rect.w = 120;
 	rect.h = 80;
-	rect.x = 10;
+	rect.x = 0;
 	rect.y = 10;
 	m_xButtonBlock.SetPosition(rect);
-	rect.y += 100;
-	m_xButtonHit.SetPosition(rect);
 	rect.y += 100;
 	m_xButtonAttack.SetPosition(rect);
 	
@@ -196,7 +188,6 @@ void Level::OnUpdate(const FrameData& frame) {
 	
 	// buttons
 	m_xButtonBlock.Update(frame);
-	m_xButtonHit.Update(frame);
 	m_xButtonAttack.Update(frame);
 	
 	// progress indicator
@@ -218,7 +209,6 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xInteractor.Render(renderer, frame);
 	
 	m_xButtonBlock.Render(renderer, frame);
-	m_xButtonHit.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 }
 
@@ -246,18 +236,11 @@ void Level::ButtonPressedEventHandler(const Button& sender, const Button::EventA
 	
 	switch (args.id) {
 		case eButtonCommandIdStarBlock:
-			m_xButtonHit.SetEnabled(false);
 			m_xButtonAttack.SetEnabled(false);
 			star->BeginBlock();
 			break;
-		case eButtonCommandIdStarHit:
-			m_xButtonBlock.SetEnabled(false);
-			m_xButtonAttack.SetEnabled(false);
-			star->BeginHit();
-			break;
 		case eButtonCommandIdStarAttack:
 			m_xButtonBlock.SetEnabled(false);
-			m_xButtonHit.SetEnabled(false);
 			star->BeginAttack();
 			break;
 		default:
@@ -274,18 +257,11 @@ void Level::ButtonReleasedEventHandler(const Button& sender, const Button::Event
 	
 	switch (args.id) {
 		case eButtonCommandIdStarBlock:
-			m_xButtonHit.SetEnabled(true);
 			m_xButtonAttack.SetEnabled(true);
 			star->EndBlock();
 			break;
-		case eButtonCommandIdStarHit:
-			m_xButtonBlock.SetEnabled(true);
-			m_xButtonAttack.SetEnabled(true);
-			star->EndHit();
-			break;
 		case eButtonCommandIdStarAttack:
 			m_xButtonBlock.SetEnabled(true);
-			m_xButtonHit.SetEnabled(true);
 			star->EndAttack();
 			break;
 		default:

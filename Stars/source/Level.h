@@ -26,7 +26,6 @@ private:
 	AppPanel m_xAppPanel;
 
 	ButtonEx m_xButtonBlock;
-	ButtonEx m_xButtonHit;
 	ButtonEx m_xButtonAttack;
 	
 	LevelInteractor m_xInteractor;
