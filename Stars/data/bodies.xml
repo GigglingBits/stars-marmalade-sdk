@@ -286,7 +286,8 @@ the bodie that owns the joint.
       -->
     </texture>
 
-    <texture id="touch" image="touch" />
+	  <texture id="touch" image="touch" />
+	  <texture id="backdrop" image="backdrop" />
 
     <texture id="button_social" image="button_social" />
     <texture id="button_achievements" image="button_achievements" />
@@ -317,7 +318,7 @@ the bodie that owns the joint.
 		  <frame id="disabled" image="button_action_attack_disabled"/>
 	  </texture>
 
-    <texture id="button_plain" image="button_plain" />
+	  <texture id="button_plain" image="button_plain" />
     <texture id="button_toggle_hud" image="button_toggle_hud" />
     <texture id="button_restart" image="button_restart" />
     <texture id="button_reload" image="button_reload" />

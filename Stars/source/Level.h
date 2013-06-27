@@ -31,6 +31,9 @@ private:
 	LevelInteractor m_xInteractor;
 	LevelStatsPanel m_xStatsPanel;
 
+	Texture* m_pxBackdrop;
+	VertexStreamScreen m_xBackdropShape;
+	
 	int m_iCompletionTimer;
 
 public:

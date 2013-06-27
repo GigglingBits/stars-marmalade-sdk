@@ -16,7 +16,8 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_iCompletionTimer(0),
 	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
 	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
-	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP) {
+	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP),
+	m_pxBackdrop(NULL) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -36,6 +37,10 @@ Level::~Level() {
 	m_xButtonAttack.PressedEvent.RemoveListener(this, &Level::ButtonPressedEventHandler);
 	m_xButtonAttack.ReleasedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
 
+	if (m_pxBackdrop) {
+		delete m_pxBackdrop;
+	}
+	
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 
@@ -49,7 +54,9 @@ void Level::Initialize() {
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
-
+	
+	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
+	
 	m_xStatsPanel.Initialize();
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
@@ -108,7 +115,7 @@ float Level::GetStarRestForce() {
 }
 
 CIwFVec2 Level::GetStarStartPosition() {
-	return CIwFVec2(m_xWorldSize.x / 4.0f, m_xWorldSize.y / 2.0f);
+	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
 }
 
 void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
@@ -141,13 +148,14 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	m_xBackground.SetGeometry(m_xWorldSize, screensize, bgmargin);
 
 	// action buttons
+	const int spacing = 20;
 	CIwRect rect;
 	rect.w = 120;
 	rect.h = 80;
 	rect.x = 0;
-	rect.y = 10;
+	rect.y = screensize.y - (2 * rect.h) - (2 * spacing);
 	m_xButtonBlock.SetPosition(rect);
-	rect.y += 100;
+	rect.y += rect.h + spacing;
 	m_xButtonAttack.SetPosition(rect);
 	
 	// app panel
@@ -156,6 +164,9 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	m_xAppPanel.GetMainButton().SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
 		btnmargin, btnsize, btnsize));
+	
+	// backdrop
+	m_xBackdropShape.SetRect(0, 0, 150, screensize.y);
 }
 
 void Level::OnUpdate(const FrameData& frame) {
@@ -194,6 +205,11 @@ void Level::OnUpdate(const FrameData& frame) {
 	float progress = m_xGame.GetCompletionDegree();
 	m_xStatsPanel.SetProgress(progress);
 	m_xStatsPanel.Update(frame);
+	
+	// other
+	if (m_pxBackdrop) {
+		m_pxBackdrop->Update(frame.GetRealDurationMs());
+	}
 }
 
 void Level::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -208,6 +224,10 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	m_xInteractor.Render(renderer, frame);
 	
+	// other
+	if (m_pxBackdrop) {
+		renderer.Draw(m_xBackdropShape, *m_pxBackdrop);
+	}
 	m_xButtonBlock.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 }

@@ -67,7 +67,7 @@ void LevelStatsPanel::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void LevelStatsPanel::OnDoLayout(const CIwSVec2& screensize) {
-	const int h = 40, w = 320;
+	const int h = 40, w = screensize.x / 2;
 	int x = (screensize.x - w) / 2, y = h / 2;
 
 	m_xPanelShape.Make(x, y, w, h);
