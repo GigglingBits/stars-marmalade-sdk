@@ -336,33 +336,28 @@ the bodie that owns the joint.
       
       <texture id="button_planet">
           <frame id="earth" image="world_earth"/>
-          <frame id="sky" image="world_sky"/>
           <frame id="mars" image="world_mars"/>
           <frame id="jupiter" image="world_jupiter"/>
       </texture>
       
     <texture id="button_world_name">
         <frame id="earth" image="world_earth_name"/>
-        <frame id="sky" image="world_sky_name"/>
         <frame id="mars" image="world_mars_name"/>
         <frame id="jupiter" image="world_jupiter_name"/>
     </texture>
       
       <texture id="titlemenu_bg">
           <frame id="earth" image="world_earth_background"/>
-          <frame id="sky" image="world_sky_background"/>
           <frame id="mars" image="world_mars_background"/>
           <frame id="jupiter" image="world_jupiter_background"/>
       </texture>
       <texture id="levelmenu_bg">
           <frame id="earth" image="world_earth_background"/>
-          <frame id="sky" image="world_sky_background"/>
           <frame id="mars" image="world_mars_background"/>
           <frame id="jupiter" image="world_jupiter_background"/>
       </texture>
       <texture id="preamble_bg">
           <frame id="earth" image="world_earth_background"/>
-          <frame id="sky" image="world_sky_background"/>
           <frame id="mars" image="world_mars_background"/>
           <frame id="jupiter" image="world_jupiter_background"/>
       </texture>

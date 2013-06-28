@@ -7,10 +7,9 @@ class PageSettings {
 public: 
 	enum WorldId {
 		eWorldIdEarth = 0,
-		eWorldIdSky = 1,
-		eWorldIdMars = 2,
-		eWorldIdJupiter = 3,
-        eWorldIdMax = 4
+		eWorldIdMars = 1,
+		eWorldIdJupiter = 2,
+        eWorldIdMax = 3
 	};
     
 private:

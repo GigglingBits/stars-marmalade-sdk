@@ -98,18 +98,6 @@
       <sprite body="bird_01" pos="5.0" delay="100000" />
     </level>
 
-		<level name="sky_1" width="14.0" height="14.0" background="world_sky_background">
-			<sprite body="nugget" pos="3.5" delay="0" />
-			<sprite body="nugget" pos="3.5" delay="1000" />
-			<sprite body="nugget" pos="1.0" delay="1000" />
-			<sprite body="nugget" pos="6.0" delay="1000" />
-			<sprite body="nugget" pos="4.5" delay="1000" />
-			<sprite body="nugget" pos="2.5" delay="0" />
-			<sprite body="nugget" pos="3.5" delay="300" />
-			<sprite body="nugget" pos="3.5" delay="2000" />
-			<sprite body="nugget" pos="3.5" delay="1000" />
-		</level>
-		
 		<level name="mars_1" width="14.0" height="14.0" background="world_mars_background">
 			<sprite body="nugget" pos="3.5" delay="0" />
 			<sprite body="nugget" pos="3.5" delay="1000" />

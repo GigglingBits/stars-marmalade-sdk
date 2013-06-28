@@ -62,7 +62,6 @@ CIwResGroup
 	sprites/red-star.png
 
     sprites/world_earth_background.png
-    sprites/world_sky_background.png
     sprites/world_mars_background.png
     sprites/world_jupiter_background.png
 
@@ -70,12 +69,10 @@ CIwResGroup
     sprites/background_won.png
 
 	sprites/world_earth.png
-	sprites/world_sky.png
 	sprites/world_mars.png
 	sprites/world_jupiter.png
 
 	sprites/world_earth_name.png
-	sprites/world_sky_name.png
 	sprites/world_mars_name.png
 	sprites/world_jupiter_name.png
 
