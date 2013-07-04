@@ -26,11 +26,11 @@ Kidbook/build_kidbook_xcode/
 Kidbook/originals/
 Kidbook/dist/
 
-Rydendahl/Oldengaard/build_temp/
-Rydendahl/Oldengaard/deployments/
+Rydendahl/build_temp/
+Rydendahl/deployments/
 
 *.mkb~
+*.mkf~
 
 *.gxfont~
-
 

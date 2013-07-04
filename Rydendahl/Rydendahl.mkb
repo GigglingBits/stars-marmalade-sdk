@@ -50,11 +50,11 @@ options
 deployments
 {
 	["Default"]
-	android-pkgname='com.gigglingbits.rydendahl.oldengaard'
+	android-pkgname='com.gigglingbits.rydendahl'
 	caption='Training'
 	copyright='2013'
 	icon='icons/1024x1024.png'
-	iphone-appid='com.gigglingbits.rydendahl.oldengaard'
+	iphone-appid='com.gigglingbits.rydendahl'
 	iphone-enable-4inch-retina='1'
 	long-caption='Training der virker!'
 	manufacturer='Giggling Bits'
