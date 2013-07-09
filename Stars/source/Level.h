@@ -11,6 +11,7 @@
 #include "LevelInteractor.h"
 #include "LevelStatsPanel.h"
 #include "ButtonEx.h"
+#include "ParticleSystem.h"
 
 #define LEVEL_COMPLETION_DELAY 3000
 
@@ -33,6 +34,8 @@ private:
 
 	Texture* m_pxBackdrop;
 	VertexStreamScreen m_xBackdropShape;
+
+	ParticleSystem* m_pxParticles;
 	
 	int m_iCompletionTimer;
 

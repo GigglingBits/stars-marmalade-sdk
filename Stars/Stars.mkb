@@ -4,6 +4,7 @@ options {
 	strict
 #	enable-exceptions
 	arm-fpu=1 # Box2D will not work without FPU
+#    	builddir = build_temp
 }
 
 subprojects {
@@ -48,9 +49,9 @@ subprojects {
 	../Foundations/Sound
 	../Foundations/Physics
 	../Foundations/Sprites
+	../Foundations/Particles
 
 	tinyxml
-
 	s3eWebView
 }
 

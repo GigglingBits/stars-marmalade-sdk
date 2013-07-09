@@ -7,7 +7,7 @@ maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
 
 pathspeed=10			# meters per second
-pathmaxlength=20		# max length of the path in meters
+pathmaxlength=30		# max length of the path in meters
 
 bodies=bodies.xml
 levels=levels.xml
@@ -89,5 +89,5 @@ CacheTextureMaxSize=256
 ####################################################
 [GL]
 ####################################################
-EGL_SAMPLE_BUFFERS=1
-EGL_SAMPLES=4			# Use super-sampling if available. Change to 2 for cheaper multi-sampling
+#EGL_SAMPLE_BUFFERS=1
+#EGL_SAMPLES=4			# Use super-sampling if available. Change to 2 for cheaper multi-sampling

@@ -1,0 +1,12 @@
+includepaths {
+	./Particles
+}
+
+files {
+	(Particles)
+	ParticleSystem.h
+	ParticleSystem.cpp
+
+	Particle.h
+	Particle.cpp
+}

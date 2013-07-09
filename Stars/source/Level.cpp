@@ -17,7 +17,8 @@ Level::Level(const CIwFVec2& worldsize, std::string background) :
 	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
 	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP),
-	m_pxBackdrop(NULL) {
+	m_pxBackdrop(NULL),
+	m_pxParticles(NULL) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -40,6 +41,9 @@ Level::~Level() {
 	if (m_pxBackdrop) {
 		delete m_pxBackdrop;
 	}
+	if (m_pxParticles) {
+		delete m_pxParticles;
+	}
 	
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
@@ -61,6 +65,8 @@ void Level::Initialize() {
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
 
+	m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("button_play"));
+	
 	CreateStar();
 }
 
@@ -197,6 +203,10 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackground.Update(frame);
 	
+	if (m_pxParticles) {
+		m_pxParticles->Update(frame);
+	}
+	
 	// buttons
 	m_xButtonBlock.Update(frame);
 	m_xButtonAttack.Update(frame);
@@ -223,6 +233,10 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xAppPanel.Render(renderer, frame);
 	
 	m_xInteractor.Render(renderer, frame);
+	
+	if (m_pxParticles) {
+		m_pxParticles->Render(renderer, frame);
+	}
 	
 	// other
 	if (m_pxBackdrop) {
