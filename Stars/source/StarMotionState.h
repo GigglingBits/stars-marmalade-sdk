@@ -21,6 +21,7 @@ class Star::FollowState : public Star::MotionStateBase {
 public:
 	FollowState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
+	virtual void FollowPath();
 	virtual void Update(uint16 timestep);
 };
 

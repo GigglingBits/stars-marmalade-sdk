@@ -135,10 +135,18 @@ void Star::SetAnchorLine(float xpos) {
 }
 
 void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed) {
+	// clear current path
+	while (!m_xPath.empty()) {
+		m_xPath.pop();
+	}
+	
+	// copy new path
 	m_fPathSpeed = speed;
 	for (int i = 0; i < samplecount; i++) {
 		m_xPath.push(samplepoints[i]);
 	}
+	
+	// get the star to pollow
 	GetMotionState().FollowPath();
 }
 

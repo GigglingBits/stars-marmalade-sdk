@@ -48,6 +48,10 @@ void Star::FollowState::Initialize() {
 	m_rxContext.SetMotionTextureFrame("followpath");
 }
 
+void Star::FollowState::FollowPath() {
+	m_rxContext.SetState(new FollowState(m_rxContext));
+}
+
 void Star::FollowState::Update(uint16 timestep) {
 	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
 	if (path.empty()) {

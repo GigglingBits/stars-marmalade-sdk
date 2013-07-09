@@ -36,10 +36,7 @@ void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 
 	// nothing draggable hit? start recording the path of the touch 
 	if (touch.gesturetype == eGestureTypeNone && !m_xRecorder.IsRecording()) {
-		Star* star = m_rxGame.GetStar();
-		if (star && !star->IsFollowingPath()) {
-			touch.gesturetype = eGestureTypeDrawStarPath;
-		}
+		touch.gesturetype = eGestureTypeDrawStarPath;
 	}
 }
 
