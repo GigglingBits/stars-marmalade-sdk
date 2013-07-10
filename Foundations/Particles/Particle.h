@@ -19,9 +19,13 @@ private:
 	int m_iRemainingLifeTimeMs;
 	
 public:
-	Particle(const TextureTemplate& tpl, const CIwFVec2& position, const CIwFVec2& velocity);
+	Particle(const TextureTemplate& tpl);
 	
 	bool IsDead();
+	
+	void SetPosition(const CIwFVec2& point);
+	void SetGravity(const CIwFVec2& force);
+	void SetVelocity(const CIwFVec2& speed);
 	
 private:
 	void ApplyGravity(const CIwFVec2& g, uint16 simulationtime);

@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(const TextureTemplate& tpl) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f) {
+ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f), m_xGravity(gravity) {
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -44,7 +44,10 @@ Particle* ParticleSystem::CreateParticle() {
 		maxstartvelocity.x * x,
 		maxstartvelocity.y * y);
 	
-	Particle* particle = new Particle(m_xTextureTpl, m_xPosition, velocity);
+	Particle* particle = new Particle(m_xTextureTpl);
+	particle->SetPosition(m_xPosition);
+	particle->SetGravity(m_xGravity);
+	particle->SetVelocity(velocity);
 	particle->SetRederingLayer(Renderer::eRenderingLayerBackgroundGameObjects);
 	return particle;
 }

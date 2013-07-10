@@ -15,11 +15,13 @@ private:
 	
 	TextureTemplate m_xTextureTpl;
 
+	CIwFVec2 m_xGravity;
+	
 	bool m_bIsStarted;
 	int m_iNextParticleDueInMs;
 	
 public:
-	ParticleSystem(const TextureTemplate& tpl);
+	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity);
 	~ParticleSystem();
 	
 	void Start();

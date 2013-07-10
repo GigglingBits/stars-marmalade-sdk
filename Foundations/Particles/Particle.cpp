@@ -1,13 +1,23 @@
 #include "Particle.h"
 
-Particle::Particle(const TextureTemplate& tpl, const CIwFVec2& position, const CIwFVec2& velocity) : m_xTexture(tpl), m_xGravity(0.0f, -9.81f), m_iRemainingLifeTimeMs(1000) {
-	m_xPosition = position;
-	m_xVelocity = velocity;
+Particle::Particle(const TextureTemplate& tpl) : m_xTexture(tpl), m_xPosition(0.0f, 0.0f), m_xGravity(0.0f, -9.81f), m_iRemainingLifeTimeMs(1000) {
 	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, 0.5f, 0.5f);
 }
 
 bool Particle::IsDead() {
 	return m_iRemainingLifeTimeMs <= 0;
+}
+
+void Particle::SetPosition(const CIwFVec2& point) {
+	m_xPosition = point;
+}
+
+void Particle::SetGravity(const CIwFVec2& force) {
+	m_xGravity = force;
+}
+
+void Particle::SetVelocity(const CIwFVec2& speed) {
+	m_xVelocity = speed;
 }
 
 void Particle::OnUpdate(const FrameData& frame) {

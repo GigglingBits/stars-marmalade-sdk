@@ -256,35 +256,47 @@ the bodie that owns the joint.
 
     <texture id="statspanel" image="wood_frame" />
 
-    <texture id="star">
-		<frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
-		<frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
-		<frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
-		<frame id="happy_03" image="Happy-star_kollision_03" />
+	  <texture id="star">
+		  <frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
+		  <frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
+		  <frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
+		  <frame id="happy_03" image="Happy-star_kollision_03" />
+		  
+		  <frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
+		  <frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
+		  <frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
+		  
+		  <frame id="followpath" image="Happy-star_followpath" />
+		  
+		  <frame id="block" image="red-star" />
+		  
+		  <frame id="hit" image="red-star" />
+		  
+		  <frame id="attack" image="red-star" />
+		  
+		  <!--
+		   <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
+		   <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />
+		   <frame id="09" image="Happy-star_kollision_09" duration="30" next="10" />
+		   <frame id="10" image="Happy-star_kollision_10" duration="30" next="09" />
+		   <frame id="11" image="Happy-star_kollision_11" duration="30" next="09" />
+		   <frame id="12" image="Happy-star_kollision_12" duration="30" next="09" />
+		   <frame id="13" image="Happy-star_kollision_13" duration="30" next="09" />
+		   <frame id="14" image="Happy-star_kollision_14" duration="30" next="09" />
+		   -->
+	  </texture>
 
-		<frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
-		<frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
-		<frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
-		
-		<frame id="followpath" image="Happy-star_followpath" />
-
-		<frame id="block" image="red-star" />
-
-		<frame id="hit" image="red-star" />
-
-		<frame id="attack" image="red-star" />
-
-      <!--
-      <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
-      <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />
-      <frame id="09" image="Happy-star_kollision_09" duration="30" next="10" />
-      <frame id="10" image="Happy-star_kollision_10" duration="30" next="09" />
-      <frame id="11" image="Happy-star_kollision_11" duration="30" next="09" />
-      <frame id="12" image="Happy-star_kollision_12" duration="30" next="09" />
-      <frame id="13" image="Happy-star_kollision_13" duration="30" next="09" />
-      <frame id="14" image="Happy-star_kollision_14" duration="30" next="09" />
-      -->
-    </texture>
+	  <texture id="spark">
+		  <frame id="01" image="spark_01" duration="100" next="02" />
+		  <frame id="02" image="spark_02" duration="100" next="03" />
+		  <frame id="03" image="spark_03" duration="100" next="04" />
+		  <frame id="04" image="spark_04" duration="100" next="05" />
+		  <frame id="05" image="spark_05" duration="100" next="06" />
+		  <frame id="06" image="spark_06" duration="100" next="07" />
+		  <frame id="07" image="spark_07" duration="200" next="08" />
+		  <frame id="08" image="spark_08" duration="200" next="09" />
+		  <frame id="09" image="spark_09" />
+	  </texture>
 
 	  <texture id="touch" image="touch" />
 	  <texture id="backdrop" image="backdrop" />

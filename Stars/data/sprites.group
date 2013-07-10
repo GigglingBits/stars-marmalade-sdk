@@ -40,6 +40,16 @@ CIwResGroup
 	sprites/button_arrow_left.png
 	sprites/button_arrow_right.png
 
+	sprites/spark_01.png
+	sprites/spark_02.png
+	sprites/spark_03.png
+	sprites/spark_04.png
+	sprites/spark_05.png
+	sprites/spark_06.png
+	sprites/spark_07.png
+	sprites/spark_08.png
+	sprites/spark_09.png
+
 	sprites/Happy-star_kollision_03.png
 	sprites/Happy-star_kollision_04.png
 	sprites/Happy-star_kollision_05.png
