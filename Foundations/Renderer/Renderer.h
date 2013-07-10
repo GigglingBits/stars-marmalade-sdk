@@ -13,9 +13,10 @@ class Renderer {
 public:
 	enum RenderingLayer {
 		eRenderingLayerBackground = -1,
-		eRenderingLayerHorizonVeryFar = 8,
-		eRenderingLayerHorizonFar = 7,
-		eRenderingLayerHorizonClose = 6,
+		eRenderingLayerHorizonVeryFar = 9,
+		eRenderingLayerHorizonFar = 8,
+		eRenderingLayerHorizonClose = 7,
+		eRenderingLayerBackgroundGameObjects = 6,
 		eRenderingLayerStaticGameObjects = 5,
 		eRenderingLayerDynamicGameObjects = 4,
 		eRenderingLayerForegroundObjects = 3,

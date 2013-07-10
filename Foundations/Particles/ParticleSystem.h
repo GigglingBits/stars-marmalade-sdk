@@ -8,19 +8,27 @@
 
 class ParticleSystem : public Renderable {
 private:
-	int m_iNextParticleDueInMs;
+	CIwFVec2 m_xPosition;
 	
 	typedef std::list<Particle*> ParticleList;
 	ParticleList m_xParticles;
 	
 	TextureTemplate m_xTextureTpl;
+
+	bool m_bIsStarted;
+	int m_iNextParticleDueInMs;
 	
 public:
 	ParticleSystem(const TextureTemplate& tpl);
 	~ParticleSystem();
 	
+	void Start();
+	void Stop();
+
+	void SetPosition(const CIwFVec2& pos);
+	
 private:
-	void CheckCreateParticles(uint16 elapsedms);
+	void CreateParticles(uint16 elapsedms);
 	Particle* CreateParticle();
 
 	void RemoveDeadParticles();

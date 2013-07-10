@@ -9,7 +9,7 @@
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL) {
+	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL) {
 	GetBody().SetBullet(true);
 	SetState(new RetractingState(*this));
 	SetState(new PeacefulState(*this));
@@ -25,6 +25,10 @@ Star::~Star() {
 		m_pxTouchTexture = NULL;
 	}
 
+	if (m_pxParticles) {
+		delete m_pxParticles;
+	}
+	
 	if (m_pxMotionState) {
 		delete m_pxMotionState;
 	}
@@ -70,6 +74,11 @@ void Star::OnUpdate(const FrameData& frame) {
 			distance				// the larger the distance, the larger the force to be applied
 			* 50.0f					// just a constant to amplify the effect
 			* GetMass());			// larger bodies require more force to move
+	}
+	
+	// particle system
+	if (m_pxParticles) {
+		m_pxParticles->Update(frame);
 	}
 	
 	// flip the texture according to movement
@@ -122,6 +131,10 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	Body::OnRender(renderer, frame);
+
+	if (m_pxParticles) {
+		m_pxParticles->Render(renderer, frame);
+	}
 }
 
 void Star::SetAnchorLine(float xpos) {
@@ -177,6 +190,21 @@ void Star::BeginAttack() {
 
 void Star::EndAttack() {
 	GetAttackState().EndAttack();
+}
+
+void Star::EnableParticles() {
+	if (!m_pxParticles) {
+		m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("button_play"));
+	}
+	if (m_pxParticles) {
+		m_pxParticles->Start();
+	}
+}
+
+void Star::DisableParticles() {
+	if (m_pxParticles) {
+		m_pxParticles->Stop();
+	}
 }
 
 

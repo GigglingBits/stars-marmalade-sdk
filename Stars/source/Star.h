@@ -3,6 +3,7 @@
 
 #include <queue>
 #include "Body.h"
+#include "ParticleSystem.h"
 
 class Star : public Body {
 public:
@@ -56,6 +57,8 @@ private:
 	
 	Texture* m_pxTouchTexture;
 
+	ParticleSystem* m_pxParticles;
+	
 private:
 	std::queue<CIwFVec2> m_xPath;
 	float m_fPathSpeed;
@@ -90,6 +93,9 @@ private:
 	void SetTextureFrame(std::string id);
 	
 	void ShowTextEffect(const std::string& text);
+	
+	void EnableParticles();
+	void DisableParticles();
 	
 	void SetState(MotionStateBase* newstate);
 	void SetState(AttackStateBase* newstate);

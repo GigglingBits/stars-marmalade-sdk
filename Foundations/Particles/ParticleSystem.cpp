@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(const TextureTemplate& tpl) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0) {
+ParticleSystem::ParticleSystem(const TextureTemplate& tpl) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f) {
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -10,8 +10,21 @@ ParticleSystem::~ParticleSystem() {
 	m_xParticles.clear();
 }
 
-void ParticleSystem::CheckCreateParticles(uint16 elapsedms) {
-	const int interval = 40;
+void ParticleSystem::Start() {
+	m_bIsStarted = true;
+}
+
+void ParticleSystem::Stop() {
+	m_bIsStarted = false;
+	
+}
+
+void ParticleSystem::SetPosition(const CIwFVec2& pos) {
+	m_xPosition = pos;
+}
+
+void ParticleSystem::CreateParticles(uint16 elapsedms) {
+	const int interval = 50;
 	
 	m_iNextParticleDueInMs -= elapsedms;
 	while (m_iNextParticleDueInMs < 0) {
@@ -21,8 +34,7 @@ void ParticleSystem::CheckCreateParticles(uint16 elapsedms) {
 }
 
 Particle* ParticleSystem::CreateParticle() {
-	CIwFVec2 pos(5.0f, 5.0f);
-	CIwFVec2 maxstartvelocity(20.0f, 20.0f);
+	CIwFVec2 maxstartvelocity(10.0f, 10.0f);
 	
 	// veocity
 	const int resolution = 1000;
@@ -32,7 +44,8 @@ Particle* ParticleSystem::CreateParticle() {
 		maxstartvelocity.x * x,
 		maxstartvelocity.y * y);
 	
-	Particle* particle = new Particle(m_xTextureTpl, pos, velocity);
+	Particle* particle = new Particle(m_xTextureTpl, m_xPosition, velocity);
+	particle->SetRederingLayer(Renderer::eRenderingLayerBackgroundGameObjects);
 	return particle;
 }
 
@@ -50,7 +63,9 @@ void ParticleSystem::RemoveDeadParticles() {
 
 void ParticleSystem::OnUpdate(const FrameData& frame) {
 	RemoveDeadParticles();
-	CheckCreateParticles(frame.GetSimulatedDurationMs());
+	if (m_bIsStarted) {
+		CreateParticles(frame.GetSimulatedDurationMs());
+	}
 	
 	for (ParticleList::iterator i = m_xParticles.begin(); i != m_xParticles.end(); i++) {
 		if (*i) {

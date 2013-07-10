@@ -9,6 +9,7 @@
 void Star::RetractingState::Initialize() {
 	m_rxContext.ShowTextEffect("Retracting");
 	m_rxContext.SetMotionTextureFrame("happy");
+	m_rxContext.DisableParticles();
 }
 
 void Star::RetractingState::FollowPath() {
@@ -46,6 +47,7 @@ void Star::RetractingState::Update(uint16 timestep) {
 void Star::FollowState::Initialize() {
 	m_rxContext.ShowTextEffect("Following");
 	m_rxContext.SetMotionTextureFrame("followpath");
+	m_rxContext.EnableParticles();
 }
 
 void Star::FollowState::FollowPath() {
@@ -53,6 +55,7 @@ void Star::FollowState::FollowPath() {
 }
 
 void Star::FollowState::Update(uint16 timestep) {
+	// end condition
 	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
 	if (path.empty()) {
 		m_rxContext.SetState(new RetractingState(m_rxContext));
@@ -82,7 +85,11 @@ void Star::FollowState::Update(uint16 timestep) {
 	
 	// move to new place
 	m_rxContext.MoveDragging(dragtarget);
-	
+	if (m_rxContext.m_pxParticles) {
+		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
+	}
+ 	
 	// draw effect
-	m_rxContext.ShowEffect("smoke_plume");
+	//m_rxContext.ShowEffect("smoke_plume");
+	
 }
