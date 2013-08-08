@@ -254,7 +254,10 @@ the bodie that owns the joint.
     <texture id="shade" colour="0x77343423" />
     <texture id="aimingdevice" image="crosshair" />
 
-    <texture id="statspanel" image="wood_frame" />
+	  <texture id="statspanel" image="progress_bar" />
+
+	  <texture id="stardustvial" image="stardust_vial" />
+	  <texture id="stardust" colour="0xaacceeff" />
 
 	  <texture id="star">
 		  <frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />

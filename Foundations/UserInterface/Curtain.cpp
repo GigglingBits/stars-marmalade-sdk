@@ -6,6 +6,8 @@ Curtain::Curtain(uint32 alpha, uint32 fadetime) {
 	m_iCountdown = 0;
 	m_uiAlpha = alpha;
 	m_uiFadeTime = fadetime;
+	
+	SetRederingLayer(Renderer::eRenderingLayerFront);
 }
 
 bool Curtain::IsClosed() {

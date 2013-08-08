@@ -50,7 +50,7 @@ void LevelStatsPanel::OnUpdate(const FrameData& frame) {
 	}
 
 	if (m_pxStar) {
-		m_pxBackground->Update(frame.GetRealDurationMs());
+		m_pxStar->Update(frame.GetRealDurationMs());
 	}
 }
 

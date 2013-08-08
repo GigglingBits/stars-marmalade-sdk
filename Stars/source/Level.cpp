@@ -58,6 +58,7 @@ void Level::Initialize() {
 	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
 	
 	m_xStatsPanel.Initialize();
+	m_xDustCollector.Initialize();
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
 
@@ -205,6 +206,11 @@ void Level::OnUpdate(const FrameData& frame) {
 	float progress = m_xGame.GetCompletionDegree();
 	m_xStatsPanel.SetProgress(progress);
 	m_xStatsPanel.Update(frame);
+
+	// dust collector
+	// todo: show how much dust was collected
+	m_xDustCollector.SetProgress(progress);
+	m_xDustCollector.Update(frame);
 	
 	// other
 	if (m_pxBackdrop) {
@@ -219,6 +225,7 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xBackground.Render(renderer, frame);
 	m_xGame.Render(renderer, frame);
 
+	m_xDustCollector.Render(renderer, frame);
 	m_xStatsPanel.Render(renderer, frame);
 	m_xAppPanel.Render(renderer, frame);
 	

@@ -12,6 +12,8 @@ Button::Button(ButtonCommandId cmdid, s3eKey key, long userdata)
 
 	m_xButtonVerts.SetRect(m_xButton.rect);
 
+	SetRederingLayer(Renderer::eRenderingLayerHud);
+		
 	m_xButton.PressedEvent.AddListener<Button>(this, &Button::PressedEventHandler);
 	m_xButton.ReleasedEvent.AddListener<Button>(this, &Button::ReleasedEventHandler);
 	

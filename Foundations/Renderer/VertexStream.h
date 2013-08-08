@@ -49,6 +49,22 @@ public:
 		}
 	}
 
+	void ClosePolygon() {
+		if (!m_axVerts || m_iVertCount < 2) {
+			return;
+		}
+		
+		TVec* verts = m_axVerts;
+		m_axVerts = new TVec[m_iVertCount + 1];
+		for (int i = 0; i < m_iVertCount; i++) {
+			m_axVerts[i] = verts[i];
+		}
+		m_axVerts[m_iVertCount] = verts[0];
+		m_iVertCount++;
+		
+		delete [] verts;
+	}
+	
 	VertexStream<TVec>& operator=(const VertexStream<TVec>& vertstream) {
 		if (&vertstream == this) {
 			return *this;
@@ -71,7 +87,7 @@ protected:
 		verts[3].y = y;
 		SetVerts(verts, 4, true);
 	}
-
+	
 private:
 	void ClearVerts() {
 		if (m_axVerts) {

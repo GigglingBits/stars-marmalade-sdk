@@ -40,6 +40,9 @@ CIwResGroup
 	sprites/button_arrow_left.png
 	sprites/button_arrow_right.png
 
+	sprites/progress_bar.png
+	sprites/stardust_vial.png
+
 	sprites/spark_01.png
 	sprites/spark_02.png
 	sprites/spark_03.png
@@ -141,6 +144,4 @@ CIwResGroup
 	sprites/smoke_right_0008.png
 	sprites/smoke_right_0009.png
 	sprites/smoke_right_0010.png
-
-	sprites/wood_frame.png
 }

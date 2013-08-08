@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "LevelInteractor.h"
 #include "LevelStatsPanel.h"
+#include "LevelDustCollector.h"
 #include "ButtonEx.h"
 
 #define LEVEL_COMPLETION_DELAY 3000
@@ -30,6 +31,7 @@ private:
 	
 	LevelInteractor m_xInteractor;
 	LevelStatsPanel m_xStatsPanel;
+	LevelDustCollector m_xDustCollector;
 
 	Texture* m_pxBackdrop;
 	VertexStreamScreen m_xBackdropShape;
