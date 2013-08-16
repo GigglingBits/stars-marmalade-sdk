@@ -2,9 +2,10 @@
 #include "InputManager.h"
 #include "SoundEngine.h"
 #include "Buff.h"
+#include "GameFoundation.h"
 
 /////////////////////////////////////////////////////////////
-// Idle
+// Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
 	m_rxContext.ShowTextEffect("Retracting");
@@ -54,10 +55,22 @@ void Star::FollowState::FollowPath() {
 	m_rxContext.SetState(new FollowState(m_rxContext));
 }
 
+void Star::FollowState::IncrementMultiplier() {
+	if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
+		game->IncrementPointMultiplier();
+	}
+}
+
 void Star::FollowState::Update(uint16 timestep) {
 	// end condition
 	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
 	if (path.empty()) {
+		// reset the multiplier
+		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
+			game->ResetPointMultiplier();
+		}
+
+		// transition to next state
 		m_rxContext.SetState(new RetractingState(m_rxContext));
 		return;
 	}
@@ -87,9 +100,5 @@ void Star::FollowState::Update(uint16 timestep) {
 	m_rxContext.MoveDragging(dragtarget);
 	if (m_rxContext.m_pxParticles) {
 		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
-	}
- 	
-	// draw effect
-	//m_rxContext.ShowEffect("smoke_plume");
-	
+	}	
 }

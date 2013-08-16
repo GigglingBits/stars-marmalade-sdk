@@ -17,6 +17,7 @@ public:
 		
 		virtual void Initialize() {};
 		virtual void FollowPath() {};
+		virtual void IncrementMultiplier() {};
 		
 		virtual void Update(uint16 timestep) {};
 	};

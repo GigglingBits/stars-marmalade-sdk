@@ -55,11 +55,14 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 	if (otherbody.GetTypeName() == Buff::TypeName()) {
 		GetHealthManager().RenewLife();
 		otherbody.GetHealthManager().Kill();
+		if (m_pxMotionState) {
+			m_pxMotionState->IncrementMultiplier();
+		}
 	} else if (otherbody.GetTypeName() == Target::TypeName()) {
 		GetHealthManager().RenewLife();
 	} else {
 		GetHealthManager().Injure(5.0f);
-	} 	
+	}
 }
 
 void Star::OnUpdate(const FrameData& frame) {

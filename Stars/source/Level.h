@@ -6,12 +6,11 @@
 #include "AppPanel.h"
 #include "GameFoundation.h"
 #include "LevelBackground.h"
+#include "LevelHud.h"
 #include "Star.h"
 #include "Camera.h"
 #include "LevelInteractor.h"
 #include "LevelStatsPanel.h"
-#include "LevelDustCollector.h"
-#include "ButtonEx.h"
 
 #define LEVEL_COMPLETION_DELAY 3000
 
@@ -25,13 +24,10 @@ private:
 	GameFoundation m_xGame;
 
 	AppPanel m_xAppPanel;
+	LevelHud m_xHud;
 
-	ButtonEx m_xButtonBlock;
-	ButtonEx m_xButtonAttack;
-	
 	LevelInteractor m_xInteractor;
 	LevelStatsPanel m_xStatsPanel;
-	LevelDustCollector m_xDustCollector;
 
 	Texture* m_pxBackdrop;
 	VertexStreamScreen m_xBackdropShape;
@@ -60,9 +56,6 @@ private:
 
 	void CreateHud();
 	void DestroyHud();
-
-	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args);
 
 	float GetStarMoveForce();
 	float GetStarRestForce();

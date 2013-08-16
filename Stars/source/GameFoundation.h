@@ -48,6 +48,8 @@ private:
 	CompletionInfo m_xCompletionInfo;
 	Star* m_pxStar;
 
+	int m_iPointsMultiplier;
+	
 public:
 	GameFoundation(const CIwFVec2& worldsize);
 	~GameFoundation();
@@ -80,6 +82,11 @@ public:
 	bool IsCompleted();
 	const CompletionInfo& GetCompletionInfo();
 	float GetCompletionDegree();
+	
+	// points
+	int GetPointMultiplier();
+	void IncrementPointMultiplier();
+	void ResetPointMultiplier();
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);

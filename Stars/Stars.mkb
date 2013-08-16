@@ -107,6 +107,10 @@ files {
 	LevelBackground.cpp
 	LevelCompletion.h
 	LevelCompletion.cpp
+	LevelHud.h
+	LevelHud.cpp
+	LevelHudText.h
+	LevelHudText.cpp
 	LevelDustCollector.h
 	LevelDustCollector.cpp
 	LevelStatsPanel.h
