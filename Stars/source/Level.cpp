@@ -9,9 +9,9 @@
 #include "SoundEngine.h"
 #include "FactoryManager.h"
 
-Level::Level(const CIwFVec2& worldsize, std::string background) :
+Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string background) :
 	m_xWorldSize(worldsize),
-	m_xGame(worldsize), 
+	m_xGame(dustrequirement, worldsize),
 	m_xBackground(background, m_xGame), 
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),

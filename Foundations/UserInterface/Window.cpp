@@ -2,16 +2,21 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Window::Window() : m_xScreenSize(CIwSVec2::g_Zero) {
+Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false) {
 	m_iScreenPpcm = DeviceInfo::GetInfo().GetScreenPpcm();
+}
+
+void Window::InvalidateLayout() {
+	m_bIsLayoutDone = false;
 }
 
 void Window::Update(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	if (frame.GetScreensize() != m_xScreenSize) {
+	if (!(m_bIsLayoutDone && frame.GetScreensize() == m_xScreenSize)) {
 		m_xScreenSize = frame.GetScreensize();
 		OnDoLayout(m_xScreenSize);
+		m_bIsLayoutDone = true;
 	}
 
 	Renderable::Update(frame);

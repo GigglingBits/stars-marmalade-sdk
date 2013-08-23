@@ -7,6 +7,7 @@ class Window : public Renderable {
 private:
 	int m_iScreenPpcm;
 	CIwSVec2 m_xScreenSize;
+	bool m_bIsLayoutDone;
 
 public:
 	Window();
@@ -14,6 +15,8 @@ public:
 	virtual void Initialize() = 0;
 	virtual void Update(const FrameData& frame);
 
+	void InvalidateLayout();
+	
 protected:
 	int GetScreenExtents();
 

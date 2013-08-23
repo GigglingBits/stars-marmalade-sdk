@@ -290,9 +290,11 @@ void Test::RunLevelTest() {
 	filenames.push_back("test.xml");
 	FactoryManager::InitializeFromFiles(filenames);
 
-	Page* p = new Level(CIwFVec2(15.0f, 10.0f), "world_earth_background");
+	Page* p = new Level(CIwFVec2(15.0f, 10.0f), 0.5, "world_earth_background");
 	CIwSVec2 pos(IwGxGetDeviceWidth(), IwGxGetDisplayHeight());
-	p->Update(FrameData());
+	FrameData frame;
+	frame.SetScreenSize(480, 320);
+	p->Update(frame);
 
 	// leaks because the renderer uses the GxCache, which is 
 	// garbage collected after every rendering to screen.

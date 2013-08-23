@@ -37,6 +37,12 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	m_xButtonBlock.SetPosition(rect);
 	rect.y += rect.h + spacing;
 	m_xButtonAttack.SetPosition(rect);
+	
+	// dust collector
+	const int w = 80, h = screensize.y - w - w - 200;
+	int x = w / 2, y = w;
+	rect.Make(x, y, w, h);
+	m_xDustCollector.SetPosition(rect);
 }
 
 void LevelHud::OnUpdate(const FrameData& frame) {
@@ -47,17 +53,18 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xButtonAttack.Update(frame);
 	
 	// dust collector
-	// todo: show how much dust was collected
-	m_xDustCollector.SetProgress(0.55f);
+	m_xDustCollector.SetProgress(m_rxGame.GetDustCounter().GetDustFillPercent());
 	m_xDustCollector.Update(frame);
 	
-	// update health value
-	int multiplier = m_rxGame.GetPointMultiplier();
+	// updte count of collected nuggets
+	int queuedcount = m_rxGame.GetDustCounter().GetQueuedDustCount();
+	float queuedamount = m_rxGame.GetDustCounter().GetQueuedDustAmount();
 	const int bufsize = 32;
 	char buf[bufsize];
-	snprintf(buf, bufsize, "Mult: %i", multiplier);
+	snprintf(buf, bufsize, "%i x %.0f", queuedcount, queuedamount);
 	m_xMultiplierText.SetText(std::string(buf));
 
+	
 	// others
 	m_xMultiplierText.Update(frame);
 }

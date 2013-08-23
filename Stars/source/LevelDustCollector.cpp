@@ -6,7 +6,8 @@
 LevelDustCollector::LevelDustCollector() : 
 	m_pxVial(NULL),
 	m_pxDust(NULL),
-	m_fProgress(0.0f) {
+	m_fProgress(0.0f),
+	m_xCollectorShape(0, 0, 1, 1) {
 	IW_CALLSTACK_SELF;
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
@@ -25,6 +26,11 @@ void LevelDustCollector::Initialize() {
 	m_pxDust = FactoryManager::GetTextureFactory().Create("stardust");
 }
 
+void LevelDustCollector::SetPosition(const CIwRect& rect) {
+	m_xCollectorShape = rect;
+	InvalidateLayout();
+}
+
 void LevelDustCollector::UpdateStarShape() {
 	int progress = (int)(m_fProgress * (float)(m_xCollectorShape.h));
 	m_xDustShape.SetRect(
@@ -38,10 +44,12 @@ void LevelDustCollector::UpdateStarShape() {
 void LevelDustCollector::SetProgress(float progress) {
 	IW_CALLSTACK_SELF;
 	IwAssert(MYAPP, progress >= 0.0f && progress <= 1.0f);
+	progress = std::min<float>(progress, 1.0f);
 
-	m_fProgress = progress;
-
-	UpdateStarShape();
+	if (m_fProgress != progress) {
+		m_fProgress = progress;
+		UpdateStarShape();
+	}
 }
 
 void LevelDustCollector::OnUpdate(const FrameData& frame) {
@@ -71,11 +79,6 @@ void LevelDustCollector::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void LevelDustCollector::OnDoLayout(const CIwSVec2& screensize) {
-	const int w = 40, h = screensize.y - w - w;
-	int x = w / 2, y = w;
-
-	m_xCollectorShape.Make(x, y, w, h);
 	m_xVialShape.SetRect(m_xCollectorShape);
-
 	UpdateStarShape();
 }

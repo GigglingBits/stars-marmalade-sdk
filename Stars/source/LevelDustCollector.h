@@ -22,6 +22,7 @@ public:
 
 	void Initialize();
 
+	void SetPosition(const CIwRect& rect);
 	void SetProgress(float progress);
 
 protected:

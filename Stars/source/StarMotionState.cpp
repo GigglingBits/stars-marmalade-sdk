@@ -57,7 +57,7 @@ void Star::FollowState::FollowPath() {
 
 void Star::FollowState::IncrementMultiplier() {
 	if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-		game->IncrementPointMultiplier();
+		game->GetDustCounter().EnqueueDust(100);
 	}
 }
 
@@ -67,7 +67,7 @@ void Star::FollowState::Update(uint16 timestep) {
 	if (path.empty()) {
 		// reset the multiplier
 		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-			game->ResetPointMultiplier();
+			game->GetDustCounter().CommitDustQueue();
 		}
 
 		// transition to next state

@@ -4,16 +4,14 @@
 #include "FactoryManager.h"
 #include "SoundEngine.h"
 
-GameFoundation::GameFoundation(const CIwFVec2& worldsize) 
-: m_xWorldSize(worldsize), m_xRayCaster(m_xWorld), m_pxStar(NULL) {
+GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
+: m_xWorldSize(worldsize), m_xRayCaster(m_xWorld), m_pxStar(NULL), m_xDust(dustrequirement) {
 
 	m_xContactListener.CollisionEvent.AddListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
 	m_xWorld.SetContactListener(&m_xContactListener);
 
 	m_xBodyTimer.Elapsed.AddListener(this, &GameFoundation::BodyTimerEventHandler);
 	m_xBodyTimer.LastEventFired.AddListener(this, &GameFoundation::BodyTimerClearedEventHandler);
-	
-	ResetPointMultiplier();
 }
 
 GameFoundation::~GameFoundation() {
@@ -185,16 +183,8 @@ bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 	return m_xRayCaster.RayHitTest(raystart, rayend);
 }
 
-int GameFoundation::GetPointMultiplier() {
-	return m_iPointsMultiplier;
-}
-
-void GameFoundation::IncrementPointMultiplier() {
-	m_iPointsMultiplier++;
-}
-
-void GameFoundation::ResetPointMultiplier() {
-	m_iPointsMultiplier = 1;
+DustCounter& GameFoundation::GetDustCounter() {
+	return m_xDust;
 }
 
 void GameFoundation::Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity) {

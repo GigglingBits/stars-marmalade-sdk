@@ -12,6 +12,7 @@
 #include "EventTimer.h"
 #include "ContactListener.h"
 #include "RayCaster.h"
+#include "DustCounter.h"
 
 class GameFoundation : public Renderable {
 public:
@@ -48,16 +49,15 @@ private:
 	CompletionInfo m_xCompletionInfo;
 	Star* m_pxStar;
 
-	int m_iPointsMultiplier;
+	DustCounter m_xDust;
 	
 public:
-	GameFoundation(const CIwFVec2& worldsize);
+	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
 	~GameFoundation();
 
 	// sprite management
 	void Add(Sprite* sprite);
 	void Add(Body* body);
-
 	void Add(uint16 delay, const std::string& body, float ypos);
 
 	Star* GetStar();
@@ -83,10 +83,8 @@ public:
 	const CompletionInfo& GetCompletionInfo();
 	float GetCompletionDegree();
 	
-	// points
-	int GetPointMultiplier();
-	void IncrementPointMultiplier();
-	void ResetPointMultiplier();
+	// dust
+	DustCounter& GetDustCounter();
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);

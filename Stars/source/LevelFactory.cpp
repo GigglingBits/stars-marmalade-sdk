@@ -13,17 +13,20 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	std::string levelname((pc = (char*)node->Attribute("name")) ? pc : "");
 	std::string background((pc = (char*)node->Attribute("background")) ? pc : "");
 
-	double width, height;
+	double width, height, dustrequirement;
 	node->Attribute("width", &width);
 	node->Attribute("height", &height);
+	node->Attribute("dustrequirement", &dustrequirement);
 
 	IwAssertMsg(MYAPP, !levelname.empty(), ("No level name is defined."));
 	IwAssertMsg(MYAPP, std::abs(width) > 0.1f, ("Level is not wide enough!"));
 	IwAssertMsg(MYAPP, std::abs(height) > 0.1f, ("Level is not tall enough!"));
+	IwAssertMsg(MYAPP, dustrequirement > 0.0f, ("Level does not have any dust requirements! Should be more than 0.0."));
 
 	conf.SetName(levelname);
 	conf.SetBackground(background);
 	conf.SetSize((float)width, (float)height);
+	conf.SetDustRequirement((float)dustrequirement);
 
 	// add level elements
 	TiXmlElement* subnode = node->FirstChildElement("sprite");
@@ -59,7 +62,7 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 	LevelTemplate leveltpl = conf;
 
 	// create level instance
-	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetBackground());
+	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement(), leveltpl.GetBackground());
 
 	// populate level
 	GameFoundation& game = level->GetGameFoundation();

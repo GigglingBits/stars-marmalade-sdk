@@ -9,6 +9,10 @@ std::string LevelTemplate::GetName() {
 	return m_sLevelName;
 }
 
+void LevelTemplate::SetDustRequirement(float amount) {
+	m_fDustRequirement = amount;
+}
+
 void LevelTemplate::SetBackground(std::string name) {
 	m_sBackground = name;
 }
@@ -24,7 +28,11 @@ void LevelTemplate::SetSize(float width, float height) {
 CIwFVec2 LevelTemplate::GetSize() {
 	return m_xSize;
 }
-	
+
+float LevelTemplate::GetDustRequirement() {
+	return m_fDustRequirement;
+}
+
 void LevelTemplate::AddElement(std::string bodyname, float position, uint16 delay) {
 	LevelElement element;
 	element.BodyName = bodyname;

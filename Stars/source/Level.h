@@ -35,7 +35,7 @@ private:
 	int m_iCompletionTimer;
 
 public:
-	Level(const CIwFVec2& worldsize, std::string background);
+	Level(const CIwFVec2& worldsize, float dustrequirement, std::string background);
 	virtual ~Level();
 
 	virtual void Initialize();
