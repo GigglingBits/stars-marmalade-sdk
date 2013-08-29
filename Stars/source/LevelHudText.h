@@ -5,6 +5,9 @@
 
 class LevelHudText : public Window {
 private:
+	CIwSVec2 m_xPosition;
+	CIwSVec2 m_xSize;
+
 	std::string m_sText;
 	
 public:
@@ -13,6 +16,9 @@ public:
 
 	virtual void Initialize();
 
+	void SetPosition(const CIwSVec2 pos);
+	void SetSize(const CIwSVec2 size);
+	
 	void SetText(const std::string& s);
 	
 protected:

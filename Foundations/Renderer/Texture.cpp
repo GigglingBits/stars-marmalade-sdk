@@ -157,7 +157,7 @@ void Texture::Update(uint16 timestep) {
 		if (m_iFrameElapsed >= m_rxCurrentFrame.duration) {
 			m_iFrameElapsed -= m_rxCurrentFrame.duration;
 			SelectFrame(m_rxCurrentFrame.nextid);
-			IwDebugTraceLinePrintf("Animated: Switched to frame '%s'", m_rxCurrentFrame.nextid.c_str());
+			//IwDebugTraceLinePrintf("Animated: Switched to frame '%s'", m_rxCurrentFrame.nextid.c_str());
 		}
 	} else {
 		m_iFrameElapsed = 0;

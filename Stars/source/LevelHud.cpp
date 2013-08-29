@@ -43,6 +43,13 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	int x = w / 2, y = w;
 	rect.Make(x, y, w, h);
 	m_xDustCollector.SetPosition(rect);
+	
+	// scores
+	m_xQueuedCount.SetPosition(CIwSVec2(250, 200));
+	m_xQueuedCount.SetSize(CIwSVec2(100, 50));
+
+	m_xQueuedAmount.SetPosition(CIwSVec2(350, 200));
+	m_xQueuedAmount.SetSize(CIwSVec2(100, 50));
 }
 
 void LevelHud::OnUpdate(const FrameData& frame) {
@@ -56,17 +63,12 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xDustCollector.SetProgress(m_rxGame.GetDustCounter().GetDustFillPercent());
 	m_xDustCollector.Update(frame);
 	
-	// updte count of collected nuggets
-	int queuedcount = m_rxGame.GetDustCounter().GetQueuedDustCount();
-	float queuedamount = m_rxGame.GetDustCounter().GetQueuedDustAmount();
-	const int bufsize = 32;
-	char buf[bufsize];
-	snprintf(buf, bufsize, "%i x %.0f", queuedcount, queuedamount);
-	m_xMultiplierText.SetText(std::string(buf));
+	// collected nuggets
+	m_xQueuedCount.SetNumber(m_rxGame.GetDustCounter().GetQueuedDustCount());
+	m_xQueuedCount.Update(frame);
 
-	
-	// others
-	m_xMultiplierText.Update(frame);
+	m_xQueuedAmount.SetRollingNumber(m_rxGame.GetDustCounter().GetQueuedDustAmount());
+	m_xQueuedAmount.Update(frame);
 }
 
 void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -77,7 +79,8 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	m_xDustCollector.Render(renderer, frame);
 
-	m_xMultiplierText.Render(renderer, frame);
+	m_xQueuedCount.Render(renderer, frame);
+	m_xQueuedAmount.Render(renderer, frame);
 }
 
 void LevelHud::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {

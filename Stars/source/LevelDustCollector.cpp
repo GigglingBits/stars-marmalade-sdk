@@ -43,7 +43,6 @@ void LevelDustCollector::UpdateStarShape() {
 
 void LevelDustCollector::SetProgress(float progress) {
 	IW_CALLSTACK_SELF;
-	IwAssert(MYAPP, progress >= 0.0f && progress <= 1.0f);
 	progress = std::min<float>(progress, 1.0f);
 
 	if (m_fProgress != progress) {

@@ -12,7 +12,7 @@
 #include "LevelInteractor.h"
 #include "LevelStatsPanel.h"
 
-#define LEVEL_COMPLETION_DELAY 3000
+#define LEVEL_COMPLETION_DELAY 10000
 
 class Level : public Page {
 private:

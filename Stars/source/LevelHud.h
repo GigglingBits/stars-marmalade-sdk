@@ -5,7 +5,7 @@
 #include "GameFoundation.h"
 #include "ButtonEx.h"
 #include "LevelDustCollector.h"
-#include "LevelHudText.h"
+#include "LevelHudNumber.h"
 
 class LevelHud : public Window {
 private:
@@ -16,7 +16,8 @@ private:
 	
 	LevelDustCollector m_xDustCollector;
 
-	LevelHudText m_xMultiplierText;
+	LevelHudNumber m_xQueuedCount;
+	LevelHudNumber m_xQueuedAmount;
 	
 public:
 	LevelHud(GameFoundation& game);

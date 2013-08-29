@@ -113,6 +113,8 @@ files {
 	LevelHud.cpp
 	LevelHudText.h
 	LevelHudText.cpp
+	LevelHudNumber.h
+	LevelHudNumber.cpp
 	LevelDustCollector.h
 	LevelDustCollector.cpp
 	LevelStatsPanel.h

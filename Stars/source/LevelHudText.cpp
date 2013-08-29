@@ -12,6 +12,16 @@ void LevelHudText::Initialize() {
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
 
+void LevelHudText::SetPosition(const CIwSVec2 pos) {
+	m_xPosition = pos;
+	InvalidateLayout();
+}
+
+void LevelHudText::SetSize(const CIwSVec2 size) {
+	m_xSize = size;
+	InvalidateLayout();
+}
+
 void LevelHudText::SetText(const std::string &s) {
 	m_sText = s;
 }
@@ -29,8 +39,8 @@ void LevelHudText::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	renderer.DrawText(
 		m_sText,
-		CIwSVec2(150, 50),
-		CIwSVec2(250, 50),
+		m_xPosition,
+		m_xSize,
 		Renderer::eFontTypeLarge,
 		0xffffffff);
 }
