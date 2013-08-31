@@ -42,7 +42,9 @@
     <texture id="button_toggle_hud" colour="0xff343423" />
     <texture id="button_restart" colour="0xff343423" />
     <texture id="button_reload" colour="0xff343423" />
-    <texture id="button_quit" colour="0xff343423" />
+	  <texture id="button_quit" colour="0xff343423" />
+
+	  <texture id="number_back" image="number_back" />
   </textures>
 
   <fixtures>

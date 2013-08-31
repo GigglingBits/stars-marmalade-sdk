@@ -29,6 +29,8 @@ void LevelHudNumber::UpdateText() {
 void LevelHudNumber::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
+	LevelHudText::OnUpdate(frame);
+	
 	// needs rolling?
 	if (m_lDisplayedNumber != m_lInternalNumber) {
 		// time exceeded?

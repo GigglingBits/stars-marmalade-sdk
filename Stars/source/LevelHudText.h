@@ -2,6 +2,7 @@
 #define __LEVELHUDTEXT_H__
 
 #include "Window.h"
+#include "Texture.h"
 
 class LevelHudText : public Window {
 private:
@@ -9,6 +10,9 @@ private:
 	CIwSVec2 m_xSize;
 
 	std::string m_sText;
+
+	VertexStreamScreen m_xBackgroundShape;
+	Texture* m_pxBackground;
 	
 public:
 	LevelHudText();
@@ -20,11 +24,16 @@ public:
 	void SetSize(const CIwSVec2 size);
 	
 	void SetText(const std::string& s);
-	
+
+	void SetBackground(const std::string& texturename);
+
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+	
+private:
+	void SetBackgroundShape();
 };
 
 #endif

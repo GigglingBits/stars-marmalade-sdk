@@ -45,9 +45,11 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	m_xDustCollector.SetPosition(rect);
 	
 	// scores
+	m_xCollectedAmount.SetBackground("number_back");
 	m_xCollectedAmount.SetPosition(CIwSVec2(250, 200));
 	m_xCollectedAmount.SetSize(CIwSVec2(100, 50));
 	
+	m_xQueuedAmount.SetBackground("number_back");
 	m_xQueuedAmount.SetPosition(CIwSVec2(350, 200));
 	m_xQueuedAmount.SetSize(CIwSVec2(100, 50));
 }

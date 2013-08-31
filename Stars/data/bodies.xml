@@ -256,6 +256,8 @@ the bodie that owns the joint.
 
 	  <texture id="statspanel" image="progress_bar" />
 
+	  <texture id="number_back" image="number_back" />
+
 	  <texture id="stardustvial" image="stardust_vial" />
 	  <texture id="stardust" colour="0xeecceeff" />
 
