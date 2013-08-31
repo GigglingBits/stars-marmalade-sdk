@@ -158,6 +158,29 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 	}
 }
 
+float GameFoundation::GetDustFillPercent() {
+	return m_xDust.GetDustFillPercent();
+}
+
+void GameFoundation::QueueDust(const CIwFVec2& pos, int amount) {
+	int multipliedamount = (m_xDust.GetQueuedDustCount() + 1) * amount;
+	m_xDust.EnqueueDust(multipliedamount);
+	AddSplashNumber(multipliedamount, pos);
+}
+
+void GameFoundation::CommitDust(const CIwFVec2& pos) {
+	m_xDust.CommitDustQueue();
+	AddSplashNumber(m_xDust.GetQueuedDustAmount(), pos);
+}
+
+float GameFoundation::GetDustQueuedAmount() {
+	return m_xDust.GetQueuedDustAmount();
+}
+
+float GameFoundation::GetDustFillAmount() {
+	return m_xDust.GetCollectedDustAmount();
+}
+
 bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
 	const float limit = 30.0f; // meters
 
@@ -169,22 +192,29 @@ bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
 	return (std::abs(pos.x) + limit > bounds.x || std::abs(pos.y) + limit > bounds.y);
 }
 
+void GameFoundation::AddSplashNumber(long number, const CIwFVec2& position) {
+	IW_CALLSTACK_SELF;
+	
+	const int bufsize = 32;
+	char buf[bufsize];
+	snprintf(buf, bufsize, "%li", number);
+
+	AddSplashText(buf, position);
+}
+
 void GameFoundation::AddSplashText(std::string text, const CIwFVec2& position) {
 	IW_CALLSTACK_SELF;
-
+	
 	SplashText* p = (SplashText*)FactoryManager::GetEffectFactory().Create("text");
 	p->SetText(text);
 	p->SetPosition(position);
 	p->SetVelocity(CIwFVec2(0.0f, 0.8f));
+
 	Add(p);
 }
 
 bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 	return m_xRayCaster.RayHitTest(raystart, rayend);
-}
-
-DustCounter& GameFoundation::GetDustCounter() {
-	return m_xDust;
 }
 
 void GameFoundation::Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity) {

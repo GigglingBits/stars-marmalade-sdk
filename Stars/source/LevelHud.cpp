@@ -45,9 +45,9 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	m_xDustCollector.SetPosition(rect);
 	
 	// scores
-	m_xQueuedCount.SetPosition(CIwSVec2(250, 200));
-	m_xQueuedCount.SetSize(CIwSVec2(100, 50));
-
+	m_xCollectedAmount.SetPosition(CIwSVec2(250, 200));
+	m_xCollectedAmount.SetSize(CIwSVec2(100, 50));
+	
 	m_xQueuedAmount.SetPosition(CIwSVec2(350, 200));
 	m_xQueuedAmount.SetSize(CIwSVec2(100, 50));
 }
@@ -60,14 +60,16 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xButtonAttack.Update(frame);
 	
 	// dust collector
-	m_xDustCollector.SetProgress(m_rxGame.GetDustCounter().GetDustFillPercent());
+	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
 	m_xDustCollector.Update(frame);
 	
 	// collected nuggets
-	m_xQueuedCount.SetNumber(m_rxGame.GetDustCounter().GetQueuedDustCount());
-	m_xQueuedCount.Update(frame);
-
-	m_xQueuedAmount.SetRollingNumber(m_rxGame.GetDustCounter().GetQueuedDustAmount());
+	const int rolltime = 1500;
+	
+	m_xCollectedAmount.SetRollingNumber(m_rxGame.GetDustFillAmount(), rolltime);
+	m_xCollectedAmount.Update(frame);
+	
+	m_xQueuedAmount.SetRollingNumber(m_rxGame.GetDustQueuedAmount(), rolltime);
 	m_xQueuedAmount.Update(frame);
 }
 
@@ -79,7 +81,7 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	m_xDustCollector.Render(renderer, frame);
 
-	m_xQueuedCount.Render(renderer, frame);
+	m_xCollectedAmount.Render(renderer, frame);
 	m_xQueuedAmount.Render(renderer, frame);
 }
 

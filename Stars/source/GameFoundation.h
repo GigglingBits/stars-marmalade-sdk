@@ -75,17 +75,24 @@ public:
 	bool StarHitTest(CIwFVec2 position);
 
 	// managed effects
+	void AddSplashNumber(long number, const CIwFVec2& position);
 	void AddSplashText(std::string text, const CIwFVec2& position);
 
+	// gameplay
+	void QueueDust(const CIwFVec2& pos, int amount);
+	void CommitDust(const CIwFVec2& pos);
+
+	float GetDustQueuedAmount();
+
+	float GetDustFillAmount();
+	float GetDustFillPercent();
+	
 	// game state
 	CIwFVec2 GetGravity();
 	bool IsCompleted();
 	const CompletionInfo& GetCompletionInfo();
 	float GetCompletionDegree();
 	
-	// dust
-	DustCounter& GetDustCounter();
-
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

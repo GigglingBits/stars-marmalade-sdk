@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHudNumber::LevelHudNumber() : m_lInternalNumber(0), m_lDisplayedNumber(0), m_lRemainingRollTime(0) {
+LevelHudNumber::LevelHudNumber() : m_lInternalNumber(0), m_lDisplayedNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
 	UpdateText();
 }
 
@@ -11,10 +11,11 @@ void LevelHudNumber::SetNumber(long number) {
 	m_lRemainingRollTime = 0;
 }
 
-void LevelHudNumber::SetRollingNumber(long number) {
+void LevelHudNumber::SetRollingNumber(long number, int milliseconds) {
 	if (m_lInternalNumber != number) {
 		m_lInternalNumber = number;
-		m_lRemainingRollTime = NUMBER_ROLL_TIME;
+		m_lTotalRollTime = milliseconds;
+		m_lRemainingRollTime = m_lTotalRollTime;
 	}
 }
 
@@ -36,7 +37,7 @@ void LevelHudNumber::OnUpdate(const FrameData& frame) {
 		} else {
 			// roll the number
 			long error = m_lInternalNumber - m_lDisplayedNumber;
-			long correction = error * (NUMBER_ROLL_TIME - m_lRemainingRollTime) / NUMBER_ROLL_TIME;
+			long correction = error * (m_lTotalRollTime - m_lRemainingRollTime) / m_lTotalRollTime;
 			m_lDisplayedNumber = m_lDisplayedNumber + correction;
 		}
 		

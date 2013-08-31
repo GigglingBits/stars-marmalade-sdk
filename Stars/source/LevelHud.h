@@ -16,8 +16,8 @@ private:
 	
 	LevelDustCollector m_xDustCollector;
 
-	LevelHudNumber m_xQueuedCount;
 	LevelHudNumber m_xQueuedAmount;
+	LevelHudNumber m_xCollectedAmount;
 	
 public:
 	LevelHud(GameFoundation& game);

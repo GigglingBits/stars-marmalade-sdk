@@ -11,7 +11,7 @@ void DustCounter::EnqueueDust(float dustamount) {
 }
 
 void DustCounter::CommitDustQueue() {
-	m_fCollectedDust += m_iQueuedCount * m_fQueuedAmount;
+	m_fCollectedDust += m_fQueuedAmount;
 	ClearDustQueue();
 }
 
