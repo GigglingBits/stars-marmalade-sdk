@@ -16,6 +16,8 @@ LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
 	m_bIsCompleted = IsCompleted(info);
 	m_sCompletionText = GenerateCompletionText(info);
 
+		m_xDustFillPercent.SetRollingNumber(info.DustFillPercent * 100.0f, 5000);
+		
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("levelstats_bg");
 	if (m_pxBackground) {
 		m_pxBackground->SelectFrame(m_bIsCompleted ? "won" : "lost");
@@ -69,6 +71,8 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	if (m_pxBackground) {
 		m_pxBackground->Update(frame.GetRealDurationMs());
     }
+	
+	m_xDustFillPercent.Update(frame);
 }
 
 void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -87,6 +91,8 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	rect.y = 0;
 	rect.h = screen.y / 2;
 	renderer.DrawText(m_sCompletionText, rect);
+	
+	m_xDustFillPercent.Render(renderer, frame);
 
 	// buttons
 	m_xButtonStar.Render(renderer, frame);
@@ -109,6 +115,10 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	button.y = screencenter.y - (button.w / 2);
 	m_xButtonStar.SetPosition(button);
     
+	// text
+	m_xDustFillPercent.SetPosition(CIwSVec2(150, 250));
+	m_xDustFillPercent.SetSize(CIwSVec2(150, 50));
+	
     // the button size is determined by the screen height
 	button.h = extents / 7;
 	button.w = button.h;

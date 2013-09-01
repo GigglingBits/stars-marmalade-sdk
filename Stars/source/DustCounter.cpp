@@ -1,3 +1,5 @@
+#include <string>
+
 #include "DustCounter.h"
 
 DustCounter::DustCounter(float maxdust)
@@ -37,5 +39,5 @@ float DustCounter::GetCollectedDustAmount() {
 }
 
 float DustCounter::GetDustFillPercent() {
-	return m_fCollectedDust / m_fMaxDust;
+	return std::min<float>(1.0f, m_fCollectedDust / m_fMaxDust);
 }
