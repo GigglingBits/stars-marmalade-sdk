@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "Body.h"
 #include "Debug.h"
 #include "IwDebug.h"
@@ -292,11 +294,10 @@ void Body::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	// print health value
-	const int bufsize = 12;
-	char buf[bufsize];
-	snprintf(buf, bufsize, "%i", m_xHealth.GetHealthValue());
+	std::ostringstream oss;
+	oss << m_xHealth.GetHealthValue();
 	renderer.DrawText(
-		std::string(buf), 
+		oss.str(),
 		GetPosition(),
 		Renderer::eFontTypeSmall, 
 		0xffff0000);

@@ -88,7 +88,7 @@ bool Level::IsPaused() {
 }
 
 bool Level::GetCompletionInfo(GameFoundation::CompletionInfo& info) {
-	if (Page::GetCompletionState() == eCompleted) {
+	if (GetCompletionState() == eCompleted) {
 		info = m_xGame.GetCompletionInfo();
 		return true;
 	}

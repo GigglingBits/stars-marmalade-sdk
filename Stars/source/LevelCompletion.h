@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Camera.h"
 #include "GameFoundation.h"
+#include "LevelHudNumber.h"
 
 class LevelCompletion : public Page {
 private:
@@ -20,6 +21,8 @@ private:
 	Button m_xButtonQuit;
 	Button m_xButtonRetry;
 	Button m_xButtonNext;
+	
+	LevelHudNumber m_xDustFillPercent;
 
 public:
 	LevelCompletion(GameFoundation::CompletionInfo& info);

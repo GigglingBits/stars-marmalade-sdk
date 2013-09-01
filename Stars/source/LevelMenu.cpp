@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "LevelMenu.h"
 #include "FactoryManager.h"
 #include "Debug.h"
@@ -52,9 +54,9 @@ void LevelMenu::Initialize() {
 			m_apxButtons[i] = new ButtonEx(eButtonCommandIdOpenLevel, s3eKeyFirst, level);
 		}
 		
-		char buf[8];
-		snprintf(buf, sizeof(buf), "%i", level);
-		m_apxButtons[i]->SetText(buf, 0xffffffff, Renderer::eFontTypeLarge);
+		std::ostringstream oss;
+		oss << level;
+		m_apxButtons[i]->SetText(oss.str(), 0xffffffff, Renderer::eFontTypeLarge);
 		m_apxButtons[i]->SetTexture(FactoryManager::GetTextureFactory().Create("button_level"));
 	}
 

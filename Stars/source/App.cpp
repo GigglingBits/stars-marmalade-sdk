@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "App.h"
 #include "InputManager.h"
 
@@ -130,16 +132,17 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 	int fps = (int)(1000.0 / realframetime);
 	float simratio = simframetime / realframetime;
 	
-	const int len = 80;
-	char buf[len];
-	snprintf(buf, len, "fps: %i; sim-ratio: %.0f%%;\nupdate: %.0f%%; render: %.0f%%; system: %.0f%%", 
-		fps, 100.0f * simratio, 
-		100.0f * pureupdatetime / realframetime, 
-		100.0f * purerendertime / realframetime, 
-		100.0f * (realframetime - pureupdatetime - purerendertime) / realframetime);
-
+	std::ostringstream oss;
+	oss.precision(1);
+	oss << std::fixed;
+	oss << "fps: " << fps << std::endl;
+	oss << "sim-ratio: " << 100.0f * simratio << std::endl;
+	oss << "update: " << 100.0f * pureupdatetime / realframetime << std::endl;
+	oss << "render: " << 100.0f * purerendertime / realframetime << std::endl;
+	oss << "system: " << 100.0f * (realframetime - pureupdatetime - purerendertime) / realframetime << std::endl;
+	
 	GetRenderer().DrawText(
-		std::string(buf), rect, 
+		oss.str(), rect,
 		Renderer::eFontTypeSystem, 
 		simratio > 0.95f ? 0xffffffff : 0xff0000ff);
 }

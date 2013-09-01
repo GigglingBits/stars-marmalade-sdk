@@ -18,8 +18,10 @@ class GameFoundation : public Renderable {
 public:
 	struct CompletionInfo {
 		bool IsCleared;
+		float DustFillPercent;
 		CompletionInfo() {
 			IsCleared = false;
+			DustFillPercent = 0.0f;
 		}
 	};
 

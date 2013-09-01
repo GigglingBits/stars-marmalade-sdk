@@ -1,3 +1,4 @@
+#include <sstream>
 
 #include "GameFoundation.h"
 #include "SplashText.h"
@@ -110,6 +111,7 @@ void GameFoundation::OnUpdate(const FrameData& frame) {
 	UpdatePhysics(frame.GetSimulatedDurationMs());
 	ManageSpriteLifeCicles(frame);
 	m_xBodyTimer.Update(frame.GetSimulatedDurationMs());
+	m_xCompletionInfo.DustFillPercent = GetDustFillPercent();
 }
 
 void GameFoundation::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -195,11 +197,9 @@ bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
 void GameFoundation::AddSplashNumber(long number, const CIwFVec2& position) {
 	IW_CALLSTACK_SELF;
 	
-	const int bufsize = 32;
-	char buf[bufsize];
-	snprintf(buf, bufsize, "%li", number);
-
-	AddSplashText(buf, position);
+	std::ostringstream oss;
+	oss << number;
+	AddSplashText(oss.str(), position);
 }
 
 void GameFoundation::AddSplashText(std::string text, const CIwFVec2& position) {

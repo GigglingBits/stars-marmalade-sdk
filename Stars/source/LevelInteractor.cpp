@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "LevelInteractor.h"
 #include "Configuration.h"
 
@@ -60,11 +62,12 @@ void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
 		
 		// draw length
 		CIwFVec2 pos = m_xRecorder.GetPoints()[count - 1];
-		const int len = 50;
-		char buf[len];
-		snprintf(buf, len, "length: %.2fm", m_xRecorder.GetLength());
+		std::ostringstream oss;
+		oss.precision(2);
+		oss << std::fixed;
+		oss << "Length: " << m_xRecorder.GetLength() << 'm';
 		renderer.DrawText(
-			std::string(buf), pos,
+			oss.str(), pos,
 		    Renderer::eFontTypeSystem, 0xffffffff);
 
 	}

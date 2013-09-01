@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "Debug.h"
 #include "Renderer.h"
 #include "IwGxFont.h"
@@ -453,10 +455,9 @@ void Renderer::DebugDrawCoords(const CIwSVec2& point) {
 #ifdef IW_DEBUG
 	IW_CALLSTACK_SELF;
 
-	const int len = 20;
-	char buf[len];
-	snprintf(buf, len, "(%i/%i)", point.x, point.y);
-	DrawText(std::string(buf), point, eFontTypeSmall);
+	std::ostringstream oss;
+	oss << '(' << point.x << '/' << point.y << ')';
+	DrawText(oss.str(), point, eFontTypeSmall);
 
 	uint32 col = 0xffffffff;
 	CIwSVec2 line[2] = { point, point };
@@ -478,10 +479,10 @@ void Renderer::DebugDrawCoords(const CIwFVec2& point) {
 #ifdef IW_DEBUG
 	IW_CALLSTACK_SELF;
 
-	const int len = 20;
-	char buf[len];
-	snprintf(buf, len, "(%.1f/%.1f)", point.x, point.y);
-	DrawText(std::string(buf), point, eFontTypeSmall);
+	std::ostringstream oss;
+	oss.precision(4);
+	oss << '(' << point.x << '/' << point.y << ')';
+	DrawText(oss.str(), point, eFontTypeSmall);
 
 	uint32 cols[2] = { 0xffffffff, 0xffffffff };
 	CIwFVec2 line[2] = { point, point };

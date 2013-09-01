@@ -1,3 +1,4 @@
+#include <sstream>
 #include "LevelHudNumber.h"
 #include "Debug.h"
 #include "FactoryManager.h"
@@ -20,10 +21,9 @@ void LevelHudNumber::SetRollingNumber(long number, int milliseconds) {
 }
 
 void LevelHudNumber::UpdateText() {
-	const int bufsize = 32;
-	char buf[bufsize];
-	snprintf(buf, bufsize, "%li", m_lDisplayedNumber);
-	SetText(buf);
+	std::ostringstream oss;
+	oss << m_lDisplayedNumber;
+	SetText(oss.str());
 }
 
 void LevelHudNumber::OnUpdate(const FrameData& frame) {
