@@ -45,7 +45,6 @@ void Level::Initialize() {
 	
 	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
 	
-	m_xStatsPanel.Initialize();
 	m_xHud.Initialize();
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
@@ -176,11 +175,6 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xBackground.Update(frame);
 	m_xHud.Update(frame);
 	
-	// progress indicator
-	float progress = m_xGame.GetCompletionDegree();
-	m_xStatsPanel.SetProgress(progress);
-	m_xStatsPanel.Update(frame);
-
 	// other
 	if (m_pxBackdrop) {
 		m_pxBackdrop->Update(frame.GetRealDurationMs());
@@ -194,9 +188,7 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xBackground.Render(renderer, frame);
 	m_xGame.Render(renderer, frame);
 
-	m_xStatsPanel.Render(renderer, frame);
-	m_xAppPanel.Render(renderer, frame);
-	
+	m_xAppPanel.Render(renderer, frame);	
 	m_xInteractor.Render(renderer, frame);
 
 	m_xHud.Render(renderer, frame);

@@ -6,6 +6,7 @@
 #include "ButtonEx.h"
 #include "LevelDustCollector.h"
 #include "LevelHudNumber.h"
+#include "LevelStatsPanel.h"
 
 class LevelHud : public Window {
 private:
@@ -14,6 +15,7 @@ private:
 	ButtonEx m_xButtonBlock;
 	ButtonEx m_xButtonAttack;
 	
+	LevelStatsPanel m_xStatsPanel;
 	LevelDustCollector m_xDustCollector;
 
 	LevelHudNumber m_xQueuedAmount;

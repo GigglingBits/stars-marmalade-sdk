@@ -23,6 +23,7 @@ void LevelHud::Initialize() {
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 	
+	m_xStatsPanel.Initialize();
 	m_xDustCollector.Initialize();
 }
 
@@ -61,6 +62,11 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xButtonBlock.Update(frame);
 	m_xButtonAttack.Update(frame);
 	
+	// progress indicator
+	float progress = m_rxGame.GetCompletionDegree();
+	m_xStatsPanel.SetProgress(progress);
+	m_xStatsPanel.Update(frame);
+
 	// dust collector
 	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
 	m_xDustCollector.Update(frame);
@@ -81,6 +87,7 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonBlock.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 	
+	m_xStatsPanel.Render(renderer, frame);
 	m_xDustCollector.Render(renderer, frame);
 
 	m_xCollectedAmount.Render(renderer, frame);

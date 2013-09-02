@@ -10,7 +10,6 @@
 #include "Star.h"
 #include "Camera.h"
 #include "LevelInteractor.h"
-#include "LevelStatsPanel.h"
 
 #define LEVEL_COMPLETION_DELAY 10000
 
@@ -27,7 +26,6 @@ private:
 	LevelHud m_xHud;
 
 	LevelInteractor m_xInteractor;
-	LevelStatsPanel m_xStatsPanel;
 
 	Texture* m_pxBackdrop;
 	VertexStreamScreen m_xBackdropShape;
