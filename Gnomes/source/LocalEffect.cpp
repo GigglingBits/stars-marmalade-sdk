@@ -11,7 +11,7 @@ LocalEffect::LocalEffect(const std::string& id, const ShapeTemplate& shapedef, c
 	shapedef.CreateAABB(verts);
 	GetShape().SetVerts(verts, count, false);
 
-	SetRederingLayer(Renderer::eRenderingLayerForegroundObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameForeground);
 	
 	m_xVelocity = CIwFVec2::g_Zero;
 }

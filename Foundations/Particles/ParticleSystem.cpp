@@ -48,7 +48,7 @@ Particle* ParticleSystem::CreateParticle() {
 	particle->SetPosition(m_xPosition);
 	particle->SetGravity(m_xGravity);
 	particle->SetVelocity(velocity);
-	particle->SetRederingLayer(Renderer::eRenderingLayerBackgroundGameObjects);
+	particle->SetRederingLayer(Renderer::eRenderingLayerGameBackground);
 	return particle;
 }
 

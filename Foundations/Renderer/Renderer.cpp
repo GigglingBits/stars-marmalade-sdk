@@ -6,7 +6,7 @@
 
 Renderer::Renderer() {
 	m_xScreenOffset = CIwSVec2::g_Zero;
-	m_eCurrentRenderingLayer = eRenderingLayerDynamicGameObjects;
+	m_eCurrentRenderingLayer = eRenderingLayerGameDynamicObjects;
 
 	memset(m_apxFonts, 0, sizeof(m_apxFonts));
 	
@@ -66,7 +66,7 @@ void Renderer::SetViewport(const Viewport& viewport) {
 }
 
 void Renderer::SetDefaultRederingLayer() {
-	SetRederingLayer(eRenderingLayerDynamicGameObjects);
+	SetRederingLayer(eRenderingLayerGameDynamicObjects);
 }
 
 void Renderer::SetRederingLayer(RenderingLayer renderinglayer) {

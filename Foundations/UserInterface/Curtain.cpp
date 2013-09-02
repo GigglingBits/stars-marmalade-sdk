@@ -7,7 +7,7 @@ Curtain::Curtain(uint32 alpha, uint32 fadetime) {
 	m_uiAlpha = alpha;
 	m_uiFadeTime = fadetime;
 	
-	SetRederingLayer(Renderer::eRenderingLayerFront);
+	SetRederingLayer(Renderer::eRenderingLayerGameFront);
 }
 
 bool Curtain::IsClosed() {

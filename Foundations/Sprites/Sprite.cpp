@@ -5,7 +5,7 @@
 Sprite::Sprite(const std::string& id, const TextureTemplate& texturedef) : 
 	m_eOrientation(eOrientationUndefined), m_xTexture(texturedef), m_sId(id) {
 	m_xPosition= CIwFVec2::g_Zero;
-	SetRederingLayer(Renderer::eRenderingLayerDynamicGameObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameDynamicObjects);
 }
 
 Sprite::~Sprite() {

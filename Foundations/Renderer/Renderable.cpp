@@ -1,14 +1,14 @@
 #include "Renderable.h"
 
 Renderable::Renderable() {
-	m_eRenderingLayer = Renderer::eRenderingLayerDynamicGameObjects;
+	m_eRenderingLayer = Renderer::eRenderingLayerGameDynamicObjects;
 }
 
 Renderable::~Renderable() {
 }
 
 void Renderable::SetDefaultRederingLayer() {
-	SetRederingLayer(Renderer::eRenderingLayerDynamicGameObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameDynamicObjects);
 }
 
 void Renderable::SetRederingLayer(Renderer::RenderingLayer renderinglayer) {

@@ -13,18 +13,19 @@ class Renderer {
 public:
 	enum RenderingLayer {
 		eRenderingLayerBackground = -1,
-		eRenderingLayerHorizonVeryFar = 12,
-		eRenderingLayerHorizonFar = 11,
-		eRenderingLayerHorizonClose = 10,
-		eRenderingLayerBackgroundGameObjects = 9,
-		eRenderingLayerStaticGameObjects = 8,
-		eRenderingLayerDynamicGameObjects = 7,
-		eRenderingLayerForegroundObjects = 6,
-		eRenderingLayerTextEffects = 5,
+		eRenderingLayerHorizonVeryFar = 13,
+		eRenderingLayerHorizonFar = 12,
+		eRenderingLayerHorizonClose = 11,
+		eRenderingLayerGameBackground = 10,
+		eRenderingLayerGameStaticObjects = 9,
+		eRenderingLayerGameDynamicObjects = 8,
+		eRenderingLayerGameForeground = 7,
+		eRenderingLayerGameTextEffects = 6,
+		eRenderingLayerGameFront = 5,
 		eRenderingLayerHud3 = 4,
 		eRenderingLayerHud2 = 3,
 		eRenderingLayerHud = 2,
-		eRenderingLayerFront = 1
+		eRenderingLayerHudFront = 1
 	};
 
 	enum FontType {

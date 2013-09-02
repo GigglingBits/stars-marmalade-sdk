@@ -4,7 +4,7 @@
 Target::Target(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
 	: Body(id, bodydef, fixturedef, texturedef) {
 	EnableRotation(false);
-	SetRederingLayer(Renderer::eRenderingLayerStaticGameObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameStaticObjects);
 }
 
 const char* Target::GetTypeName() {

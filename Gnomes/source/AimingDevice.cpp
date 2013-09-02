@@ -7,7 +7,7 @@ AimingDevice::AimingDevice(GameFoundation& game) : m_xTrajectory(game) {
 	m_pxTexture = FactoryManager::GetTextureFactory().Create("aimingdevice");
 	IwAssertMsg(MYAPP, m_pxTexture, ("Texture for aiming device could not be created."));
 
-	SetRederingLayer(Renderer::eRenderingLayerStaticGameObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameStaticObjects);
 
 	m_xTextureOsc.Set(1.0f, 0.9f, 1.1f);
 }

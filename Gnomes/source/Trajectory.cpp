@@ -6,7 +6,7 @@ Trajectory::Trajectory(GameFoundation& game) : m_rxGame(game) {
 	m_xVelocity = CIwFVec2::g_Zero;
 	m_xGravity = game.GetGravity();
 
-	SetRederingLayer(Renderer::eRenderingLayerStaticGameObjects);
+	SetRederingLayer(Renderer::eRenderingLayerGameStaticObjects);
 
 	m_iVisibleStepCount = 0;
 	m_bCacheExpired = true;
