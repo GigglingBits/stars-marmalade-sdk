@@ -142,7 +142,7 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 }
 
 void LevelMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeState(args.IsOpen, sender);
+	ChangeState(args.IsPanelOpen, sender);
 }
 
 void LevelMenu::ChangeState(bool enable, const ButtonPanel& except) {

@@ -9,16 +9,16 @@
 
 class ButtonPanel : public Window {
 private:
-	Curtain m_xCurtain;
+	bool m_bPanelEnabled;
+	bool m_bPanelOpen;
+
+	VertexStreamScreen m_xPanelArea;
 
 	Button m_xToggle;
 	Button* m_apxButtons[BTNPANEL_MAX_BTN_COUNT];
 	int m_iButtonCount;
 
-	bool m_bEnabled;
-	bool m_bPanelVisible;
-
-	VertexStreamScreen m_xPanelArea;
+	Curtain m_xCurtain;
 
 public:
 	ButtonPanel(ButtonCommandId cmdid, s3eKey key, long userdata = 0);
@@ -26,11 +26,11 @@ public:
 
 	void Initialize();
 
-	bool IsPanelVisible();
-	void ShowPanel();
+	void OpenPanel();
+	bool IsPanelOpen();
 
-	bool IsEnabled();
 	void SetEnabled(bool enabled);
+	bool IsEnabled();
 
 	Button& GetMainButton();
 
@@ -47,7 +47,7 @@ protected:
 
 public:	
 	struct EventArgs {
-		bool IsOpen;
+		bool IsPanelOpen;
 	};
 	Event<ButtonPanel, EventArgs> StateChanged;
 };

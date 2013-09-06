@@ -63,7 +63,7 @@ void Level::Add(Body* body) {
 }
 
 void Level::SetPaused() {
-	m_xAppPanel.ShowPanel();
+	m_xAppPanel.OpenPanel();
 	IwAssertMsg(MYAPP, m_bIsPaused, ("Pause requested, but did not work."));
 }
 
@@ -209,7 +209,7 @@ void Level::SoundEffectEventHandler(const GameFoundation& sender, const GameFoun
 }
 
 void Level::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	m_bIsPaused = !args.IsOpen;
+	m_bIsPaused = !args.IsPanelOpen;
 	m_xStatsPanel.SetEnabled(!m_bIsPaused);
 }
 

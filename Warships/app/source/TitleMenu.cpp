@@ -97,7 +97,7 @@ void TitleMenu::OnDoLayout(const CIwSVec2& screensize) {
 }
 
 void TitleMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeState(args.IsOpen, sender);
+	ChangeState(args.IsPanelOpen, sender);
 }
 
 void TitleMenu::ChangeState(bool enable, const ButtonPanel& except) {

@@ -12,6 +12,8 @@ class LevelHud : public Window {
 private:
 	GameFoundation& m_rxGame;
 
+	bool m_bIsEnabled;
+	
 	ButtonEx m_xButtonBlock;
 	ButtonEx m_xButtonAttack;
 	
@@ -26,6 +28,8 @@ public:
 	virtual ~LevelHud();
 
 	virtual void Initialize();
+	
+	void SetEnabled(bool enabled);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

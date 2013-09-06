@@ -17,12 +17,14 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xHud(m_xGame),
 	m_iCompletionTimer(0),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP),
-	m_pxBackdrop(NULL) {
+	m_pxBackdrop(NULL),
+	m_bIsPaused(false){
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
+	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 }
 
 Level::~Level() {
@@ -31,6 +33,7 @@ Level::~Level() {
 	}
 
 	// detach event handlers
+	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
@@ -40,7 +43,6 @@ Level::~Level() {
 
 void Level::Initialize() {
 	m_xAppPanel.Initialize();
-
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 	
 	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
@@ -77,13 +79,20 @@ void Level::Add(Body* body) {
 	}
 }
 
-void Level::SetPaused() {
-	m_xAppPanel.ShowPanel();
-	IwAssertMsg(MYAPP, IsPaused(), ("Pause requested, but did not work."));
+void Level::SetPaused(bool paused) {
+	if (paused) {
+		m_xAppPanel.OpenPanel();
+		//IwAssertMsg(MYAPP, m_xAppPanel.IsPanelOpen(), ("Pause requested, but did not work."));
+		m_xHud.SetEnabled(false);
+	} else {
+		//IwAssertMsg(MYAPP, !m_xAppPanel.IsPanelOpen(), ("Pause requested, but did not work."));
+		m_xHud.SetEnabled(true);
+	}
+	m_bIsPaused = paused;
 }
 
 bool Level::IsPaused() {
-	return m_xAppPanel.IsPanelVisible();
+	return m_bIsPaused;
 }
 
 bool Level::GetCompletionInfo(GameFoundation::CompletionInfo& info) {
@@ -210,6 +219,10 @@ int32 Level::AppPausedCallback(void* systemData, void* userData) {
 	IW_CALLSTACK_SELF;
 
 	Level* lvl = (Level*) userData;
-	lvl->SetPaused();
+	lvl->SetPaused(true);
 	return 0;
+}
+
+void Level::AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
+	SetPaused(args.IsPanelOpen);
 }

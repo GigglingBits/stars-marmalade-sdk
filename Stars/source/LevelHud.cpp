@@ -5,7 +5,8 @@
 LevelHud::LevelHud(GameFoundation& game) :
 	m_rxGame(game),
 	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
-	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2) {
+	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
+	m_bIsEnabled(true) {
 	m_xButtonBlock.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
@@ -26,6 +27,16 @@ void LevelHud::Initialize() {
 	m_xStatsPanel.Initialize();
 	m_xDustCollector.Initialize();
 }
+
+void LevelHud::SetEnabled(bool enabled) {
+	if (m_bIsEnabled != enabled) {
+		m_xButtonAttack.SetEnabled(enabled);
+		m_xButtonBlock.SetEnabled(enabled);
+	}
+	
+	m_bIsEnabled = enabled;
+}
+
 
 void LevelHud::OnDoLayout(const CIwSVec2& screensize) {	
 	// action buttons
@@ -84,6 +95,10 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
+	if (!m_bIsEnabled) {
+		return;
+	}
+	
 	m_xButtonBlock.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 	

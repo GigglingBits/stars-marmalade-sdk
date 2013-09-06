@@ -43,7 +43,7 @@ private:
 	void EnableButtons(bool enable);
 	
 	Button* GetButton(int col, int row);
-	void ChangeState(bool enable, const ButtonPanel& except);
+	void ChangeButtonState(bool enable, const ButtonPanel& except);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 

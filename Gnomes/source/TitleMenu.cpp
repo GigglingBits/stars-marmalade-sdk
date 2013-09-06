@@ -40,14 +40,14 @@ void TitleMenu::OnUpdate(const FrameData& frame) {
 	// update buttons
 	m_xButtonPlay.Update(frame);
 
-	if (m_xPanelSocial.IsPanelVisible() && m_xPanelOptions.IsEnabled()) {
+	if (m_xPanelSocial.IsPanelOpen() && m_xPanelOptions.IsEnabled()) {
 		m_xPanelOptions.SetEnabled(false);
-	} else if (!m_xPanelSocial.IsPanelVisible() && !m_xPanelOptions.IsEnabled()) {
+	} else if (!m_xPanelSocial.IsPanelOpen() && !m_xPanelOptions.IsEnabled()) {
 		m_xPanelOptions.SetEnabled(true);
 	}
-	if (m_xPanelOptions.IsPanelVisible() && m_xPanelSocial.IsEnabled()) {
+	if (m_xPanelOptions.IsPanelOpen() && m_xPanelSocial.IsEnabled()) {
 		m_xPanelSocial.SetEnabled(false);
-	} else if (!m_xPanelOptions.IsPanelVisible() && !m_xPanelSocial.IsEnabled()) {
+	} else if (!m_xPanelOptions.IsPanelOpen() && !m_xPanelSocial.IsEnabled()) {
 		m_xPanelSocial.SetEnabled(true);
 	}
 	m_xPanelOptions.Update(frame);
@@ -107,7 +107,7 @@ void TitleMenu::OnDoLayout(const CIwSVec2& screensize) {
 }
 
 void TitleMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeState(args.IsOpen, sender);
+	ChangeState(args.IsPanelOpen, sender);
 }
 
 void TitleMenu::ChangeState(bool enable, const ButtonPanel& except) {

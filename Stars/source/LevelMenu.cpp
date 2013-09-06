@@ -157,10 +157,10 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 }
 
 void LevelMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeState(args.IsOpen, sender);
+	ChangeButtonState(!args.IsPanelOpen, sender);
 }
 
-void LevelMenu::ChangeState(bool enable, const ButtonPanel& except) {
+void LevelMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {
 	EnableButtons(enable);
 	m_xButtonAchievements.SetEnabled(enable);
 
@@ -170,7 +170,13 @@ void LevelMenu::ChangeState(bool enable, const ButtonPanel& except) {
 void LevelMenu::EnableButtons(bool enable) {
 	for (int i = 0; i < LVLMENU_BTN_COUNT; i++) {
 		if (m_apxButtons[i]) {
-			m_apxButtons[i]->SetEnabled(enable && CheckLevelConfiguration(m_eWorldId, i + 1));
+			if (enable) {
+				m_apxButtons[i]->SetHideWhenDisabled(false);
+				m_apxButtons[i]->SetEnabled(CheckLevelConfiguration(m_eWorldId, i + 1));
+			} else {
+				m_apxButtons[i]->SetHideWhenDisabled(true);
+				m_apxButtons[i]->SetEnabled(false);
+			}
 		}
 	}
 }

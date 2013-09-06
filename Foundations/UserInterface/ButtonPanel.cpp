@@ -4,8 +4,10 @@
 #include "Debug.h"
 
 ButtonPanel::ButtonPanel(ButtonCommandId cmdid, s3eKey key, long userdata)
-	: m_xToggle(cmdid, key, userdata), m_xCurtain(0xdd, 100), m_bEnabled(true), m_bPanelVisible(false), m_iButtonCount(0) {
+	: m_xToggle(cmdid, key, userdata), m_xCurtain(0xdd, 100), m_bPanelEnabled(true), m_bPanelOpen(false), m_iButtonCount(0) {
 
+	m_xCurtain.SetRederingLayer(Renderer::eRenderingLayerHud3);
+		
 	m_xToggle.PressedEvent.AddListener<ButtonPanel>(this, &ButtonPanel::PressedEventHandler);
 
 	for (int i = 0; i < BTNPANEL_MAX_BTN_COUNT; i++) {
@@ -22,24 +24,36 @@ ButtonPanel::~ButtonPanel() {
 void ButtonPanel::Initialize() {
 }
 
-bool ButtonPanel::IsPanelVisible() {
-	return m_bPanelVisible;
+void ButtonPanel::OpenPanel() {
+	if (m_bPanelOpen && m_xCurtain.IsClosed()) {
+		// already open
+		return;
+	}
+	
+	if (!m_bPanelOpen && m_xCurtain.IsOpen()) {
+		// show
+		m_xCurtain.Close();
+	}
+}
+
+bool ButtonPanel::IsPanelOpen() {
+	return m_bPanelOpen;
 }
 
 bool ButtonPanel::IsEnabled() {
-	return m_bEnabled;
+	return m_bPanelEnabled;
 }
 
 void ButtonPanel::SetEnabled(bool enabled) {
-	m_bEnabled = enabled;
+	m_bPanelEnabled = enabled;
 	m_xToggle.SetEnabled(enabled);
-	SetButtonsEnabled(IsPanelVisible() && m_bEnabled);
+	SetButtonsEnabled(IsPanelOpen() && m_bPanelEnabled);
 }
 
 void ButtonPanel::SetButtonsEnabled(bool enabled) {
 	for (int i = 0; i < m_iButtonCount; i++) {
 		if (m_apxButtons[i]) {
-			m_apxButtons[i]->SetEnabled(enabled && m_bEnabled);
+			m_apxButtons[i]->SetEnabled(enabled && m_bPanelEnabled);
 		}
 	}
 }
@@ -53,21 +67,9 @@ void ButtonPanel::AddButton(Button& button) {
 
 	IwAssertMsg(MYAPP, m_iButtonCount < BTNPANEL_MAX_BTN_COUNT, ("Cannot add button; the button array is full."));
 
-	button.SetEnabled(m_bPanelVisible);
+	button.SetEnabled(m_bPanelOpen);
 	m_apxButtons[m_iButtonCount] = &button;
 	m_iButtonCount++;
-}
-
-void ButtonPanel::ShowPanel() {
-	if (m_bPanelVisible && m_xCurtain.IsClosed()) {
-		// already shown
-		return;
-	}
-
-	if (!m_bPanelVisible && m_xCurtain.IsOpen()) {
-		// show
-		m_xCurtain.Close();
-	}
 }
 
 void ButtonPanel::OnDoLayout(const CIwSVec2& screensize) {
@@ -97,11 +99,11 @@ void ButtonPanel::OnUpdate(const FrameData& frame) {
 		}
 	}
 
-	if (!m_xCurtain.IsClosed() && m_bPanelVisible) {
-		m_bPanelVisible = false;
+	if (!m_xCurtain.IsClosed() && m_bPanelOpen) {
+		m_bPanelOpen = false;
 		SetButtonsEnabled(false);
-	} else if (m_xCurtain.IsClosed() && !m_bPanelVisible) {
-		m_bPanelVisible = true;
+	} else if (m_xCurtain.IsClosed() && !m_bPanelOpen) {
+		m_bPanelOpen = true;
 		SetButtonsEnabled(true);
 	}
 }
@@ -120,20 +122,20 @@ void ButtonPanel::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void ButtonPanel::PressedEventHandler(const Button& sender, const Button::EventArgs& args) {
-	if (!m_bEnabled && m_xCurtain.IsOpen()) {
+	if (!m_bPanelEnabled && m_xCurtain.IsOpen()) {
 		return;
 	}
 
 	bool handled = false;
-	bool open = false;
+	bool curtainopen = false;
 	if (m_xCurtain.IsOpen()) {
 		handled = true;
 		m_xCurtain.Close();
-		open = false;
+		curtainopen = false;
 	} else if (m_xCurtain.IsClosed()) {
 		handled = true;
 		m_xCurtain.Open();
-		open = true;
+		curtainopen = true;
 	}
 
 	if (handled) {
@@ -143,7 +145,7 @@ void ButtonPanel::PressedEventHandler(const Button& sender, const Button::EventA
 
 		// fire event about state change
 		EventArgs panelargs;
-		panelargs.IsOpen = open;
+		panelargs.IsPanelOpen = !curtainopen;
 		StateChanged(*this, panelargs); 
 	}
 }

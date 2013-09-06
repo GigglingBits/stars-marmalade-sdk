@@ -64,7 +64,7 @@ void Level::Add(Body* body) {
 }
 
 void Level::SetPaused() {
-	m_xAppPanel.ShowPanel();
+	m_xAppPanel.OpenPanel();
 	IwAssertMsg(MYAPP, m_bIsPaused, ("Pause requested, but did not work."));
 }
 
@@ -144,7 +144,7 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 }
 
 void Level::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	m_bIsPaused = !args.IsOpen;
+	m_bIsPaused = !args.IsPanelOpen;
 }
 
 int32 Level::AppPausedCallback(void* systemData, void* userData) {

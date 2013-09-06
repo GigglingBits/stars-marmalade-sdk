@@ -164,13 +164,15 @@ void TitleMenu::ButtonPressedEventHandler(const Button& sender, const Button::Ev
 }
 
 void TitleMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeState(args.IsOpen, sender);
+	ChangeButtonState(!args.IsPanelOpen, sender);
 }
 
-void TitleMenu::ChangeState(bool enable, const ButtonPanel& except) {
+void TitleMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {
     m_xButtonPlanet.SetEnabled(enable);
     m_xButtonPlanetName.SetEnabled(enable);
 	m_xButtonAchievements.SetEnabled(enable);
 	m_xButtonCredits.SetEnabled(enable);
+	m_xButtonPrevious.SetEnabled(enable);
+	m_xButtonNext.SetEnabled(enable);
 	if (&except != &m_xPanelOptions) m_xPanelOptions.SetEnabled(enable);
 }

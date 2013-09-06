@@ -22,6 +22,8 @@ private:
 
 	GameFoundation m_xGame;
 
+	bool m_bIsPaused;
+	
 	AppPanel m_xAppPanel;
 	LevelHud m_xHud;
 
@@ -62,11 +64,15 @@ private:
 	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
 	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
 	
-	void SetPaused();
+	void SetPaused(bool paused);
 	bool IsPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
 
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
+	
+private:
+	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
+
 };
 
 #endif

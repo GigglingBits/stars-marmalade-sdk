@@ -44,7 +44,7 @@ protected:
 
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ChangeState(bool enable, const ButtonPanel& except);
+	void ChangeButtonState(bool enable, const ButtonPanel& except);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 
