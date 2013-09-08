@@ -254,8 +254,7 @@ the bodie that owns the joint.
     <texture id="shade" colour="0x77343423" />
     <texture id="aimingdevice" image="crosshair" />
 
-	  <texture id="statspanel" image="progress_bar" />
-
+	  <texture id="statspanel" image="number_back" />
 	  <texture id="number_back" image="number_back" />
 
 	  <texture id="stardustvial" image="stardust_vial" />

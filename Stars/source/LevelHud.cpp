@@ -6,6 +6,7 @@ LevelHud::LevelHud(GameFoundation& game) :
 	m_rxGame(game),
 	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
 	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
+	m_pxBackdrop(NULL),
 	m_bIsEnabled(true) {
 	m_xButtonBlock.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
@@ -14,6 +15,10 @@ LevelHud::LevelHud(GameFoundation& game) :
 }
 
 LevelHud::~LevelHud() {
+	if (m_pxBackdrop) {
+		delete m_pxBackdrop;
+	}
+
 	m_xButtonBlock.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.RemoveListener(this, &LevelHud::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
@@ -21,11 +26,13 @@ LevelHud::~LevelHud() {
 }
 
 void LevelHud::Initialize() {
+	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
+
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 	
-	m_xStatsPanel.Initialize();
 	m_xDustCollector.Initialize();
+	m_xProgressBar.Initialize();
 }
 
 void LevelHud::SetEnabled(bool enabled) {
@@ -38,36 +45,63 @@ void LevelHud::SetEnabled(bool enabled) {
 }
 
 
-void LevelHud::OnDoLayout(const CIwSVec2& screensize) {	
-	// action buttons
-	const int spacing = 20;
+void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
+	int extent = GetScreenExtents();
+	
+	int spacing = extent / 25;
+	
+	int backdropwidth = extent / 6;
+	int progressbarheight = extent / 20;
+
+	int buttonwidth = extent / 6;
+	int buttonheight = extent / 9;
+
+	int textheight = extent / 15;
+	
+	// action buttons (right)
 	CIwRect rect;
-	rect.w = 120;
-	rect.h = 80;
-	rect.x = 0;
-	rect.y = screensize.y - (2 * rect.h) - (2 * spacing);
+	rect.w = buttonwidth;
+	rect.h = buttonheight;
+	rect.x = screensize.x - buttonwidth;
+	rect.y = screensize.y - (2 * buttonheight) - (2 * spacing);
 	m_xButtonBlock.SetPosition(rect);
 	rect.y += rect.h + spacing;
 	m_xButtonAttack.SetPosition(rect);
 	
-	// dust collector
-	const int w = 80, h = screensize.y - w - w - 200;
-	int x = w / 2, y = w;
+	// backdrop (left)
+	m_xBackdropShape.SetRect(0, 0, backdropwidth, screensize.y);
+	
+	// queued dust (left)
+	m_xQueuedAmount.SetBackground("number_back");
+	m_xQueuedAmount.SetPosition(CIwSVec2(0, spacing));
+	m_xQueuedAmount.SetSize(CIwSVec2(backdropwidth, textheight));
+	
+	// dust collector (left)
+	int w = backdropwidth - (2 * spacing), h = screensize.y - (5 * spacing) - progressbarheight - (2 * textheight);
+	int x = spacing, y = spacing + textheight + spacing;
 	rect.Make(x, y, w, h);
 	m_xDustCollector.SetPosition(rect);
-	
-	// scores
+
+	// collected dust (left)
 	m_xCollectedAmount.SetBackground("number_back");
-	m_xCollectedAmount.SetPosition(CIwSVec2(250, 200));
-	m_xCollectedAmount.SetSize(CIwSVec2(100, 50));
+	m_xCollectedAmount.SetPosition(CIwSVec2(0, screensize.y - (2 * spacing) - progressbarheight - textheight));
+	m_xCollectedAmount.SetSize(CIwSVec2(backdropwidth, textheight));
 	
-	m_xQueuedAmount.SetBackground("number_back");
-	m_xQueuedAmount.SetPosition(CIwSVec2(350, 200));
-	m_xQueuedAmount.SetSize(CIwSVec2(100, 50));
+	// progress bar (left)
+	rect.Make(
+			  spacing,
+			  screensize.y - spacing - progressbarheight,
+			  backdropwidth - (2 * spacing),
+			  progressbarheight);
+	m_xProgressBar.SetPosition(rect);
 }
 
 void LevelHud::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
+
+	if (m_pxBackdrop) {
+		m_pxBackdrop->Update(frame.GetRealDurationMs());
+	}
 
 	// buttons
 	m_xButtonBlock.Update(frame);
@@ -75,8 +109,8 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	
 	// progress indicator
 	float progress = m_rxGame.GetCompletionDegree();
-	m_xStatsPanel.SetProgress(progress);
-	m_xStatsPanel.Update(frame);
+	m_xProgressBar.SetProgress(progress);
+	m_xProgressBar.Update(frame);
 
 	// dust collector
 	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
@@ -99,10 +133,15 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 		return;
 	}
 	
+	if (m_pxBackdrop) {
+		renderer.SetRederingLayer(Renderer::eRenderingLayerHud3);
+		renderer.Draw(m_xBackdropShape, *m_pxBackdrop);
+	}
+
 	m_xButtonBlock.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 	
-	m_xStatsPanel.Render(renderer, frame);
+	m_xProgressBar.Render(renderer, frame);
 	m_xDustCollector.Render(renderer, frame);
 
 	m_xCollectedAmount.Render(renderer, frame);

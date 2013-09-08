@@ -6,23 +6,26 @@
 #include "ButtonEx.h"
 #include "LevelDustCollector.h"
 #include "LevelHudNumber.h"
-#include "LevelStatsPanel.h"
+#include "LevelProgressBar.h"
 
 class LevelHud : public Window {
 private:
 	GameFoundation& m_rxGame;
 
 	bool m_bIsEnabled;
-	
-	ButtonEx m_xButtonBlock;
-	ButtonEx m_xButtonAttack;
-	
-	LevelStatsPanel m_xStatsPanel;
+
+	Texture* m_pxBackdrop;
+	VertexStreamScreen m_xBackdropShape;
+
+	LevelProgressBar m_xProgressBar;
 	LevelDustCollector m_xDustCollector;
 
 	LevelHudNumber m_xQueuedAmount;
 	LevelHudNumber m_xCollectedAmount;
-	
+
+	ButtonEx m_xButtonBlock;
+	ButtonEx m_xButtonAttack;
+		
 public:
 	LevelHud(GameFoundation& game);
 	virtual ~LevelHud();

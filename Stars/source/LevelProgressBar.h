@@ -1,10 +1,10 @@
-#ifndef __LEVELSTATSPANEL_H__
-#define __LEVELSTATSPANEL_H__
+#ifndef __LEVELPROGRESSBAR_H__
+#define __LEVELPROGRESSBAR_H__
 
 #include "Window.h"
 #include "Texture.h"
 
-class LevelStatsPanel : public Window {
+class LevelProgressBar : public Window {
 private:
 	CIwRect m_xPanelShape;
 
@@ -17,11 +17,12 @@ private:
 	float m_fProgress;
 
 public:
-	LevelStatsPanel();
-	virtual ~LevelStatsPanel();
+	LevelProgressBar();
+	virtual ~LevelProgressBar();
 
 	void Initialize();
 
+	void SetPosition(const CIwRect& rect);
 	void SetProgress(float progress);
 
 protected:

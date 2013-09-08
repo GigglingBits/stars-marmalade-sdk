@@ -17,7 +17,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xHud(m_xGame),
 	m_iCompletionTimer(0),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP),
-	m_pxBackdrop(NULL),
 	m_bIsPaused(false){
 
 	// attach event handlers
@@ -28,10 +27,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 }
 
 Level::~Level() {
-	if (m_pxBackdrop) {
-		delete m_pxBackdrop;
-	}
-
 	// detach event handlers
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
@@ -44,8 +39,6 @@ Level::~Level() {
 void Level::Initialize() {
 	m_xAppPanel.Initialize();
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
-	
-	m_pxBackdrop = FactoryManager::GetTextureFactory().Create("backdrop");
 	
 	m_xHud.Initialize();
 
@@ -82,10 +75,8 @@ void Level::Add(Body* body) {
 void Level::SetPaused(bool paused) {
 	if (paused) {
 		m_xAppPanel.OpenPanel();
-		//IwAssertMsg(MYAPP, m_xAppPanel.IsPanelOpen(), ("Pause requested, but did not work."));
 		m_xHud.SetEnabled(false);
 	} else {
-		//IwAssertMsg(MYAPP, !m_xAppPanel.IsPanelOpen(), ("Pause requested, but did not work."));
 		m_xHud.SetEnabled(true);
 	}
 	m_bIsPaused = paused;
@@ -150,9 +141,6 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	m_xAppPanel.GetMainButton().SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
 		btnmargin, btnsize, btnsize));
-	
-	// backdrop
-	m_xBackdropShape.SetRect(0, 0, 150, screensize.y);
 }
 
 void Level::OnUpdate(const FrameData& frame) {
@@ -183,11 +171,6 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackground.Update(frame);
 	m_xHud.Update(frame);
-	
-	// other
-	if (m_pxBackdrop) {
-		m_pxBackdrop->Update(frame.GetRealDurationMs());
-	}
 }
 
 void Level::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -201,11 +184,6 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xInteractor.Render(renderer, frame);
 
 	m_xHud.Render(renderer, frame);
-	
-	// other
-	if (m_pxBackdrop) {
-		renderer.Draw(m_xBackdropShape, *m_pxBackdrop);
-	}
 }
 
 CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {

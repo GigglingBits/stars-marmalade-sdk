@@ -117,8 +117,8 @@ files {
 	LevelHudNumber.cpp
 	LevelDustCollector.h
 	LevelDustCollector.cpp
-	LevelStatsPanel.h
-	LevelStatsPanel.cpp
+	LevelProgressBar.h
+	LevelProgressBar.cpp
 
 	LevelInteractor.h
 	LevelInteractor.cpp
