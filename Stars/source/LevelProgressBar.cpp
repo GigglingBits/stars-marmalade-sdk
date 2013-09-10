@@ -22,8 +22,8 @@ LevelProgressBar::~LevelProgressBar() {
 }
 
 void LevelProgressBar::Initialize() {
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("statspanel");
-	m_pxStar = FactoryManager::GetTextureFactory().Create("star");
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("progressbar_back");
+	m_pxStar = FactoryManager::GetTextureFactory().Create("progressbar_star");
 }
 
 void LevelProgressBar::UpdateStarShape() {

@@ -5,7 +5,6 @@ CIwResGroup
 	sprites/image_missing.png
 
 	sprites/touch.png
-	sprites/backdrop.png
 
 	sprites/button_social.png
 	sprites/button_achievements.png
@@ -40,8 +39,10 @@ CIwResGroup
 	sprites/button_arrow_left.png
 	sprites/button_arrow_right.png
 
-	sprites/number_back.png
-	sprites/stardust_vial.png
+	sprites/hud_backdrop.png
+	sprites/hud_progressbar_back.png
+	sprites/hud_stardust_vial.png
+	sprites/hud_number_back.png
 
 	sprites/spark_01.png
 	sprites/spark_02.png

@@ -252,12 +252,14 @@ the bodie that owns the joint.
   <textures>
     <texture id="none" colour="0x00000000" />
     <texture id="shade" colour="0x77343423" />
-    <texture id="aimingdevice" image="crosshair" />
 
-	  <texture id="statspanel" image="number_back" />
-	  <texture id="number_back" image="number_back" />
+	  <texture id="touch" image="touch" />
 
-	  <texture id="stardustvial" image="stardust_vial" />
+	  <texture id="backdrop" image="hud_backdrop" />
+	  <texture id="progressbar_back" image="hud_progressbar_back" />
+	  <texture id="progressbar_star" image="Happy-star_kollision_06" />
+	  <texture id="number_back" image="hud_number_back" />
+	  <texture id="stardustvial" image="hud_stardust_vial" />
 	  <texture id="stardust" colour="0xeecceeff" />
 
 	  <texture id="star">
@@ -301,9 +303,6 @@ the bodie that owns the joint.
 		  <frame id="08" image="spark_08" duration="200" next="09" />
 		  <frame id="09" image="spark_09" />
 	  </texture>
-
-	  <texture id="touch" image="touch" />
-	  <texture id="backdrop" image="backdrop" />
 
     <texture id="button_social" image="button_social" />
     <texture id="button_achievements" image="button_achievements" />

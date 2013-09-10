@@ -31,6 +31,7 @@ void LevelHud::Initialize() {
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 	
+	m_xDustQueue.Initialize();
 	m_xDustCollector.Initialize();
 	m_xProgressBar.Initialize();
 }
@@ -48,15 +49,18 @@ void LevelHud::SetEnabled(bool enabled) {
 void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	int extent = GetScreenExtents();
 	
-	int spacing = extent / 25;
+	int spacing = extent / 40;
 	
-	int backdropwidth = extent / 6;
-	int progressbarheight = extent / 20;
+	int backdropwidth = extent / 5;
+	int widgetwidth = backdropwidth - (3 * spacing);
 
 	int buttonwidth = extent / 6;
 	int buttonheight = extent / 9;
 
 	int textheight = extent / 15;
+	int progressbarheight = extent / 30;
+	int dustqueueheight = (screensize.y - (4 * spacing) - progressbarheight - (2 * textheight)) / 3;
+	int dustcollectorheight = dustqueueheight * 2;
 	
 	// action buttons (right)
 	CIwRect rect;
@@ -71,29 +75,37 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	// backdrop (left)
 	m_xBackdropShape.SetRect(0, 0, backdropwidth, screensize.y);
 	
-	// queued dust (left)
+	// progress bar (left)
+	int x = spacing, y = spacing;
+	int w = widgetwidth, h = progressbarheight;
+	rect.Make(x, y, w, h);
+	m_xProgressBar.SetPosition(rect);
+
+	// dust queue (left)
+	y += h + spacing;
+	h = dustqueueheight;
+	rect.Make(x, y, w, h);
+	m_xDustQueue.SetPosition(rect);
+	
+	// queued dust amount (left)
 	m_xQueuedAmount.SetBackground("number_back");
-	m_xQueuedAmount.SetPosition(CIwSVec2(0, spacing));
-	m_xQueuedAmount.SetSize(CIwSVec2(backdropwidth, textheight));
+	y += h;
+	h = textheight;
+	m_xQueuedAmount.SetPosition(CIwSVec2(x, y));
+	m_xQueuedAmount.SetSize(CIwSVec2(w, h));
 	
 	// dust collector (left)
-	int w = backdropwidth - (2 * spacing), h = screensize.y - (5 * spacing) - progressbarheight - (2 * textheight);
-	int x = spacing, y = spacing + textheight + spacing;
+	y += h + spacing;
+	h = dustcollectorheight;
 	rect.Make(x, y, w, h);
 	m_xDustCollector.SetPosition(rect);
 
-	// collected dust (left)
+	// collected dust amount (left)
 	m_xCollectedAmount.SetBackground("number_back");
-	m_xCollectedAmount.SetPosition(CIwSVec2(0, screensize.y - (2 * spacing) - progressbarheight - textheight));
-	m_xCollectedAmount.SetSize(CIwSVec2(backdropwidth, textheight));
-	
-	// progress bar (left)
-	rect.Make(
-			  spacing,
-			  screensize.y - spacing - progressbarheight,
-			  backdropwidth - (2 * spacing),
-			  progressbarheight);
-	m_xProgressBar.SetPosition(rect);
+	y += h;
+	h = textheight;
+	m_xCollectedAmount.SetPosition(CIwSVec2(x, y));
+	m_xCollectedAmount.SetSize(CIwSVec2(w, h));
 }
 
 void LevelHud::OnUpdate(const FrameData& frame) {
@@ -112,18 +124,22 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xProgressBar.SetProgress(progress);
 	m_xProgressBar.Update(frame);
 
-	// dust collector
-	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
-	m_xDustCollector.Update(frame);
-	
-	// collected nuggets
+	// queued dust
 	const int rolltime = 1500;
-	
-	m_xCollectedAmount.SetRollingNumber(m_rxGame.GetDustFillAmount(), rolltime);
-	m_xCollectedAmount.Update(frame);
-	
+	const int queuesize = 1000;
+
 	m_xQueuedAmount.SetRollingNumber(m_rxGame.GetDustQueuedAmount(), rolltime);
 	m_xQueuedAmount.Update(frame);
+
+	m_xDustQueue.SetProgress(m_rxGame.GetDustQueuedAmount() / queuesize);
+	m_xDustQueue.Update(frame);
+	
+	// collected dust
+	m_xCollectedAmount.SetRollingNumber(m_rxGame.GetDustFillAmount(), rolltime);
+	m_xCollectedAmount.Update(frame);
+
+	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
+	m_xDustCollector.Update(frame);
 }
 
 void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -142,10 +158,12 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonAttack.Render(renderer, frame);
 	
 	m_xProgressBar.Render(renderer, frame);
-	m_xDustCollector.Render(renderer, frame);
 
-	m_xCollectedAmount.Render(renderer, frame);
+	m_xDustQueue.Render(renderer, frame);
 	m_xQueuedAmount.Render(renderer, frame);
+
+	m_xDustCollector.Render(renderer, frame);
+	m_xCollectedAmount.Render(renderer, frame);
 }
 
 void LevelHud::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {

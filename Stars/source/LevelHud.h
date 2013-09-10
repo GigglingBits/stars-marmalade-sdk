@@ -18,6 +18,7 @@ private:
 	VertexStreamScreen m_xBackdropShape;
 
 	LevelProgressBar m_xProgressBar;
+	LevelDustCollector m_xDustQueue;
 	LevelDustCollector m_xDustCollector;
 
 	LevelHudNumber m_xQueuedAmount;
