@@ -175,6 +175,21 @@ void GameFoundation::CommitDust(const CIwFVec2& pos) {
 	AddSplashNumber(m_xDust.GetQueuedDustAmount(), pos);
 }
 
+void GameFoundation::CancelDust(const CIwFVec2& pos) {
+	if (m_xDust.GetQueuedDustCount() <= 0) {
+		return;
+	}
+
+	// cancel
+	AddSplashNumber(-m_xDust.GetQueuedDustAmount(), pos);
+	m_xDust.ClearDustQueue();
+
+	// notify about cancellation
+	QuakeImpactArgs arg;
+	arg.amplitude = 0.3f;
+	QuakeImpact.Invoke(*this, arg);
+}
+
 float GameFoundation::GetDustQueuedAmount() {
 	return m_xDust.GetQueuedDustAmount();
 }

@@ -24,10 +24,12 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
+	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
 }
 
 Level::~Level() {
 	// detach event handlers
+	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
@@ -203,4 +205,8 @@ int32 Level::AppPausedCallback(void* systemData, void* userData) {
 
 void Level::AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
 	SetPaused(args.IsPanelOpen);
+}
+
+void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args) {
+	m_xCamera.StartQuakeEffect(args.amplitude, 700);
 }

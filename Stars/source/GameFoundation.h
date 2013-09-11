@@ -83,6 +83,7 @@ public:
 	// gameplay
 	void QueueDust(const CIwFVec2& pos, int amount);
 	void CommitDust(const CIwFVec2& pos);
+	void CancelDust(const CIwFVec2& pos);
 
 	float GetDustQueuedAmount();
 
@@ -111,6 +112,12 @@ private:
 
 	void BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args);
 	void BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy);
+	
+public:
+	struct QuakeImpactArgs {
+		float amplitude;
+	};
+	Event<GameFoundation, QuakeImpactArgs> QuakeImpact;
 };
 
 #endif

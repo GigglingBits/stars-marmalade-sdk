@@ -14,6 +14,8 @@ files {
 
 	Camera.h
 	Camera.cpp
+	CameraEffect.h
+	CameraEffect.cpp
 	Viewport.h
 	Viewport.cpp
 

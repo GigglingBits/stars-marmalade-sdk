@@ -4,6 +4,7 @@
 #include "Camera.h"
 
 Camera::Camera() {
+
 	m_xWorldSize = CIwFVec2::g_Zero;
 	m_xFocusPoint = CIwFVec2::g_Zero;
 
@@ -185,6 +186,13 @@ void Camera::Update(const CIwSVec2& screensize, uint16 timestep) {
 			m_xViewport.SetCenterPosition(currentpos + (factor * diffpos));
 		}
 	}
+	
+	// effect
+	m_xEffect.Update(screensize, timestep);
+	if (m_xEffect.IsActive()) {
+		CIwFVec2 currentpos = m_xViewport.GetCenterPosition();
+		m_xViewport.SetCenterPosition(currentpos + m_xEffect.GetEffectOffset());
+	}
 }
 
 const Viewport& Camera::GetViewport() {
@@ -206,3 +214,8 @@ float Camera::CalcW2SFactorFitInScreen(const CIwFVec2& worldsize, const CIwSVec2
 			xfactor < 0.0f ? -xfactor : xfactor, 
 			yfactor < 0.0f ? -yfactor : yfactor);
 }
+
+void Camera::StartQuakeEffect(float amplitude, uint16 duration) {
+	m_xEffect.StartQuake(amplitude, duration);
+}
+

@@ -1,3 +1,4 @@
+#include "GameFoundation.h"
 #include "StarAttackState.h"
 #include "InputManager.h"
 #include "SoundEngine.h"
@@ -30,6 +31,10 @@ void Star::PeacefulState::Collide(Body& body) {
 		body.GetHealthManager().Injure(5.0f); // just arbitrarily 5... for testing
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::PlaySoundEffect("NinjaHurt");
+		
+		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
+			game->CancelDust(m_rxContext.GetPosition());
+		}
 	}
 }
 

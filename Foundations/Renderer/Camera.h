@@ -3,6 +3,7 @@
 
 #include "IwGeom.h"
 #include "Viewport.h"
+#include "CameraEffect.h"
 
 class Camera {
 private:
@@ -24,10 +25,13 @@ private:
 		float Scale;
 	};
 	PanInfo m_xPan;
+	
+	// effects
+	CameraEffect m_xEffect;
 
 public:
 	Camera();
-
+	
 	// geometry
 	void SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& screensize, float maxvisibleworldsize /* used for close view */);
 
@@ -46,6 +50,9 @@ public:
 	// expose for coord transformations
 	const Viewport& GetViewport();
 
+	// effects
+	void StartQuakeEffect(float amplitude, uint16 duration);
+	
 private:
 	float CalcW2SFactorFillScreen(const CIwFVec2& worldsize, const CIwSVec2& screensize, float maxvisibleworldsize);
 	float CalcW2SFactorFitInScreen(const CIwFVec2& worldsize, const CIwSVec2& screensize);

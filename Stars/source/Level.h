@@ -58,9 +58,6 @@ private:
 	float GetStarRestForce();
 	CIwFVec2 GetStarStartPosition();
 
-	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
-	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
-	
 	void SetPaused(bool paused);
 	bool IsPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
@@ -70,6 +67,10 @@ private:
 private:
 	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
+	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
+	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
+
+	void QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args);
 };
 
 #endif
