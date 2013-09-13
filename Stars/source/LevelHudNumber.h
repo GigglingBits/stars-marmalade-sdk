@@ -7,7 +7,7 @@
 
 class LevelHudNumber : public LevelHudText {
 private:
-	long m_lInternalNumber;
+	long m_lTargetNumber;
 	long m_lDisplayedNumber;
 
 	long m_lTotalRollTime;
@@ -16,8 +16,7 @@ private:
 public:
 	LevelHudNumber();
 	
-	void SetNumber(long number);
-	void SetRollingNumber(long number, int milliseconds);
+	void SetNumber(long number, int rolltime = 0);
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);

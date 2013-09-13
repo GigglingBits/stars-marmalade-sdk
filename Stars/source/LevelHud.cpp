@@ -125,20 +125,20 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xProgressBar.Update(frame);
 
 	// queued dust
-	const int rolltime = 1500;
+	const int rolltime = 3000;
 	const int queuesize = 1000;
 
-	m_xQueuedAmount.SetRollingNumber(m_rxGame.GetDustQueuedAmount(), rolltime);
+	m_xQueuedAmount.SetNumber(m_rxGame.GetDustQueuedAmount(), rolltime);
 	m_xQueuedAmount.Update(frame);
 
-	m_xDustQueue.SetProgress(m_rxGame.GetDustQueuedAmount() / queuesize);
+	m_xDustQueue.SetProgress(m_rxGame.GetDustQueuedAmount() / queuesize, rolltime);
 	m_xDustQueue.Update(frame);
 	
 	// collected dust
-	m_xCollectedAmount.SetRollingNumber(m_rxGame.GetDustFillAmount(), rolltime);
+	m_xCollectedAmount.SetNumber(m_rxGame.GetDustFillAmount(), rolltime);
 	m_xCollectedAmount.Update(frame);
 
-	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent());
+	m_xDustCollector.SetProgress(m_rxGame.GetDustFillPercent(), rolltime);
 	m_xDustCollector.Update(frame);
 }
 

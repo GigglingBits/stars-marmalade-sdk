@@ -3,21 +3,18 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHudNumber::LevelHudNumber() : m_lInternalNumber(0), m_lDisplayedNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
+LevelHudNumber::LevelHudNumber() : m_lTargetNumber(0), m_lDisplayedNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
 	UpdateText();
 }
 
-void LevelHudNumber::SetNumber(long number) {
-	m_lInternalNumber = number;
-	m_lRemainingRollTime = 0;
-}
-
-void LevelHudNumber::SetRollingNumber(long number, int milliseconds) {
-	if (m_lInternalNumber != number) {
-		m_lInternalNumber = number;
-		m_lTotalRollTime = milliseconds;
-		m_lRemainingRollTime = m_lTotalRollTime;
+void LevelHudNumber::SetNumber(long number, int rolltime) {
+	if (m_lTargetNumber == number) {
+		return;
 	}
+	
+	m_lTargetNumber = number;
+	m_lTotalRollTime = rolltime;
+	m_lRemainingRollTime = m_lTotalRollTime;
 }
 
 void LevelHudNumber::UpdateText() {
@@ -32,15 +29,15 @@ void LevelHudNumber::OnUpdate(const FrameData& frame) {
 	LevelHudText::OnUpdate(frame);
 	
 	// needs rolling?
-	if (m_lDisplayedNumber != m_lInternalNumber) {
+	if (m_lDisplayedNumber != m_lTargetNumber) {
 		// time exceeded?
 		if (m_lRemainingRollTime <= 0) {
-			m_lDisplayedNumber = m_lInternalNumber;
+			m_lDisplayedNumber = m_lTargetNumber;
 		} else {
 			// roll the number
-			long error = m_lInternalNumber - m_lDisplayedNumber;
+			long error = m_lTargetNumber - m_lDisplayedNumber;
 			long correction = error * (m_lTotalRollTime - m_lRemainingRollTime) / m_lTotalRollTime;
-			m_lDisplayedNumber = m_lDisplayedNumber + correction;
+			m_lDisplayedNumber += correction;
 		}
 		
 		m_lRemainingRollTime -= frame.GetSimulatedDurationMs();

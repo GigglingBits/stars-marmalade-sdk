@@ -14,7 +14,11 @@ private:
 	VertexStreamScreen m_xVialShape;
 	Texture* m_pxVial;
 
-	float m_fProgress;
+	float m_fTargetProgress;
+	float m_fDisplayedProgress;
+	
+	long m_lTotalRollTime;
+	long m_lRemainingRollTime;
 
 public:
 	LevelDustCollector();
@@ -23,10 +27,10 @@ public:
 	void Initialize();
 
 	void SetPosition(const CIwRect& rect);
-	void SetProgress(float progress);
+	void SetProgress(float progress, int rolltime = 0);
 
 protected:
-	void UpdateStarShape();
+	void UpdateDustShape();
 
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

@@ -16,7 +16,7 @@ LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
 	m_bIsCompleted = IsCompleted(info);
 	m_sCompletionText = GenerateCompletionText(info);
 
-		m_xDustFillPercent.SetRollingNumber(info.DustFillPercent * 100.0f, 5000);
+		m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 		
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("levelstats_bg");
 	if (m_pxBackground) {
