@@ -113,8 +113,7 @@ void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
 	uint32 btnsize = 60;
 	uint32 btnmargin = 15;
 	m_xButtonBack.SetPosition(
-		CIwRect(screensize.x - (btnsize + btnmargin),
-		btnmargin, btnsize, btnsize));
+		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void WorldMenu::SetWorld(PageSettings::WorldId world) {

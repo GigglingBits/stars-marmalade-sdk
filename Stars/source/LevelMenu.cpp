@@ -107,7 +107,7 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 		
 	CIwRect menuarea(0, 0, screensize.x, screensize.y);
 	menuarea.x += margin;
-	menuarea.y += margin * 4 / 5; // move menu area slightly upwards
+	menuarea.y += margin;
 	menuarea.w -= 2 * margin;
 	menuarea.h -= 2 * margin;
 
@@ -131,8 +131,7 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	uint32 btnsize = 60;
 	uint32 btnmargin = 15;
 	m_xButtonBack.SetPosition(
-		CIwRect(screensize.x - (btnsize + btnmargin),
-		btnmargin, btnsize, btnsize));
+		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void LevelMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {

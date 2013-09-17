@@ -54,26 +54,15 @@ CIwResGroup
 	sprites/spark_08.png
 	sprites/spark_09.png
 
-	sprites/Happy-star_kollision_03.png
-	sprites/Happy-star_kollision_04.png
-	sprites/Happy-star_kollision_05.png
-	sprites/Happy-star_kollision_06.png
-	sprites/Happy-star_kollision_07.png
-	sprites/Happy-star_kollision_08.png
-	sprites/Happy-star_kollision_09.png
-	sprites/Happy-star_kollision_10.png
-	sprites/Happy-star_kollision_11.png
-	sprites/Happy-star_kollision_12.png
-	sprites/Happy-star_kollision_13.png
-	sprites/Happy-star_kollision_14.png
-	sprites/Happy-star_kollision_15.png
-	sprites/Happy-star_kollision_17.png
-	sprites/Happy-star_kollision_18.png
-
-	sprites/Happy-star_followpath.png
-
-	sprites/yellow-star.png
-	sprites/red-star.png
+	sprites/star_angry.png
+	sprites/star_grin.png
+	sprites/star_happy.png
+	sprites/star_hurt.png
+	sprites/star_hurt_2.png
+	sprites/star_hurt_3.png
+	sprites/star_idle.png
+	sprites/star_idle_2.png
+	sprites/star_surprised.png
 
     sprites/world_earth_background.png
     sprites/world_mars_background.png

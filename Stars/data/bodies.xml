@@ -257,40 +257,26 @@ the bodie that owns the joint.
 
 	  <texture id="backdrop" image="hud_backdrop" />
 	  <texture id="progressbar_back" image="hud_progressbar_back" />
-	  <texture id="progressbar_star" image="Happy-star_kollision_06" />
+	  <texture id="progressbar_star" image="star_nugget" />
 	  <texture id="number_back" image="hud_number_back" />
 	  <texture id="stardustvial" image="hud_stardust_vial" />
 	  <texture id="stardust" colour="0xeecceeff" />
 
 	  <texture id="star">
-		  <frame id="happy" image="Happy-star_kollision_06" duration="30" next="happy_01" />
-		  <frame id="happy_01" image="Happy-star_kollision_05" duration="30" next="happy_02" />
-		  <frame id="happy_02" image="Happy-star_kollision_04" duration="30" next="happy_03" />
-		  <frame id="happy_03" image="Happy-star_kollision_03" />
+		  <frame id="happy" image="star_happy" />
 		  
-		  <frame id="hurt" image="Happy-star_kollision_17" duration="100" next="hurt_01" />
-		  <frame id="hurt_01" image="Happy-star_kollision_15" duration="100" next="hurt_02" />
-		  <frame id="hurt_02" image="Happy-star_kollision_18" duration="100" next="happy" />
+		  <frame id="hurt" image="star_hurt" duration="100" next="hurt_01" />
+		  <frame id="hurt_01" image="star_hurt_2" duration="100" next="hurt_02" />
+		  <frame id="hurt_02" image="star_hurt_3" duration="100" next="happy" />
 		  
-		  <frame id="followpath" image="Happy-star_followpath" />
+		  <frame id="followpath" image="star_surprised" />
 		  
-		  <frame id="block" image="red-star" />
+		  <frame id="block" image="star_angry" />
 		  
-		  <frame id="hit" image="red-star" />
+		  <frame id="hit" image="star_angry" />
 
-		  <frame id="attack" image="red-star" />
-		  
-		  <!--
-		   <frame id="07" image="Happy-star_kollision_07" duration="30" next="08" />
-		   <frame id="08" image="Happy-star_kollision_08" duration="30" next="09" />
-		   <frame id="09" image="Happy-star_kollision_09" duration="30" next="10" />
-		   <frame id="10" image="Happy-star_kollision_10" duration="30" next="09" />
-		   <frame id="11" image="Happy-star_kollision_11" duration="30" next="09" />
-		   <frame id="12" image="Happy-star_kollision_12" duration="30" next="09" />
-		   <frame id="13" image="Happy-star_kollision_13" duration="30" next="09" />
-		   <frame id="14" image="Happy-star_kollision_14" duration="30" next="09" />
-		   -->
-	  </texture>
+		  <frame id="attack" image="star_angry" />
+	</texture>
 
 	  <texture id="spark">
 		  <frame id="01" image="spark_01" duration="100" next="02" />
@@ -345,8 +331,8 @@ the bodie that owns the joint.
     <texture id="button_arrow_right" image="button_arrow_right" />
 
       <texture id="button_completion">
-          <frame id="won" image="Happy-star_kollision_03"/>
-          <frame id="lost" image="Happy-star_kollision_18"/>
+          <frame id="won" image="star_grin"/>
+          <frame id="lost" image="star_angry"/>
       </texture>
       
       <texture id="button_planet">
