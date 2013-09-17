@@ -11,7 +11,8 @@ enum ButtonCommandId {
 	//eButtonCommandIdRight			= 4,
 
 	// application navigation
-	eButtonCommandIdOpenTitleMenu,
+	eButtonCommandIdOpenTitleScreen,
+	eButtonCommandIdOpenWorldMenu,
 	eButtonCommandIdOpenLevelMenu,
 	
     eButtonCommandIdOpenWorld,

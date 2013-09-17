@@ -21,10 +21,8 @@ private:
 	Texture* m_pxBackground;
 	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT];
 
-	Button m_xButtonTitleMenu;
-	Button m_xButtonAchievements;
-	OptionsPanel m_xPanelOptions;
-	
+	Button m_xButtonBack;
+
 	PageSettings::WorldId m_eWorldId;
 
 public:
@@ -44,7 +42,6 @@ private:
 	
 	Button* GetButton(int col, int row);
 	void ChangeButtonState(bool enable, const ButtonPanel& except);
-	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 
 #endif

@@ -74,8 +74,10 @@ files {
 	PageSettings.h
 	PageSettings.cpp
 
-	TitleMenu.h
-	TitleMenu.cpp
+	TitleScreen.h
+	TitleScreen.cpp
+	WorldMenu.h
+	WorldMenu.cpp
 	LevelMenu.h
 	LevelMenu.cpp
 	Preamble.h

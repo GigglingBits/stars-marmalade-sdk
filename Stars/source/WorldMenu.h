@@ -1,5 +1,5 @@
-#ifndef __TITLEMENU_H__
-#define __TITLEMENU_H__
+#ifndef __WORLDMENU_H__
+#define __WORLDMENU_H__
 
 #include "Page.h"
 #include "PageSettings.h"
@@ -9,28 +9,25 @@
 #include "Body.h"
 #include "Camera.h"
 
-class TitleMenu : public Page {
+class WorldMenu : public Page {
 private:
 	Camera m_xCamera;
 
 	Texture* m_pxBackground;
 	
-	Button m_xButtonCredits;
-	Button m_xButtonAchievements;
-
     Button m_xButtonPlanet;
 	Button m_xButtonPlanetName;
 
 	Button m_xButtonNext;
 	Button m_xButtonPrevious;
 
-	OptionsPanel m_xPanelOptions;
-
+	Button m_xButtonBack;
+	
     PageSettings::WorldId m_eWorld;
     
 public:
-	TitleMenu(PageSettings::WorldId world);
-	virtual ~TitleMenu();
+	WorldMenu(PageSettings::WorldId world);
+	virtual ~WorldMenu();
 
 	virtual void Initialize();
 
@@ -45,7 +42,6 @@ protected:
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ChangeButtonState(bool enable, const ButtonPanel& except);
-	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 
 #endif

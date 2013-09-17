@@ -9,9 +9,7 @@
 #define NO_BUTTON -1
 
 LevelMenu::LevelMenu(PageSettings::WorldId world) :
-    m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
-    m_xButtonTitleMenu(eButtonCommandIdOpenTitleMenu, s3eKeyFirst),
-	m_xButtonAchievements(eButtonCommandIdAchievements, s3eKeyFirst) {
+    m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyFirst) {
 
 	m_eWorldId = world;
 		
@@ -22,13 +20,9 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
     }
 
 	memset(m_apxButtons, 0, sizeof(m_apxButtons));
-
-	m_xPanelOptions.StateChanged.AddListener<LevelMenu>(this, &LevelMenu::ButtonPanelStateChangedEventHandler);
 }
 
 LevelMenu::~LevelMenu() {
-	m_xPanelOptions.StateChanged.RemoveListener<LevelMenu>(this, &LevelMenu::ButtonPanelStateChangedEventHandler);
-
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
@@ -60,11 +54,7 @@ void LevelMenu::Initialize() {
 		m_apxButtons[i]->SetTexture(FactoryManager::GetTextureFactory().Create("button_level"));
 	}
 
-	m_xPanelOptions.Initialize();
-	m_xPanelOptions.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_options"));
-
-	m_xButtonTitleMenu.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
-	m_xButtonAchievements.SetTexture(FactoryManager::GetTextureFactory().Create("button_achievements"));
+	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
 }
@@ -78,9 +68,7 @@ void LevelMenu::OnUpdate(const FrameData& frame) {
 	}
 
 	// update other buttons
-	m_xButtonTitleMenu.Update(frame);
-	m_xButtonAchievements.Update(frame);
-	m_xPanelOptions.Update(frame);
+	m_xButtonBack.Update(frame);
 
 	if (m_pxBackground) {
 		m_pxBackground->Update(frame.GetRealDurationMs());
@@ -108,9 +96,7 @@ void LevelMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	// other buttons
-	m_xButtonTitleMenu.Render(renderer, frame);
-	m_xButtonAchievements.Render(renderer, frame);
-	m_xPanelOptions.Render(renderer, frame);
+	m_xButtonBack.Render(renderer, frame);
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
@@ -141,30 +127,16 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	}
 	EnableButtons(true);
 	
-    // remaining buttons
-	button.h = extents / 7;
-	button.w = button.h;
-    
-	button.x = (screensize.x - (3 * button.w) - (2 * space)) / 2;
-	button.y = screensize.y * 10 / 13;
-	m_xButtonTitleMenu.SetPosition(button);
-    
-	button.x += button.w + space;
-	m_xPanelOptions.GetMainButton().SetPosition(button);
-    
-	button.x += button.w + space;
-	m_xButtonAchievements.SetPosition(button);
-}
-
-void LevelMenu::ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
-	ChangeButtonState(!args.IsPanelOpen, sender);
+    // back button
+	uint32 btnsize = 60;
+	uint32 btnmargin = 15;
+	m_xButtonBack.SetPosition(
+		CIwRect(screensize.x - (btnsize + btnmargin),
+		btnmargin, btnsize, btnsize));
 }
 
 void LevelMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {
 	EnableButtons(enable);
-	m_xButtonAchievements.SetEnabled(enable);
-
-	if (&except != &m_xPanelOptions) m_xPanelOptions.SetEnabled(enable);
 }
 
 void LevelMenu::EnableButtons(bool enable) {

@@ -181,8 +181,11 @@ void App::ButtonReleasedEventHandler(const InputManager& sender, const InputMana
 
 		m_xPageManager.StartLevel();
 
-	} else if (args.cmdid == eButtonCommandIdOpenTitleMenu) {
-		m_xPageManager.StartTitleMenu();
+	} else if (args.cmdid == eButtonCommandIdOpenTitleScreen) {
+		m_xPageManager.StartTitleScreen();
+        
+	} else if (args.cmdid == eButtonCommandIdOpenWorldMenu) {
+		m_xPageManager.StartWorldMenu();
         
 	} else if (args.cmdid == eButtonCommandIdOpenLevelMenu) {
         m_xPageManager.SetWorld((PageSettings::WorldId)args.userdata);

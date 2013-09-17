@@ -277,7 +277,7 @@ the bodie that owns the joint.
 		  <frame id="block" image="red-star" />
 		  
 		  <frame id="hit" image="red-star" />
-		  
+
 		  <frame id="attack" image="red-star" />
 		  
 		  <!--
@@ -354,14 +354,18 @@ the bodie that owns the joint.
           <frame id="mars" image="world_mars"/>
           <frame id="jupiter" image="world_jupiter"/>
       </texture>
-      
+
+	  <texture id="title_bg" image="title_background"/>
+	  <texture id="title_name" image="title_name"/>
+	  <texture id="title_button" image="title_button"/>
+	  
     <texture id="button_world_name">
         <frame id="earth" image="world_earth_name"/>
         <frame id="mars" image="world_mars_name"/>
         <frame id="jupiter" image="world_jupiter_name"/>
     </texture>
       
-      <texture id="titlemenu_bg">
+      <texture id="worldmenu_bg">
           <frame id="earth" image="world_earth_background"/>
           <frame id="mars" image="world_mars_background"/>
           <frame id="jupiter" image="world_jupiter_background"/>

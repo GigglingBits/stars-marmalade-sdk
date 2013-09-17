@@ -1,7 +1,8 @@
 #include "PageManager.h"
 #include "Debug.h"
 
-#include "TitleMenu.h"
+#include "TitleScreen.h"
+#include "WorldMenu.h"
 #include "LevelMenu.h"
 #include "Preamble.h"
 #include "Level.h"
@@ -48,7 +49,7 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 }
 
 Page* PageManager::CreateDefaultPage() {
-	return new TitleMenu(PageSettings::eWorldIdEarth);
+	return new TitleScreen();
 }
 
 void PageManager::StartLevel() {
@@ -61,9 +62,14 @@ void PageManager::StartNextLevel() {
 	StartLevel();
 }
 
-void PageManager::StartTitleMenu() {
+void PageManager::StartTitleScreen() {
 	IW_CALLSTACK_SELF;
-	SetNextPage(new TitleMenu(m_xPageSettings.GetWorld()));
+	SetNextPage(new TitleScreen());
+}
+
+void PageManager::StartWorldMenu() {
+	IW_CALLSTACK_SELF;
+	SetNextPage(new WorldMenu(m_xPageSettings.GetWorld()));
 }
 
 void PageManager::StartLevelMenu() {

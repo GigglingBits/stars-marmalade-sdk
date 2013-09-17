@@ -23,7 +23,8 @@ public:
     void SetLevel(int level);
 
     
-    void StartTitleMenu();
+    void StartTitleScreen();
+    void StartWorldMenu();
 	void StartLevelMenu();
 	void StartLevel();
     void StartNextLevel();

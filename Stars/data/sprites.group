@@ -79,6 +79,10 @@ CIwResGroup
     sprites/world_mars_background.png
     sprites/world_jupiter_background.png
 
+	sprites/title_background.png
+	sprites/title_name.png
+	sprites/title_button.png
+
     sprites/background_lost.png
     sprites/background_won.png
 
