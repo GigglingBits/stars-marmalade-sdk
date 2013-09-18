@@ -14,13 +14,10 @@ private:
 
 	Texture* m_pxBackground;
 	
-	Button m_xButtonCredits;
-	Button m_xButtonAchievements;
-
     Button m_xButtonTitle;
-	Button m_xButtonTitleName;
 
 	OptionsPanel m_xPanelOptions;
+	OptionsPanel m_xPanelSocial;
 
 public:
 	TitleScreen();
@@ -35,7 +32,6 @@ protected:
 
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ChangeButtonState(bool enable, const ButtonPanel& except);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 

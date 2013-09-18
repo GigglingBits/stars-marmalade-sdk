@@ -59,6 +59,41 @@ void LevelMenu::Initialize() {
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
 }
 
+void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
+	int extents = GetScreenExtents();
+	int margin = extents / 7;
+	int space = extents / 25;
+	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
+	
+	CIwRect menuarea(0, 0, screensize.x, screensize.y);
+	menuarea.x += margin;
+	menuarea.y += margin;
+	menuarea.w -= 2 * margin;
+	menuarea.h -= 2 * margin;
+	
+	// level buttons
+	CIwRect button(0, 0,
+		((menuarea.w + space) / LVLMENU_BTN_COLS) - space,
+		((menuarea.h + space) / LVLMENU_BTN_ROWS) - space);
+	
+	for (int row = 0; row < LVLMENU_BTN_ROWS; row++) {
+		for (int col = 0; col < LVLMENU_BTN_COLS; col++) {
+			if (Button* p = GetButton(col, row)) {
+				button.x = menuarea.x + col * (button.w + space);
+				button.y = menuarea.y + row * (button.h + space);
+				p->SetPosition(button);
+			}
+		}
+	}
+	EnableButtons(true);
+	
+    // back button
+	uint32 btnsize = 60;
+	uint32 btnmargin = 15;
+	m_xButtonBack.SetPosition(
+							  CIwRect(btnmargin, btnmargin, btnsize, btnsize));
+}
+
 void LevelMenu::OnUpdate(const FrameData& frame) {
 	// update level buttons
 	for (int i = 0; i < LVLMENU_BTN_COUNT; i++) {
@@ -97,41 +132,6 @@ void LevelMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	// other buttons
 	m_xButtonBack.Render(renderer, frame);
-}
-
-void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
-	int extents = GetScreenExtents();
-	int margin = extents / 4;	// 25% 
-	int space = margin / 5;		// 25% / 5 = 5%
-	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
-		
-	CIwRect menuarea(0, 0, screensize.x, screensize.y);
-	menuarea.x += margin;
-	menuarea.y += margin;
-	menuarea.w -= 2 * margin;
-	menuarea.h -= 2 * margin;
-
-	// level buttons
-	CIwRect button(0, 0,
-		((menuarea.w + space) / LVLMENU_BTN_COLS) - space,
-		((menuarea.h + space) / LVLMENU_BTN_ROWS) - space);
-
-	for (int row = 0; row < LVLMENU_BTN_ROWS; row++) {
-		for (int col = 0; col < LVLMENU_BTN_COLS; col++) {
-			if (Button* p = GetButton(col, row)) {
-				button.x = menuarea.x + col * (button.w + space);
-				button.y = menuarea.y + row * (button.h + space);
-				p->SetPosition(button);
-			}
-		}
-	}
-	EnableButtons(true);
-	
-    // back button
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
-	m_xButtonBack.SetPosition(
-		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void LevelMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {

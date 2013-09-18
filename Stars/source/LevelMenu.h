@@ -10,8 +10,8 @@
 #include "ButtonEx.h"
 #include "OptionsPanel.h"
 
-#define LVLMENU_BTN_COLS 4
-#define LVLMENU_BTN_ROWS 2
+#define LVLMENU_BTN_COLS 5
+#define LVLMENU_BTN_ROWS 3
 #define LVLMENU_BTN_COUNT LVLMENU_BTN_COLS*LVLMENU_BTN_ROWS
 
 class LevelMenu : public Page {
@@ -32,9 +32,9 @@ public:
 	virtual void Initialize();
 
 protected:
+	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
 	bool CheckLevelConfiguration(PageSettings::WorldId world, int level);

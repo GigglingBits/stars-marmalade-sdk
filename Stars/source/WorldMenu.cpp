@@ -79,34 +79,32 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
+	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
+	CIwRect button;
 	int extents = GetScreenExtents();
 
-	// button size
-	CIwRect button;
-	button.h = extents / 7;						
-	button.w = button.h;						
-
-	// location of the buttons
-	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
-    button.w = (int16)(extents / 1.3f);
-    button.h = (int16)(extents / 1.3f);
+    // name button
+	button.w = extents;
+    button.h = extents / 10;
+    button.x = screencenter.x - (extents / 2);
+	button.y = screencenter.y - (extents * 5 / 12);
+	m_xButtonPlanetName.SetPosition(button);
+    
+	// world button
+    button.w = (int16)(extents / 1.2f);
+    button.h = (int16)(extents / 1.2f);
     button.x = screencenter.x - (button.w / 2);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPlanet.SetPosition(button);
-    
-    button.w = extents;
-    button.h = extents / 10;
-    button.x = screencenter.x - (extents / 2);
-	button.y = screencenter.y - (extents / 2) + (extents / 12);
-	m_xButtonPlanetName.SetPosition(button);
-    
+
+    // navigation buttons
     button.w = extents / 10;
     button.h = extents / 5;
-    button.x = screencenter.x - (extents / 2);
+    button.x = screencenter.x - (extents * 3 / 5);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPrevious.SetPosition(button);
     
-	button.x = screencenter.x + (extents / 2) - button.w;
+	button.x = screencenter.x + (extents * 3 / 5) - button.w;
 	m_xButtonNext.SetPosition(button);
 	
     // back button
