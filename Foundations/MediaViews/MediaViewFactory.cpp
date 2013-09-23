@@ -4,7 +4,6 @@
 #include "WebView.h"
 #include "VideoView.h"
 #include "TextureView.h"
-#include "FactoryManager.h"
 #include "Debug.h"
 
 #include <algorithm>
@@ -28,19 +27,14 @@ MediaView* MediaViewFactory::CreateViewForFile(const std::string& filename) {
 	return mv;
 }
 
-MediaView* MediaViewFactory::CreateViewForTexture(const std::string& textureid) {
-	TextureFactory& factory = FactoryManager::GetTextureFactory();
-
-	TextureView* tv = NULL;
+MediaView* MediaViewFactory::CreateViewForTexture(Texture* texture) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, texture, ("Cannot create view for NULL texture"));
 	
-	if (factory.ConfigExists(textureid)) {
-		tv = new TextureView(textureid);
-
-	} else {
-		IwAssertMsg(MYAPP, false, ("Cannot create view for texture '%s'; the texture cannot be found.", textureid.c_str()));
+	if (texture) {
+		return new TextureView(texture);
 	}
-	
-	return tv;
+	return NULL;
 }
 
 std::string MediaViewFactory::ToLower(const std::string& s) {

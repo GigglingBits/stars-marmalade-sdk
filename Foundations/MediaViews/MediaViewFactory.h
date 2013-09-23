@@ -6,7 +6,7 @@
 class MediaViewFactory {
 public:
 	static MediaView* CreateViewForFile(const std::string& filename);
-	static MediaView* CreateViewForTexture(const std::string& textureid);
+	static MediaView* CreateViewForTexture(Texture* texture);
 	
 private:
 	static std::string ToLower(const std::string& s);

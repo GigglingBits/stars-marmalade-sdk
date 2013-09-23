@@ -12,7 +12,7 @@ private:
 	VertexStreamScreen m_xGemoetry;
 	
 public:
-	TextureView(const std::string textureid);
+	TextureView(Texture* texture);
 	virtual ~TextureView();
 
 	virtual void Initialize();

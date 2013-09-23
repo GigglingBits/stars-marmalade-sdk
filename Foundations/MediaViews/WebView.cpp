@@ -1,5 +1,4 @@
 #include "WebView.h"
-#include "Configuration.h"
 #include "Debug.h"
 
 WebView::WebView(const std::string& filename) : MediaFileView(filename),  m_pxHandle(0) {

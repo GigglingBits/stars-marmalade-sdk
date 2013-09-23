@@ -1,10 +1,8 @@
 #include "TextureView.h"
 #include "Debug.h"
-#include "FactoryManager.h"
 
-TextureView::TextureView(const std::string textureid) : m_pxTexture(NULL) {
-	IW_CALLSTACK_SELF;
-	m_pxTexture = FactoryManager::GetTextureFactory().Create(textureid);
+TextureView::TextureView(Texture* texture) : m_pxTexture(NULL) {
+	m_pxTexture = texture;
 }
 
 TextureView::~TextureView() {

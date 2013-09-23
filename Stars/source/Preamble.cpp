@@ -12,7 +12,9 @@ Preamble::Preamble(const std::string& text, const std::string& textureid, const 
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("preamble_bg");
 
 	if (!textureid.empty()) {
-		m_pxMediaView = MediaViewFactory::CreateViewForTexture(textureid);
+		if (Texture* texture = FactoryManager::GetTextureFactory().Create(textureid)) {
+			m_pxMediaView = MediaViewFactory::CreateViewForTexture(texture);
+		}
 		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of texture media: %s", textureid.c_str()));
 
 	} else if (!mediafile.empty()) {
