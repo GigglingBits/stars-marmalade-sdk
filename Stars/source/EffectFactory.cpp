@@ -1,14 +1,18 @@
+#include <sstream>
+#include <string>
+
 #include "EffectFactory.h"
 #include "FactoryManager.h"
 #include "LocalEffect.h"
 #include "SplashText.h"
-#include <sstream>
-#include <string>
+#include "Debug.h"
 
 EffectFactory::EffectFactory() : FactoryBase<EffectTemplate, LocalEffect>("root", "effects", "effect") {
 }
 
 std::string EffectFactory::PopulateConfig(TiXmlElement* node, EffectTemplate& conf) {
+	IW_CALLSTACK_SELF;
+
 	// read from XML
 	char* pc;
 	std::string id((pc = (char*)node->Attribute("id")) ? pc : GenerateUniqueId((long)node));

@@ -15,3 +15,11 @@ void PreambleTemplate::SetFile(const std::string& filename) {
 const std::string& PreambleTemplate::GetFile() {
 	return m_sFile;
 }
+
+void PreambleTemplate::SetTextureId(const std::string& textureid) {
+	m_sTexture = textureid;
+}
+
+const std::string& PreambleTemplate::GetTextureId() {
+	return m_sTexture;
+}

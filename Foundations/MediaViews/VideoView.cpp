@@ -1,10 +1,7 @@
 #include "VideoView.h"
-#include "Configuration.h"
 #include "Debug.h"
-#include "IwDebug.h"
 
-VideoView::VideoView() {
-	SetFileExtensions(Configuration::GetInstance().VideoViewExts);
+VideoView::VideoView(const std::string& filename) : MediaFileView(filename) {
 	m_bStopCallbackRegistered = S3E_RESULT_SUCCESS == s3eVideoRegister(S3E_VIDEO_STOP, (s3eCallback)OnVideoStopped, this);
 }
 
@@ -12,30 +9,31 @@ VideoView::~VideoView() {
 	if (m_bStopCallbackRegistered) {
 		s3eVideoUnRegister(S3E_VIDEO_STOP, (s3eCallback)OnVideoStopped);
 	}
-	Hide();
+
+	s3eVideoStop();
 }
 
-bool VideoView::IsShowing() {
+void VideoView::Initialize() {
+	Play();
+}
+
+bool VideoView::IsPlaying() {
 	s3eVideoStatus state = (s3eVideoStatus)s3eVideoGetInt(S3E_VIDEO_STATUS);
 	return state == S3E_VIDEO_PLAYING || state == S3E_VIDEO_PAUSED;
 }
 
-void VideoView::Show(const CIwVec2& pos, const CIwVec2& size) {
+void VideoView::Play() {
 	IW_CALLSTACK_SELF;
 
-	Hide();
+	s3eVideoStop();
 	
 	s3eResult res = s3eVideoPlay(
 		GetFile().c_str(), 1, 
-		pos.x, pos.y, size.x, size.y);
+		GetPosition().x, GetPosition().y, GetSize().x, GetSize().y);
 
 	if (res != S3E_RESULT_SUCCESS) {
 		IwAssertMsg(MYAPP, false, ("Cannot play video '%s'. Error: %s", GetFile().c_str(), s3eVideoGetErrorString()));
 	}
-}
-
-void VideoView::Hide() {
-	s3eVideoStop();
 }
 
 int32 VideoView::OnVideoStopped(void* systemData, void* userData) {
@@ -46,3 +44,16 @@ int32 VideoView::OnVideoStopped(void* systemData, void* userData) {
 	}
     return false;
 }
+
+void VideoView::OnDoLayout(const CIwSVec2& screensize) {
+	Play();
+}
+
+void VideoView::OnUpdate(const FrameData& frame) {
+	//	MediaFileView::OnUpdate(frame);
+}
+
+void VideoView::OnRender(Renderer& renderer, const FrameData& frame) {
+	//	MediaFileView::OnRender(renderer, frame);
+}
+

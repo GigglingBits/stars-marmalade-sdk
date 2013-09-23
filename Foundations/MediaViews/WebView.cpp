@@ -1,21 +1,22 @@
 #include "WebView.h"
 #include "Configuration.h"
 #include "Debug.h"
-#include "IwDebug.h"
 
-WebView::WebView() : m_pxHandle(0) {
-	SetFileExtensions(Configuration::GetInstance().WebViewExts);
+WebView::WebView(const std::string& filename) : MediaFileView(filename),  m_pxHandle(0) {
 }
 
 WebView::~WebView() {
 	Hide();
 }
 
+void WebView::Initialize() {
+}
+
 bool WebView::IsShowing() {
 	return NULL != m_pxHandle;
 }
 
-void WebView::Show(const CIwVec2& pos, const CIwVec2& size) {
+void WebView::Show() {
 	IW_CALLSTACK_SELF;
 
 	Hide();
@@ -29,18 +30,28 @@ void WebView::Show(const CIwVec2& pos, const CIwVec2& size) {
 
 		res = s3eWebViewShow(
 			m_pxHandle, 
-			pos.x, pos.y, size.x, size.y);
+			GetPosition().x, GetPosition().y, GetSize().x, GetSize().y);
 	
 		IwAssertMsg(MYAPP, res == S3E_RESULT_SUCCESS, ("Cannot show web view '%s'. Error: %s", GetFile().c_str(), s3eWebViewGetErrorString()));
 	}
 }
 
-void WebView::Hide() {
-	IW_CALLSTACK_SELF;
-
+void WebView::Hide(){
 	if (m_pxHandle) {
 		s3eWebViewHide(m_pxHandle);
     	s3eWebViewDestroy(m_pxHandle);
 		m_pxHandle = NULL;
 	}
+}
+
+void WebView::OnDoLayout(const CIwSVec2& screensize) {
+	Show();
+}
+
+void WebView::OnUpdate(const FrameData& frame) {
+//	MediaFileView::OnUpdate(frame);
+}
+
+void WebView::OnRender(Renderer& renderer, const FrameData& frame) {
+//	MediaFileView::OnRender(renderer, frame);
 }

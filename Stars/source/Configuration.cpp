@@ -49,18 +49,6 @@ Configuration::Configuration() {
 		WonSong = "music/wonsong.mp3";
 	}
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "webviewexts", tmpstr)) {
-		WebViewExts = tmpstr;
-	} else {
-		WebViewExts = "html;htm";
-	}
-
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "videoviewexts", tmpstr)) {
-		VideoViewExts = tmpstr;
-	} else {
-		VideoViewExts = "m4v;mp4";
-	}
-
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httpbodies", tmpstr)) {
 		HttpBodiesFile = tmpstr;
 	} else {

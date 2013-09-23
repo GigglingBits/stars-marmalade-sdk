@@ -28,6 +28,3 @@ introsong				Name of the sound file containing the intro song
 levelsong				Name of the sound file containing the level song
 lostsong				Name of the sound file containing the lost song
 wonsong					Name of the sound file containing the won song
-
-webviewexts				List of filename extensions that should be played in the WebView extension
-videoviewexts			List of filename extensions that should be played in the VideoView extension

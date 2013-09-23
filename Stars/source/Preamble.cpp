@@ -1,26 +1,25 @@
 #include "Preamble.h"
 #include "Debug.h"
 #include "FactoryManager.h"
+#include "MediaViewFactory.h"
 
-bool Preamble::NullMediaView::IsShowing() {
-	return false;
-}
+Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) : m_pxMediaView(NULL) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, !text.empty() || !textureid.empty() || !mediafile.empty(), ("At least on of the 3 parguments must be non-empty."));
 
-void Preamble::NullMediaView::Show(const CIwVec2& pos, const CIwVec2& size) {
-}
-
-void Preamble::NullMediaView::Hide() {
-}
-
-Preamble::Preamble(const std::string &text, const std::string& file) : m_pxMediaView(&m_xNull) {
 	m_sText = text;
 
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("preamble_bg");
 
-	m_pxMediaView = &SelectMediaView(file);
-	m_pxMediaView->SetFile(file);
-	m_pxMediaView->Finished.AddListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
+	if (!textureid.empty()) {
+		m_pxMediaView = MediaViewFactory::CreateViewForTexture(textureid);
+		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of texture media: %s", textureid.c_str()));
 
+	} else if (!mediafile.empty()) {
+		m_pxMediaView = MediaViewFactory::CreateViewForFile(mediafile);
+		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of media file: %s", textureid.c_str()));
+	}
+	
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
 	im.TouchEndEvent.AddListener<Preamble>(this, &Preamble::TouchEndEventHandler);
@@ -33,6 +32,7 @@ Preamble::~Preamble() {
 
 	if (m_pxMediaView) {
 		m_pxMediaView->Finished.RemoveListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
+		delete m_pxMediaView;
 	}
 	
 	if (m_pxBackground) {
@@ -45,19 +45,28 @@ void Preamble::Initialize() {
 		SetCompletionState(eCompleted);
 		return;
 	}
+	
+	if (m_pxMediaView) {
+		m_pxMediaView->Initialize();
+	}
 }
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {
 	int32 margin = GetScreenExtents() / 5;
 	CIwVec2 pos(margin, margin);
 	CIwVec2 size(screensize.x - 2 * margin, screensize.y - 2 * margin);
-	m_pxMediaView->Show(pos, size);
+	if (m_pxMediaView) {
+		m_pxMediaView->SetPosition(pos, size);
+	}
 }
 
 void Preamble::OnUpdate(const FrameData& frame) {
 	if (m_pxBackground) {
 		m_pxBackground->Update(frame.GetRealDurationMs());
     }
+	if (m_pxMediaView) {
+		m_pxMediaView->Update(frame);
+	}
 }
 
 void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -75,6 +84,11 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
         renderer.Draw(shape, *m_pxBackground);
     }
 
+	// media
+	if (m_pxMediaView) {
+		m_pxMediaView->Render(renderer, frame);
+	}
+	
 	// text
 	CIwRect textrect(0, screensize.y / 2, screensize.x, screensize.y / 2);
 	renderer.DrawText(m_sText, textrect);
@@ -82,26 +96,18 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
 
 void Preamble::TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {
 	SetCompletionState(eCompleted);
-	m_pxMediaView->Hide();
+
+	if (m_pxMediaView) {
+		delete m_pxMediaView;
+		m_pxMediaView = NULL;
+	}
 }
 
 void Preamble::MediaFinishedEventHandler(const MediaView& sender, const int& args) {
 	SetCompletionState(eCompleted);
-	m_pxMediaView->Hide();
-}
 
-MediaView& Preamble::SelectMediaView(const std::string& file) {
-	IW_CALLSTACK_SELF;
-
-	if (m_xWeb.IsFileSupported(file)) {
-		return m_xWeb;
-	} 
-
-	if (m_xVideo.IsFileSupported(file)) {
-		return m_xVideo;
+	if (m_pxMediaView) {
+		delete m_pxMediaView;
+		m_pxMediaView = NULL;
 	}
-
-	IwAssertMsg(MYAPP, false, ("Cannot itentify player for file '%s'; the file type is not mapped.", file.c_str()));
-	return m_xNull;
 }
-

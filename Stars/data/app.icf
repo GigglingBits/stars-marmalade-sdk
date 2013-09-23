@@ -20,10 +20,6 @@ levelsong="music/Based On Clocks.mp3"
 wonsong="music/Winning.mp3"
 lostsong="music/Lost.mp3"
 
-webviewexts=htm;html
-videoviewexts=m4v;mp4;jpg
-
-
 ####################################################
 [Util]
 ####################################################

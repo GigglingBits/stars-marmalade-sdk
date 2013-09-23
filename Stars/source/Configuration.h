@@ -31,9 +31,6 @@ public:
 	std::string WonSong;
 	std::string LostSong;
 
-	std::string WebViewExts;
-	std::string VideoViewExts;
-
 	std::string HttpBodiesFile;
 	std::string HttpLevelsFile;
 };

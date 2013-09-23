@@ -4,11 +4,14 @@
 #include <string>
 
 #include "FactoryManager.h"
+#include "Debug.h"
 
 LevelFactory::LevelFactory() : FactoryBase<LevelTemplate, Level>("root", "levels", "level") {
 }
 
 std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf) {
+	IW_CALLSTACK_SELF;
+
 	char* pc;
 	std::string levelname((pc = (char*)node->Attribute("name")) ? pc : "");
 	std::string background((pc = (char*)node->Attribute("background")) ? pc : "");

@@ -8,30 +8,19 @@
 #include "Camera.h"
 #include "WebView.h"
 #include "VideoView.h"
+#include "TextureView.h"
 
 class Preamble : public Page {
-private:
-	class NullMediaView : public MediaView {
-	public:
-		virtual bool IsShowing();
-		virtual void Show(const CIwVec2& pos, const CIwVec2& size);
-		virtual void Hide();
-	};
-
 private:
 	Camera m_xCamera;
 
 	std::string m_sText;
 
 	Texture* m_pxBackground;
-
 	MediaView* m_pxMediaView;
-	NullMediaView m_xNull;
-	WebView m_xWeb;
-	VideoView m_xVideo;
 
 public:
-	Preamble(const std::string& text, const std::string& file);
+	Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile);
 	virtual ~Preamble();
 
 	virtual void Initialize();

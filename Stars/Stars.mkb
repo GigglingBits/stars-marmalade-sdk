@@ -45,6 +45,7 @@ subprojects {
 	../Foundations/Logging
 	../Foundations/Renderer
 	../Foundations/UserInterface
+	../Foundations/MediaViews
 	../Foundations/Utilities
 	../Foundations/Sound
 	../Foundations/Physics
@@ -52,7 +53,6 @@ subprojects {
 	../Foundations/Particles
 
 	tinyxml
-	s3eWebView
 }
 
 files {
@@ -83,20 +83,13 @@ files {
 	Preamble.h
 	Preamble.cpp
 
-	MediaView.h
-	MediaView.cpp
-	VideoView.h
-	VideoView.cpp
-	WebView.h
-	WebView.cpp
-
 	SocialPanel.h
 	SocialPanel.cpp
 	OptionsPanel.h
 	OptionsPanel.cpp
 
 	["Sources/Test"]
-	(source)	
+	(source)
 	Test.h
 	Test.cpp
 

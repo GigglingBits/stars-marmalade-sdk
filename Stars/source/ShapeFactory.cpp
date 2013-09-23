@@ -1,5 +1,7 @@
 #include "ShapeFactory.h"
 
+#include "Debug.h"
+
 ShapeFactory::ShapeFactory() : FactoryBase<ShapeTemplate, void>("root", "shapes", "shape") {
 }
 
@@ -19,6 +21,8 @@ int ShapeFactory::ReadVertices(TiXmlElement* pointnode, float xpoints[ShapeFacto
 }
 
 std::string ShapeFactory::PopulateConfig(TiXmlElement* node, ShapeTemplate& conf) {
+	IW_CALLSTACK_SELF;
+
 	char* pc;
 	std::string id((pc = (char*)node->Attribute("id")) ? pc : GenerateUniqueId((long)node));
 	std::string type((pc = (char*)node->Attribute("type")) ? pc : "");

@@ -5,10 +5,10 @@
       fileformatversion="2">
 
 	<preambles>
-		 <preamble name="earth_1" file="stories/intro.mp4">
+		 <preamble name="earth_1" texture="title_bg">
 			 Drag the star to catch the nuggets. The nuggets make it stronger.
 		 </preamble>
-		 <preamble name="earth_2" file="rom://stories/catch_nuggets/index.html">
+		 <preamble name="earth_2" file="stories/intro.mp4">
 			 Catch all nuggets to get max points.
 		 </preamble>
 		 <preamble name="earth_3" file="rom://stories/dodge_objects/index.html">

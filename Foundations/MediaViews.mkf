@@ -1,0 +1,27 @@
+subprojects {
+	./UserInterface
+
+	s3eWebView
+}
+
+includepaths {
+	./MediaViews
+}
+
+files {
+	(MediaViews)
+	MediaViewFactory.h
+	MediaViewFactory.cpp
+
+	MediaView.h
+	MediaView.cpp
+	TextureView.h
+	TextureView.cpp
+
+	MediaFileView.h
+	MediaFileView.cpp
+	VideoView.h
+	VideoView.cpp
+	WebView.h
+	WebView.cpp
+}
