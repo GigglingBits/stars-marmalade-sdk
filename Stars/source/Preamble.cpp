@@ -3,7 +3,7 @@
 #include "FactoryManager.h"
 #include "MediaViewFactory.h"
 
-Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) : m_pxMediaView(NULL) {
+Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) : m_xTextPosition(0, 0, 0, 0), m_pxMediaView(NULL) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, !text.empty() || !textureid.empty() || !mediafile.empty(), ("At least on of the 3 parguments must be non-empty."));
 
@@ -55,10 +55,17 @@ void Preamble::Initialize() {
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {
 	int32 margin = GetScreenExtents() / 5;
-	CIwVec2 pos(margin, margin);
-	CIwVec2 size(screensize.x - 2 * margin, screensize.y - 2 * margin);
+
 	if (m_pxMediaView) {
+		// media view
+		CIwVec2 pos(margin, margin);
+		CIwVec2 size(screensize.x - 2 * margin, screensize.y - 2 * margin);
 		m_pxMediaView->SetPosition(pos, size);
+	
+		// text
+		m_xTextPosition.Make(margin, screensize.y - margin, screensize.x - (2 * margin), margin);
+	} else {
+		m_xTextPosition.Make(margin, margin, screensize.x - (2 * margin), screensize.y - 2 * margin);
 	}
 }
 
@@ -92,8 +99,7 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 	
 	// text
-	CIwRect textrect(0, screensize.y / 2, screensize.x, screensize.y / 2);
-	renderer.DrawText(m_sText, textrect);
+	renderer.DrawText(m_sText, m_xTextPosition);
 }
 
 void Preamble::TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {

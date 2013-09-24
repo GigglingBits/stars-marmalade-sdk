@@ -15,10 +15,11 @@ private:
 	Camera m_xCamera;
 
 	std::string m_sText;
+	CIwRect m_xTextPosition;
 
 	Texture* m_pxBackground;
 	MediaView* m_pxMediaView;
-
+	
 public:
 	Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile);
 	virtual ~Preamble();
