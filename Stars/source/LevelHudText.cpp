@@ -67,7 +67,7 @@ void LevelHudText::OnRender(Renderer& renderer, const FrameData& frame) {
 		m_sText,
 		m_xPosition,
 		m_xSize,
-		Renderer::eFontTypeLarge,
+		Renderer::eFontTypeNormal,
 		0xffffffff);
 }
 

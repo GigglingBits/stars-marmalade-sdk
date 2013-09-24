@@ -3,7 +3,8 @@ CIwResGroup
 	name fonts
 
 	"fonts/terminal6.gxfont"
-	"fonts/jellybelly10.gxfont"
-	"fonts/jellybelly16.gxfont"
-	"fonts/jellybelly22.gxfont"
+
+	"fonts/jb10.gxfont"
+	"fonts/jb16.gxfont"
+	"fonts/jb22.gxfont"
 }

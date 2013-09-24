@@ -91,7 +91,7 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	uint32 btnsize = 60;
 	uint32 btnmargin = 15;
 	m_xButtonBack.SetPosition(
-							  CIwRect(btnmargin, btnmargin, btnsize, btnsize));
+		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void LevelMenu::OnUpdate(const FrameData& frame) {

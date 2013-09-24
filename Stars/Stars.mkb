@@ -8,6 +8,13 @@ options {
 }
 
 subprojects {
+	# empty section required because auto-derbh bug in the mkb interpreter
+}
+
+defines {
+	# Define for TTF rendering support.
+	# Must be before iwgxfont subproject is first included.
+	IW_GXFONT_TTF
 }
 
 deployments {
@@ -51,6 +58,8 @@ subprojects {
 	../Foundations/Physics
 	../Foundations/Sprites
 	../Foundations/Particles
+
+	iwgxfont
 
 	tinyxml
 }

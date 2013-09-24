@@ -25,5 +25,5 @@ void SplashText::OnRender(Renderer& renderer, const FrameData& frame) {
 	if (m_sText.empty()) {
 		return;
 	}
-	renderer.DrawText(m_sText, GetPosition(), Renderer::eFontTypeNormal, 0xff00ffff);
+	renderer.DrawText(m_sText, GetPosition(), Renderer::eFontTypeSmall, 0xff00ffff);
 }

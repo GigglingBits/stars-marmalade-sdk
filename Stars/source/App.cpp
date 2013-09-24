@@ -21,7 +21,7 @@ App::App() {
 	im.ButtonReleasedEvent.AddListener<App>(this, &App::ButtonReleasedEventHandler);
 	
 	// set the rendeer up
-	m_xRenderer.SetFonts("jellybelly22", "jellybelly16", "jellybelly10", "terminal6");
+	m_xRenderer.SetFonts("jb22", "jb16", "jb10", "terminal6");
 }
 
 App::~App() {
