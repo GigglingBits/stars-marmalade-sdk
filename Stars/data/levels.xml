@@ -5,6 +5,7 @@
       fileformatversion="2">
 
 	<preambles>
+		<!--
 		 <preamble name="earth_1">
 			 Drag the star to catch the nuggets. The nuggets make it stronger.
 		 </preamble>
@@ -17,6 +18,7 @@
 		 <preamble name="earth_4" texture="title_bg">
 			 Beware of flying objects.
 		 </preamble>
+		 -->
 	</preambles>
 	
 	<levels>
