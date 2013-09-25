@@ -37,9 +37,58 @@ void WorldMenu::Initialize() {
 	m_xButtonPlanetName.SetTexture(FactoryManager::GetTextureFactory().Create("button_world_name"));
     SetWorld(m_eWorld);
     
+	m_xNaviPanel.Initialize();
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey1, PageSettings::eWorldIdEarth);
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey2, PageSettings::eWorldIdMars);
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey3, PageSettings::eWorldIdJupiter);
+	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
+}
+
+void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
+	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
+	CIwRect button;
+	int extents = GetScreenExtents();
+	
+    // name button
+	button.w = extents;
+    button.h = extents / 10;
+    button.x = screencenter.x - (extents / 2);
+	button.y = screencenter.y - (extents * 5 / 12);
+	m_xButtonPlanetName.SetPosition(button);
+    
+	// world button
+    button.w = (int16)(extents / 1.5f);
+    button.h = (int16)(extents / 1.5f);
+    button.x = screencenter.x - (button.w / 2);
+	button.y = screencenter.y - (button.h / 2);
+	m_xButtonPlanet.SetPosition(button);
+	
+    // navigation buttons
+    button.w = extents / 10;
+    button.h = extents / 5;
+    button.x = screencenter.x - (extents * 3 / 5);
+	button.y = screencenter.y - (button.h / 2);
+	m_xButtonPrevious.SetPosition(button);
+    
+	button.x = screencenter.x + (extents * 3 / 5) - button.w;
+	m_xButtonNext.SetPosition(button);
+	
+    // navi panel
+	int navidosize = extents / 15;
+	button.w = 3 * navidosize;
+    button.h = navidosize;
+    button.x = screencenter.x - (3 * navidosize / 2);
+	button.y = screencenter.y + (extents / 3);
+	m_xNaviPanel.SetPosition(button);
+	
+    // back button
+	uint32 btnsize = 60;
+	uint32 btnmargin = 15;
+	m_xButtonBack.SetPosition(
+		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void WorldMenu::OnUpdate(const FrameData& frame) {
@@ -47,9 +96,12 @@ void WorldMenu::OnUpdate(const FrameData& frame) {
 
 	m_xButtonPlanet.Update(frame);
 	m_xButtonPlanetName.Update(frame);
+
 	m_xButtonPrevious.Update(frame);
 	m_xButtonNext.Update(frame);
 
+	m_xNaviPanel.Update(frame);
+	
 	m_xButtonBack.Update(frame);
 
 	if (m_pxBackground) {
@@ -75,43 +127,8 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonPlanet.Render(renderer, frame);
 	m_xButtonPrevious.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
+	m_xNaviPanel.Render(renderer, frame);
 	m_xButtonBack.Render(renderer, frame);
-}
-
-void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
-	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
-	CIwRect button;
-	int extents = GetScreenExtents();
-
-    // name button
-	button.w = extents;
-    button.h = extents / 10;
-    button.x = screencenter.x - (extents / 2);
-	button.y = screencenter.y - (extents * 5 / 12);
-	m_xButtonPlanetName.SetPosition(button);
-    
-	// world button
-    button.w = (int16)(extents / 1.2f);
-    button.h = (int16)(extents / 1.2f);
-    button.x = screencenter.x - (button.w / 2);
-	button.y = screencenter.y - (button.h / 2);
-	m_xButtonPlanet.SetPosition(button);
-
-    // navigation buttons
-    button.w = extents / 10;
-    button.h = extents / 5;
-    button.x = screencenter.x - (extents * 3 / 5);
-	button.y = screencenter.y - (button.h / 2);
-	m_xButtonPrevious.SetPosition(button);
-    
-	button.x = screencenter.x + (extents * 3 / 5) - button.w;
-	m_xButtonNext.SetPosition(button);
-	
-    // back button
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
-	m_xButtonBack.SetPosition(
-		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
 }
 
 void WorldMenu::SetWorld(PageSettings::WorldId world) {
@@ -139,11 +156,4 @@ void WorldMenu::ButtonPressedEventHandler(const Button& sender, const Button::Ev
         m_eWorld = (PageSettings::WorldId)((m_eWorld + 1) % PageSettings::eWorldIdMax);
     }
     SetWorld(m_eWorld);
-}
-
-void WorldMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {
-    m_xButtonPlanet.SetEnabled(enable);
-    m_xButtonPlanetName.SetEnabled(enable);
-	m_xButtonPrevious.SetEnabled(enable);
-	m_xButtonNext.SetEnabled(enable);
 }

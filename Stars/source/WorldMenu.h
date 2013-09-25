@@ -4,7 +4,7 @@
 #include "Page.h"
 #include "PageSettings.h"
 #include "Button.h"
-#include "OptionsPanel.h"
+#include "NaviPanel.h"
 #include "IwList.h"
 #include "Body.h"
 #include "Camera.h"
@@ -13,7 +13,7 @@ class WorldMenu : public Page {
 private:
 	Camera m_xCamera;
 
-	Texture* m_pxBackground;
+	PageSettings::WorldId m_eWorld;
 	
     Button m_xButtonPlanet;
 	Button m_xButtonPlanetName;
@@ -22,9 +22,10 @@ private:
 	Button m_xButtonPrevious;
 
 	Button m_xButtonBack;
+	NaviPanel m_xNaviPanel;
 	
-    PageSettings::WorldId m_eWorld;
-    
+	Texture* m_pxBackground;
+
 public:
 	WorldMenu(PageSettings::WorldId world);
 	virtual ~WorldMenu();
@@ -41,7 +42,6 @@ protected:
 
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ChangeButtonState(bool enable, const ButtonPanel& except);
 };
 
 #endif

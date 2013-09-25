@@ -54,6 +54,11 @@ void LevelMenu::Initialize() {
 		m_apxButtons[i]->SetTexture(FactoryManager::GetTextureFactory().Create("button_level"));
 	}
 
+	m_xNaviPanel.Initialize();
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey1, 1);
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey2, 2);
+	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey3, 3);
+
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
@@ -61,7 +66,7 @@ void LevelMenu::Initialize() {
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int margin = extents / 7;
+	int margin = extents / 5;
 	int space = extents / 25;
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 	
@@ -87,6 +92,14 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	}
 	EnableButtons(true);
 	
+	// navi panel
+	int navidosize = extents / 15;
+	button.w = 3 * navidosize;
+    button.h = navidosize;
+    button.x = screencenter.x - (3 * navidosize / 2);
+	button.y = screencenter.y + (extents / 3);
+	m_xNaviPanel.SetPosition(button);
+
     // back button
 	uint32 btnsize = 60;
 	uint32 btnmargin = 15;
@@ -103,6 +116,7 @@ void LevelMenu::OnUpdate(const FrameData& frame) {
 	}
 
 	// update other buttons
+	m_xNaviPanel.Update(frame);
 	m_xButtonBack.Update(frame);
 
 	if (m_pxBackground) {
@@ -131,11 +145,8 @@ void LevelMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	// other buttons
+	m_xNaviPanel.Render(renderer, frame);
 	m_xButtonBack.Render(renderer, frame);
-}
-
-void LevelMenu::ChangeButtonState(bool enable, const ButtonPanel& except) {
-	EnableButtons(enable);
 }
 
 void LevelMenu::EnableButtons(bool enable) {

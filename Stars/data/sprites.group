@@ -5,8 +5,8 @@ CIwResGroup
 	sprites/image_missing.png
 
 	sprites/touch.png
-	sprites/navidot_on.png
-	sprites/navidot_off.png
+	sprites/navidot_filled.png
+	sprites/navidot_empty.png
 
 	sprites/button_social.png
 	sprites/button_achievements.png
