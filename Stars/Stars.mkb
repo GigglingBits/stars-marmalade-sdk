@@ -96,6 +96,8 @@ files {
 	SocialPanel.cpp
 	OptionsPanel.h
 	OptionsPanel.cpp
+	NaviPanel.h
+	NaviPanel.cpp
 
 	["Sources/Test"]
 	(source)

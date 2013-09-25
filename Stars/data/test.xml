@@ -45,6 +45,10 @@
 	  <texture id="button_quit" colour="0xff343423" />
 
 	  <texture id="number_back" image="hud_number_back" />
+	  <texture id="navipanel">
+		  <frame id="on" colour="0xff343423"/>
+		  <frame id="off" colour="0xff343423"/>
+	  </texture>
   </textures>
 
   <fixtures>
