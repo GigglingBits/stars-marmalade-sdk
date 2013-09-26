@@ -4,23 +4,26 @@
 #include "Button.h"
 #include "Window.h"
 
-#define NAVIPANEL_MAX_BUTTONS 5
+#define NAVIPANEL_BUTTON_MAX_COUNT 5
+#define NAVIPANEL_BUTTON_ON "on"
+#define NAVIPANEL_BUTTON_OFF "off"
 
 class NaviPanel : public Window {
 private:
 	CIwRect m_xPosition;
 
 	int m_iButtonCount;
-	Button* m_apxButtons[NAVIPANEL_MAX_BUTTONS];
+	Button* m_apxButtons[NAVIPANEL_BUTTON_MAX_COUNT];
 	
 public:
 	NaviPanel();
 	virtual ~NaviPanel();
 	virtual void Initialize();
 
-	void AddButton(const std::string& textureid, ButtonCommandId cmdid, s3eKey key = s3eKeyFirst, long userdata = 0);
-	
 	void SetPosition(const CIwRect& rect);
+
+	void AddButton(const std::string& textureid, int buttonid);
+	void ActivateButton(int buttonid);
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);

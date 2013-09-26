@@ -3,7 +3,7 @@
 #include "Debug.h"
 
 NaviPanel::NaviPanel() : m_iButtonCount(0), m_xPosition(0, 0, 0, 0) {
-	for (int i = 0; i < NAVIPANEL_MAX_BUTTONS; i++) {
+	for (int i = 0; i < NAVIPANEL_BUTTON_MAX_COUNT; i++) {
 		m_apxButtons[i] = NULL;
 	}
 }
@@ -48,12 +48,12 @@ void NaviPanel::SetPosition(const CIwRect& rect) {
 	InvalidateLayout();
 }
 
-void NaviPanel::AddButton(const std::string& textureid, ButtonCommandId cmdid, s3eKey key, long userdata) {
+void NaviPanel::AddButton(const std::string& textureid, int buttonid) {
 	IW_CALLSTACK_SELF;
 	
 	// find empty spot
 	int cursor = m_iButtonCount;
-	if (cursor == NAVIPANEL_MAX_BUTTONS - 1) {
+	if (cursor == NAVIPANEL_BUTTON_MAX_COUNT - 1) {
 		IwAssertMsg(MYAPP, false, ("Cannot add button. Maximum number of buttons exceeded."));
 		return;
 	}
@@ -61,7 +61,7 @@ void NaviPanel::AddButton(const std::string& textureid, ButtonCommandId cmdid, s
 	// load and check the texture
 	Texture* t = FactoryManager::GetTextureFactory().Create(textureid);
 	if (t) {
-		if (!(t->ContainsFrame("on") && t->ContainsFrame("on"))) {
+		if (!(t->ContainsFrame(NAVIPANEL_BUTTON_ON) && t->ContainsFrame(NAVIPANEL_BUTTON_OFF))) {
 			IwAssertMsg(MYAPP, false, ("The texture '%s' cannot be used in the NaviBar. It does not contain frames called 'on' and 'off'.", textureid.c_str()));
 			delete t;
 			return;
@@ -71,10 +71,22 @@ void NaviPanel::AddButton(const std::string& textureid, ButtonCommandId cmdid, s
 	}
 	
 	// create the button
-	m_apxButtons[cursor] = new Button(cmdid, key, userdata);
+	m_apxButtons[cursor] = new Button(eButtonCommandIdNone, s3eKeyFirst, buttonid);
 	m_apxButtons[cursor]->SetTexture(t);
+	m_apxButtons[cursor]->SetHideWhenDisabled(true);
+	m_apxButtons[cursor]->SetShadedWhenPressed(false);
 
 	// houskeeping
 	m_iButtonCount++;
 	InvalidateLayout();
+}
+
+void NaviPanel::ActivateButton(int buttonid) {
+	for (int i = 0; i < m_iButtonCount; i++) {
+		if (m_apxButtons[i]->GetUserData() == buttonid) {
+			m_apxButtons[i]->SetTextureFrame(NAVIPANEL_BUTTON_ON);
+		} else {
+			m_apxButtons[i]->SetTextureFrame(NAVIPANEL_BUTTON_OFF);
+		}
+	}
 }

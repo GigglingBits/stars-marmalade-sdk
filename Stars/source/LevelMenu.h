@@ -10,21 +10,26 @@
 #include "ButtonEx.h"
 #include "NaviPanel.h"
 
-#define LVLMENU_BTN_COLS 4
+#define LVLMENU_BTN_COLS 3
 #define LVLMENU_BTN_ROWS 2
-#define LVLMENU_BTN_COUNT LVLMENU_BTN_COLS*LVLMENU_BTN_ROWS
+#define LVLMENU_BTN_GROUP_COUNT 4
+#define LVLMENU_BTN_COUNT_PER_GROUP LVLMENU_BTN_COLS*LVLMENU_BTN_ROWS
 
 class LevelMenu : public Page {
 private:
 	Camera m_xCamera;
 	
 	Texture* m_pxBackground;
-	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT];
+	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT_PER_GROUP];
+
+	Button m_xButtonNext;
+	Button m_xButtonPrevious;
 
 	Button m_xButtonBack;
 	NaviPanel m_xNaviPanel;
 
 	PageSettings::WorldId m_eWorldId;
+	int m_iGroupId;
 
 public:
 	LevelMenu(PageSettings::WorldId world);
@@ -42,6 +47,13 @@ private:
 	void EnableButtons(bool enable);
 	
 	Button* GetButton(int col, int row);
+
+	void ApplyGroup(int groupid);
+	int GetNext(int groupid);
+	int GetPrevious(int groupid);
+
+private:
+	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 };
 
 #endif

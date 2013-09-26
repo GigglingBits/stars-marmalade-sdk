@@ -33,8 +33,10 @@ public:
 	virtual void Initialize();
 
 private:
-    void SetWorld(PageSettings::WorldId world);
-    
+    void ApplyWorld(PageSettings::WorldId world);
+	PageSettings::WorldId GetNext(PageSettings::WorldId worldid);
+	PageSettings::WorldId GetPrevious(PageSettings::WorldId worldid);
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

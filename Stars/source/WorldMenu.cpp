@@ -35,16 +35,17 @@ void WorldMenu::Initialize() {
 
     m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
 	m_xButtonPlanetName.SetTexture(FactoryManager::GetTextureFactory().Create("button_world_name"));
-    SetWorld(m_eWorld);
     
 	m_xNaviPanel.Initialize();
-	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey1, PageSettings::eWorldIdEarth);
-	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey2, PageSettings::eWorldIdMars);
-	m_xNaviPanel.AddButton("navipanel", eButtonCommandIdNone, s3eKey3, PageSettings::eWorldIdJupiter);
+	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdEarth);
+	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdMars);
+	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdJupiter);
 	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
+
+    ApplyWorld(m_eWorld);
 }
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
@@ -131,11 +132,12 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonBack.Render(renderer, frame);
 }
 
-void WorldMenu::SetWorld(PageSettings::WorldId world) {
+void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
     // communicate the new level
     m_xButtonPlanet.SetUserData((int)world);
     m_xButtonPlanetName.SetUserData((int)world);
-    
+    m_xNaviPanel.ActivateButton((int)world);
+	
     // find name for texture frame
     std::string worldframe = PageSettings::GetWorldKey(world);
     
@@ -149,11 +151,19 @@ void WorldMenu::SetWorld(PageSettings::WorldId world) {
     m_xButtonPlanetName.SetTextureFrame(worldframe);
 }
 
+PageSettings::WorldId WorldMenu::GetNext(PageSettings::WorldId worldid) {
+	return (PageSettings::WorldId)((m_eWorld + 1) % PageSettings::eWorldIdMax);
+}
+
+PageSettings::WorldId WorldMenu::GetPrevious(PageSettings::WorldId worldid) {
+	return (PageSettings::WorldId)((m_eWorld + PageSettings::eWorldIdMax - 1) % PageSettings::eWorldIdMax);
+}
+
 void WorldMenu::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
     if (&sender == &m_xButtonPrevious) {
-        m_eWorld = (PageSettings::WorldId)((m_eWorld + PageSettings::eWorldIdMax - 1) % PageSettings::eWorldIdMax);
+        m_eWorld = GetPrevious(m_eWorld);
     } else if (&sender == &m_xButtonNext) {
-        m_eWorld = (PageSettings::WorldId)((m_eWorld + 1) % PageSettings::eWorldIdMax);
+        m_eWorld = GetNext(m_eWorld);
     }
-    SetWorld(m_eWorld);
+    ApplyWorld(m_eWorld);
 }
