@@ -345,8 +345,7 @@ the bodie that owns the joint.
           <frame id="jupiter" image="world_jupiter"/>
       </texture>
 
-	  <texture id="title_bg" image="title_background"/>
-	  <texture id="title_name" image="title_name"/>
+	  <texture id="title_bg" image="world_earth_background"/>
 	  <texture id="title_button" image="title_button"/>
 	  
     <texture id="button_world_name">

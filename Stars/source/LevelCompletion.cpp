@@ -16,7 +16,7 @@ LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
 	m_bIsCompleted = IsCompleted(info);
 	m_sCompletionText = GenerateCompletionText(info);
 
-		m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
+	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 		
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("levelstats_bg");
 	if (m_pxBackground) {
@@ -35,6 +35,7 @@ LevelCompletion::~LevelCompletion() {
 void LevelCompletion::Initialize() {
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
     m_xButtonStar.SetTextureFrame(m_bIsCompleted ? "won" : "lost");
+	m_xButtonStar.SetShadedWhenPressed(false);
     
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));

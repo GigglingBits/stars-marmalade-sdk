@@ -13,8 +13,7 @@ private:
 	Camera m_xCamera;
 
 	Texture* m_pxBackground;
-	
-    Button m_xButtonTitle;
+	Button m_xButtonTitle;
 
 	OptionsPanel m_xPanelOptions;
 	OptionsPanel m_xPanelSocial;

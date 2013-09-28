@@ -51,7 +51,7 @@ SplashscreenBkB=0
 IOSDispScaleFactor=200
 DispFixRot=2
 
-MemSize=100000000
+MemSize=120000000
 MemSizeDebug=90000000
 
 SysTraceToFile=0
@@ -64,11 +64,11 @@ SysTraceToFile=0
 KeyAbsGameA=P			# pause/resume
 KeyAbsGameB=R			# restart
 KeyAbsGameC=Backspace	# reload
-KeyAbsGameD=Esc			# quit
+KeyAbsGameD=Esc		# quit
 
 KeyAbsOk=Enter			# not used
-KeyAbsASK=T				# not used
-KeyAbsBSK=B				# not used
+KeyAbsASK=T			# not used
+KeyAbsBSK=B			# not used
 
 ####################################################
 [Gx]
@@ -86,5 +86,5 @@ CacheTextureMaxSize=256
 ####################################################
 [GL]
 ####################################################
-#EGL_SAMPLE_BUFFERS=1
-#EGL_SAMPLES=4			# Use super-sampling if available. Change to 2 for cheaper multi-sampling
+EGL_SAMPLE_BUFFERS=1
+EGL_SAMPLES=4			# Use super-sampling if available. Change to 2 for cheaper multi-sampling
