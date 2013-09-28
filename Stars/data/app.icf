@@ -6,7 +6,8 @@ showstats=0
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
 
-pathspeed=10			# meters per second
+objectspeed=4			# meters per second
+pathspeed=15			# meters per second
 pathmaxlength=50		# max length of the path in meters
 
 bodies=bodies.xml

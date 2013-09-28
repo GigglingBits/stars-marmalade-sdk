@@ -53,15 +53,13 @@ Texture* TextureFactory::CreateInstance(const TextureTemplate& conf) {
 	return new Texture(myconf);
 }
 
-uint32 TextureFactory::HexToColour(const std::string& col) {
-	if (col.empty()) {
-		return 0x00000000;
-	} else {
+uint32 TextureFactory::HexToColour(const std::string& coltext) {
+	uint32 col = 0x00000000;
+	if (!coltext.empty()) {
 		// inspired by: http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer
-		uint32 x;    
-		std::stringstream ss; 
-		ss << std::hex << col; 
-		ss >> x; 
-		return x;
+		std::stringstream ss;
+		ss << std::hex << coltext;
+		ss >> col;
 	}
+	return col;
 }

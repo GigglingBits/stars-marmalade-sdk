@@ -4,6 +4,7 @@
 #include "SplashText.h"
 #include "FactoryManager.h"
 #include "SoundEngine.h"
+#include "Configuration.h"
 
 GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
 : m_xWorldSize(worldsize), m_xRayCaster(m_xWorld), m_pxStar(NULL), m_xDust(dustrequirement) {
@@ -254,7 +255,7 @@ void GameFoundation::BodyTimerEventHandler(const EventTimer<BodySpec>& sender, c
 	BodyFactory& factory = FactoryManager::GetBodyFactory();		
 	if (Body* body = factory.Create(args.Body)) {
 		body->SetPosition(CIwFVec2(m_xWorldSize.x * 2, args.YPos));
-		body->SetSpeed(CIwFVec2(-3.0f, 0.0f));
+		body->SetSpeed(CIwFVec2(-Configuration::GetInstance().ObjectSpeed, 0.0f));
 		Add(body);
 	} else {
 		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", args.Body.c_str()));

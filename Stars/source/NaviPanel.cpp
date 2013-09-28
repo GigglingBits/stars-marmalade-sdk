@@ -3,13 +3,12 @@
 #include "Debug.h"
 
 NaviPanel::NaviPanel() : m_iButtonCount(0), m_xPosition(0, 0, 0, 0) {
-	for (int i = 0; i < NAVIPANEL_BUTTON_MAX_COUNT; i++) {
-		m_apxButtons[i] = NULL;
-	}
+	memset(m_apxButtons, 0, sizeof(m_apxButtons));
 }
 
 NaviPanel::~NaviPanel() {
 	for (int i = 0; i < m_iButtonCount; i++) {
+		IwAssert(MYAPP, m_apxButtons[i]);
 		delete m_apxButtons[i];
 	}
 }
