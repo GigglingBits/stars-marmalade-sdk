@@ -10,7 +10,7 @@ Renderer::Renderer() {
 
 	memset(m_apxFonts, 0, sizeof(m_apxFonts));
 	
-	IwGetResManager()->LoadGroup("fonts.group");
+	IwGetResManager()->LoadGroup("fonts/fonts.group");
 }
 
 Renderer::~Renderer() {

@@ -64,11 +64,11 @@ SysTraceToFile=0
 KeyAbsGameA=P			# pause/resume
 KeyAbsGameB=R			# restart
 KeyAbsGameC=Backspace	# reload
-KeyAbsGameD=Esc		# quit
+KeyAbsGameD=Esc			# quit
 
 KeyAbsOk=Enter			# not used
-KeyAbsASK=T			# not used
-KeyAbsBSK=B			# not used
+KeyAbsASK=T				# not used
+KeyAbsBSK=B				# not used
 
 ####################################################
 [Gx]

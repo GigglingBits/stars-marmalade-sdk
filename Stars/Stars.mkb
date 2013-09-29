@@ -42,6 +42,10 @@ deployments {
 	iphone
 	iphone-appid='com.gigglingbits.stars'
 	iphone-enable-4inch-retina='1'
+	iphone-splash-retina-generate='1'
+	iphone-splash-full-orient='1'
+	iphone-splashscreen-portrait='data/splashscreens/'
+	iphone-splashscreen-landscape='data/splashscreens/'
 }
 
 packages {
@@ -225,9 +229,9 @@ files {
 
 	["Sources/Resources"]
 	(data)
-	fonts.group
-	sprites.group
-	sounds.group
+	fonts/fonts.group
+	sprites/sprites.group
+	sounds/sounds.group
 	sounds/effects.itx
 }
 
@@ -241,15 +245,13 @@ assets
 	music/.
 	stories/.
 
-	(data-ram/data-gles1, data)
-	fonts.group.bin
-	sprites.group.bin
-	sounds.group.bin
-}
+	fonts/fonts.group
+	sprites/sprites.group
+	sounds/sounds.group
+	sounds/effects.itx
 
-#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
-deployments
-{
-	["Default"]
-	["iOS"]
+	(data-ram/data-gles1, data)
+	fonts/fonts.group.bin
+	sprites/sprites.group.bin
+	sounds/sounds.group.bin
 }

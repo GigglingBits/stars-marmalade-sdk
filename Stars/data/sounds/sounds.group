@@ -1,0 +1,16 @@
+CIwResGroup
+{
+	name "sounds"
+
+	./collision.wav
+
+	./28814_SFX_KungFuOh.wav
+	./28815_SFX_KungFuWaka.wav
+	./28820_SFX_NinjaAttack.wav
+	./28829_SFX_NinjaHo.wav
+	./28831_SFX_NinjaHurt.wav
+
+	./27995_SFX_FoleyDroppingEmptyBulletShell.wav
+	
+	./effects.itx
+}

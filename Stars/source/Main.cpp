@@ -44,7 +44,7 @@ void Initialize() {
 	}
 
 	IwResManagerInit();
-	IwGetResManager()->LoadGroup("sprites.group");
+	IwGetResManager()->LoadGroup("sprites/sprites.group");
 
 	IwGxFontInit();
 

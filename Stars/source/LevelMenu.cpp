@@ -71,7 +71,7 @@ void LevelMenu::Initialize() {
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int space = extents / 25;
+	int space = extents / 15;
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 	
 	CIwRect menuarea;

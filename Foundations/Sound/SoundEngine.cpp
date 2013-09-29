@@ -16,7 +16,7 @@ void SoundEngine::Initialize() {
 	IwGetResManager()->AddHandler(new CIwResHandlerWAV);
 #endif
 	IwSoundInit();
-	s_pSoundResources = IwGetResManager()->LoadGroup("sounds.group");
+	s_pSoundResources = IwGetResManager()->LoadGroup("sounds/sounds.group");
 }
 
 void SoundEngine::Terminate() {
