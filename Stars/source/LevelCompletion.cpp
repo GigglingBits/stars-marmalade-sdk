@@ -91,7 +91,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	// text
 	rect.y = 0;
 	rect.h = screen.y / 2;
-	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffffffff);
+	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffccfaff);
 	
 	m_xDustFillPercent.Render(renderer, frame);
 

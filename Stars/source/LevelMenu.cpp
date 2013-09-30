@@ -205,7 +205,7 @@ void LevelMenu::ApplyGroup(int groupid) {
         
 		std::ostringstream oss;
 		oss << level;
-		m_apxButtons[i]->SetText(oss.str(), 0xffffffff, Renderer::eFontTypeLarge);
+		m_apxButtons[i]->SetText(oss.str(), 0xffccfaff, Renderer::eFontTypeLarge);
 	}
 
 	// make sure they are locked/unlocked

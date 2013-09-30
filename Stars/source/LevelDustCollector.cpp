@@ -4,7 +4,6 @@
 #include "Debug.h"
 
 LevelDustCollector::LevelDustCollector() : 
-	m_pxVial(NULL),
 	m_pxDust(NULL),
 	m_fTargetProgress(0.0f),
 	m_fDisplayedProgress(0.0f),
@@ -17,13 +16,9 @@ LevelDustCollector::~LevelDustCollector() {
 	if (m_pxDust) {
 		delete m_pxDust;
 	}
-	if (m_pxVial) {
-		delete m_pxVial;
-	}
 }
 
 void LevelDustCollector::Initialize() {
-	m_pxVial = FactoryManager::GetTextureFactory().Create("stardustvial");
 	m_pxDust = FactoryManager::GetTextureFactory().Create("stardust");
 }
 
@@ -77,9 +72,6 @@ void LevelDustCollector::OnUpdate(const FrameData& frame) {
 	}
 	
 	// textures
-	if (m_pxVial) {
-		m_pxVial->Update(frame.GetRealDurationMs());
-	}
 	if (m_pxDust) {
 		m_pxDust->Update(frame.GetRealDurationMs());
 	}
@@ -89,10 +81,6 @@ void LevelDustCollector::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	// background
-	if (m_pxVial) {
-		renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
-		renderer.Draw(m_xVialShape, *m_pxVial);
-	}
 	if (m_pxDust) {
 		renderer.SetRederingLayer(Renderer::eRenderingLayerHud3);
 		renderer.Draw(m_xDustShape, *m_pxDust);
@@ -100,6 +88,5 @@ void LevelDustCollector::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void LevelDustCollector::OnDoLayout(const CIwSVec2& screensize) {
-	m_xVialShape.SetRect(m_xCollectorShape);
 	UpdateDustShape();
 }

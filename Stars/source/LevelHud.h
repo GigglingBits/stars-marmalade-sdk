@@ -14,10 +14,11 @@ private:
 
 	bool m_bIsEnabled;
 
-	Texture* m_pxBackdrop;
-	VertexStreamScreen m_xBackdropShape;
-
 	LevelProgressBar m_xProgressBar;
+
+	VertexStreamScreen m_xVialShape;
+	Texture* m_pxVial;
+	
 	LevelDustCollector m_xDustQueue;
 	LevelDustCollector m_xDustCollector;
 

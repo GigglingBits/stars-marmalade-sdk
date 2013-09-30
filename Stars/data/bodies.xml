@@ -255,7 +255,6 @@ the bodie that owns the joint.
 
 	  <texture id="touch" image="touch" />
 
-	  <texture id="backdrop" image="hud_backdrop" />
 	  <texture id="progressbar_back" image="hud_progressbar_back" />
 	  <texture id="progressbar_star" image="star_nugget" />
 	  <texture id="number_back" image="hud_number_back" />

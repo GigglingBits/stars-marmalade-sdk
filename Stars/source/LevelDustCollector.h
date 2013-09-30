@@ -11,9 +11,6 @@ private:
 	VertexStreamScreen m_xDustShape;
 	Texture* m_pxDust;
 
-	VertexStreamScreen m_xVialShape;
-	Texture* m_pxVial;
-
 	float m_fTargetProgress;
 	float m_fDisplayedProgress;
 	
