@@ -81,37 +81,40 @@ void LevelBackground::CreateCloud(const CIwFVec2& pos) {
 	CIwFVec2 velocity;
 	Renderer::RenderingLayer layer;
 	switch (rand() % 3) {
-	case 0:
-            distance = std::string("sky");
-		velocity = CIwFVec2(-0.5f, 0.0f);
-		layer = Renderer::eRenderingLayerHorizonVeryFar;
-		break;
-	case 1:
-            distance = std::string("far");
-		velocity = CIwFVec2(-1.5f, 0.0f);
-		layer = Renderer::eRenderingLayerHorizonFar;
-		break;
-	case 2:
-	default:
-            distance = std::string("near");
-		velocity = CIwFVec2(-3.0f, 0.0f);
-		layer = Renderer::eRenderingLayerHorizonClose;
-		break;
+		case 0:
+			distance = std::string("sky");
+			velocity = CIwFVec2(-0.5f, 0.0f);
+			layer = Renderer::eRenderingLayerHorizonVeryFar;
+			break;
+		case 1:
+			distance = std::string("far");
+			velocity = CIwFVec2(-1.5f, 0.0f);
+			layer = Renderer::eRenderingLayerHorizonFar;
+			break;
+		case 2:
+		default:
+			distance = std::string("near");
+			velocity = CIwFVec2(-3.0f, 0.0f);
+			layer = Renderer::eRenderingLayerHorizonClose;
+			break;
 	}
 
 	std::string variation;
-	switch (rand() % 3) {
-	case 0:
-            variation = std::string("01");
-		break;
-	case 1:
-            variation = std::string("02");
-		break;
-	case 2:
-	default:
-            variation = std::string("03");
-		break;
-	}   
+	switch (rand() % 4) {
+		case 0:
+			variation = std::string("01");
+			break;
+		case 1:
+			variation = std::string("02");
+			break;
+		case 2:
+			variation = std::string("03");
+			break;
+		case 3:
+		default:
+			variation = std::string("04");
+			break;
+	}
 
 	std::string cloudname(std::string("cloud").append(variation).append(distance));
 	LocalEffect* effect = FactoryManager::GetEffectFactory().Create(cloudname);

@@ -220,8 +220,12 @@ the bodie that owns the joint.
       <texture image="cloud_02" />
     </effect>
     <effect id="cloud03sky" duration="20000">
-      <shape type="rectangle" width="0.4" height="0.2" />
-      <texture image="cloud_03" />
+		<shape type="rectangle" width="0.4" height="0.2" />
+		<texture image="cloud_03" />
+    </effect>
+    <effect id="cloud04sky" duration="20000">
+		<shape type="rectangle" width="0.4" height="0.2" />
+		<texture image="cloud_04" />
     </effect>
     <effect id="cloud01far" duration="20000">
       <shape type="rectangle" width="1.4" height="0.5" />
@@ -232,8 +236,12 @@ the bodie that owns the joint.
       <texture image="cloud_02" />
     </effect>
     <effect id="cloud03far" duration="20000">
-      <shape type="rectangle" width="1.4" height="0.5" />
-      <texture image="cloud_03" />
+		<shape type="rectangle" width="1.4" height="0.5" />
+		<texture image="cloud_03" />
+    </effect>
+    <effect id="cloud04far" duration="20000">
+		<shape type="rectangle" width="1.4" height="0.5" />
+		<texture image="cloud_04" />
     </effect>
     <effect id="cloud01near" duration="20000">
       <shape type="rectangle" width="2.4" height="1.2" />
@@ -244,8 +252,12 @@ the bodie that owns the joint.
       <texture image="cloud_02" />
     </effect>
     <effect id="cloud03near" duration="20000">
-      <shape type="rectangle" width="2.4" height="1.2" />
-      <texture image="cloud_03" />
+		<shape type="rectangle" width="2.4" height="1.2" />
+		<texture image="cloud_03" />
+    </effect>
+    <effect id="cloud04near" duration="20000">
+		<shape type="rectangle" width="2.4" height="1.2" />
+		<texture image="cloud_04" />
     </effect>
   </effects>
 
