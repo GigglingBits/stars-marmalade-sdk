@@ -80,14 +80,14 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonTitle.SetPosition(button);
 	
-    // navigation buttons
-    button.w = extents / 10;
-    button.h = extents / 10;
-    button.x = screencenter.x - (extents * 3 / 5);
+    // menu buttons
+    button.w = extents / 8;
+    button.h = extents / 8;
+    button.x = screencenter.x - (extents / 2);
 	button.y = screencenter.y + (extents / 4);
 	m_xPanelOptions.GetMainButton().SetPosition(button);
     
-	button.x = screencenter.x + (extents * 3 / 5) - button.w;
+	button.x = screencenter.x + (extents / 2) - button.w;
 	m_xPanelSocial.GetMainButton().SetPosition(button);
 }
 

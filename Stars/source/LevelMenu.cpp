@@ -97,13 +97,13 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	EnableButtons(true);
 	
     // navigation buttons
-    button.w = extents / 10;
+    button.w = extents / 5;
     button.h = extents / 5;
-    button.x = screencenter.x - (extents * 3 / 5);
+    button.x = screencenter.x - (extents * 5 / 8);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPrevious.SetPosition(button);
     
-	button.x = screencenter.x + (extents * 3 / 5) - button.w;
+	button.x = screencenter.x + (extents * 5 / 8) - button.w;
 	m_xButtonNext.SetPosition(button);
 	
 	// navi panel
@@ -115,10 +115,11 @@ void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
 	m_xNaviPanel.SetPosition(button);
 
     // back button
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
+	uint32 btnsize = extents / 10;
+	uint32 btnmargin = extents / 30;
 	m_xButtonBack.SetPosition(
-		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
+		CIwRect(screensize.x - (btnsize + btnmargin),
+			btnmargin, btnsize, btnsize));
 }
 
 void LevelMenu::OnUpdate(const FrameData& frame) {

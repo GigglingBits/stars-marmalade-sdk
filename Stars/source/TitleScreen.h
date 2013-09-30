@@ -3,6 +3,7 @@
 
 #include "Page.h"
 #include "Button.h"
+#include "SocialPanel.h"
 #include "OptionsPanel.h"
 #include "IwList.h"
 #include "Body.h"
@@ -16,7 +17,7 @@ private:
 	Button m_xButtonTitle;
 
 	OptionsPanel m_xPanelOptions;
-	OptionsPanel m_xPanelSocial;
+	SocialPanel m_xPanelSocial;
 
 public:
 	TitleScreen();

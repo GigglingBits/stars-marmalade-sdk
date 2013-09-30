@@ -138,11 +138,12 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	m_xBackground.SetGeometry(m_xWorldSize, screensize, bgmargin);
 	
 	// app panel
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
+	int extents = GetScreenExtents();
+	uint32 btnsize = extents / 10;
+	uint32 btnmargin = extents / 30;
 	m_xAppPanel.GetMainButton().SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
-		btnmargin, btnsize, btnsize));
+				btnmargin, btnsize, btnsize));
 }
 
 void Level::OnUpdate(const FrameData& frame) {

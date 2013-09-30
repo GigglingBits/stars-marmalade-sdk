@@ -7,7 +7,6 @@
 WorldMenu::WorldMenu(PageSettings::WorldId world) :
     m_eWorld(world),
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyEnter),
-    m_xButtonPlanetName(eButtonCommandIdOpenLevelMenu, s3eKeyEnter),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyLeft),
 	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyFirst) {
@@ -34,7 +33,6 @@ void WorldMenu::Initialize() {
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
     m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
-	m_xButtonPlanetName.SetTexture(FactoryManager::GetTextureFactory().Create("button_world_name"));
     
 	m_xNaviPanel.Initialize();
 	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdEarth);
@@ -50,31 +48,34 @@ void WorldMenu::Initialize() {
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
-	CIwRect button;
 	int extents = GetScreenExtents();
 	
     // name button
-	button.w = extents;
-    button.h = extents / 10;
-    button.x = screencenter.x - (extents / 2);
-	button.y = screencenter.y - (extents * 5 / 12);
-	m_xButtonPlanetName.SetPosition(button);
+	m_xTitlePos.w = extents;
+    m_xTitlePos.h = extents / 10;
+    m_xTitlePos.x = screencenter.x - (extents / 2);
+	m_xTitlePos.y = screencenter.y - (extents * 5 / 12);
+	
+	m_xTitleShadowPos = m_xTitlePos;
+	m_xTitleShadowPos.x += extents / 150;
+	m_xTitleShadowPos.y += extents / 150;
     
 	// world button
-    button.w = (int16)(extents / 1.5f);
-    button.h = (int16)(extents / 1.5f);
+	CIwRect button;
+    button.w = (int16)(extents / 1.8f);
+    button.h = (int16)(extents / 1.8f);
     button.x = screencenter.x - (button.w / 2);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPlanet.SetPosition(button);
 	
     // navigation buttons
-    button.w = extents / 10;
+    button.w = extents / 5;
     button.h = extents / 5;
-    button.x = screencenter.x - (extents * 3 / 5);
+    button.x = screencenter.x - (extents * 5 / 8);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPrevious.SetPosition(button);
     
-	button.x = screencenter.x + (extents * 3 / 5) - button.w;
+	button.x = screencenter.x + (extents * 5 / 8) - button.w;
 	m_xButtonNext.SetPosition(button);
 	
     // navi panel
@@ -86,17 +87,17 @@ void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
 	m_xNaviPanel.SetPosition(button);
 	
     // back button
-	uint32 btnsize = 60;
-	uint32 btnmargin = 15;
+	uint32 btnsize = extents / 10;
+	uint32 btnmargin = extents / 30;
 	m_xButtonBack.SetPosition(
-		CIwRect(btnmargin, btnmargin, btnsize, btnsize));
+		CIwRect(screensize.x - (btnsize + btnmargin),
+				btnmargin, btnsize, btnsize));
 }
 
 void WorldMenu::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xButtonPlanet.Update(frame);
-	m_xButtonPlanetName.Update(frame);
 
 	m_xButtonPrevious.Update(frame);
 	m_xButtonNext.Update(frame);
@@ -124,18 +125,28 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
     }
     
     // buttons
-	m_xButtonPlanetName.Render(renderer, frame);
 	m_xButtonPlanet.Render(renderer, frame);
 	m_xButtonPrevious.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
 	m_xNaviPanel.Render(renderer, frame);
 	m_xButtonBack.Render(renderer, frame);
+	
+	// title
+	renderer.DrawText(
+					  m_sTitle,
+					  m_xTitleShadowPos,
+					  Renderer::eFontTypeLarge,
+					  0xaa444444);
+	renderer.DrawText(
+					  m_sTitle,
+					  m_xTitlePos,
+					  Renderer::eFontTypeLarge,
+					  0xffccfaff);
 }
 
 void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
     // communicate the new level
     m_xButtonPlanet.SetUserData((int)world);
-    m_xButtonPlanetName.SetUserData((int)world);
     m_xNaviPanel.ActivateButton((int)world);
 	
     // find name for texture frame
@@ -148,7 +159,27 @@ void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
     
     // buttons
     m_xButtonPlanet.SetTextureFrame(worldframe);
-    m_xButtonPlanetName.SetTextureFrame(worldframe);
+
+	// title text
+	switch (world) {
+		case PageSettings::eWorldIdEarth:
+		{
+			m_sTitle = "The blue planet";
+			break;
+		}
+		case PageSettings::eWorldIdMars:
+		{
+			m_sTitle = "The planet of fire";
+			break;
+		}
+		case PageSettings::eWorldIdJupiter:
+		{
+			m_sTitle = "The planet of rocks";
+			break;
+		}
+		default:
+			m_sTitle = "Some Planet";
+	}
 }
 
 PageSettings::WorldId WorldMenu::GetNext(PageSettings::WorldId worldid) {

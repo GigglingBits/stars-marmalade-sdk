@@ -79,10 +79,6 @@ CIwResGroup
 	./world_mars.png
 	./world_jupiter.png
 
-	./world_earth_name.png
-	./world_mars_name.png
-	./world_jupiter_name.png
-
 	./bird_01.png
 	./bird_02.png
 	./airplane.png

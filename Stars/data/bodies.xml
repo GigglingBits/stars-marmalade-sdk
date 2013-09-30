@@ -348,12 +348,6 @@ the bodie that owns the joint.
 	  <texture id="title_bg" image="world_earth_background"/>
 	  <texture id="title_button" image="title_button"/>
 	  
-    <texture id="button_world_name">
-        <frame id="earth" image="world_earth_name"/>
-        <frame id="mars" image="world_mars_name"/>
-        <frame id="jupiter" image="world_jupiter_name"/>
-    </texture>
-      
       <texture id="worldmenu_bg">
           <frame id="earth" image="world_earth_background"/>
           <frame id="mars" image="world_mars_background"/>
