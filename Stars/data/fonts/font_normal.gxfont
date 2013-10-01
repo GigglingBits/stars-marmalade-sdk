@@ -1,11 +1,11 @@
 CIwGxFont
 {
     //name for font resource
-    name "jb10"
+    name "font_normal"
 
     //file name of ttf
     ttf "jellybelly.ttf"
 
     //font face point size
-    ttfPointSize 10
+    ttfPointSize 22
 }

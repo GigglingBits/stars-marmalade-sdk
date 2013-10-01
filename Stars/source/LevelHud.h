@@ -18,7 +18,7 @@ private:
 
 	VertexStreamScreen m_xVialShape;
 	Texture* m_pxVial;
-	
+
 	LevelDustCollector m_xDustQueue;
 	LevelDustCollector m_xDustCollector;
 
@@ -27,7 +27,7 @@ private:
 
 	ButtonEx m_xButtonBlock;
 	ButtonEx m_xButtonAttack;
-		
+
 public:
 	LevelHud(GameFoundation& game);
 	virtual ~LevelHud();

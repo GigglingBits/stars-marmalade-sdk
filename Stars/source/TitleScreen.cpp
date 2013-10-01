@@ -74,10 +74,10 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
 	
 	// world button
-    button.w = (int16)(extents / 1.2f);
-    button.h = (int16)(extents / 1.2f);
+    button.w = extents;
+    button.h = button.w * 2 / 3;
     button.x = screencenter.x - (button.w / 2);
-	button.y = screencenter.y - (button.h / 2);
+	button.y = extents / 20;
 	m_xButtonTitle.SetPosition(button);
 	
     // menu buttons

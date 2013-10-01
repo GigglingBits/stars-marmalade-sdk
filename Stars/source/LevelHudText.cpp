@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHudText::LevelHudText() : m_pxBackground(NULL) {
+LevelHudText::LevelHudText() : m_pxBackground(NULL), m_eFont(Renderer::eFontTypeNormal), m_uiColour(0xffffffff) {
 }
 
 LevelHudText::~LevelHudText() {
@@ -29,6 +29,14 @@ void LevelHudText::SetSize(const CIwSVec2 size) {
 	if (m_pxBackground) {
 		SetBackgroundShape();
 	}
+}
+
+void LevelHudText::SetFont(Renderer::FontType font) {
+	m_eFont = font;
+}
+
+void LevelHudText::SetColour(uint32 col) {
+	m_uiColour = col;
 }
 
 void LevelHudText::SetText(const std::string &s) {
@@ -67,8 +75,8 @@ void LevelHudText::OnRender(Renderer& renderer, const FrameData& frame) {
 		m_sText,
 		m_xPosition,
 		m_xSize,
-		Renderer::eFontTypeNormal,
-		0xffffffff);
+		m_eFont,
+		m_uiColour);
 }
 
 void LevelHudText::SetBackgroundShape() {

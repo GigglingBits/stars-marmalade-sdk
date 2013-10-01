@@ -2,9 +2,8 @@ CIwResGroup
 {
 	name fonts
 
-	./terminal6.gxfont
-
-	./jb10.gxfont
-	./jb16.gxfont
-	./jb22.gxfont
+	./font_system.gxfont
+	./font_small.gxfont
+	./font_normal.gxfont
+	./font_large.gxfont
 }

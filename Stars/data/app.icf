@@ -74,14 +74,14 @@ KeyAbsBSK=B				# not used
 [Gx]
 ####################################################
 DataCacheSize=262144
-NumTPages=256
-NumU256PaletteCacheBlocks=32
+#NumTPages=256
+#NumU256PaletteCacheBlocks=32
 VertCacheSize=4096
 
 ####################################################
 [GxFont]
 ####################################################
-CacheTextureMaxSize=256
+CacheTextureMaxSize=512
 
 ####################################################
 [GL]
