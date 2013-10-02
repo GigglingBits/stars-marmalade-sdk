@@ -2,12 +2,26 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false) {
+Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false), m_pxResGroup(NULL) {
 	m_iScreenPpcm = DeviceInfo::GetInfo().GetScreenPpcm();
+}
+
+Window::~Window() {
+	if (m_pxResGroup) {
+		IwGetResManager()->DestroyGroup(m_pxResGroup);
+	}
 }
 
 void Window::InvalidateLayout() {
 	m_bIsLayoutDone = false;
+}
+
+void Window::LoadResources(const std::string& grpname) {
+	if (m_pxResGroup) {
+		IwAssertMsg(MYAPP, false, ("Failed to load resource group '%s'. Another group is already associated. The Window class can only be associated to one resource group.", grpname.c_str()));
+		IwGetResManager()->DestroyGroup(m_pxResGroup);
+	}
+	m_pxResGroup = IwGetResManager()->LoadGroup(grpname.c_str());
 }
 
 void Window::Update(const FrameData& frame) {

@@ -1,0 +1,23 @@
+CIwResGroup
+{
+	name "menu"
+
+	./button_arrow_left.png
+	./button_arrow_right.png
+	./navidot_filled.png
+	./navidot_empty.png
+
+	./button_level.png
+	./button_level_pressed.png
+	./button_level_locked.png
+
+    	./world_earth_background.png
+	./world_mars_background.png
+	./world_jupiter_background.png
+
+	./title_button.png
+
+ 	./world_earth.png
+	./world_mars.png
+	./world_jupiter.png
+}

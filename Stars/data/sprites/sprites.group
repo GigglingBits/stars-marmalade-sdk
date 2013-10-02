@@ -4,9 +4,11 @@ CIwResGroup
 
 	./image_missing.png
 
+	./hud/hud.group
+	./menu/menu.group
+	./effects/effects.group
+
 	./touch.png
-	./navidot_filled.png
-	./navidot_empty.png
 
 	./button_social.png
 	./button_achievements.png
@@ -18,18 +20,7 @@ CIwResGroup
 	./button_soundfx.png
 	./button_soundfx_mute.png
 	./button_credits.png
-
-	./button_level.png
-	./button_level_pressed.png
-	./button_level_locked.png
 	./button_play.png
-
-	./button_action_block.png
-	./button_action_block_pressed.png
-	./button_action_block_disabled.png
-	./button_action_attack.png
-	./button_action_attack_pressed.png
-	./button_action_attack_disabled.png
 
 	./button_plain.png
 	./button_quit.png
@@ -37,23 +28,6 @@ CIwResGroup
 	./button_reload_local.png
 	./button_restart.png
 	./button_toggle_hud.png
-
-	./button_arrow_left.png
-	./button_arrow_right.png
-
-	./hud_progressbar_back.png
-	./hud_stardust_vial.png
-	./hud_number_back.png
-
-	./spark_01.png
-	./spark_02.png
-	./spark_03.png
-	./spark_04.png
-	./spark_05.png
-	./spark_06.png
-	./spark_07.png
-	./spark_08.png
-	./spark_09.png
 
 	./star_angry.png
 	./star_grin.png
@@ -65,18 +39,8 @@ CIwResGroup
 	./star_idle_2.png
 	./star_surprised.png
 
-    ./world_earth_background.png
-    ./world_mars_background.png
-    ./world_jupiter_background.png
-
-	./title_button.png
-
-    ./background_lost.png
-    ./background_won.png
-
-	./world_earth.png
-	./world_mars.png
-	./world_jupiter.png
+        ./background_lost.png
+    	./background_won.png
 
 	./bird_01.png
 	./bird_02.png
@@ -90,48 +54,4 @@ CIwResGroup
 	./cloud_04.png
 
 	./star_nugget.png
-
-	./smoke_jump_0001.png
-	./smoke_jump_0002.png
-	./smoke_jump_0003.png
-	./smoke_jump_0004.png
-	./smoke_jump_0005.png
-	./smoke_jump_0006.png
-	./smoke_jump_0007.png
-	./smoke_jump_0008.png
-	./smoke_jump_0009.png
-	./smoke_jump_0010.png
-	
-	./smoke_plume_0001.png
-	./smoke_plume_0002.png
-	./smoke_plume_0003.png
-	./smoke_plume_0004.png
-	./smoke_plume_0005.png
-	./smoke_plume_0006.png
-	./smoke_plume_0007.png
-	./smoke_plume_0008.png
-	./smoke_plume_0009.png
-	./smoke_plume_0010.png
-
-	./smoke_puff_0001.png
-	./smoke_puff_0002.png
-	./smoke_puff_0003.png
-	./smoke_puff_0004.png
-	./smoke_puff_0005.png
-	./smoke_puff_0006.png
-	./smoke_puff_0007.png
-	./smoke_puff_0008.png
-	./smoke_puff_0009.png
-	./smoke_puff_0010.png
-	
-	./smoke_right_0001.png
-	./smoke_right_0002.png
-	./smoke_right_0003.png
-	./smoke_right_0004.png
-	./smoke_right_0005.png
-	./smoke_right_0006.png
-	./smoke_right_0007.png
-	./smoke_right_0008.png
-	./smoke_right_0009.png
-	./smoke_right_0010.png
 }
