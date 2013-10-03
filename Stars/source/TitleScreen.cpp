@@ -7,9 +7,7 @@
 TitleScreen::TitleScreen() :
 	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyEnter),
 	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
-	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
-
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("title_bg");
+	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst), m_pxBackground(NULL) {
 
 		m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 		m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
@@ -27,6 +25,9 @@ TitleScreen::~TitleScreen() {
 }
 
 void TitleScreen::Initialize() {
+	
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("title_bg");
+
 	m_xPanelOptions.Initialize();
 	m_xPanelOptions.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_options"));
 	
