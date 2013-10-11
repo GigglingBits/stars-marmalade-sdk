@@ -34,6 +34,7 @@ private:
 
 private:
 	void PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime);
+	void PrintMem(const CIwRect& rect, uint32 usedmem, uint32 freemem, uint32 largestfreeblock);
 
 	void ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args);
 };

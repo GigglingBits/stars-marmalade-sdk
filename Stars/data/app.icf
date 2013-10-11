@@ -51,8 +51,8 @@ SplashscreenBkB=0
 IOSDispScaleFactor=200
 DispFixRot=2
 
-MemSize=70000000
-MemSizeDebug=50000000
+MemSize=30000000
+MemSizeDebug=25000000
 
 SysTraceToFile=0
 

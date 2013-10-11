@@ -11,6 +11,8 @@
 #include "Downloader.h"
 #include "LogManager.h"
 
+#include "IwMemBucket.h"
+
 #include "Debug.h"
 
 App::App() {
@@ -118,12 +120,21 @@ void App::Render() {
 	
     // fps for debug...
 	const int margin = 5;
-	CIwRect rect(margin, margin, screensize.x - (2 * margin), margin);
+	const int height = 25;
+	CIwRect rect(margin, margin, screensize.x - (2 * margin), height);
 	PrintFps(rect,
-		m_xFrameData.GetAvgRealDurationMs(),
-		m_xFrameData.GetAvgSimulatedDurationMs(),
-        m_xUpdateTime.GetAvgTickTimeMs(),
-        m_xRenderTime.GetAvgTickTimeMs());
+			 m_xFrameData.GetAvgRealDurationMs(),
+			 m_xFrameData.GetAvgSimulatedDurationMs(),
+			 m_xUpdateTime.GetAvgTickTimeMs(),
+			 m_xRenderTime.GetAvgTickTimeMs());
+
+	uint32 bucketid = IwMemBucketGetID();
+	
+	rect.y += height + margin;
+	PrintMem(rect,
+			 IwMemBucketGetUsed(bucketid),
+			 IwMemBucketGetFree(bucketid),
+			 IwMemBucketGetLargestFreeBlock(bucketid));
 }
 
 void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime) {
@@ -137,14 +148,31 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 	oss << std::fixed;
 	oss << "fps: " << fps << std::endl;
 	oss << "sim-ratio: " << 100.0f * simratio << std::endl;
-	oss << "update: " << 100.0f * pureupdatetime / realframetime << std::endl;
-	oss << "render: " << 100.0f * purerendertime / realframetime << std::endl;
-	oss << "system: " << 100.0f * (realframetime - pureupdatetime - purerendertime) / realframetime << std::endl;
-	
+	oss << "update: " << 100.0f * pureupdatetime / realframetime << '%' << " / ";
+	oss << "render: " << 100.0f * purerendertime / realframetime << '%' << " / ";
+	oss << "system: " << 100.0f * (realframetime - pureupdatetime - purerendertime) / realframetime  << '%' << std::endl;
+
 	GetRenderer().DrawText(
 		oss.str(), rect,
 		Renderer::eFontTypeSystem, 
 		simratio > 0.95f ? 0xffffffff : 0xff0000ff);
+}
+
+void App::PrintMem(const CIwRect& rect, uint32 usedmem, uint32 freemem, uint32 largestfreeblock) {
+	IW_CALLSTACK_SELF;
+	
+	float mem = 100.0f * usedmem / (usedmem + freemem);
+	float lfb = largestfreeblock / 1024.f / 1024.f;
+	
+	std::ostringstream oss;
+	oss.precision(1);
+	oss << std::fixed;
+	oss << "mem: " << mem << "% / LFB: " << lfb << "MB" << std::endl;
+	
+	GetRenderer().DrawText(
+		oss.str(), rect,
+		Renderer::eFontTypeSystem,
+		mem > 0.80f ? 0xffffffff : 0xff0000ff);
 }
 
 void App::ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args) {
