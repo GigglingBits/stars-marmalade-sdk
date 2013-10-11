@@ -1,6 +1,8 @@
 CIwResGroup
 {
 	name "sounds"
+	
+	shared true
 
 	"./sounds/collision.wav"
 

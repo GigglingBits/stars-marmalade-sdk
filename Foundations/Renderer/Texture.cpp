@@ -73,11 +73,10 @@ void Texture::LoadFrames(TextureTemplate& texturedef) {
 		frame.nextid = frametpl.nextid;
 
 		if (frametpl.type == eFrameTypeImage || frametpl.type == eFrameTypeAnimation || frametpl.type == eFrameTypePattern) {
-			CIwResGroup* grp = IwGetResManager()->GetGroupNamed("sprites");	
-			frame.image = (CIwTexture*)grp->GetResNamed(frametpl.imageresource.c_str(), "CIwTexture");
-			IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", "image_missing"));
+			frame.image = (CIwTexture*)IwGetResManager()->GetResNamed(frametpl.imageresource.c_str(), "CIwTexture");
+			IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", frametpl.imageresource.c_str()));
 			if (!frame.image) {
-				frame.image = (CIwTexture*)grp->GetResNamed("image_missing", "CIwTexture");
+				frame.image = (CIwTexture*)IwGetResManager()->GetResNamed("image_missing", "CIwTexture");
 				IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", "image_missing"));
 			}			
 		} else {

@@ -1,0 +1,8 @@
+CIwResGroup
+{
+	name "menu"
+	
+	shared true
+
+	./sprites/sprites.group
+}

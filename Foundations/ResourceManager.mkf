@@ -1,0 +1,14 @@
+subprojects {
+	iwgx
+	iwresmanager
+}
+
+includepaths {
+	./ResourceManager
+}
+
+files {
+	(ResourceManager)	
+	ResourceManager.h
+	ResourceManager.cpp
+}

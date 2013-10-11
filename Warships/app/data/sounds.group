@@ -2,6 +2,8 @@ CIwResGroup
 {
 	name "sounds"
 
+	shared true
+
 	"./sounds/collision.wav"
 
 	"./sounds/28814_SFX_KungFuOh.wav"

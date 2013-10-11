@@ -10,6 +10,7 @@
 #include "FactoryManager.h"
 
 Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string background) :
+	Page("level.group"),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
 	m_xBackground(background, m_xGame), 
@@ -47,6 +48,10 @@ void Level::Initialize() {
 	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
 
 	CreateStar();
+}
+
+const std::string& Level::GetResourceGroupName() {
+	return  "sprites/sprites.group";
 }
 
 GameFoundation& Level::GetGameFoundation() {

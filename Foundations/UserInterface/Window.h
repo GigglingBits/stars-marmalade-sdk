@@ -2,7 +2,6 @@
 #define __WINDOW_H__
 
 #include "Renderable.h"
-#include "IwResManager.h"
 
 class Window : public Renderable {
 private:
@@ -10,12 +9,9 @@ private:
 	CIwSVec2 m_xScreenSize;
 	
 	bool m_bIsLayoutDone;
-
-	CIwResGroup* m_pxResGroup;
 	
 public:
 	Window();
-	virtual ~Window();
 
 	virtual void Initialize() = 0;
 	virtual void Update(const FrameData& frame);
@@ -36,9 +32,6 @@ protected:
 	T CentimeterToPixel(T cm) {
 		return cm * (T)m_iScreenPpcm;
 	}
-
-protected:
-	void LoadResources(const std::string& grpname);
 };
 
 #endif

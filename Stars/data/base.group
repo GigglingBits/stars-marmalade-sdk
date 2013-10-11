@@ -1,0 +1,10 @@
+CIwResGroup
+{
+	name "base"
+	
+	shared true
+
+	./fonts/fonts.group
+	./sprites/sprites.group
+	./sounds/sounds.group
+}

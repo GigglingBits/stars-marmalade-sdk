@@ -8,6 +8,7 @@
 #include "Level.h"
 #include "LevelCompletion.h"
 #include "FactoryManager.h"
+#include "ResourceManager.h"
 
 PageManager::PageManager() {
 	m_pxCurrentPage = NULL;
@@ -118,6 +119,8 @@ void PageManager::OnUpdate(const FrameData& frame) {
 			}
 			m_pxCurrentPage = m_pxNextPage;
 			if (m_pxCurrentPage) {
+				ResourceManager::GetInstance().LoadTemporary(
+					m_pxCurrentPage->GetResourceGroupName());
 				m_pxCurrentPage->Initialize();
 			}
 			// re-open the curtain
@@ -140,6 +143,7 @@ void PageManager::OnUpdate(const FrameData& frame) {
 
 void PageManager::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
+			
 	if (m_pxCurrentPage) {
 		m_pxCurrentPage->Render(renderer, frame);
 	}

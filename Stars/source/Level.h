@@ -43,6 +43,8 @@ public:
 
 	GameFoundation& GetGameFoundation();
 
+	virtual const std::string& GetResourceGroupName();
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

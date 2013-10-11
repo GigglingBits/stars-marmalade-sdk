@@ -1,0 +1,6 @@
+CIwResGroup
+{
+	name "level"
+	
+	shared true
+}

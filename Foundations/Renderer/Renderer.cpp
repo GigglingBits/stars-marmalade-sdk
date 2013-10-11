@@ -9,12 +9,6 @@ Renderer::Renderer() {
 	m_eCurrentRenderingLayer = eRenderingLayerGameDynamicObjects;
 
 	memset(m_apxFonts, 0, sizeof(m_apxFonts));
-	
-	IwGetResManager()->LoadGroup("fonts/fonts.group");
-}
-
-Renderer::~Renderer() {
-	IwGetResManager()->DestroyGroup("fonts");
 }
 
 void Renderer::SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system) {

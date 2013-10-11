@@ -4,9 +4,7 @@
 #include "FactoryManager.h"
 
 LevelBackground::LevelBackground(std::string background, GameFoundation& game) : m_rxGame(game) {
-
-	CIwResGroup* grp = IwGetResManager()->GetGroupNamed("sprites");	
-	m_pxBackground = (CIwTexture*)grp->GetResNamed(background.c_str(), "CIwTexture");
+	m_pxBackground = (CIwTexture*)IwGetResManager()->GetResNamed(background.c_str(), "CIwTexture");
 
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;

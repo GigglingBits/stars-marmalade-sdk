@@ -2,6 +2,8 @@ CIwResGroup
 {
 	name "effects"
 
+	shared true
+
 	./spark_01.png
 	./spark_02.png
 	./spark_03.png

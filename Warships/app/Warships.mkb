@@ -50,6 +50,7 @@ subprojects {
 	../Foundations/Sound
 	../Foundations/Physics
 	../Foundations/Sprites
+	../Foundations/ResourceManager
 
 	iwssl
 
@@ -205,6 +206,7 @@ files {
 
 	["Sources/Application/Resources"]
 	(data)
+	resources.group
 	fonts.group
 	sprites.group
 	sounds.group

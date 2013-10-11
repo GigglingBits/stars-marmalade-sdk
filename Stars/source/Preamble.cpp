@@ -3,7 +3,10 @@
 #include "FactoryManager.h"
 #include "MediaViewFactory.h"
 
-Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) : m_xTextPosition(0, 0, 0, 0), m_pxMediaView(NULL) {
+Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) :
+	Page("preamble.group"),
+	m_xTextPosition(0, 0, 0, 0),
+	m_pxMediaView(NULL) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, !text.empty() || !textureid.empty() || !mediafile.empty(), ("At least on of the 3 parguments must be non-empty."));
 

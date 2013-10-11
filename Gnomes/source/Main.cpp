@@ -19,6 +19,7 @@
 #include "Configuration.h"
 #include "InputManager.h"
 #include "LogManager.h"
+#include "ResourceManager.h"
 
 //--------------------------------------------------------------------------
 // Global helpers
@@ -41,19 +42,20 @@ void Initialize() {
 	}
 
 	IwResManagerInit();
-	IwGetResManager()->LoadGroup("sprites.group");
-
 	IwGxFontInit();
 
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
+	ResourceManager::Initialize();
 	SoundEngine::Initialize();
 	Configuration::Initialize();
 	InputManager::Initialize();
 	DeviceInfo::Initialize();
 	LogManager::Initialize();
 
+	ResourceManager::GetInstance().LoadPermament("resources.group");
+	
 	std::srand((unsigned int)s3eTimerGetUST());
 }
 
@@ -66,8 +68,9 @@ void Terminate() {
 	Configuration::Terminate();
 	SoundEngine::Terminate();
 
+	ResourceManager::Terminate();
+	
 	IwGxFontTerminate();
-	IwGetResManager()->DestroyGroup("sprites");
 	IwResManagerTerminate();
 	IwGxTerminate();
 }

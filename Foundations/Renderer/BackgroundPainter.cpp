@@ -4,19 +4,18 @@
 
 BackgroundPainter::BackgroundPainter(std::string background) {
 
-	CIwResGroup* grp = IwGetResManager()->GetGroupNamed("sprites");	
     std::string s;
     s.assign(background);
     s.append("_sky");
-	m_pxBackgroundSky = (CIwTexture*)grp->GetResNamed(s.c_str(), "CIwTexture");
+	m_pxBackgroundSky = (CIwTexture*)IwGetResManager()->GetResNamed(s.c_str(), "CIwTexture");
 
     s.assign(background);
     s.append("_far");
-    m_pxBackgroundFar = (CIwTexture*)grp->GetResNamed(s.c_str(), "CIwTexture");
+    m_pxBackgroundFar = (CIwTexture*)IwGetResManager()->GetResNamed(s.c_str(), "CIwTexture");
 	
     s.assign(background);
     s.append("_near");
-    m_pxBackgroundNear = (CIwTexture*)grp->GetResNamed(s.c_str(), "CIwTexture");
+    m_pxBackgroundNear = (CIwTexture*)IwGetResManager()->GetResNamed(s.c_str(), "CIwTexture");
 
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;

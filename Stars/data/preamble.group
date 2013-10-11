@@ -1,0 +1,6 @@
+CIwResGroup
+{
+	name "preamble"
+	
+	shared true
+}

@@ -54,6 +54,7 @@ packages {
 
 subprojects {
 	../Foundations/Logging
+	../Foundations/ResourceManager
 	../Foundations/Renderer
 	../Foundations/UserInterface
 	../Foundations/MediaViews
@@ -229,9 +230,16 @@ files {
 
 	["Sources/Resources"]
 	(data)
+	test.group
+	base.group
+	menu.group
+	preamble.group
+	level.group
+	completion.group
+
 	sprites/sprites.group
 	sprites/hud/hud.group
-	sprites/menu/menu.group
+	sprites/menu/menusub.group
 	sprites/effects/effects.group
 
 	fonts/fonts.group
@@ -250,18 +258,31 @@ assets
 	music/.
 	stories/.
 
+	test.group
+	base.group
+	menu.group
+	preamble.group
+	level.group
+	completion.group
+
 	fonts/fonts.group
 	sprites/sprites.group
 	sprites/hud/hud.group
-	sprites/menu/menu.group
+	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sounds/sounds.group
 	sounds/effects.itx
 
 	(data-ram/data-gles1, data)
+	test.group.bin
+	base.group.bin
+	menu.group.bin
+	preamble.group.bin
+	level.group.bin
+	completion.group.bin
 	sprites/sprites.group.bin
 	sprites/hud/hud.group.bin
-	sprites/menu/menu.group.bin
+	sprites/menu/menusub.group.bin
 	sprites/effects/effects.group.bin
 	fonts/fonts.group.bin
 	sounds/sounds.group.bin

@@ -1,6 +1,6 @@
 CIwResGroup
 {
-	name "menu"
+	name "menusub"
 
 	./button_arrow_left.png
 	./button_arrow_right.png
@@ -11,7 +11,7 @@ CIwResGroup
 	./button_level_pressed.png
 	./button_level_locked.png
 
-    	./world_earth_background.png
+	./world_earth_background.png
 	./world_mars_background.png
 	./world_jupiter_background.png
 

@@ -43,6 +43,7 @@ packages {
 
 subprojects {
 	../Foundations/Logging
+	../Foundations/ResourceManager
 	../Foundations/Renderer
 	../Foundations/UserInterface
 	../Foundations/Utilities
@@ -203,6 +204,7 @@ files {
 
 	["Sources/Application/Resources"]
 	(data)
+	resources.group
 	fonts.group
 	sprites.group
 	sounds.group

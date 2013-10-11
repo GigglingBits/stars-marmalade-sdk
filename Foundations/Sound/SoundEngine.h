@@ -6,12 +6,8 @@
 
 #include "IwSound.h"
 #include "IwSoundInst.h"
-#include "IwResGroup.h"
 
 class SoundEngine {
-private:
-	static CIwResGroup* s_pSoundResources;
-
 public:
 	static void Initialize();
 	static void Terminate();

@@ -6,22 +6,14 @@
 #include "IwSound.h"
 #include "IwDebug.h"
 
-#include "IwResManager.h"
-#include "IwResManager.h"
-
-CIwResGroup* SoundEngine::s_pSoundResources = NULL;
-
 void SoundEngine::Initialize() {
 #ifdef IW_BUILD_RESOURCES
 	IwGetResManager()->AddHandler(new CIwResHandlerWAV);
 #endif
 	IwSoundInit();
-	s_pSoundResources = IwGetResManager()->LoadGroup("sounds/sounds.group");
 }
 
 void SoundEngine::Terminate() {
-	IwGetResManager()->DestroyGroup(s_pSoundResources);
-	s_pSoundResources = NULL;
 	IwSoundTerminate();
 }
 
@@ -38,8 +30,7 @@ void SoundEngine::StopMusicFile() {
 }
 
 void SoundEngine::PlaySoundEffect(const std::string& soundname) {
-	IwAssertMsg(MYAPP, s_pSoundResources, ("The sound %s cannot be played. The sound engine is not initialized.", soundname.c_str()));
-	CIwSoundSpec* sound = (CIwSoundSpec*)s_pSoundResources->GetResNamed(soundname.c_str(), IW_SOUND_RESTYPE_SPEC);
+	CIwSoundSpec* sound = (CIwSoundSpec*)IwGetResManager()->GetResNamed(soundname.c_str(), IW_SOUND_RESTYPE_SPEC);
 	IwAssertMsg(MYAPP, sound, ("The sound %s cannot be played. It was not found in the resource group.", soundname.c_str()));
 	sound->Play();
 }

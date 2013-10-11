@@ -12,6 +12,7 @@ public:
 	static void RunTest();
 
 private:
+	static void RunResourceLoaderTest();
 	static void RunWorldTest();
 	static void RunInputControllerTest();
 	static void RunFactoryConfigTest();

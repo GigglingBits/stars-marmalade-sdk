@@ -45,7 +45,6 @@ private:
 
 public:
 	Renderer();
-	virtual ~Renderer();
 
 	void SetViewport(const Viewport& viewport);
 	CIwFVec2 GetScreenCenterWorldSpace();

@@ -2,11 +2,11 @@
 // Start-up of the application, and event loop
 //--------------------------------------------------------------------------
 #include "s3e.h"
-#include "IwResManager.h"
 #include "IwGx.h"
 #include "IwGxFont.h"
 #include "IwResHandlerWAV.h"
 #include "SoundEngine.h"
+#include "ResourceManager.h"
 #include "DeviceInfo.h"
 
 #ifdef IW_DEBUG
@@ -29,9 +29,6 @@ void Initialize() {
 
 	IwGxInit();
 	{
-#if defined (IW_USE_LEGACY_MODULES)
-		IwGxMipMappingOff();
-#endif
 		IwGxLightingOn(); // required only for IwGxFont colouring
 		IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
 
@@ -44,13 +41,12 @@ void Initialize() {
 	}
 
 	IwResManagerInit();
-	IwGetResManager()->LoadGroup("sprites/sprites.group");
-
 	IwGxFontInit();
 
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
+	ResourceManager::Initialize();
 	SoundEngine::Initialize();
 	Configuration::Initialize();
 	InputManager::Initialize();
@@ -58,6 +54,8 @@ void Initialize() {
 	LogManager::Initialize();
 
 	World::SetDefaultGravity(0.0f, 0.0f);
+
+	ResourceManager::GetInstance().LoadPermament("base.group");
 
 	std::srand((unsigned int)s3eTimerGetUST());
 }
@@ -70,9 +68,9 @@ void Terminate() {
 	InputManager::Terminate();
 	Configuration::Terminate();
 	SoundEngine::Terminate();
+	ResourceManager::Terminate();
 
 	IwGxFontTerminate();
-	IwGetResManager()->DestroyGroup("sprites");
 	IwResManagerTerminate();
 	IwGxTerminate();
 }

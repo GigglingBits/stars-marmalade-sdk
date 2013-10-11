@@ -2,6 +2,8 @@ CIwResGroup
 {
 	name fonts
 
+	shared true
+
 	./font_system.gxfont
 	./font_small.gxfont
 	./font_normal.gxfont

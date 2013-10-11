@@ -1,6 +1,8 @@
 CIwResGroup
 {
 	name fonts
+	
+	shared true
 
 	"fonts/terminal6.gxfont"
 	"fonts/arial14.gxfont"

@@ -8,6 +8,7 @@
 #include "SoundEngine.h"
 
 LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
+	Page("completion.group"),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),

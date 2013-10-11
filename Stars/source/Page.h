@@ -14,12 +14,16 @@ public:
 private:
     CompletionState m_eCompletionState;
 
+	std::string m_sResGrpName;
+	
 public:
-	Page();
+	Page(const std::string& resgrpname);
 
 	bool IsCompleted();
 	CompletionState GetCompletionState();
 
+	const std::string& GetResourceGroupName();
+	
 protected:
 	void SetCompletionState(CompletionState state);
 };

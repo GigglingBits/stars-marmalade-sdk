@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Page::Page() : Window(), m_eCompletionState(eInProgress) {
+Page::Page(const std::string& resgrpname) : Window(), m_eCompletionState(eInProgress), m_sResGrpName(resgrpname) {
 }
 
 bool Page::IsCompleted() {
@@ -15,4 +15,8 @@ Page::CompletionState Page::GetCompletionState() {
 
 void Page::SetCompletionState(CompletionState state) {
 	m_eCompletionState = state;
+}
+
+const std::string& Page::GetResourceGroupName() {
+	return m_sResGrpName;
 }

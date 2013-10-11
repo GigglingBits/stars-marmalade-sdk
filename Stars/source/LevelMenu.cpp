@@ -10,6 +10,7 @@
 #define NO_BUTTON -1
 
 LevelMenu::LevelMenu(PageSettings::WorldId world) :
+	Page("menu.group"),
 	m_eWorldId(world),
 	m_iGroupId(0),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
@@ -47,8 +48,7 @@ LevelMenu::~LevelMenu() {
 
 void LevelMenu::Initialize() {
 	IW_CALLSTACK_SELF;
-	
-    m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
+	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {

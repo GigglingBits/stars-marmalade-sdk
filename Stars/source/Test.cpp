@@ -13,6 +13,7 @@
 #include "Oscillator.h"
 #include "FrameData.h"
 #include "PinchGesture.h"
+#include "ResourceManager.h"
 
 #define DBG_FILE NULL //"memdbg.txt"
 
@@ -28,10 +29,14 @@ void Test::RunTest() {
 	IwMemBucketPush(IW_MEM_BUCKET_ID_SYSTEM_DEBUG);
 	uint32 testcheckpoint = IwMemBucketCheckpoint();
 
+	RunResourceLoaderTest();
+	Evaluate(systemcheckpoint, testcheckpoint);
+	s3eDeviceYield(0);
+	
 	RunWorldTest();
 	Evaluate(systemcheckpoint, testcheckpoint);
 	s3eDeviceYield(0);
-
+	
 	RunInputControllerTest();
 	Evaluate(systemcheckpoint, testcheckpoint);
 	s3eDeviceYield(0);
@@ -84,6 +89,12 @@ void Test::Evaluate(uint32 systemcheckpoint, uint32 testcheckpoint) {
 		IwAssertMsg(MYAPP, false, ("Test failed; memory leaked in system bucket! Allocation ID: %i", allocid));
 		IwMemBucketVisualDump("memdump_dbg_post.html", IW_MEM_BUCKET_ID_SYSTEM);
 	}
+}
+
+void Test::RunResourceLoaderTest() {
+	IW_CALLSTACK_SELF;
+	ResourceManager::GetInstance().LoadTemporary("test.group");
+	ResourceManager::GetInstance().UnloadTemporary();
 }
 
 void Test::RunWorldTest() {
@@ -247,6 +258,8 @@ void Test::RunViewportTest() {
 void Test::RunFactoryTest() {
 	IW_CALLSTACK_SELF;
 
+	ResourceManager::GetInstance().LoadTemporary("test.group");
+
 	std::list<std::string> filenames;
 	filenames.push_back("test.xml");
 	FactoryManager::InitializeFromFiles(filenames);
@@ -262,10 +275,14 @@ void Test::RunFactoryTest() {
 	delete l;
 
 	FactoryManager::Terminate();
+
+	ResourceManager::GetInstance().UnloadTemporary();
 }
 
 void Test::RunSpriteTest() {
 	IW_CALLSTACK_SELF;
+
+	ResourceManager::GetInstance().LoadTemporary("test.group");
 
 	std::list<std::string> filenames;
 	filenames.push_back("test.xml");
@@ -280,10 +297,14 @@ void Test::RunSpriteTest() {
 	delete p;
 
 	FactoryManager::Terminate();
+
+	ResourceManager::GetInstance().UnloadTemporary();
 }
 
 void Test::RunLevelTest() {
 	IW_CALLSTACK_SELF;
+
+	ResourceManager::GetInstance().LoadTemporary("test.group");
 
 	std::list<std::string> filenames;
 	filenames.push_back("test.xml");
@@ -304,6 +325,8 @@ void Test::RunLevelTest() {
 	delete p;
 
 	FactoryManager::Terminate();
+
+	ResourceManager::GetInstance().UnloadTemporary();
 }
 
 void Test::RunOscillatorTest() {

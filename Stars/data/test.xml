@@ -62,16 +62,16 @@
   <effects>
     <effect id="myeffect" duration="250">
       <texture>
-        <frame id="01" image="smoke_right_0001" duration="30" next="02" />
-        <frame id="02" image="smoke_right_0002" duration="30" next="03" />
-        <frame id="03" image="smoke_right_0003" duration="30" next="04" />
-        <frame id="04" image="smoke_right_0004" duration="30" next="05" />
-        <frame id="05" image="smoke_right_0005" duration="30" next="06" />
-        <frame id="06" image="smoke_right_0006" duration="30" next="07" />
-        <frame id="07" image="smoke_right_0007" duration="30" next="08" />
-        <frame id="08" image="smoke_right_0008" duration="30" next="09" />
-        <frame id="09" image="smoke_right_0009" duration="30" next="10" />
-        <frame id="10" image="smoke_right_0010" duration="30" next="11" />
+        <frame id="01" image="image_missing" duration="30" next="02" />
+        <frame id="02" image="image_missing" duration="30" next="03" />
+        <frame id="03" image="image_missing" duration="30" next="04" />
+        <frame id="04" image="image_missing" duration="30" next="05" />
+        <frame id="05" image="image_missing" duration="30" next="06" />
+        <frame id="06" image="image_missing" duration="30" next="07" />
+        <frame id="07" image="image_missing" duration="30" next="08" />
+        <frame id="08" image="image_missing" duration="30" next="09" />
+        <frame id="09" image="image_missing" duration="30" next="10" />
+        <frame id="10" image="image_missing" duration="30" next="11" />
         <frame id="11" colour="0x000000" />
       </texture>
       <shape type="polygon">

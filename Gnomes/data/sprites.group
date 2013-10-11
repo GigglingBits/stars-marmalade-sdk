@@ -2,6 +2,8 @@ CIwResGroup
 {
 	name "sprites"
 
+	shared true
+
 	sprites/image_missing.png
 
 	sprites/touch.png

@@ -1,0 +1,6 @@
+CIwResGroup
+{
+	name "completion"
+	
+	shared true
+}

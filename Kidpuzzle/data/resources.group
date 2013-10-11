@@ -1,0 +1,9 @@
+CIwResGroup
+{
+	name resources
+	
+	./fonts.group
+	./sounds.group
+	./sprites.group
+	./views.group
+}

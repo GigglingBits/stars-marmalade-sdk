@@ -5,7 +5,7 @@
 
 class Configuration {
 private:
-	static Configuration* m_pxInstance;
+	static Configuration* s_pxInstance;
 	Configuration();
 
 public:

@@ -5,9 +5,11 @@
 #include "Configuration.h"
 
 TitleScreen::TitleScreen() :
+	Page("menu.group"),
 	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyEnter),
 	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
-	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst), m_pxBackground(NULL) {
+	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst),
+	m_pxBackground(NULL) {
 
 		m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 		m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
@@ -25,6 +27,7 @@ TitleScreen::~TitleScreen() {
 }
 
 void TitleScreen::Initialize() {
+	IW_CALLSTACK_SELF;
 	
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("title_bg");
 

@@ -1,0 +1,6 @@
+CIwResGroup
+{
+	name "menu"
+	
+	shared true
+}

@@ -2,6 +2,8 @@ CIwResGroup
 {
 	name	views
 
+	shared true
+
 	ui/button_up.tga
 	ui/button_down.tga
 

@@ -5,13 +5,13 @@
 #include "Configuration.h"
 
 WorldMenu::WorldMenu(PageSettings::WorldId world) :
+	Page("menu.group"),
     m_eWorld(world),
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyEnter),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyLeft),
-	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyFirst) {
-
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("worldmenu_bg");
+	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyFirst),
+	m_pxBackground(NULL) {
 
     m_xButtonNext.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
     m_xButtonPrevious.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
@@ -29,6 +29,8 @@ WorldMenu::~WorldMenu() {
 }
 
 void WorldMenu::Initialize() {
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("worldmenu_bg");
+
     m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 

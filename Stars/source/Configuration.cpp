@@ -2,7 +2,7 @@
 
 #include "Configuration.h"
 
-Configuration* Configuration::m_pxInstance = NULL;
+Configuration* Configuration::s_pxInstance = NULL;
 
 Configuration::Configuration() {
 	char tmpstr[S3E_CONFIG_STRING_MAX] = {'\0'};
@@ -93,20 +93,20 @@ Configuration::Configuration() {
 }
 
 void Configuration::Initialize() {
-	Configuration config = GetInstance();
+	GetInstance();
 }
 
 void Configuration::Terminate() {
-	if (m_pxInstance) {
-		delete m_pxInstance;
-		m_pxInstance = NULL;
+	if (s_pxInstance) {
+		delete s_pxInstance;
+		s_pxInstance = NULL;
 	}
 }
 
 Configuration& Configuration::GetInstance() {
-	if (!m_pxInstance) {
-		m_pxInstance = new Configuration();
+	if (!s_pxInstance) {
+		s_pxInstance = new Configuration();
 	}
-	return *m_pxInstance;
+	return *s_pxInstance;
 }
 
