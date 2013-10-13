@@ -46,6 +46,16 @@ deployments {
 	iphone-splash-full-orient='1'
 	iphone-splashscreen-portrait='data/splashscreens/'
 	iphone-splashscreen-landscape='data/splashscreens/'
+	iphone-show-status-bar='1'
+
+	["Android"]
+	android
+	android-pkgname='com.gigglingbits.stars'
+	android-manifest=deploy/android/AndroidManifest.xml
+	android-keystore=deploy/android/my-release-key.keystore
+	android-aliasname='GigglingBits'
+	android-keypass='123456'
+	android-storepass='123456'
 }
 
 packages {
@@ -286,4 +296,12 @@ assets
 	sprites/effects/effects.group.bin
 	fonts/fonts.group.bin
 	sounds/sounds.group.bin
+}
+
+#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
+deployments
+{
+	["Android"]
+	["Default"]
+	["iOS"]
 }

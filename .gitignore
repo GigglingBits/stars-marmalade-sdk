@@ -31,8 +31,7 @@ Rydendahl/deployments/
 
 *.mkb~
 *.mkf~
-
 *.gxfont~
-
-
 *.group~
+*.xml~
+
