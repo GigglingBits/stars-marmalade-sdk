@@ -3,4 +3,6 @@ CIwResGroup
 	name "preamble"
 	
 	shared true
+	
+	./tutorials/tutorials.group
 }

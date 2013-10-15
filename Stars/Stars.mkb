@@ -247,6 +247,7 @@ files {
 	level.group
 	completion.group
 
+	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
 	sprites/menu/menusub.group
@@ -276,6 +277,7 @@ assets
 	completion.group
 
 	fonts/fonts.group
+	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
 	sprites/menu/menusub.group
@@ -290,6 +292,7 @@ assets
 	preamble.group.bin
 	level.group.bin
 	completion.group.bin
+	tutorials/tutorials.group.bin
 	sprites/sprites.group.bin
 	sprites/hud/hud.group.bin
 	sprites/menu/menusub.group.bin
@@ -303,5 +306,6 @@ deployments
 {
 	["Android"]
 	["Default"]
+	["MacOSX"]
 	["iOS"]
 }

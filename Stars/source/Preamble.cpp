@@ -12,19 +12,11 @@ Preamble::Preamble(const std::string& text, const std::string& textureid, const 
 
 	m_sText = text;
 
+	m_sTextureId = textureid;
+	m_sMediaFile = mediafile;
+		
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("preamble_bg");
 
-	if (!textureid.empty()) {
-		if (Texture* texture = FactoryManager::GetTextureFactory().Create(textureid)) {
-			m_pxMediaView = MediaViewFactory::CreateViewForTexture(texture);
-		}
-		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of texture media: %s", textureid.c_str()));
-
-	} else if (!mediafile.empty()) {
-		m_pxMediaView = MediaViewFactory::CreateViewForFile(mediafile);
-		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of media file: %s", textureid.c_str()));
-	}
-	
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
 	im.TouchEndEvent.AddListener<Preamble>(this, &Preamble::TouchEndEventHandler);
@@ -46,23 +38,34 @@ Preamble::~Preamble() {
 }
 
 void Preamble::Initialize() {
-	if (m_sText.empty()) {
-		SetCompletionState(eCompleted);
-		return;
+	if (!m_sTextureId.empty()) {
+		if (Texture* texture = FactoryManager::GetTextureFactory().Create(m_sTextureId)) {
+			m_pxMediaView = MediaViewFactory::CreateViewForTexture(texture);
+		}
+		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of texture media: %s", m_sTextureId.c_str()));
+		
+	} else if (!m_sMediaFile.empty()) {
+		m_pxMediaView = MediaViewFactory::CreateViewForFile(m_sMediaFile);
+		IwAssertMsg(MYAPP, m_pxMediaView, ("Error in assignment of media file: %s", m_sMediaFile.c_str()));
 	}
-	
+
 	if (m_pxMediaView) {
+		m_pxMediaView->Finished.AddListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
 		m_pxMediaView->Initialize();
 	}
 }
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {
-	int32 margin = GetScreenExtents() / 5;
+	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
+	int32 extents = GetScreenExtents();
+	int32 margin = extents / 5;
 
 	if (m_pxMediaView) {
 		// media view
-		CIwVec2 pos(margin, margin);
-		CIwVec2 size(screensize.x - 2 * margin, screensize.y - 2 * margin);
+		CIwVec2 size;
+		size.y = screensize.y - 2 * margin;
+		size.x = size.y * 3 / 2;
+		CIwVec2 pos(screencenter.x - (size.x / 2), margin);
 		m_pxMediaView->SetPosition(pos, size);
 	
 		// text
@@ -102,7 +105,7 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 	
 	// text
-	renderer.DrawText(m_sText, m_xTextPosition, Renderer::eFontTypeNormal, 0xffffffff);
+	renderer.DrawText(m_sText, m_xTextPosition, Renderer::eFontTypeNormal, 0xffccfaff);
 }
 
 void Preamble::TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {

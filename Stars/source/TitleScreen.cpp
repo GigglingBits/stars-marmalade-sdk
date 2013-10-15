@@ -77,18 +77,18 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	CIwRect button;
 	int extents = GetScreenExtents();
 	
-	// world button
-    button.w = extents;
+	// main button
+    button.w = extents * 0.9;
     button.h = button.w * 2 / 3;
     button.x = screencenter.x - (button.w / 2);
-	button.y = extents / 20;
+	button.y = extents / 6;
 	m_xButtonTitle.SetPosition(button);
 	
     // menu buttons
-    button.w = extents / 8;
-    button.h = extents / 8;
+    button.w = extents / 7;
+    button.h = extents / 7;
     button.x = screencenter.x - (extents / 2);
-	button.y = screencenter.y + (extents / 4);
+	button.y = screencenter.y + (extents / 3);
 	m_xPanelOptions.GetMainButton().SetPosition(button);
     
 	button.x = screencenter.x + (extents / 2) - button.w;

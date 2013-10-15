@@ -17,8 +17,11 @@ private:
 	std::string m_sText;
 	CIwRect m_xTextPosition;
 
-	Texture* m_pxBackground;
+	std::string m_sTextureId;
+	std::string m_sMediaFile;
+	
 	MediaView* m_pxMediaView;
+	Texture* m_pxBackground;
 	
 public:
 	Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile);

@@ -5,10 +5,10 @@
       fileformatversion="2">
 
 	<preambles>
-		<!--
-		 <preamble name="earth_1">
-			 Drag the star to catch the nuggets. The nuggets make it stronger.
+		 <preamble name="earth_1" texture="preamble_01">
+			 Draw with your finger to lead the star!
 		 </preamble>
+		 <!--
 		 <preamble name="earth_2" file="stories/intro.mp4">
 			 Catch all nuggets to get max points.
 		 </preamble>

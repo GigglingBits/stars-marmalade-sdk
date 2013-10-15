@@ -146,7 +146,7 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 	std::ostringstream oss;
 	oss.precision(1);
 	oss << std::fixed;
-	oss << "fps: " << fps << std::endl;
+	oss << "fps: " << fps << " / ";
 	oss << "sim-ratio: " << 100.0f * simratio << std::endl;
 	oss << "update: " << 100.0f * pureupdatetime / realframetime << '%' << " / ";
 	oss << "render: " << 100.0f * purerendertime / realframetime << '%' << " / ";

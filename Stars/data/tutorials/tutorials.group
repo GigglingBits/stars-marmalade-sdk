@@ -1,0 +1,8 @@
+CIwResGroup
+{
+	name "tutorials"
+
+	shared true
+
+	./01.png
+}

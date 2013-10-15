@@ -289,6 +289,8 @@ the bodie that owns the joint.
 		  <frame id="attack" image="star_angry" />
 	</texture>
 
+	<texture id="preamble_01" image="01" />
+
 	  <texture id="spark">
 		  <frame id="01" image="spark_01" duration="100" next="02" />
 		  <frame id="02" image="spark_02" duration="100" next="03" />
