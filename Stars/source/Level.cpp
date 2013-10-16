@@ -17,7 +17,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),
 	m_iCompletionTimer(0),
-	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyP),
+	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false){
 
 	// attach event handlers

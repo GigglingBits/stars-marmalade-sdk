@@ -43,10 +43,12 @@ SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
 
-#SplashScreenWidth=480
-#SplashScreenHeight=320
-#SplashScreenMinTime=1000
-#SplashScreenFile=splashscreen-320x480.jpg
+{OS=android}
+SplashscreenWidth=640
+SplashscreenHeight=377
+SplashscreenFile=splashscreen.jpg
+SplashscreenMinTime=3000
+{}
 
 IOSDispScaleFactor=200
 DispFixRot=2
@@ -69,6 +71,12 @@ KeyAbsGameD=Esc			# quit
 KeyAbsOk=Enter			# not used
 KeyAbsASK=T				# not used
 KeyAbsBSK=B				# not used
+
+{OS=android}
+KeyAbsGameA=Menu
+KeyAbsGameD=Back
+{}
+
 
 ####################################################
 [Gx]

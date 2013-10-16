@@ -10,7 +10,7 @@ WorldMenu::WorldMenu(PageSettings::WorldId world) :
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyEnter),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyLeft),
-	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyFirst),
+	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyAbsGameD),
 	m_pxBackground(NULL) {
 
     m_xButtonNext.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);

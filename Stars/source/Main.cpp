@@ -30,14 +30,19 @@ void Initialize() {
 	IwGxInit();
 	{
 		IwGxLightingOn(); // required only for IwGxFont colouring
-		IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
-
+		IwGxSetColClear(0x40, 0x40, 0x40, 0xff);
+		//IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
+		
 		CIwMaterial* pMat = IwGxGetMaterialTemplate();
 		pMat->SetShadeMode(CIwMaterial::SHADE_GOURAUD);
 		pMat->SetCullMode(CIwMaterial::CULL_NONE);
 		pMat->SetModulateMode(CIwMaterial::MODULATE_RGB);
 		pMat->SetAlphaMode(CIwMaterial::ALPHA_BLEND);
 		pMat->SetBlendMode(CIwMaterial::BLEND_BLEND);
+		
+		IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+		IwGxFlush();
+		IwGxSwapBuffers();
 	}
 
 	IwResManagerInit();

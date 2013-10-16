@@ -15,7 +15,7 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
 	m_iGroupId(0),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyLeft),
-    m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyFirst) {
+    m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyAbsGameD) {
 
     m_pxBackground = FactoryManager::GetTextureFactory().Create("levelmenu_bg");
     if (m_pxBackground) {
