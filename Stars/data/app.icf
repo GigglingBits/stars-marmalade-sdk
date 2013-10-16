@@ -43,12 +43,12 @@ SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
 
-{OS=android}
-SplashscreenWidth=640
-SplashscreenHeight=377
-SplashscreenFile=splashscreen.jpg
-SplashscreenMinTime=3000
-{}
+#{OS=android}
+#SplashscreenWidth=640
+#SplashscreenHeight=377
+#SplashscreenFile=splashscreen.jpg
+#SplashscreenMinTime=3000
+#{}
 
 IOSDispScaleFactor=200
 DispFixRot=2
@@ -58,19 +58,20 @@ MemSizeDebug=25000000
 
 SysTraceToFile=0
 
-#KeyAbsLeft=Left
-#KeyAbsRight=Right
-#KeyAbsUp=Up
-#KeyAbsDown=Down
+KeyAbsOk=Enter
+
+KeyAbsLeft=Left
+KeyAbsRight=Right
+KeyAbsUp=Up
+KeyAbsDown=Down
 
 KeyAbsGameA=P			# pause/resume
 KeyAbsGameB=R			# restart
 KeyAbsGameC=Backspace	# reload
-KeyAbsGameD=Esc			# quit
+KeyAbsGameD=Esc		# quit
 
-KeyAbsOk=Enter			# not used
-KeyAbsASK=T				# not used
-KeyAbsBSK=B				# not used
+KeyAbsASK=T			# not used
+KeyAbsBSK=B			# not used
 
 {OS=android}
 KeyAbsGameA=Menu

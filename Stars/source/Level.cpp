@@ -18,7 +18,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xHud(m_xGame),
 	m_iCompletionTimer(0),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
-	m_bIsPaused(false){
+	m_bIsPaused(false) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);

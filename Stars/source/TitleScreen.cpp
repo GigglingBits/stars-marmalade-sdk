@@ -6,7 +6,7 @@
 
 TitleScreen::TitleScreen() :
 	Page("menu.group"),
-	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyEnter),
+	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
 	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst),
 	m_pxBackground(NULL) {

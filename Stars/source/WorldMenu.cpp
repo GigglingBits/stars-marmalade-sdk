@@ -7,9 +7,9 @@
 WorldMenu::WorldMenu(PageSettings::WorldId world) :
 	Page("menu.group"),
     m_eWorld(world),
-    m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyEnter),
-    m_xButtonNext(eButtonCommandIdNone, s3eKeyRight),
-    m_xButtonPrevious(eButtonCommandIdNone, s3eKeyLeft),
+    m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyAbsOk),
+    m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),
+    m_xButtonPrevious(eButtonCommandIdNone, s3eKeyAbsLeft),
 	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyAbsGameD),
 	m_pxBackground(NULL) {
 
