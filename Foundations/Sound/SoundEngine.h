@@ -8,17 +8,28 @@
 #include "IwSoundInst.h"
 
 class SoundEngine {
+private:
+	static SoundEngine* s_pxInstance;
+	SoundEngine();
+	~SoundEngine();
+	
+private:
+	std::string m_sMusicFile;
+	
 public:
 	static void Initialize();
 	static void Terminate();
+	static SoundEngine& GetInstance();
 
-	static void PlayMusicFileLoop(const std::string& filename);
-	static void PlayMusicFile(const std::string& filename);
-	static void StopMusicFile();
+public:
+	const std::string& GetPlayingMusicFile();
+	void PlayMusicFileLoop(const std::string& filename);
+	void PlayMusicFile(const std::string& filename);
+	void StopMusicFile();
 
-	static void PlaySoundEffect(const std::string& soundname);
+	void PlaySoundEffect(const std::string& soundname);
 
-	static void Update();
+	void Update();
 };
 
 #endif

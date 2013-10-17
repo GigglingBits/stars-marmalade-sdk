@@ -6,11 +6,10 @@
 #include "Debug.h"
 #include "Configuration.h"
 #include "InputManager.h"
-#include "SoundEngine.h"
 #include "FactoryManager.h"
 
 Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string background) :
-	Page("level.group"),
+	Page("level.group", Configuration::GetInstance().LevelsFile),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
 	m_xBackground(background, m_xGame), 
@@ -35,8 +34,6 @@ Level::~Level() {
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
-
-	SoundEngine::StopMusicFile();
 }
 
 void Level::Initialize() {
@@ -45,13 +42,12 @@ void Level::Initialize() {
 	
 	m_xHud.Initialize();
 
-	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().LevelSong);
-
 	CreateStar();
 }
 
 const std::string& Level::GetResourceGroupName() {
-	return  "sprites/sprites.group";
+	static std::string s("sprites/sprites.group");
+	return s;
 }
 
 GameFoundation& Level::GetGameFoundation() {

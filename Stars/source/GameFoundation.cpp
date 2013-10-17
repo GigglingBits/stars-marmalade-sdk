@@ -241,7 +241,7 @@ void GameFoundation::Collide(Body& body1, Body& body2, bool issensorcollision, c
 	body1.Collide(body2);
 
 	// general collision actions
-	SoundEngine::PlaySoundEffect("collision");
+	SoundEngine::GetInstance().PlaySoundEffect("collision");
 }
 
 void GameFoundation::CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args) {

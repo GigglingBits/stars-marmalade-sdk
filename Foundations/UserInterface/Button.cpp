@@ -149,7 +149,7 @@ void Button::PressedEventHandler(const InputManager::VirtualButton& sender, cons
 		PressedEvent.Invoke(*this, newargs);
 		pargs->handled = newargs.handled;
 
-		SoundEngine::PlaySoundEffect("ButtonPressed");
+		SoundEngine::GetInstance().PlaySoundEffect("ButtonPressed");
 		m_bDown = true;
 	} else {
 		// button is disabled; suppress any further processing

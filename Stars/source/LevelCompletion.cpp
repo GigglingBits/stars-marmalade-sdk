@@ -5,10 +5,9 @@
 #include "FactoryManager.h"
 #include "GameFoundation.h"
 #include "Configuration.h"
-#include "SoundEngine.h"
 
 LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
-	Page("completion.group"),
+	Page("completion.group", info.IsCleared ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
@@ -29,9 +28,7 @@ LevelCompletion::~LevelCompletion() {
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
-
-	SoundEngine::StopMusicFile();
-} 
+}
 
 void LevelCompletion::Initialize() {
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
@@ -43,9 +40,6 @@ void LevelCompletion::Initialize() {
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
 
 	m_xButtonNext.SetEnabled(m_bIsCompleted);
-
-	std::string& song = m_bIsCompleted ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong;
-	SoundEngine::PlayMusicFileLoop(song);
 }
 
 bool LevelCompletion::IsCompleted(GameFoundation::CompletionInfo& info) {

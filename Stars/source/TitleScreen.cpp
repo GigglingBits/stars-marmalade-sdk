@@ -1,11 +1,10 @@
 #include "TitleScreen.h"
 #include "FactoryManager.h"
 #include "Debug.h"
-#include "SoundEngine.h"
 #include "Configuration.h"
 
 TitleScreen::TitleScreen() :
-	Page("menu.group"),
+	Page("menu.group", Configuration::GetInstance().IntroSong),
 	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
 	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst),
@@ -22,8 +21,6 @@ TitleScreen::~TitleScreen() {
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
-
-	SoundEngine::StopMusicFile();
 }
 
 void TitleScreen::Initialize() {
@@ -38,7 +35,6 @@ void TitleScreen::Initialize() {
 	m_xPanelSocial.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_achievements"));
 
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
-	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
 }
 
 void TitleScreen::OnUpdate(const FrameData& frame) {

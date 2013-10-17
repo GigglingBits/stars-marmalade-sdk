@@ -106,7 +106,7 @@ void DoLoop() {
 		s3eDeviceYield();
 
 		// clear sound channels
-		SoundEngine::Update();
+		SoundEngine::GetInstance().Update();
 		s3eDeviceYield();
 	}
 }

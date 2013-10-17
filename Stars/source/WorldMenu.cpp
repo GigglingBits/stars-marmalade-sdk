@@ -1,11 +1,10 @@
 #include "WorldMenu.h"
 #include "FactoryManager.h"
 #include "Debug.h"
-#include "SoundEngine.h"
 #include "Configuration.h"
 
 WorldMenu::WorldMenu(PageSettings::WorldId world) :
-	Page("menu.group"),
+	Page("menu.group", Configuration::GetInstance().IntroSong),
     m_eWorld(world),
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyAbsOk),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),
@@ -24,8 +23,6 @@ WorldMenu::~WorldMenu() {
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
-
-	SoundEngine::StopMusicFile();
 }
 
 void WorldMenu::Initialize() {
@@ -42,8 +39,6 @@ void WorldMenu::Initialize() {
 	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdJupiter);
 	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
-
-	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
 
     ApplyWorld(m_eWorld);
 }

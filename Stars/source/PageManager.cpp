@@ -9,6 +9,7 @@
 #include "LevelCompletion.h"
 #include "FactoryManager.h"
 #include "ResourceManager.h"
+#include "SoundEngine.h"
 
 PageManager::PageManager() {
 	m_pxCurrentPage = NULL;
@@ -24,6 +25,8 @@ PageManager::~PageManager() {
 	if (m_pxNextPage && m_pxNextPage != m_pxCurrentPage) {
 		delete m_pxNextPage;
 	}
+	
+	SoundEngine::GetInstance().StopMusicFile();
 }
 
 Page* PageManager::CreateNextPage(Page* oldpage) {
@@ -121,7 +124,13 @@ void PageManager::OnUpdate(const FrameData& frame) {
 			if (m_pxCurrentPage) {
 				ResourceManager::GetInstance().LoadTemporary(
 					m_pxCurrentPage->GetResourceGroupName());
+
 				m_pxCurrentPage->Initialize();
+				
+				const std::string& musicfile = m_pxCurrentPage->GetMusicFileName();
+				if (!musicfile.empty() && SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
+					SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
+				}
 			}
 			// re-open the curtain
 			m_xCurtain.Open();

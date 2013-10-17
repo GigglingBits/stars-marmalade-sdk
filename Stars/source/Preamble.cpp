@@ -2,9 +2,10 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 #include "MediaViewFactory.h"
+#include "Configuration.h"
 
 Preamble::Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile) :
-	Page("preamble.group"),
+	Page("preamble.group", Configuration::GetInstance().IntroSong),
 	m_xTextPosition(0, 0, 0, 0),
 	m_pxMediaView(NULL) {
 	IW_CALLSTACK_SELF;

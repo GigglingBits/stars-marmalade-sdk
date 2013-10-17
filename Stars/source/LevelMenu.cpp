@@ -3,14 +3,13 @@
 #include "LevelMenu.h"
 #include "FactoryManager.h"
 #include "Debug.h"
-#include "SoundEngine.h"
 #include "Configuration.h"
 #include "Debug.h"
 
 #define NO_BUTTON -1
 
 LevelMenu::LevelMenu(PageSettings::WorldId world) :
-	Page("menu.group"),
+	Page("menu.group", Configuration::GetInstance().IntroSong),
 	m_eWorldId(world),
 	m_iGroupId(0),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),
@@ -42,8 +41,6 @@ LevelMenu::~LevelMenu() {
 			delete m_apxButtons[i];
 		}
 	}
-
-	SoundEngine::StopMusicFile();
 }
 
 void LevelMenu::Initialize() {
@@ -64,8 +61,6 @@ void LevelMenu::Initialize() {
 
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
-	SoundEngine::PlayMusicFileLoop(Configuration::GetInstance().IntroSong);
-	
 	ApplyGroup(m_iGroupId);
 }
 

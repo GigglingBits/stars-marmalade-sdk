@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Page::Page(const std::string& resgrpname) : Window(), m_eCompletionState(eInProgress), m_sResGrpName(resgrpname) {
+Page::Page(const std::string& resgrpname, const std::string& musicfilename) : Window(), m_eCompletionState(eInProgress), m_sResGrpName(resgrpname), m_sMusicFileName(musicfilename) {
 }
 
 bool Page::IsCompleted() {
@@ -19,4 +19,8 @@ void Page::SetCompletionState(CompletionState state) {
 
 const std::string& Page::GetResourceGroupName() {
 	return m_sResGrpName;
+}
+
+const std::string& Page::GetMusicFileName() {
+	return m_sMusicFileName;
 }
