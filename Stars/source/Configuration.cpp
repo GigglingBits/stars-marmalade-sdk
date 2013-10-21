@@ -12,7 +12,13 @@ Configuration::Configuration() {
 	} else {
 		ShowStats = 0;
 	}
-
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "rebuildresources", &tmpint)) {
+		RebuildResources = tmpint == 1;
+	} else {
+		RebuildResources = 1;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {
 		BodiesFile = tmpstr;
 	} else {

@@ -16,6 +16,7 @@ public:
 
 public:
 	bool ShowStats;
+	bool RebuildResources;
 
 	double MaxVisibleWorldSize;
 	double WorldMargin;

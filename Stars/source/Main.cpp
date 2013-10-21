@@ -27,6 +27,8 @@
 void Initialize() {
 	IW_CALLSTACK_SELF;
 
+	Configuration::Initialize();
+
 	IwGxInit();
 	{
 		IwGxLightingOn(); // required only for IwGxFont colouring
@@ -45,6 +47,9 @@ void Initialize() {
 	}
 
 	IwResManagerInit();
+#ifdef IW_DEBUG
+	IwGetResManager()->SetMode(Configuration::GetInstance().RebuildResources ? CIwResManager::MODE_BUILD : CIwResManager::MODE_LOAD);
+#endif
 	IwGxFontInit();
 
 	//// flip y axis: https://www.airplaysdk.com/node/3193
@@ -52,7 +57,6 @@ void Initialize() {
 
 	ResourceManager::Initialize();
 	SoundEngine::Initialize();
-	Configuration::Initialize();
 	InputManager::Initialize();
 	DeviceInfo::Initialize();
 	LogManager::Initialize();
@@ -70,13 +74,14 @@ void Terminate() {
 	LogManager::Terminate();
 	DeviceInfo::Terminate();
 	InputManager::Terminate();
-	Configuration::Terminate();
 	SoundEngine::Terminate();
 	ResourceManager::Terminate();
 
 	IwGxFontTerminate();
 	IwResManagerTerminate();
 	IwGxTerminate();
+	
+	Configuration::Terminate();
 }
 
 //--------------------------------------------------------------------------
