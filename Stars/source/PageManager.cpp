@@ -38,8 +38,8 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 		nextpage = FactoryManager::GetLevelFactory().Create(m_xPageSettings.GetLevelKey());
 
 	} else if (Level* level = dynamic_cast<Level*>(oldpage)) {
-		GameFoundation::CompletionInfo info;
-		if (level->GetCompletionInfo(info)) {
+		const Level::CompletionInfo& info = level->GetCompletionInfo();
+		if (info.IsCleared) {
 			nextpage = new LevelCompletion(info);
 		} else {
 			nextpage = new LevelMenu(m_xPageSettings.GetWorld());

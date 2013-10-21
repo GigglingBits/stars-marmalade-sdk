@@ -11,15 +11,9 @@ GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
 
 	m_xContactListener.CollisionEvent.AddListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
 	m_xWorld.SetContactListener(&m_xContactListener);
-
-	m_xBodyTimer.Elapsed.AddListener(this, &GameFoundation::BodyTimerEventHandler);
-	m_xBodyTimer.LastEventFired.AddListener(this, &GameFoundation::BodyTimerClearedEventHandler);
 }
 
 GameFoundation::~GameFoundation() {
-	m_xBodyTimer.LastEventFired.RemoveListener(this, &GameFoundation::BodyTimerClearedEventHandler);
-	m_xBodyTimer.Elapsed.RemoveListener(this, &GameFoundation::BodyTimerEventHandler);
-
 	SpriteMap::iterator it;
 	for (it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		Sprite* sprite = it->second;
@@ -28,19 +22,6 @@ GameFoundation::~GameFoundation() {
 
 	m_xWorld.SetContactListener(NULL);
 	m_xContactListener.CollisionEvent.RemoveListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
-}
-
-bool GameFoundation::IsCompleted() {
-	return !m_pxStar || (m_xBodyTimer.GetTotalDuration() < m_xBodyTimer.GetElapsedTime());
-}
-
-float GameFoundation::GetCompletionDegree() {
-	uint32 total = m_xBodyTimer.GetTotalDuration();
-	return total == 0 ? 1.0f : std::min<float>(1.0f, (float)m_xBodyTimer.GetElapsedTime() / (float)total);
-}
-
-const GameFoundation::CompletionInfo& GameFoundation::GetCompletionInfo() {
-	return m_xCompletionInfo;
 }
 
 std::map<std::string, Sprite*>& GameFoundation::GetSpriteMap() {
@@ -85,16 +66,6 @@ void GameFoundation::Add(Sprite* sprite) {
 	m_xSpriteMap[id] = sprite;
 }
 
-void GameFoundation::Add(uint16 delay, const std::string& body, float ypos) {
-	IW_CALLSTACK_SELF;
-
-	BodySpec spec;
-	spec.Body = body;
-	spec.YPos = ypos;
-
-	m_xBodyTimer.Enqueue(delay, spec);
-}
-
 void GameFoundation::EnqueueCreateSplashText(std::string text, const CIwFVec2& position) {
 	m_xSplashtextCreationQueue.push(SplashTextInfo());
 	SplashTextInfo& info = m_xSplashtextCreationQueue.back();
@@ -102,17 +73,10 @@ void GameFoundation::EnqueueCreateSplashText(std::string text, const CIwFVec2& p
 	info.position = position;
 }
 
-CIwFVec2 GameFoundation::GetGravity() {
-	b2Vec2 b2g = m_xWorld.GetWorld().GetGravity();
-	return CIwFVec2(b2g.x, b2g.y);
-}
-
 void GameFoundation::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	UpdatePhysics(frame.GetSimulatedDurationMs());
 	ManageSpriteLifeCicles(frame);
-	m_xBodyTimer.Update(frame.GetSimulatedDurationMs());
-	m_xCompletionInfo.DustFillPercent = GetDustFillPercent();
 }
 
 void GameFoundation::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -247,21 +211,4 @@ void GameFoundation::Collide(Body& body1, Body& body2, bool issensorcollision, c
 void GameFoundation::CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args) {
 	Collide(*args.bodya, *args.bodyb, args.issensorcollision, args.collisionpoint, args.approachvelocity);
 	Collide(*args.bodyb, *args.bodya, args.issensorcollision, args.collisionpoint, args.approachvelocity);
-}
-
-void GameFoundation::BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args) {
-	IW_CALLSTACK_SELF;
-
-	BodyFactory& factory = FactoryManager::GetBodyFactory();		
-	if (Body* body = factory.Create(args.Body)) {
-		body->SetPosition(CIwFVec2(m_xWorldSize.x * 2, args.YPos));
-		body->SetSpeed(CIwFVec2(-Configuration::GetInstance().ObjectSpeed, 0.0f));
-		Add(body);
-	} else {
-		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", args.Body.c_str()));
-	}
-}
-
-void GameFoundation::BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy) {
-	m_xCompletionInfo.IsCleared = true;
 }

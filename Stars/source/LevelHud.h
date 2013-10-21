@@ -36,6 +36,8 @@ public:
 	
 	void SetEnabled(bool enabled);
 	
+	void SetLevelProgress(float progress);
+	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);

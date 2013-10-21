@@ -4,7 +4,7 @@
 #include "Page.h"
 #include "Button.h"
 #include "Camera.h"
-#include "GameFoundation.h"
+#include "Level.h"
 #include "LevelHudNumber.h"
 
 class LevelCompletion : public Page {
@@ -25,7 +25,7 @@ private:
 	LevelHudNumber m_xDustFillPercent;
 
 public:
-	LevelCompletion(GameFoundation::CompletionInfo& info);
+	LevelCompletion(const Level::CompletionInfo& info);
 	~LevelCompletion();
 
 	virtual void Initialize();
@@ -36,8 +36,8 @@ protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
-	bool IsCompleted(GameFoundation::CompletionInfo& info);
-	std::string GenerateCompletionText(GameFoundation::CompletionInfo& info);
+	bool IsCompleted(const Level::CompletionInfo& info);
+	std::string GenerateCompletionText(const Level::CompletionInfo& info);
 };
 
 #endif

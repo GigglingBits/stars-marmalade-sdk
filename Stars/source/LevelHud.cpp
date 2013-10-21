@@ -57,6 +57,9 @@ void LevelHud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
+void LevelHud::SetLevelProgress(float progress) {
+	m_xProgressBar.SetProgress(progress);
+}
 
 void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	int extent = GetScreenExtents();
@@ -127,8 +130,6 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xButtonAttack.Update(frame);
 	
 	// progress indicator
-	float progress = m_rxGame.GetCompletionDegree();
-	m_xProgressBar.SetProgress(progress);
 	m_xProgressBar.Update(frame);
 
 	// vial

@@ -9,22 +9,11 @@
 #include "Body.h"
 #include "Star.h"
 #include "World.h"
-#include "EventTimer.h"
 #include "ContactListener.h"
 #include "RayCaster.h"
 #include "DustCounter.h"
 
 class GameFoundation : public Renderable {
-public:
-	struct CompletionInfo {
-		bool IsCleared;
-		float DustFillPercent;
-		CompletionInfo() {
-			IsCleared = false;
-			DustFillPercent = 0.0f;
-		}
-	};
-
 private:
 	struct SplashTextInfo {
 		std::string text;
@@ -37,18 +26,11 @@ private:
 	RayCaster m_xRayCaster;
 	ContactListener m_xContactListener;
 
-	struct BodySpec {
-		std::string Body;
-		float YPos;
-	};
-	EventTimer<BodySpec> m_xBodyTimer;
-
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap m_xSpriteMap;
 
 	std::queue<SplashTextInfo> m_xSplashtextCreationQueue;
 
-	CompletionInfo m_xCompletionInfo;
 	Star* m_pxStar;
 
 	DustCounter m_xDust;
@@ -60,7 +42,6 @@ public:
 	// sprite management
 	void Add(Sprite* sprite);
 	void Add(Body* body);
-	void Add(uint16 delay, const std::string& body, float ypos);
 
 	Star* GetStar();
 	Sprite* FindSprite(const std::string& id);
@@ -90,12 +71,6 @@ public:
 	float GetDustFillAmount();
 	float GetDustFillPercent();
 	
-	// game state
-	CIwFVec2 GetGravity();
-	bool IsCompleted();
-	const CompletionInfo& GetCompletionInfo();
-	float GetCompletionDegree();
-	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
@@ -110,9 +85,6 @@ private:
 	void Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity);
 	void CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args);
 
-	void BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args);
-	void BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy);
-	
 public:
 	struct QuakeImpactArgs {
 		float amplitude;

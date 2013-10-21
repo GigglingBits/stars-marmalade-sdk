@@ -10,10 +10,21 @@
 #include "Star.h"
 #include "Camera.h"
 #include "LevelInteractor.h"
+#include "EventTimer.h"
 
 #define LEVEL_COMPLETION_DELAY 10000
 
 class Level : public Page {
+public:
+	struct CompletionInfo {
+		bool IsCleared;
+		float DustFillPercent;
+		CompletionInfo() {
+			IsCleared = false;
+			DustFillPercent = 0.0f;
+		}
+	};
+	
 private:
 	CIwFVec2 m_xWorldSize;
 
@@ -21,6 +32,13 @@ private:
 	LevelBackground m_xBackground;
 
 	GameFoundation m_xGame;
+	CompletionInfo m_xCompletionInfo;
+
+	struct BodySpec {
+		std::string Body;
+		float YPos;
+	};
+	EventTimer<BodySpec> m_xBodyTimer;
 
 	bool m_bIsPaused;
 	
@@ -38,8 +56,10 @@ public:
 	virtual void Initialize();
 
 	void Add(Body* body);
+	void Add(uint16 delay, const std::string& body, float ypos);
 
-	bool GetCompletionInfo(GameFoundation::CompletionInfo& info);
+	const CompletionInfo& GetCompletionInfo();
+	float GetCompletionDegree();
 
 	GameFoundation& GetGameFoundation();
 
@@ -67,6 +87,9 @@ private:
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
 	
 private:
+	void BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args);
+	void BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy);
+	
 	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);

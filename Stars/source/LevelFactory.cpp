@@ -68,10 +68,9 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement(), leveltpl.GetBackground());
 
 	// populate level
-	GameFoundation& game = level->GetGameFoundation();
 	LevelTemplate::ElementQueue elems(leveltpl.GetElements());
 	while (!elems.empty()) {
-		game.Add(
+		level->Add(
 			elems.front().Delay,
 			elems.front().BodyName,
 			elems.front().Position);

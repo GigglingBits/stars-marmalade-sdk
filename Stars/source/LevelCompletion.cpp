@@ -6,7 +6,7 @@
 #include "GameFoundation.h"
 #include "Configuration.h"
 
-LevelCompletion::LevelCompletion(GameFoundation::CompletionInfo& info) :
+LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
 	Page("completion.group", info.IsCleared ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
@@ -42,11 +42,11 @@ void LevelCompletion::Initialize() {
 	m_xButtonNext.SetEnabled(m_bIsCompleted);
 }
 
-bool LevelCompletion::IsCompleted(GameFoundation::CompletionInfo& info) {
+bool LevelCompletion::IsCompleted(const Level::CompletionInfo& info) {
 	return info.IsCleared;
 }
 
-std::string LevelCompletion::GenerateCompletionText(GameFoundation::CompletionInfo& info) {
+std::string LevelCompletion::GenerateCompletionText(const Level::CompletionInfo& info) {
 	std::ostringstream oss;
 
 	if (info.IsCleared) {
