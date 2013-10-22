@@ -2,7 +2,7 @@
 #include "FactoryManager.h"
 #include "Debug.h"
 
-NaviPanel::NaviPanel() : m_iButtonCount(0), m_xPosition(0, 0, 0, 0) {
+NaviPanel::NaviPanel() : m_iButtonCount(0) {
 	memset(m_apxButtons, 0, sizeof(m_apxButtons));
 }
 
@@ -22,7 +22,7 @@ void NaviPanel::OnDoLayout(const CIwSVec2& screensize) {
 	}
 	
 	// set button geometry
-	CIwRect rect(m_xPosition);
+	CIwRect rect(GetPosition());
 	rect.w /= m_iButtonCount;
 	for (int i = 0; i < m_iButtonCount; i++) {
 		m_apxButtons[i]->SetPosition(rect);
@@ -40,11 +40,6 @@ void NaviPanel::OnRender(Renderer& renderer, const FrameData& frame) {
 	for (int i = 0; i < m_iButtonCount; i++) {
 		m_apxButtons[i]->Render(renderer, frame);
 	}
-}
-
-void NaviPanel::SetPosition(const CIwRect& rect) {
-	m_xPosition = rect;
-	InvalidateLayout();
 }
 
 void NaviPanel::AddButton(const std::string& textureid, int buttonid) {

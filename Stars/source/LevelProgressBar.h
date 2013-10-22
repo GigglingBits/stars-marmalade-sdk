@@ -6,8 +6,6 @@
 
 class LevelProgressBar : public Window {
 private:
-	CIwRect m_xPanelShape;
-
 	VertexStreamScreen m_xBackgroundShape;
 	Texture* m_pxBackground;
 
@@ -22,7 +20,6 @@ public:
 
 	void Initialize();
 
-	void SetPosition(const CIwRect& rect);
 	void SetProgress(float progress);
 
 protected:

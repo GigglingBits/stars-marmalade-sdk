@@ -6,8 +6,7 @@
 LevelDustCollector::LevelDustCollector() : 
 	m_pxDust(NULL),
 	m_fTargetProgress(0.0f),
-	m_fDisplayedProgress(0.0f),
-	m_xCollectorShape(0, 0, 1, 1) {
+	m_fDisplayedProgress(0.0f) {
 	IW_CALLSTACK_SELF;
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
@@ -22,18 +21,12 @@ void LevelDustCollector::Initialize() {
 	m_pxDust = FactoryManager::GetTextureFactory().Create("stardust");
 }
 
-void LevelDustCollector::SetPosition(const CIwRect& rect) {
-	m_xCollectorShape = rect;
-	InvalidateLayout();
-}
-
 void LevelDustCollector::UpdateDustShape() {
-	int progress = (int)(m_fDisplayedProgress * (float)(m_xCollectorShape.h));
-	m_xDustShape.SetRect(
-		m_xCollectorShape.x,
-		m_xCollectorShape.y + (m_xCollectorShape.h - progress),
-		m_xCollectorShape.w,
-		progress);
+	CIwRect shape(GetPosition());
+	int progress = (int)(m_fDisplayedProgress * (float)(shape.h));
+	shape.y = shape.y + (shape.h - progress);
+	shape.h = progress;
+	m_xDustShape.SetRect(shape);
 	m_xDustShape.ClosePolygon();
 }
 

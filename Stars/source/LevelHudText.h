@@ -6,9 +6,6 @@
 
 class LevelHudText : public Window {
 private:
-	CIwSVec2 m_xPosition;
-	CIwSVec2 m_xSize;
-
 	Renderer::FontType m_eFont;
 	uint32 m_uiColour;
 	
@@ -23,9 +20,6 @@ public:
 
 	virtual void Initialize();
 
-	void SetPosition(const CIwSVec2 pos);
-	void SetSize(const CIwSVec2 size);
-	
 	void SetFont(Renderer::FontType font);
 	void SetColour(uint32 col);
 

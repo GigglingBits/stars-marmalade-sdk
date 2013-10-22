@@ -13,12 +13,6 @@ private:
 public:
 	MediaView();
 	
-	void SetPosition(const CIwVec2& pos, const CIwVec2& size);
-	
-protected:
-	const CIwVec2& GetPosition();
-	const CIwVec2& GetSize();
-	
 public:
 	Event<MediaView, int> Finished;
 };

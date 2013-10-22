@@ -29,7 +29,7 @@ void VideoView::Play() {
 	
 	s3eResult res = s3eVideoPlay(
 		GetFile().c_str(), 1, 
-		GetPosition().x, GetPosition().y, GetSize().x, GetSize().y);
+		GetPosition().x, GetPosition().y, GetPosition().w, GetPosition().h);
 
 	if (res != S3E_RESULT_SUCCESS) {
 		IwAssertMsg(MYAPP, false, ("Cannot play video '%s'. Error: %s", GetFile().c_str(), s3eVideoGetErrorString()));

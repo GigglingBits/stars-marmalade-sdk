@@ -112,8 +112,8 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	m_xButtonStar.SetPosition(button);
     
 	// text
-	m_xDustFillPercent.SetPosition(CIwSVec2(150, 250));
-	m_xDustFillPercent.SetSize(CIwSVec2(150, 50));
+	m_xDustFillPercent.SetPosition(150, 250);
+	m_xDustFillPercent.SetSize(150, 50);
 	
     // the button size is determined by the screen height
 	button.h = extents / 7;

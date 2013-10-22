@@ -15,7 +15,7 @@ void TextureView::Initialize() {
 }
 
 void TextureView::OnDoLayout(const CIwSVec2& screensize) {
-	m_xGemoetry.SetRect(GetPosition().x, GetPosition().y, GetSize().x, GetSize().y);
+	m_xGemoetry.SetRect(GetPosition().x, GetPosition().y, GetPosition().w, GetPosition().h);
 }
 
 void TextureView::OnUpdate(const FrameData& frame) {

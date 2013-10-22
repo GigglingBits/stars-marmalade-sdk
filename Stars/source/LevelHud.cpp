@@ -113,13 +113,13 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	y = screensize.y - dustvialheight + (extent / 20);
 	w = (dustvialwidth / 2) - collectorcorrection;
 	h = dustvialheight - collectorheight - (extent / 15);
-	m_xQueuedAmount.SetPosition(CIwSVec2(x, y));
-	m_xQueuedAmount.SetSize(CIwSVec2(w, h));
+	m_xQueuedAmount.SetPosition(x, y);
+	m_xQueuedAmount.SetSize(w, h);
 	
 	// collected dust amount
 	x = spacing + (dustvialwidth / 2);
-	m_xCollectedAmount.SetPosition(CIwSVec2(x, y));
-	m_xCollectedAmount.SetSize(CIwSVec2(w, h));
+	m_xCollectedAmount.SetPosition(x, y);
+	m_xCollectedAmount.SetSize(w, h);
 }
 
 void LevelHud::OnUpdate(const FrameData& frame) {

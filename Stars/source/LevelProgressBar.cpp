@@ -6,8 +6,7 @@
 LevelProgressBar::LevelProgressBar() : 
 	m_pxBackground(NULL),
 	m_pxStar(NULL),
-	m_fProgress(0.0f),
-	m_xPanelShape(0, 0, 1, 1) {
+	m_fProgress(0.0f) {
 	IW_CALLSTACK_SELF;
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
@@ -27,16 +26,12 @@ void LevelProgressBar::Initialize() {
 }
 
 void LevelProgressBar::UpdateStarShape() {
-	int size = m_xPanelShape.h;
-	int progress = (int)(m_fProgress * (float)(m_xPanelShape.w - size));
+	CIwRect shape(GetPosition());
+	int size = shape.h;
+	int progress = (int)(m_fProgress * (float)(shape.w - size));
 	m_xStarShape.SetRect(
-		m_xPanelShape.x + progress, 
-		m_xPanelShape.y, size, size);
-}
-
-void LevelProgressBar::SetPosition(const CIwRect& rect) {
-	m_xPanelShape = rect;
-	InvalidateLayout();
+		shape.x + progress,
+		shape.y, size, size);
 }
 
 void LevelProgressBar::SetProgress(float progress) {
@@ -49,7 +44,7 @@ void LevelProgressBar::SetProgress(float progress) {
 }
 
 void LevelProgressBar::OnDoLayout(const CIwSVec2& screensize) {
-	m_xBackgroundShape.SetRect(m_xPanelShape);	
+	m_xBackgroundShape.SetRect(GetPosition());
 	UpdateStarShape();
 }
 

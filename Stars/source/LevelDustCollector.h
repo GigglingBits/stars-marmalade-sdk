@@ -6,8 +6,6 @@
 
 class LevelDustCollector : public Window {
 private:
-	CIwRect m_xCollectorShape;
-
 	VertexStreamScreen m_xDustShape;
 	Texture* m_pxDust;
 
@@ -23,7 +21,6 @@ public:
 
 	void Initialize();
 
-	void SetPosition(const CIwRect& rect);
 	void SetProgress(float progress, int rolltime = 0);
 
 protected:

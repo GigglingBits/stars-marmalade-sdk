@@ -10,8 +10,6 @@
 
 class NaviPanel : public Window {
 private:
-	CIwRect m_xPosition;
-
 	int m_iButtonCount;
 	Button* m_apxButtons[NAVIPANEL_BUTTON_MAX_COUNT];
 	
@@ -19,8 +17,6 @@ public:
 	NaviPanel();
 	virtual ~NaviPanel();
 	virtual void Initialize();
-
-	void SetPosition(const CIwRect& rect);
 
 	void AddButton(const std::string& textureid, int buttonid);
 	void ActivateButton(int buttonid);

@@ -6,6 +6,36 @@ Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false) {
 	m_iScreenPpcm = DeviceInfo::GetInfo().GetScreenPpcm();
 }
 
+void Window::SetSize(int w, int h) {
+	if (w != m_xPosition.w || h != m_xPosition.h) {
+		m_xPosition.w = w;
+		m_xPosition.h = h;
+		InvalidateLayout();
+	}
+}
+
+void Window::SetPosition(int x, int y) {
+	if (x != m_xPosition.x || y != m_xPosition.y) {
+		m_xPosition.x = x;
+		m_xPosition.y = y;
+		InvalidateLayout();
+	}
+}
+
+void Window::SetPosition(const CIwRect& pos) {
+	if (m_xPosition.x != pos.x ||
+		m_xPosition.y != pos.y ||
+		m_xPosition.w != pos.w ||
+		m_xPosition.h != pos.h) {
+		m_xPosition = pos;
+		InvalidateLayout();
+	}
+}
+
+const CIwRect& Window::GetPosition() {
+	return m_xPosition;
+}
+
 void Window::InvalidateLayout() {
 	m_bIsLayoutDone = false;
 }

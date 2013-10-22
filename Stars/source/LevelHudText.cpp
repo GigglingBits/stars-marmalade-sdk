@@ -15,22 +15,6 @@ void LevelHudText::Initialize() {
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
 
-void LevelHudText::SetPosition(const CIwSVec2 pos) {
-	m_xPosition = pos;
-	InvalidateLayout();
-	if (m_pxBackground) {
-		SetBackgroundShape();
-	}
-}
-
-void LevelHudText::SetSize(const CIwSVec2 size) {
-	m_xSize = size;
-	InvalidateLayout();
-	if (m_pxBackground) {
-		SetBackgroundShape();
-	}
-}
-
 void LevelHudText::SetFont(Renderer::FontType font) {
 	m_eFont = font;
 }
@@ -55,6 +39,9 @@ void LevelHudText::SetBackground(const std::string& texturename) {
 
 void LevelHudText::OnDoLayout(const CIwSVec2& screensize) {
 	IW_CALLSTACK_SELF;
+	if (m_pxBackground) {
+		SetBackgroundShape();
+	}
 }
 
 void LevelHudText::OnUpdate(const FrameData& frame) {
@@ -73,13 +60,12 @@ void LevelHudText::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	renderer.DrawText(
 		m_sText,
-		m_xPosition,
-		m_xSize,
+		GetPosition(),
 		m_eFont,
 		m_uiColour);
 }
 
 void LevelHudText::SetBackgroundShape() {
-	m_xBackgroundShape.SetRect(m_xPosition.x, m_xPosition.y, m_xSize.x, m_xSize.y);
+	m_xBackgroundShape.SetRect(GetPosition());
 }
 

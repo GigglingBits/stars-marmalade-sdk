@@ -67,7 +67,7 @@ void Preamble::OnDoLayout(const CIwSVec2& screensize) {
 		size.y = screensize.y - 2 * margin;
 		size.x = size.y * 3 / 2;
 		CIwVec2 pos(screencenter.x - (size.x / 2), margin);
-		m_pxMediaView->SetPosition(pos, size);
+		m_pxMediaView->SetPosition(CIwRect(pos.x, pos.y, size.x, size.y));
 	
 		// text
 		m_xTextPosition.Make(margin, screensize.y - margin, screensize.x - (2 * margin), margin);
