@@ -10,12 +10,18 @@ private:
 	CIwRect m_xPosition;
 	
 	bool m_bIsLayoutDone;
+
+	Renderer::RenderingLayer m_eBackgroundRenderingLayer;
+	VertexStreamScreen m_xBackgroundShape;
+	Texture* m_pxBackground;
 	
 public:
 	Window();
-
+	~Window();
+	
 	virtual void Initialize() = 0;
 	virtual void Update(const FrameData& frame);
+	virtual void Render(Renderer& renderer, const FrameData& frame);
 
 	void InvalidateLayout();
 
@@ -24,6 +30,8 @@ public:
 	void SetPosition(const CIwRect& pos);
 	
 	const CIwRect& GetPosition();
+	
+	void SetBackground(Texture* texture, Renderer::RenderingLayer layer = Renderer::eRenderingLayerBackground);
 	
 protected:
 	int GetScreenExtents();
@@ -39,6 +47,9 @@ protected:
 	T CentimeterToPixel(T cm) {
 		return cm * (T)m_iScreenPpcm;
 	}
+	
+private:
+	void SetBackgroundShape();
 };
 
 #endif

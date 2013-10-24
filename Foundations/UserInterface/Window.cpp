@@ -2,8 +2,14 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false) {
+Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false), m_pxBackground(NULL), m_eBackgroundRenderingLayer(Renderer::eRenderingLayerBackground) {
 	m_iScreenPpcm = DeviceInfo::GetInfo().GetScreenPpcm();
+}
+
+Window::~Window() {
+	if (m_pxBackground) {
+		delete m_pxBackground;
+	}
 }
 
 void Window::SetSize(int w, int h) {
@@ -36,6 +42,17 @@ const CIwRect& Window::GetPosition() {
 	return m_xPosition;
 }
 
+void Window::SetBackground(Texture* texture, Renderer::RenderingLayer layer) {
+	if (m_pxBackground) {
+		delete m_pxBackground;
+	}
+	m_eBackgroundRenderingLayer = layer;
+	m_pxBackground = texture;
+	if (m_pxBackground) {
+		SetBackgroundShape();
+	}
+}
+
 void Window::InvalidateLayout() {
 	m_bIsLayoutDone = false;
 }
@@ -47,9 +64,26 @@ void Window::Update(const FrameData& frame) {
 		m_xScreenSize = frame.GetScreensize();
 		OnDoLayout(m_xScreenSize);
 		m_bIsLayoutDone = true;
+		if (m_pxBackground) {
+			SetBackgroundShape();
+		}
+	}
+
+	if (m_pxBackground) {
+		m_pxBackground->Update(frame.GetRealDurationMs());
 	}
 
 	Renderable::Update(frame);
+}
+
+void Window::Render(Renderer& renderer, const FrameData& frame) {
+	if (m_pxBackground) {
+		renderer.SetRederingLayer(m_eBackgroundRenderingLayer);
+		renderer.Draw(m_xBackgroundShape, *m_pxBackground);
+		renderer.SetDefaultRederingLayer();
+	}
+	
+	Renderable::Render(renderer, frame);
 }
 
 int Window::GetScreenExtents() {
@@ -62,4 +96,8 @@ int Window::GetScreenExtents() {
 
 void Window::OnDoLayout(const CIwSVec2& screensize) {
 	// override this for re-doing the page layouts
+}
+
+void Window::SetBackgroundShape() {
+	m_xBackgroundShape.SetRect(GetPosition());
 }
