@@ -18,26 +18,6 @@ defines {
 }
 
 deployments {
-	name='Stars'
-	caption='Stars'
-	long-caption='Stars'
-	manufacturer='Giggling Bits'
-	provider='Oliver C. Lanz'
-	copyright='2010-2013'
-
-	version-major=0
-	version-minor=0
-	version-revision=1
-
-	icon='data/icons/'
-	splashscreen='data/splashscreens/'
-	splashscreen-use-all='1'
-
-	app-icf=data/app.icf
-	embed-icf='1'
-
-	networking=0
-
 	["iOS"]
 	iphone
 	iphone-appid='com.gigglingbits.stars'
@@ -305,7 +285,6 @@ assets
 deployments
 {
 	["Android"]
-	["Default"]
 	["MacOSX"]
 	["iOS"]
 }

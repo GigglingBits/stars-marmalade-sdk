@@ -1,0 +1,1 @@
+XCODE;build_stars_xcode

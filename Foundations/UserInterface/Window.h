@@ -11,7 +11,6 @@ private:
 	
 	bool m_bIsLayoutDone;
 
-	Renderer::RenderingLayer m_eBackgroundRenderingLayer;
 	VertexStreamScreen m_xBackgroundShape;
 	Texture* m_pxBackground;
 	
@@ -31,7 +30,7 @@ public:
 	
 	const CIwRect& GetPosition();
 	
-	void SetBackground(Texture* texture, Renderer::RenderingLayer layer = Renderer::eRenderingLayerBackground);
+	void SetBackground(Texture* texture);
 	
 protected:
 	int GetScreenExtents();

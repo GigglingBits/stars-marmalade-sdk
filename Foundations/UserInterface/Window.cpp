@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false), m_pxBackground(NULL), m_eBackgroundRenderingLayer(Renderer::eRenderingLayerBackground) {
+Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_bIsLayoutDone(false), m_pxBackground(NULL) {
 	m_iScreenPpcm = DeviceInfo::GetInfo().GetScreenPpcm();
 }
 
@@ -42,11 +42,10 @@ const CIwRect& Window::GetPosition() {
 	return m_xPosition;
 }
 
-void Window::SetBackground(Texture* texture, Renderer::RenderingLayer layer) {
+void Window::SetBackground(Texture* texture) {
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
-	m_eBackgroundRenderingLayer = layer;
 	m_pxBackground = texture;
 	if (m_pxBackground) {
 		SetBackgroundShape();
@@ -78,9 +77,8 @@ void Window::Update(const FrameData& frame) {
 
 void Window::Render(Renderer& renderer, const FrameData& frame) {
 	if (m_pxBackground) {
-		renderer.SetRederingLayer(m_eBackgroundRenderingLayer);
+		renderer.SetRederingLayer(GetRederingLayer());
 		renderer.Draw(m_xBackgroundShape, *m_pxBackground);
-		renderer.SetDefaultRederingLayer();
 	}
 	
 	Renderable::Render(renderer, frame);
