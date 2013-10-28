@@ -31,33 +31,27 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	conf.SetSize((float)width, (float)height);
 	conf.SetDustRequirement((float)dustrequirement);
 
-	// add level elements
-	TiXmlElement* subnode = node->FirstChildElement("sprite");
-	while (subnode) {
-		// read data
-		std::string bodyname((pc = (char*)subnode->Attribute("body")) ? pc : "");
-
-		if (bodyname.empty()) {
-			if (TiXmlElement* bodynode = subnode->FirstChildElement("body")) {
-				bodyname = FactoryManager::GetBodyFactory().AddConfig(bodynode);
-			}
+	// add sequences of level elements
+	TiXmlElement* spritesequencenode = node->FirstChildElement("spritesequence");
+	while (spritesequencenode) {
+		TiXmlElement* linenode = spritesequencenode->FirstChildElement("line");
+		std::vector<std::string> lines;
+		while (linenode) {
+			// read data
+			std::string map((pc = (char*)linenode->Attribute("map")) ? pc : "");
+			lines.push_back(map);
+			
+			// move next
+			linenode = linenode->NextSiblingElement();
 		}
-
-		IwAssertMsg(MYAPP, FactoryManager::GetBodyFactory().ConfigExists(bodyname), ("Body '%s' could not be found. Its referenced by level '%s'.", bodyname.c_str(), levelname.c_str()));
-
-		double pos = 0.0f;
-		subnode->Attribute("pos", &pos);
-
-		int delay = -1;
-		subnode->Attribute("delay", &delay);
-
+		
 		// add element
-		conf.AddElement(bodyname, (float)pos, (uint16)(delay >= 0 ? delay : 0));
+		conf.AddElements(height, lines);
 
 		// move next
-		subnode = subnode->NextSiblingElement();
+		spritesequencenode = spritesequencenode->NextSiblingElement();
 	}
-
+	
 	return levelname;
 }
 

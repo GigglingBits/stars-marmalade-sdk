@@ -27,6 +27,7 @@ public:
 	void SetSize(float width, float height);
 	void SetDustRequirement(float amount);
 	void AddElement(std::string bodyname, float position, uint16 delay);
+	void AddElements(float levelheight, const std::vector<std::string>& map);
 
 	std::string GetName();
 	std::string GetBackground();

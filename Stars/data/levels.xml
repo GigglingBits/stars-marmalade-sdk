@@ -24,20 +24,19 @@
 	<levels>
 
     <level name="earth_1" width="14.0" height="14.0" background="world_earth_background" dustrequirement="100">
-		<sprite body="nugget" pos="5" delay="0" />
-		<sprite body="nugget" pos="8" delay="5000" />
-		<sprite body="nugget" pos="10" delay="5000" />
-		<sprite body="nugget" pos="4" delay="5000" />
-		<sprite body="nugget" pos="4" delay="5000" />
-		<sprite body="nugget" pos="10" delay="5000" />
-		<sprite body="nugget" pos="10" delay="1000" />
-		<sprite body="nugget" pos="4" delay="5000" />
-		<sprite body="nugget" pos="4" delay="1000" />
-		<sprite body="nugget" pos="6" delay="5000" />
-		<sprite body="nugget" pos="8" delay="0000" />
-		<sprite body="nugget" pos="6" delay="5000" />
-		<sprite body="nugget" pos="8" delay="0000" />
-    </level>
+		<spritesequence>
+			<line map="   n    " />
+			<line map="        " />
+			<line map="      n " />
+			<line map="   n    " />
+			<line map="        " />
+			<line map="   n  n " />
+			<line map=" n nn   " />
+			<line map="   n    " />
+			<line map="        " />
+			<line map="   n n  " />
+		</spritesequence>
+	</level>
 
     <level name="earth_2" width="14.0" height="14.0" background="world_earth_background" dustrequirement="10000">
       <sprite body="nugget" pos="1.0" delay="1000" />
