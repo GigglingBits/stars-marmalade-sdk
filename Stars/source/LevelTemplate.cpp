@@ -1,5 +1,5 @@
 #include "LevelTemplate.h"
-#include "IwDebug.h"
+#include "Debug.h"
 
 void LevelTemplate::SetName(std::string levelname) {
 	m_sLevelName = levelname;
@@ -41,7 +41,9 @@ void LevelTemplate::AddElement(std::string bodyname, float position, uint16 dela
 	m_xElements.push(element);
 }
 
-void LevelTemplate::AddElements(float levelheight, const std::vector<std::string>& map) {
+void LevelTemplate::AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map) {
+	IW_CALLSTACK_SELF;
+	
 	// find number of lanes
 	int numberoflanes = 0;
 	std::vector<std::string>::const_iterator it;
@@ -61,22 +63,18 @@ void LevelTemplate::AddElements(float levelheight, const std::vector<std::string
 	int accumulateddelay = 0;
 	for (it = map.begin(); it != map.end(); it++) {
 		for (int lane = 0; lane < it->length(); lane ++) {
-			char bodyref = it->at(lane);
-			std::string body;
-			switch (bodyref) {
-				case 'n': body = "nugget"; break;
-				case ' ': body = ""; break;
-				default: {
-					IwAssertMsg(MYAPP, false, ("Unrecognized body reference in lane map line %i: %c", lane, bodyref));
-				}
-			}
-			// schedule body creation
-			if (!body.empty()) {
+			char bodydef = it->at(lane);
+			std::map<char, std::string>::const_iterator it = defs.find(bodydef);
+			if (bodydef == ' ') {
+				// nothing; just step over
+			} else if (it != defs.end()) {
 				AddElement(
-					body,
+					it->second,
 					worldmargin + (lanewidth / 2.0f) + (lane * lanewidth),
 					accumulateddelay);
 				accumulateddelay = 0;
+			} else {
+				IwAssertMsg(MYAPP, false, ("Unrecognized body reference in lane map line %i: %c", lane, bodydef));
 			}
 		}
 		accumulateddelay += DELAY;

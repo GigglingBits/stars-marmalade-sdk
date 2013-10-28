@@ -24,15 +24,23 @@
 	<levels>
 
     <level name="earth_1" width="14.0" height="14.0" background="world_earth_background" dustrequirement="100">
+		<spritedefs>
+			<def id="n" body="nugget" />
+			<def id="1" body="bird_01" />
+			<def id="2" body="bird_02" />
+		</spritedefs>
 		<spritesequence>
 			<line map="   n    " />
-			<line map="        " />
+			<line map="    1   " />
 			<line map="      n " />
 			<line map="   n    " />
 			<line map="        " />
 			<line map="   n  n " />
 			<line map=" n nn   " />
+			<line map="        " />
 			<line map="   n    " />
+			<line map="        " />
+			<line map=" 21212  " />
 			<line map="        " />
 			<line map="   n n  " />
 		</spritesequence>
