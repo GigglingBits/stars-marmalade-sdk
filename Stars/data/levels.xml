@@ -30,15 +30,15 @@
 			<def id="2" body="bird_02" />
 		</spritedefs>
 		<spritesequence>
+			<line map="n  n    " />
+			<line map="n   1   " />
+			<line map=" n    n " />
+			<line map="  nn    " />
 			<line map="   n    " />
-			<line map="    1   " />
+			<line map="   nn n " />
+			<line map=" n nnn  " />
 			<line map="      n " />
-			<line map="   n    " />
-			<line map="        " />
-			<line map="   n  n " />
-			<line map=" n nn   " />
-			<line map="        " />
-			<line map="   n    " />
+			<line map="   n   n" />
 			<line map="        " />
 			<line map=" 21212  " />
 			<line map="        " />

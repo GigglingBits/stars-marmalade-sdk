@@ -24,6 +24,25 @@ public:
 			DustFillPercent = 0.0f;
 		}
 	};
+
+private:
+	enum EventId {
+		eEventIdNoOp = 0,
+		eEventIdShowBanner,
+		eEventIdHideBanner,
+		eEventIdEnableUserInput,
+		eEventIdDisableUserInput,
+		eEventIdSuspendEventTimer,
+		eEventIdCreateBody,
+		eEventIdFinish,
+	};
+
+	struct EventArgs {
+		EventId eventId;
+		std::string bannerText;
+		std::string bodyName;
+		CIwFVec2 position;
+	};
 	
 private:
 	CIwFVec2 m_xWorldSize;
@@ -34,20 +53,16 @@ private:
 	GameFoundation m_xGame;
 	CompletionInfo m_xCompletionInfo;
 
-	struct BodySpec {
-		std::string Body;
-		float YPos;
-	};
-	EventTimer<BodySpec> m_xBodyTimer;
+	EventTimer<EventArgs> m_xEventTimer;
 
+	std::string m_sBannerText;
+	
 	bool m_bIsPaused;
 	
 	AppPanel m_xAppPanel;
 	LevelHud m_xHud;
 
 	LevelInteractor m_xInteractor;
-
-	int m_iCompletionTimer;
 
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement, std::string background);
@@ -84,11 +99,16 @@ private:
 	bool IsPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
 
+	void ShowBannerText(const std::string& text);
+	void HideBannerText();
+	
+	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
+	
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
 	
 private:
-	void BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args);
-	void BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy);
+	void EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args);
+	void EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy);
 	
 	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 

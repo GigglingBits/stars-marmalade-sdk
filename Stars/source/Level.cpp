@@ -15,7 +15,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xBackground(background, m_xGame), 
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),
-	m_iCompletionTimer(0),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false) {
 
@@ -25,14 +24,48 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
-	m_xBodyTimer.Elapsed.AddListener(this, &Level::BodyTimerEventHandler);
-	m_xBodyTimer.LastEventFired.AddListener(this, &Level::BodyTimerClearedEventHandler);
+	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
+	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
+		
+	// configure the start
+	EventArgs args;
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = "3";
+		m_xEventTimer.Enqueue(750, args);
+		
+		args.eventId = eEventIdHideBanner;
+		args.bannerText = "";
+		m_xEventTimer.Enqueue(1000, args);
+
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = "2";
+		m_xEventTimer.Enqueue(500, args);
+		
+		args.eventId = eEventIdHideBanner;
+		args.bannerText = "";
+		m_xEventTimer.Enqueue(1000, args);
+
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = "1";
+		m_xEventTimer.Enqueue(500, args);
+		
+		args.eventId = eEventIdHideBanner;
+		args.bannerText = "";
+		m_xEventTimer.Enqueue(1000, args);
+
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = "Start";
+		m_xEventTimer.Enqueue(500, args);
+		
+		args.eventId = eEventIdHideBanner;
+		args.bannerText = "";
+		m_xEventTimer.Enqueue(1000, args);
 }
 
 Level::~Level() {
 	// detach event handlers
-	m_xBodyTimer.LastEventFired.RemoveListener(this, &Level::BodyTimerClearedEventHandler);
-	m_xBodyTimer.Elapsed.RemoveListener(this, &Level::BodyTimerEventHandler);
+	m_xEventTimer.LastEventFired.RemoveListener(this, &Level::EventTimerClearedEventHandler);
+	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
@@ -47,6 +80,10 @@ void Level::Initialize() {
 	m_xHud.Initialize();
 
 	CreateStar();
+
+	EventArgs args;
+	args.eventId = eEventIdFinish;
+	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -78,11 +115,13 @@ void Level::Add(Body* body) {
 void Level::Add(uint16 delay, const std::string& body, float ypos) {
 	IW_CALLSTACK_SELF;
 	
-	BodySpec spec;
-	spec.Body = body;
-	spec.YPos = ypos;
+	EventArgs args;
+	args.eventId = eEventIdCreateBody;
+	args.bodyName = body;
+	args.position.x = m_xWorldSize.x * 1.5f;
+	args.position.y = ypos;
 	
-	m_xBodyTimer.Enqueue(delay, spec);
+	m_xEventTimer.Enqueue(delay, args);
 }
 
 void Level::SetPaused(bool paused) {
@@ -104,8 +143,8 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 }
 
 float Level::GetCompletionDegree() {
-	uint32 total = m_xBodyTimer.GetTotalDuration();
-	return total == 0 ? 1.0f : std::min<float>(1.0f, (float)m_xBodyTimer.GetElapsedTime() / (float)total);
+	uint32 total = m_xEventTimer.GetTotalDuration();
+	return total == 0 ? 1.0f : std::min<float>(1.0f, (float)m_xEventTimer.GetElapsedTime() / (float)total);
 }
 
 float Level::GetStarMoveForce() {
@@ -118,6 +157,14 @@ float Level::GetStarRestForce() {
 
 CIwFVec2 Level::GetStarStartPosition() {
 	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
+}
+
+void Level::ShowBannerText(const std::string& text) {
+	m_sBannerText = text;
+}
+
+void Level::HideBannerText() {
+	m_sBannerText = "";
 }
 
 void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
@@ -168,17 +215,8 @@ void Level::OnUpdate(const FrameData& frame) {
 	}
 
 	// update game logic (create new, remove dead, etc...)
-	m_xBodyTimer.Update(frame.GetSimulatedDurationMs());
+	m_xEventTimer.Update(frame.GetSimulatedDurationMs());
 	m_xGame.Update(frame);
-
-	// check if level is finished
-	if (m_xCompletionInfo.IsCleared) {
-		// delay the level termination for a short time
-		m_iCompletionTimer += frame.GetSimulatedDurationMs();
-		if (LEVEL_COMPLETION_DELAY < m_iCompletionTimer) {
-			SetCompletionState(eCompleted);
-		}
-	}
 
 	// interaction
 	m_xInteractor.Update(frame);
@@ -202,6 +240,10 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xInteractor.Render(renderer, frame);
 
 	m_xHud.Render(renderer, frame);
+	
+	if (!m_sBannerText.empty()) {
+		renderer.DrawText(m_sBannerText, m_xWorldSize / 2.0f, Renderer::eFontTypeLarge, 0xffccfaff);
+	}
 }
 
 CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
@@ -227,20 +269,56 @@ void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoun
 	m_xCamera.StartQuakeEffect(args.amplitude, 700);
 }
 
-void Level::BodyTimerEventHandler(const EventTimer<BodySpec>& sender, const BodySpec& args) {
+void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args) {
 	IW_CALLSTACK_SELF;
 	
-	BodyFactory& factory = FactoryManager::GetBodyFactory();
-	if (Body* body = factory.Create(args.Body)) {
-		body->SetPosition(CIwFVec2(m_xWorldSize.x * 2, args.YPos));
-		body->SetSpeed(CIwFVec2(-Configuration::GetInstance().ObjectSpeed, 0.0f));
-		Add(body);
-	} else {
-		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", args.Body.c_str()));
+	switch (args.eventId) {
+		case eEventIdNoOp: {
+			break;
+		}
+		case eEventIdShowBanner: {
+			ShowBannerText(args.bannerText);
+			break;
+		}
+		case eEventIdHideBanner: {
+			HideBannerText();
+			break;
+		}
+		case eEventIdEnableUserInput: {
+			break;
+		}
+		case eEventIdDisableUserInput: {
+			break;
+		}
+		case eEventIdSuspendEventTimer: {
+			break;
+		}
+		case eEventIdCreateBody: {
+			CreateBody(args.bodyName, args.position,
+					   CIwFVec2(-Configuration::GetInstance().ObjectSpeed, 0.0f));
+			break;
+		}
+		case eEventIdFinish: {
+			SetCompletionState(eCompleted);
+			break;
+		}
 	}
 }
 
-void Level::BodyTimerClearedEventHandler(const EventTimer<BodySpec>& sender, const int& dummy) {
+void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed) {
+	IW_CALLSTACK_SELF;
+
+	BodyFactory& factory = FactoryManager::GetBodyFactory();
+	if (Body* body = factory.Create(bodyName)) {
+		body->SetPosition(pos);
+		body->SetSpeed(speed);
+		Add(body);
+	} else {
+		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", bodyName.c_str()));
+	}
+}
+
+void Level::EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy) {
 	m_xCompletionInfo.IsCleared = true;
 	m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
 }
