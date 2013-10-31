@@ -9,7 +9,7 @@
 #include "FactoryManager.h"
 
 Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string background) :
-	Page("level.group", Configuration::GetInstance().LevelsFile),
+	Page("level.group", Configuration::GetInstance().LevelSong),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
 	m_xBackground(background, m_xGame), 
@@ -31,35 +31,35 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 	EventArgs args;
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "3";
-		m_xEventTimer.Enqueue(750, args);
+		m_xEventTimer.Enqueue(200, args);
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1000, args);
+		m_xEventTimer.Enqueue(1300, args);
 
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "2";
-		m_xEventTimer.Enqueue(500, args);
+		m_xEventTimer.Enqueue(200, args);
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1000, args);
+		m_xEventTimer.Enqueue(1300, args);
 
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "1";
-		m_xEventTimer.Enqueue(500, args);
+		m_xEventTimer.Enqueue(200, args);
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1000, args);
+		m_xEventTimer.Enqueue(1300, args);
 
 		args.eventId = eEventIdShowBanner;
-		args.bannerText = "Start";
-		m_xEventTimer.Enqueue(500, args);
+		args.bannerText = "Go!";
+		m_xEventTimer.Enqueue(200, args);
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1000, args);
+		m_xEventTimer.Enqueue(1300, args);
 }
 
 Level::~Level() {

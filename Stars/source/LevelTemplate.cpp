@@ -62,7 +62,7 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, std::str
 	const int DELAY = 1500; // milliseconds
 	int accumulateddelay = 0;
 	for (it = map.begin(); it != map.end(); it++) {
-		for (int lane = 0; lane < it->length(); lane ++) {
+		for (uint lane = 0; lane < it->length(); lane++) {
 			char bodydef = it->at(lane);
 			std::map<char, std::string>::const_iterator it = defs.find(bodydef);
 			if (bodydef == ' ') {
