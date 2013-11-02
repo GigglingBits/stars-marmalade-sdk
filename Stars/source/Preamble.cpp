@@ -54,6 +54,8 @@ void Preamble::Initialize() {
 		m_pxMediaView->Finished.AddListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
 		m_pxMediaView->Initialize();
 	}
+
+	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {

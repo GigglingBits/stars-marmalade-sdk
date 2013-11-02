@@ -144,17 +144,15 @@ void LevelBackground::OnUpdate(const FrameData& frame) {
 void LevelBackground::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	//const uint32 HAZE = 0x44ffffff;
-
 	CIwFVec2 screencenter = renderer.GetScreenCenterWorldSpace();
 	CIwFVec2 offset = screencenter - m_xWorldCenter;
 
 	const int count = 4;
 	CIwFVec2 verts[count];
+	SetVerts(offset, verts);
 
 	if (m_pxBackground) {
-		SetVerts(offset, verts);
-		renderer.DrawImage(m_pxBackground, verts, count); 
+		renderer.DrawImage(m_pxBackground, verts, count);
 		//renderer.DrawPolygon(verts, count, 0x00000000, HAZE); 
 	}
 

@@ -3,16 +3,20 @@
 
 #include "Renderable.h"
 
+#define WINDOW_NUM_COLOURS 4
+
 class Window : public Renderable {
 private:
 	int m_iScreenPpcm;
 	CIwSVec2 m_xScreenSize;
 	CIwRect m_xPosition;
-	
+
+	bool m_bIsInitialPositionSet;
 	bool m_bIsLayoutDone;
 
 	VertexStreamScreen m_xBackgroundShape;
-	Texture* m_pxBackground;
+	Texture* m_pxBackgroundTexture;
+	uint32* m_puiBackgroundColourStream;
 	
 public:
 	Window();
@@ -31,6 +35,8 @@ public:
 	const CIwRect& GetPosition();
 	
 	void SetBackground(Texture* texture);
+	void SetBackground(uint32 blcolour, uint32 brcolour, uint32 urcolour, uint32 ulcolour);
+	void ClearBackground();
 	
 protected:
 	int GetScreenExtents();

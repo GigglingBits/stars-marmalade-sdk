@@ -35,7 +35,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1300, args);
+		m_xEventTimer.Enqueue(1100, args);
 
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "2";
@@ -43,7 +43,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1300, args);
+		m_xEventTimer.Enqueue(1100, args);
 
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "1";
@@ -51,7 +51,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1300, args);
+		m_xEventTimer.Enqueue(1100, args);
 
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = "Go!";
@@ -59,7 +59,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 		
 		args.eventId = eEventIdHideBanner;
 		args.bannerText = "";
-		m_xEventTimer.Enqueue(1300, args);
+		m_xEventTimer.Enqueue(1100, args);
 }
 
 Level::~Level() {
@@ -81,6 +81,11 @@ void Level::Initialize() {
 
 	CreateStar();
 
+	// mars:	0xff000000 -> 0xff0050ae
+	// jupiter:	0xff000000 -> 0xff9d8a85
+	// earth
+	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
+	
 	EventArgs args;
 	args.eventId = eEventIdFinish;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);

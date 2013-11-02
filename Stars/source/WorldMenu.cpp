@@ -41,6 +41,8 @@ void WorldMenu::Initialize() {
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
     ApplyWorld(m_eWorld);
+
+	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {

@@ -1,7 +1,7 @@
 ####################################################
 [Game]
 ####################################################
-rebuildresources=0
+rebuildresources=1
 showstats=0
 
 maxvisibleworldsize=8	# see max 20 meters on screen

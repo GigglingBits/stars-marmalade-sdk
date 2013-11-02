@@ -62,6 +62,8 @@ void LevelMenu::Initialize() {
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
 	ApplyGroup(m_iGroupId);
+
+	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {

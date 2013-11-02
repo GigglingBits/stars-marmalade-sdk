@@ -35,6 +35,8 @@ void TitleScreen::Initialize() {
 	m_xPanelSocial.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_achievements"));
 
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
+
+	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void TitleScreen::OnUpdate(const FrameData& frame) {
