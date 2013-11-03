@@ -41,8 +41,6 @@ void WorldMenu::Initialize() {
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
     ApplyWorld(m_eWorld);
-
-	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
@@ -159,25 +157,29 @@ void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
     // buttons
     m_xButtonPlanet.SetTextureFrame(worldframe);
 
-	// title text
+	// title text and background
 	switch (world) {
 		case PageSettings::eWorldIdEarth:
 		{
 			m_sTitle = "The blue planet";
+			SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 			break;
 		}
 		case PageSettings::eWorldIdMars:
 		{
 			m_sTitle = "The planet of fire";
+			SetBackground(0xff0050ae, 0xff0050ae, 0xff000000, 0xff000000);
 			break;
 		}
 		case PageSettings::eWorldIdJupiter:
 		{
 			m_sTitle = "The planet of rocks";
+			SetBackground(0xff9d8a85, 0xff9d8a85, 0xff000000, 0xff000000);
 			break;
 		}
 		default:
 			m_sTitle = "Some Planet";
+			SetBackground(0x00000000, 0x00000000, 0x00000000, 0x00000000);
 	}
 }
 

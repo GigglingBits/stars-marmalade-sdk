@@ -63,7 +63,26 @@ void LevelMenu::Initialize() {
 
 	ApplyGroup(m_iGroupId);
 
-	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
+	// title text and background
+	switch (m_eWorldId) {
+		case PageSettings::eWorldIdEarth:
+		{
+			SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
+			break;
+		}
+		case PageSettings::eWorldIdMars:
+		{
+			SetBackground(0xff0050ae, 0xff0050ae, 0xff000000, 0xff000000);
+			break;
+		}
+		case PageSettings::eWorldIdJupiter:
+		{
+			SetBackground(0xff9d8a85, 0xff9d8a85, 0xff000000, 0xff000000);
+			break;
+		}
+		default:
+			SetBackground(0x00000000, 0x00000000, 0x00000000, 0x00000000);
+	}
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {

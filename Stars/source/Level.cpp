@@ -81,9 +81,6 @@ void Level::Initialize() {
 
 	CreateStar();
 
-	// mars:	0xff000000 -> 0xff0050ae
-	// jupiter:	0xff000000 -> 0xff9d8a85
-	// earth
 	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 	
 	EventArgs args;
