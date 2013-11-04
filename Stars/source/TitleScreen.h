@@ -9,6 +9,8 @@
 #include "Body.h"
 #include "Camera.h"
 
+#include "s3eGyroscope.h"
+
 class TitleScreen : public Page {
 private:
 	Camera m_xCamera;
@@ -19,12 +21,14 @@ private:
 	OptionsPanel m_xPanelOptions;
 	SocialPanel m_xPanelSocial;
 
+	s3eGyroscopeData m_xGyro;
+	
 public:
 	TitleScreen();
 	virtual ~TitleScreen();
 
 	virtual void Initialize();
-
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
@@ -33,6 +37,10 @@ protected:
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
+
+private:
+	void SetGyroData(const s3eGyroscopeData& data);
+	static void GyroscopeCallback(void* sysdata, void* usrdata);
 };
 
 #endif

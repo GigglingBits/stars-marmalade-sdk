@@ -54,6 +54,8 @@ subprojects {
 	../Foundations/Sprites
 	../Foundations/Particles
 
+	../s3eGyroscope
+
 	iwgxfont
 
 	tinyxml

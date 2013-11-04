@@ -12,14 +12,38 @@ TitleScreen::TitleScreen() :
 
 		m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 		m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
+		
+		if (s3eGyroscopeAvailable()) {
+			s3eGyroscopeStart();
+			s3eGyroscopeSetSensorDelay(DELAY_UI);
+			s3eGyroscopeRegister(S3E_GYROSCOPE_CALLBACK_DATA_UPDATE, (s3eCallback)GyroscopeCallback, this);
+		}
 }
 
+
 TitleScreen::~TitleScreen() {
+	if (s3eGyroscopeAvailable()) {
+		s3eGyroscopeUnRegister(S3E_GYROSCOPE_CALLBACK_DATA_UPDATE, (s3eCallback)GyroscopeCallback);
+		s3eGyroscopeStop();
+	}
+	
 	m_xPanelOptions.StateChanged.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 	m_xPanelSocial.StateChanged.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 
 	if (m_pxBackground) {
 		delete m_pxBackground;
+	}
+}
+
+void TitleScreen::SetGyroData(const s3eGyroscopeData& data) {
+	m_xGyro = data;
+}
+
+void TitleScreen::GyroscopeCallback(void* sysdata, void* usrdata) {
+	if (TitleScreen* ts = (TitleScreen*) usrdata) {
+		if (s3eGyroscopeData* gyro = (s3eGyroscopeData*) sysdata) {
+			ts->SetGyroData(*gyro);
+		}
 	}
 }
 
@@ -64,9 +88,13 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 
     // background
     if (m_pxBackground) {
+		CIwSVec2 gyrooffset;
+		gyrooffset.x = m_xGyro.m_X * 5.0f;
+		gyrooffset.y = m_xGyro.m_Y * 5.0f;
+		
         VertexStreamScreen shape;        
         const CIwSVec2& screensize = frame.GetScreensize();
-        shape.SetRect(CIwRect(0, 0, screensize.x, screensize.y));
+        shape.SetRect(CIwRect(gyrooffset.x, gyrooffset.y, screensize.x, screensize.y));
         renderer.Draw(shape, *m_pxBackground);
     }
     
