@@ -13,14 +13,6 @@ void LevelTemplate::SetDustRequirement(float amount) {
 	m_fDustRequirement = amount;
 }
 
-void LevelTemplate::SetBackground(std::string name) {
-	m_sBackground = name;
-}
-
-std::string LevelTemplate::GetBackground() {
-	return m_sBackground;
-}
-
 void LevelTemplate::SetSize(float width, float height) {
 	m_xSize = CIwFVec2(width, height);
 }

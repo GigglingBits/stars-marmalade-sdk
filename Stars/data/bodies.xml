@@ -323,7 +323,7 @@ the bodie that owns the joint.
 		<frame id="pressed" image="button_level_pressed"/>
 		<frame id="disabled" image="button_level_locked"/>
 	</texture>
-	  <texture id="button_play" image="button_play" />
+	<texture id="button_play" image="button_play" />
 
 	  <texture id="button_action_block">
 		  <frame id="released" image="button_action_block"/>
@@ -358,29 +358,9 @@ the bodie that owns the joint.
           <frame id="jupiter" image="world_jupiter"/>
       </texture>
 
-	  <texture id="title_bg" image="world_background"/>
 	  <texture id="title_button" image="title_button"/>
 	  
-      <texture id="worldmenu_bg">
-          <frame id="earth" image="world_background"/>
-          <frame id="mars" image="world_background"/>
-          <frame id="jupiter" image="world_background"/>
-      </texture>
-      <texture id="levelmenu_bg">
-          <frame id="earth" image="world_background"/>
-          <frame id="mars" image="world_background"/>
-          <frame id="jupiter" image="world_background"/>
-      </texture>
-      <texture id="preamble_bg">
-          <frame id="earth" image="world_background"/>
-          <frame id="mars" image="world_background"/>
-          <frame id="jupiter" image="world_background"/>
-      </texture>
-
-    <texture id="levelstats_bg">
-      <frame id="win" image="background_won" />
-      <frame id="lost" image="background_lost" />
-    </texture>
+    <texture id="background_stars" image="background_stars" />
   </textures>
 
   <fixtures>

@@ -16,7 +16,7 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyAbsLeft),
     m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyAbsGameD) {
 
-    m_pxBackground = FactoryManager::GetTextureFactory().Create("levelmenu_bg");
+    m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
     if (m_pxBackground) {
         std::string worldframe = PageSettings::GetWorldKey(world);
         m_pxBackground->SelectFrame(worldframe);
@@ -63,26 +63,14 @@ void LevelMenu::Initialize() {
 
 	ApplyGroup(m_iGroupId);
 
-	// title text and background
-	switch (m_eWorldId) {
-		case PageSettings::eWorldIdEarth:
-		{
-			SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
-			break;
-		}
-		case PageSettings::eWorldIdMars:
-		{
-			SetBackground(0xff0050ae, 0xff0050ae, 0xff000000, 0xff000000);
-			break;
-		}
-		case PageSettings::eWorldIdJupiter:
-		{
-			SetBackground(0xff9d8a85, 0xff9d8a85, 0xff000000, 0xff000000);
-			break;
-		}
-		default:
-			SetBackground(0x00000000, 0x00000000, 0x00000000, 0x00000000);
-	}
+	// update background
+	PageSettings ps;
+	ps.SetWorld(m_eWorldId);
+	SetBackground(
+		ps.GetWorldColours().LowerLeft,
+		ps.GetWorldColours().LowerRight,
+		ps.GetWorldColours().UpperRight,
+		ps.GetWorldColours().UpperLeft);
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {

@@ -12,6 +12,8 @@ CIwResGroup
 
 	./touch.png
 
+	./background_stars.png
+
 	./button_social.png
 	./button_achievements.png
 	./button_leaderboards.png
@@ -40,9 +42,6 @@ CIwResGroup
 	./star_idle.png
 	./star_idle_2.png
 	./star_surprised.png
-
-	./background_lost.png
-	./background_won.png
 
 	./bird_01.png
 	./bird_02.png

@@ -26,7 +26,7 @@ TitleScreen::~TitleScreen() {
 void TitleScreen::Initialize() {
 	IW_CALLSTACK_SELF;
 	
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("title_bg");
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
 
 	m_xPanelOptions.Initialize();
 	m_xPanelOptions.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_options"));
@@ -36,7 +36,13 @@ void TitleScreen::Initialize() {
 
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
 
-	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
+	PageSettings ps;
+	ps.SetWorld(PageSettings::eWorldIdEarth);
+	SetBackground(
+		ps.GetWorldColours().LowerLeft,
+		ps.GetWorldColours().LowerRight,
+		ps.GetWorldColours().UpperRight,
+		ps.GetWorldColours().UpperLeft);
 }
 
 void TitleScreen::OnUpdate(const FrameData& frame) {

@@ -16,7 +16,7 @@ Preamble::Preamble(const std::string& text, const std::string& textureid, const 
 	m_sTextureId = textureid;
 	m_sMediaFile = mediafile;
 		
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("preamble_bg");
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
 
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
@@ -54,8 +54,6 @@ void Preamble::Initialize() {
 		m_pxMediaView->Finished.AddListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
 		m_pxMediaView->Initialize();
 	}
-
-	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
 }
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {

@@ -8,11 +8,11 @@
 #include "InputManager.h"
 #include "FactoryManager.h"
 
-Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string background) :
+Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	Page("level.group", Configuration::GetInstance().LevelSong),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
-	m_xBackground(background, m_xGame), 
+	m_xBackground("background_stars", m_xGame),
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
@@ -29,37 +29,37 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement, std::string backg
 		
 	// configure the start
 	EventArgs args;
-		args.eventId = eEventIdShowBanner;
-		args.bannerText = "3";
-		m_xEventTimer.Enqueue(200, args);
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "3";
+	m_xEventTimer.Enqueue(200, args);
 		
-		args.eventId = eEventIdHideBanner;
-		args.bannerText = "";
-		m_xEventTimer.Enqueue(1100, args);
+	args.eventId = eEventIdHideBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(1100, args);
 
-		args.eventId = eEventIdShowBanner;
-		args.bannerText = "2";
-		m_xEventTimer.Enqueue(200, args);
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "2";
+	m_xEventTimer.Enqueue(200, args);
 		
-		args.eventId = eEventIdHideBanner;
-		args.bannerText = "";
-		m_xEventTimer.Enqueue(1100, args);
+	args.eventId = eEventIdHideBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(1100, args);
+		
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "1";
+	m_xEventTimer.Enqueue(200, args);
+		
+	args.eventId = eEventIdHideBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(1100, args);
 
-		args.eventId = eEventIdShowBanner;
-		args.bannerText = "1";
-		m_xEventTimer.Enqueue(200, args);
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "Go!";
+	m_xEventTimer.Enqueue(200, args);
 		
-		args.eventId = eEventIdHideBanner;
-		args.bannerText = "";
-		m_xEventTimer.Enqueue(1100, args);
-
-		args.eventId = eEventIdShowBanner;
-		args.bannerText = "Go!";
-		m_xEventTimer.Enqueue(200, args);
-		
-		args.eventId = eEventIdHideBanner;
-		args.bannerText = "";
-		m_xEventTimer.Enqueue(1100, args);
+	args.eventId = eEventIdHideBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(1100, args);
 }
 
 Level::~Level() {
@@ -81,8 +81,6 @@ void Level::Initialize() {
 
 	CreateStar();
 
-	SetBackground(0xffd6834b, 0xffd6834b, 0xff320000, 0xff320000);
-	
 	EventArgs args;
 	args.eventId = eEventIdFinish;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);

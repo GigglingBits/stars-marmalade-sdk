@@ -18,10 +18,7 @@ LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 		
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("levelstats_bg");
-	if (m_pxBackground) {
-		m_pxBackground->SelectFrame(m_bIsCompleted ? "won" : "lost");
-	}
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
 }
 
 LevelCompletion::~LevelCompletion() {

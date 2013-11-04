@@ -65,7 +65,7 @@ private:
 	LevelInteractor m_xInteractor;
 
 public:
-	Level(const CIwFVec2& worldsize, float dustrequirement, std::string background);
+	Level(const CIwFVec2& worldsize, float dustrequirement);
 	virtual ~Level();
 
 	virtual void Initialize();

@@ -14,7 +14,6 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 
 	char* pc;
 	std::string levelname((pc = (char*)node->Attribute("name")) ? pc : "");
-	std::string background((pc = (char*)node->Attribute("background")) ? pc : "");
 
 	double width, height, dustrequirement;
 	node->Attribute("width", &width);
@@ -27,7 +26,6 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	IwAssertMsg(MYAPP, dustrequirement > 0.0f, ("Level does not have any dust requirements! Should be more than 0.0."));
 
 	conf.SetName(levelname);
-	conf.SetBackground(background);
 	conf.SetSize((float)width, (float)height);
 	conf.SetDustRequirement((float)dustrequirement);
 	
@@ -82,7 +80,7 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 	LevelTemplate leveltpl = conf;
 
 	// create level instance
-	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement(), leveltpl.GetBackground());
+	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement());
 
 	// populate level
 	LevelTemplate::ElementQueue elems(leveltpl.GetElements());

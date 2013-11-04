@@ -117,21 +117,8 @@ void PageManager::OnUpdate(const FrameData& frame) {
 		}
 		if (m_xCurtain.IsClosed()) {
 			// do the actual transition
-			if (m_pxCurrentPage) {
-				delete m_pxCurrentPage;
-			}
-			m_pxCurrentPage = m_pxNextPage;
-			if (m_pxCurrentPage) {
-				ResourceManager::GetInstance().LoadTemporary(
-					m_pxCurrentPage->GetResourceGroupName());
+			ApplyNextPage();
 
-				m_pxCurrentPage->Initialize();
-				
-				const std::string& musicfile = m_pxCurrentPage->GetMusicFileName();
-				if (!musicfile.empty() && SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
-					SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
-				}
-			}
 			// re-open the curtain
 			m_xCurtain.Open();
 		}
@@ -158,4 +145,30 @@ void PageManager::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 
 	m_xCurtain.Render(renderer, frame);
+}
+
+void PageManager::ApplyNextPage() {
+	if (m_pxCurrentPage) {
+		delete m_pxCurrentPage;
+	}
+	m_pxCurrentPage = m_pxNextPage;
+	if (m_pxCurrentPage) {
+		// load resources associated to that page
+		ResourceManager::GetInstance().LoadTemporary(
+			m_pxCurrentPage->GetResourceGroupName());
+		
+		// initialize the page
+		m_pxCurrentPage->SetBackground(
+			m_xPageSettings.GetWorldColours().LowerLeft,
+			m_xPageSettings.GetWorldColours().LowerRight,
+			m_xPageSettings.GetWorldColours().UpperRight,
+			m_xPageSettings.GetWorldColours().UpperLeft);
+		m_pxCurrentPage->Initialize();
+		
+		// play music associated to the page
+		const std::string& musicfile = m_pxCurrentPage->GetMusicFileName();
+		if (!musicfile.empty() && SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
+			SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
+		}
+	}
 }
