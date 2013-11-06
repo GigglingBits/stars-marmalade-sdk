@@ -12,11 +12,11 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	Page("level.group", Configuration::GetInstance().LevelSong),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
-	m_xBackground("background_stars", m_xGame),
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
-	m_bIsPaused(false) {
+	m_bIsPaused(false),
+	m_xBackground2("background_stars", m_xGame) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -78,7 +78,8 @@ void Level::Initialize() {
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 	
 	m_xHud.Initialize();
-
+	m_xBackground1.Initialize();
+	
 	CreateStar();
 
 	EventArgs args;
@@ -194,7 +195,7 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	
 	// create background image to fit the level
 	float bgmargin = (float) Configuration::GetInstance().WorldMargin;
-	m_xBackground.SetGeometry(m_xWorldSize, screensize, bgmargin);
+	m_xBackground2.SetGeometry(m_xWorldSize, screensize, bgmargin);
 	
 	// app panel
 	int extents = GetScreenExtents();
@@ -223,7 +224,8 @@ void Level::OnUpdate(const FrameData& frame) {
 	
 	// scene and widgets
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
-	m_xBackground.Update(frame);
+	m_xBackground1.Update(frame);
+	m_xBackground2.Update(frame);
 	
 	m_xHud.SetLevelProgress(GetCompletionDegree());
 	m_xHud.Update(frame);
@@ -233,7 +235,8 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	renderer.SetViewport(m_xCamera.GetViewport());
-	m_xBackground.Render(renderer, frame);
+	m_xBackground1.Render(renderer, frame);
+	m_xBackground2.Render(renderer, frame);
 	m_xGame.Render(renderer, frame);
 
 	m_xAppPanel.Render(renderer, frame);	

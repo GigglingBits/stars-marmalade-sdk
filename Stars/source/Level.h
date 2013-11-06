@@ -6,6 +6,7 @@
 #include "AppPanel.h"
 #include "GameFoundation.h"
 #include "LevelBackground.h"
+#include "PageBackground.h"
 #include "LevelHud.h"
 #include "Star.h"
 #include "Camera.h"
@@ -48,7 +49,9 @@ private:
 	CIwFVec2 m_xWorldSize;
 
 	Camera m_xCamera;
-	LevelBackground m_xBackground;
+
+	PageBackground m_xBackground1;
+	LevelBackground m_xBackground2;
 
 	GameFoundation m_xGame;
 	CompletionInfo m_xCompletionInfo;

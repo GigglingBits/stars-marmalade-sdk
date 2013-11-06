@@ -17,14 +17,6 @@ LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
 	m_sCompletionText = GenerateCompletionText(info);
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
-		
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
-}
-
-LevelCompletion::~LevelCompletion() {
-	if (m_pxBackground) {
-		delete m_pxBackground;
-	}
 }
 
 void LevelCompletion::Initialize() {
@@ -37,6 +29,8 @@ void LevelCompletion::Initialize() {
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
 
 	m_xButtonNext.SetEnabled(m_bIsCompleted);
+	
+	m_xBackground.Initialize();
 }
 
 bool LevelCompletion::IsCompleted(const Level::CompletionInfo& info) {
@@ -56,33 +50,24 @@ std::string LevelCompletion::GenerateCompletionText(const Level::CompletionInfo&
 }
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {
+	m_xBackground.Update(frame);
+	
 	m_xButtonStar.Update(frame);
 	m_xButtonQuit.Update(frame);
 	m_xButtonRetry.Update(frame);
 	m_xButtonNext.Update(frame);
 
-	if (m_pxBackground) {
-		m_pxBackground->Update(frame.GetRealDurationMs());
-    }
-	
 	m_xDustFillPercent.Update(frame);
 }
 
 void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	// background
-	const CIwSVec2& screen = frame.GetScreensize();
-	CIwRect rect(0, 0, screen.x, screen.y);
-    if (m_pxBackground) {
-        VertexStreamScreen shape;
-        shape.SetRect(rect);
-        renderer.Draw(shape, *m_pxBackground);
-    }
+	m_xBackground.Render(renderer, frame);
 
 	// text
-	rect.y = 0;
-	rect.h = screen.y / 2;
+	const CIwSVec2& screen = frame.GetScreensize();
+	CIwRect rect(0, 0, screen.x, screen.y / 2);
 	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffccfaff);
 	
 	m_xDustFillPercent.Render(renderer, frame);

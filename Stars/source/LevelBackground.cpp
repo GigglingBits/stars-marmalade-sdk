@@ -4,8 +4,6 @@
 #include "FactoryManager.h"
 
 LevelBackground::LevelBackground(std::string background, GameFoundation& game) : m_rxGame(game) {
-	m_pxBackground = (CIwTexture*)IwGetResManager()->GetResNamed(background.c_str(), "CIwTexture");
-
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 
@@ -150,11 +148,6 @@ void LevelBackground::OnRender(Renderer& renderer, const FrameData& frame) {
 	const int count = 4;
 	CIwFVec2 verts[count];
 	SetVerts(offset, verts);
-
-	if (m_pxBackground) {
-		renderer.DrawImage(m_pxBackground, verts, count);
-		//renderer.DrawPolygon(verts, count, 0x00000000, HAZE); 
-	}
 
 	//renderer.DebugDrawCoords(m_xWorldCenter);
 	//renderer.DebugDrawCoords(m_xWorldCenter + offset);

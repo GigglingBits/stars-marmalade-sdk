@@ -16,12 +16,6 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyAbsLeft),
     m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyAbsGameD) {
 
-    m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
-    if (m_pxBackground) {
-        std::string worldframe = PageSettings::GetWorldKey(world);
-        m_pxBackground->SelectFrame(worldframe);
-    }
-
 	memset(m_apxButtons, 0, sizeof(m_apxButtons));
 
 	m_xButtonNext.PressedEvent.AddListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
@@ -31,10 +25,6 @@ LevelMenu::LevelMenu(PageSettings::WorldId world) :
 LevelMenu::~LevelMenu() {
 	m_xButtonNext.PressedEvent.RemoveListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
 	m_xButtonPrevious.PressedEvent.RemoveListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
-
-	if (m_pxBackground) {
-		delete m_pxBackground;
-	}
 
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		if (m_apxButtons[i]) {
@@ -71,6 +61,7 @@ void LevelMenu::Initialize() {
 		ps.GetWorldColours().LowerRight,
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
+	m_xBackground.Initialize();
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
@@ -140,23 +131,14 @@ void LevelMenu::OnUpdate(const FrameData& frame) {
 	m_xNaviPanel.Update(frame);
 	m_xButtonBack.Update(frame);
 
-	if (m_pxBackground) {
-		m_pxBackground->Update(frame.GetRealDurationMs());
-    }
+	m_xBackground.Update(frame);
 }
 
 void LevelMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	renderer.SetViewport(m_xCamera.GetViewport());
-
-    // background
-    if (m_pxBackground) {
-        VertexStreamScreen shape;        
-        const CIwSVec2& screensize = frame.GetScreensize();
-        shape.SetRect(CIwRect(0, 0, screensize.x, screensize.y));
-        renderer.Draw(shape, *m_pxBackground);
-    }
+	m_xBackground.Render(renderer, frame);
     
     // level buttons
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {

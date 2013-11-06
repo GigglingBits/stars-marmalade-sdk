@@ -11,8 +11,6 @@ class LevelCompletion : public Page {
 private:
 	Camera m_xCamera;
 
-	Texture* m_pxBackground;
-
 	bool m_bIsCompleted;
 	std::string m_sCompletionText;
 
@@ -24,9 +22,10 @@ private:
 	
 	LevelHudNumber m_xDustFillPercent;
 
+	PageBackground m_xBackground;
+
 public:
 	LevelCompletion(const Level::CompletionInfo& info);
-	~LevelCompletion();
 
 	virtual void Initialize();
 

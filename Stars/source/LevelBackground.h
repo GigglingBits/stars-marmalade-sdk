@@ -14,7 +14,6 @@ private:
 	CIwFVec2 m_xWorldRadius; // distance vector from center to upper right corner
 
 	GameFoundation& m_rxGame;
-	CIwTexture* m_pxBackground;
 
 	uint32 m_uiNextCloudTime;
 

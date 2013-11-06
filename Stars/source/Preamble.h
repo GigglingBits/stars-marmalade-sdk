@@ -9,6 +9,7 @@
 #include "WebView.h"
 #include "VideoView.h"
 #include "TextureView.h"
+#include "PageBackground.h"
 
 class Preamble : public Page {
 private:
@@ -21,7 +22,8 @@ private:
 	std::string m_sMediaFile;
 	
 	MediaView* m_pxMediaView;
-	Texture* m_pxBackground;
+
+	PageBackground m_xBackground;
 	
 public:
 	Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile);

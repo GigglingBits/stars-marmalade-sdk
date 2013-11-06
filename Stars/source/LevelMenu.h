@@ -9,6 +9,7 @@
 #include "Button.h"
 #include "ButtonEx.h"
 #include "NaviPanel.h"
+#include "PageBackground.h"
 
 #define LVLMENU_BTN_COLS 3
 #define LVLMENU_BTN_ROWS 2
@@ -19,17 +20,16 @@ class LevelMenu : public Page {
 private:
 	Camera m_xCamera;
 	
-	Texture* m_pxBackground;
 	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT_PER_GROUP];
-
 	Button m_xButtonNext;
 	Button m_xButtonPrevious;
-
 	Button m_xButtonBack;
 	NaviPanel m_xNaviPanel;
 
 	PageSettings::WorldId m_eWorldId;
 	int m_iGroupId;
+
+	PageBackground m_xBackground;
 
 public:
 	LevelMenu(PageSettings::WorldId world);

@@ -16,8 +16,6 @@ Preamble::Preamble(const std::string& text, const std::string& textureid, const 
 	m_sTextureId = textureid;
 	m_sMediaFile = mediafile;
 		
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
-
 	// attach event handlers
 	InputManager& im = InputManager::GetInstance();
 	im.TouchEndEvent.AddListener<Preamble>(this, &Preamble::TouchEndEventHandler);
@@ -31,10 +29,6 @@ Preamble::~Preamble() {
 	if (m_pxMediaView) {
 		m_pxMediaView->Finished.RemoveListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
 		delete m_pxMediaView;
-	}
-	
-	if (m_pxBackground) {
-		delete m_pxBackground;
 	}
 }
 
@@ -54,6 +48,8 @@ void Preamble::Initialize() {
 		m_pxMediaView->Finished.AddListener<Preamble>(this, &Preamble::MediaFinishedEventHandler);
 		m_pxMediaView->Initialize();
 	}
+	
+	m_xBackground.Initialize();
 }
 
 void Preamble::OnDoLayout(const CIwSVec2& screensize) {
@@ -77,9 +73,7 @@ void Preamble::OnDoLayout(const CIwSVec2& screensize) {
 }
 
 void Preamble::OnUpdate(const FrameData& frame) {
-	if (m_pxBackground) {
-		m_pxBackground->Update(frame.GetRealDurationMs());
-    }
+	m_xBackground.Update(frame);
 	if (m_pxMediaView) {
 		m_pxMediaView->Update(frame);
 	}
@@ -93,12 +87,7 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
 	const CIwSVec2& screensize = frame.GetScreensize();
 	CIwRect screenrect(0, 0, screensize.x, screensize.y);
 
-    // background
-    if (m_pxBackground) {
-        VertexStreamScreen shape;
-        shape.SetRect(CIwRect(0, 0, screensize.x, screensize.y));
-        renderer.Draw(shape, *m_pxBackground);
-    }
+	m_xBackground.Render(renderer, frame);
 
 	// media
 	if (m_pxMediaView) {
