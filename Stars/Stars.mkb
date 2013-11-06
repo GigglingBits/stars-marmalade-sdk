@@ -77,6 +77,8 @@ files {
 	PageManager.cpp
 	Page.h
 	Page.cpp
+	PageBackground.h
+	PageBackground.cpp
 	PageSettings.h
 	PageSettings.cpp
 

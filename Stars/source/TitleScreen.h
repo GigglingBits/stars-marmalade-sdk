@@ -2,6 +2,7 @@
 #define __TITLESCREEN_H__
 
 #include "Page.h"
+#include "PageBackground.h"
 #include "Button.h"
 #include "SocialPanel.h"
 #include "OptionsPanel.h"
@@ -9,19 +10,15 @@
 #include "Body.h"
 #include "Camera.h"
 
-#include "s3eGyroscope.h"
-
 class TitleScreen : public Page {
 private:
 	Camera m_xCamera;
 
-	Texture* m_pxBackground;
+	PageBackground m_xBackground;
 	Button m_xButtonTitle;
 
 	OptionsPanel m_xPanelOptions;
 	SocialPanel m_xPanelSocial;
-
-	s3eGyroscopeData m_xGyro;
 	
 public:
 	TitleScreen();
@@ -37,10 +34,6 @@ protected:
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
-
-private:
-	void SetGyroData(const s3eGyroscopeData& data);
-	static void GyroscopeCallback(void* sysdata, void* usrdata);
 };
 
 #endif
