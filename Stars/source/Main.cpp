@@ -22,13 +22,27 @@
 #include "LogManager.h"
 #include "World.h"
 
+#include <sstream>
+
 //--------------------------------------------------------------------------
 // Global helpers
 //--------------------------------------------------------------------------
+void WriteandShowLog(const std::string& message) {
+	static std::string s_Messages;
+	
+	std::ostringstream oss;
+	oss << s_Messages << message << std::endl;
+	s_Messages = oss.str();
+	
+	IwGxPrintString(100, 100, s_Messages.c_str());
+
+	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+	IwGxFlush();
+	IwGxSwapBuffers();
+}
+
 void Initialize() {
 	IW_CALLSTACK_SELF;
-
-	Configuration::Initialize();
 
 	IwGxInit();
 	{
@@ -41,12 +55,16 @@ void Initialize() {
 		pMat->SetAlphaMode(CIwMaterial::ALPHA_BLEND);
 		pMat->SetBlendMode(CIwMaterial::BLEND_BLEND);
 		
-		IwGxSetColClear(0x40, 0x40, 0x40, 0x00);
+		IwGxSetColClear(0x20, 0x20, 0x20, 0x00);
 		IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
 		IwGxFlush();
 		IwGxSwapBuffers();
 	}
 
+	WriteandShowLog("Reading configuration...");
+	Configuration::Initialize();
+	
+	WriteandShowLog("Initializing foundation...");
 	IwResManagerInit();
 #ifdef IW_DEBUG
 	IwGetResManager()->SetMode(Configuration::GetInstance().RebuildResources ? CIwResManager::MODE_BUILD : CIwResManager::MODE_LOAD);
@@ -56,15 +74,16 @@ void Initialize() {
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
+	WriteandShowLog("Initializing game frameworks...");
 	ResourceManager::Initialize();
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	DeviceInfo::Initialize();
 	LogManager::Initialize();
 	LocationServices::Initialize();
-
 	World::SetDefaultGravity(0.0f, 0.0f);
 
+	WriteandShowLog("Loading resources...");
 	ResourceManager::GetInstance().LoadPermament("base.group");
 	
 	std::srand((unsigned int)s3eTimerGetUST());
@@ -82,9 +101,10 @@ void Terminate() {
 
 	IwGxFontTerminate();
 	IwResManagerTerminate();
-	IwGxTerminate();
-	
+
 	Configuration::Terminate();
+
+	IwGxTerminate();
 }
 
 //--------------------------------------------------------------------------
@@ -124,6 +144,7 @@ S3E_MAIN_DECL void IwMain() {
 	s3eDeviceYield();
 
 #ifdef IW_DEBUG
+	WriteandShowLog("Running tests...");
 	Test::RunTest();
 #endif
 
