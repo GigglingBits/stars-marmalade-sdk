@@ -4,9 +4,16 @@
 #include "s3eGyroscope.h"
 
 class LocationServices {
+public:
+	struct DeviceOrientation {
+		float x;
+		float y;
+		float z;
+	};
+	
 private:
-	s3eGyroscopeData m_xGyro;
-
+	DeviceOrientation m_xOrientation;
+	
 private:
 	static LocationServices* s_pxInstance;
 	LocationServices();
@@ -19,7 +26,7 @@ public:
 	static LocationServices& GetInstance();
 	
 public:
-	const s3eGyroscopeData& GetGyroData();
+	const DeviceOrientation& GetDeviceOrientation();
 	
 private:
 	void SetGyroData(const s3eGyroscopeData& data);

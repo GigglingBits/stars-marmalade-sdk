@@ -22,13 +22,24 @@ void PageBackground::OnUpdate(const FrameData& frame) {
 }
 
 void PageBackground::OnRender(Renderer& renderer, const FrameData& frame) {
-    if (m_pxBackground) {
-		const s3eGyroscopeData& gyrodata = LocationServices::GetInstance().GetGyroData();
-		CIwSVec2 gyrooffset(gyrodata.m_X * 5.0f, gyrodata.m_Y * 5.0f);
+	const float MULT = 1.5f;
+    
+	if (m_pxBackground) {
+		const LocationServices::DeviceOrientation& orientation = LocationServices::GetInstance().GetDeviceOrientation();
+		CIwSVec2 orientationoffset(orientation.x * -MULT, orientation.y * MULT);
+
+		int margin = GetScreenExtents() / 10;
+		
+        const CIwSVec2& screensize = frame.GetScreensize();
+		CIwRect rect(
+			orientationoffset.x - margin,
+			orientationoffset.y - margin,
+			screensize.x + (2 * margin),
+			screensize.y + (2 * margin));
 		
         VertexStreamScreen shape;
-        const CIwSVec2& screensize = frame.GetScreensize();
-        shape.SetRect(CIwRect(gyrooffset.x, gyrooffset.y, screensize.x, screensize.y));
+        shape.SetRect(rect);
+
         renderer.Draw(shape, *m_pxBackground);
     }	
 }
