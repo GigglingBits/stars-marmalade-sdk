@@ -3,7 +3,7 @@
 #include <cmath>
 #include "FactoryManager.h"
 
-LevelBackground::LevelBackground(std::string background, GameFoundation& game) : m_rxGame(game) {
+LevelBackground::LevelBackground(GameFoundation& game) : m_rxGame(game) {
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 

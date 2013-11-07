@@ -18,7 +18,7 @@ private:
 	uint32 m_uiNextCloudTime;
 
 public:
-	LevelBackground(std::string background, GameFoundation& game);
+	LevelBackground(GameFoundation& game);
 
 	void SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& viewportsize, float margin);
 

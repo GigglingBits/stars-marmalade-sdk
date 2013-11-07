@@ -50,8 +50,8 @@ private:
 
 	Camera m_xCamera;
 
-	PageBackground m_xBackground1;
-	LevelBackground m_xBackground2;
+	PageBackground m_xBackgroundStars;
+	LevelBackground m_xBackgroundClouds;
 
 	GameFoundation m_xGame;
 	CompletionInfo m_xCompletionInfo;

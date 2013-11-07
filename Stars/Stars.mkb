@@ -72,6 +72,9 @@ files {
 	Configuration.h
 	Configuration.cpp
 
+	LocationServices.h
+	LocationServices.cpp
+
 	PageManager.h
 	PageManager.cpp
 	Page.h

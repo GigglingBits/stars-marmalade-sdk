@@ -7,6 +7,7 @@
 #include "IwResHandlerWAV.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
+#include "LocationServices.h"
 #include "DeviceInfo.h"
 
 #ifdef IW_DEBUG
@@ -60,17 +61,19 @@ void Initialize() {
 	InputManager::Initialize();
 	DeviceInfo::Initialize();
 	LogManager::Initialize();
+	LocationServices::Initialize();
 
 	World::SetDefaultGravity(0.0f, 0.0f);
 
 	ResourceManager::GetInstance().LoadPermament("base.group");
-
+	
 	std::srand((unsigned int)s3eTimerGetUST());
 }
 
 void Terminate() {
 	IW_CALLSTACK_SELF;
 
+	LocationServices::Terminate();
 	LogManager::Terminate();
 	DeviceInfo::Terminate();
 	InputManager::Terminate();

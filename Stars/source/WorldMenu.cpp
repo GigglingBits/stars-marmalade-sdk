@@ -9,8 +9,7 @@ WorldMenu::WorldMenu(PageSettings::WorldId world) :
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyAbsOk),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyAbsLeft),
-	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyAbsGameD),
-	m_pxBackground(NULL) {
+	m_xButtonBack(eButtonCommandIdOpenTitleScreen, s3eKeyAbsGameD) {
 
     m_xButtonNext.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
     m_xButtonPrevious.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
@@ -19,15 +18,9 @@ WorldMenu::WorldMenu(PageSettings::WorldId world) :
 WorldMenu::~WorldMenu() {
     m_xButtonNext.PressedEvent.RemoveListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
     m_xButtonPrevious.PressedEvent.RemoveListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
-
-	if (m_pxBackground) {
-		delete m_pxBackground;
-	}
 }
 
 void WorldMenu::Initialize() {
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
-
     m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
@@ -39,6 +32,7 @@ void WorldMenu::Initialize() {
 	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdJupiter);
 	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
+	m_xBackground.Initialize();
 
     ApplyWorld(m_eWorld);
 }
@@ -95,32 +89,20 @@ void WorldMenu::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xButtonPlanet.Update(frame);
-
 	m_xButtonPrevious.Update(frame);
 	m_xButtonNext.Update(frame);
-
 	m_xNaviPanel.Update(frame);
-	
 	m_xButtonBack.Update(frame);
 
-	if (m_pxBackground) {
-		m_pxBackground->Update(frame.GetRealDurationMs());
-    }
+	m_xBackground.Update(frame);
 }
 
 void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	renderer.SetViewport(m_xCamera.GetViewport());
-
-    // background
-    if (m_pxBackground) {
-        VertexStreamScreen shape;        
-        const CIwSVec2& screensize = frame.GetScreensize();
-        shape.SetRect(CIwRect(0, 0, screensize.x, screensize.y));
-        renderer.Draw(shape, *m_pxBackground);
-    }
-    
+	m_xBackground.Render(renderer, frame);
+	   
     // buttons
 	m_xButtonPlanet.Render(renderer, frame);
 	m_xButtonPrevious.Render(renderer, frame);
@@ -148,11 +130,6 @@ void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
 	
     // find name for texture frame
     std::string worldframe = PageSettings::GetWorldKey(world);
-    
-    // background
-    if (m_pxBackground) {
-        m_pxBackground->SelectFrame(worldframe);
-    }
     
     // buttons
     m_xButtonPlanet.SetTextureFrame(worldframe);

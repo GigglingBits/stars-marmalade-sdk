@@ -3,6 +3,7 @@
 
 #include "Page.h"
 #include "PageSettings.h"
+#include "PageBackground.h"
 #include "Button.h"
 #include "NaviPanel.h"
 #include "IwList.h"
@@ -27,7 +28,7 @@ private:
 	Button m_xButtonBack;
 	NaviPanel m_xNaviPanel;
 	
-	Texture* m_pxBackground;
+	PageBackground m_xBackground;
 
 public:
 	WorldMenu(PageSettings::WorldId world);
