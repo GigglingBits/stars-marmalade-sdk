@@ -21,12 +21,11 @@ deployments {
 	["iOS"]
 	iphone
 	iphone-appid='com.gigglingbits.stars'
-	iphone-enable-4inch-retina='1'
-	iphone-splash-retina-generate='1'
-	iphone-splash-full-orient='1'
+	iphone-enable-4inch-retina=1
+	iphone-splash-retina-generate=1
+	iphone-splash-full-orient=1
 	iphone-splashscreen-portrait='data/splashscreens/'
 	iphone-splashscreen-landscape='data/splashscreens/'
-	iphone-show-status-bar='1'
 
 	["Android"]
 	android
