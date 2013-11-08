@@ -19,6 +19,12 @@ Configuration::Configuration() {
 		RebuildResources = 1;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "screenresolution", &tmpint)) {
+		ScreenResolution = tmpint == 1;
+	} else {
+		ScreenResolution = 75;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {
 		BodiesFile = tmpstr;
 	} else {

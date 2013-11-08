@@ -22,6 +22,20 @@ levelsong="music/Based On Clocks.mp3"
 wonsong="music/Winning.mp3"
 lostsong="music/Lost.mp3"
 
+{ID=IPHONE "iPhone3,1", "iPhone4,1", "iPhone5,1"}
+screenresolution=128
+
+{ID=IPHONE "iPad3,1"}
+screenresolution=104
+
+{ID=IPHONE "iPhone1,2", "iPhone2,1", "iPod1,1", "iPod2,1"}
+screenresolution=64
+
+{ID=IPHONE "iPad1,1", "iPad2,1"}
+screenresolution=52
+
+{}
+
 ####################################################
 [Util]
 ####################################################

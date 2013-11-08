@@ -7,7 +7,8 @@
 class PageBackground : public Window {
 private:
 	Texture* m_pxBackground;
-
+	float m_fParallaxCorrection;
+	
 public:
 	PageBackground();
 	~PageBackground();
@@ -18,7 +19,6 @@ public:
 private:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	//virtual void OnDoLayout(const CIwSVec2& screensize);
 };
 
 #endif

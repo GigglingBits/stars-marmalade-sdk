@@ -1,8 +1,9 @@
 #include "PageBackground.h"
 #include "FactoryManager.h"
 #include "Debug.h"
+#include "Configuration.h"
 
-PageBackground::PageBackground() : m_pxBackground(NULL){
+PageBackground::PageBackground() : m_pxBackground(NULL), m_fParallaxCorrection(0.0f) {
 }
 
 PageBackground::~PageBackground() {
@@ -13,6 +14,8 @@ PageBackground::~PageBackground() {
 
 void PageBackground::Initialize() {
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
+
+	m_fParallaxCorrection = Configuration::GetInstance().ScreenResolution * 0.01f;
 }
 
 void PageBackground::OnUpdate(const FrameData& frame) {
@@ -22,15 +25,17 @@ void PageBackground::OnUpdate(const FrameData& frame) {
 }
 
 void PageBackground::OnRender(Renderer& renderer, const FrameData& frame) {
-	const float MULT = 1.5f;
-    
 	if (m_pxBackground) {
-		const LocationServices::DeviceOrientation& orientation = LocationServices::GetInstance().GetDeviceOrientation();
-		CIwSVec2 orientationoffset(orientation.x * -MULT, orientation.y * MULT);
-
-		int margin = GetScreenExtents() / 10;
-		
         const CIwSVec2& screensize = frame.GetScreensize();
+		int margin = GetScreenExtents() / 10;
+
+		const LocationServices::DeviceOrientation& orientation =
+			LocationServices::GetInstance().GetDeviceOrientation();
+
+		CIwSVec2 orientationoffset(
+			orientation.x * -m_fParallaxCorrection,
+			orientation.y * m_fParallaxCorrection);
+
 		CIwRect rect(
 			orientationoffset.x - margin,
 			orientationoffset.y - margin,
