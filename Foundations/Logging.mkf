@@ -1,3 +1,5 @@
+display_name "Foundation/Logging"
+
 subprojects {
 	"$MARMALADE_ROOT/extensions/s3eDialog"
 }

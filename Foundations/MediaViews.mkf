@@ -1,3 +1,5 @@
+display_name "Foundation/MediaViews"
+
 subprojects {
 	./UserInterface
 
