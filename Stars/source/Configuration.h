@@ -26,8 +26,6 @@ public:
 	double PathSpeed;
 	double PathMaxLength;
 
-	double ScreenResolution;
-	
 	std::string BodiesFile;
 	std::string LevelsFile;
 

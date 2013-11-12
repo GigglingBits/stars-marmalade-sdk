@@ -54,6 +54,7 @@ subprojects {
 	../Foundations/Particles
 
 	../s3eGyroscope
+	../dpi
 
 	iwgxfont
 

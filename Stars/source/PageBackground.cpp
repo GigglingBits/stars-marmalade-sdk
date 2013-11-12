@@ -1,7 +1,7 @@
 #include "PageBackground.h"
 #include "FactoryManager.h"
 #include "Debug.h"
-#include "Configuration.h"
+#include "DeviceInfo.h"
 
 PageBackground::PageBackground() : m_pxBackground(NULL), m_fParallaxCorrection(0.0f) {
 }
@@ -15,7 +15,7 @@ PageBackground::~PageBackground() {
 void PageBackground::Initialize() {
 	m_pxBackground = FactoryManager::GetTextureFactory().Create("background_stars");
 
-	m_fParallaxCorrection = Configuration::GetInstance().ScreenResolution * 0.01f;
+	m_fParallaxCorrection = DeviceInfo::GetInstance().GetPixelsPerInch() * 0.003f;
 }
 
 void PageBackground::OnUpdate(const FrameData& frame) {

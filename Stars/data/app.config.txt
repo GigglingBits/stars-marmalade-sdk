@@ -13,8 +13,6 @@
 showstats				Show statistical information on the screen
 rebuildresources		Causes the app to re-buid its resource files
 
-screenresolution		Screen resolution in pixels per cm (PPCM)
-
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
 

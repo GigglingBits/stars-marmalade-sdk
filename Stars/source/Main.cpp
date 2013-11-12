@@ -9,6 +9,8 @@
 #include "ResourceManager.h"
 #include "LocationServices.h"
 #include "DeviceInfo.h"
+#include "MarmaladeVersion.h"
+#include "dpiExt.h"
 
 #ifdef IW_DEBUG
   #include "Test.h"
@@ -41,6 +43,24 @@ void WriteandShowLog(const std::string& message) {
 	IwGxSwapBuffers();
 }
 
+void PrintHeader() {
+	std::ostringstream oss;
+	oss << "*************************************************************" << std::endl;
+	oss << "Stars " << std::endl;
+	oss << "*************************************************************" << std::endl;
+	oss << "Device name:   " << s3eDeviceGetString(S3E_DEVICE_NAME) << std::endl;
+	oss << "Device class:  " << s3eDeviceGetString(S3E_DEVICE_CLASS) << std::endl;
+	oss << "Device ID:     " << DeviceInfo::GetInstance().GetLongDeviceId() << std::endl;
+	oss << "Display:       " << IwGxGetDeviceWidth() << "x" << IwGxGetDeviceHeight() << std::endl;
+	oss << "Architecture:  " << s3eDeviceGetString(S3E_DEVICE_ARCHITECTURE) << std::endl;
+	oss << "*************************************************************" << std::endl;
+	oss << "OS:            " << s3eDeviceGetString(S3E_DEVICE_OS) << " " <<  s3eDeviceGetString(S3E_DEVICE_OS_VERSION) << std::endl;
+	oss << "SDK:           " << MARMALADE_VERSION_STRING_FULL << std::endl;
+	oss << "Locale:        " << s3eDeviceGetString(S3E_DEVICE_LOCALE) << std::endl;
+	oss << "*************************************************************";
+	WriteandShowLog(oss.str());
+}
+
 void Initialize() {
 	IW_CALLSTACK_SELF;
 
@@ -60,7 +80,10 @@ void Initialize() {
 		IwGxFlush();
 		IwGxSwapBuffers();
 	}
-
+	DeviceInfo::Initialize();
+	
+	PrintHeader();
+	
 	WriteandShowLog("Reading configuration...");
 	Configuration::Initialize();
 	
@@ -78,7 +101,6 @@ void Initialize() {
 	ResourceManager::Initialize();
 	SoundEngine::Initialize();
 	InputManager::Initialize();
-	DeviceInfo::Initialize();
 	LogManager::Initialize();
 	LocationServices::Initialize();
 	World::SetDefaultGravity(0.0f, 0.0f);
@@ -94,7 +116,6 @@ void Terminate() {
 
 	LocationServices::Terminate();
 	LogManager::Terminate();
-	DeviceInfo::Terminate();
 	InputManager::Terminate();
 	SoundEngine::Terminate();
 	ResourceManager::Terminate();
@@ -103,6 +124,7 @@ void Terminate() {
 	IwResManagerTerminate();
 
 	Configuration::Terminate();
+	DeviceInfo::Terminate();
 
 	IwGxTerminate();
 }

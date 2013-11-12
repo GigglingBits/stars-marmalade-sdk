@@ -1,25 +1,48 @@
 #ifndef __DEVICEINFO_H__
 #define __DEVICEINFO_H__
 
-class DeviceInfo {
-private:
-	static DeviceInfo m_sxInfo;
-	bool m_bInitialized;
+#include <string>
+#include <map>
 
-	int m_iScreenPpcm;
+class DeviceInfo {
+public:
+	enum IdentificationType {
+		eIdentificationLibrary,
+		eIdentificationDpiExt,
+		eIdentificationUnknown
+	};
 
 public:
+	struct Device {
+		IdentificationType IdType;
+		std::string Id;
+		std::string Desc;
+		std::string DescLong;
+		uint PixelsPerInch;
+	};
+	typedef std::map<std::string, Device> DeviceMap;
+	DeviceMap m_xDeviceLibrary;
+	
+	Device m_xCurrentDevice;
+	
+private:
+	static DeviceInfo* s_pxInstance;
 	DeviceInfo();
+	~DeviceInfo();
 
+public:
 	static void Initialize();
 	static void Terminate();
+	static DeviceInfo& GetInstance();
 
-	const static DeviceInfo& GetInfo();
-
-	int GetScreenPpcm() const;
+public:
+	int GetPixelsPerInch() const;
+	const std::string& GetLongDeviceId() const;
 
 private:
-	static void LoadConfiguration(DeviceInfo& info);
+	void LoadConfiguration();
+	void Add(const std::string& id, const std::string desc, uint resolution);
+	void Update();
 };
 
 #endif
