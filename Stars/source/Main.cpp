@@ -36,9 +36,10 @@ void WriteandShowLog(const std::string& message) {
 	oss << s_Messages << message << std::endl;
 	s_Messages = oss.str();
 	
-	IwGxPrintString(100, 100, s_Messages.c_str());
+	IwGxPrintString(50, 50, s_Messages.c_str());
 
 	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+	IwGxTickUpdate();
 	IwGxFlush();
 	IwGxSwapBuffers();
 }
