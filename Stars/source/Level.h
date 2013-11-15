@@ -105,6 +105,9 @@ private:
 	void ShowBannerText(const std::string& text);
 	void HideBannerText();
 	
+	void EnableUserInput();
+	void DisableUserInput();
+	
 	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
 	
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);

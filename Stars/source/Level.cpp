@@ -29,6 +29,9 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	// configure the start
 	EventArgs args;
+	args.eventId = eEventIdDisableUserInput;
+	m_xEventTimer.Enqueue(0, args);
+		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "3";
 	m_xEventTimer.Enqueue(200, args);
@@ -60,6 +63,9 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(1100, args);
+
+	args.eventId = eEventIdEnableUserInput;
+	m_xEventTimer.Enqueue(0, args);
 }
 
 Level::~Level() {
@@ -158,6 +164,14 @@ float Level::GetStarRestForce() {
 
 CIwFVec2 Level::GetStarStartPosition() {
 	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
+}
+
+void Level::EnableUserInput() {
+	
+}
+
+void Level::DisableUserInput() {
+	
 }
 
 void Level::ShowBannerText(const std::string& text) {
@@ -288,9 +302,11 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			break;
 		}
 		case eEventIdEnableUserInput: {
+			m_xInteractor.Enable();
 			break;
 		}
 		case eEventIdDisableUserInput: {
+			m_xInteractor.Disable();
 			break;
 		}
 		case eEventIdSuspendEventTimer: {

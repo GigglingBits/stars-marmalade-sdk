@@ -33,12 +33,17 @@ private:
 	typedef std::map<TouchId, TouchSpec> TouchMap;
 	TouchMap m_xTouchMap;
     
+	bool m_bAllowNewTouches;
+	
     PathRecorder m_xRecorder;
 
 public:
 	LevelInteractor(Camera& camera, GameFoundation& game);
 	~LevelInteractor();
 
+	void Enable();
+	void Disable();
+	
 private:
 	void EvaluateTouchPurpose(TouchSpec& touch);
 	void ClearTouchSpec(TouchSpec& touch);

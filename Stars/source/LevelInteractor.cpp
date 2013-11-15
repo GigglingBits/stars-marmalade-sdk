@@ -5,7 +5,8 @@
 
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
-	m_rxGame(game) {
+	m_rxGame(game),
+    m_bAllowNewTouches(true) {
 
 	InputManager& im = InputManager::GetInstance();
 	im.TouchBeginEvent.AddListener<LevelInteractor>(this, &LevelInteractor::TouchBeginEventHandler);
@@ -20,9 +21,20 @@ LevelInteractor::~LevelInteractor() {
 	im.TouchEndEvent.RemoveListener<LevelInteractor>(this, &LevelInteractor::TouchEndEventHandler);
 }
 
+void LevelInteractor::Enable() {
+	m_bAllowNewTouches = true;
+}
+
+void LevelInteractor::Disable() {
+	m_bAllowNewTouches = false;
+}
+
 void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	ClearTouchSpec(touch);
-
+	if (!m_bAllowNewTouches) {
+		return;
+	}
+	
 	// analyze hit point (was a non-star, draggable object hit?)
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap sprites = m_rxGame.GetSpriteMap();
