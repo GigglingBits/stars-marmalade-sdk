@@ -26,19 +26,18 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
-		
+	
+	m_xInteractor.Disable();
+	
 	// configure the start
 	EventArgs args;
-	args.eventId = eEventIdDisableUserInput;
-	m_xEventTimer.Enqueue(0, args);
-		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "3";
 	m_xEventTimer.Enqueue(200, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1100, args);
+	m_xEventTimer.Enqueue(900, args);
 
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "2";
@@ -46,7 +45,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1100, args);
+	m_xEventTimer.Enqueue(900, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "1";
@@ -54,7 +53,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1100, args);
+	m_xEventTimer.Enqueue(900, args);
 
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Go!";
