@@ -85,12 +85,6 @@ Configuration::Configuration() {
 		PathSpeed = 2.0f;
 	}
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "objectspeed", tmpstr)) {
-		ObjectSpeed = atof(tmpstr);
-	} else {
-		ObjectSpeed = 2.0f;
-	}
-	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathmaxlength", tmpstr)) {
 		PathMaxLength = atof(tmpstr);
 	} else {

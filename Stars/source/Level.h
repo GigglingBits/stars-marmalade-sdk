@@ -43,6 +43,7 @@ private:
 		std::string bannerText;
 		std::string bodyName;
 		CIwFVec2 position;
+		CIwFVec2 speed;
 	};
 	
 private:
@@ -74,7 +75,7 @@ public:
 	virtual void Initialize();
 
 	void Add(Body* body);
-	void Add(uint16 delay, const std::string& body, float ypos);
+	void Add(uint16 delay, const std::string& body, float ypos, float speed);
 
 	const CompletionInfo& GetCompletionInfo();
 	float GetCompletionDegree();

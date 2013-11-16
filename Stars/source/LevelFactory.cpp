@@ -55,8 +55,16 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	// add sequences of level elements
 	TiXmlElement* spritesequencenode = node->FirstChildElement("spritesequence");
 	while (spritesequencenode) {
-		TiXmlElement* linenode = spritesequencenode->FirstChildElement("line");
+		int delay;
+		spritesequencenode->Attribute("delay", &delay);
+		IwAssertMsg(MYAPP, delay > 0, ("Delay in spritesequence is either not defined or smaller or equal to 0."));
+
+		double speed;
+		spritesequencenode->Attribute("speed", &speed);
+		IwAssertMsg(MYAPP, speed > 0.0f, ("Delay in spritesequence is either not defined or smaller or equal to 0."));
+		
 		std::vector<std::string> lines;
+		TiXmlElement* linenode = spritesequencenode->FirstChildElement("line");
 		while (linenode) {
 			// read data
 			std::string map((pc = (char*)linenode->Attribute("map")) ? pc : "");
@@ -67,7 +75,7 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 		}
 		
 		// add element
-		conf.AddElements(height, defs, lines);
+		conf.AddElements(height, defs, lines, delay, speed);
 		
 		// move next
 		spritesequencenode = spritesequencenode->NextSiblingElement();
@@ -88,7 +96,8 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 		level->Add(
 			elems.front().Delay,
 			elems.front().BodyName,
-			elems.front().Position);
+			elems.front().Position,
+			elems.front().Speed);
 		elems.pop();
 	}
 

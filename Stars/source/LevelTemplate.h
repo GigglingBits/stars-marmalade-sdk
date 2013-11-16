@@ -9,9 +9,10 @@
 class LevelTemplate {
 public:
 	struct LevelElement {
+		uint16 Delay;
 		std::string BodyName;
 		float Position;
-		uint16 Delay;
+		float Speed;
 	};
 	typedef std::queue<LevelElement> ElementQueue;
 
@@ -25,8 +26,8 @@ public:
 	void SetName(std::string levelname);
 	void SetSize(float width, float height);
 	void SetDustRequirement(float amount);
-	void AddElement(std::string bodyname, float position, uint16 delay);
-	void AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map);
+	void AddElement(std::string bodyname, uint16 delay, float position, float speed);
+	void AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map, int delay, float speed);
 
 	std::string GetName();
 	CIwFVec2 GetSize();

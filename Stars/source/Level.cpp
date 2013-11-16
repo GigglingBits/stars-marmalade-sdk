@@ -118,7 +118,7 @@ void Level::Add(Body* body) {
 	}
 }
 
-void Level::Add(uint16 delay, const std::string& body, float ypos) {
+void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) {
 	IW_CALLSTACK_SELF;
 	
 	EventArgs args;
@@ -126,6 +126,8 @@ void Level::Add(uint16 delay, const std::string& body, float ypos) {
 	args.bodyName = body;
 	args.position.x = m_xWorldSize.x * 1.5f;
 	args.position.y = ypos;
+	args.speed.y = 0.0f;
+	args.speed.x = -speed;
 	
 	m_xEventTimer.Enqueue(delay, args);
 }
@@ -312,8 +314,7 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			break;
 		}
 		case eEventIdCreateBody: {
-			CreateBody(args.bodyName, args.position,
-					   CIwFVec2(-Configuration::GetInstance().ObjectSpeed, 0.0f));
+			CreateBody(args.bodyName, args.position, args.speed);
 			break;
 		}
 		case eEventIdFinish: {

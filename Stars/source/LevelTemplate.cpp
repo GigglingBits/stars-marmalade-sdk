@@ -25,15 +25,16 @@ float LevelTemplate::GetDustRequirement() {
 	return m_fDustRequirement;
 }
 
-void LevelTemplate::AddElement(std::string bodyname, float position, uint16 delay) {
+void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float position, float speed) {
 	LevelElement element;
 	element.BodyName = bodyname;
-	element.Position = position;
 	element.Delay = delay;
+	element.Position = position;
+	element.Speed = speed;
 	m_xElements.push(element);
 }
 
-void LevelTemplate::AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map) {
+void LevelTemplate::AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map, int delay, float speed) {
 	IW_CALLSTACK_SELF;
 	
 	// find number of lanes
@@ -51,7 +52,6 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, std::str
 	float lanewidth = (levelheight - (2 * worldmargin)) / numberoflanes;
 	
 	// iterate through map
-	const int DELAY = 1500; // milliseconds
 	int accumulateddelay = 0;
 	for (it = map.begin(); it != map.end(); it++) {
 		for (uint lane = 0; lane < it->length(); lane++) {
@@ -62,14 +62,15 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, std::str
 			} else if (it != defs.end()) {
 				AddElement(
 					it->second,
+					accumulateddelay,
 					worldmargin + (lanewidth / 2.0f) + (lane * lanewidth),
-					accumulateddelay);
+					speed);
 				accumulateddelay = 0;
 			} else {
 				IwAssertMsg(MYAPP, false, ("Unrecognized body reference in lane map line %i: %c", lane, bodydef));
 			}
 		}
-		accumulateddelay += DELAY;
+		accumulateddelay += delay;
 	}
 }
 

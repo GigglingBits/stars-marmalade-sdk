@@ -1,141 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root xmlns="http://www.gigglingbits.com"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
-      fileformatversion="2">
-
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
+	fileformatversion="2">
+	
 	<preambles>
-		 <preamble name="earth_1" texture="preamble_01">
-			 Draw with your finger to lead the star!
-		 </preamble>
-		 <!--
+		<preamble name="earth_1" texture="preamble_01">
+			Draw with your finger to lead the star!
+		</preamble>
+		<!--
 		 <preamble name="earth_2" file="stories/intro.mp4">
-			 Catch all nuggets to get max points.
+		 Catch all nuggets to get max points.
 		 </preamble>
 		 <preamble name="earth_3" file="rom://stories/dodge_objects/index.html">
-			 Beware of flying objects.
+		 Beware of flying objects.
 		 </preamble>
 		 <preamble name="earth_4" texture="title_bg">
-			 Beware of flying objects.
+		 Beware of flying objects.
 		 </preamble>
 		 -->
 	</preambles>
-	
 	<levels>
-
-    <level name="earth_1" width="14.0" height="14.0" dustrequirement="100">
-		<spritedefs>
-			<def id="n" body="nugget" />
-			<def id="1" body="bird_01" />
-			<def id="2" body="bird_02" />
-		</spritedefs>
-		<spritesequence>
-			<line map="n  n    " />
-			<line map="n   1   " />
-			<line map=" n    n " />
-			<line map="  nn    " />
-			<line map="   n    " />
-			<line map="   nn n " />
-			<line map=" n nnn  " />
-			<line map="      n " />
-			<line map="   n   n" />
-			<line map="        " />
-			<line map=" 21212  " />
-			<line map="        " />
-			<line map="   n n  " />
-		</spritesequence>
-	</level>
-
-    <level name="earth_2" width="14.0" height="14.0" dustrequirement="10000">
-      <sprite body="nugget" pos="1.0" delay="1000" />
-      <sprite body="nugget" pos="1.5" delay="1000" />
-      <sprite body="nugget" pos="2.0" delay="500" />
-      <sprite body="nugget" pos="2.5" delay="500" />
-      <sprite body="nugget" pos="3.0" delay="500" />
-      <sprite body="nugget" pos="3.5" delay="500" />
-      <sprite body="nugget" pos="4.0" delay="500" />
-      <sprite body="nugget" pos="4.5" delay="500" />
-      <sprite body="nugget" pos="5.0" delay="500" />
-      <sprite body="nugget" pos="5.5" delay="500" />
-      <sprite body="nugget" pos="6.0" delay="500" />
-      <sprite body="nugget" pos="3.5" delay="0" />
-      <sprite body="nugget" pos="3.5" delay="1000" />
-      <sprite body="nugget" pos="1.0" delay="1000" />
-      <sprite body="nugget" pos="6.0" delay="0" />
-      <sprite body="nugget" pos="4.5" delay="1000" />
-      <sprite body="nugget" pos="2.5" delay="500" />
-      <sprite body="nugget" pos="3.5" delay="1000" />
-      <sprite body="nugget" pos="3.5" delay="500" />
-      <sprite body="nugget" pos="3.5" delay="1000" />
-    </level>
-
-    <level name="earth_3" width="14.0" height="14.0" dustrequirement="10000">
-      <sprite body="bird_01" pos="2.0" delay="100" />
-      <sprite body="bird_01" pos="3.0" delay="100" />
-      <sprite body="bird_01" pos="4.0" delay="100" />
-      <sprite body="bird_01" pos="5.0" delay="100" />
-      <sprite body="bird_01" pos="4.0" delay="100" />
-      <sprite body="bird_01" pos="3.0" delay="100" />
-      <sprite body="bird_01" pos="2.0" delay="100" />
-      <sprite body="bird_01" pos="1.0" delay="100" />
-      <sprite body="bird_02" pos="3.0" delay="1000" />
-      <sprite body="airplane" pos="4.0" delay="1000" />
-      <sprite body="jetfighter" pos="4.0" delay="1000" />
-      <sprite body="missile" pos="4.0" delay="1000" />
-      <sprite body="nugget" pos="5.0" delay="1000" />
-      <sprite body="bird_01" pos="2.0" delay="1000" />
-      <sprite body="bird_02" pos="3.0" delay="1000" />
-      <sprite body="airplane" pos="4.0" delay="1000" />
-      <sprite body="jetfighter" pos="4.0" delay="1000" />
-      <sprite body="missile" pos="4.0" delay="1000" />
-      <sprite body="nugget" pos="5.0" delay="1000" />
-      <sprite body="bird_01" pos="2.0" delay="1000" />
-      <sprite body="bird_02" pos="3.0" delay="1000" />
-      <sprite body="airplane" pos="4.0" delay="1000" />
-      <sprite body="jetfighter" pos="4.0" delay="1000" />
-      <sprite body="missile" pos="4.0" delay="1000" />
-      <sprite body="nugget" pos="5.0" delay="1000" />
-      <sprite body="bird_01" pos="2.0" delay="1000" />
-      <sprite body="bird_02" pos="3.0" delay="1000" />
-      <sprite body="airplane" pos="4.0" delay="1000" />
-      <sprite body="jetfighter" pos="4.0" delay="1000" />
-      <sprite body="missile" pos="4.0" delay="1000" />
-      <sprite body="nugget" pos="5.0" delay="1000" />
-      <sprite body="bird_01" pos="2.0" delay="1000" />
-      <sprite body="bird_02" pos="3.0" delay="1000" />
-      <sprite body="airplane" pos="4.0" delay="1000" />
-      <sprite body="jetfighter" pos="4.0" delay="1000" />
-      <sprite body="missile" pos="4.0" delay="1000" />
-      <sprite body="nugget" pos="5.0" delay="1000" />
-    </level>
-
-    <level name="earth_4" width="14.0" height="14.0" dustrequirement="100">
-      <sprite body="bird_01" pos="5.0" delay="100" />
-      <sprite body="bird_01" pos="5.0" delay="100000" />
-    </level>
-
-		<level name="mars_1" width="14.0" height="14.0" dustrequirement="1000">
-			<sprite body="nugget" pos="3.5" delay="0" />
-			<sprite body="nugget" pos="3.5" delay="1000" />
-			<sprite body="nugget" pos="1.0" delay="1000" />
-			<sprite body="nugget" pos="6.0" delay="1000" />
-			<sprite body="nugget" pos="4.5" delay="1000" />
-			<sprite body="nugget" pos="2.5" delay="0" />
-			<sprite body="nugget" pos="3.5" delay="300" />
-			<sprite body="nugget" pos="3.5" delay="2000" />
-			<sprite body="nugget" pos="3.5" delay="1000" />
+		<level name="earth_1" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
+				<def id="1" body="bird_01" />
+				<def id="2" body="bird_02" />
+			</spritedefs>
+			<spritesequence delay="500" speed="2">
+				<line map="n  n    " />
+				<line map="n   1   " />
+				<line map=" n    n " />
+				<line map="  nn    " />
+				<line map="   n    " />
+				<line map="   nn n " />
+				<line map=" n nnn  " />
+				<line map="      n " />
+				<line map="   n   n" />
+				<line map="        " />
+				<line map=" 21212  " />
+				<line map="        " />
+				<line map="   n n  " />
+			</spritesequence>
+			<spritesequence delay="1000" speed="2">
+				<line map=" n   nnn " />
+				<line map="n   n   n" />
+				<line map="n   n   n" />
+				<line map=" nnn   n " />
+				<line map="         " />
+				<line map="        n" />
+				<line map="        n" />
+				<line map="nnnnnnnnn" />
+				<line map="        n" />
+				<line map="        n" />
+				<line map="         " />
+				<line map="nnn      " />
+				<line map="   nnnn  " />
+				<line map="   n   nn" />
+				<line map="   nnnn  " />
+				<line map="nnn      " />
+				<line map="         " />
+				<line map="nnnnnnnnn" />
+				<line map="    n   n" />
+				<line map="    n   n" />
+				<line map="nnnn nnn " />
+				<line map="         " />
+			</spritesequence>
+			<spritesequence delay="1500" speed="2">
+				<line map="n  n    " />
+				<line map="n   1   " />
+				<line map=" n    n " />
+				<line map="  nn    " />
+				<line map="   n    " />
+				<line map="   nn n " />
+				<line map=" n nnn  " />
+				<line map="      n " />
+				<line map="   n   n" />
+				<line map="        " />
+				<line map=" 21212  " />
+				<line map="        " />
+				<line map="   n n  " />
+			</spritesequence>
 		</level>
-		
-      <level name="jupiter_1" width="14.0" height="14.0" dustrequirement="1000">
-          <sprite body="nugget" pos="3.5" delay="0" />
-          <sprite body="nugget" pos="3.5" delay="1000" />
-          <sprite body="nugget" pos="1.0" delay="1000" />
-          <sprite body="nugget" pos="6.0" delay="1000" />
-          <sprite body="nugget" pos="4.5" delay="1000" />
-          <sprite body="nugget" pos="2.5" delay="0" />
-          <sprite body="nugget" pos="3.5" delay="300" />
-          <sprite body="nugget" pos="3.5" delay="2000" />
-          <sprite body="nugget" pos="3.5" delay="1000" />
-      </level>
-  </levels>
+		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
+				<def id="1" body="bird_01" />
+				<def id="2" body="bird_02" />
+			</spritedefs>
+			<spritesequence delay="200" speed="2">
+				<line map="n  n    " />
+				<line map="n   1   " />
+				<line map=" n    n " />
+				<line map="  nn    " />
+				<line map="   n    " />
+				<line map="   nn n " />
+				<line map=" n nnn  " />
+				<line map="      n " />
+				<line map="   n   n" />
+				<line map="        " />
+				<line map=" 21212  " />
+				<line map="        " />
+				<line map="   n n  " />
+			</spritesequence>
+		</level>
+		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
+				<def id="1" body="bird_01" />
+				<def id="2" body="bird_02" />
+			</spritedefs>
+			<spritesequence delay="200" speed="2">
+				<line map="n  n    " />
+				<line map="n   1   " />
+				<line map=" n    n " />
+				<line map="  nn    " />
+				<line map="   n    " />
+				<line map="   nn n " />
+				<line map=" n nnn  " />
+				<line map="      n " />
+				<line map="   n   n" />
+				<line map="        " />
+				<line map=" 21212  " />
+				<line map="        " />
+				<line map="   n n  " />
+			</spritesequence>
+		</level>
+	</levels>
 </root>
