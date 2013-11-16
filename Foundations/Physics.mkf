@@ -11,7 +11,7 @@ subprojects {
 
 includepaths {
 	./Physics
-	../Box2D/Box2D
+	../box2d/box2d
 }
 
 files {
