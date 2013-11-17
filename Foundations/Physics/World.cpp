@@ -30,7 +30,7 @@ void World::SetDefaultGravity(float x, float y) {
 
 void World::Create() {
 	// world
-    s_pxWorld = new b2World(s_xGravity);	 
+    s_pxWorld = new b2World(s_xGravity);
 
 	// add anchor (can be used as refernce body)
 	b2BodyDef def;

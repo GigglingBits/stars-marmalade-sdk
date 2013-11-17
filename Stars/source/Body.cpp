@@ -124,7 +124,7 @@ void Body::SetSpeed(const CIwFVec2& vector) {
 void Body::SetImpulse(const CIwFVec2& vector) {
 	m_pxBody->ApplyLinearImpulse(
 		b2Vec2(vector.x, vector.y),
-		m_pxBody->GetWorldCenter());
+		m_pxBody->GetWorldCenter(), true);
 }
 
 void Body::EnableCollisions(bool enable) {
