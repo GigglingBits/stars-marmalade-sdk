@@ -46,9 +46,9 @@ const LocationServices::DeviceOrientation& LocationServices::GetDeviceOrientatio
 
 void LocationServices::SetGyroData(const s3eGyroscopeData& data) {
 	// fade the old data
-	m_xOrientation.x *= 0.95f;
-	m_xOrientation.y *= 0.95f;
-	m_xOrientation.z *= 0.95f;
+	m_xOrientation.x *= 0.98f;
+	m_xOrientation.y *= 0.98f;
+	m_xOrientation.z *= 0.98f;
 		
 	// apply new data
 	m_xOrientation.x += data.m_X;

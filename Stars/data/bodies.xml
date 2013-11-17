@@ -360,7 +360,8 @@ the bodie that owns the joint.
 
 	  <texture id="title_button" image="title_button"/>
 	  
-    <texture id="background_stars" image="background_stars" />
+	  <texture id="background_stars" image="background_stars" />
+	  <texture id="background_stars_far" image="background_stars_far" />
   </textures>
 
   <fixtures>
