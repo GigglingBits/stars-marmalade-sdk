@@ -1,0 +1,23 @@
+#!/usr/bin/env mkb
+defines 
+{
+	IW_USE_LEGACY_MODULES
+}
+
+files
+{
+	HeyBox2D.cpp
+}
+
+subprojects
+{
+	iw2d
+	../examples/ExamplesCore/ExamplesCore
+	../box2d
+}
+
+assets
+{
+	(data)
+		Image.png
+}
