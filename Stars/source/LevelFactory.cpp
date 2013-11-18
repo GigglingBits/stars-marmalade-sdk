@@ -7,6 +7,11 @@
 #include "Debug.h"
 
 LevelFactory::LevelFactory() : FactoryBase<LevelTemplate, Level>("root", "levels", "level") {
+	LevelTemplate tpl;
+	tpl.SetName("Default");
+	tpl.SetDustRequirement(0);
+	tpl.SetSize(5.0f, 5.0f);
+	SetDefaultConfig(tpl);
 }
 
 std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf) {

@@ -75,22 +75,25 @@ void Star::FollowState::Update(uint16 timestep) {
 		return;
 	}
 	
-	// distance to be travelled during this frame
+	// calculate distance that can be travelled during this frame
 	const float velocity = m_rxContext.m_fPathSpeed; // m/s
 	float framedistance = velocity * ((float)timestep / 1000.0f);
 	
-	// identify the point on the path
+	// identify the next point on the path
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
-	while (path.empty() || framedistance > 0.0f) {
+	while (!path.empty() && framedistance > 0.0f) {
 		CIwFVec2 step = path.front() - dragtarget;
 		float stepdistance = step.GetLength();
 		if (stepdistance <= 0.0f) {
+			// nothing to move on this step; proceed
 			path.pop();
 		} else if (framedistance >= stepdistance) {
+			// move to end of current line, and proceed
 			framedistance -= stepdistance;
 			dragtarget = path.front();
 			path.pop();
 		} else {
+			// cannot move longer during this frame; quit
 			dragtarget += step * (framedistance / stepdistance);
 			break;
 		}
