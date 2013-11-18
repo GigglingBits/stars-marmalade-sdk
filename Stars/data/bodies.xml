@@ -348,8 +348,8 @@ the bodie that owns the joint.
     <texture id="button_arrow_right" image="button_arrow_right" />
 
       <texture id="button_completion">
-          <frame id="won" image="star_grin"/>
-          <frame id="lost" image="star_angry"/>
+          <frame id="won" image="star_game_winner"/>
+          <frame id="lost" image="star_game_loser"/>
       </texture>
       
       <texture id="button_planet">

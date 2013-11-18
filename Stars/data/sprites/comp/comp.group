@@ -1,0 +1,9 @@
+CIwResGroup
+{
+	name "comp"
+
+	./star_game_loser.png
+	./star_game_winner.png
+
+	shared true
+}

@@ -1,6 +1,8 @@
 CIwResGroup
 {
 	name "completion"
-	
+
+	./sprites/comp/comp.group
+
 	shared true
 }

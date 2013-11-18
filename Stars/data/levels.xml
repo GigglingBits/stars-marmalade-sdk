@@ -24,6 +24,21 @@
 		<level name="earth_1" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget" />
+			</spritedefs>
+			<spritesequence delay="500" speed="2">
+				<line map="n  n    " />
+				<line map="   nn n " />
+				<line map=" n nnn  " />
+				<line map="      n " />
+				<line map="   n   n" />
+				<line map="        " />
+				<line map="        " />
+				<line map="   n n  " />
+			</spritesequence>
+		</level>
+		<level name="earth_2" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
 				<def id="1" body="bird_01" />
 				<def id="2" body="bird_02" />
 			</spritedefs>
@@ -80,6 +95,14 @@
 				<line map=" 21212  " />
 				<line map="        " />
 				<line map="   n n  " />
+			</spritesequence>
+		</level>
+		<level name="earth_3" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
+			</spritedefs>
+			<spritesequence delay="500" speed="2">
+				<line map="n  n    " />
 			</spritesequence>
 		</level>
 		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
