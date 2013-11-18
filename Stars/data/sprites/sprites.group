@@ -6,7 +6,6 @@ CIwResGroup
 
 	./image_missing.png
 
-	./hud/hud.group
 	./effects/effects.group
 	./menu/menusub.group
 

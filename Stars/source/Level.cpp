@@ -55,6 +55,9 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(900, args);
 
+	args.eventId = eEventIdEnableUserInput;
+	m_xEventTimer.Enqueue(0, args);
+
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Go!";
 	m_xEventTimer.Enqueue(200, args);
@@ -62,9 +65,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(1100, args);
-
-	args.eventId = eEventIdEnableUserInput;
-	m_xEventTimer.Enqueue(0, args);
 }
 
 Level::~Level() {
@@ -93,7 +93,7 @@ void Level::Initialize() {
 }
 
 const std::string& Level::GetResourceGroupName() {
-	static std::string s("sprites/sprites.group");
+	static std::string s("level.group");
 	return s;
 }
 
