@@ -8,7 +8,7 @@
 class LevelHudNumber : public LevelHudText {
 private:
 	long m_lTargetNumber;
-	long m_lDisplayedNumber;
+	long m_lLastTargetNumber;
 
 	long m_lTotalRollTime;
 	long m_lRemainingRollTime;

@@ -3,7 +3,7 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHudNumber::LevelHudNumber() : m_lTargetNumber(0), m_lDisplayedNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
+LevelHudNumber::LevelHudNumber() : m_lTargetNumber(0), m_lLastTargetNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
 	UpdateText();
 }
 
@@ -12,14 +12,26 @@ void LevelHudNumber::SetNumber(long number, int rolltime) {
 		return;
 	}
 	
+	m_lLastTargetNumber = m_lTargetNumber;
 	m_lTargetNumber = number;
+
 	m_lTotalRollTime = rolltime;
 	m_lRemainingRollTime = m_lTotalRollTime;
 }
 
 void LevelHudNumber::UpdateText() {
+	// interpolate
+	float progress = m_lRemainingRollTime / (float) m_lTotalRollTime;
+	long number;
+	if (progress < 99.9f) {
+		number = (1 - progress) * m_lTargetNumber + progress * m_lLastTargetNumber;
+	} else {
+		number = m_lTargetNumber;
+	}
+		
+	// display
 	std::ostringstream oss;
-	oss << m_lDisplayedNumber;
+	oss << number;
 	SetText(oss.str());
 }
 
@@ -29,18 +41,15 @@ void LevelHudNumber::OnUpdate(const FrameData& frame) {
 	LevelHudText::OnUpdate(frame);
 	
 	// needs rolling?
-	if (m_lDisplayedNumber != m_lTargetNumber) {
+	if (m_lLastTargetNumber != m_lTargetNumber) {
+		// roll the number
+		m_lRemainingRollTime -= frame.GetSimulatedDurationMs();
+
 		// time exceeded?
 		if (m_lRemainingRollTime <= 0) {
-			m_lDisplayedNumber = m_lTargetNumber;
-		} else {
-			// roll the number
-			long error = m_lTargetNumber - m_lDisplayedNumber;
-			long correction = error * (m_lTotalRollTime - m_lRemainingRollTime) / m_lTotalRollTime;
-			m_lDisplayedNumber += correction;
+			m_lLastTargetNumber = m_lTargetNumber;
 		}
-		
-		m_lRemainingRollTime -= frame.GetSimulatedDurationMs();
+
 		UpdateText();
 	}
 }
