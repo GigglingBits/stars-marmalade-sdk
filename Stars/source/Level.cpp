@@ -16,7 +16,8 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xHud(m_xGame),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
-	m_xBackgroundClouds(m_xGame) {
+	m_xBackgroundClouds(m_xGame),
+	m_xBannerRect(0, 0, 0, 0) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -33,38 +34,38 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "3";
-	m_xEventTimer.Enqueue(200, args);
+	m_xEventTimer.Enqueue(100, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(900, args);
+	m_xEventTimer.Enqueue(700, args);
 
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "2";
-	m_xEventTimer.Enqueue(200, args);
+	m_xEventTimer.Enqueue(100, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(900, args);
+	m_xEventTimer.Enqueue(700, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "1";
-	m_xEventTimer.Enqueue(200, args);
+	m_xEventTimer.Enqueue(100, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(900, args);
+	m_xEventTimer.Enqueue(700, args);
 
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Go!";
-	m_xEventTimer.Enqueue(200, args);
+	m_xEventTimer.Enqueue(100, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1100, args);
+	m_xEventTimer.Enqueue(800, args);
 }
 
 Level::~Level() {
@@ -86,10 +87,17 @@ void Level::Initialize() {
 	m_xBackgroundStars.Initialize();
 	
 	CreateStar();
-
+	
+	// schedule the page unload
 	EventArgs args;
-	args.eventId = eEventIdFinish;
+	args.eventId = eEventIdDisableUserInput;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
+	
+	args.eventId = eEventIdFinish;
+	m_xEventTimer.Enqueue(0, args);
+	
+	args.eventId = eEventIdUnload;
+	m_xEventTimer.Enqueue(4000, args);
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -132,6 +140,19 @@ void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) 
 	m_xEventTimer.Enqueue(delay, args);
 }
 
+void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed) {
+	IW_CALLSTACK_SELF;
+	
+	BodyFactory& factory = FactoryManager::GetBodyFactory();
+	if (Body* body = factory.Create(bodyName)) {
+		body->SetPosition(pos);
+		body->SetSpeed(speed);
+		Add(body);
+	} else {
+		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", bodyName.c_str()));
+	}
+}
+
 void Level::SetPaused(bool paused) {
 	if (paused) {
 		m_xAppPanel.OpenPanel();
@@ -167,14 +188,6 @@ CIwFVec2 Level::GetStarStartPosition() {
 	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
 }
 
-void Level::EnableUserInput() {
-	
-}
-
-void Level::DisableUserInput() {
-	
-}
-
 void Level::ShowBannerText(const std::string& text) {
 	m_sBannerText = text;
 }
@@ -183,22 +196,15 @@ void Level::HideBannerText() {
 	m_sBannerText = "";
 }
 
-void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
-	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(star->GetPosition());
-	}
+void Level::ShowStatsBanner() {
+	ShowBannerText(m_xCompletionInfo.IsCleared ? "Well done!" : "Close. But no cigar...");
 }
 
-void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
-	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		if (path.count > 0) {
-			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-			star->FollowPath(path.count, path.samplepos, (float)Configuration::GetInstance().PathSpeed);
-		}
-	}
+CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
+	CIwSVec2 soundpixelpos = m_xCamera.GetViewport().WorldToView(worldpos);
+	CIwSVec2 centeroffset(IwGxGetScreenWidth() / 2, IwGxGetScreenHeight() / 2);
+	soundpixelpos -= centeroffset;
+	return CIwFVec2(soundpixelpos.x / (float)centeroffset.x, soundpixelpos.y / (float)centeroffset.y);
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {
@@ -219,6 +225,12 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	m_xAppPanel.GetMainButton().SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
 				btnmargin, btnsize, btnsize));
+	
+	// banner location
+	int bannerheight = extents / 7;
+	m_xBannerRect.Make(
+		0, (screensize.y - bannerheight) / 2,
+		screensize.x, bannerheight);
 }
 
 void Level::OnUpdate(const FrameData& frame) {
@@ -260,15 +272,8 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xHud.Render(renderer, frame);
 	
 	if (!m_sBannerText.empty()) {
-		renderer.DrawText(m_sBannerText, m_xWorldSize / 2.0f, Renderer::eFontTypeLarge, 0xffccfaff);
+		renderer.DrawText(m_sBannerText, m_xBannerRect, Renderer::eFontTypeLarge, 0xffccfaff);
 	}
-}
-
-CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
-	CIwSVec2 soundpixelpos = m_xCamera.GetViewport().WorldToView(worldpos);
-	CIwSVec2 centeroffset(IwGxGetScreenWidth() / 2, IwGxGetScreenHeight() / 2);
-	soundpixelpos -= centeroffset;
-	return CIwFVec2(soundpixelpos.x / (float)centeroffset.x, soundpixelpos.y / (float)centeroffset.y);
 }
 
 int32 Level::AppPausedCallback(void* systemData, void* userData) {
@@ -318,26 +323,38 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			break;
 		}
 		case eEventIdFinish: {
+			m_xCompletionInfo.IsCleared = m_xGame.GetDustFillPercent() == 1.0f;
+			m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
+			ShowStatsBanner();
+			break;
+		}
+		case eEventIdUnload: {
 			SetCompletionState(eCompleted);
 			break;
 		}
 	}
 }
 
-void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed) {
-	IW_CALLSTACK_SELF;
+void Level::EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy) {
+	//IW_CALLSTACK_SELF;
+	//IwAssertMsg(MYAPP, false, ("Timer queue is empty. This should never happen. Unloading the level..."));
+	SetCompletionState(eCompleted);
+}
 
-	BodyFactory& factory = FactoryManager::GetBodyFactory();
-	if (Body* body = factory.Create(bodyName)) {
-		body->SetPosition(pos);
-		body->SetSpeed(speed);
-		Add(body);
-	} else {
-		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", bodyName.c_str()));
+void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		star->MoveDragging(star->GetPosition());
 	}
 }
 
-void Level::EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy) {
-	m_xCompletionInfo.IsCleared = true;
-	m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
+void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		if (path.count > 0) {
+			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+			star->FollowPath(path.count, path.samplepos, (float)Configuration::GetInstance().PathSpeed);
+		}
+	}
 }

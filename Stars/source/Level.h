@@ -36,6 +36,7 @@ private:
 		eEventIdSuspendEventTimer,
 		eEventIdCreateBody,
 		eEventIdFinish,
+		eEventIdUnload,
 	};
 
 	struct EventArgs {
@@ -59,6 +60,7 @@ private:
 
 	EventTimer<EventArgs> m_xEventTimer;
 
+	CIwRect m_xBannerRect;
 	std::string m_sBannerText;
 	
 	bool m_bIsPaused;
@@ -105,9 +107,7 @@ private:
 
 	void ShowBannerText(const std::string& text);
 	void HideBannerText();
-	
-	void EnableUserInput();
-	void DisableUserInput();
+	void ShowStatsBanner();
 	
 	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
 	
