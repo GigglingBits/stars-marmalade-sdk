@@ -56,7 +56,6 @@ bool Body::CanDispose() {
 
 GameFoundation* Body::GetGameFoundation() {
 	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxGameFoundation, ("Game foundation is queried but not known."));
 	return m_pxGameFoundation;
 }
 

@@ -232,19 +232,21 @@ files {
 	menu.group
 	preamble.group
 	level.group
-	completion.group
+	levelcompletion.group
 
+	fonts/fonts.group
+
+	sounds/sounds.group
+	sounds/effects.itx
+
+	["Sources/Resources/sprites"]
+	(data)
 	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sprites/comp/comp.group
-
-	fonts/fonts.group
-
-	sounds/sounds.group
-	sounds/effects.itx
 }
 
 assets 
@@ -262,7 +264,7 @@ assets
 	menu.group
 	preamble.group
 	level.group
-	completion.group
+	levelcompletion.group
 
 	fonts/fonts.group
 	tutorials/tutorials.group
@@ -280,7 +282,7 @@ assets
 	menu.group.bin
 	preamble.group.bin
 	level.group.bin
-	completion.group.bin
+	levelcompletion.group.bin
 	tutorials/tutorials.group.bin
 	sprites/sprites.group.bin
 	sprites/hud/hud.group.bin

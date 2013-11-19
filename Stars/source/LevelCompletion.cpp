@@ -7,7 +7,7 @@
 #include "Configuration.h"
 
 LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
-	Page("completion.group", info.IsCleared ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong),
+	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),

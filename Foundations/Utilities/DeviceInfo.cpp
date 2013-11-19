@@ -67,7 +67,7 @@ void DeviceInfo::Update() {
 		m_xCurrentDevice.IdType = eIdentificationUnknown;
 		m_xCurrentDevice.Id = deviceid;
 		m_xCurrentDevice.Desc = "unknown";
-		m_xCurrentDevice.PixelsPerInch = dpiExtGetDeviceDPI();
+		m_xCurrentDevice.PixelsPerInch = 163;
 	}
 	
 	// build long description
