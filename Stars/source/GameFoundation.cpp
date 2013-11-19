@@ -164,7 +164,7 @@ float GameFoundation::GetDustFillAmount() {
 }
 
 bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
-	const float limit = 30.0f; // meters
+	const float limit = 20.0f; // meters
 
 	// only works if world is rooted at 0/0
 	CIwFVec2 bounds(
