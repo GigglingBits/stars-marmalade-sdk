@@ -303,6 +303,14 @@
 			<frame id="09" image="spark_09" />
 		</texture>
 		
+		<texture id="particle_white_star">
+			<frame id="01" image="particle_white_star_1" duration="300" next="02" />
+			<frame id="02" image="particle_white_star_2" duration="300" next="03" />
+			<frame id="03" image="particle_white_star_3" duration="600" next="04" />
+			<frame id="04" image="particle_white_star_4" duration="600" next="05" />
+			<frame id="05" image="particle_white_star_5"/>
+		</texture>
+		
 		<texture id="button_social" image="button_social" />
 		<texture id="button_achievements" image="button_achievements" />
 		<texture id="button_leaderboards" image="button_leaderboards" />

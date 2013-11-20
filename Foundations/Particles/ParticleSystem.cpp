@@ -24,7 +24,7 @@ void ParticleSystem::SetPosition(const CIwFVec2& pos) {
 }
 
 void ParticleSystem::CreateParticles(uint16 elapsedms) {
-	const int interval = 50;
+	const int interval = 30;
 	
 	m_iNextParticleDueInMs -= elapsedms;
 	while (m_iNextParticleDueInMs < 0) {
