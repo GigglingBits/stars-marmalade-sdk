@@ -6,11 +6,14 @@
 #include "Camera.h"
 #include "Level.h"
 #include "LevelHudNumber.h"
+#include "EventTimer.h"
 
 class LevelCompletion : public Page {
 private:
 	Camera m_xCamera;
 
+	EventTimer<int> m_xTimer;
+	
 	bool m_bIsCompleted;
 	std::string m_sCompletionText;
 
@@ -26,6 +29,7 @@ private:
 
 public:
 	LevelCompletion(const Level::CompletionInfo& info);
+	virtual ~LevelCompletion();
 
 	virtual void Initialize();
 
@@ -37,6 +41,8 @@ protected:
 private:
 	bool IsCompleted(const Level::CompletionInfo& info);
 	std::string GenerateCompletionText(const Level::CompletionInfo& info);
+
+	void EventTimerEventHandler(const EventTimer<int>& sender, const int& dummy);
 };
 
 #endif

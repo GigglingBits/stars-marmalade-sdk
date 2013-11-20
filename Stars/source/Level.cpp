@@ -7,6 +7,7 @@
 #include "Configuration.h"
 #include "InputManager.h"
 #include "FactoryManager.h"
+#include "SoundEngine.h"
 
 Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	Page("level.group", Configuration::GetInstance().LevelSong),
@@ -82,7 +83,7 @@ Level::~Level() {
 void Level::Initialize() {
 	m_xAppPanel.Initialize();
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
-	
+
 	m_xHud.Initialize();
 	m_xBackgroundStars.Initialize();
 	
@@ -198,6 +199,9 @@ void Level::HideBannerText() {
 
 void Level::ShowStatsBanner() {
 	ShowBannerText(m_xCompletionInfo.IsCleared ? "Well done!" : "Close. But no cigar...");
+	if (m_xCompletionInfo.IsCleared) {
+		SoundEngine::GetInstance().PlaySoundEffect("level_win");
+	}
 }
 
 CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {

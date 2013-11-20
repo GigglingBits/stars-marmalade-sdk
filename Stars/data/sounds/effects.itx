@@ -9,6 +9,15 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
+	name		"level_win"
+	data		"level_win"
+	vol 		0.7
+	pitchMin	1.0
+	pitchMax	1.0
+}
+
+CIwSoundSpec
+{
 	name		"NinjaHo"
 	data		"28829_SFX_NinjaHo"
 	vol 		0.7

@@ -17,6 +17,15 @@ LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
 	m_sCompletionText = GenerateCompletionText(info);
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
+
+	if (info.IsCleared) {
+		m_xTimer.Enqueue(29600, 0); // duration of the winning music
+		m_xTimer.Elapsed.AddListener<LevelCompletion>(this, &LevelCompletion::EventTimerEventHandler);
+	}
+}
+
+LevelCompletion::~LevelCompletion() {
+	m_xTimer.Elapsed.RemoveListener<LevelCompletion>(this, &LevelCompletion::EventTimerEventHandler);
 }
 
 void LevelCompletion::Initialize() {
@@ -49,40 +58,10 @@ std::string LevelCompletion::GenerateCompletionText(const Level::CompletionInfo&
 	return oss.str();
 }
 
-void LevelCompletion::OnUpdate(const FrameData& frame) {
-	m_xBackground.Update(frame);
-	
-	m_xButtonStar.Update(frame);
-	m_xButtonQuit.Update(frame);
-	m_xButtonRetry.Update(frame);
-	m_xButtonNext.Update(frame);
-
-	m_xDustFillPercent.Update(frame);
-}
-
-void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
-	IW_CALLSTACK_SELF;
-
-	m_xBackground.Render(renderer, frame);
-
-	// text
-	const CIwSVec2& screen = frame.GetScreensize();
-	CIwRect rect(0, 0, screen.x, screen.y / 2);
-	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffccfaff);
-	
-	m_xDustFillPercent.Render(renderer, frame);
-
-	// buttons
-	m_xButtonStar.Render(renderer, frame);
-	m_xButtonQuit.Render(renderer, frame);
-	m_xButtonRetry.Render(renderer, frame);
-	m_xButtonNext.Render(renderer, frame);
-}
-
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int margin = extents / 4;	// 25% 
-	int space = margin / 5;		// 25% / 5 = 5% 
+	int margin = extents / 4;	// 25%
+	int space = margin / 5;		// 25% / 5 = 5%
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 	
 	// star button
@@ -105,10 +84,47 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	button.x = (screensize.x - (3 * button.w) - (2 * space)) / 2;
 	button.y = screensize.y * 10 / 13;
 	m_xButtonQuit.SetPosition(button);
-
+	
 	button.x += button.w + space;
 	m_xButtonRetry.SetPosition(button);
-
+	
 	button.x += button.w + space;
 	m_xButtonNext.SetPosition(button);
+}
+
+
+void LevelCompletion::OnUpdate(const FrameData& frame) {
+	m_xBackground.Update(frame);
+	
+	m_xButtonStar.Update(frame);
+	m_xButtonQuit.Update(frame);
+	m_xButtonRetry.Update(frame);
+	m_xButtonNext.Update(frame);
+
+	m_xDustFillPercent.Update(frame);
+	
+	m_xTimer.Update(frame.GetRealDurationMs());
+}
+
+void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
+	IW_CALLSTACK_SELF;
+
+	m_xBackground.Render(renderer, frame);
+
+	// text
+	const CIwSVec2& screen = frame.GetScreensize();
+	CIwRect rect(0, 0, screen.x, screen.y / 2);
+	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffccfaff);
+	
+	m_xDustFillPercent.Render(renderer, frame);
+
+	// buttons
+	m_xButtonStar.Render(renderer, frame);
+	m_xButtonQuit.Render(renderer, frame);
+	m_xButtonRetry.Render(renderer, frame);
+	m_xButtonNext.Render(renderer, frame);
+}
+
+void LevelCompletion::EventTimerEventHandler(const EventTimer<int>& sender, const int& dummy) {
+	SetCompletionState(eCompleted);
 }

@@ -6,6 +6,8 @@ CIwResGroup
 
 	./collision.wav
 
+	./level_win.wav
+
 	./28814_SFX_KungFuOh.wav
 	./28815_SFX_KungFuWaka.wav
 	./28820_SFX_NinjaAttack.wav
