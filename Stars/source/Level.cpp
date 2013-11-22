@@ -39,7 +39,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(700, args);
+	m_xEventTimer.Enqueue(500, args);
 
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "2";
@@ -47,7 +47,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(700, args);
+	m_xEventTimer.Enqueue(500, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "1";
@@ -55,7 +55,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(700, args);
+	m_xEventTimer.Enqueue(500, args);
 
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
@@ -66,7 +66,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(800, args);
+	m_xEventTimer.Enqueue(1000, args);
 }
 
 Level::~Level() {

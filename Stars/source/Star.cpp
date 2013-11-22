@@ -197,7 +197,7 @@ void Star::EndAttack() {
 
 void Star::EnableParticles() {
 	if (!m_pxParticles) {
-		m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("particle_white_star"), CIwFVec2(-20.0f, -5.0f), "Pop", "");
+		m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("particle_yellow_star"), CIwFVec2(-20.0f, -5.0f), "Pop", "");
 	}
 	if (m_pxParticles) {
 		m_pxParticles->Start();
