@@ -1,6 +1,7 @@
 #include "ParticleSystem.h"
+#include "SoundEngine.h"
 
-ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f), m_xGravity(gravity) {
+ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound, const std::string& destroySound) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f), m_xGravity(gravity),m_sCreateSound(createSound), m_sDestroySound(destroySound) {
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -25,11 +26,17 @@ void ParticleSystem::SetPosition(const CIwFVec2& pos) {
 
 void ParticleSystem::CreateParticles(uint16 elapsedms) {
 	const int interval = 30;
-	
 	m_iNextParticleDueInMs -= elapsedms;
+	
+	bool created = false;
 	while (m_iNextParticleDueInMs < 0) {
 		m_xParticles.push_back(CreateParticle());
 		m_iNextParticleDueInMs += interval;
+		created = true;
+	}
+	
+	if (created && !m_sCreateSound.empty()) {
+		SoundEngine::GetInstance().PlaySoundEffect(m_sCreateSound);
 	}
 }
 
@@ -53,14 +60,21 @@ Particle* ParticleSystem::CreateParticle() {
 }
 
 void ParticleSystem::RemoveDeadParticles() {
+	bool destroyed = false;
+	
 	ParticleList::iterator i = m_xParticles.begin();
 	while (i != m_xParticles.end()) {
 		if ((*i)->IsDead()) {
+			destroyed = true;
 			delete *i;
 			i = m_xParticles.erase(i);
 		} else {
 			i++;
 		}
+	}
+	
+	if (destroyed && !m_sDestroySound.empty()) {
+		SoundEngine::GetInstance().PlaySoundEffect(m_sDestroySound);
 	}
 }
 

@@ -15,13 +15,16 @@ private:
 	
 	TextureTemplate m_xTextureTpl;
 
+	std::string m_sCreateSound;
+	std::string m_sDestroySound;
+	
 	CIwFVec2 m_xGravity;
 	
 	bool m_bIsStarted;
 	int m_iNextParticleDueInMs;
 	
 public:
-	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity);
+	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound = "", const std::string& destroySound = "");
 	~ParticleSystem();
 	
 	void Start();

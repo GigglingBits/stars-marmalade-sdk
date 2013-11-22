@@ -25,12 +25,12 @@ void Star::PeacefulState::Collide(Body& body) {
 
 	if (body.GetTypeName() == Buff::TypeName()) {
 		body.GetHealthManager().Kill();
-		SoundEngine::GetInstance().PlaySoundEffect("NinjaWaka");
+		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 
 	} else {
 		body.GetHealthManager().Injure(5.0f); // just arbitrarily 5... for testing
 		m_rxContext.SetTextureFrame("hurt");
-		SoundEngine::GetInstance().PlaySoundEffect("NinjaHurt");
+		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
 		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
 			game->CancelDust(m_rxContext.GetPosition());

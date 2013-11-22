@@ -1,5 +1,10 @@
 display_name "Foundation/Particles"
 
+subprojects {
+	./Renderer
+	./Sound
+}
+
 includepaths {
 	./Particles
 }
