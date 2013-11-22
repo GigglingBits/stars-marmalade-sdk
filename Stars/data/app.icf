@@ -1,7 +1,7 @@
 ####################################################
 [Game]
 ####################################################
-rebuildresources=1
+rebuildresources=0
 showstats=0
 
 maxvisibleworldsize=8	# see max 20 meters on screen
@@ -13,8 +13,8 @@ pathmaxlength=50		# max length of the path in meters
 bodies=bodies.xml
 levels=levels.xml
 
-httpbodies="http://dl.dropbox.com/s/3igckh08mxx9gy4/bodies.xml?dl=1"
-httplevels="http://dl.dropbox.com/s/rk4wvu0f2k8bmpy/levels.xml?dl=1"
+httpbodies="http://dl.dropboxusercontent.com/s/3igckh08mxx9gy4/bodies.xml?dl=1"
+httplevels="http://dl.dropboxusercontent.com/s/rk4wvu0f2k8bmpy/levels.xml?dl=1"
 
 introsong="music/Port Saint Johns.mp3"
 levelsong="music/Empire Games.mp3"
