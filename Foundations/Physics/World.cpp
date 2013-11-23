@@ -58,6 +58,10 @@ b2Body& World::GetAnchorBody() {
 	return *s_pxAnchorBody;
 }
 
-void World::SetContactListener(ContactListener* listener) {
-	GetWorld().SetContactListener(listener);
+void World::SetContactListener(ContactListener& listener) {
+	GetWorld().SetContactListener(&listener);
+}
+
+void World::RemoveContactListener() {
+	GetWorld().SetContactListener(NULL);
 }

@@ -10,7 +10,6 @@ GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
 : m_xWorldSize(worldsize), m_xRayCaster(m_xWorld), m_pxStar(NULL), m_xDust(dustrequirement) {
 
 	m_xContactListener.CollisionEvent.AddListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
-	m_xWorld.SetContactListener(&m_xContactListener);
 }
 
 GameFoundation::~GameFoundation() {
@@ -20,8 +19,12 @@ GameFoundation::~GameFoundation() {
 		delete sprite;
 	}
 
-	m_xWorld.SetContactListener(NULL);
+	m_xWorld.RemoveContactListener();
 	m_xContactListener.CollisionEvent.RemoveListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
+}
+
+void GameFoundation::Initialize() {
+	m_xWorld.SetContactListener(m_xContactListener);
 }
 
 std::map<std::string, Sprite*>& GameFoundation::GetSpriteMap() {

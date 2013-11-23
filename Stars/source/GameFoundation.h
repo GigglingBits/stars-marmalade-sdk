@@ -39,6 +39,8 @@ public:
 	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
 	~GameFoundation();
 
+	void Initialize();
+	
 	// sprite management
 	void Add(Sprite* sprite);
 	void Add(Body* body);

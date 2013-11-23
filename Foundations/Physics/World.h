@@ -18,7 +18,9 @@ public:
 	virtual ~World();
 
 	b2World& GetWorld();
-	void SetContactListener(ContactListener* listener);
+
+	void SetContactListener(ContactListener& listener);
+	void RemoveContactListener();
 
 	b2Body& GetAnchorBody();
 

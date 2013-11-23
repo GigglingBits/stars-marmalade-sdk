@@ -1,7 +1,7 @@
 #include "Particle.h"
 
 Particle::Particle(const TextureTemplate& tpl) : m_xTexture(tpl), m_xPosition(0.0f, 0.0f), m_xGravity(0.0f, -9.81f), m_iRemainingLifeTimeMs(1000) {
-	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, 0.5f, 0.5f);
+	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, 0.3f, 0.3f);
 }
 
 bool Particle::IsDead() {
@@ -33,7 +33,7 @@ void Particle::OnUpdate(const FrameData& frame) {
 }
 
 void Particle::OnRender(Renderer& renderer, const FrameData& frame) {
-	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, 0.5f, 0.5f);
+	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, 0.3f, 0.3f);
 	renderer.Draw(m_xShape, m_xTexture);
 }
 

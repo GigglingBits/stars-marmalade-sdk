@@ -81,6 +81,8 @@ Level::~Level() {
 }
 
 void Level::Initialize() {
+	m_xGame.Initialize();
+	
 	m_xAppPanel.Initialize();
 	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 
