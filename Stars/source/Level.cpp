@@ -113,11 +113,11 @@ void Level::CreateStar() {
 	Star* star = dynamic_cast<Star*>(FactoryManager::GetBodyFactory().Create("star"));
 	IwAssertMsg(MYAPP, star, ("Could not add star to level. It seems to be of a wrong type. Check its body definition."));
 	if (star) {
-		star->SetPosition(GetStarStartPosition(), 0.0f);
+		star->SetPosition(GetStarHidePosition(), 0.0f);
 		Add(star);
 		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));
-		star->BeginDragging(GetStarStartPosition());
-		star->SetAnchorLine(GetStarStartPosition().x);
+		star->BeginDragging(GetStarHidePosition());
+		star->SetAnchorLine(GetStarHidePosition().x);
 	}
 }
 
@@ -170,6 +170,18 @@ bool Level::IsPaused() {
 	return m_bIsPaused;
 }
 
+void Level::HideStar() {
+	if (Star* star = m_xGame.GetStar()) {
+		star->SetAnchorLine(GetStarHidePosition().x);
+	}
+}
+
+void Level::ShowStar() {
+	if (Star* star = m_xGame.GetStar()) {
+		star->SetAnchorLine(GetStarRestPosition().x);
+	}
+}
+
 const Level::CompletionInfo& Level::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
@@ -184,11 +196,15 @@ float Level::GetStarMoveForce() {
 }
 
 float Level::GetStarRestForce() {
-	return 10.0f;	
+	return 5.0f;
 }
 
-CIwFVec2 Level::GetStarStartPosition() {
+CIwFVec2 Level::GetStarRestPosition() {
 	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
+}
+
+CIwFVec2 Level::GetStarHidePosition() {
+	return CIwFVec2(-8.0f, m_xWorldSize.y / 2.0f);
 }
 
 void Level::ShowBannerText(const std::string& text) {
@@ -315,10 +331,12 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 		}
 		case eEventIdEnableUserInput: {
 			m_xInteractor.Enable();
+			ShowStar();
 			break;
 		}
 		case eEventIdDisableUserInput: {
 			m_xInteractor.Disable();
+			HideStar();
 			break;
 		}
 		case eEventIdSuspendEventTimer: {

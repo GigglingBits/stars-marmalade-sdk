@@ -99,7 +99,8 @@ private:
 
 	float GetStarMoveForce();
 	float GetStarRestForce();
-	CIwFVec2 GetStarStartPosition();
+	CIwFVec2 GetStarRestPosition();
+	CIwFVec2 GetStarHidePosition();
 
 	void SetPaused(bool paused);
 	bool IsPaused();
@@ -108,6 +109,9 @@ private:
 	void ShowBannerText(const std::string& text);
 	void HideBannerText();
 	void ShowStatsBanner();
+	
+	void HideStar();
+	void ShowStar();
 	
 	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
 	
