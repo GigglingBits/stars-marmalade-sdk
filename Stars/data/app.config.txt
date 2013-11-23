@@ -27,5 +27,3 @@ httplevels				Name of the file containing the level definitions, available as HT
 
 introsong				Name of the sound file containing the intro song
 levelsong				Name of the sound file containing the level song
-lostsong				Name of the sound file containing the lost song
-wonsong					Name of the sound file containing the won song

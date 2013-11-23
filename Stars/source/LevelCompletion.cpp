@@ -7,7 +7,7 @@
 #include "Configuration.h"
 
 LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
-	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().WonSong : Configuration::GetInstance().LostSong),
+	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
@@ -17,15 +17,6 @@ LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
 	m_sCompletionText = GenerateCompletionText(info);
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
-
-	if (info.IsCleared) {
-		m_xTimer.Enqueue(29600, 0); // duration of the winning music
-		m_xTimer.Elapsed.AddListener<LevelCompletion>(this, &LevelCompletion::EventTimerEventHandler);
-	}
-}
-
-LevelCompletion::~LevelCompletion() {
-	m_xTimer.Elapsed.RemoveListener<LevelCompletion>(this, &LevelCompletion::EventTimerEventHandler);
 }
 
 void LevelCompletion::Initialize() {
@@ -102,8 +93,6 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xButtonNext.Update(frame);
 
 	m_xDustFillPercent.Update(frame);
-	
-	m_xTimer.Update(frame.GetRealDurationMs());
 }
 
 void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -123,8 +112,4 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonQuit.Render(renderer, frame);
 	m_xButtonRetry.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
-}
-
-void LevelCompletion::EventTimerEventHandler(const EventTimer<int>& sender, const int& dummy) {
-	SetCompletionState(eCompleted);
 }

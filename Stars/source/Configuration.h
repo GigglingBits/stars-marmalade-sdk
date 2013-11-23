@@ -29,8 +29,6 @@ public:
 
 	std::string IntroSong;
 	std::string LevelSong;
-	std::string WonSong;
-	std::string LostSong;
 
 	std::string HttpBodiesFile;
 	std::string HttpLevelsFile;

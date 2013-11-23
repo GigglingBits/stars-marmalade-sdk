@@ -212,7 +212,7 @@ void Level::ShowBannerText(const std::string& text) {
 }
 
 void Level::HideBannerText() {
-	m_sBannerText = "";
+	m_sBannerText.clear();
 }
 
 void Level::ShowStatsBanner() {

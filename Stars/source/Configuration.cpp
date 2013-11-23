@@ -43,18 +43,6 @@ Configuration::Configuration() {
 		LevelSong = "music/levelsong.mp3";
 	}
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "lostsong", tmpstr)) {
-		LostSong = tmpstr;
-	} else {
-		LostSong = "music/lostsong.mp3";
-	}
-
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "wonsong", tmpstr)) {
-		WonSong = tmpstr;
-	} else {
-		WonSong = "music/wonsong.mp3";
-	}
-
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httpbodies", tmpstr)) {
 		HttpBodiesFile = tmpstr;
 	} else {
