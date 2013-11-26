@@ -55,8 +55,6 @@ private:
 	
 	std::string m_sMotionTextureFrame;
 	std::string m_sAttackTextureFrame;
-	
-	Texture* m_pxTouchTexture;
 
 	ParticleSystem* m_pxParticles;
 	

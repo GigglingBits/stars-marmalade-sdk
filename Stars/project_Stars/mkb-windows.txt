@@ -1,0 +1,1 @@
+VC11X;build_stars_vc11x

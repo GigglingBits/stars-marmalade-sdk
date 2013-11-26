@@ -14,17 +14,11 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	SetState(new RetractingState(*this));
 	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
-	m_pxTouchTexture = FactoryManager::GetTextureFactory().Create("touch");
 		
 	m_fAnchorLine = 0.0f;
 }
 
 Star::~Star() {
-	if (m_pxTouchTexture) {
-		delete m_pxTouchTexture;
-		m_pxTouchTexture = NULL;
-	}
-
 	if (m_pxParticles) {
 		delete m_pxParticles;
 	}
@@ -117,27 +111,10 @@ void Star::SetTextureFrame(std::string id) {
 }
 
 void Star::OnRender(Renderer& renderer, const FrameData& frame) {
-	if (IsDragging()) {
-		CIwFVec2* center = GetPort("center");
-		CIwFVec2 target = GetDragTarget();
-
-		renderer.DrawLine(
-			GetPosition() + (center ? *center : CIwFVec2::g_Zero),
-			target,
-			0xffaaaaaa);
-
-		if (m_pxTouchTexture) {
-			VertexStreamWorld verts;
-			verts.SetRect(target.x - 0.2f, target.y - 0.2f, 0.4f, 0.4f);
-			renderer.Draw(verts, *m_pxTouchTexture);
-		}
-	}
-
-	Body::OnRender(renderer, frame);
-
 	if (m_pxParticles) {
 		m_pxParticles->Render(renderer, frame);
 	}
+	Body::OnRender(renderer, frame);
 }
 
 void Star::SetAnchorLine(float xpos) {
