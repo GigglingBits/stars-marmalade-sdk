@@ -14,7 +14,7 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	SetState(new RetractingState(*this));
 	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
-		
+	
 	m_fAnchorLine = 0.0f;
 }
 
@@ -63,15 +63,6 @@ void Star::OnUpdate(const FrameData& frame) {
 	Body::OnUpdate(frame);
 	GetMotionState().Update(frame.GetSimulatedDurationMs());
 	GetAttackState().Update(frame.GetSimulatedDurationMs());
-
-	// adjust drag force
-	if (IsDragging()) {
-		float distance = (GetDragTarget() - GetPosition()).GetLength();
-		SetDragForce(
-			distance				// the larger the distance, the larger the force to be applied
-			* 100.0f				// just a constant to amplify the effect
-			* GetMass());			// larger bodies require more force to move
-	}
 	
 	// particle system
 	if (m_pxParticles) {

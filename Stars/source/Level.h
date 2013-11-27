@@ -97,8 +97,6 @@ private:
 	void CreateHud();
 	void DestroyHud();
 
-	float GetStarMoveForce();
-	float GetStarRestForce();
 	CIwFVec2 GetStarRestPosition();
 	CIwFVec2 GetStarHidePosition();
 

@@ -34,36 +34,12 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	// configure the start
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
-	args.bannerText = "3";
-	m_xEventTimer.Enqueue(100, args);
-		
-	args.eventId = eEventIdHideBanner;
-	args.bannerText = "";
-	m_xEventTimer.Enqueue(500, args);
-
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = "2";
-	m_xEventTimer.Enqueue(100, args);
-		
-	args.eventId = eEventIdHideBanner;
-	args.bannerText = "";
+	args.bannerText = "Go!";
 	m_xEventTimer.Enqueue(500, args);
 		
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = "1";
-	m_xEventTimer.Enqueue(100, args);
-		
-	args.eventId = eEventIdHideBanner;
-	args.bannerText = "";
-	m_xEventTimer.Enqueue(500, args);
-
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = "Go!";
-	m_xEventTimer.Enqueue(100, args);
-		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(1000, args);
@@ -189,14 +165,6 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 float Level::GetCompletionDegree() {
 	uint32 total = m_xEventTimer.GetTotalDuration();
 	return total == 0 ? 1.0f : std::min<float>(1.0f, (float)m_xEventTimer.GetElapsedTime() / (float)total);
-}
-
-float Level::GetStarMoveForce() {
-	return 10.0f;
-}
-
-float Level::GetStarRestForce() {
-	return 5.0f;
 }
 
 CIwFVec2 Level::GetStarRestPosition() {

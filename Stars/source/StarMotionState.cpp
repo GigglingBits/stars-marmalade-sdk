@@ -11,6 +11,12 @@ void Star::RetractingState::Initialize() {
 	m_rxContext.ShowTextEffect("Retracting");
 	m_rxContext.SetMotionTextureFrame("happy");
 	m_rxContext.DisableParticles();
+
+	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
+	dragtarget.x = m_rxContext.m_fAnchorLine;
+	m_rxContext.MoveDragging(dragtarget);
+
+	m_rxContext.GetBody().SetLinearDamping(1.5f);
 }
 
 void Star::RetractingState::FollowPath() {
@@ -18,27 +24,11 @@ void Star::RetractingState::FollowPath() {
 }
 
 void Star::RetractingState::Update(uint16 timestep) {
-	// distance to be travelled during this frame
-	const float velocity = m_rxContext.m_fPathSpeed / 2.0f; // m/s
-	float framedistance = velocity * ((float)timestep / 1000.0f);
-	
-	// identify the point on the path
-	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
-	CIwFVec2 parkposition = dragtarget;
-	parkposition.x = m_rxContext.m_fAnchorLine;
-	CIwFVec2 step = parkposition - dragtarget;
-	
-	float stepdistance = step.GetLength();
-	if (stepdistance <= 0.0f) {
-		return;
-	} else if (framedistance >= stepdistance) {
-		dragtarget = parkposition;
-	} else {
-		dragtarget += step * (framedistance / stepdistance);
+	// balance the drag force
+	if (m_rxContext.IsDragging()) {
+		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
+		m_rxContext.SetDragForce(distance * 10.0f * m_rxContext.GetMass());
 	}
-	
-	// move to new place
-	m_rxContext.MoveDragging(dragtarget);
 }
 
 
@@ -49,6 +39,7 @@ void Star::FollowState::Initialize() {
 	m_rxContext.ShowTextEffect("Following");
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
+	m_rxContext.GetBody().SetLinearDamping(0.1f);
 }
 
 void Star::FollowState::FollowPath() {
@@ -99,7 +90,13 @@ void Star::FollowState::Update(uint16 timestep) {
 		}
 	}
 	
-	// move to new place
+	// balance the drag force
+	if (m_rxContext.IsDragging()) {
+		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
+		m_rxContext.SetDragForce(distance * 100.0f * m_rxContext.GetMass());
+	}
+	
+	// move particles to new place
 	m_rxContext.MoveDragging(dragtarget);
 	if (m_rxContext.m_pxParticles) {
 		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
