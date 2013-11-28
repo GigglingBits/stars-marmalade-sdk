@@ -11,7 +11,7 @@ CIwSoundSpec
 {
 	name		"EatNugget"
 	data		"eat_01"
-	vol 		0.5
+	vol 		0.3
 	pitchMin	0.7
 	pitchMax	1.0
 }

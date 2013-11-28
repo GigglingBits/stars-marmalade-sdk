@@ -1,7 +1,6 @@
 ####################################################
 [Game]
 ####################################################
-rebuildresources=0
 showstats=0
 
 maxvisibleworldsize=8	# see max 20 meters on screen
@@ -22,7 +21,7 @@ levelsong="music/Empire Games.mp3"
 ####################################################
 [Util]
 ####################################################
-#MemoryBreakpoint=160004
+#MemoryBreakpoint=742
 
 ####################################################
 [TRACE]
@@ -49,10 +48,10 @@ SplashscreenBkB=0
 #{}
 
 IOSDispScaleFactor=200
-DispFixRot=FixedLandscape # locked because of the gyroscope
+DispFixRot=FixedLandscape	# locked because of the gyroscope
 
-MemSize=30000000
-MemSizeDebug=25000000
+MemSize=18000000			# main heap
+MemSizeDebug=25000000		# debug / resource builder
 
 SysTraceToFile=0
 
@@ -66,10 +65,10 @@ KeyAbsDown=Down
 KeyAbsGameA=P			# pause/resume
 KeyAbsGameB=R			# restart
 KeyAbsGameC=Backspace	# reload
-KeyAbsGameD=Esc		# quit
+KeyAbsGameD=Esc			# quit
 
-KeyAbsASK=T			# not used
-KeyAbsBSK=B			# not used
+KeyAbsASK=T				# not used
+KeyAbsBSK=B				# not used
 
 {OS=android}
 KeyAbsGameA=Menu
@@ -79,7 +78,9 @@ KeyAbsGameD=Back
 ####################################################
 [RESMANAGER]
 ####################################################
+#ResBuildStyle=gles1-pvrtc
 ResBuildStyle=gles1
+ResBuild=1
 
 ####################################################
 [Gx]

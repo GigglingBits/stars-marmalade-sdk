@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "FrameData.h"
 #include "Stopwatch.h"
+#include "MemoryBuckets.h"
 
 class App {
 private:
@@ -34,7 +35,7 @@ private:
 
 private:
 	void PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime);
-	void PrintMem(const CIwRect& rect, uint32 usedmem, uint32 freemem, uint32 largestfreeblock);
+	void PrintMem(const CIwRect& rect, MemoryBuckets bucketid);
 
 	void ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args);
 };

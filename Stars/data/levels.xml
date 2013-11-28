@@ -30,6 +30,7 @@
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
+				<line map="       " />
 				<line map="    n  " />
 				<line map="       " />
 				<line map="       " />
@@ -70,11 +71,9 @@
 				<line map="   nn  " />
 				<line map="   nn  " />
 				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
 			</spritesequence>
 		</level>
-		<level name="earth_2" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_7" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget" />
 			</spritedefs>
@@ -102,7 +101,7 @@
 				<line map="   n n  " />
 			</spritesequence>
 		</level>
-		<level name="earth_3" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_8" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget" />
 				<def id="1" body="bird_01" />
@@ -163,7 +162,7 @@
 				<line map="   n n  " />
 			</spritesequence>
 		</level>
-		<level name="earth_4" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_13" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget" />
 			</spritedefs>

@@ -29,19 +29,25 @@
 //--------------------------------------------------------------------------
 // Global helpers
 //--------------------------------------------------------------------------
-void WriteandShowLog(const std::string& message) {
+void WriteandShowLog(const std::string& message, bool clear = false) {
 	static std::string s_Messages;
-	
-	std::ostringstream oss;
-	oss << s_Messages << message << std::endl;
-	s_Messages = oss.str();
-	
-	IwGxPrintString(50, 50, s_Messages.c_str());
 
-	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
-	IwGxTickUpdate();
-	IwGxFlush();
-	IwGxSwapBuffers();
+	if (clear) {
+		s_Messages.clear();
+	}
+
+	if (!message.empty()) {
+		std::ostringstream oss;
+		oss << s_Messages << message << std::endl;
+		s_Messages = oss.str();
+		
+		IwGxPrintString(50, 50, s_Messages.c_str());
+		
+		IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+		IwGxTickUpdate();
+		IwGxFlush();
+		IwGxSwapBuffers();
+	}
 }
 
 void PrintHeader() {
@@ -90,16 +96,16 @@ void Initialize() {
 	
 	WriteandShowLog("Initializing foundation...");
 	IwResManagerInit();
-#ifdef IW_DEBUG
-	IwGetResManager()->SetMode(Configuration::GetInstance().RebuildResources ? CIwResManager::MODE_BUILD : CIwResManager::MODE_LOAD);
-#endif
 	IwGxFontInit();
 
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
 	WriteandShowLog("Initializing game frameworks...");
-	ResourceManager::Initialize();
+	IwMemBucketInit();
+	IwMemBucketCreate(eMemoryBucketResources, "resources", 15000000);
+	ResourceManager::Initialize(eMemoryBucketResources);
+
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	LogManager::Initialize();
@@ -128,6 +134,8 @@ void Terminate() {
 	DeviceInfo::Terminate();
 
 	IwGxTerminate();
+
+	IwMemBucketFree(eMemoryBucketResources);
 }
 
 //--------------------------------------------------------------------------
@@ -170,6 +178,8 @@ S3E_MAIN_DECL void IwMain() {
 	WriteandShowLog("Running tests...");
 	Test::RunTest();
 #endif
+
+	WriteandShowLog("", true);
 
 	DoLoop();
 

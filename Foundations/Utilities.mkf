@@ -2,6 +2,7 @@ display_name "Foundation/Utilities"
 
 subprojects {
 	iwhttp
+	iwutil
 }
 
 includepaths {
@@ -21,6 +22,8 @@ files {
 
 	FrequencyCounter.h
 	FrequencyCounter.cpp
+
+	MemoryBuckets.h
 
 	DeviceInfo.h
 	DeviceInfo.cpp

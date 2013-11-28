@@ -8,12 +8,17 @@
 
 class ResourceManager {
 private:
+	static bool s_bUseSpecificMemoryBucket;
+	static uint32 s_uiMemoryBucketId;
+	
 	static ResourceManager* s_pxInstance;
+
 	ResourceManager();
 	~ResourceManager();
 	
 public:
 	static void Initialize();
+	static void Initialize(uint32 memorybucketid);
 	static void Terminate();
 
 	static ResourceManager& GetInstance();
@@ -29,6 +34,10 @@ public:
 
 	void LoadTemporary(const std::string& groupfile);
 	void UnloadTemporary();
+	
+private:
+	void LoadPermamentInt(const std::string& groupfile);
+	void LoadTemporaryInt(const std::string& groupfile);
 };
 
 #endif

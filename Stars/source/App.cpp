@@ -11,8 +11,6 @@
 #include "Downloader.h"
 #include "LogManager.h"
 
-#include "IwMemBucket.h"
-
 #include "Debug.h"
 
 App::App() {
@@ -117,24 +115,23 @@ void App::Render() {
 	m_xPageManager.Render(GetRenderer(), m_xFrameData);
 
 	m_xRenderTime.Tick(watch.GetElapsed());
-	
-    // fps for debug...
-	const int margin = 5;
-	const int height = 25;
-	CIwRect rect(margin, margin, screensize.x - (2 * margin), height);
-	PrintFps(rect,
+
+	if (Configuration::GetInstance().ShowStats) {
+		const int margin = 3;
+		const int height = 25;
+		CIwRect rect(margin, margin, screensize.x - (2 * margin), height);
+		PrintFps(rect,
 			 m_xFrameData.GetAvgRealDurationMs(),
 			 m_xFrameData.GetAvgSimulatedDurationMs(),
 			 m_xUpdateTime.GetAvgTickTimeMs(),
 			 m_xRenderTime.GetAvgTickTimeMs());
 
-	uint32 bucketid = IwMemBucketGetID();
-	
-	rect.y += height + margin;
-	PrintMem(rect,
-			 IwMemBucketGetUsed(bucketid),
-			 IwMemBucketGetFree(bucketid),
-			 IwMemBucketGetLargestFreeBlock(bucketid));
+		rect.y += height;
+		PrintMem(rect, eMemoryBucketApp);
+
+		rect.y += height;
+		PrintMem(rect, eMemoryBucketResources);
+	}
 }
 
 void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime) {
@@ -158,8 +155,12 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 		simratio > 0.95f ? 0xffffffff : 0xff0000ff);
 }
 
-void App::PrintMem(const CIwRect& rect, uint32 usedmem, uint32 freemem, uint32 largestfreeblock) {
+void App::PrintMem(const CIwRect& rect, MemoryBuckets bucketid) {
 	IW_CALLSTACK_SELF;
+
+	uint32 usedmem = IwMemBucketGetUsed(bucketid);
+	uint32 freemem = IwMemBucketGetFree(bucketid);
+	uint32 largestfreeblock = IwMemBucketGetLargestFreeBlock(bucketid);
 	
 	float mem = 100.0f * usedmem / (usedmem + freemem);
 	float lfb = largestfreeblock / 1024.f / 1024.f;
@@ -168,7 +169,7 @@ void App::PrintMem(const CIwRect& rect, uint32 usedmem, uint32 freemem, uint32 l
 	oss.precision(1);
 	oss << std::fixed;
 	oss << "mem: " << mem << "% / LFB: " << lfb << "MB" << std::endl;
-	
+
 	GetRenderer().DrawText(
 		oss.str(), rect,
 		Renderer::eFontTypeSystem,
