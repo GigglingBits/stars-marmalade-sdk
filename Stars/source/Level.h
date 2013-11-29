@@ -14,6 +14,7 @@
 #include "EventTimer.h"
 
 #define LEVEL_COMPLETION_DELAY 10000
+#define LEVEL_LEADOUT_TIME 4000
 
 class Level : public Page {
 public:
@@ -70,6 +71,8 @@ private:
 
 	LevelInteractor m_xInteractor;
 
+	uint32 m_ulLeadInTime;
+	
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement);
 	virtual ~Level();

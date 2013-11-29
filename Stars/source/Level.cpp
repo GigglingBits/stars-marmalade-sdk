@@ -34,8 +34,16 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	// configure the start
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
-	args.bannerText = "Go!";
+	args.bannerText = "Ready?";
+	m_xEventTimer.Enqueue(800, args);
+		
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "";
 	m_xEventTimer.Enqueue(500, args);
+	
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "Go!";
+	m_xEventTimer.Enqueue(800, args);
 		
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
@@ -43,6 +51,8 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(1000, args);
+
+	m_ulLeadInTime = m_xEventTimer.GetTotalDuration();
 }
 
 Level::~Level() {
@@ -76,7 +86,7 @@ void Level::Initialize() {
 	m_xEventTimer.Enqueue(0, args);
 	
 	args.eventId = eEventIdUnload;
-	m_xEventTimer.Enqueue(4000, args);
+	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -163,8 +173,14 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 }
 
 float Level::GetCompletionDegree() {
-	uint32 total = m_xEventTimer.GetTotalDuration();
-	return total == 0 ? 1.0f : std::min<float>(1.0f, (float)m_xEventTimer.GetElapsedTime() / (float)total);
+	float total = m_xEventTimer.GetTotalDuration();
+	float elapsed = m_xEventTimer.GetElapsedTime();
+	
+	float progress = (elapsed - m_ulLeadInTime) / (float)(total - m_ulLeadInTime - LEVEL_LEADOUT_TIME);
+	progress = std::min<float>(progress, 1.0f);
+	progress = std::max<float>(progress, 0.0f);
+
+	return progress;
 }
 
 CIwFVec2 Level::GetStarRestPosition() {

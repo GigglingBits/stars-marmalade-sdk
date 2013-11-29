@@ -266,7 +266,6 @@ assets
 	preamble.group
 	level.group
 	levelcompletion.group
-
 	fonts/fonts.group
 	tutorials/tutorials.group
 	sprites/sprites.group
