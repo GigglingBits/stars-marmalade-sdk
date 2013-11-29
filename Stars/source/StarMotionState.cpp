@@ -16,7 +16,7 @@ void Star::RetractingState::Initialize() {
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
 
-	m_rxContext.GetBody().SetLinearDamping(1.5f);
+	m_rxContext.GetBody().SetLinearDamping(5.0f);
 }
 
 void Star::RetractingState::FollowPath() {
@@ -27,7 +27,7 @@ void Star::RetractingState::Update(uint16 timestep) {
 	// balance the drag force
 	if (m_rxContext.IsDragging()) {
 		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
-		m_rxContext.SetDragForce(distance * 10.0f * m_rxContext.GetMass());
+		m_rxContext.SetDragForce(distance * 20.0f * m_rxContext.GetMass());
 	}
 }
 
