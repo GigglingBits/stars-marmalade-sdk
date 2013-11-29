@@ -6,7 +6,6 @@ CIwResGroup
 
 	./image_missing.png
 
-	./effects/effects.group
 	./menu/menusub.group
 
 	./touch.png
@@ -32,16 +31,6 @@ CIwResGroup
 	./button_reload_local.png
 	./button_restart.png
 	./button_toggle_hud.png
-
-	./star_angry.png
-	./star_grin.png
-	./star_happy.png
-	./star_hurt.png
-	./star_hurt_2.png
-	./star_hurt_3.png
-	./star_idle.png
-	./star_idle_2.png
-	./star_surprised.png
 
 	./bird_01.png
 	./bird_02.png

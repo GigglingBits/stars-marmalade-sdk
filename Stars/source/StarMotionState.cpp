@@ -9,7 +9,7 @@
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
 	m_rxContext.ShowTextEffect("Retracting");
-	m_rxContext.SetMotionTextureFrame("happy");
+	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
 
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();

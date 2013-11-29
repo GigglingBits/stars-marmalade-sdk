@@ -1,8 +1,10 @@
 CIwResGroup
 {
 	name "level"
-	
-	./sprites/hud/hud.group
 
 	shared true
+
+	./sprites/hud/hud.group
+	./sprites/characters/star/star.group
+	./sprites/effects/effects.group
 }

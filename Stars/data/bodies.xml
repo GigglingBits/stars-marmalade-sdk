@@ -274,13 +274,22 @@
 		<texture id="stardust" colour="0xeecceeff" />
 		
 		<texture id="star">
-			<frame id="happy" image="star_happy" />
+			<frame id="idle" image="star_happy" duration="2000" next="idle_01" />
+			<frame id="idle_01" image="star_blink" duration="100" next="idle_02" />
+			<frame id="idle_02" image="star_blink_1" duration="100" next="idle_03" />
+			<frame id="idle_03" image="star_blink_2" duration="200" next="idle_04" />
+			<frame id="idle_04" image="star_happy" duration="5000" next="idle_05" />
+			<frame id="idle_05" image="star_blink" duration="100" next="idle_06" />
+			<frame id="idle_06" image="star_blink_1" duration="200" next="idle_07" />
+			<frame id="idle_07" image="star_blink_2" duration="200" next="idle_08" />
+			<frame id="idle_08" image="star_happy" duration="3000" next="idle_09" />
+			<frame id="idle_09" image="star_lick" duration="500" next="idle" />
 			
 			<frame id="hurt" image="star_hurt" duration="100" next="hurt_01" />
 			<frame id="hurt_01" image="star_hurt_2" duration="100" next="hurt_02" />
 			<frame id="hurt_02" image="star_hurt_3" duration="100" next="happy" />
 			
-			<frame id="followpath" image="star_surprised" />
+			<frame id="followpath" image="star_moving" />
 			
 			<frame id="block" image="star_angry" />
 			

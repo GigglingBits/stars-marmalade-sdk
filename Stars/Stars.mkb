@@ -244,6 +244,7 @@ files {
 	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
+	sprites/characters/star/star.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sprites/comp/comp.group
@@ -270,6 +271,7 @@ assets
 	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
+	sprites/characters/star/star.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sprites/comp/comp.group
@@ -286,6 +288,7 @@ assets
 	tutorials/tutorials.group.bin
 	sprites/sprites.group.bin
 	sprites/hud/hud.group.bin
+	sprites/characters/star/star.group.bin
 	sprites/menu/menusub.group.bin
 	sprites/effects/effects.group.bin
 	sprites/comp/comp.group.bin
