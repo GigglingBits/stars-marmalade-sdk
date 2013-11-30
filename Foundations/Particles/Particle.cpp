@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle(const TextureTemplate& tpl, const CIwFVec2& size, uint16 lifetime) : m_xTexture(tpl), m_xPosition(0.0f, 0.0f), m_xGravity(0.0f, -9.81f), m_iRemainingLifeTimeMs(lifetime) {
+Particle::Particle(const TextureTemplate& tpl, const CIwFVec2& size, uint16 lifetime) : m_xTexture(tpl), m_xPosition(0.0f, 0.0f), m_xGravity(0.0f, -9.81f), m_xSize(size), m_iRemainingLifeTimeMs(lifetime) {
 	m_xShape.SetRect(m_xPosition.x, m_xPosition.y, m_xSize.x, m_xSize.y);
 }
 
