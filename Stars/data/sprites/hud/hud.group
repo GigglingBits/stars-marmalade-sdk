@@ -8,6 +8,11 @@ CIwResGroup
 	./hud_stardust_vial.png
 	./hud_number_back.png
 
+	./hud_icon_star.png
+	./hud_icon_bird.png
+	./hud_icon_fire.png
+	./hud_icon_rock.png
+
 	./button_action_block.png
 	./button_action_block_pressed.png
 	./button_action_block_disabled.png
