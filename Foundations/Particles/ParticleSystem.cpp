@@ -1,7 +1,16 @@
 #include "ParticleSystem.h"
 #include "SoundEngine.h"
 
-ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound, const std::string& destroySound) : m_xTextureTpl(tpl), m_iNextParticleDueInMs(0), m_bIsStarted(false), m_xPosition(0.0f, 0.0f), m_xGravity(gravity),m_sCreateSound(createSound), m_sDestroySound(destroySound) {
+ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound, const std::string& destroySound) :
+	m_xTextureTpl(tpl),
+	m_iNextParticleDueInMs(0),
+	m_bIsStarted(false),
+	m_xPosition(0.0f, 0.0f),
+	m_xGravity(gravity),
+	m_sCreateSound(createSound),
+	m_sDestroySound(destroySound),
+	m_uiParticleLifetime(1000),
+	m_xParticleSize(0.3f, 0.3f) {
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -18,6 +27,14 @@ void ParticleSystem::Start() {
 void ParticleSystem::Stop() {
 	m_bIsStarted = false;
 	
+}
+
+void ParticleSystem::SetParticleSize(const CIwFVec2& size) {
+	m_xParticleSize = size;
+}
+
+void ParticleSystem::SetParticleLifetime(uint16 lifetime) {
+	m_uiParticleLifetime = lifetime;
 }
 
 void ParticleSystem::SetPosition(const CIwFVec2& pos) {
@@ -41,9 +58,8 @@ void ParticleSystem::CreateParticles(uint16 elapsedms) {
 }
 
 Particle* ParticleSystem::CreateParticle() {
-	CIwFVec2 maxstartvelocity(10.0f, 10.0f);
-	
 	// veocity
+	CIwFVec2 maxstartvelocity(10.0f, 10.0f);
 	const int resolution = 1000;
 	float x = (float)(rand() % resolution - (resolution / 2)) / resolution;
 	float y = (float)(rand() % resolution - (resolution / 2)) / resolution;
@@ -51,7 +67,7 @@ Particle* ParticleSystem::CreateParticle() {
 		maxstartvelocity.x * x,
 		maxstartvelocity.y * y);
 	
-	Particle* particle = new Particle(m_xTextureTpl);
+	Particle* particle = new Particle(m_xTextureTpl, m_xParticleSize, m_uiParticleLifetime);
 	particle->SetPosition(m_xPosition);
 	particle->SetGravity(m_xGravity);
 	particle->SetVelocity(velocity);

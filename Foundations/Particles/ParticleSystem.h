@@ -22,7 +22,11 @@ private:
 	
 	bool m_bIsStarted;
 	int m_iNextParticleDueInMs;
-	
+
+	// prarticle properties
+	CIwFVec2 m_xParticleSize;
+	uint16 m_uiParticleLifetime;
+		
 public:
 	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound = "", const std::string& destroySound = "");
 	~ParticleSystem();
@@ -31,6 +35,9 @@ public:
 	void Stop();
 
 	void SetPosition(const CIwFVec2& pos);
+	
+	void SetParticleSize(const CIwFVec2& size);
+	void SetParticleLifetime(uint16 lifetime);
 	
 private:
 	void CreateParticles(uint16 elapsedms);

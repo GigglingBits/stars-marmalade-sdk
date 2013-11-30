@@ -11,6 +11,7 @@ private:
 
 	// apprarance
 	CIwFVec2 m_xPosition;
+	CIwFVec2 m_xSize;
 	VertexStreamWorld m_xShape;
 	Texture m_xTexture;
 
@@ -19,7 +20,7 @@ private:
 	int m_iRemainingLifeTimeMs;
 	
 public:
-	Particle(const TextureTemplate& tpl);
+	Particle(const TextureTemplate& tpl, const CIwFVec2& size, uint16 lifetime);
 	
 	bool IsDead();
 	
