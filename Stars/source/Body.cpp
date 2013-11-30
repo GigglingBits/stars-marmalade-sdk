@@ -282,23 +282,28 @@ void Body::UpdateShape() {
 void Body::OnRender(Renderer& renderer, const FrameData& frame) {
 	Sprite::OnRender(renderer, frame);
 
-	VertexStreamWorld& shape = GetShape();
-	if (IsDragging() && Configuration::GetInstance().ShowStats && shape.GetVertCount() > 0) {
-		// shade the shape if it is pinned
-		renderer.DrawPolygon(
-			shape.GetVerts(),
-			shape.GetVertCount(),
-			0x00000000,
-			0x6600aa00);
-	}
+	bool showstats = Configuration::GetInstance().ShowStats;
 
 	// print health value
-	std::ostringstream oss;
-	oss << m_xHealth.GetHealthValue();
-	renderer.DrawText(
-		oss.str(),
-		GetPosition(),
-		Renderer::eFontTypeSmall, 
-		0xffff0000);
+	if (showstats) {
+		std::ostringstream oss;
+		oss << m_xHealth.GetHealthValue();
+		renderer.DrawText(
+						  oss.str(),
+						  GetPosition(),
+						  Renderer::eFontTypeSmall,
+						  0xffff0000);
+
+		VertexStreamWorld& shape = GetShape();
+		if (showstats && IsDragging() && shape.GetVertCount() > 0) {
+			// shade the shape if it is pinned
+			renderer.DrawPolygon(
+								 shape.GetVerts(),
+								 shape.GetVertCount(),
+								 0x00000000,
+								 0x6600aa00);
+		}
+
+	}
 }
 

@@ -69,6 +69,7 @@ public:
 	void CancelDust(const CIwFVec2& pos);
 
 	float GetDustQueuedAmount();
+	float GetDustQueuedPercent();
 
 	float GetDustFillAmount();
 	float GetDustFillPercent();

@@ -19,6 +19,7 @@ public:
 	
 	int GetQueuedDustCount();
 	float GetQueuedDustAmount();
+	float GetQueuedDustPercent();
 
 	// container
 	float GetMaxDustAmount();

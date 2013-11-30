@@ -132,6 +132,18 @@ float GameFoundation::GetDustFillPercent() {
 	return m_xDust.GetDustFillPercent();
 }
 
+float GameFoundation::GetDustFillAmount() {
+	return m_xDust.GetCollectedDustAmount();
+}
+
+float GameFoundation::GetDustQueuedAmount() {
+	return m_xDust.GetQueuedDustAmount();
+}
+
+float GameFoundation::GetDustQueuedPercent() {
+	return m_xDust.GetQueuedDustPercent();
+}
+
 void GameFoundation::QueueDust(const CIwFVec2& pos, int amount) {
 	int multipliedamount = (m_xDust.GetQueuedDustCount() + 1) * amount;
 	m_xDust.EnqueueDust(multipliedamount);
@@ -156,14 +168,6 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 	QuakeImpactArgs arg;
 	arg.amplitude = 0.3f;
 	QuakeImpact.Invoke(*this, arg);
-}
-
-float GameFoundation::GetDustQueuedAmount() {
-	return m_xDust.GetQueuedDustAmount();
-}
-
-float GameFoundation::GetDustFillAmount() {
-	return m_xDust.GetCollectedDustAmount();
 }
 
 bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {

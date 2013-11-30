@@ -30,6 +30,10 @@ float DustCounter::GetQueuedDustAmount() {
 	return m_fQueuedAmount;
 }
 
+float DustCounter::GetQueuedDustPercent() {
+	return std::min<float>(1.0f, m_fQueuedAmount / m_fMaxDust);
+}
+
 float DustCounter::GetMaxDustAmount() {
 	return m_fMaxDust;
 }
