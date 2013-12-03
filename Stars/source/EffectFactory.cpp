@@ -5,6 +5,7 @@
 #include "FactoryManager.h"
 #include "LocalEffect.h"
 #include "SplashText.h"
+#include "ParticleEffect.h"
 #include "Debug.h"
 
 EffectFactory::EffectFactory() : FactoryBase<EffectTemplate, LocalEffect>("root", "effects", "effect") {
@@ -56,6 +57,8 @@ LocalEffect* EffectFactory::CreateInstance(const EffectTemplate& conf) {
 	std::string instanceid = GenerateInstanceId();
 	if (!copyconf.GetType().compare("splashtext")) {
 		effect = new SplashText(instanceid, shapeconf, textureconf);
+	} else if (!copyconf.GetType().compare("particles")) {
+		effect = new ParticleEffect(instanceid, shapeconf, textureconf);
 	} else {
 		effect = new LocalEffect(instanceid, shapeconf, textureconf);
 	}

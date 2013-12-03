@@ -20,6 +20,10 @@ ParticleSystem::~ParticleSystem() {
 	m_xParticles.clear();
 }
 
+bool ParticleSystem::IsStarted() {
+	return m_bIsStarted;
+}
+
 void ParticleSystem::Start() {
 	m_bIsStarted = true;
 }
@@ -29,8 +33,16 @@ void ParticleSystem::Stop() {
 	
 }
 
+bool ParticleSystem::HasParticles() {
+	return !m_xParticles.empty();
+}
+
 void ParticleSystem::SetParticleSize(const CIwFVec2& size) {
 	m_xParticleSize = size;
+}
+
+uint16 ParticleSystem::GetParticleLifeTime() {
+	return m_uiParticleLifetime;
 }
 
 void ParticleSystem::SetParticleLifetime(uint16 lifetime) {

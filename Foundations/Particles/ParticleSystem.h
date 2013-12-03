@@ -31,12 +31,17 @@ public:
 	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound = "", const std::string& destroySound = "");
 	~ParticleSystem();
 	
+	bool IsStarted();
 	void Start();
 	void Stop();
 
 	void SetPosition(const CIwFVec2& pos);
 	
+	bool HasParticles();
+	
 	void SetParticleSize(const CIwFVec2& size);
+
+	uint16 GetParticleLifeTime();
 	void SetParticleLifetime(uint16 lifetime);
 	
 private:

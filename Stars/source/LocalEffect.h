@@ -16,7 +16,9 @@ public:
 	virtual const char* GetTypeName();
 	static const char* TypeName();
 
+	uint16 GetRemainingFadeTime();
 	void SetFadeTime(uint16 ms);
+	
 	void SetVelocity(const CIwFVec2& v);
 
 	virtual bool CanDispose();

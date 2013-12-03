@@ -21,8 +21,8 @@ void Star::PeacefulState::BeginAttack() {
 }
 
 void Star::PeacefulState::Collide(Body& body) {
-	m_rxContext.ShowEffect("smoke_jump");
-
+	m_rxContext.ShowEffect("star_collision");
+	
 	if (body.GetTypeName() == Buff::TypeName()) {
 		body.GetHealthManager().Kill();
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");

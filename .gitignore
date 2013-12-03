@@ -3,11 +3,7 @@
 
 data-ram
 
-*.mkb.bak
-
-Stars/build_stars_vc11/
-Stars/build_stars_vc11x/
-Stars/build_stars_xcode/
+Stars/build_*
 
 Kidpuzzle/build_kidpuzzle_vc11/
 Kidpuzzle/build_kidpuzzle_xcode/
@@ -30,6 +26,7 @@ Kidbook/dist/
 Rydendahl/build_temp/
 Rydendahl/deployments/
 
+*.mkb.bak
 *.mkb~
 *.mkf~
 *.gxfont~
@@ -37,3 +34,5 @@ Rydendahl/deployments/
 *.xml~
 
 Stars/build_stars_vc11x/android_x86_linker_script
+
+*.group~

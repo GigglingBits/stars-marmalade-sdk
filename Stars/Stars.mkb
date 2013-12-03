@@ -200,10 +200,14 @@ files {
 	Buff.h
 	Buff.cpp
 
+	["Sources/Game Logic/Effects"]
+
 	LocalEffect.h
 	LocalEffect.cpp
 	CircularRays.h
 	CircularRays.cpp
+	ParticleEffect.cpp
+	ParticleEffect.h
 	SplashText.h
 	SplashText.cpp
 

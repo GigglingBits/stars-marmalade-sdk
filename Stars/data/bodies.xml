@@ -120,6 +120,9 @@
 	</bodies>
 	
 	<effects>
+		<effect id="star_collision" type="particles" texture="touch" duration="500">
+			<shape type="rectangle" width="0.01" height="0.01" />
+		</effect>
 		<effect id="text" type="splashtext" texture="none" duration="1500">
 			<shape type="polygon">
 				<point x="-0.25" y="-0.2" />
@@ -127,89 +130,6 @@
 				<point x="0.25" y="0.2" />
 				<point x="-0.25" y="0.2" />
 			</shape>
-		</effect>
-		<effect id="smoke_jump" duration="300">
-			<shape type="polygon">
-				<point x="-0.25" y="0" />
-				<point x="0.25" y="0" />
-				<point x="0.25" y="0.4" />
-				<point x="-0.25" y="0.4" />
-			</shape>
-			<texture>
-				<frame id="01" image="smoke_jump_0001" duration="30" next="02" />
-				<frame id="02" image="smoke_jump_0002" duration="30" next="03" />
-				<frame id="03" image="smoke_jump_0003" duration="30" next="04" />
-				<frame id="04" image="smoke_jump_0004" duration="30" next="05" />
-				<frame id="05" image="smoke_jump_0005" duration="30" next="06" />
-				<frame id="06" image="smoke_jump_0006" duration="30" next="07" />
-				<frame id="07" image="smoke_jump_0007" duration="30" next="08" />
-				<frame id="08" image="smoke_jump_0008" duration="30" next="09" />
-				<frame id="09" image="smoke_jump_0009" duration="30" next="10" />
-				<frame id="10" image="smoke_jump_0010" duration="30" next="11" />
-				<frame id="11" colour="0x000000" />
-			</texture>
-		</effect>
-		<effect id="smoke_plume" duration="300">
-			<shape type="polygon">
-				<point x="-0.25" y="-0.25" />
-				<point x="0.25" y="-0.25" />
-				<point x="0.25" y="0.25" />
-				<point x="-0.25" y="0.25" />
-			</shape>
-			<texture>
-				<frame id="01" image="smoke_plume_0001" duration="30" next="02" />
-				<frame id="02" image="smoke_plume_0002" duration="30" next="03" />
-				<frame id="03" image="smoke_plume_0003" duration="30" next="04" />
-				<frame id="04" image="smoke_plume_0004" duration="30" next="05" />
-				<frame id="05" image="smoke_plume_0005" duration="30" next="06" />
-				<frame id="06" image="smoke_plume_0006" duration="30" next="07" />
-				<frame id="07" image="smoke_plume_0007" duration="30" next="08" />
-				<frame id="08" image="smoke_plume_0008" duration="30" next="09" />
-				<frame id="09" image="smoke_plume_0009" duration="30" next="10" />
-				<frame id="10" image="smoke_plume_0010" duration="30" next="11" />
-				<frame id="11" colour="0x000000" />
-			</texture>
-		</effect>
-		<effect id="smoke_puff" duration="300">
-			<shape type="polygon">
-				<point x="-0.25" y="-0.25" />
-				<point x="0.25" y="-0.25" />
-				<point x="0.25" y="0.25" />
-				<point x="-0.25" y="0.25" />
-			</shape>
-			<texture>
-				<frame id="01" image="smoke_puff_0001" duration="30" next="02" />
-				<frame id="02" image="smoke_puff_0002" duration="30" next="03" />
-				<frame id="03" image="smoke_puff_0003" duration="30" next="04" />
-				<frame id="04" image="smoke_puff_0004" duration="30" next="05" />
-				<frame id="05" image="smoke_puff_0005" duration="30" next="06" />
-				<frame id="06" image="smoke_puff_0006" duration="30" next="07" />
-				<frame id="07" image="smoke_puff_0007" duration="30" next="08" />
-				<frame id="08" image="smoke_puff_0008" duration="30" next="09" />
-				<frame id="09" image="smoke_puff_0009" duration="30" next="10" />
-				<frame id="10" image="smoke_puff_0010" duration="30" next="11" />
-				<frame id="11" colour="0x000000" />
-			</texture>
-		</effect>
-		<effect id="smoke_right" duration="1500">
-			<shape type="polygon">
-				<point x="-0.25" y="-0.25" />
-				<point x="0.25" y="-0.25" />
-				<point x="0.25" y="0.25" />
-				<point x="-0.25" y="0.25" />
-			</shape>
-			<texture>
-				<frame id="02" image="smoke_right_0002" duration="30" next="03" />
-				<frame id="03" image="smoke_right_0003" duration="30" next="04" />
-				<frame id="04" image="smoke_right_0004" duration="30" next="05" />
-				<frame id="05" image="smoke_right_0005" duration="30" next="06" />
-				<frame id="06" image="smoke_right_0006" duration="30" next="07" />
-				<frame id="07" image="smoke_right_0007" duration="30" next="08" />
-				<frame id="08" image="smoke_right_0008" duration="30" next="09" />
-				<frame id="09" image="smoke_right_0009" duration="30" next="10" />
-				<frame id="10" image="smoke_right_0010" duration="30" next="11" />
-				<frame id="11" colour="0x000000" />
-			</texture>
 		</effect>
 		<effect id="cloud01sky" duration="20000">
 			<shape type="rectangle" width="0.75" height="0.29" />

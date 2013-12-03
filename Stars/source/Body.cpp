@@ -229,9 +229,9 @@ bool Body::HitTest(const CIwFVec2& position) {
 void Body::ShowEffect(const std::string& effect) {
 	IW_CALLSTACK_SELF;
 	if (GameFoundation* game = GetGameFoundation()) {
-		Sprite* smoke = FactoryManager::GetEffectFactory().Create(effect);
-		smoke->SetPosition(GetPosition());
-		game->Add(smoke);
+		Sprite* fx = FactoryManager::GetEffectFactory().Create(effect);
+		fx->SetPosition(GetPosition());
+		game->Add(fx);
 	} else {
 		IwAssertMsg(MYAPP, false, 
 			("Tried to show effect %s for body %s. But the game foundation cannot be found!", effect.c_str(), GetId().c_str()));

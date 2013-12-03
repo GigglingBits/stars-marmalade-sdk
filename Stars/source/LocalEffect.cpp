@@ -29,6 +29,10 @@ void LocalEffect::SetVelocity(const CIwFVec2& v) {
 	m_xVelocity = v;
 }
 
+uint16 LocalEffect::GetRemainingFadeTime() {
+	return m_iRemaingTimeMS;
+}
+
 void LocalEffect::SetFadeTime(uint16 ms) {
 	m_iRemaingTimeMS = ms;
 }
