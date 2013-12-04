@@ -8,7 +8,6 @@
 // Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
-	m_rxContext.ShowTextEffect("Retracting");
 	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
 
@@ -36,7 +35,6 @@ void Star::RetractingState::Update(uint16 timestep) {
 // Follow
 /////////////////////////////////////////////////////////////
 void Star::FollowState::Initialize() {
-	m_rxContext.ShowTextEffect("Following");
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);

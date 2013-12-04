@@ -91,8 +91,9 @@
 	</bodies>
 	
 	<effects>
-		<effect id="star_collision" type="particles" texture="touch" duration="100">
+		<effect id="star_collision" type="particles" duration="100">
 			<shape type="rectangle" width="0.01" height="0.01" />
+			<texture colour="0x55ffffff" />
 		</effect>
 		<effect id="text" type="splashtext" texture="none" duration="1500">
 			<shape type="polygon">
@@ -191,18 +192,6 @@
 		
 		<texture id="preamble_01" image="01" />
 		
-		<texture id="spark">
-			<frame id="01" image="spark_01" duration="100" next="02" />
-			<frame id="02" image="spark_02" duration="100" next="03" />
-			<frame id="03" image="spark_03" duration="100" next="04" />
-			<frame id="04" image="spark_04" duration="100" next="05" />
-			<frame id="05" image="spark_05" duration="100" next="06" />
-			<frame id="06" image="spark_06" duration="100" next="07" />
-			<frame id="07" image="spark_07" duration="200" next="08" />
-			<frame id="08" image="spark_08" duration="200" next="09" />
-			<frame id="09" image="spark_09" />
-		</texture>
-		
 		<texture id="particle_white_star">
 			<frame id="01" image="particle_white_star_1" duration="300" next="02" />
 			<frame id="02" image="particle_white_star_2" duration="300" next="03" />
@@ -212,11 +201,15 @@
 		</texture>
 		
 		<texture id="particle_yellow_star">
-			<frame id="01" image="particle_yellow_star_1" duration="300" next="02" />
-			<frame id="02" image="particle_yellow_star_2" duration="300" next="03" />
-			<frame id="03" image="particle_yellow_star_3" duration="600" next="04" />
-			<frame id="04" image="particle_yellow_star_4" duration="600" next="05" />
-			<frame id="05" image="particle_yellow_star_5"/>
+			<frame id="01" image="particle_yellow_star_1" duration="100" next="02" />
+			<frame id="02" image="particle_yellow_star_2" duration="100" next="03" />
+			<frame id="03" image="particle_yellow_star_3" duration="100" next="04" />
+			<frame id="04" image="particle_yellow_star_1" duration="100" next="05" />
+			<frame id="05" image="particle_yellow_star_2" duration="100" next="06" />
+			<frame id="06" image="particle_yellow_star_3" duration="100" next="07" />
+			<frame id="07" image="particle_yellow_star_4" duration="100" next="08" />
+			<frame id="08" image="particle_yellow_star_1" duration="100" next="09" />
+			<frame id="09" image="particle_yellow_star_5"/>
 		</texture>
 		
 		<texture id="button_social" image="button_social" />
