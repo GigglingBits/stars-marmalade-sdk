@@ -4,9 +4,12 @@
 ParticleEffect::ParticleEffect(const std::string& id, const ShapeTemplate& shapedef, const TextureTemplate& texturedef) : LocalEffect(id, shapedef, texturedef), m_pxSystem(NULL) {
 	
 	m_pxSystem = new ParticleSystem(texturedef, CIwFVec2(-5.0f, -5.0f), "", "");
-	
-	m_pxSystem->SetParticleLifetime(3000);
 	m_pxSystem->SetPosition(GetPosition());
+	m_pxSystem->SetBirthRate(200);
+
+	m_pxSystem->SetParticleSize(CIwFVec2(0.1f, 0.1f));
+	m_pxSystem->SetParticleSpeed(CIwFVec2(10.0f, 10.0f));
+	m_pxSystem->SetParticleLifetime(500);
 }
 
 ParticleEffect::~ParticleEffect() {
@@ -25,19 +28,20 @@ const char* ParticleEffect::TypeName() {
 }
 
 bool ParticleEffect::CanDispose() {
-	return LocalEffect::CanDispose() && m_pxSystem && m_pxSystem->HasParticles();
+	return LocalEffect::CanDispose()
+		&& m_pxSystem
+		&& !m_pxSystem->HasParticles();
 }
 
 void ParticleEffect::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	if (m_pxSystem) {
 		bool started = m_pxSystem->IsStarted();
-		bool enoughtime = m_pxSystem->GetParticleLifeTime() >= GetRemainingFadeTime();
-		
-		if (!started && enoughtime) {
+		bool emit = GetRemainingFadeTime() > 0;
+		if (!started && emit) {
 			m_pxSystem->Start();
 		}
-		if (started && !m_pxSystem->GetParticleLifeTime() >= GetRemainingFadeTime()) {
+		if (started && !emit) {
 			m_pxSystem->Stop();
 		}
 		m_pxSystem->SetPosition(GetPosition());

@@ -80,7 +80,7 @@ KeyAbsGameD=Back
 ####################################################
 #ResBuildStyle=gles1-pvrtc
 ResBuildStyle=gles1
-ResBuild=0
+ResBuild=1
 
 ####################################################
 [Gx]

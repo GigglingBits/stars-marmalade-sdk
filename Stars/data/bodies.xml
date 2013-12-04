@@ -50,7 +50,12 @@
 		
 		<body id="nugget" type="buff" resilience="1.0" revolve="1" drag="0">
 			<texture image="star_nugget" />
-			<shape type="rectangle" width="0.4" height="0.4" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
@@ -83,44 +88,10 @@
 			<shape type="rectangle" width="0.9" height="0.5" />
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
-		
-		<body id="world_earth" type="target" resilience="1.0" revolve="0" drag="0">
-			<texture image="world_earth" />
-			<shape type="polygon">
-				<point x="0" y="-5" />
-				<point x="10" y="-5" />
-				<point x="10" y="5" />
-				<point x="0" y="5" />
-			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
-		<body id="world_mars" type="target" resilience="1.0" revolve="0" drag="0">
-			<texture image="world_mars" />
-			<shape type="polygon">
-				<point x="0" y="-5" />
-				<point x="10" y="-5" />
-				<point x="10" y="5" />
-				<point x="0" y="5" />
-			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
-		<body id="world_jupiter" type="target" resilience="1.0" revolve="0" drag="0">
-			<texture image="world_jupiter" />
-			<shape type="polygon">
-				<point x="0" y="-5" />
-				<point x="10" y="-5" />
-				<point x="10" y="5" />
-				<point x="0" y="5" />
-			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
 	</bodies>
 	
 	<effects>
-		<effect id="star_collision" type="particles" texture="touch" duration="500">
+		<effect id="star_collision" type="particles" texture="touch" duration="100">
 			<shape type="rectangle" width="0.01" height="0.01" />
 		</effect>
 		<effect id="text" type="splashtext" texture="none" duration="1500">
