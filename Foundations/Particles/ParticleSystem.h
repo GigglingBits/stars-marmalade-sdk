@@ -8,22 +8,25 @@
 
 class ParticleSystem : public Renderable {
 private:
-	CIwFVec2 m_xPosition;
-	
+	// internal helpers
 	typedef std::list<Particle*> ParticleList;
 	ParticleList m_xParticles;
+	int m_iNextParticleDueInMs;
 	
-	TextureTemplate m_xTextureTpl;
+	// system properties
+	bool m_bIsStarted;
+
+	CIwFVec2 m_xPosition;
+	CIwFVec2 m_xGravity;
+	uint16 m_uiBirthRate;
 
 	std::string m_sCreateSound;
 	std::string m_sDestroySound;
 	
-	CIwFVec2 m_xGravity;
-	
-	bool m_bIsStarted;
-	int m_iNextParticleDueInMs;
+	// particle properties
+	TextureTemplate m_xTextureTpl;
 
-	// prarticle properties
+	CIwFVec2 m_xParticleSpeed;
 	CIwFVec2 m_xParticleSize;
 	uint16 m_uiParticleLifetime;
 		
@@ -34,11 +37,15 @@ public:
 	bool IsStarted();
 	void Start();
 	void Stop();
-
-	void SetPosition(const CIwFVec2& pos);
 	
 	bool HasParticles();
+
+public:
+	void SetPosition(const CIwFVec2& pos);
+	void SetBirthRate(uint16 particlespersecond);
 	
+public:
+	void SetParticleSpeed(const CIwFVec2& v);
 	void SetParticleSize(const CIwFVec2& size);
 
 	uint16 GetParticleLifeTime();

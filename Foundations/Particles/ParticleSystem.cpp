@@ -10,7 +10,8 @@ ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravi
 	m_sCreateSound(createSound),
 	m_sDestroySound(destroySound),
 	m_uiParticleLifetime(1000),
-	m_xParticleSize(0.3f, 0.3f) {
+	m_xParticleSize(0.3f, 0.3f),
+	m_uiBirthRate(30) {
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -37,6 +38,10 @@ bool ParticleSystem::HasParticles() {
 	return !m_xParticles.empty();
 }
 
+void ParticleSystem::SetParticleSpeed(const CIwFVec2& v) {
+	m_xParticleSpeed = v;
+}
+
 void ParticleSystem::SetParticleSize(const CIwFVec2& size) {
 	m_xParticleSize = size;
 }
@@ -53,14 +58,17 @@ void ParticleSystem::SetPosition(const CIwFVec2& pos) {
 	m_xPosition = pos;
 }
 
+void ParticleSystem::SetBirthRate(uint16 particlespersecond) {
+	m_uiBirthRate = particlespersecond;
+}
+
 void ParticleSystem::CreateParticles(uint16 elapsedms) {
-	const int interval = 30;
 	m_iNextParticleDueInMs -= elapsedms;
 	
 	bool created = false;
 	while (m_iNextParticleDueInMs < 0) {
 		m_xParticles.push_back(CreateParticle());
-		m_iNextParticleDueInMs += interval;
+		m_iNextParticleDueInMs += m_uiBirthRate >= 1000 ? 1 : 1000 / m_uiBirthRate;
 		created = true;
 	}
 	
@@ -70,19 +78,16 @@ void ParticleSystem::CreateParticles(uint16 elapsedms) {
 }
 
 Particle* ParticleSystem::CreateParticle() {
-	// veocity
-	CIwFVec2 maxstartvelocity(10.0f, 10.0f);
+	// randomize veocity
 	const int resolution = 1000;
 	float x = (float)(rand() % resolution - (resolution / 2)) / resolution;
 	float y = (float)(rand() % resolution - (resolution / 2)) / resolution;
-	CIwFVec2 velocity(
-		maxstartvelocity.x * x,
-		maxstartvelocity.y * y);
+	CIwFVec2 v(m_xParticleSpeed.x * x, m_xParticleSpeed.y * y);
 	
 	Particle* particle = new Particle(m_xTextureTpl, m_xParticleSize, m_uiParticleLifetime);
 	particle->SetPosition(m_xPosition);
 	particle->SetGravity(m_xGravity);
-	particle->SetVelocity(velocity);
+	particle->SetVelocity(v);
 	particle->SetRederingLayer(Renderer::eRenderingLayerGameBackground);
 	return particle;
 }
