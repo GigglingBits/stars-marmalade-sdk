@@ -152,7 +152,6 @@ void GameFoundation::QueueDust(const CIwFVec2& pos, int amount) {
 
 void GameFoundation::CommitDust(const CIwFVec2& pos) {
 	m_xDust.CommitDustQueue();
-	AddSplashNumber(m_xDust.GetQueuedDustAmount(), pos);
 }
 
 void GameFoundation::CancelDust(const CIwFVec2& pos) {

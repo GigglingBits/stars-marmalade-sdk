@@ -21,7 +21,7 @@
 		 -->
 	</preambles>
 	<levels>
-		<level name="earth_1" width="12.0" height="12.0" dustrequirement="20000">
+		<level name="earth_1" width="12.0" height="12.0" dustrequirement="2000">
 			<spritedefs>
 				<def id="n" body="nugget" />
 			</spritedefs>

@@ -35,19 +35,19 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Ready?";
-	m_xEventTimer.Enqueue(800, args);
+	m_xEventTimer.Enqueue(500, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(500, args);
+	m_xEventTimer.Enqueue(1000, args);
 	
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = "Go!";
-	m_xEventTimer.Enqueue(800, args);
-		
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
-
+		
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "Go!";
+	m_xEventTimer.Enqueue(500, args);
+		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(1000, args);
@@ -79,10 +79,10 @@ void Level::Initialize() {
 	
 	// schedule the page unload
 	EventArgs args;
-	args.eventId = eEventIdDisableUserInput;
-	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
-	
 	args.eventId = eEventIdFinish;
+	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
+
+	args.eventId = eEventIdDisableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 	
 	args.eventId = eEventIdUnload;
@@ -188,7 +188,12 @@ CIwFVec2 Level::GetStarRestPosition() {
 }
 
 CIwFVec2 Level::GetStarHidePosition() {
-	return CIwFVec2(-8.0f, m_xWorldSize.y / 2.0f);
+	const float offset = 8.0f;
+	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
+	if (m_xCompletionInfo.IsCleared && m_xEventTimer.GetTotalDuration() <= LEVEL_LEADOUT_TIME + m_xEventTimer.GetElapsedTime()) {
+		pos.x = m_xWorldSize.x + offset;
+	}
+	return pos;
 }
 
 void Level::ShowBannerText(const std::string& text) {

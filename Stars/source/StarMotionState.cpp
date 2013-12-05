@@ -46,7 +46,7 @@ void Star::FollowState::FollowPath() {
 
 void Star::FollowState::IncrementMultiplier() {
 	if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-		game->QueueDust(m_rxContext.GetPosition(), 100);
+		game->QueueDust(m_rxContext.GetPosition(), 10);
 	}
 }
 
