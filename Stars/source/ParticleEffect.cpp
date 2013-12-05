@@ -7,9 +7,9 @@ ParticleEffect::ParticleEffect(const std::string& id, const ShapeTemplate& shape
 	m_pxSystem->SetPosition(GetPosition());
 	m_pxSystem->SetBirthRate(200);
 
-	m_pxSystem->SetParticleSize(CIwFVec2(0.1f, 0.1f));
+	m_pxSystem->SetParticleSize(CIwFVec2(0.2f, 0.2f));
 	m_pxSystem->SetParticleSpeed(CIwFVec2(10.0f, 10.0f));
-	m_pxSystem->SetParticleLifetime(500);
+	m_pxSystem->SetParticleLifetime(800);
 }
 
 ParticleEffect::~ParticleEffect() {

@@ -92,8 +92,12 @@
 	
 	<effects>
 		<effect id="star_collision" type="particles" duration="100">
-			<shape type="rectangle" width="0.01" height="0.01" />
-			<texture colour="0x55ffffff" />
+			<shape type="rectangle" width="0.1" height="0.1" />
+			<texture>
+				<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+				<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+				<frame id="03" image="particle_white_star_3" />
+			</texture>
 		</effect>
 		<effect id="text" type="splashtext" texture="none" duration="1500">
 			<shape type="polygon">
@@ -191,14 +195,6 @@
 		</texture>
 		
 		<texture id="preamble_01" image="01" />
-		
-		<texture id="particle_white_star">
-			<frame id="01" image="particle_white_star_1" duration="300" next="02" />
-			<frame id="02" image="particle_white_star_2" duration="300" next="03" />
-			<frame id="03" image="particle_white_star_3" duration="600" next="04" />
-			<frame id="04" image="particle_white_star_4" duration="600" next="05" />
-			<frame id="05" image="particle_white_star_5"/>
-		</texture>
 		
 		<texture id="particle_yellow_star">
 			<frame id="01" image="particle_yellow_star_1" duration="100" next="02" />
