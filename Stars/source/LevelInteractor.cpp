@@ -6,7 +6,7 @@
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
 	m_rxGame(game),
-    m_bAllowNewTouches(true) {
+    m_bEnableInput(true) {
 
 	InputManager& im = InputManager::GetInstance();
 	im.TouchBeginEvent.AddListener<LevelInteractor>(this, &LevelInteractor::TouchBeginEventHandler);
@@ -22,16 +22,16 @@ LevelInteractor::~LevelInteractor() {
 }
 
 void LevelInteractor::Enable() {
-	m_bAllowNewTouches = true;
+	m_bEnableInput = true;
 }
 
 void LevelInteractor::Disable() {
-	m_bAllowNewTouches = false;
+	m_bEnableInput = false;
 }
 
 void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	ClearTouchSpec(touch);
-	if (!m_bAllowNewTouches) {
+	if (!m_bEnableInput) {
 		return;
 	}
 	
@@ -159,13 +159,14 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		m_xRecorder.Record(touch.worldendpos);
 		
-		PathEventArgs args;
-		args.count = m_xRecorder.GetPointCount();
-		args.samplepos = m_xRecorder.GetPoints();
-
+		if (m_bEnableInput) {
+			PathEventArgs args;
+			args.count = m_xRecorder.GetPointCount();
+			args.samplepos = m_xRecorder.GetPoints();
+			EndDrawPath.Invoke(*this, args);
+		}
+		
 		m_xRecorder.EndRecording();
-
-		EndDrawPath.Invoke(*this, args);
 	}
 
 	// delete
