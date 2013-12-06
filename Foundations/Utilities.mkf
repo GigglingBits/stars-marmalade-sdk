@@ -3,6 +3,8 @@ display_name "Foundation/Utilities"
 subprojects {
 	iwhttp
 	iwutil
+	
+	../dpi
 }
 
 includepaths {
