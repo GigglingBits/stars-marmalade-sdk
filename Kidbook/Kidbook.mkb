@@ -64,27 +64,6 @@ deployments {
 	["Windows(x86)"]
 	win32
 	assets='XHighRes'
-
-	["BadaWVGA"]
-	bada
-	bada-appid='w58powj0vy'
-	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
-	bada-manifest=deploy/bada/manifest.xml
-	assets='HighRes'
-
-	["BadaHVGA"]
-	bada
-	bada-appid='w58powj0vy'
-	bada-appsecret='7980CB6558A5269DEC396AD985C83244'
-	bada-manifest=deploy/bada/manifest.xml
-	assets='MedRes'
-
-	["BadaWQVGA"]
-	bada
-	bada-appid='y6t739fm25'
-	bada-appsecret='08E74C3C12CEC6F42A39B485DC46BC86'
-	bada-manifest=deploy/bada/manifest-wq.xml
-	assets='LowRes'
 }
 
 packages {
@@ -200,9 +179,6 @@ assets {
 deployments
 {
 	["Android"]
-	["BadaHVGA"]
-	["BadaWQVGA"]
-	["BadaWVGA"]
 	["Blackberry"]
 	["Default"]
 	["Windows(x86)"]

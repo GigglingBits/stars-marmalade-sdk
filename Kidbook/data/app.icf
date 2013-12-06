@@ -9,15 +9,6 @@ IOSDispScaleFactor=200
 
 DispFixRot=2
 
-{OS=bada}
-	SplashscreenBkR=255
-	SplashscreenBkG=255
-	SplashscreenBkB=255
-	SplashscreenWidth=300
-	SplashscreenHeight=220
-	SplashscreenFile=splashscreen.jpg
-	SplashscreenMinTime=1000
-
 {OS=android}
 	SplashscreenBkR=255
 	SplashscreenBkG=255
@@ -26,11 +17,6 @@ DispFixRot=2
 	SplashscreenHeight=220
 	SplashscreenFile=splashscreen.jpg
 	SplashscreenMinTime=1000
-
-#	SysGlesVersion=1
-
-#    MemSizeDebug=10000000
-#    MemSize=28000000
 
 {OS=QNX}
 	SplashscreenBkR=255
@@ -79,9 +65,6 @@ DataCacheSize=131072 # 132k of data cache needed for font
 {OS=android}
 	NumTPagesNoMipMap=512
 
-{OS=bada}
-	NumTPages=64
-
 {OS=windows}
 	DataCacheSize=524288 # needed for font
 
@@ -101,9 +84,6 @@ anim-constant=0.8
 
 autorotate=0
 showstats=0
-
-{OS=bada}
-	exitbutton=1
 
 {OS=android}
 	exitbutton=1
