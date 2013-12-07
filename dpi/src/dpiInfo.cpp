@@ -9,20 +9,6 @@ namespace DPI
 	bool g_dpiChached = false;
 	int g_dpiChachedValue = 96;
 
-	int32 dpiGetScreenDPI_Bada()
-	{
-		switch (s3eDeviceGetInt(S3E_DEVICE_ID))
-		{
-			case 754973890: //Wave 525 ("GT-S5250")
-				return 146;
-			case 755065988: //Bada Wave GT-S8500
-				return 283;
-			default:
-				break;
-		}
-		return 146;
-	}
-
 	int32 dpiGetScreenDPI_iOS()
 	{
 		uint32 w = IwGxGetScreenWidth();
@@ -48,7 +34,6 @@ namespace DPI
 		//return 132; //iPad 1024x768
 		//return 163; //old ipod/iphone; 480x320
 	}
-
 }
 
 using namespace DPI;
@@ -83,9 +68,6 @@ int32 DPI::dpiGetScreenDPI()
 	{
 	case S3E_OS_ID_IPHONE:
 		g_dpiChachedValue = dpiGetScreenDPI_iOS();
-		break;
-	case S3E_OS_ID_BADA:
-		g_dpiChachedValue = dpiGetScreenDPI_Bada();
 		break;
 	default:
 		if (dpiExtAvailable())
