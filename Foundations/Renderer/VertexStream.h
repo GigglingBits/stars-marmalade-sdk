@@ -10,9 +10,7 @@ private:
 	int m_iVertCount;
 
 public:
-	VertexStream() {
-		m_axVerts = NULL;
-		m_iVertCount = 0;
+	VertexStream() : m_axVerts(NULL), m_iVertCount(0) {
 	}
 
 	~VertexStream() {

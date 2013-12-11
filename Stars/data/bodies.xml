@@ -165,6 +165,10 @@
 		
 		<texture id="progressbar_back" image="hud_progressbar_back" />
 		<texture id="progressbar_star" image="hud_icon_star" />
+		<texture id="progressbar_icon_bird" image="hud_icon_bird" />
+		<texture id="progressbar_icon_fire" image="hud_icon_fire" />
+		<texture id="progressbar_icon_rock" image="hud_icon_rock" />
+
 		<texture id="number_back" image="hud_number_back" />
 		<texture id="stardustvial" image="hud_stardust_vial" />
 		<texture id="stardust" colour="0xeecceeff" />

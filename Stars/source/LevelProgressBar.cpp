@@ -18,6 +18,10 @@ LevelProgressBar::~LevelProgressBar() {
 	if (m_pxBackground) {
 		delete m_pxBackground;
 	}
+	for (Icons::iterator i = m_xIcons.begin(); i != m_xIcons.end(); i++) {
+		delete i->texture;
+		delete i->shape;
+	}
 }
 
 void LevelProgressBar::Initialize() {
@@ -25,13 +29,32 @@ void LevelProgressBar::Initialize() {
 	m_pxStar = FactoryManager::GetTextureFactory().Create("progressbar_star");
 }
 
-void LevelProgressBar::UpdateStarShape() {
-	CIwRect shape(GetPosition());
-	int size = shape.h;
-	int progress = (int)(m_fProgress * (float)(shape.w - size));
-	m_xStarShape.SetRect(
-		shape.x + progress,
-		shape.y, size, size);
+void LevelProgressBar::UpdateStarShapes() {
+	UpdateStarShape(m_fProgress, m_xStarShape);
+	for (Icons::iterator i = m_xIcons.begin(); i != m_xIcons.end(); i++) {
+		UpdateStarShape(i->progress, *i->shape);
+	}
+}
+
+void LevelProgressBar::UpdateStarShape(float progress, VertexStreamScreen& shape) {
+	CIwRect rect(GetPosition());
+	int size = rect.h;
+	int pos = (int)(progress * (float)(rect.w - size));
+	shape.SetRect(
+		rect.x + pos,
+		rect.y, size, size);
+}
+
+void LevelProgressBar::SetIcon(float progress, const std::string& texture) {
+	IW_CALLSTACK_SELF;
+	if (Texture* t = FactoryManager::GetTextureFactory().Create(texture)) {
+		Icon i;
+		i.progress = progress;
+		i.texture = t;
+		i.shape = new VertexStreamScreen();
+		UpdateStarShape(progress, *i.shape);
+		m_xIcons.push_back(i);
+	}
 }
 
 void LevelProgressBar::SetProgress(float progress) {
@@ -39,13 +62,12 @@ void LevelProgressBar::SetProgress(float progress) {
 	IwAssert(MYAPP, progress >= 0.0f && progress <= 1.0f);
 
 	m_fProgress = progress;
-
-	UpdateStarShape();
+	UpdateStarShape(m_fProgress, m_xStarShape);
 }
 
 void LevelProgressBar::OnDoLayout(const CIwSVec2& screensize) {
 	m_xBackgroundShape.SetRect(GetPosition());
-	UpdateStarShape();
+	UpdateStarShapes();
 }
 
 void LevelProgressBar::OnUpdate(const FrameData& frame) {
@@ -54,20 +76,24 @@ void LevelProgressBar::OnUpdate(const FrameData& frame) {
 	if (m_pxBackground) {
 		m_pxBackground->Update(frame.GetRealDurationMs());
 	}
-
 	if (m_pxStar) {
 		m_pxStar->Update(frame.GetRealDurationMs());
+	}
+	for (Icons::iterator i = m_xIcons.begin(); i != m_xIcons.end(); i++) {
+		i->texture->Update(frame.GetRealDurationMs());
 	}
 }
 
 void LevelProgressBar::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	// background
 	if (m_pxBackground) {
 		renderer.Draw(m_xBackgroundShape, *m_pxBackground);
 	}
 	if (m_pxStar) {
 		renderer.Draw(m_xStarShape, *m_pxStar);
+	}
+	for (Icons::iterator i = m_xIcons.begin(); i != m_xIcons.end(); i++) {
+		renderer.Draw(*i->shape, *i->texture);
 	}
 }
