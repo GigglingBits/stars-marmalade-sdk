@@ -190,6 +190,9 @@ void Level::Add(const std::string& bannertext) {
 	IwAssert(MYAPP, !bannertext.empty());
 	
 	EventArgs args;
+	args.eventId = eEventIdDisableUserInput;
+	m_xEventTimer.Enqueue(0, args);
+	
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = bannertext;
 	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
@@ -199,8 +202,10 @@ void Level::Add(const std::string& bannertext) {
 	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
 	
 	args.eventId = eEventIdNoOp;
-	args.bannerText = "";
 	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
+
+	args.eventId = eEventIdEnableUserInput;
+	m_xEventTimer.Enqueue(0, args);
 }
 
 void Level::SetSectionMark(const std::string& icontexture) {
