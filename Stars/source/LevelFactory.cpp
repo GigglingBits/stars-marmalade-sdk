@@ -60,6 +60,10 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	// add sequences of level elements
 	TiXmlElement* spritesequencenode = node->FirstChildElement("spritesequence");
 	while (spritesequencenode) {
+		std::string icon((pc = (char*)spritesequencenode->Attribute("icon")) ? pc : "");
+		std::string text((pc = (char*)spritesequencenode->Attribute("text")) ? pc : "");
+		conf.StartSection(icon, text);
+		
 		int delay;
 		spritesequencenode->Attribute("delay", &delay);
 		IwAssertMsg(MYAPP, delay > 0, ("Delay in spritesequence is either not defined or smaller or equal to 0."));
@@ -98,13 +102,25 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 	// populate level
 	LevelTemplate::ElementQueue elems(leveltpl.GetElements());
 	while (!elems.empty()) {
-		level->Add(
-			elems.front().Delay,
-			elems.front().BodyName,
-			elems.front().Position,
-			elems.front().Speed);
+		AddElement(*level, elems.front());
 		elems.pop();
 	}
 
 	return level;
+}
+
+void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::LevelElement& element) {
+	if (!element.BodyName.empty()) {
+		level.Add(
+			element.Delay,
+			element.BodyName,
+			element.Position,
+			element.Speed);
+	}
+	if (!element.SectionIcon.empty()) {
+		level.SetSectionMark(element.SectionText);
+	}
+	if (!element.SectionText.empty()) {
+		level.Add(element.SectionText);
+	}
 }

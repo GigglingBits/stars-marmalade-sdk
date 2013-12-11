@@ -12,6 +12,9 @@ public:
 public:
 	virtual std::string PopulateConfig(TiXmlElement* node, LevelTemplate& conf);
 	virtual Level* CreateInstance(const LevelTemplate& conf);
+	
+private:
+	void AddElement(Level& level, const LevelTemplate::LevelTemplate::LevelElement& element);
 };
 
 #endif

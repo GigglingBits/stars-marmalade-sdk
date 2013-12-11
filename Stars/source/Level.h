@@ -13,6 +13,13 @@
 #include "LevelInteractor.h"
 #include "EventTimer.h"
 
+#define LEVEL_START_BANNER_LEADIN 500
+#define LEVEL_START_BANNER_DURATION 1000
+
+#define LEVEL_SECTION_BANNER_LEADIN 2000
+#define LEVEL_SECTION_BANNER_DURATION 2000
+#define LEVEL_SECTION_BANNER_LEADOUT 2000
+
 #define LEVEL_COMPLETION_DELAY 10000
 #define LEVEL_LEADOUT_TIME 4000
 
@@ -81,7 +88,13 @@ public:
 
 	void Add(Body* body);
 	void Add(uint16 delay, const std::string& body, float ypos, float speed);
+	void Add(const std::string& bannertext);
 
+	void SetSectionMark(const std::string& icontexture);
+	
+	uint32 GetDuration();
+	uint32 GetElapsed();
+	
 	const CompletionInfo& GetCompletionInfo();
 	float GetCompletionDegree();
 

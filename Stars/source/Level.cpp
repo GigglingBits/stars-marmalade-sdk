@@ -35,22 +35,22 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Ready?";
-	m_xEventTimer.Enqueue(500, args);
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1000, args);
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 	
 	args.eventId = eEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 		
 	args.eventId = eEventIdShowBanner;
 	args.bannerText = "Go!";
-	m_xEventTimer.Enqueue(500, args);
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
 		
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
-	m_xEventTimer.Enqueue(1000, args);
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 
 	m_ulLeadInTime = m_xEventTimer.GetTotalDuration();
 }
@@ -132,6 +132,10 @@ void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) 
 void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed) {
 	IW_CALLSTACK_SELF;
 	
+	if (bodyName.empty()) {
+		return;
+	}
+
 	BodyFactory& factory = FactoryManager::GetBodyFactory();
 	if (Body* body = factory.Create(bodyName)) {
 		body->SetPosition(pos);
@@ -173,14 +177,42 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 }
 
 float Level::GetCompletionDegree() {
-	float total = m_xEventTimer.GetTotalDuration();
-	float elapsed = m_xEventTimer.GetElapsedTime();
-	
-	float progress = (elapsed - m_ulLeadInTime) / (float)(total - m_ulLeadInTime - LEVEL_LEADOUT_TIME);
+	float progress = (GetElapsed() - m_ulLeadInTime) / (float)(GetDuration() - m_ulLeadInTime - LEVEL_LEADOUT_TIME);
 	progress = std::min<float>(progress, 1.0f);
 	progress = std::max<float>(progress, 0.0f);
 
 	return progress;
+}
+
+void Level::Add(const std::string& bannertext) {
+	IW_CALLSTACK_SELF;
+	
+	IwAssert(MYAPP, !bannertext.empty());
+	
+	EventArgs args;
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = bannertext;
+	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
+	
+	args.eventId = eEventIdShowBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
+	
+	args.eventId = eEventIdNoOp;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
+}
+
+void Level::SetSectionMark(const std::string& icontexture) {
+	//todo
+}
+
+uint32 Level::GetDuration() {
+	return m_xEventTimer.GetTotalDuration();
+}
+
+uint32 Level::GetElapsed() {
+	return m_xEventTimer.GetElapsedTime();
 }
 
 CIwFVec2 Level::GetStarRestPosition() {
@@ -190,7 +222,7 @@ CIwFVec2 Level::GetStarRestPosition() {
 CIwFVec2 Level::GetStarHidePosition() {
 	const float offset = 8.0f;
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsCleared && m_xEventTimer.GetTotalDuration() <= LEVEL_LEADOUT_TIME + m_xEventTimer.GetElapsedTime()) {
+	if (m_xCompletionInfo.IsCleared && GetDuration() <= LEVEL_LEADOUT_TIME + GetElapsed()) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
