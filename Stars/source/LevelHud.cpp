@@ -57,8 +57,16 @@ void LevelHud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
-void LevelHud::SetLevelProgress(float progress) {
-	m_xProgressBar.SetProgress(progress);
+void LevelHud::SetLevelSectionIcon(uint16 milliseconds, const std::string& texturename) {
+	m_xProgressBar.SetIcon(milliseconds, texturename);
+}
+
+void LevelHud::SetLevelDuration(uint16 milliseconds) {
+	m_xProgressBar.SetMax(milliseconds);
+}
+
+void LevelHud::SetLevelProgress(uint16 milliseconds) {
+	m_xProgressBar.SetProgress(milliseconds);
 }
 
 void LevelHud::OnDoLayout(const CIwSVec2& screensize) {

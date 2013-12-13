@@ -18,7 +18,9 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
 	m_xBackgroundClouds(m_xGame),
-	m_xBannerRect(0, 0, 0, 0) {
+	m_xBannerRect(0, 0, 0, 0),
+	m_ulLeadInTime(0),
+	m_ulLeadOutTime(0) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -53,6 +55,8 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 
 	m_ulLeadInTime = m_xEventTimer.GetTotalDuration();
+
+	m_xHud.SetLevelDuration(GetDuration());
 }
 
 Level::~Level() {
@@ -78,6 +82,9 @@ void Level::Initialize() {
 	CreateStar();
 	
 	// schedule the page unload
+	// (assuming that the level has been populated by the tim ethis is called)
+	uint16 endmarker = m_xEventTimer.GetTotalDuration();
+	
 	EventArgs args;
 	args.eventId = eEventIdFinish;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
@@ -87,6 +94,10 @@ void Level::Initialize() {
 	
 	args.eventId = eEventIdUnload;
 	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
+	
+	m_ulLeadOutTime = m_xEventTimer.GetTotalDuration() - endmarker;
+
+	m_xHud.SetLevelDuration(GetDuration());
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -176,14 +187,6 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
 
-float Level::GetCompletionDegree() {
-	float progress = (GetElapsed() - m_ulLeadInTime) / (float)(GetDuration() - m_ulLeadInTime - LEVEL_LEADOUT_TIME);
-	progress = std::min<float>(progress, 1.0f);
-	progress = std::max<float>(progress, 0.0f);
-
-	return progress;
-}
-
 void Level::Add(const std::string& bannertext) {
 	IW_CALLSTACK_SELF;
 	
@@ -209,15 +212,17 @@ void Level::Add(const std::string& bannertext) {
 }
 
 void Level::SetSectionMark(const std::string& icontexture) {
-	//todo
+	m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
 }
 
 uint32 Level::GetDuration() {
-	return m_xEventTimer.GetTotalDuration();
+	return m_xEventTimer.GetTotalDuration() - (m_ulLeadInTime + m_ulLeadOutTime);
 }
 
 uint32 Level::GetElapsed() {
-	return m_xEventTimer.GetElapsedTime();
+	uint32 elapsed = m_xEventTimer.GetElapsedTime();
+	elapsed -= std::min<uint32>(elapsed, m_ulLeadInTime);
+	return std::min<uint32>(elapsed, GetDuration());
 }
 
 CIwFVec2 Level::GetStarRestPosition() {
@@ -227,7 +232,7 @@ CIwFVec2 Level::GetStarRestPosition() {
 CIwFVec2 Level::GetStarHidePosition() {
 	const float offset = 8.0f;
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsCleared && GetDuration() <= LEVEL_LEADOUT_TIME + GetElapsed()) {
+	if (m_xCompletionInfo.IsCleared && GetDuration() <= GetElapsed()) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
@@ -302,7 +307,7 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xBackgroundStars.Update(frame);
 	m_xBackgroundClouds.Update(frame);
 	
-	m_xHud.SetLevelProgress(GetCompletionDegree());
+	m_xHud.SetLevelProgress(GetElapsed());
 	m_xHud.Update(frame);
 }
 

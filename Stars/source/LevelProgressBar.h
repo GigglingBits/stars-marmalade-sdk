@@ -8,11 +8,14 @@ class LevelProgressBar : public Window {
 private:
 	struct Icon {
 		float progress;
+		std::string textureid;
 		Texture* texture;
 		VertexStreamScreen* shape;
 	};
 	
 private:
+	float m_fMaxValue;
+	
 	VertexStreamScreen m_xBackgroundShape;
 	Texture* m_pxBackground;
 
@@ -29,14 +32,17 @@ public:
 	virtual ~LevelProgressBar();
 
 	void Initialize();
-
-	void SetIcon(float progress, const std::string& texture);
+	
+	void SetIcon(float progress, const std::string& textureid);
+	void SetMax(float value);
 	void SetProgress(float progress);
 
 protected:
 	void UpdateStarShapes();
 	void UpdateStarShape(float progress, VertexStreamScreen& shape);
 
+	float CalcNormalProgress(float value);
+	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnDoLayout(const CIwSVec2& screensize);

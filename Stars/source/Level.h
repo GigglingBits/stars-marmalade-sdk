@@ -79,6 +79,7 @@ private:
 	LevelInteractor m_xInteractor;
 
 	uint32 m_ulLeadInTime;
+	uint32 m_ulLeadOutTime;
 	
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement);
@@ -96,7 +97,6 @@ public:
 	uint32 GetElapsed();
 	
 	const CompletionInfo& GetCompletionInfo();
-	float GetCompletionDegree();
 
 	GameFoundation& GetGameFoundation();
 

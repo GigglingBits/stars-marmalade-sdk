@@ -25,7 +25,7 @@
 			<spritedefs>
 				<def id="n" body="nugget" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2" icon="" text="- - - section - - -">
+			<spritesequence delay="800" speed="2" icon="progressbar_icon_rock" text="- - - section - - -">
 				<line map="    n  " />
 				<line map="       " />
 				<line map="       " />

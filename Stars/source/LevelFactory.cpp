@@ -118,7 +118,7 @@ void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::
 			element.Speed);
 	}
 	if (!element.SectionIcon.empty()) {
-		level.SetSectionMark(element.SectionText);
+		level.SetSectionMark(element.SectionIcon);
 	}
 	if (!element.SectionText.empty()) {
 		level.Add(element.SectionText);
