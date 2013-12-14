@@ -25,16 +25,74 @@
 			<spritedefs>
 				<def id="n" body="nugget" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2" icon="progressbar_icon_rock" text="- - - section - - -">
+			<spritesequence delay="800" speed="2" >
+				<line map="   n   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
 				<line map="    n  " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
-				<line map="       " />
-				<line map="    n  " />
-				<line map="       " />
+				<line map="     n " />
 				<line map="       " />
 				<line map="       " />
+				<line map="       " />
+				<line map="  n    " />
+				<line map="  n    " />
+				<line map="  n    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="      n" />
+				<line map="      n" />
+				<line map="      n" />
+				<line map="       " />
+				<line map="       " />
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="  n    " />
+				<line map="  n    " />
+				<line map="  n    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="     n " />
+				<line map="     n " />
+				<line map="     n " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" n     " />
+				<line map="   n   " />
+				<line map="     n " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+				<line map="   nn  " />
+			</spritesequence>
+		</level>
+		<level name="earth_2" width="12.0" height="12.0" dustrequirement="100">
+			<spritedefs>
+				<def id="n" body="nugget" />
+			</spritedefs>
+			<spritesequence delay="800" speed="2" >
 				<line map="  n    " />
 				<line map="  n    " />
 				<line map="  n    " />
@@ -50,19 +108,23 @@
 				<line map=" n     " />
 				<line map="       " />
 				<line map="       " />
+				<line map="       " />
 				<line map="   nn  " />
 				<line map="   nn  " />
 				<line map="   nn  " />
 				<line map="   nn  " />
-				<line map="       " />
-				<line map="       " />
-				<line map=" nn    " />
-				<line map=" nn    " />
-				<line map=" nn    " />
-				<line map=" nn    " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="   nn  " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="A wave is comaing!">
+				<line map="   n   " />
+				<line map="  n n  " />
+				<line map=" n n n " />
+				<line map="n n n n" />
+				<line map=" n n n " />
+				<line map="  n n  " />
+				<line map="   n   " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2" >
 				<line map="  n    " />
 				<line map="  n    " />
 				<line map="  n    " />
@@ -84,6 +146,15 @@
 				<line map="   nn  " />
 				<line map="   nn  " />
 				<line map="   nn  " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
+				<line map="   n   " />
+				<line map="  n n  " />
+				<line map=" n n n " />
+				<line map="n n n n" />
+				<line map=" n n n " />
+				<line map="  n n  " />
+				<line map="   n   " />
 			</spritesequence>
 		</level>
 		<level name="earth_7" width="12.0" height="12.0" dustrequirement="100">
