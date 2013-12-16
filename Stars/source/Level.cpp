@@ -130,7 +130,7 @@ void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) 
 	IW_CALLSTACK_SELF;
 	
 	EventArgs args;
-	args.eventId = eEventIdCreateBody;
+	args.eventId = body.empty() ? eEventIdNoOp : eEventIdCreateBody;
 	args.bodyName = body;
 	args.position.x = m_xWorldSize.x * 1.5f;
 	args.position.y = ypos;

@@ -94,6 +94,7 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, std::str
 			}
 		}
 		if (firstelement) {
+			// must have been empty
 			AddElementDelay(delay);
 		}
 	}

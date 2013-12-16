@@ -79,7 +79,12 @@
 		
 		<body id="bird_01" type="dynamic" resilience="1.0" revolve="0" drag="0">
 			<texture image="bird_01" />
-			<shape type="rectangle" width="1.2" height="0.7" />
+			<shape type="polygon">
+				<point x="-0.8" y="-0.55" />
+				<point x="0.8" y="-0.55" />
+				<point x="0.8" y="0.55" />
+				<point x="-0.8" y="0.55" />
+			</shape>
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		

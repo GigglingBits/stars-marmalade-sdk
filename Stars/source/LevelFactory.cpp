@@ -110,17 +110,17 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 }
 
 void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::LevelElement& element) {
-	if (!element.BodyName.empty()) {
-		level.Add(
-			element.Delay,
-			element.BodyName,
-			element.Position,
-			element.Speed);
-	}
 	if (!element.SectionIcon.empty()) {
 		level.SetSectionMark(element.SectionIcon);
 	}
 	if (!element.SectionText.empty()) {
 		level.Add(element.SectionText);
+	}
+	if (element.Delay > 0 || !element.BodyName.empty()) {
+		level.Add(
+			element.Delay,
+			element.BodyName,
+			element.Position,
+			element.Speed);
 	}
 }
