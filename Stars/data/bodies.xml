@@ -218,6 +218,12 @@
 			<frame id="09" image="particle_yellow_star_5"/>
 		</texture>
 		
+		<texture id="particle_white_star">
+			<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+			<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+			<frame id="03" image="particle_white_star_3" />
+		</texture>
+
 		<texture id="button_social" image="button_social" />
 		<texture id="button_achievements" image="button_achievements" />
 		<texture id="button_leaderboards" image="button_leaderboards" />

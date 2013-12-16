@@ -2,9 +2,12 @@
 #define __BUFF_H__
 
 #include "Body.h"
-#include "CircularRays.h"
+#include "ParticleSystem.h"
 
 class Buff : public Body {
+private:
+	ParticleSystem* m_pxParticles;
+	
 public:
 	Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 

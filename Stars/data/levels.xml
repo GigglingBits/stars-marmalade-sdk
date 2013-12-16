@@ -168,9 +168,109 @@
 			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
 				<line map="   n   " />
 				<line map="  n n  " />
+				<line map=" n n n " />
+				<line map="n b b n" />
+				<line map=" n n n " />
+				<line map="  n n  " />
+				<line map="   n   " />
+			</spritesequence>
+		</level>
+		<level name="earth_3" width="12.0" height="12.0" dustrequirement="1000">
+			<spritedefs>
+				<def id="n" body="nugget" />
+				<def id="b" body="bird_01" />
+			</spritedefs>
+			<spritesequence delay="800" speed="2.2" >
+				<line map="   nnn " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" nnn   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   nnn " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="     n " />
+				<line map="    nnn" />
+				<line map="       " />
+				<line map=" n     " />
+				<line map="nnn    " />
+				<line map="       " />
+				<line map="    n  " />
+				<line map="   nnn " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="     n " />
+				<line map="    nnn" />
+				<line map="       " />
+				<line map="    n  " />
+				<line map="   nnn " />
+				<line map="       " />
+				<line map=" n     " />
+				<line map="nnn    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="    bb " />
+				<line map="    nn " />
+				<line map="    nn " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="  bb   " />
+				<line map="  nn   " />
+				<line map="  nn   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="     n " />
+				<line map="    nnn" />
+				<line map="       " />
+				<line map="    n  " />
+				<line map="   nnn " />
+				<line map="       " />
+				<line map=" n     " />
+				<line map="nnn    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="  b b  " />
+				<line map="  n n  " />
+				<line map="  n n  " />
+				<line map="  n n  " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" b b   " />
+				<line map=" n n   " />
+				<line map=" n n   " />
+				<line map=" n n   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="    b b" />
+				<line map="    n n" />
+				<line map="    n n" />
+				<line map="    n n" />
+			</spritesequence>
+			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
+				<line map="   n   " />
+				<line map="  n n  " />
 				<line map=" n b n " />
-				<line map="n n n n" />
-				<line map=" n b n " />
+				<line map="n b b n" />
+				<line map=" n n n " />
 				<line map="  n n  " />
 				<line map="   n   " />
 			</spritesequence>
