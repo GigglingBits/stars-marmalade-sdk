@@ -5,9 +5,6 @@
 #include "CircularRays.h"
 
 class Buff : public Body {
-private:
-	CircularRays m_xRays;
-
 public:
 	Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 
