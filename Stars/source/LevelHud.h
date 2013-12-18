@@ -36,9 +36,9 @@ public:
 	
 	void SetEnabled(bool enabled);
 	
-	void SetLevelSectionIcon(uint16 milliseconds, const std::string& texturename);
-	void SetLevelDuration(uint16 milliseconds);
-	void SetLevelProgress(uint16 milliseconds);
+	void SetLevelSectionIcon(uint32 milliseconds, const std::string& texturename);
+	void SetLevelDuration(uint32 milliseconds);
+	void SetLevelProgress(uint32 milliseconds);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

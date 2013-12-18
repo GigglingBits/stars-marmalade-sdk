@@ -83,7 +83,7 @@ void Level::Initialize() {
 	
 	// schedule the page unload
 	// (assuming that the level has been populated by the tim ethis is called)
-	uint16 endmarker = m_xEventTimer.GetTotalDuration();
+	uint32 endmarker = m_xEventTimer.GetTotalDuration();
 	
 	EventArgs args;
 	args.eventId = eEventIdFinish;
