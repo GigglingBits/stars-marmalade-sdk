@@ -187,32 +187,36 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
 
-void Level::Add(const std::string& bannertext) {
+void Level::StartSection(const std::string& icontexture, const std::string& bannertext) {
 	IW_CALLSTACK_SELF;
-	
-	IwAssert(MYAPP, !bannertext.empty());
-	
-	EventArgs args;
-	args.eventId = eEventIdDisableUserInput;
-	m_xEventTimer.Enqueue(0, args);
-	
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = bannertext;
-	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
-	
-	args.eventId = eEventIdShowBanner;
-	args.bannerText = "";
-	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
-	
-	args.eventId = eEventIdNoOp;
-	m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
 
-	args.eventId = eEventIdEnableUserInput;
-	m_xEventTimer.Enqueue(0, args);
+	if (!icontexture.empty()) {
+		m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
+	}
+	
+	if (!bannertext.empty()) {
+		EventArgs args;
+		args.eventId = eEventIdDisableUserInput;
+		m_xEventTimer.Enqueue(0, args);
+		
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = bannertext;
+		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
+		
+		args.eventId = eEventIdShowBanner;
+		args.bannerText = "";
+		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
+		
+		args.eventId = eEventIdNoOp;
+		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
+		
+		args.eventId = eEventIdEnableUserInput;
+		m_xEventTimer.Enqueue(0, args);
+	}
 }
 
-void Level::SetSectionMark(const std::string& icontexture) {
-	m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
+void Level::EndSection() {
+	
 }
 
 uint32 Level::GetDuration() {

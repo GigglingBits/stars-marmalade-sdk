@@ -48,6 +48,10 @@ Sprite* GameFoundation::FindSprite(const std::string& id) {
 	return it->second;
 }
 
+bool GameFoundation::HasNonStarSprites() {
+	return (m_xSpriteMap.size() - (m_pxStar ? 1 : 0)) > 0;
+}
+
 void GameFoundation::Add(Body* body) {
 	// indexing of star
 	if (body->GetTypeName() == Star::TypeName()) {

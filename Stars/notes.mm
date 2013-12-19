@@ -11,7 +11,9 @@
 </node>
 <node CREATED="1387189726106" ID="ID_813323948" MODIFIED="1387198982909" POSITION="left" TEXT="Errors">
 <node CREATED="1387189732985" ID="ID_65754686" MODIFIED="1387189748523" TEXT="Crash when level map uses a body that does not exits"/>
-<node CREATED="1387198983252" ID="ID_769429521" MODIFIED="1387198994169" TEXT="Progress bar in evel 3 is too fast"/>
+<node CREATED="1387198983252" ID="ID_769429521" MODIFIED="1387485707144" TEXT="Progress bar in level 3 is too fast">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 </node>
 </map>

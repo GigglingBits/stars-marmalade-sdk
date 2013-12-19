@@ -110,11 +110,8 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 }
 
 void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::LevelElement& element) {
-	if (!element.SectionIcon.empty()) {
-		level.SetSectionMark(element.SectionIcon);
-	}
-	if (!element.SectionText.empty()) {
-		level.Add(element.SectionText);
+	if (!element.SectionIcon.empty() || !element.SectionText.empty()) {
+		level.StartSection(element.SectionIcon, element.SectionText);
 	}
 	if (element.Delay > 0 || !element.BodyName.empty()) {
 		level.Add(

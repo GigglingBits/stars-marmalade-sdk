@@ -55,6 +55,9 @@ public:
 
 	std::map<std::string, Sprite*>& GetSpriteMap();	
 
+	// simulation
+	bool HasNonStarSprites();
+	
 	// interaction
 	bool RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend);
 	bool StarHitTest(CIwFVec2 position);
