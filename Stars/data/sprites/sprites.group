@@ -32,16 +32,8 @@ CIwResGroup
 	./button_restart.png
 	./button_toggle_hud.png
 
-	./bird_01.png
-	./bird_02.png
-	./airplane.png
-	./jetfighter.png
-	./jetfighter_missile.png
-
 	./cloud_01.png
 	./cloud_02.png
 	./cloud_03.png
 	./cloud_04.png
-
-	./star_nugget.png
 }

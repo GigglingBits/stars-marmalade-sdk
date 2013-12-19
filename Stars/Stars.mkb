@@ -193,11 +193,11 @@ files {
 	StarAttackState.h
 	StarAttackState.cpp
 
+	Nugget.h
+	Nugget.cpp
+
 	Target.h
 	Target.cpp
-
-	Buff.h
-	Buff.cpp
 
 	["Sources/Game Logic/Effects"]
 

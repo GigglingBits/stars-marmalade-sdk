@@ -2,7 +2,7 @@
 #include "StarAttackState.h"
 #include "InputManager.h"
 #include "SoundEngine.h"
-#include "Buff.h"
+#include "Nugget.h"
 
 /////////////////////////////////////////////////////////////
 // Peaceful
@@ -21,7 +21,7 @@ void Star::PeacefulState::BeginAttack() {
 }
 
 void Star::PeacefulState::Collide(Body& body) {
-	if (body.GetTypeName() == Buff::TypeName()) {
+	if (body.GetTypeName() == Nugget::TypeName()) {
 		body.GetHealthManager().Kill();
 		body.ShowEffect("star_collision");
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");

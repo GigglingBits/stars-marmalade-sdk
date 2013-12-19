@@ -4,7 +4,7 @@
 #include "Body.h"
 #include "CompositeBody.h"
 #include "Star.h"
-#include "Buff.h"
+#include "Nugget.h"
 #include "Target.h"
 
 #include <sstream>
@@ -137,8 +137,8 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 	std::string instanceid = GenerateInstanceId();
 	if (!copyconf.GetType().compare("star")) {
 		p = new Star(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("buff")) {
-		p = new Buff(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("nugget")) {
+		p = new Nugget(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("target")) {
 		p = new Target(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetChildren().empty()) {

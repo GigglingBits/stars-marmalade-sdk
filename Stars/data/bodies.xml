@@ -48,8 +48,41 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
-		<body id="nugget" type="buff" resilience="1.0" revolve="1" drag="0">
-			<texture image="star_nugget" />
+		<body id="nugget_01" type="nugget" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_yellow" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+		</body>
+		
+		<body id="nugget_02" type="nugget" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_red" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+		</body>
+		
+		<body id="nugget_03" type="nugget" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_purple" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+		</body>
+		
+		<body id="nugget_04" type="nugget" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_diamond_purple" />
 			<shape type="polygon">
 				<point x="-0.2" y="-0.2" />
 				<point x="0.2" y="-0.2" />

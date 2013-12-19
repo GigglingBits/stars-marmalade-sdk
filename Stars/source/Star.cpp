@@ -1,6 +1,6 @@
 #include "Star.h"
 #include "Target.h"
-#include "Buff.h"
+#include "Nugget.h"
 #include "StarMotionState.h"
 #include "StarAttackState.h"
 #include "FactoryManager.h"
@@ -46,7 +46,7 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 
 	GetAttackState().Collide(otherbody);
 
-	if (otherbody.GetTypeName() == Buff::TypeName()) {
+	if (otherbody.GetTypeName() == Nugget::TypeName()) {
 		GetHealthManager().RenewLife();
 		otherbody.GetHealthManager().Kill();
 		if (m_pxMotionState) {

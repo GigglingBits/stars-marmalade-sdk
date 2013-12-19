@@ -1,7 +1,7 @@
 #include "StarMotionState.h"
 #include "InputManager.h"
 #include "SoundEngine.h"
-#include "Buff.h"
+#include "Nugget.h"
 #include "GameFoundation.h"
 
 /////////////////////////////////////////////////////////////

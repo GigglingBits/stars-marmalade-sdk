@@ -23,7 +23,7 @@
 	<levels>
 		<level name="earth_1" width="12.0" height="12.0" dustrequirement="500">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2" >
 				<line map="   n   " />
@@ -103,7 +103,7 @@
 		</level>
 		<level name="earth_2" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="b" body="bird_01" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
@@ -165,7 +165,7 @@
 				<line map="       " />
 				<line map="   b  b" />
 			</spritesequence>
-			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
+			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is coming!">
 				<line map="   n   " />
 				<line map="  n n  " />
 				<line map=" n n n " />
@@ -177,7 +177,7 @@
 		</level>
 		<level name="earth_3" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="b" body="bird_01" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
@@ -265,7 +265,7 @@
 				<line map="    n n" />
 				<line map="    n n" />
 			</spritesequence>
-			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
+			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="Another wave is coming!">
 				<line map="   n   " />
 				<line map="  n n  " />
 				<line map=" n b n " />
@@ -277,7 +277,7 @@
 		</level>
 		<level name="earth_4" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="b" body="bird_01" />
 				<def id="c" body="bird_02" />
 			</spritedefs>
@@ -358,7 +358,7 @@
 		</level>
 		<level name="earth_5" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="b" body="bird_01" />
 				<def id="c" body="bird_02" />
 			</spritedefs>
@@ -442,13 +442,16 @@
 		</level>
 		<level name="earth_7" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
+				<def id="N" body="nugget_02" />
+				<def id="m" body="nugget_03" />
+				<def id="M" body="nugget_04" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2" >
 				<line map="  n    " />
-				<line map="  n    " />
-				<line map="  n    " />
-				<line map="       " />
+				<line map="  N    " />
+				<line map="  m    " />
+				<line map="  M    " />
 				<line map="       " />
 				<line map="     n " />
 				<line map="     n " />
@@ -467,7 +470,7 @@
 				<line map="   nn  " />
 				<line map="   nn  " />
 			</spritesequence>
-			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="A wave is comaing!">
+			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="A wave is coming!">
 				<line map="   n   " />
 				<line map="  n n  " />
 				<line map=" n n n " />
@@ -499,7 +502,7 @@
 				<line map="   nn  " />
 				<line map="   nn  " />
 			</spritesequence>
-			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="Another wave is comaing!">
+			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="Another wave is coming!">
 				<line map="   n   " />
 				<line map="  n n  " />
 				<line map=" n n n " />
@@ -511,7 +514,7 @@
 		</level>
 		<level name="earth_8" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2">
 				<line map="     n  " />
@@ -539,7 +542,7 @@
 		</level>
 		<level name="earth_9" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="1" body="bird_01" />
 				<def id="2" body="bird_02" />
 			</spritedefs>
@@ -600,7 +603,7 @@
 		</level>
 		<level name="earth_13" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 			</spritedefs>
 			<spritesequence delay="500" speed="2">
 				<line map="n  n    " />
@@ -608,7 +611,7 @@
 		</level>
 		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="1" body="bird_01" />
 				<def id="2" body="bird_02" />
 			</spritedefs>
@@ -630,7 +633,7 @@
 		</level>
 		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
-				<def id="n" body="nugget" />
+				<def id="n" body="nugget_01" />
 				<def id="1" body="bird_01" />
 				<def id="2" body="bird_02" />
 			</spritedefs>

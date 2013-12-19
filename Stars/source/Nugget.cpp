@@ -1,25 +1,23 @@
-#include "Buff.h"
+#include "Nugget.h"
 #include "Debug.h"
 #include "FactoryManager.h"
 
-Buff::Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
+Nugget::Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Body(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
 }
 
-const char* Buff::GetTypeName() {
-	return Buff::TypeName();
+const char* Nugget::GetTypeName() {
+	return Nugget::TypeName();
 }
 
-const char* Buff::TypeName() {
-	static const char* type = "buff";
+const char* Nugget::TypeName() {
+	static const char* type = "nugget";
 	return type;
 }
 
-void Buff::OnUpdate(const FrameData& frame) {
+void Nugget::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	Body::OnUpdate(frame);
-	
-	GetPosition();
 	
 	if (!m_pxParticles) {
 		m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("particle_white_star"), CIwFVec2(0.0f, 0.0f), "", "");
@@ -34,7 +32,7 @@ void Buff::OnUpdate(const FrameData& frame) {
 	}
 }
 
-void Buff::OnRender(Renderer& renderer, const FrameData& frame) {
+void Nugget::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	if (m_pxParticles) {
 		m_pxParticles->Render(renderer, frame);

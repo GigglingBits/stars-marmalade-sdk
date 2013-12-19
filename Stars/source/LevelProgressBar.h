@@ -15,7 +15,8 @@ private:
 	
 private:
 	float m_fMaxValue;
-	
+	float m_fProgress;
+
 	VertexStreamScreen m_xBackgroundShape;
 	Texture* m_pxBackground;
 
@@ -25,8 +26,6 @@ private:
 	typedef std::vector<Icon> Icons;
 	Icons m_xIcons;
 	
-	float m_fProgress;
-
 public:
 	LevelProgressBar();
 	virtual ~LevelProgressBar();

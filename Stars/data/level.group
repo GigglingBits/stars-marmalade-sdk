@@ -7,4 +7,18 @@ CIwResGroup
 	./sprites/hud/hud.group
 	./sprites/characters/star/star.group
 	./sprites/effects/effects.group
+	
+	./sprites/nugget_star_yellow.png
+	./sprites/nugget_star_red.png
+	./sprites/nugget_star_purple.png
+
+	./sprites/nugget_diamond_purple.png
+
+	./sprites/bird_01.png
+	./sprites/bird_02.png
+	./sprites/bird_03.png
+
+	./sprites/airplane.png
+	./sprites/jetfighter.png
+	./sprites/jetfighter_missile.png
 }

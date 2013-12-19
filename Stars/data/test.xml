@@ -25,7 +25,7 @@
 
   <bodies>
     <body id="mystar" type="star" fixture="myfixture" shape="myshape" texture="mytexture" resilience="0.5" />
-    <body id="mybuff" type="buff" fixture="myfixture" shape="myshape" texture="mytexture" resilience="0.5" />
+    <body id="mybuff" type="nugget" fixture="myfixture" shape="myshape" texture="mytexture" resilience="0.5" />
     <body id="mybody" type="dynamic" fixture="myfixture" shape="myshape" texture="mytexture" resilience="0.5" />
   </bodies>
 

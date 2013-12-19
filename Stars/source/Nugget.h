@@ -1,15 +1,15 @@
-#ifndef __BUFF_H__
-#define __BUFF_H__
+#ifndef __NUGGET_H__
+#define __NUGGET_H__
 
 #include "Body.h"
 #include "ParticleSystem.h"
 
-class Buff : public Body {
+class Nugget : public Body {
 private:
 	ParticleSystem* m_pxParticles;
 	
 public:
-	Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
+	Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
