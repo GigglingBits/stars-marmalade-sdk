@@ -53,8 +53,8 @@ void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
     
 	// world button
 	CIwRect button;
-    button.w = (int16)(extents / 1.8f);
-    button.h = (int16)(extents / 1.8f);
+    button.w = (int16)(extents / 1.5f);
+    button.h = (int16)(extents / 1.5f);
     button.x = screencenter.x - (button.w / 2);
 	button.y = screencenter.y - (button.h / 2);
 	m_xButtonPlanet.SetPosition(button);
