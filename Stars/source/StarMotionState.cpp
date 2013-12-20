@@ -26,7 +26,7 @@ void Star::RetractingState::Update(uint16 timestep) {
 	// balance the drag force
 	if (m_rxContext.IsDragging()) {
 		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
-		m_rxContext.SetDragForce((distance / 3.0f) * 15.0f * m_rxContext.GetMass());
+		m_rxContext.SetDragForce((1.0f + (distance / 10.0f)) * 5.0f * m_rxContext.GetMass());
 	}
 }
 
