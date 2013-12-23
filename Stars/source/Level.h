@@ -16,11 +16,13 @@
 #define LEVEL_START_BANNER_LEADIN 500
 #define LEVEL_START_BANNER_DURATION 1000
 
-#define LEVEL_SECTION_BANNER_LEADIN 1000
-#define LEVEL_SECTION_BANNER_DURATION 2000
+#define LEVEL_SETTLE_DELAY 5000
+
+#define LEVEL_SECTION_BANNER_LEADIN 500
+#define LEVEL_SECTION_BANNER_DURATION 3000
 #define LEVEL_SECTION_BANNER_LEADOUT 500
 
-#define LEVEL_COMPLETION_DELAY 10000
+#define LEVEL_COMPLETION_DELAY 1500
 #define LEVEL_LEADOUT_TIME 4000
 
 class Level : public Page {
@@ -41,8 +43,8 @@ private:
 		eEventIdHideBanner,
 		eEventIdEnableUserInput,
 		eEventIdDisableUserInput,
-		eEventIdSuspendEventTimer,
 		eEventIdCreateBody,
+		eEventIdSettle,
 		eEventIdFinish,
 		eEventIdUnload,
 	};
@@ -72,6 +74,7 @@ private:
 	std::string m_sBannerText;
 	
 	bool m_bIsPaused;
+	bool m_bIsSetteling;
 	
 	AppPanel m_xAppPanel;
 	LevelHud m_xHud;

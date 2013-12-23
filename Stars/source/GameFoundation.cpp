@@ -48,8 +48,21 @@ Sprite* GameFoundation::FindSprite(const std::string& id) {
 	return it->second;
 }
 
-bool GameFoundation::HasNonStarSprites() {
-	return (m_xSpriteMap.size() - (m_pxStar ? 1 : 0)) > 0;
+bool GameFoundation::IsGameGoing() {
+	// the game is going if there is at least one
+	// dynamic, non-star body
+	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); it++) {
+		if (Body* body = dynamic_cast<Body*>(it->second)) {
+			b2Body& b2body = body->GetBody();
+			if (b2body.IsActive() && b2body.GetType() == b2_dynamicBody) {
+				if (!dynamic_cast<Star*>(body)) {
+					IwTrace(MYAPP, ("Game is going because of body '%s' of type '%s'", body->GetId().c_str(), body->GetTypeName()));
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 void GameFoundation::Add(Body* body) {
@@ -174,7 +187,7 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 }
 
 bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
-	const float limit = 20.0f; // meters
+	const float limit = 5.0f; // meters
 
 	// only works if world is rooted at 0/0
 	CIwFVec2 bounds(

@@ -17,6 +17,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xHud(m_xGame),
 	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
+	m_bIsSetteling(false),
 	m_xBackgroundClouds(m_xGame),
 	m_xBannerRect(0, 0, 0, 0),
 	m_ulLeadInTime(0),
@@ -129,6 +130,10 @@ void Level::Add(Body* body) {
 void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) {
 	IW_CALLSTACK_SELF;
 	
+	if (delay <= 0 && body.empty()) {
+		return;
+	}
+	
 	EventArgs args;
 	args.eventId = body.empty() ? eEventIdNoOp : eEventIdCreateBody;
 	args.bodyName = body;
@@ -190,15 +195,8 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 void Level::StartSection(const std::string& icontexture, const std::string& bannertext) {
 	IW_CALLSTACK_SELF;
 
-	if (!icontexture.empty()) {
-		m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
-	}
-	
 	if (!bannertext.empty()) {
 		EventArgs args;
-		args.eventId = eEventIdDisableUserInput;
-		m_xEventTimer.Enqueue(0, args);
-		
 		args.eventId = eEventIdShowBanner;
 		args.bannerText = bannertext;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
@@ -209,14 +207,17 @@ void Level::StartSection(const std::string& icontexture, const std::string& bann
 		
 		args.eventId = eEventIdNoOp;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
-		
-		args.eventId = eEventIdEnableUserInput;
-		m_xEventTimer.Enqueue(0, args);
 	}
+
+	if (!icontexture.empty()) {
+		m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
+	}	
 }
 
 void Level::EndSection() {
-	
+	EventArgs args;
+	args.eventId = eEventIdSettle;
+	m_xEventTimer.Enqueue(LEVEL_SETTLE_DELAY, args);
 }
 
 uint32 Level::GetDuration() {
@@ -299,8 +300,15 @@ void Level::OnUpdate(const FrameData& frame) {
 		return;
 	}
 
+	// manage level progress (prevent creation of new bodies when level is setteling)
+	if (m_bIsSetteling) {
+		m_bIsSetteling = m_xGame.IsGameGoing();
+	}
+	if (!m_bIsSetteling) {
+		m_xEventTimer.Update(frame.GetSimulatedDurationMs());
+	}
+	
 	// update game logic (create new, remove dead, etc...)
-	m_xEventTimer.Update(frame.GetSimulatedDurationMs());
 	m_xGame.Update(frame);
 
 	// interaction
@@ -374,7 +382,8 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			HideStar();
 			break;
 		}
-		case eEventIdSuspendEventTimer: {
+		case eEventIdSettle: {
+			m_bIsSetteling = true;
 			break;
 		}
 		case eEventIdCreateBody: {

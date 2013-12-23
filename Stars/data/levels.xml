@@ -390,7 +390,7 @@
 				<line map="       " />
 				<line map=" c     " />
 			</spritesequence>
-			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_nugget" text="Be carefull! A wave of birds is coming!">
+			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_bird" text="Be carefull! A wave of birds is coming!">
 				<line map="       " />
 				<line map="  c    " />
 				<line map="     b " />
