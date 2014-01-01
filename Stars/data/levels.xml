@@ -310,7 +310,7 @@
 				<line map="       " />
 				<line map="       " />
 			</spritesequence>
-			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_nugget" text="A wave is coming!">
+			<spritesequence delay="800" speed="3.0" icon="progressbar_icon_nugget" text="A wave is coming!">
 				<line map="nn     " />
 				<line map="nn     " />
 				<line map="nn     " />
@@ -345,13 +345,13 @@
 				<line map="    n  " />
 				<line map="   n   " />
 				<line map="  n    " />
-				<line map="       " />
-				<line map=" c     " />
+				<line map="      c" />
 				<line map="       " />
 				<line map="   b   " />
 				<line map="       " />
 				<line map="       " />
-				<line map="  n  c " />
+				<line map="  n    " />
+				<line map="     c " />
 				<line map="       " />
 				<line map=" b     " />
 			</spritesequence>
@@ -372,7 +372,7 @@
 				<line map="     n " />
 				<line map="   n   " />
 				<line map="  n    " />
-				<line map=" n  c  " />
+				<line map=" n     " />
 				<line map="n   n  " />
 				<line map="     n " />
 				<line map="   n  n" />
@@ -405,7 +405,7 @@
 				<line map="     c " />
 				<line map="       " />
 				<line map="    b  " />
-				<line map="       " />
+				<line map="c      " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.2" >
 				<line map="       " />
@@ -440,104 +440,274 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_7" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_6" width="12.0" height="12.0" dustrequirement="1200">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="N" body="nugget_02" />
 				<def id="m" body="nugget_03" />
 				<def id="M" body="nugget_04" />
+				<def id="b" body="bird_01" />
+				<def id="c" body="bird_02" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2" >
-				<line map="  n    " />
-				<line map="  N    " />
-				<line map="  m    " />
-				<line map="  M    " />
-				<line map="       " />
+			<spritesequence delay="800" speed="2.2" >
+				<line map="      n" />
+				<line map="      n" />
+				<line map="      n" />
+				<line map=" n    n" />
+				<line map=" n     " />
+				<line map=" n b   " />
+				<line map=" n     " />
+				<line map=" n   n " />
 				<line map="     n " />
 				<line map="     n " />
-				<line map="     n " />
-				<line map="       " />
-				<line map="       " />
+				<line map=" c   n " />
+				<line map=" n   n " />
 				<line map=" n     " />
 				<line map=" n     " />
+				<line map=" n   b " />
 				<line map=" n     " />
 				<line map="       " />
 				<line map="       " />
+				<line map="   c   " />
 				<line map="       " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
 			</spritesequence>
-			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="A wave is coming!">
+			<spritesequence delay="800" speed="2.5" icon="progressbar_icon_bird" text="Be carefull! A wave of birds is coming!">
+				<line map="  b    " />
+				<line map="       " />
+				<line map="     c " />
+				<line map="   b   " />
+				<line map="     n " />
+				<line map=" c  n  " />
+				<line map="     b " />
+				<line map="       " />
+				<line map="  b    " />
+				<line map="      c" />
+				<line map="  n    " />
 				<line map="   n   " />
-				<line map="  n n  " />
-				<line map=" n n n " />
-				<line map="n n n n" />
-				<line map=" n n n " />
-				<line map="  n n  " />
-				<line map="   n   " />
+				<line map=" c     " />
+				<line map="     b " />
+				<line map="       " />
+				<line map="   c   " />
+				<line map="       " />
+				<line map="   N   " />
+				<line map="   N   " />
 			</spritesequence>
-			<spritesequence delay="800" speed="2" >
-				<line map="  n    " />
-				<line map="  n    " />
-				<line map="  n    " />
+			<spritesequence delay="800" speed="2.2" >
 				<line map="       " />
-				<line map="       " />
-				<line map="     n " />
-				<line map="     n " />
-				<line map="     n " />
-				<line map="       " />
+				<line map="   n   " />
+				<line map="  nNn  " />
+				<line map=" nNNNn " />
+				<line map="  nNn  " />
+				<line map="   n   " />
 				<line map="       " />
 				<line map=" n     " />
-				<line map=" n     " />
-				<line map=" n     " />
+				<line map=" nn   n" />
+				<line map=" nn  nn" />
+				<line map="  n  nn" />
+				<line map="     n " />
 				<line map="       " />
+				<line map="  n n  " />
+				<line map="  nNn  " />
+				<line map="  nNn  " />
+				<line map="  nNn  " />
+				<line map="   N   " />
 				<line map="       " />
+				<line map="   b   " />
 				<line map="       " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
-				<line map="   nn  " />
 			</spritesequence>
-			<spritesequence delay="800" speed="2" icon="progressbar_icon_nugget" text="Another wave is coming!">
-				<line map="   n   " />
-				<line map="  n n  " />
-				<line map=" n n n " />
-				<line map="n n n n" />
-				<line map=" n n n " />
-				<line map="  n n  " />
-				<line map="   n   " />
+			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_nugget" text="A final wave of stars is coming!">
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map=" n   N " />
+				<line map=" n     " />
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map="     n " />
+				<line map="     n " />
+				<line map="  n  n " />
+				<line map="  n  n " />
+				<line map="  n    " />
+				<line map="  n  N " />
+				<line map="  n    " />
 			</spritesequence>
 		</level>
-		<level name="earth_8" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1200">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
+				<def id="N" body="nugget_02" />
+				<def id="m" body="nugget_03" />
+				<def id="M" body="nugget_04" />
+				<def id="b" body="bird_01" />
+				<def id="c" body="bird_02" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2">
-				<line map="     n  " />
-				<line map="        " />
-				<line map="        " />
-				<line map="        " />
-				<line map="     n  " />
-				<line map="        " />
-				<line map="        " />
-				<line map="        " />
-				<line map="   n    " />
-				<line map="   n    " />
-				<line map="        " />
-				<line map="        " />
-				<line map="      n " />
-				<line map="      n " />
-				<line map="      n " />
-				<line map="        " />
-				<line map="        " />
-				<line map="   n   n" />
-				<line map="        " />
-				<line map="        " />
-				<line map="   n n  " />
+			<spritesequence delay="800" speed="3.5" text="Super fast level!">
+				<line map="nn     " />
+				<line map="nn  c  " />
+				<line map="nn   N " />
+				<line map="nn   N " />
+				<line map="nn     " />
+				<line map="nn     " />
+				<line map="       " />
+				<line map="   b   " />
+				<line map="     nn" />
+				<line map="     nn" />
+				<line map="     nn" />
+				<line map=" N   nn" />
+				<line map=" N   nn" />
+				<line map="     nn" />
+				<line map=" c     " />
+				<line map="       " />
+				<line map="   n   " />
+				<line map="   n  c" />
+				<line map="   n   " />
+				<line map="b  n   " />
+				<line map="       " />
+				<line map=" n     " />
+				<line map=" n  N  " />
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map="       " />
+				<line map="   b  n" />
+				<line map="      n" />
+				<line map="   N  n" />
+				<line map="      n" />
+				<line map=" b     " />
+				<line map="   n   " />
+				<line map="   n   " />
+				<line map="   n  N" />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="     n " />
+				<line map="  N  n " />
+				<line map="c    n " />
+				<line map="     n " />
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map=" n   b " />
+				<line map=" n     " />
+				<line map="   n   " />
+				<line map="   n  N" />
+				<line map="c  n   " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="     n " />
+				<line map=" N   n " />
+				<line map=" N   n " />
+				<line map="     n " />
+				<line map="   c   " />
+				<line map="n      " />
+				<line map="nn     " />
+				<line map="nn     " />
+				<line map=" n    n" />
+				<line map="     nn" />
+				<line map="     nn" />
+				<line map="  b  n " />
+				<line map="    n  " />
+				<line map="   n   " />
+				<line map="  n  c " />
+				<line map=" n     " />
+				<line map=" n     " />
+				<line map="  n    " />
+				<line map="   n   " />
+				<line map=" c  n  " />
+				<line map="     n " />
+				<line map="      n" />
+				<line map="     n " />
+				<line map="   b   " />
+			</spritesequence>
+		</level>
+		<level name="earth_8" width="12.0" height="12.0" dustrequirement="1200">
+			<spritedefs>
+				<def id="n" body="nugget_01" />
+				<def id="N" body="nugget_02" />
+				<def id="m" body="nugget_03" />
+				<def id="M" body="nugget_04" />
+				<def id="b" body="bird_01" />
+				<def id="c" body="bird_02" />
+			</spritedefs>
+			<spritesequence delay="800" speed="2.2">
+				<line map=" n     " />
+				<line map="nNn b  " />
+				<line map=" n     " />
+				<line map="    n  " />
+				<line map="   nNn " />
+				<line map="    n  " />
+				<line map="   n   " />
+				<line map="  cm b " />
+				<line map="   n   " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="   c   " />
+				<line map="       " />
+				<line map="b      " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2.5" icon="progressbar_icon_nugget" text="A wave of stars is coming!">
+				<line map="nn     " />
+				<line map=" nn    " />
+				<line map="  nn   " />
+				<line map="   nn  " />
+				<line map="    nn " />
+				<line map=" N   nn" />
+				<line map="    nn " />
+				<line map="   nn  " />
+				<line map="  nn   " />
+				<line map="   nn  " />
+				<line map="    nn " />
+				<line map="   nn  " />
+				<line map="  NN   " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2.2">
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map=" n n n " />
+				<line map=" N   N " />
+				<line map="  n n  " />
+				<line map="   m   " />
+				<line map="       " />
+				<line map=" n   n " />
+				<line map=" n   n " />
+				<line map="       " />
+				<line map="   m   " />
+				<line map="       " />
+				<line map=" n   n " />
+				<line map=" nn nn " />
+				<line map=" nnnnn " />
+				<line map="  nnn  " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="   b   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="n  n  n" />
+				<line map=" n n n " />
+				<line map="  nnn  " />
+				<line map="   n   " />
+				<line map="       " />
+			</spritesequence>
+			<spritesequence delay="800" speed="2.5" icon="progressbar_icon_bird" text="Birds are coming! Be carefull!">
+				<line map="  b    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="     c " />
+				<line map="       " />
+				<line map="   c   " />
+				<line map="       " />
+				<line map=" b     " />
+				<line map="     b " />
+				<line map="       " />
+				<line map="   c   " />
+				<line map="       " />
+				<line map="     b " />
+				<line map=" c     " />
+				<line map="       " />
+				<line map="    c  " />
+				<line map="       " />
+				<line map="   b   " />
+				<line map="  c b  " />
+				<line map=" b M c " />
 			</spritesequence>
 		</level>
 		<level name="earth_9" width="12.0" height="12.0" dustrequirement="100">
