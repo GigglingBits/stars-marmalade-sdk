@@ -1,5 +1,7 @@
 #include <sstream>
 
+#include "Debug.h"
+
 #include "LevelInteractor.h"
 #include "Configuration.h"
 
@@ -22,10 +24,12 @@ LevelInteractor::~LevelInteractor() {
 }
 
 void LevelInteractor::Enable() {
+	IwTrace(MYAPP, ("Enabling level interaction"));
 	m_bEnableInput = true;
 }
 
 void LevelInteractor::Disable() {
+	IwTrace(MYAPP, ("Disabling level interaction"));
 	m_bEnableInput = false;
 }
 

@@ -86,7 +86,9 @@ private:
 	void ManageSpriteLifeCicles(const FrameData& frame);
 	void EnqueueCreateSplashText(std::string text, const CIwFVec2& position);
 
-	bool CheckOutOfBounds(const CIwFVec2& pos);
+	bool CheckOutOfWorld(const CIwFVec2& pos);
+	bool CheckOutOfUniverse(const CIwFVec2& pos);
+	bool CheckOutOfBounds(const CIwFVec2& pos, float margin);
 
 	void Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity);
 	void CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args);

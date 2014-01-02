@@ -83,7 +83,7 @@ void Level::Initialize() {
 	CreateStar();
 	
 	// schedule the page unload
-	// (assuming that the level has been populated by the tim ethis is called)
+	// (assuming that the level has been populated by the time this is called)
 	uint32 endmarker = m_xEventTimer.GetTotalDuration();
 	
 	EventArgs args;
@@ -163,6 +163,7 @@ void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CI
 }
 
 void Level::SetPaused(bool paused) {
+	IwTrace(MYAPP, (paused ? "Pause" : "Unpause"));
 	if (paused) {
 		m_xAppPanel.OpenPanel();
 		m_xHud.SetEnabled(false);
@@ -177,12 +178,14 @@ bool Level::IsPaused() {
 }
 
 void Level::HideStar() {
+	IwTrace(MYAPP, ("Hiding star"));
 	if (Star* star = m_xGame.GetStar()) {
 		star->SetAnchorLine(GetStarHidePosition().x);
 	}
 }
 
 void Level::ShowStar() {
+	IwTrace(MYAPP, ("Showing star"));
 	if (Star* star = m_xGame.GetStar()) {
 		star->SetAnchorLine(GetStarRestPosition().x);
 	}
@@ -244,10 +247,12 @@ CIwFVec2 Level::GetStarHidePosition() {
 }
 
 void Level::ShowBannerText(const std::string& text) {
+	IwTrace(MYAPP, ("Showing banner: %s", text.c_str()));
 	m_sBannerText = text;
 }
 
 void Level::HideBannerText() {
+	IwTrace(MYAPP, ("Hiding banner"));
 	m_sBannerText.clear();
 }
 

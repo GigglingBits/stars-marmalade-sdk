@@ -35,6 +35,21 @@
 	fileformatversion="2">
 	<bodies>
 		
+		<!-- infrastructure -->
+		<body id="bumper" type="static" resilience="0.8" revolve="0" drag="1">
+			<texture colour="0x77343423" />
+			<shape type="polygon">
+				<point x="-0.6" y="-0.75" />
+				<point x="0.6" y="-0.75" />
+				<point x="0.75" y="0.3" />
+				<point x="0.0" y="0.75" />
+				<point x="-0.75" y="0.3" />
+			</shape>
+			<port id="center" x="0.0" y="0.0" />
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+		</body>
+		
+		
 		<!-- gameplay -->
 		<body id="star" type="star" texture="star" resilience="0.8" revolve="0" drag="1">
 			<shape type="polygon">

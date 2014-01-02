@@ -50,14 +50,16 @@ Sprite* GameFoundation::FindSprite(const std::string& id) {
 
 bool GameFoundation::IsGameGoing() {
 	// the game is going if there is at least one
-	// dynamic, non-star body
+	// dynamic, non-star body within the world bounds
 	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); it++) {
 		if (Body* body = dynamic_cast<Body*>(it->second)) {
-			b2Body& b2body = body->GetBody();
-			if (b2body.IsActive() && b2body.GetType() == b2_dynamicBody) {
-				if (!dynamic_cast<Star*>(body)) {
-					IwTrace(MYAPP, ("Game is going because of body '%s' of type '%s'", body->GetId().c_str(), body->GetTypeName()));
-					return true;
+			if (!CheckOutOfWorld(body->GetPosition())) {
+				b2Body& b2body = body->GetBody();
+				if (b2body.IsActive() && b2body.GetType() == b2_dynamicBody) {
+					if (!dynamic_cast<Star*>(body)) {
+						IwTrace(MYAPP, ("Game is going because of body '%s' of type '%s'", body->GetId().c_str(), body->GetTypeName()));
+						return true;
+					}
 				}
 			}
 		}
@@ -109,8 +111,8 @@ void GameFoundation::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void GameFoundation::UpdatePhysics(uint16 timestep) {
-	const int32 velocityIterations = 25;
-    const int32 positionIterations = 25;
+	const int32 velocityIterations = 10;
+    const int32 positionIterations = 10;
 	float32 box2dtimestep = ((float32)timestep) / 1000.0f;
 	m_xWorld.GetWorld().Step(box2dtimestep, velocityIterations, positionIterations);
     m_xWorld.GetWorld().ClearForces();
@@ -124,7 +126,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 	while (it != m_xSpriteMap.end()) {
 		Sprite* sprite = it->second;
 
-		bool outofbounds = CheckOutOfBounds(sprite->GetPosition());
+		bool outofbounds = CheckOutOfUniverse(sprite->GetPosition());
 		if (outofbounds || sprite->CanDispose()) {
 			if (m_pxStar == sprite) {
 				m_pxStar = NULL;
@@ -186,15 +188,26 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 	QuakeImpact.Invoke(*this, arg);
 }
 
-bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos) {
-	const float limit = 5.0f; // meters
+bool GameFoundation::CheckOutOfWorld(const CIwFVec2& pos) {
+	// The world is defined as the area where interaction with
+	// a body can be expected.
+	return CheckOutOfBounds(pos, 2.0f);
+}
 
+bool GameFoundation::CheckOutOfUniverse(const CIwFVec2& pos) {
+	// The universe is the world area plus a generous margin.
+	// Bodies outside the universe are not expected to play any
+	// role in the game.
+	return CheckOutOfBounds(pos, 10.0f);
+}
+
+bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos, float margin) {
 	// only works if world is rooted at 0/0
 	CIwFVec2 bounds(
-		std::abs(m_xWorldSize.x) + (2.0f * limit), 
-		std::abs(m_xWorldSize.y) + (2.0f * limit));
+		std::abs(m_xWorldSize.x) + (2.0f * margin),
+		std::abs(m_xWorldSize.y) + (2.0f * margin));
 	
-	return (std::abs(pos.x) + limit > bounds.x || std::abs(pos.y) + limit > bounds.y);
+	return (std::abs(pos.x) + margin > bounds.x || std::abs(pos.y) + margin > bounds.y);
 }
 
 void GameFoundation::AddSplashNumber(long number, const CIwFVec2& position) {
