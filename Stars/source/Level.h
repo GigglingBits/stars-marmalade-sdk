@@ -116,9 +116,6 @@ private:
 	void CreateHud();
 	void DestroyHud();
 
-	CIwFVec2 GetStarRestPosition();
-	CIwFVec2 GetStarHidePosition();
-
 	void SetPaused(bool paused);
 	bool IsPaused();
 	static int32 AppPausedCallback(void* systemData, void* userData);
@@ -133,7 +130,13 @@ private:
 	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
 	
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
+
+	CIwFVec2 GetStarRestPosition();
+	CIwFVec2 GetStarHidePosition();
 	
+	void SetStarAnchor(const CIwFVec2& pos);
+	void SetStarPath(int samplecount, const CIwFVec2* samplepoints);
+
 private:
 	void EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args);
 	void EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy);

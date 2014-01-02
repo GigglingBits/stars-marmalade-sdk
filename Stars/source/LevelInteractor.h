@@ -33,7 +33,7 @@ private:
 	typedef std::map<TouchId, TouchSpec> TouchMap;
 	TouchMap m_xTouchMap;
     
-	bool m_bEnableInput;
+	bool m_bInputEnabled;
 	
     PathRecorder m_xRecorder;
 

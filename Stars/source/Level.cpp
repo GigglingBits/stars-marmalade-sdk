@@ -179,15 +179,31 @@ bool Level::IsPaused() {
 
 void Level::HideStar() {
 	IwTrace(MYAPP, ("Hiding star"));
-	if (Star* star = m_xGame.GetStar()) {
-		star->SetAnchorLine(GetStarHidePosition().x);
-	}
+	SetStarAnchor(GetStarHidePosition());
 }
 
 void Level::ShowStar() {
 	IwTrace(MYAPP, ("Showing star"));
+	SetStarAnchor(GetStarRestPosition());
+}
+
+void Level::SetStarAnchor(const CIwFVec2& pos) {
 	if (Star* star = m_xGame.GetStar()) {
-		star->SetAnchorLine(GetStarRestPosition().x);
+		// adjust retraction line
+		star->SetAnchorLine(pos.x);
+		// move fast
+		star->FollowPath(1, &pos, (float)Configuration::GetInstance().PathSpeed);
+	}
+}
+
+void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		if (samplecount > 0) {
+			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+			star->FollowPath(samplecount, samplepoints, (float)Configuration::GetInstance().PathSpeed);
+			IwTrace(MYAPP, ("Setting %i points path to star", samplecount));
+		}
 	}
 }
 
@@ -424,10 +440,5 @@ void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFV
 
 void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
 	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		if (path.count > 0) {
-			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-			star->FollowPath(path.count, path.samplepos, (float)Configuration::GetInstance().PathSpeed);
-		}
-	}
+	SetStarPath(path.count, path.samplepos);
 }

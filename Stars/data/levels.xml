@@ -307,8 +307,6 @@
 				<line map="       " />
 				<line map="       " />
 				<line map="   b   " />
-				<line map="       " />
-				<line map="       " />
 			</spritesequence>
 			<spritesequence delay="800" speed="3.0" icon="progressbar_icon_nugget" text="A wave is coming!">
 				<line map="nn     " />
@@ -408,7 +406,6 @@
 				<line map="c      " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.2" >
-				<line map="       " />
 				<line map="  n    " />
 				<line map="  n    " />
 				<line map="  n    " />
@@ -419,7 +416,6 @@
 				<line map="     n " />
 				<line map="       " />
 				<line map="  b    " />
-				<line map="       " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.2" icon="progressbar_icon_nugget" text="A wave of stars is coming!">
 				<line map="  nnn  " />
@@ -469,7 +465,6 @@
 				<line map="       " />
 				<line map="       " />
 				<line map="   c   " />
-				<line map="       " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.5" icon="progressbar_icon_bird" text="Be carefull! A wave of birds is coming!">
 				<line map="  b    " />
@@ -493,7 +488,6 @@
 				<line map="   N   " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.2" >
-				<line map="       " />
 				<line map="   n   " />
 				<line map="  nNn  " />
 				<line map=" nNNNn " />
@@ -513,7 +507,6 @@
 				<line map="   N   " />
 				<line map="       " />
 				<line map="   b   " />
-				<line map="       " />
 			</spritesequence>
 			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_nugget" text="A final wave of stars is coming!">
 				<line map=" n     " />
@@ -685,7 +678,6 @@
 				<line map=" n n n " />
 				<line map="  nnn  " />
 				<line map="   n   " />
-				<line map="       " />
 			</spritesequence>
 			<spritesequence delay="800" speed="2.5" icon="progressbar_icon_bird" text="Birds are coming! Be carefull!">
 				<line map="  b    " />

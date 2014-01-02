@@ -8,7 +8,7 @@
 LevelInteractor::LevelInteractor(Camera& camera, GameFoundation& game) : 
 	m_rxCamera(camera), 
 	m_rxGame(game),
-    m_bEnableInput(true) {
+    m_bInputEnabled(true) {
 
 	InputManager& im = InputManager::GetInstance();
 	im.TouchBeginEvent.AddListener<LevelInteractor>(this, &LevelInteractor::TouchBeginEventHandler);
@@ -25,17 +25,17 @@ LevelInteractor::~LevelInteractor() {
 
 void LevelInteractor::Enable() {
 	IwTrace(MYAPP, ("Enabling level interaction"));
-	m_bEnableInput = true;
+	m_bInputEnabled = true;
 }
 
 void LevelInteractor::Disable() {
 	IwTrace(MYAPP, ("Disabling level interaction"));
-	m_bEnableInput = false;
+	m_bInputEnabled = false;
 }
 
 void LevelInteractor::EvaluateTouchPurpose(TouchSpec& touch) {
 	ClearTouchSpec(touch);
-	if (!m_bEnableInput) {
+	if (!m_bInputEnabled) {
 		return;
 	}
 	
@@ -163,7 +163,7 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		m_xRecorder.Record(touch.worldendpos);
 		
-		if (m_bEnableInput) {
+		if (m_bInputEnabled) {
 			PathEventArgs args;
 			args.count = m_xRecorder.GetPointCount();
 			args.samplepos = m_xRecorder.GetPoints();
