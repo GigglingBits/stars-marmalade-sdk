@@ -761,28 +761,114 @@
 				<line map="  nnn  " />
 				<line map="   n   " />
 			</spritesequence>
-			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_bird" text="Birds!! Collect the stars but be carefull!">
+			<spritesequence delay="800" speed="3.2" icon="progressbar_icon_bird" text="Birds are coming! Be carefull!">
+				<line map=" b     " />
 				<line map="       " />
+				<line map="     c " />
 				<line map="       " />
+				<line map="  b    " />
 				<line map="       " />
+				<line map="    c  " />
+				<line map=" c     " />
+				<line map="   b   " />
 				<line map="       " />
+				<line map="     b " />
+				<line map="  c    " />
 				<line map="       " />
+				<line map="    b  " />
 				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="     c " />
+				<line map=" c     " />
 				<line map="       " />
 				<line map=" n   n " />
 				<line map="  n n  " />
-				<line map="   n   " />
+				<line map="   M   " />
+			</spritesequence>
+		</level>
+		<level name="earth_10" width="12.0" height="12.0" dustrequirement="1500">
+			<spritedefs>
+				<def id="n" body="nugget_01" />
+				<def id="N" body="nugget_02" />
+				<def id="m" body="nugget_03" />
+				<def id="M" body="nugget_04" />
+				<def id="b" body="bird_01" />
+				<def id="c" body="bird_02" />
+			</spritedefs>
+			<spritesequence delay="800" speed="2.2">
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
 			</spritesequence>
 		</level>
 		<level name="earth_13" width="12.0" height="12.0" dustrequirement="100">
