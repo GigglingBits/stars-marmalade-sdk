@@ -224,10 +224,11 @@
 		<texture id="progressbar_icon_rock" image="hud_icon_rock" />
 
 		<texture id="number_back" image="hud_number_back" />
+		
 		<texture id="stardustvial" image="hud_stardust_vial" />
 		<texture id="stardustsurface" image="hud_stardust_surface" />
 		<texture id="stardustsurface_queued" image="hud_stardust_surface_queued" />
-		<texture id="stardustvial_back" colour="0xeecceeff" />
+		<texture id="stardustvial_back" colour="0xcc31353a" />
 		<texture id="stardust" colour="0xeecceeff" />
 		
 		<texture id="star">

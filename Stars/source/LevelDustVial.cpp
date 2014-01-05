@@ -6,18 +6,28 @@
 LevelDustVial::LevelDustVial() :
 m_fCommittedDust(0.0f),
 m_fQueuedDust(0.0f),
+m_pxBack(NULL),
 m_pxCommittedDustSurface(NULL),
 m_pxQueuedDustSurface(NULL) {
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
 
 LevelDustVial::~LevelDustVial() {
+	if (m_pxBack) {
+		delete m_pxBack;
+	}
+	if (m_pxCommittedDustSurface) {
+		delete m_pxCommittedDustSurface;
+	}
+	if (m_pxQueuedDustSurface) {
+		delete m_pxQueuedDustSurface;
+	}
 }
 
 void LevelDustVial::Initialize() {
 	// we misuse this to draw the foreground
 	SetBackground(FactoryManager::GetTextureFactory().Create("stardustvial"));
-
+	m_pxBack = FactoryManager::GetTextureFactory().Create("stardustvial_back");
 	m_pxCommittedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface");
 	m_pxQueuedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface_queued");
 }
@@ -66,6 +76,9 @@ void LevelDustVial::OnDoLayout(const CIwSVec2& screensize) {
 void LevelDustVial::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	
+	if (m_pxBack) {
+		m_pxBack->Update(frame.GetRealDurationMs());
+	}
 	if (m_pxCommittedDustSurface) {
 		m_pxCommittedDustSurface->Update(frame.GetRealDurationMs());
 	}
@@ -76,16 +89,21 @@ void LevelDustVial::OnUpdate(const FrameData& frame) {
 
 void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
-	
+		
 	// vial background
+	VertexStreamScreen shape;
 	renderer.SetRederingLayer(Renderer::eRenderingLayerHud3);
-	renderer.DrawRect(m_xBackGeom, 0x00000000, 0xcc31353a);
+	if (m_pxBack) {
+		shape.SetRect(m_xBackGeom);
+		shape.ClosePolygon();
+		renderer.Draw(shape, *m_pxBack);
+	}
 	
 	// vial content
-	renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
 	int surfaceheight = m_xCommittedGeom.w / 3;
 	int surfaceorigin = surfaceheight * 10 / 11;
-	VertexStreamScreen shape;
+	
+	renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
 	if (m_xCommittedGeom.h > 0) {
 		renderer.DrawRect(m_xCommittedGeom, 0x00000000, 0xee10e3f9);
 		if (m_xQueuedGeom.h <= 0 && m_pxCommittedDustSurface) {
@@ -96,7 +114,7 @@ void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 		}
 	}
 	if (m_xQueuedGeom.h > 0) {
-		renderer.DrawRect(m_xQueuedGeom, 0xffffffff, 0xeeffffff);
+		renderer.DrawRect(m_xQueuedGeom, 0x00000000, 0xeeffffff);
 		if (m_pxQueuedDustSurface) {
 			shape.SetRect(
 				m_xQueuedGeom.x, m_xQueuedGeom.y - surfaceorigin,

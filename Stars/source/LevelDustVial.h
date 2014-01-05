@@ -6,6 +6,8 @@
 class LevelDustVial : public Window {
 private:
 	CIwRect m_xBackGeom;
+	Texture* m_pxBack;
+
 	CIwRect m_xContentGeom;
 	
 	float m_fCommittedDust;
