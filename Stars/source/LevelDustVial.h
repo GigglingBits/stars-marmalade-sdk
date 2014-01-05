@@ -10,9 +10,12 @@ private:
 	
 	float m_fCommittedDust;
 	CIwRect m_xCommittedGeom;
+	Texture* m_pxCommittedDustSurface;
 	
 	float m_fQueuedDust;
 	CIwRect m_xQueuedGeom;
+	Texture* m_pxQueuedDustSurface;
+	
 	
 public:
 	LevelDustVial();

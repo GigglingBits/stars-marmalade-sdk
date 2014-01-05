@@ -3,8 +3,11 @@
 #include "VertexStreamScreen.h"
 #include "Debug.h"
 
-LevelDustVial::LevelDustVial() : m_fCommittedDust(0.0f), m_fQueuedDust(0.0f) {
-	IW_CALLSTACK_SELF;
+LevelDustVial::LevelDustVial() :
+m_fCommittedDust(0.0f),
+m_fQueuedDust(0.0f),
+m_pxCommittedDustSurface(NULL),
+m_pxQueuedDustSurface(NULL) {
 	SetRederingLayer(Renderer::eRenderingLayerHud);
 }
 
@@ -15,7 +18,8 @@ void LevelDustVial::Initialize() {
 	// we misuse this to draw the foreground
 	SetBackground(FactoryManager::GetTextureFactory().Create("stardustvial"));
 
-	// todo: FactoryManager::GetTextureFactory().Create("stardustsurface"));
+	m_pxCommittedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface");
+	m_pxQueuedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface_queued");
 }
 
 void LevelDustVial::SetDustAmount(float committed, float queued) {
@@ -61,6 +65,13 @@ void LevelDustVial::OnDoLayout(const CIwSVec2& screensize) {
 
 void LevelDustVial::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
+	
+	if (m_pxCommittedDustSurface) {
+		m_pxCommittedDustSurface->Update(frame.GetRealDurationMs());
+	}
+	if (m_pxQueuedDustSurface) {
+		m_pxQueuedDustSurface->Update(frame.GetRealDurationMs());
+	}
 }
 
 void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -72,10 +83,25 @@ void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	// vial content
 	renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
+	int surfaceheight = m_xCommittedGeom.w / 3;
+	int surfaceorigin = surfaceheight * 10 / 11;
+	VertexStreamScreen shape;
 	if (m_xCommittedGeom.h > 0) {
 		renderer.DrawRect(m_xCommittedGeom, 0x00000000, 0xee10e3f9);
+		if (m_xQueuedGeom.h <= 0 && m_pxCommittedDustSurface) {
+			shape.SetRect(
+				m_xCommittedGeom.x, m_xCommittedGeom.y - surfaceorigin,
+				m_xCommittedGeom.w, surfaceheight);
+			renderer.Draw(shape, *m_pxCommittedDustSurface);
+		}
 	}
 	if (m_xQueuedGeom.h > 0) {
-		renderer.DrawRect(m_xQueuedGeom, 0x00000000, 0xeeffffff);
+		renderer.DrawRect(m_xQueuedGeom, 0xffffffff, 0xeeffffff);
+		if (m_pxQueuedDustSurface) {
+			shape.SetRect(
+				m_xQueuedGeom.x, m_xQueuedGeom.y - surfaceorigin,
+				m_xQueuedGeom.w, surfaceheight);
+			renderer.Draw(shape, *m_pxQueuedDustSurface);
+		}
 	}
 }
