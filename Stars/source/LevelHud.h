@@ -4,7 +4,7 @@
 #include "Window.h"
 #include "GameFoundation.h"
 #include "ButtonEx.h"
-#include "LevelDustCollector.h"
+#include "LevelDustVial.h"
 #include "LevelHudNumber.h"
 #include "LevelProgressBar.h"
 
@@ -15,16 +15,8 @@ private:
 	bool m_bIsEnabled;
 
 	LevelProgressBar m_xProgressBar;
-
-	VertexStreamScreen m_xVialShape;
-	Texture* m_pxVial;
-
-	LevelDustCollector m_xDustQueue;
-	LevelDustCollector m_xDustCollector;
-
-	LevelHudNumber m_xQueuedAmount;
-	LevelHudNumber m_xCollectedAmount;
-
+	LevelDustVial m_xVial;
+	
 	ButtonEx m_xButtonBlock;
 	ButtonEx m_xButtonAttack;
 

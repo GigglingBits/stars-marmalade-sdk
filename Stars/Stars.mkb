@@ -124,8 +124,8 @@ files {
 	LevelHudText.cpp
 	LevelHudNumber.h
 	LevelHudNumber.cpp
-	LevelDustCollector.h
-	LevelDustCollector.cpp
+	LevelDustVial.h
+	LevelDustVial.cpp
 	LevelProgressBar.h
 	LevelProgressBar.cpp
 
