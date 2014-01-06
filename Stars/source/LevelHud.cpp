@@ -64,10 +64,10 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	
 	// action buttons (right)
 	CIwRect rect;
+	rect.x = 0;
+	rect.y = screensize.y - (2 * buttonheight) - (2 * spacing);
 	rect.w = buttonwidth;
 	rect.h = buttonheight;
-	rect.x = screensize.x - buttonwidth;
-	rect.y = screensize.y - (2 * buttonheight) - (2 * spacing);
 	m_xButtonBlock.SetPosition(rect);
 	rect.y += rect.h + spacing;
 	m_xButtonAttack.SetPosition(rect);
@@ -79,7 +79,11 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	m_xProgressBar.SetPosition(rect);
 
 	// dust vial
-	rect.Make(spacing, screensize.y - dustvialheight, dustvialwidth, dustvialheight);
+	x = screensize.x - dustvialwidth - spacing;
+	y = screensize.y - dustvialheight - spacing;
+	w = dustvialwidth;
+	h = dustvialheight;
+	rect.Make(x, y, w, h);
 	m_xVial.SetPosition(rect);
 }
 
