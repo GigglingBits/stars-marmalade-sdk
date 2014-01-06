@@ -3,6 +3,20 @@
 #include "VertexStreamScreen.h"
 #include "Debug.h"
 
+uint32 LevelDustVial::s_auCommittedColours[] = {
+	0xff37f5eb,
+	0xff37f5eb,
+	0xff44cde6,
+	0xff44cde6
+};
+
+uint32 LevelDustVial::s_auQueuedColours[] = {
+	0xffccf5eb,
+	0xffccf5eb,
+	0xffeff5eb,
+	0xffeff5eb
+};
+
 LevelDustVial::LevelDustVial() :
 m_fCommittedDust(0.0f),
 m_fQueuedDust(0.0f),
@@ -33,44 +47,66 @@ void LevelDustVial::Initialize() {
 }
 
 void LevelDustVial::SetDustAmount(float committed, float queued) {
-	m_fCommittedDust = std::min<float>(committed, 1.0f);
-	m_fCommittedDust = std::max<float>(m_fCommittedDust, 0.0f);
-	m_fQueuedDust = std::min<float>(queued, 1.0f - m_fCommittedDust);
-	m_fQueuedDust = std::max<float>(m_fQueuedDust, 0.0f);
+	committed = std::min<float>(committed, 1.0f);
+	committed = std::max<float>(committed, 0.0f);
+	queued = std::min<float>(queued, 1.0f - m_fCommittedDust);
+	queued = std::max<float>(queued, 0.0f);
 	
-	UpdateShapes();
+	if (committed != m_fCommittedDust || queued != m_fQueuedDust) {
+		m_fCommittedDust = committed;
+		m_fQueuedDust = queued;
+		UpdateAmountShapes();
+	}
 }
 
-void LevelDustVial::UpdateShapes() {
-	m_xCommittedGeom = m_xContentGeom;
-	m_xCommittedGeom.h = m_xContentGeom.h * m_fCommittedDust;
-	m_xCommittedGeom.y += m_xContentGeom.h - m_xCommittedGeom.h;
-	
-	m_xQueuedGeom = m_xContentGeom;
-	m_xQueuedGeom.h = m_xContentGeom.h * m_fQueuedDust;
-	m_xQueuedGeom.y += m_xContentGeom.h - m_xQueuedGeom.h - m_xCommittedGeom.h;
-}
-
-void LevelDustVial::OnDoLayout(const CIwSVec2& screensize) {
+void LevelDustVial::UpdateVialShapes() {
 	// vial background geometry
-	m_xBackGeom = GetPosition();
-	int marginx = std::max<int>(1, m_xBackGeom.w / 50);
-	int marginy = std::max<int>(1, m_xBackGeom.h / 5);
-	m_xBackGeom.x += marginx;
-	m_xBackGeom.y += marginy;
-	m_xBackGeom.w -= 2 * marginx;
-	m_xBackGeom.h -= 2 * marginy;
+	CIwRect back = GetPosition();
+	int marginx = std::max<int>(1, back.w / 50);
+	int marginy = std::max<int>(1, back.h / 5);
+	back.x += marginx;
+	back.y += marginy;
+	back.w -= 2 * marginx;
+	back.h -= 2 * marginy;
+	m_xBackShape.SetRect(back);
+	m_xBackShape.ClosePolygon();
 	
 	// vial content geometry
-	m_xContentGeom = m_xBackGeom;
+	m_xContentGeom = back;
 	marginx = std::max<int>(1, m_xContentGeom.w / 20);
-	marginy = std::max<int>(1, m_xContentGeom.h / 7);
+	marginy = std::max<int>(1, m_xContentGeom.h / 5);
 	m_xContentGeom.x += marginx;
 	m_xContentGeom.y += marginy;
 	m_xContentGeom.w -= 2 * marginx;
 	m_xContentGeom.h -= marginy;
+}
+
+void LevelDustVial::UpdateAmountShapes() {
+	int surfaceheight = m_xContentGeom.w / 3;
+	int surfaceorigin = surfaceheight * 10 / 11;
+
+	CIwRect committed = m_xContentGeom;
+	committed.h = m_xContentGeom.h * m_fCommittedDust;
+	committed.y += m_xContentGeom.h - committed.h;
+	m_xCommittedDustShape.SetRect(committed);
 	
-	UpdateShapes();
+	m_xCommittedDustSurfaceShape.SetRect(
+		committed.x, committed.y - surfaceorigin,
+		committed.w, surfaceheight);
+
+	CIwRect queued = m_xContentGeom;
+	queued.h = m_xContentGeom.h * m_fQueuedDust;
+	queued.y += m_xContentGeom.h - queued.h - committed.h;
+	m_xQueuedDustShape.SetRect(queued);
+	
+	m_xQueuedDustSurfaceShape.SetRect(
+		queued.x, queued.y - surfaceorigin,
+		queued.w, surfaceheight);
+}
+
+void LevelDustVial::OnDoLayout(const CIwSVec2& screensize) {
+	UpdateVialShapes();
+	UpdateAmountShapes();
 }
 
 void LevelDustVial::OnUpdate(const FrameData& frame) {
@@ -91,35 +127,27 @@ void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 		
 	// vial background
-	VertexStreamScreen shape;
 	renderer.SetRederingLayer(Renderer::eRenderingLayerHud3);
 	if (m_pxBack) {
-		shape.SetRect(m_xBackGeom);
-		shape.ClosePolygon();
-		renderer.Draw(shape, *m_pxBack);
+		renderer.Draw(m_xBackShape, *m_pxBack);
 	}
 	
 	// vial content
-	int surfaceheight = m_xCommittedGeom.w / 3;
-	int surfaceorigin = surfaceheight * 10 / 11;
-	
 	renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
-	if (m_xCommittedGeom.h > 0) {
-		renderer.DrawRect(m_xCommittedGeom, 0x00000000, 0xee10e3f9);
-		if (m_xQueuedGeom.h <= 0 && m_pxCommittedDustSurface) {
-			shape.SetRect(
-				m_xCommittedGeom.x, m_xCommittedGeom.y - surfaceorigin,
-				m_xCommittedGeom.w, surfaceheight);
-			renderer.Draw(shape, *m_pxCommittedDustSurface);
+	if (m_fCommittedDust > 0.0f) {
+		renderer.DrawPolygon(
+			m_xCommittedDustShape.GetVerts(), m_xCommittedDustShape.GetVertCount(),
+			NULL, s_auCommittedColours);
+		if (m_fQueuedDust <= 0.0f && m_pxCommittedDustSurface) {
+			renderer.Draw(m_xCommittedDustSurfaceShape, *m_pxCommittedDustSurface);
 		}
 	}
-	if (m_xQueuedGeom.h > 0) {
-		renderer.DrawRect(m_xQueuedGeom, 0x00000000, 0xeeffffff);
+	if (m_fQueuedDust > 0.0f) {
+		renderer.DrawPolygon(
+			m_xQueuedDustShape.GetVerts(), m_xQueuedDustShape.GetVertCount(),
+			NULL, s_auQueuedColours);
 		if (m_pxQueuedDustSurface) {
-			shape.SetRect(
-				m_xQueuedGeom.x, m_xQueuedGeom.y - surfaceorigin,
-				m_xQueuedGeom.w, surfaceheight);
-			renderer.Draw(shape, *m_pxQueuedDustSurface);
+			renderer.Draw(m_xQueuedDustSurfaceShape, *m_pxQueuedDustSurface);
 		}
 	}
 }

@@ -5,19 +5,23 @@
 
 class LevelDustVial : public Window {
 private:
-	CIwRect m_xBackGeom;
+	static uint32 s_auCommittedColours[];
+	static uint32 s_auQueuedColours[];
+	
+	VertexStreamScreen m_xBackShape;
 	Texture* m_pxBack;
 
 	CIwRect m_xContentGeom;
 	
 	float m_fCommittedDust;
-	CIwRect m_xCommittedGeom;
+	VertexStreamScreen m_xCommittedDustShape;
+	VertexStreamScreen m_xCommittedDustSurfaceShape;
 	Texture* m_pxCommittedDustSurface;
 	
 	float m_fQueuedDust;
-	CIwRect m_xQueuedGeom;
+	VertexStreamScreen m_xQueuedDustShape;
+	VertexStreamScreen m_xQueuedDustSurfaceShape;
 	Texture* m_pxQueuedDustSurface;
-	
 	
 public:
 	LevelDustVial();
@@ -28,7 +32,8 @@ public:
 	void SetDustAmount(float committed, float queued);
 	
 private:
-	void UpdateShapes();
+	void UpdateVialShapes();
+	void UpdateAmountShapes();
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
