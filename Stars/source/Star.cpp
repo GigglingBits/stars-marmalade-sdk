@@ -1,5 +1,4 @@
 #include "Star.h"
-#include "Target.h"
 #include "Nugget.h"
 #include "StarMotionState.h"
 #include "StarAttackState.h"
@@ -52,10 +51,6 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 		if (m_pxMotionState) {
 			m_pxMotionState->IncrementMultiplier();
 		}
-	} else if (otherbody.GetTypeName() == Target::TypeName()) {
-		GetHealthManager().RenewLife();
-	} else {
-		GetHealthManager().Injure(5.0f);
 	}
 }
 

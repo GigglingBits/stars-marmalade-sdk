@@ -196,11 +196,7 @@ files {
 	Nugget.h
 	Nugget.cpp
 
-	Target.h
-	Target.cpp
-
 	["Sources/Game Logic/Effects"]
-
 	LocalEffect.h
 	LocalEffect.cpp
 	CircularRays.h
