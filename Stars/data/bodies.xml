@@ -216,12 +216,12 @@
 		
 		<texture id="touch" image="touch" />
 		
-		<texture id="progressbar_back" image="hud_progressbar_back" />
-		<texture id="progressbar_star" image="hud_icon_star" />
-		<texture id="progressbar_icon_nugget" image="hud_icon_nugget" />
-		<texture id="progressbar_icon_bird" image="hud_icon_bird" />
-		<texture id="progressbar_icon_fire" image="hud_icon_fire" />
-		<texture id="progressbar_icon_rock" image="hud_icon_rock" />
+		<texture id="progressbar" image="hud_progressbar" />
+		<texture id="progressbar_icon_star" image="hud_progressbar_icon_star" />
+		<texture id="progressbar_icon_nugget" image="hud_progressbar_icon_nugget" />
+		<texture id="progressbar_icon_bird" image="hud_progressbar_icon_bird" />
+		<texture id="progressbar_icon_fire" image="hud_progressbar_icon_fire" />
+		<texture id="progressbar_icon_rock" image="hud_progressbar_icon_rock" />
 
 		<texture id="number_back" image="hud_number_back" />
 		

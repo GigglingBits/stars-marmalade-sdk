@@ -30,8 +30,8 @@ LevelProgressBar::~LevelProgressBar() {
 
 void LevelProgressBar::Initialize() {
 	IW_CALLSTACK_SELF;
-	m_pxBackground = FactoryManager::GetTextureFactory().Create("progressbar_back");
-	m_pxStar = FactoryManager::GetTextureFactory().Create("progressbar_star");
+	m_pxBackground = FactoryManager::GetTextureFactory().Create("progressbar");
+	m_pxStar = FactoryManager::GetTextureFactory().Create("progressbar_icon_star");
 	
 	for (Icons::iterator i = m_xIcons.begin(); i != m_xIcons.end(); i++) {
 		Icon& icon = *i;
