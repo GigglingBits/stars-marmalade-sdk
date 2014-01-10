@@ -4,6 +4,7 @@
 data-ram
 
 Stars/build_*
+Stars/doxygen/output
 
 Kidpuzzle/build_kidpuzzle_vc11/
 Kidpuzzle/build_kidpuzzle_xcode/
@@ -32,7 +33,5 @@ Rydendahl/deployments/
 *.gxfont~
 *.group~
 *.xml~
+Doxyfile~
 
-Stars/build_stars_vc11x/android_x86_linker_script
-
-*.group~
