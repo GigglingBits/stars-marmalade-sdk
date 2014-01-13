@@ -17,8 +17,8 @@ public:
 		
 		virtual void Initialize() {};
 		virtual void FollowPath() {};
-		virtual void IncrementMultiplier() {};
 		
+		virtual void Collide(Body& body) {};
 		virtual void Update(uint16 timestep) {};
 	};
 	
@@ -91,8 +91,6 @@ private:
 
 	void SetTextureFrame(std::string id);
 	
-	void ShowTextEffect(const std::string& text);
-	
 	void EnableParticles();
 	void DisableParticles();
 	
@@ -103,6 +101,20 @@ private:
 
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+	
+public:
+	enum DustEventType {
+		eDustEventTypeCollectSingle,
+		eDustEventTypeCollect,
+		eDustEventTypeCommit,
+		eDustEventTypeRollback,
+	};
+	struct DustEventArgs {
+		DustEventType EventType;
+		int amount;
+		CIwFVec2 position;
+	};
+	Event<Star, DustEventArgs> DustEvent;
 };
 
 #endif

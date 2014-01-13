@@ -7,7 +7,7 @@
 #include "FactoryManager.h"
 
 Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Sprite(id, texturedef), m_pxGameFoundation(NULL) {
+	: Sprite(id, texturedef) {
 
 	// construct physical body
 	m_pxBody = m_xWorld.GetWorld().CreateBody(&bodydef);
@@ -52,15 +52,6 @@ const char* Body::TypeName() {
 
 bool Body::CanDispose() {
 	return m_xHealth.IsDead();
-}
-
-GameFoundation* Body::GetGameFoundation() {
-	IW_CALLSTACK_SELF;
-	return m_pxGameFoundation;
-}
-
-void Body::SetGameFoundation(const GameFoundation& game) {
-	m_pxGameFoundation = (GameFoundation*)&game;
 }
 
 void Body::AddPort(const std::string& portid, const CIwFVec2& pos) {
@@ -228,14 +219,10 @@ bool Body::HitTest(const CIwFVec2& position) {
 
 void Body::ShowEffect(const std::string& effect) {
 	IW_CALLSTACK_SELF;
-	if (GameFoundation* game = GetGameFoundation()) {
-		Sprite* fx = FactoryManager::GetEffectFactory().Create(effect);
-		fx->SetPosition(GetPosition());
-		game->Add(fx);
-	} else {
-		IwAssertMsg(MYAPP, false, 
-			("Tried to show effect %s for body %s. But the game foundation cannot be found!", effect.c_str(), GetId().c_str()));
-	}
+	EffectArgs args;
+	args.id = effect;
+	args.pos = GetPosition();
+	EffectRequested.Invoke(*this, args);
 }
 
 void Body::Collide(Body& body) {

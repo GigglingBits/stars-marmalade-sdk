@@ -8,7 +8,6 @@
 // Peaceful
 /////////////////////////////////////////////////////////////
 void Star::PeacefulState::Initialize() {
-	m_rxContext.ShowTextEffect("Peaceful");
 	m_rxContext.ClearAttackTextureFrame();
 }
 
@@ -21,19 +20,10 @@ void Star::PeacefulState::BeginAttack() {
 }
 
 void Star::PeacefulState::Collide(Body& body) {
-	if (body.GetTypeName() == Nugget::TypeName()) {
-		body.GetHealthManager().Kill();
-		body.ShowEffect("star_collision");
-		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
-
-	} else {
+	if (body.GetTypeName() != Nugget::TypeName()) {
 		body.GetHealthManager().Injure(5.0f); // just arbitrarily 5... for testing
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
-		
-		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-			game->CancelDust(m_rxContext.GetPosition());
-		}
 	}
 }
 
@@ -44,7 +34,6 @@ void Star::PeacefulState::Update(uint16 timestep) {
 // Block
 /////////////////////////////////////////////////////////////
 void Star::BlockState::Initialize() {
-	m_rxContext.ShowTextEffect("Blocking");
 	m_rxContext.SetAttackTextureFrame("block");
 }
 
@@ -59,7 +48,6 @@ void Star::BlockState::Update(uint16 timestep) {
 // Attack
 /////////////////////////////////////////////////////////////
 void Star::AttackState::Initialize() {
-	m_rxContext.ShowTextEffect("Attacking");
 	m_rxContext.SetAttackTextureFrame("attack");
 }
 

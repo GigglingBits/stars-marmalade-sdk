@@ -245,7 +245,8 @@
 			
 			<frame id="hurt" image="star_hurt" duration="100" next="hurt_01" />
 			<frame id="hurt_01" image="star_hurt_2" duration="100" next="hurt_02" />
-			<frame id="hurt_02" image="star_hurt_3" duration="100" next="happy" />
+			<frame id="hurt_02" image="star_hurt_3" duration="400" next="hurt_03" />
+			<frame id="hurt_03" image="star_hurt_2" duration="100" next="idle" />
 			
 			<frame id="followpath" image="star_moving" />
 			

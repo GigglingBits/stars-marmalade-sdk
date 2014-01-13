@@ -23,6 +23,9 @@ private:
 	b2Vec2 CalculateAverage(const b2Vec2& vectora, const b2Vec2& vectorb);
 	float CalculateApproachVelocity(b2Body* bodya, b2Body* bodyb, const b2Vec2& refpoint, const b2Vec2& normal);
 
+protected:
+	virtual void OnContact(Body* bodya, Body* bodyb, bool issensorcollision, float approachvelocity, const CIwFVec2& collisionpoint);
+	
 public:
 	struct CollisionEventArgs {
 		Body* bodya;

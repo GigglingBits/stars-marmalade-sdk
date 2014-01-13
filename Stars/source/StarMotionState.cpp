@@ -3,6 +3,7 @@
 #include "SoundEngine.h"
 #include "Nugget.h"
 #include "GameFoundation.h"
+#include "Debug.h"
 
 /////////////////////////////////////////////////////////////
 // Retracting
@@ -20,6 +21,21 @@ void Star::RetractingState::Initialize() {
 
 void Star::RetractingState::FollowPath() {
 	m_rxContext.SetState(new FollowState(m_rxContext));
+}
+
+void Star::RetractingState::Collide(Body& body) {
+	if (body.GetTypeName() != Nugget::TypeName()) {
+		return;
+	}
+	
+	IW_CALLSTACK_SELF;
+	SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
+	
+	DustEventArgs args;
+	args.EventType = eDustEventTypeCollectSingle;
+	args.amount = 10;
+	args.position = body.GetPosition();
+	m_rxContext.DustEvent.Invoke(m_rxContext, args);
 }
 
 void Star::RetractingState::Update(uint16 timestep) {
@@ -45,22 +61,30 @@ void Star::FollowState::FollowPath() {
 	m_rxContext.SetState(new FollowState(m_rxContext));
 }
 
-void Star::FollowState::IncrementMultiplier() {
-	if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-		game->QueueDust(m_rxContext.GetPosition(), 10);
+void Star::FollowState::Collide(Body& body) {
+	if (body.GetTypeName() != Nugget::TypeName()) {
+		return;
 	}
+	
+	IW_CALLSTACK_SELF;
+	SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
+	
+	DustEventArgs args;
+	args.EventType = eDustEventTypeCollect;
+	args.amount = 10;
+	args.position = body.GetPosition();
+	m_rxContext.DustEvent.Invoke(m_rxContext, args);
 }
 
 void Star::FollowState::Update(uint16 timestep) {
 	// end condition
 	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
 	if (path.empty()) {
-		// reset the multiplier
-		if (GameFoundation* game = m_rxContext.GetGameFoundation()) {
-			game->CommitDust(m_rxContext.GetPosition());
-		}
-
 		// transition to next state
+		DustEventArgs args;
+		args.EventType = eDustEventTypeCommit;
+		args.position = m_rxContext.GetPosition();
+		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		m_rxContext.SetState(new RetractingState(m_rxContext));
 		return;
 	}

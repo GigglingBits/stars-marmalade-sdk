@@ -15,6 +15,7 @@ public:
 	static const char* TypeName();
 
 protected:
+	virtual void OnColliding(Body& thisbody, Body& otherbody);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 };

@@ -4,6 +4,7 @@
 #include <map>
 
 #include "IwGeom.h"
+#include "Event.h"
 #include "Sprite.h"
 #include "World.h"
 #include "BodyShape.h"
@@ -12,8 +13,6 @@
 class Body : public Sprite {
 private:
 	World m_xWorld;
-
-	GameFoundation* m_pxGameFoundation;
 
 	b2Body* m_pxBody;
     b2Fixture* m_pxFixture;
@@ -37,9 +36,6 @@ public:
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
-
-	GameFoundation* GetGameFoundation();
-	void SetGameFoundation(const GameFoundation& game);
 
 	virtual bool CanDispose();
 
@@ -91,6 +87,13 @@ protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnColliding(Body& thisbody, Body& otherbody);
+	
+public:
+	struct EffectArgs {
+		std::string id;
+		CIwFVec2 pos;
+	};
+	Event<Body, EffectArgs> EffectRequested;
 };
 
 #endif

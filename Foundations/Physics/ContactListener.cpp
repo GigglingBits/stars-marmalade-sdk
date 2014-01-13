@@ -14,27 +14,27 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		("Sensor contacts are assumed not to have a manifold! Assumption failed. \
 		 The contact is possibly not a sensor contact, but will be treated as such!"));
 
-	// idetify bodies
-	b2Body* bodyA = contact->GetFixtureA()->GetBody();
-	b2Body* bodyB = contact->GetFixtureB()->GetBody();
-	args.bodya = GetActor(bodyA);
-	args.bodyb = GetActor(bodyB);
+	// identify bodies
+	b2Body* b2bodya = contact->GetFixtureA()->GetBody();
+	b2Body* b2bodyb = contact->GetFixtureB()->GetBody();
 
-	b2Vec2 bodyApos = bodyA->GetWorldCenter();
-	b2Vec2 bodyBpos = bodyB->GetWorldCenter();
+	b2Vec2 b2bodyapos = b2bodya->GetWorldCenter();
+	b2Vec2 b2bodybpos = b2bodyb->GetWorldCenter();
 
 	// find collision position
-	b2Vec2 collisionpoint = CalculateAverage(bodyApos, bodyBpos);
-	args.collisionpoint = CIwFVec2(collisionpoint.x, collisionpoint.y);	
+	b2Vec2 b2collisionpoint = CalculateAverage(b2bodyapos, b2bodybpos);
 
 	// calculate relative velocity
-	args.approachvelocity = CalculateApproachVelocity(
-		bodyA, bodyB, 
-		collisionpoint, 
-		bodyBpos - bodyApos);
+	float approachvelocity = CalculateApproachVelocity(
+		b2bodya, b2bodyb,
+		b2collisionpoint,
+		b2bodybpos - b2bodyapos);
 
 	// call the collision subscribers
-	CollisionEvent.Invoke(*this, args);
+	Body* bodya = GetActor(b2bodya);
+	Body* bodyb = GetActor(b2bodyb);
+	CIwFVec2 collisionpoint(b2collisionpoint.x, b2collisionpoint.y);
+	OnContact(bodya, bodyb, false, approachvelocity, collisionpoint);
 }
 
 //void ContactListener::EndContact(b2Contact* contact) {
@@ -49,14 +49,9 @@ void ContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold
 		return;
 	}
 
-	CollisionEventArgs args;
-	args.issensorcollision = false;
-
 	// get bodies
-	b2Body* bodyA = contact->GetFixtureA()->GetBody();
-	b2Body* bodyB = contact->GetFixtureB()->GetBody();
-	args.bodya = GetActor(bodyA);
-	args.bodyb = GetActor(bodyB);
+	b2Body* b2bodya = contact->GetFixtureA()->GetBody();
+	b2Body* b2bodyb = contact->GetFixtureB()->GetBody();
 
 	// assert for sensors
 	const b2Manifold* manifold = contact->GetManifold();
@@ -69,22 +64,24 @@ void ContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold
 	// find collision position
 	b2WorldManifold worldManifold;
 	contact->GetWorldManifold(&worldManifold);
-	b2Vec2 collisionpoint;
+	b2Vec2 b2collisionpoint;
 	if (pointcount == 1) {
-		collisionpoint = worldManifold.points[0];
+		b2collisionpoint = worldManifold.points[0];
 	} else {
-		collisionpoint = CalculateAverage(worldManifold.points[0], worldManifold.points[1]);
+		b2collisionpoint = CalculateAverage(worldManifold.points[0], worldManifold.points[1]);
 	}
-	args.collisionpoint = CIwFVec2(collisionpoint.x, collisionpoint.y);
-
+	
 	// calculate relative velocity
-	args.approachvelocity = CalculateApproachVelocity(
-		bodyA, bodyB, 
+	float approachvelocity = CalculateApproachVelocity(
+		b2bodya, b2bodyb,
 		worldManifold.points[0], 
 		worldManifold.normal);
 
 	// call the collision subscribers
-	CollisionEvent.Invoke(*this, args);
+	Body* bodya = GetActor(b2bodya);
+	Body* bodyb = GetActor(b2bodyb);
+	CIwFVec2 collisionpoint(b2collisionpoint.x, b2collisionpoint.y);
+	OnContact(bodya, bodyb, false, approachvelocity, collisionpoint);
 }
 
 //void ContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
@@ -116,4 +113,14 @@ float ContactListener::CalculateApproachVelocity(b2Body* bodya, b2Body* bodyb, c
 	b2Vec2 vA = bodya->GetLinearVelocityFromWorldPoint(refpoint);
 	b2Vec2 vB = bodyb->GetLinearVelocityFromWorldPoint(refpoint);
 	return b2Dot(vB - vA, normal);	
+}
+
+void ContactListener::OnContact(Body* bodya, Body* bodyb, bool issensorcollision, float approachvelocity, const CIwFVec2& collisionpoint) {
+	CollisionEventArgs args;
+	args.bodya = bodya;
+	args.bodyb = bodyb;
+	args.issensorcollision = false;
+	args.approachvelocity = approachvelocity;
+	args.collisionpoint = collisionpoint;
+	CollisionEvent.Invoke(*this, args);
 }

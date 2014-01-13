@@ -11,6 +11,7 @@ public:
 	RetractingState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
 	virtual void FollowPath();
+	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);
 };
 
@@ -21,10 +22,8 @@ class Star::FollowState : public Star::MotionStateBase {
 public:
 	FollowState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
-	
 	virtual void FollowPath();
-	virtual void IncrementMultiplier();
-
+	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);
 };
 

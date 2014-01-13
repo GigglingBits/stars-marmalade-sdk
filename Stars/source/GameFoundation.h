@@ -9,7 +9,7 @@
 #include "Body.h"
 #include "Star.h"
 #include "World.h"
-#include "ContactListener.h"
+#include "ContactHandler.h"
 #include "RayCaster.h"
 #include "DustCounter.h"
 
@@ -24,7 +24,7 @@ private:
 	World m_xWorld;
 	CIwFVec2 m_xWorldSize;
 	RayCaster m_xRayCaster;
-	ContactListener m_xContactListener;
+	ContactHandler m_xContactHandler;
 
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap m_xSpriteMap;
@@ -90,8 +90,8 @@ private:
 	bool CheckOutOfUniverse(const CIwFVec2& pos);
 	bool CheckOutOfBounds(const CIwFVec2& pos, float margin);
 
-	void Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity);
-	void CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args);
+	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
+	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);
 
 public:
 	struct QuakeImpactArgs {

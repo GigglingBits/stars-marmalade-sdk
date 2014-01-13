@@ -109,6 +109,8 @@ files {
 	(source)	
 	GameFoundation.h
 	GameFoundation.cpp
+	ContactHandler.h
+	ContactHandler.cpp
 	DustCounter.h
 	DustCounter.cpp
 

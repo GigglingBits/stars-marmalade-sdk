@@ -3,28 +3,29 @@
 #include "GameFoundation.h"
 #include "SplashText.h"
 #include "FactoryManager.h"
-#include "SoundEngine.h"
 #include "Configuration.h"
 
-GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
-: m_xWorldSize(worldsize), m_xRayCaster(m_xWorld), m_pxStar(NULL), m_xDust(dustrequirement) {
-
-	m_xContactListener.CollisionEvent.AddListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
+GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize) :
+m_xContactHandler(m_xWorld),
+m_xWorldSize(worldsize),
+m_xRayCaster(m_xWorld), m_pxStar(NULL),
+m_xDust(dustrequirement) {
 }
 
 GameFoundation::~GameFoundation() {
+	if (m_pxStar) {
+		m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
+	}
+	
 	SpriteMap::iterator it;
 	for (it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		Sprite* sprite = it->second;
 		delete sprite;
 	}
-
-	m_xWorld.RemoveContactListener();
-	m_xContactListener.CollisionEvent.RemoveListener<GameFoundation>(this, &GameFoundation::CollisionEventHandler);
 }
 
 void GameFoundation::Initialize() {
-	m_xWorld.SetContactListener(m_xContactListener);
+	m_xWorld.SetContactListener(m_xContactHandler);
 }
 
 std::map<std::string, Sprite*>& GameFoundation::GetSpriteMap() {
@@ -72,9 +73,10 @@ void GameFoundation::Add(Body* body) {
 	if (body->GetTypeName() == Star::TypeName()) {
 		IwAssertMsg(MYAPP, !m_pxStar, ("There seems to be a star already. There should by not more than one star at any given time."));
 		m_pxStar = (Star*)body;
+		m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
 	}
 
-	body->SetGameFoundation(*this);
+	body->EffectRequested.AddListener(this, &GameFoundation::EffectRequestedEventHandler);
 
 	Add((Sprite*)body);
 }
@@ -129,7 +131,11 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 		bool outofbounds = CheckOutOfUniverse(sprite->GetPosition());
 		if (outofbounds || sprite->CanDispose()) {
 			if (m_pxStar == sprite) {
+				m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
 				m_pxStar = NULL;
+			}
+			if (Body* body = dynamic_cast<Body*>(sprite)) {
+				body->EffectRequested.RemoveListener(this, &GameFoundation::EffectRequestedEventHandler);
 			}
 			delete sprite;
 			m_xSpriteMap.erase(it++);
@@ -233,18 +239,34 @@ bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 	return m_xRayCaster.RayHitTest(raystart, rayend);
 }
 
-void GameFoundation::Collide(Body& body1, Body& body2, bool issensorcollision, const CIwFVec2 collisionpoint, float approachvelocity) {
-	IW_CALLSTACK_SELF;
-	IwTrace(MYAPP, ("Colliding: %s(%s) -> %s(%s)", body1.GetTypeName(), body1.GetId().c_str(), body2.GetTypeName(), body2.GetId().c_str()));
-
-	// do body-internal actions (state transitions, texture changes, etc).
-	body1.Collide(body2);
-
-	// general collision actions
-	SoundEngine::GetInstance().PlaySoundEffect("Collision");
+void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
+	switch (args.EventType) {
+		case Star::eDustEventTypeCollectSingle: {
+			IwAssert(MYAPP, m_xDust.GetQueuedDustCount() == 0);
+			QueueDust(args.position, args.amount);
+			CommitDust(args.position);
+			break;
+		}
+			
+		case Star::eDustEventTypeCollect: {
+			QueueDust(args.position, args.amount);
+			break;
+		}
+			
+		case Star::eDustEventTypeCommit: {
+			CommitDust(args.position);
+			break;
+		}
+			
+		case Star::eDustEventTypeRollback: {
+			CancelDust(args.position);
+			break;
+		}
+	}
 }
 
-void GameFoundation::CollisionEventHandler(const ContactListener& sender, const ContactListener::CollisionEventArgs& args) {
-	Collide(*args.bodya, *args.bodyb, args.issensorcollision, args.collisionpoint, args.approachvelocity);
-	Collide(*args.bodyb, *args.bodya, args.issensorcollision, args.collisionpoint, args.approachvelocity);
+void GameFoundation::EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args) {
+	 Sprite* fx = FactoryManager::GetEffectFactory().Create(args.id);
+	 fx->SetPosition(args.pos);
+	 Add(fx);
 }

@@ -43,15 +43,8 @@ const char* Star::TypeName() {
 void Star::OnColliding(Body& thisbody, Body& otherbody) {
 	IW_CALLSTACK_SELF;
 
+	GetMotionState().Collide(otherbody);
 	GetAttackState().Collide(otherbody);
-
-	if (otherbody.GetTypeName() == Nugget::TypeName()) {
-		GetHealthManager().RenewLife();
-		otherbody.GetHealthManager().Kill();
-		if (m_pxMotionState) {
-			m_pxMotionState->IncrementMultiplier();
-		}
-	}
 }
 
 void Star::OnUpdate(const FrameData& frame) {
@@ -133,13 +126,6 @@ bool Star::IsFollowingPath() {
 	// RRR: this should have been solved by checking the state, rather than
 	///     the type! But I didn't find a simple way to test the state.
 	return !m_xPath.empty();
-}
-
-void Star::ShowTextEffect(const std::string& text) {
-	IW_CALLSTACK_SELF;
-	if (GameFoundation* game = GetGameFoundation()) {
-		game->AddSplashText(text, GetPosition());
-	}	
 }
 
 void Star::BeginBlock() {

@@ -15,6 +15,14 @@ const char* Nugget::TypeName() {
 	return type;
 }
 
+void Nugget::OnColliding(Body& thisbody, Body& otherbody) {
+	IW_CALLSTACK_SELF;
+	
+	// any collision leads to selfdestruction
+	GetHealthManager().Kill();
+	ShowEffect("star_collision");
+}
+
 void Nugget::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	Body::OnUpdate(frame);
