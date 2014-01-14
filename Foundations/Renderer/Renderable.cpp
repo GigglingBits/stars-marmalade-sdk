@@ -8,10 +8,10 @@ Renderable::~Renderable() {
 }
 
 void Renderable::SetDefaultRederingLayer() {
-	SetRederingLayer(Renderer::eRenderingLayerGameDynamicObjects);
+	SetRenderingLayer(Renderer::eRenderingLayerGameDynamicObjects);
 }
 
-void Renderable::SetRederingLayer(Renderer::RenderingLayer renderinglayer) {
+void Renderable::SetRenderingLayer(Renderer::RenderingLayer renderinglayer) {
 	m_eRenderingLayer = renderinglayer;
 }
 
@@ -24,7 +24,7 @@ void Renderable::Update(const FrameData& frame) {
 }
 
 void Renderable::Render(Renderer& renderer, const FrameData& frame) {
-	renderer.SetRederingLayer(m_eRenderingLayer);
+	renderer.SetRenderingLayer(m_eRenderingLayer);
 	OnRender(renderer, frame);
 	renderer.SetDefaultRederingLayer();
 }

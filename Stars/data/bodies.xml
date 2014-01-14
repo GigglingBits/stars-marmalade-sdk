@@ -107,6 +107,26 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
+		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
+			<texture image="buff_attack" />
+			<shape type="polygon">
+				<point x="-0.3" y="-0.3" />
+				<point x="0.3" y="-0.3" />
+				<point x="0.3" y="0.3" />
+				<point x="-0.3" y="0.3" />
+			</shape>
+		</body>
+		
+		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
+			<texture image="buff_block" />
+			<shape type="polygon">
+				<point x="-0.3" y="-0.3" />
+				<point x="0.3" y="-0.3" />
+				<point x="0.3" y="0.3" />
+				<point x="-0.3" y="0.3" />
+			</shape>
+		</body>
+		
 		<body id="airplane" type="dynamic" resilience="0.0" revolve="0" drag="0">
 			<texture image="airplane" />
 			<shape type="rectangle" width="2.4" height="0.8" />

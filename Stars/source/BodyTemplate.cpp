@@ -22,7 +22,7 @@ void BodyTemplate::Set(const std::string& id, const std::string& type, const std
 
 	if (!type.compare("dynamic") || !type.compare("star") || !type.compare("nugget")) {
 		m_xDef.type = b2_dynamicBody;
-	} else if (!type.compare("kinematic") || !type.compare("splashtext")) {
+	} else if (!type.compare("kinematic") || !type.compare("buff") || !type.compare("splashtext")) {
 		m_xDef.type = b2_kinematicBody;
 	} else { 
 		m_xDef.type = b2_staticBody;

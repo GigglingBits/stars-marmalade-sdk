@@ -97,6 +97,14 @@ void GameFoundation::EnqueueCreateSplashText(std::string text, const CIwFVec2& p
 	info.position = position;
 }
 
+void GameFoundation::EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed) {
+	m_xBodyCreationQueue.push(BodyInfo());
+	BodyInfo& info = m_xBodyCreationQueue.back();
+	info.id = id;
+	info.position = position;
+	info.speed = speed;
+}
+
 void GameFoundation::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	UpdatePhysics(frame.GetSimulatedDurationMs());
@@ -144,11 +152,18 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 			++it;
 		}
 	}
-
+	
+	// create the queued bodies
+	while (m_xBodyCreationQueue.size()) {
+		BodyInfo& info = m_xBodyCreationQueue.front();
+		CreateBody(info.id, info.position, info.speed);
+		m_xBodyCreationQueue.pop();
+	}
+	
 	// create the queued splash texts
 	while (m_xSplashtextCreationQueue.size()) {
 		SplashTextInfo& info = m_xSplashtextCreationQueue.front();
-		AddSplashText(info.text, info.position);
+		CreateSplashText(info.text, info.position);
 		m_xSplashtextCreationQueue.pop();
 	}
 }
@@ -169,10 +184,10 @@ float GameFoundation::GetDustQueuedPercent() {
 	return m_xDust.GetQueuedDustPercent();
 }
 
-void GameFoundation::QueueDust(const CIwFVec2& pos, int amount) {
+void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
 	int multipliedamount = (m_xDust.GetQueuedDustCount() + 1) * amount;
 	m_xDust.EnqueueDust(multipliedamount);
-	AddSplashNumber(multipliedamount, pos);
+	CreateSplashNumber(multipliedamount, pos);
 }
 
 void GameFoundation::CommitDust(const CIwFVec2& pos) {
@@ -185,10 +200,10 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 	}
 
 	// cancel
-	AddSplashNumber(-m_xDust.GetQueuedDustAmount(), pos);
+	CreateSplashNumber(-m_xDust.GetQueuedDustAmount(), pos);
 	m_xDust.ClearDustQueue();
 
-	// notify about cancellation
+	// quake effect
 	QuakeImpactArgs arg;
 	arg.amplitude = 0.3f;
 	QuakeImpact.Invoke(*this, arg);
@@ -216,40 +231,71 @@ bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos, float margin) {
 	return (std::abs(pos.x) + margin > bounds.x || std::abs(pos.y) + margin > bounds.y);
 }
 
-void GameFoundation::AddSplashNumber(long number, const CIwFVec2& position) {
+void GameFoundation::CreateSplashNumber(long number, const CIwFVec2& position) {
 	IW_CALLSTACK_SELF;
 	
 	std::ostringstream oss;
 	oss << number;
-	AddSplashText(oss.str(), position);
+	CreateSplashText(oss.str(), position);
 }
 
-void GameFoundation::AddSplashText(std::string text, const CIwFVec2& position) {
+void GameFoundation::CreateSplashText(std::string text, const CIwFVec2& position) {
 	IW_CALLSTACK_SELF;
 	
 	SplashText* p = (SplashText*)FactoryManager::GetEffectFactory().Create("text");
-	p->SetText(text);
-	p->SetPosition(position);
-	p->SetVelocity(CIwFVec2(0.0f, 0.8f));
+	if (p) {
+		p->SetText(text);
+		p->SetPosition(position);
+		p->SetVelocity(CIwFVec2(0.0f, 0.8f));
+		Add(p);
+	}
+}
 
-	Add(p);
+void GameFoundation::CreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed) {
+	IW_CALLSTACK_SELF;
+	
+	Body* p = (Body*)FactoryManager::GetBodyFactory().Create(id);
+	if (p) {
+		p->SetPosition(position);
+		p->GetBody().SetLinearVelocity(b2Vec2(speed.x, speed.y));
+		Add(p);
+	}
 }
 
 bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 	return m_xRayCaster.RayHitTest(raystart, rayend);
 }
 
+void GameFoundation::EmitBuff(const CIwFVec2& pos) {
+	IW_CALLSTACK_SELF;
+
+	// evaluate probability
+	float probability = m_xDust.GetDustFillPercent();
+	float random = (float)(rand() % 100) / 100.0f;
+	if (probability <= random) {
+		return;
+	}
+	
+	// select buff (based on even/odd number )
+	std::string buff = ((int)(random * 100.0f))%2 ? "buff_attack" : "buff_block";
+	
+	// create buff
+	CIwFVec2 speed(0.0f, Configuration::GetInstance().BuffSpeed);
+	EnqueueCreateBody(buff, pos, speed);
+}
+
 void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
 	switch (args.EventType) {
 		case Star::eDustEventTypeCollectSingle: {
 			IwAssert(MYAPP, m_xDust.GetQueuedDustCount() == 0);
-			QueueDust(args.position, args.amount);
+			EnqueueDust(args.position, args.amount);
 			CommitDust(args.position);
 			break;
 		}
 			
 		case Star::eDustEventTypeCollect: {
-			QueueDust(args.position, args.amount);
+			EnqueueDust(args.position, args.amount);
+			EmitBuff(args.position);
 			break;
 		}
 			

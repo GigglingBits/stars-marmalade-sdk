@@ -15,12 +15,6 @@
 
 class GameFoundation : public Renderable {
 private:
-	struct SplashTextInfo {
-		std::string text;
-		CIwFVec2 position;
-	};
-
-private:
 	World m_xWorld;
 	CIwFVec2 m_xWorldSize;
 	RayCaster m_xRayCaster;
@@ -29,7 +23,18 @@ private:
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap m_xSpriteMap;
 
+	struct SplashTextInfo {
+		std::string text;
+		CIwFVec2 position;
+	};
 	std::queue<SplashTextInfo> m_xSplashtextCreationQueue;
+
+	struct BodyInfo {
+		std::string id;
+		CIwFVec2 speed;
+		CIwFVec2 position;
+	};
+	std::queue<BodyInfo> m_xBodyCreationQueue;
 
 	Star* m_pxStar;
 
@@ -63,11 +68,12 @@ public:
 	bool StarHitTest(CIwFVec2 position);
 
 	// managed effects
-	void AddSplashNumber(long number, const CIwFVec2& position);
-	void AddSplashText(std::string text, const CIwFVec2& position);
+	void CreateSplashNumber(long number, const CIwFVec2& position);
+	void CreateSplashText(std::string text, const CIwFVec2& position);
+	void CreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
 	// gameplay
-	void QueueDust(const CIwFVec2& pos, int amount);
+	void EnqueueDust(const CIwFVec2& pos, int amount);
 	void CommitDust(const CIwFVec2& pos);
 	void CancelDust(const CIwFVec2& pos);
 
@@ -84,12 +90,16 @@ protected:
 private:
 	void UpdatePhysics(uint16 timestep);
 	void ManageSpriteLifeCicles(const FrameData& frame);
+
 	void EnqueueCreateSplashText(std::string text, const CIwFVec2& position);
+	void EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
 	bool CheckOutOfWorld(const CIwFVec2& pos);
 	bool CheckOutOfUniverse(const CIwFVec2& pos);
 	bool CheckOutOfBounds(const CIwFVec2& pos, float margin);
 
+	void EmitBuff(const CIwFVec2& pos);
+	
 	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);
 

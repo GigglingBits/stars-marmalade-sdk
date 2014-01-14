@@ -61,6 +61,12 @@ Configuration::Configuration() {
 		WorldMargin = 5.0f;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffspeed", tmpstr)) {
+		BuffSpeed = atof(tmpstr);
+	} else {
+		BuffSpeed = 0.5f;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {
 		PathSpeed = atof(tmpstr);
 	} else {

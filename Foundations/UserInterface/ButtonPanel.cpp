@@ -6,7 +6,7 @@
 ButtonPanel::ButtonPanel(ButtonCommandId cmdid, s3eKey key, long userdata)
 	: m_xToggle(cmdid, key, userdata), m_xCurtain(0xdd, 100), m_bPanelEnabled(true), m_bPanelOpen(false), m_iButtonCount(0) {
 
-	m_xCurtain.SetRederingLayer(Renderer::eRenderingLayerHud3);
+	m_xCurtain.SetRenderingLayer(Renderer::eRenderingLayerHud3);
 		
 	m_xToggle.PressedEvent.AddListener<ButtonPanel>(this, &ButtonPanel::PressedEventHandler);
 

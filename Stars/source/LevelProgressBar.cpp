@@ -8,7 +8,7 @@ LevelProgressBar::LevelProgressBar() :
 	m_pxStar(NULL),
 	m_fProgress(0.0f),
 	m_fMaxValue(1.0f) {
-	SetRederingLayer(Renderer::eRenderingLayerHud);
+	SetRenderingLayer(Renderer::eRenderingLayerHud);
 }
 
 LevelProgressBar::~LevelProgressBar() {

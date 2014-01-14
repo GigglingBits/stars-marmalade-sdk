@@ -20,7 +20,7 @@ BackgroundPainter::BackgroundPainter(std::string background) {
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 
-	SetRederingLayer(Renderer::eRenderingLayerBackground);
+	SetRenderingLayer(Renderer::eRenderingLayerBackground);
 }
 
 void BackgroundPainter::SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& viewportsize, float margin) {

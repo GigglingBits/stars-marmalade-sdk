@@ -20,6 +20,8 @@ public:
 	double MaxVisibleWorldSize;
 	double WorldMargin;
 
+	double BuffSpeed;
+	
 	double PathSpeed;
 	double PathMaxLength;
 

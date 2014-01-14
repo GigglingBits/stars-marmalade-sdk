@@ -60,10 +60,10 @@ void Renderer::SetViewport(const Viewport& viewport) {
 }
 
 void Renderer::SetDefaultRederingLayer() {
-	SetRederingLayer(eRenderingLayerGameDynamicObjects);
+	SetRenderingLayer(eRenderingLayerGameDynamicObjects);
 }
 
-void Renderer::SetRederingLayer(RenderingLayer renderinglayer) {
+void Renderer::SetRenderingLayer(RenderingLayer renderinglayer) {
 	m_eCurrentRenderingLayer = renderinglayer;
 }
 

@@ -103,10 +103,10 @@ void Window::Render(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 		
 	if (m_pxBackgroundTexture) {
-		renderer.SetRederingLayer(GetRederingLayer());
+		renderer.SetRenderingLayer(GetRederingLayer());
 		renderer.Draw(m_xBackgroundShape, *m_pxBackgroundTexture);
 	} else if (m_puiBackgroundColourStream && sizeof(m_puiBackgroundColourStream) <= m_xBackgroundShape.GetVertCount()) {
-		renderer.SetRederingLayer(GetRederingLayer());
+		renderer.SetRenderingLayer(GetRederingLayer());
 		renderer.DrawPolygon(m_xBackgroundShape.GetVerts(), m_xBackgroundShape.GetVertCount(), m_puiBackgroundColourStream, m_puiBackgroundColourStream);
 	} else if (m_puiBackgroundColourStream) {
 		IwAssertMsg(MYAPP,  sizeof(m_puiBackgroundColourStream) <= m_xBackgroundShape.GetVertCount(), ("The colour stream contains more colours than the windown shape. This is likely undesired, and could indicate an error."));

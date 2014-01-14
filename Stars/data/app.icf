@@ -6,6 +6,8 @@ showstats=0
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
 
+buffspeed=0.5			# meters per second
+
 pathspeed=15			# meters per second
 pathmaxlength=50		# max length of the path in meters
 
@@ -40,15 +42,9 @@ SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
 
-#{OS=android}
-#SplashscreenWidth=640
-#SplashscreenHeight=377
-#SplashscreenFile=splashscreen.jpg
-#SplashscreenMinTime=3000
-#{}
-
 IOSDispScaleFactor=200
-DispFixRot=FixedLandscape	# locked because of the gyroscope
+#DispFixRot=FixedLandscape	# locked because of the gyroscope
+DispFixRot=Landscape		# locked because of the gyroscope
 
 MemSize=18000000			# main heap; the resource heap in Main.cpp must also fit in here
 MemSizeDebug=25000000		# debug / resource builder
@@ -86,8 +82,6 @@ ResBuild=1
 [Gx]
 ####################################################
 DataCacheSize=524288
-#NumTPages=256
-#NumU256PaletteCacheBlocks=32
 VertCacheSize=4096
 
 ####################################################

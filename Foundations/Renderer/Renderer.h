@@ -50,7 +50,7 @@ public:
 	CIwFVec2 GetScreenCenterWorldSpace();
 
 	void SetDefaultRederingLayer();
-	void SetRederingLayer(RenderingLayer renderinglayer);
+	void SetRenderingLayer(RenderingLayer renderinglayer);
 
 	void SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system);
 

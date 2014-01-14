@@ -14,7 +14,7 @@ public:
 	virtual ~Renderable();
 
 	void SetDefaultRederingLayer();
-	void SetRederingLayer(Renderer::RenderingLayer renderinglayer);
+	void SetRenderingLayer(Renderer::RenderingLayer renderinglayer);
 	
 	virtual void Update(const FrameData& frame);
 	virtual void Render(Renderer& renderer, const FrameData& frame);

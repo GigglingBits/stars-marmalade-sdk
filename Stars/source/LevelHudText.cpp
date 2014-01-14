@@ -6,7 +6,7 @@ LevelHudText::LevelHudText() : m_eFont(Renderer::eFontTypeNormal), m_uiColour(0x
 }
 
 void LevelHudText::Initialize() {
-	SetRederingLayer(Renderer::eRenderingLayerHud);
+	SetRenderingLayer(Renderer::eRenderingLayerHud);
 }
 
 void LevelHudText::SetFont(Renderer::FontType font) {

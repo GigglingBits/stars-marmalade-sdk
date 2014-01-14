@@ -7,7 +7,7 @@ LevelBackground::LevelBackground(GameFoundation& game) : m_rxGame(game) {
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 
-	SetRederingLayer(Renderer::eRenderingLayerBackground);
+	SetRenderingLayer(Renderer::eRenderingLayerBackground);
 
 	m_uiNextCloudTime = 0;
 }
@@ -115,7 +115,7 @@ void LevelBackground::CreateCloud(const CIwFVec2& pos) {
 	std::string cloudname(std::string("cloud").append(variation).append(distance));
 	LocalEffect* effect = FactoryManager::GetEffectFactory().Create(cloudname);
 	if (effect) {
-		effect->SetRederingLayer(layer);
+		effect->SetRenderingLayer(layer);
 		effect->SetVelocity(velocity);
 		effect->SetPosition(pos);
 		m_rxGame.Add(effect);

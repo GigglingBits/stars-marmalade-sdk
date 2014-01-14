@@ -23,7 +23,7 @@ m_fQueuedDust(0.0f),
 m_pxBack(NULL),
 m_pxCommittedDustSurface(NULL),
 m_pxQueuedDustSurface(NULL) {
-	SetRederingLayer(Renderer::eRenderingLayerHud);
+	SetRenderingLayer(Renderer::eRenderingLayerHud);
 }
 
 LevelDustVial::~LevelDustVial() {
@@ -127,13 +127,13 @@ void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 		
 	// vial background
-	renderer.SetRederingLayer(Renderer::eRenderingLayerHud3);
+	renderer.SetRenderingLayer(Renderer::eRenderingLayerHud3);
 	if (m_pxBack) {
 		renderer.Draw(m_xBackShape, *m_pxBack);
 	}
 	
 	// vial content
-	renderer.SetRederingLayer(Renderer::eRenderingLayerHud2);
+	renderer.SetRenderingLayer(Renderer::eRenderingLayerHud2);
 	if (m_fCommittedDust > 0.0f) {
 		renderer.DrawPolygon(
 			m_xCommittedDustShape.GetVerts(), m_xCommittedDustShape.GetVertCount(),

@@ -11,8 +11,10 @@ CIwResGroup
 	./sprites/nugget_star_yellow.png
 	./sprites/nugget_star_red.png
 	./sprites/nugget_star_purple.png
-
 	./sprites/nugget_diamond_purple.png
+
+	./sprites/buff_attack.png
+	./sprites/buff_block.png
 
 	./sprites/bird_01.png
 	./sprites/bird_02.png

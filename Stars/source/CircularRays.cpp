@@ -3,7 +3,7 @@
 #include "Debug.h"
 
 CircularRays::CircularRays() {
-	SetRederingLayer(Renderer::eRenderingLayerGameStaticObjects);
+	SetRenderingLayer(Renderer::eRenderingLayerGameStaticObjects);
 	m_xPosition = CIwFVec2::g_Zero;
 	m_bCacheInvalidated = true;
 }
