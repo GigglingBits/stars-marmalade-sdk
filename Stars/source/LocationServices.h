@@ -2,6 +2,7 @@
 #define __LOCATIONSERVICES_H__
 
 #include "s3eGyroscope.h"
+#include "s3eSurface.h"
 
 class LocationServices {
 public:
@@ -29,8 +30,12 @@ public:
 	const DeviceOrientation& GetDeviceOrientation();
 	
 private:
+	bool NeedYInversion();
+	
 	void SetGyroData(const s3eGyroscopeData& data);
 	static void GyroscopeCallback(void* sysdata, void* usrdata);
+	
+//	static void ScreenSizeOrientationChangedCallback(s3eSurfaceOrientation *orien, void *pUserData);
 };
 
 #endif
