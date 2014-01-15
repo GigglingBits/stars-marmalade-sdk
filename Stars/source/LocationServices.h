@@ -5,6 +5,14 @@
 #include "s3eSurface.h"
 
 class LocationServices {
+private:
+	enum AppOrientation {
+		eAppOrientUp = 0,
+		eAppOrientRight = 90,
+		eAppOrientDown = 180,
+		eAppOrientLeft = 270,
+	};
+	
 public:
 	struct DeviceOrientation {
 		float x;
@@ -13,7 +21,8 @@ public:
 	};
 	
 private:
-	DeviceOrientation m_xOrientation;
+	AppOrientation m_eAppOrientation;
+	DeviceOrientation m_xDeviceOrientation;
 	
 private:
 	static LocationServices* s_pxInstance;
@@ -30,12 +39,11 @@ public:
 	const DeviceOrientation& GetDeviceOrientation();
 	
 private:
-	bool NeedYInversion();
+	void SetSurfaceData(const s3eSurfaceOrientation& orien);
+	static void SurfaceCallback(s3eSurfaceOrientation *orien, void *usrdata);
 	
 	void SetGyroData(const s3eGyroscopeData& data);
 	static void GyroscopeCallback(void* sysdata, void* usrdata);
-	
-//	static void ScreenSizeOrientationChangedCallback(s3eSurfaceOrientation *orien, void *pUserData);
 };
 
 #endif

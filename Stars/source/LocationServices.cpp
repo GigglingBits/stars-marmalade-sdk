@@ -1,33 +1,32 @@
 #include "LocationServices.h"
+#include "IwDebug.h"
 #include "Debug.h"
 
 LocationServices* LocationServices::s_pxInstance = NULL;
 
 LocationServices::LocationServices() {
-	m_xOrientation.x = 0.0f;
-	m_xOrientation.y = 0.0f;
-	m_xOrientation.z = 0.0f;
+	m_xDeviceOrientation.x = 0.0f;
+	m_xDeviceOrientation.y = 0.0f;
+	m_xDeviceOrientation.z = 0.0f;
 	
 	if (s3eGyroscopeAvailable()) {
 		s3eGyroscopeStart();
 		s3eGyroscopeSetSensorDelay(DELAY_GAME);
 		s3eGyroscopeRegister(S3E_GYROSCOPE_CALLBACK_DATA_UPDATE, (s3eCallback)GyroscopeCallback, this);
 		
-/*
 		s3eSurfaceRegister(
 			S3E_SURFACE_SCREENSIZE,
-			(s3eCallback)ScreenSizeOrientationChangedCallback, this);
-*/
+			(s3eCallback)SurfaceCallback, this);
 	}
 }
 
 LocationServices::~LocationServices() {
 	if (s3eGyroscopeAvailable()) {
-/*
+
 		s3eSurfaceUnRegister(
 			S3E_SURFACE_SCREENSIZE,
-			(s3eCallback)ScreenSizeOrientationChangedCallback);
-*/
+			(s3eCallback)SurfaceCallback);
+
 		s3eGyroscopeUnRegister(S3E_GYROSCOPE_CALLBACK_DATA_UPDATE, (s3eCallback)GyroscopeCallback);
 		s3eGyroscopeStop();
 	}
@@ -52,26 +51,41 @@ LocationServices& LocationServices::GetInstance() {
 }
 
 const LocationServices::DeviceOrientation& LocationServices::GetDeviceOrientation() {
-	return m_xOrientation;
-}
-
-bool LocationServices::NeedYInversion() {
-	int dir = s3eSurfaceGetInt(S3E_SURFACE_BLIT_DIRECTION);
-	return S3E_SURFACE_BLIT_DIR_ROT180 == dir || S3E_SURFACE_BLIT_DIR_ROT270 == dir;
+	return m_xDeviceOrientation;
 }
 
 void LocationServices::SetGyroData(const s3eGyroscopeData& data) {
 	// fade the old data
-	m_xOrientation.x *= 0.98f;
-	m_xOrientation.y *= 0.98f;
-	m_xOrientation.z *= 0.98f;
-		
-	// apply new data
-	m_xOrientation.x += data.m_X;
-	m_xOrientation.y += NeedYInversion() ? -data.m_Y :  data.m_Y;
-	m_xOrientation.z += data.m_Z;
+	m_xDeviceOrientation.x *= 0.98f;
+	m_xDeviceOrientation.y *= 0.98f;
+	m_xDeviceOrientation.z *= 0.98f;
 	
-	// compensate for app rotation
+	// compensate for screen rotation
+	float dx, dy, dz;
+	if (eAppOrientRight == m_eAppOrientation) {
+		// notimplemented; todo: rotate the axis correctly
+		dx = data.m_X * 0.0f;
+		dy = data.m_Y * 0.0f;
+		dz = data.m_Z;
+	} else if (eAppOrientDown == m_eAppOrientation) {
+		dx = data.m_X;
+		dy = data.m_Y;
+		dz = data.m_Z;
+	} else if (eAppOrientLeft == m_eAppOrientation) {
+		// notimplemented; todo: rotate the axis correctly
+		dx = data.m_X * 0.0f;
+		dy = data.m_Y * 0.0f;
+		dz = data.m_Z;
+	} else {
+		dx = -data.m_X;
+		dy = -data.m_Y;
+		dz = data.m_Z;
+	}
+	
+	// apply new data
+	m_xDeviceOrientation.x += dx;
+	m_xDeviceOrientation.y += dy;
+	m_xDeviceOrientation.z += dz;
 }
 
 void LocationServices::GyroscopeCallback(void* sysdata, void* usrdata) {
@@ -82,8 +96,37 @@ void LocationServices::GyroscopeCallback(void* sysdata, void* usrdata) {
 	}
 }
 
-/*
- void LocationServices::ScreenSizeOrientationChangedCallback(s3eSurfaceOrientation *orien, void *pUserData) {
+void LocationServices::SetSurfaceData(const s3eSurfaceOrientation& orien) {
+	if (orien.m_OrientationChanged) {
+		return;
+	}
 	
+	switch (orien.m_DeviceBlitDirection) {
+		case S3E_SURFACE_BLIT_DIR_NORMAL: {
+			m_eAppOrientation = eAppOrientUp;
+			break;
+		}
+		case S3E_SURFACE_BLIT_DIR_ROT90: {
+			m_eAppOrientation = eAppOrientLeft;
+			break;
+		}
+		case S3E_SURFACE_BLIT_DIR_ROT180: {
+			m_eAppOrientation = eAppOrientDown;
+			break;
+		}
+		case S3E_SURFACE_BLIT_DIR_ROT270: {
+			m_eAppOrientation = eAppOrientLeft;
+			break;
+		}
+		default: {
+			m_eAppOrientation = eAppOrientUp;
+		}
+	}
 }
-*/
+
+void LocationServices::SurfaceCallback(s3eSurfaceOrientation *orien, void *usrdata) {
+	if (LocationServices* ls = (LocationServices*) usrdata) {
+		if (orien) {
+			ls->SetSurfaceData(*orien);
+		}
+	}}
