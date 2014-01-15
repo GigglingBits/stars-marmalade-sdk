@@ -4,17 +4,17 @@
 #include "Debug.h"
 
 uint32 LevelDustVial::s_auCommittedColours[] = {
-	0xff37f5eb,
-	0xff37f5eb,
-	0xff44cde6,
-	0xff44cde6
+	0xdd37f5eb,
+	0xdd37f5eb,
+	0xdd44cde6,
+	0xdd44cde6
 };
 
 uint32 LevelDustVial::s_auQueuedColours[] = {
-	0xffccf5eb,
-	0xffccf5eb,
-	0xffeff5eb,
-	0xffeff5eb
+	0xddccf5eb,
+	0xddccf5eb,
+	0xddeff5eb,
+	0xddeff5eb
 };
 
 LevelDustVial::LevelDustVial() :
@@ -73,7 +73,7 @@ void LevelDustVial::UpdateVialShapes() {
 	
 	// vial content geometry
 	m_xContentGeom = back;
-	marginx = std::max<int>(1, m_xContentGeom.w / 20);
+	marginx = std::max<int>(1, m_xContentGeom.w / 12);
 	marginy = std::max<int>(1, m_xContentGeom.h / 5);
 	m_xContentGeom.x += marginx;
 	m_xContentGeom.y += marginy;
