@@ -9,6 +9,8 @@ public:
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
+	
+	virtual bool BeginDragging(const CIwFVec2& target);
 };
 
 #endif

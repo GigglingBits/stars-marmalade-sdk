@@ -109,22 +109,12 @@
 		
 		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
 			<texture image="buff_attack" />
-			<shape type="polygon">
-				<point x="-0.3" y="-0.3" />
-				<point x="0.3" y="-0.3" />
-				<point x="0.3" y="0.3" />
-				<point x="-0.3" y="0.3" />
-			</shape>
+			<shape type="circle" width="0.8" />
 		</body>
 		
 		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
 			<texture image="buff_block" />
-			<shape type="polygon">
-				<point x="-0.3" y="-0.3" />
-				<point x="0.3" y="-0.3" />
-				<point x="0.3" y="0.3" />
-				<point x="-0.3" y="0.3" />
-			</shape>
+			<shape type="circle" width="0.8" />
 		</body>
 		
 		<body id="airplane" type="dynamic" resilience="0.0" revolve="0" drag="0">

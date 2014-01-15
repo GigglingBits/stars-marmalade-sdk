@@ -71,9 +71,9 @@ public:
 
 	void EnableDragging(bool enable);
 	bool CanDrag();
-	bool BeginDragging(const CIwFVec2& target);
-	void MoveDragging(const CIwFVec2& target);
-	void EndDragging();
+	virtual bool BeginDragging(const CIwFVec2& target);
+	virtual void MoveDragging(const CIwFVec2& target);
+	virtual void EndDragging();
 	bool IsDragging();
 
 	virtual float GetMass();

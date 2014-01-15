@@ -16,3 +16,7 @@ const char* Buff::TypeName() {
 	return type;
 }
 
+bool Buff::BeginDragging(const CIwFVec2& target) {
+	GetHealthManager().Kill();
+	return false;
+}
