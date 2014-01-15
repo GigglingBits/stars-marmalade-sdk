@@ -18,5 +18,6 @@ const char* Buff::TypeName() {
 
 bool Buff::BeginDragging(const CIwFVec2& target) {
 	GetHealthManager().Kill();
+	ShowEffect("buff_touch");
 	return false;
 }

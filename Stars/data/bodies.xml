@@ -155,7 +155,15 @@
 	
 	<effects>
 		<effect id="star_collision" type="particles" duration="100">
-			<shape type="rectangle" width="0.1" height="0.1" />
+			<shape type="circle" width="0.1" />
+			<texture>
+				<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+				<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+				<frame id="03" image="particle_white_star_3" />
+			</texture>
+		</effect>
+		<effect id="buff_touch" type="particles" duration="100">
+			<shape type="circle" width="0.1" />
 			<texture>
 				<frame id="01" image="particle_white_star_1" duration="550" next="02" />
 				<frame id="02" image="particle_white_star_2" duration="50" next="03" />
