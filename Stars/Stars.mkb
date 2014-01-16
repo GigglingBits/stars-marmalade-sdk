@@ -112,8 +112,6 @@ files {
 	LevelHudNumber.cpp
 	LevelDustVial.h
 	LevelDustVial.cpp
-	LevelProgressBar.h
-	LevelProgressBar.cpp
 
 	LevelInteractor.h
 	LevelInteractor.cpp

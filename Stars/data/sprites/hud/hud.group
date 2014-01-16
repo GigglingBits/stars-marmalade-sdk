@@ -9,13 +9,6 @@ CIwResGroup
 	./hud_stardust_surface_queued.png
 	./hud_number_back.png
 
-	./hud_progressbar.png
-	./hud_progressbar_icon_star.png
-	./hud_progressbar_icon_nugget.png
-	./hud_progressbar_icon_bird.png
-	./hud_progressbar_icon_fire.png
-	./hud_progressbar_icon_rock.png
-
 	./button_action_block.png
 	./button_action_block_pressed.png
 	./button_action_block_disabled.png

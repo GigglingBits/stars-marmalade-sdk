@@ -60,9 +60,8 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	// add sequences of level elements
 	TiXmlElement* spritesequencenode = node->FirstChildElement("spritesequence");
 	while (spritesequencenode) {
-		std::string icon((pc = (char*)spritesequencenode->Attribute("icon")) ? pc : "");
 		std::string text((pc = (char*)spritesequencenode->Attribute("text")) ? pc : "");
-		conf.BeginSection(icon, text);
+		conf.BeginSection(text);
 		
 		int delay;
 		spritesequencenode->Attribute("delay", &delay);
@@ -114,7 +113,7 @@ void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::
 	
 	switch (element.Type) {
 		case LevelTemplate::eElementTypeBeginSection:
-			level.StartSection(element.SectionIcon, element.SectionText);
+			level.StartSection(element.SectionText);
 			break;
 		case LevelTemplate::eElementTypeCreateBody:
 			level.Add(element.Delay, element.BodyName, element.Position, element.Speed);

@@ -884,8 +884,16 @@
 				<def id="n" body="nugget_01" />
 				<def id="1" body="bird_01" />
 				<def id="2" body="bird_02" />
+				<def id="3" body="bird_03" />
 			</spritedefs>
 			<spritesequence delay="200" speed="2">
+				<line map=" 1      " />
+				<line map="        " />
+				<line map="   2    " />
+				<line map="        " />
+				<line map="     3  " />
+				<line map="        " />
+				<line map="        " />
 				<line map="n  n    " />
 				<line map="n   1   " />
 				<line map=" n    n " />

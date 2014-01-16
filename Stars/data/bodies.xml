@@ -109,12 +109,12 @@
 		
 		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
 			<texture image="buff_attack" />
-			<shape type="circle" width="0.8" />
+			<shape type="circle" width="1.0" />
 		</body>
 		
 		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
 			<texture image="buff_block" />
-			<shape type="circle" width="0.8" />
+			<shape type="circle" width="1.0" />
 		</body>
 		
 		<body id="airplane" type="dynamic" resilience="0.0" revolve="0" drag="0">
@@ -135,21 +135,91 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
-		<body id="bird_01" type="dynamic" resilience="1.0" revolve="0" drag="0">
+		<body id="bird_01" type="dynamic" resilience="1.0" revolve="0">
 			<texture image="bird_01" />
 			<shape type="polygon">
-				<point x="-0.8" y="-0.55" />
-				<point x="0.8" y="-0.55" />
-				<point x="0.8" y="0.55" />
-				<point x="-0.8" y="0.55" />
+				<point x="-0.8" y="-0.35" />
+				<point x="0.8" y="-0.35" />
+				<point x="0.8" y="0.35" />
+				<point x="-0.8" y="0.35" />
 			</shape>
+			<port id="shoulder" x="0.4" y="0.1" />
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<child id="wings" port="shoulder" jointtype="weld">
+				<body type="dynamic" resilience="1.0" >
+					<texture>
+						<frame id="01" image="bird_01_wings_01" duration="300" next="02" />
+						<frame id="02" image="bird_01_wings_02" duration="150" next="03" />
+						<frame id="03" image="bird_01_wings_03" duration="150" next="04" />
+						<frame id="04" image="bird_01_wings_02" duration="150" next="01" />
+					</texture>
+					<shape type="polygon">
+						<point x="0.0" y="-0.5" />
+						<point x="0.5" y="-0.5" />
+						<point x="0.5" y="0.5" />
+						<point x="0.0" y="0.5" />
+					</shape>
+					<fixture friction="0.6" restitution="0.5" density="1.0" />
+				</body>
+			</child>
 		</body>
 		
 		<body id="bird_02" type="dynamic" resilience="0.2" revolve="0" drag="0">
 			<texture image="bird_02" />
-			<shape type="rectangle" width="0.9" height="0.5" />
+			<shape type="polygon">
+				<point x="-0.6" y="-0.35" />
+				<point x="0.6" y="-0.35" />
+				<point x="0.6" y="0.35" />
+				<point x="-0.6" y="0.35" />
+			</shape>
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<port id="shoulder" x="0.4" y="0.1" />
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<child id="wings" port="shoulder" jointtype="weld">
+				<body type="dynamic" resilience="1.0" >
+					<texture>
+						<frame id="01" image="bird_02_wings_01" duration="500" next="02" />
+						<frame id="02" image="bird_02_wings_02" duration="200" next="03" />
+						<frame id="03" image="bird_02_wings_03" duration="200" next="01" />
+					</texture>
+					<shape type="polygon">
+						<point x="0.0" y="-0.5" />
+						<point x="0.5" y="-0.5" />
+						<point x="0.5" y="0.5" />
+						<point x="0.0" y="0.5" />
+					</shape>
+					<fixture friction="0.6" restitution="0.5" density="1.0" />
+				</body>
+			</child>
+		</body>
+		
+		<body id="bird_03" type="dynamic" resilience="0.2" revolve="0" drag="0">
+			<texture image="bird_03" />
+			<shape type="polygon">
+				<point x="-0.7" y="-0.55" />
+				<point x="0.7" y="-0.55" />
+				<point x="0.7" y="0.55" />
+				<point x="-0.7" y="0.55" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<port id="shoulder" x="0.4" y="0.1" />
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<child id="wings" port="shoulder" jointtype="weld">
+				<body type="dynamic" resilience="1.0" >
+					<texture>
+						<frame id="01" image="bird_03_wings_01" duration="500" next="02" />
+						<frame id="02" image="bird_03_wings_02" duration="200" next="03" />
+						<frame id="03" image="bird_03_wings_03" duration="200" next="01" />
+					</texture>
+					<shape type="polygon">
+						<point x="0.0" y="-0.5" />
+						<point x="0.5" y="-0.5" />
+						<point x="0.5" y="0.5" />
+						<point x="0.0" y="0.5" />
+					</shape>
+					<fixture friction="0.6" restitution="0.5" density="1.0" />
+				</body>
+			</child>
 		</body>
 	</bodies>
 	
@@ -234,13 +304,6 @@
 		
 		<texture id="touch" image="touch" />
 		
-		<texture id="progressbar" image="hud_progressbar" />
-		<texture id="progressbar_icon_star" image="hud_progressbar_icon_star" />
-		<texture id="progressbar_icon_nugget" image="hud_progressbar_icon_nugget" />
-		<texture id="progressbar_icon_bird" image="hud_progressbar_icon_bird" />
-		<texture id="progressbar_icon_fire" image="hud_progressbar_icon_fire" />
-		<texture id="progressbar_icon_rock" image="hud_progressbar_icon_rock" />
-
 		<texture id="number_back" image="hud_number_back" />
 		
 		<texture id="stardustvial" image="hud_stardust_vial" />

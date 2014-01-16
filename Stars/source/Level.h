@@ -93,7 +93,7 @@ public:
 	void Add(Body* body);
 	void Add(uint16 delay, const std::string& body, float ypos, float speed);
 
-	void StartSection(const std::string& icontexture, const std::string& bannertext);
+	void StartSection(const std::string& bannertext);
 	void EndSection();
 
 	uint32 GetDuration();

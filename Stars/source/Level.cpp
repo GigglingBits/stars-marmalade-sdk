@@ -56,8 +56,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 
 	m_ulLeadInTime = m_xEventTimer.GetTotalDuration();
-
-	m_xHud.SetLevelDuration(GetDuration());
 }
 
 Level::~Level() {
@@ -97,8 +95,6 @@ void Level::Initialize() {
 	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
 	
 	m_ulLeadOutTime = m_xEventTimer.GetTotalDuration() - endmarker;
-
-	m_xHud.SetLevelDuration(GetDuration());
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -211,7 +207,7 @@ const Level::CompletionInfo& Level::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
 
-void Level::StartSection(const std::string& icontexture, const std::string& bannertext) {
+void Level::StartSection(const std::string& bannertext) {
 	IW_CALLSTACK_SELF;
 
 	if (!bannertext.empty()) {
@@ -227,10 +223,6 @@ void Level::StartSection(const std::string& icontexture, const std::string& bann
 		args.eventId = eEventIdNoOp;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
 	}
-
-	if (!icontexture.empty()) {
-		m_xHud.SetLevelSectionIcon(GetDuration(), icontexture);
-	}	
 }
 
 void Level::EndSection() {
@@ -340,7 +332,6 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xBackgroundStars.Update(frame);
 	m_xBackgroundClouds.Update(frame);
 	
-	m_xHud.SetLevelProgress(GetElapsed());
 	m_xHud.Update(frame);
 }
 

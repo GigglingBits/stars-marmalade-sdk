@@ -16,7 +16,6 @@ public:
 	
 	struct LevelElement {
 		ElementType Type;
-		std::string SectionIcon;
 		std::string SectionText;
 		uint16 Delay;
 		std::string BodyName;
@@ -41,7 +40,7 @@ public:
 	void AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map, int delay, float speed);
 	void AddElementDelay(uint16 delay);
 
-	void BeginSection(std::string icontexture, std::string bannertext);
+	void BeginSection(std::string bannertext);
 	void EndSection();
 	
 	std::string GetName();

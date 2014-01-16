@@ -17,8 +17,19 @@ CIwResGroup
 	./sprites/buff_block.png
 
 	./sprites/bird_01.png
+	./sprites/bird_01_wings_01.png
+	./sprites/bird_01_wings_02.png
+	./sprites/bird_01_wings_03.png
+
 	./sprites/bird_02.png
+	./sprites/bird_02_wings_01.png
+	./sprites/bird_02_wings_02.png
+	./sprites/bird_02_wings_03.png
+
 	./sprites/bird_03.png
+	./sprites/bird_03_wings_01.png
+	./sprites/bird_03_wings_02.png
+	./sprites/bird_03_wings_03.png
 
 	./sprites/airplane.png
 	./sprites/jetfighter.png

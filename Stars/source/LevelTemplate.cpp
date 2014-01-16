@@ -25,8 +25,8 @@ float LevelTemplate::GetDustRequirement() {
 	return m_fDustRequirement;
 }
 
-void LevelTemplate::BeginSection(std::string icontexture, std::string bannertext) {
-	if (icontexture.empty() && bannertext.empty()) {
+void LevelTemplate::BeginSection(std::string bannertext) {
+	if (bannertext.empty()) {
 		return;
 	}
 	
@@ -36,7 +36,6 @@ void LevelTemplate::BeginSection(std::string icontexture, std::string bannertext
 	element.Delay = 0;
 	element.Position = 0.0f;
 	element.Speed = 0.0f;
-	element.SectionIcon = icontexture;
 	element.SectionText = bannertext;
 	m_xElements.push(element);
 }
@@ -48,7 +47,6 @@ void LevelTemplate::EndSection() {
 	element.Delay = 0;
 	element.Position = 0.0f;
 	element.Speed = 0.0f;
-	element.SectionIcon = "";
 	element.SectionText = "";
 	m_xElements.push(element);
 }
@@ -66,7 +64,6 @@ void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float positio
 	element.Delay = delay;
 	element.Position = position;
 	element.Speed = speed;
-	element.SectionIcon = "";
 	element.SectionText = "";
 	m_xElements.push(element);
 }

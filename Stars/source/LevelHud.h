@@ -6,7 +6,6 @@
 #include "ButtonEx.h"
 #include "LevelDustVial.h"
 #include "LevelHudNumber.h"
-#include "LevelProgressBar.h"
 
 class LevelHud : public Window {
 private:
@@ -14,7 +13,6 @@ private:
 
 	bool m_bIsEnabled;
 
-	LevelProgressBar m_xProgressBar;
 	LevelDustVial m_xVial;
 	
 	ButtonEx m_xButtonBlock;
@@ -27,10 +25,6 @@ public:
 	virtual void Initialize();
 	
 	void SetEnabled(bool enabled);
-	
-	void SetLevelSectionIcon(uint32 milliseconds, const std::string& texturename);
-	void SetLevelDuration(uint32 milliseconds);
-	void SetLevelProgress(uint32 milliseconds);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

@@ -24,7 +24,6 @@ void LevelHud::Initialize() {
 	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
 	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 	
-	m_xProgressBar.Initialize();
 	m_xVial.Initialize();
 }
 
@@ -37,25 +36,13 @@ void LevelHud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
-void LevelHud::SetLevelSectionIcon(uint32 milliseconds, const std::string& texturename) {
-	m_xProgressBar.SetIcon(milliseconds, texturename);
-}
-
-void LevelHud::SetLevelDuration(uint32 milliseconds) {
-	m_xProgressBar.SetMax(milliseconds);
-}
-
-void LevelHud::SetLevelProgress(uint32 milliseconds) {
-	m_xProgressBar.SetProgress(milliseconds);
-}
-
 void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	int extent = GetScreenExtents();
 	
 	int spacing = extent / 40;
 	
-	int buttonwidth = extent / 6;
-	int buttonheight = extent / 9;
+	int buttonwidth = extent / 8;
+	int buttonheight = extent / 8;
 
 	int progressbarheight = extent / 20;
 
@@ -64,7 +51,7 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	
 	// action buttons (right)
 	CIwRect rect;
-	rect.x = 0;
+	rect.x = spacing;
 	rect.y = screensize.y - (2 * buttonheight) - (2 * spacing);
 	rect.w = buttonwidth;
 	rect.h = buttonheight;
@@ -72,17 +59,11 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	rect.y += rect.h + spacing;
 	m_xButtonAttack.SetPosition(rect);
 	
-	// progress bar
-	int x = spacing, y = spacing;
-	int w = screensize.x - (extent / 10) - (extent / 30) - (2 * spacing), h = progressbarheight;
-	rect.Make(x, y, w, h);
-	m_xProgressBar.SetPosition(rect);
-
 	// dust vial
-	x = screensize.x - dustvialwidth - spacing;
-	y = screensize.y - dustvialheight - spacing;
-	w = dustvialwidth;
-	h = dustvialheight;
+	int x = screensize.x - dustvialwidth - spacing;
+	int y = screensize.y - dustvialheight - spacing;
+	int w = dustvialwidth;
+	int h = dustvialheight;
 	rect.Make(x, y, w, h);
 	m_xVial.SetPosition(rect);
 }
@@ -93,8 +74,6 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xButtonBlock.Update(frame);
 	m_xButtonAttack.Update(frame);
 	
-	m_xProgressBar.Update(frame);
-
 	m_xVial.SetDustAmount(m_rxGame.GetDustFillPercent(), m_rxGame.GetDustQueuedPercent());
 	m_xVial.Update(frame);
 }
@@ -109,7 +88,6 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonBlock.Render(renderer, frame);
 	m_xButtonAttack.Render(renderer, frame);
 	
-	m_xProgressBar.Render(renderer, frame);
 	m_xVial.Render(renderer, frame);
 }
 
