@@ -48,7 +48,7 @@ public:
 	CIwFVec2 GetCenter();
 
 	void SetImpulse(const CIwFVec2& vector);
-	void SetSpeed(const CIwFVec2& vector);
+	virtual void SetSpeed(const CIwFVec2& vector);
 
 	void EnableCollisions(bool enable);
 	void EnableRotation(bool enable);

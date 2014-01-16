@@ -32,6 +32,7 @@ public:
 	void AddJoint(const std::string& jointid, const std::string& childaa, const std::string& porta, const std::string& childb, const std::string& portb, BodyJoint::eJointType jointtype);
 
 	virtual void SetPosition(const CIwFVec2& position, float angle);
+	virtual void SetSpeed(const CIwFVec2& vector);
 
 	virtual float GetMass();
 

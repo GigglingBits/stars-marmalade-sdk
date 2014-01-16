@@ -82,6 +82,17 @@ void CompositeBody::SetPosition(const CIwFVec2& position, float angle) {
 	AlignChildren();
 }
 
+void CompositeBody::SetSpeed(const CIwFVec2& vector) {
+	Body::SetSpeed(vector);
+	
+	// child bodies also need to get the speed set;
+	// otherwise the parent body loses momentum
+	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
+		Body* body = it->second;
+		body->SetSpeed(vector);
+	}
+}
+
 void CompositeBody::AlignChildren() {
 	IW_CALLSTACK_SELF;
 
