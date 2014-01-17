@@ -16,9 +16,7 @@
 #define LEVEL_START_BANNER_LEADIN 500
 #define LEVEL_START_BANNER_DURATION 1000
 
-#define LEVEL_SETTLE_DELAY 5000
-
-#define LEVEL_SECTION_BANNER_LEADIN 500
+#define LEVEL_SECTION_BANNER_LEADIN 3000
 #define LEVEL_SECTION_BANNER_DURATION 3000
 #define LEVEL_SECTION_BANNER_LEADOUT 500
 
@@ -46,7 +44,6 @@ private:
 		eEventIdCreateBody,
 		eEventIdSettle,
 		eEventIdFinish,
-		eEventIdUnload,
 	};
 
 	struct EventArgs {
@@ -80,9 +77,6 @@ private:
 	LevelHud m_xHud;
 
 	LevelInteractor m_xInteractor;
-
-	uint32 m_ulLeadInTime;
-	uint32 m_ulLeadOutTime;
 	
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement);
@@ -96,9 +90,6 @@ public:
 	void StartSection(const std::string& bannertext);
 	void EndSection();
 
-	uint32 GetDuration();
-	uint32 GetElapsed();
-	
 	const CompletionInfo& GetCompletionInfo();
 
 	GameFoundation& GetGameFoundation();
@@ -131,7 +122,7 @@ private:
 	
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
 
-	CIwFVec2 GetStarRestPosition();
+	CIwFVec2 GetStarIdlePosition();
 	CIwFVec2 GetStarHidePosition();
 	
 	void SetStarAnchor(const CIwFVec2& pos);

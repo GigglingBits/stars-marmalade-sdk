@@ -44,8 +44,6 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	int buttonwidth = extent / 8;
 	int buttonheight = extent / 8;
 
-	int progressbarheight = extent / 20;
-
 	int dustvialheight = extent / 3;
 	int dustvialwidth = extent / 7;
 	

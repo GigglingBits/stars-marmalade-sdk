@@ -19,9 +19,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
 	m_xBackgroundClouds(m_xGame),
-	m_xBannerRect(0, 0, 0, 0),
-	m_ulLeadInTime(0),
-	m_ulLeadOutTime(0) {
+	m_xBannerRect(0, 0, 0, 0) {
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
@@ -54,8 +52,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	args.eventId = eEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
-
-	m_ulLeadInTime = m_xEventTimer.GetTotalDuration();
 }
 
 Level::~Level() {
@@ -80,21 +76,20 @@ void Level::Initialize() {
 	
 	CreateStar();
 	
-	// schedule the page unload
-	// (assuming that the level has been populated by the time this is called)
-	uint32 endmarker = m_xEventTimer.GetTotalDuration();
-	
+	// schedule the finish og the level
+	// (assuming that it has been populated by the time this is called)
 	EventArgs args;
+	args.eventId = eEventIdSettle;
+	m_xEventTimer.Enqueue(0, args);
+
 	args.eventId = eEventIdFinish;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
 
 	args.eventId = eEventIdDisableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 	
-	args.eventId = eEventIdUnload;
+	args.eventId = eEventIdNoOp;
 	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
-	
-	m_ulLeadOutTime = m_xEventTimer.GetTotalDuration() - endmarker;
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -180,7 +175,7 @@ void Level::HideStar() {
 
 void Level::ShowStar() {
 	IwTrace(MYAPP, ("Showing star"));
-	SetStarAnchor(GetStarRestPosition());
+	SetStarAnchor(GetStarIdlePosition());
 }
 
 void Level::SetStarAnchor(const CIwFVec2& pos) {
@@ -220,35 +215,23 @@ void Level::StartSection(const std::string& bannertext) {
 		args.bannerText = "";
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
 		
-		args.eventId = eEventIdNoOp;
+		args.eventId = eEventIdSettle;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
 	}
 }
 
 void Level::EndSection() {
-	EventArgs args;
-	args.eventId = eEventIdSettle;
-	m_xEventTimer.Enqueue(LEVEL_SETTLE_DELAY, args);
+	; // nothing happens here; the next session will start with settling
 }
 
-uint32 Level::GetDuration() {
-	return m_xEventTimer.GetTotalDuration() - (m_ulLeadInTime + m_ulLeadOutTime);
-}
-
-uint32 Level::GetElapsed() {
-	uint32 elapsed = m_xEventTimer.GetElapsedTime();
-	elapsed -= std::min<uint32>(elapsed, m_ulLeadInTime);
-	return std::min<uint32>(elapsed, GetDuration());
-}
-
-CIwFVec2 Level::GetStarRestPosition() {
+CIwFVec2 Level::GetStarIdlePosition() {
 	return CIwFVec2(0.0f, m_xWorldSize.y / 2.0f);
 }
 
 CIwFVec2 Level::GetStarHidePosition() {
-	const float offset = 8.0f;
+	const float offset = 4.0f;	
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsCleared && GetDuration() <= GetElapsed()) {
+	if (m_xCompletionInfo.IsCleared) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
@@ -330,7 +313,7 @@ void Level::OnUpdate(const FrameData& frame) {
 	// scene and widgets
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackgroundStars.Update(frame);
-	m_xBackgroundClouds.Update(frame);
+	m_xBackgroundClouds.Update(frame.GetAvgSimulatedDurationMs());
 	
 	m_xHud.Update(frame);
 }
@@ -340,7 +323,6 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	renderer.SetViewport(m_xCamera.GetViewport());
 	m_xBackgroundStars.Render(renderer, frame);
-	m_xBackgroundClouds.Render(renderer, frame);
 	m_xGame.Render(renderer, frame);
 
 	m_xAppPanel.Render(renderer, frame);	
@@ -408,16 +390,10 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			ShowStatsBanner();
 			break;
 		}
-		case eEventIdUnload: {
-			SetCompletionState(eCompleted);
-			break;
-		}
 	}
 }
 
 void Level::EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy) {
-	//IW_CALLSTACK_SELF;
-	//IwAssertMsg(MYAPP, false, ("Timer queue is empty. This should never happen. Unloading the level..."));
 	SetCompletionState(eCompleted);
 }
 
