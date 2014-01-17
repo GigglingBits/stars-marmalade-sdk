@@ -4,6 +4,7 @@
 #include "DeviceInfo.h"
 
 PageBackground::PageBackground() : m_pxBackground(NULL), m_pxBackgroundFar(NULL), m_fParallaxCorrection(0.0f), m_xBackgroundRect(0, 0, 0, 0) {
+	SetRenderingLayer(Renderer::eRenderingLayerBackground);
 }
 
 PageBackground::~PageBackground() {

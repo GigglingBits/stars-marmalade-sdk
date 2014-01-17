@@ -7,8 +7,6 @@ LevelBackground::LevelBackground(GameFoundation& game) : m_rxGame(game) {
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 
-	SetRenderingLayer(Renderer::eRenderingLayerBackground);
-
 	m_uiNextCloudTime = 0;
 }
 
@@ -46,18 +44,6 @@ void LevelBackground::SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& vie
 	m_xWorldRadius = m_xWorldCenter + aspectcorrection + marginv;
 }
 
-void LevelBackground::SetVerts(const CIwFVec2& offset, CIwFVec2 verts[4]) {
-	// perspective corrected geometry
-	CIwFVec2& center = m_xWorldCenter;
-	CIwFVec2& radius = m_xWorldRadius;
-
-	// construct corrected verts
-	verts[0] = center - radius;
-	verts[1] = CIwFVec2(center.x + radius.x, center.y - radius.y);
-	verts[2] = center + radius;
-	verts[3] = CIwFVec2(center.x - radius.x, center.y + radius.y);
-}
-	
 uint32 LevelBackground::GetNextCloudTime() {
 	return (rand() % (CLOUD_INTERVAL_MAX - CLOUD_INTERVAL_MIN)) + CLOUD_INTERVAL_MIN;
 }
@@ -118,13 +104,13 @@ void LevelBackground::CreateCloud(const CIwFVec2& pos) {
 		effect->SetRenderingLayer(layer);
 		effect->SetVelocity(velocity);
 		effect->SetPosition(pos);
+		effect->SetFadeTime(-1);
 		m_rxGame.Add(effect);
 		//IwTrace(MYAPP, ("Cloud at %.2f / %.2f", pos.x, pos.y));
 	}
 }
 
-void LevelBackground::OnUpdate(const FrameData& frame) {
-	uint16 frametime = frame.GetSimulatedDurationMs();
+void LevelBackground::Update(uint16 frametime) {
 	if (m_uiNextCloudTime > frametime) {
 		// no cloud yet
 		m_uiNextCloudTime -= frametime;
@@ -137,20 +123,4 @@ void LevelBackground::OnUpdate(const FrameData& frame) {
 		m_uiNextCloudTime = GetNextCloudTime();
 		IwTrace(MYAPP, ("Next cloud in %ims", m_uiNextCloudTime));
 	}
-}
-
-void LevelBackground::OnRender(Renderer& renderer, const FrameData& frame) {
-	IW_CALLSTACK_SELF;
-
-	CIwFVec2 screencenter = renderer.GetScreenCenterWorldSpace();
-	CIwFVec2 offset = screencenter - m_xWorldCenter;
-
-	const int count = 4;
-	CIwFVec2 verts[count];
-	SetVerts(offset, verts);
-
-	//renderer.DebugDrawCoords(m_xWorldCenter);
-	//renderer.DebugDrawCoords(m_xWorldCenter + offset);
-	//renderer.DebugDrawCoords(m_xWorldCenter + m_xWorldRadius);
-	//renderer.DebugDrawCoords(m_xWorldCenter - m_xWorldRadius);
 }
