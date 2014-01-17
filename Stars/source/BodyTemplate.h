@@ -32,6 +32,7 @@ private:
 
 	bool m_bDragEnabled;
 	bool m_bRevolveEnabled;
+	bool m_bCollideEnabled;
 
 	ChildMap m_xChildren;
 	PortMap m_xPorts;
@@ -59,7 +60,10 @@ public:
 
 	void SetEnableRevolve(bool enable);
 	bool IsRevolveEnabled();
-
+	
+	void SetEnableCollide(bool enable);
+	bool IsCollideEnabled();
+	
 	ChildMap& GetChildren();
 	PortMap& GetPorts();
 	JointMap& GetJoints();

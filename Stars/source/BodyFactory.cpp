@@ -55,7 +55,13 @@ std::string BodyFactory::PopulateConfig(TiXmlElement* node, BodyTemplate& conf) 
 	if (node->Attribute("revolve", &enablerevolve)) {
 		conf.SetEnableRevolve(enablerevolve != 0);
 	}
-
+	
+	// collision support
+	int enablecollide = 0;
+	if (node->Attribute("collide", &enablecollide)) {
+		conf.SetEnableCollide(enablecollide != 0);
+	}
+	
 	// check integity
 	IwAssertMsg(MYAPP, FactoryManager::GetShapeFactory().ConfigExists(conf.GetShapeId()), ("No shape '%s' could be found. It is referenced by body '%s'.", shape.c_str(), id.c_str()));
 	IwAssertMsg(MYAPP, FactoryManager::GetFixtureFactory().ConfigExists(conf.GetFixtureId()), ("No fixture '%s' could be found. It is referenced by body '%s'.", fixture.c_str(), id.c_str()));
@@ -150,6 +156,7 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 	// additional properties
 	p->EnableDragging(copyconf.IsDragEnabled());
 	p->EnableRotation(copyconf.IsRevolveEnabled());
+	p->EnableCollisions(copyconf.IsCollideEnabled());
 
 	// configure ports if any
 	BodyTemplate::PortMap& ports = copyconf.GetPorts();

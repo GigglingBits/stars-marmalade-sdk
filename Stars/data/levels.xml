@@ -25,15 +25,13 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2" >
+			<spritesequence delay="800" speed="2.2" >
 				<line map="   n   " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
-				<line map="       " />
 				<line map="    n  " />
-				<line map="       " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />

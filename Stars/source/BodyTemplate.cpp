@@ -8,6 +8,7 @@ BodyTemplate::BodyTemplate() {
 
 	m_bDragEnabled = false;
 	m_bRevolveEnabled = true;
+	m_bCollideEnabled = true;
 }
 
 BodyTemplate::~BodyTemplate() {
@@ -125,6 +126,14 @@ void BodyTemplate::SetEnableRevolve(bool enable) {
 
 bool BodyTemplate::IsRevolveEnabled() {
 	return m_bRevolveEnabled;
+}
+
+void BodyTemplate::SetEnableCollide(bool enable) {
+	m_bCollideEnabled = enable;
+}
+
+bool BodyTemplate::IsCollideEnabled() {
+	return m_bCollideEnabled;
 }
 
 BodyTemplate::PortMap& BodyTemplate::GetPorts() {
