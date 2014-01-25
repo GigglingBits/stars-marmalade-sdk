@@ -107,12 +107,12 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
-		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
+		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
 			<texture image="buff_attack" />
 			<shape type="circle" width="1.0" />
 		</body>
 		
-		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1">
+		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
 			<texture image="buff_block" />
 			<shape type="circle" width="1.0" />
 		</body>
