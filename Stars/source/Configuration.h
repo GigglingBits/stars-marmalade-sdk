@@ -33,6 +33,8 @@ public:
 
 	std::string HttpBodiesFile;
 	std::string HttpLevelsFile;
+	
+	std::string SettingsFile;
 };
 
 #endif

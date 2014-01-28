@@ -43,7 +43,10 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
-	bool CheckLevelConfiguration(PageSettings::WorldId world, int level);
+	std::string GetLevelKey(PageSettings::WorldId world, int level);
+	bool CheckLevelExists(PageSettings::WorldId world, int level);
+	bool CheckLevelOpen(PageSettings::WorldId world, int level);
+	
 	void EnableButtons(bool enable);
 	
 	Button* GetButton(int col, int row);
@@ -51,7 +54,7 @@ private:
 	void ApplyGroup(int groupid);
 	int GetNext(int groupid);
 	int GetPrevious(int groupid);
-
+	
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 };

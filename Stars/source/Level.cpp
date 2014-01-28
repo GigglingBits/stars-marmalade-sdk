@@ -198,7 +198,7 @@ void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
 	}
 }
 
-const Level::CompletionInfo& Level::GetCompletionInfo() {
+const LevelCompletionInfo& Level::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
 
@@ -259,6 +259,11 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 	CIwSVec2 centeroffset(IwGxGetScreenWidth() / 2, IwGxGetScreenHeight() / 2);
 	soundpixelpos -= centeroffset;
 	return CIwFVec2(soundpixelpos.x / (float)centeroffset.x, soundpixelpos.y / (float)centeroffset.y);
+}
+
+void Level::Conclude() {
+	m_xCompletionInfo.IsCleared = m_xGame.GetDustFillPercent() == 1.0f;
+	m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {
@@ -385,8 +390,7 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 			break;
 		}
 		case eEventIdFinish: {
-			m_xCompletionInfo.IsCleared = m_xGame.GetDustFillPercent() == 1.0f;
-			m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
+			Conclude();
 			ShowStatsBanner();
 			break;
 		}

@@ -104,6 +104,8 @@ files {
 	LevelBackground.cpp
 	LevelCompletion.h
 	LevelCompletion.cpp
+	LevelCompletionInfo.h
+	LevelCompletionInfo.cpp
 	LevelHud.h
 	LevelHud.cpp
 	LevelHudText.h

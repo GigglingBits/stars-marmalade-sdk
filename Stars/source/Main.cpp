@@ -20,6 +20,7 @@
 #include "Stopwatch.h"
 #include "App.h"
 #include "Configuration.h"
+#include "UserSettings.h"
 #include "InputManager.h"
 #include "LogManager.h"
 #include "World.h"
@@ -93,6 +94,7 @@ void Initialize() {
 	
 	WriteandShowLog("Reading configuration...");
 	Configuration::Initialize();
+	UserSettings::Initialize(Configuration::GetInstance().SettingsFile);
 	
 	WriteandShowLog("Initializing foundation...");
 	IwResManagerInit();
@@ -130,6 +132,7 @@ void Terminate() {
 	IwGxFontTerminate();
 	IwResManagerTerminate();
 
+	UserSettings::Terminate();
 	Configuration::Terminate();
 	DeviceInfo::Terminate();
 

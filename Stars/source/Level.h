@@ -12,6 +12,7 @@
 #include "Camera.h"
 #include "LevelInteractor.h"
 #include "EventTimer.h"
+#include "LevelCompletionInfo.h"
 
 #define LEVEL_START_BANNER_LEADIN 500
 #define LEVEL_START_BANNER_DURATION 1000
@@ -24,16 +25,6 @@
 #define LEVEL_LEADOUT_TIME 4000
 
 class Level : public Page {
-public:
-	struct CompletionInfo {
-		bool IsCleared;
-		float DustFillPercent;
-		CompletionInfo() {
-			IsCleared = false;
-			DustFillPercent = 0.0f;
-		}
-	};
-
 private:
 	enum EventId {
 		eEventIdNoOp = 0,
@@ -63,7 +54,7 @@ private:
 	LevelBackground m_xBackgroundClouds;
 
 	GameFoundation m_xGame;
-	CompletionInfo m_xCompletionInfo;
+	LevelCompletionInfo m_xCompletionInfo;
 
 	EventTimer<EventArgs> m_xEventTimer;
 
@@ -90,7 +81,7 @@ public:
 	void StartSection(const std::string& bannertext);
 	void EndSection();
 
-	const CompletionInfo& GetCompletionInfo();
+	const LevelCompletionInfo& GetCompletionInfo();
 
 	GameFoundation& GetGameFoundation();
 
@@ -128,6 +119,8 @@ private:
 	void SetStarAnchor(const CIwFVec2& pos);
 	void SetStarPath(int samplecount, const CIwFVec2* samplepoints);
 
+	void Conclude();
+	
 private:
 	void EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args);
 	void EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy);

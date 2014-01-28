@@ -2,16 +2,19 @@
 #define __LEVELCOMPLETION_H__
 
 #include "Page.h"
+#include "PageBackground.h"
 #include "Button.h"
 #include "Camera.h"
-#include "Level.h"
+#include "LevelCompletionInfo.h"
 #include "LevelHudNumber.h"
 
 class LevelCompletion : public Page {
 private:
 	Camera m_xCamera;
 
-	bool m_bIsCompleted;
+	std::string m_sLevelId;
+	LevelCompletionInfo m_xCompletionInfo;
+	
 	std::string m_sCompletionText;
 
 	Button m_xButtonStar;
@@ -25,7 +28,7 @@ private:
 	PageBackground m_xBackground;
 
 public:
-	LevelCompletion(const Level::CompletionInfo& info);
+	LevelCompletion(const std::string levelid, const LevelCompletionInfo& info);
 
 	virtual void Initialize();
 
@@ -33,10 +36,10 @@ protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnDoLayout(const CIwSVec2& screensize);
-
+	
 private:
-	bool IsCompleted(const Level::CompletionInfo& info);
-	std::string GenerateCompletionText(const Level::CompletionInfo& info);
+	std::string GetCompletionText();
+	void SaveResults();
 };
 
 #endif

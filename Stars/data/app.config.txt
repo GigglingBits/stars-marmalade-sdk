@@ -28,3 +28,5 @@ httplevels				Name of the file containing the level definitions, available as HT
 
 introsong				Name of the sound file containing the intro song
 levelsong				Name of the sound file containing the level song
+
+settingsfile			Name of the file to be used for storing user settings

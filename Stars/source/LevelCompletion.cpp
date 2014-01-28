@@ -5,48 +5,64 @@
 #include "FactoryManager.h"
 #include "GameFoundation.h"
 #include "Configuration.h"
+#include "UserSettings.h"
 
-LevelCompletion::LevelCompletion(const Level::CompletionInfo& info) :
+LevelCompletion::LevelCompletion(const std::string levelid, const LevelCompletionInfo& info) :
 	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
-	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight) {
+	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight),
+    m_sLevelId(levelid),
+    m_xCompletionInfo(info) {
 
-	m_bIsCompleted = IsCompleted(info);
-	m_sCompletionText = GenerateCompletionText(info);
+	m_sCompletionText = GetCompletionText();
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 }
 
 void LevelCompletion::Initialize() {
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
-    m_xButtonStar.SetTextureFrame(m_bIsCompleted ? "won" : "lost");
+    m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared ? "won" : "lost");
 	m_xButtonStar.SetShadedWhenPressed(false);
     
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
 
-	m_xButtonNext.SetEnabled(m_bIsCompleted);
+	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsCleared);
 	
 	m_xBackground.Initialize();
+
+	SaveResults();
 }
 
-bool LevelCompletion::IsCompleted(const Level::CompletionInfo& info) {
-	return info.IsCleared;
-}
-
-std::string LevelCompletion::GenerateCompletionText(const Level::CompletionInfo& info) {
+std::string LevelCompletion::GetCompletionText() {
 	std::ostringstream oss;
 
-	if (info.IsCleared) {
+	if (m_xCompletionInfo.IsCleared) {
 		oss << "The level is cleared" << std::endl;
 	} else {
 		oss << "Try again" << std::endl;
 	}
 
 	return oss.str();
+}
+
+void LevelCompletion::SaveResults() {
+	UserSettings& settings = UserSettings::GetInstance();
+	UserSettings::LevelSetting& level = settings.GetLevel(m_sLevelId);
+
+	level.PlayCount++;
+	
+	if (m_xCompletionInfo.IsCleared) {
+		level.Stars = 1;
+		if (level.HighScore < m_xCompletionInfo.DustFillPercent) {
+			level.HighScore = m_xCompletionInfo.DustFillPercent;
+		}
+	}
+	
+	settings.Save();
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {

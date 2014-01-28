@@ -4,6 +4,7 @@
 #include "FactoryManager.h"
 #include "Debug.h"
 #include "Configuration.h"
+#include "UserSettings.h"
 #include "Debug.h"
 
 #define NO_BUTTON -1
@@ -162,8 +163,14 @@ void LevelMenu::EnableButtons(bool enable) {
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		if (m_apxButtons[i]) {
 			if (enable) {
-				m_apxButtons[i]->SetHideWhenDisabled(false);
-				m_apxButtons[i]->SetEnabled(CheckLevelConfiguration(m_eWorldId, m_apxButtons[i]->GetUserData()));
+				int level = m_apxButtons[i]->GetUserData();
+				if (CheckLevelExists(m_eWorldId, level)) {
+					m_apxButtons[i]->SetHideWhenDisabled(false);
+					m_apxButtons[i]->SetEnabled(CheckLevelOpen(m_eWorldId, level));
+				} else {
+					m_apxButtons[i]->SetHideWhenDisabled(true);
+					m_apxButtons[i]->SetEnabled(false);
+				}
 			} else {
 				m_apxButtons[i]->SetHideWhenDisabled(true);
 				m_apxButtons[i]->SetEnabled(false);
@@ -172,11 +179,21 @@ void LevelMenu::EnableButtons(bool enable) {
 	}
 }
 
-bool LevelMenu::CheckLevelConfiguration(PageSettings::WorldId world, int level) {
+std::string LevelMenu::GetLevelKey(PageSettings::WorldId world, int level) {
 	PageSettings settings;
 	settings.SetWorld(world);
 	settings.SetLevel(level);
-	return FactoryManager::GetLevelFactory().ConfigExists(settings.GetLevelKey());
+	return settings.GetLevelKey();
+}
+
+bool LevelMenu::CheckLevelExists(PageSettings::WorldId world, int level) {
+	return FactoryManager::GetLevelFactory().ConfigExists(GetLevelKey(world, level));
+}
+
+bool LevelMenu::CheckLevelOpen(PageSettings::WorldId world, int level) {
+	return
+		(level == 1 && world == PageSettings::eWorldIdEarth) ||
+		UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars >= 0;
 }
 
 void LevelMenu::ApplyGroup(int groupid) {
