@@ -19,7 +19,7 @@ public:
 	PageManager();
 	~PageManager();
 
-    void SetWorld(PageSettings::WorldId world);
+    void SetWorld(LevelIndexer::WorldId world);
     void SetLevel(int level);
 
     

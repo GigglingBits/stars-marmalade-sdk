@@ -3,7 +3,7 @@
 #include "Debug.h"
 #include "Configuration.h"
 
-WorldMenu::WorldMenu(PageSettings::WorldId world) :
+WorldMenu::WorldMenu(LevelIndexer::WorldId world) :
 	Page("menu.group", Configuration::GetInstance().IntroSong),
     m_eWorld(world),
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyAbsOk),
@@ -27,9 +27,9 @@ void WorldMenu::Initialize() {
     m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
     
 	m_xNaviPanel.Initialize();
-	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdEarth);
-	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdMars);
-	m_xNaviPanel.AddButton("navipanel", PageSettings::eWorldIdJupiter);
+	m_xNaviPanel.AddButton("navipanel", LevelIndexer::eWorldIdEarth);
+	m_xNaviPanel.AddButton("navipanel", LevelIndexer::eWorldIdMars);
+	m_xNaviPanel.AddButton("navipanel", LevelIndexer::eWorldIdJupiter);
 	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xBackground.Initialize();
@@ -123,30 +123,31 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 					  0xffccfaff);
 }
 
-void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
+void WorldMenu::ApplyWorld(LevelIndexer::WorldId world) {
     // communicate the new level
     m_xButtonPlanet.SetUserData((int)world);
     m_xNaviPanel.ActivateButton((int)world);
 	
     // find name for texture frame
-    std::string worldframe = PageSettings::GetWorldKey(world);
+	LevelIndexer indexer;
+    std::string worldframe = indexer.GetWorldName(world);
     
     // buttons
     m_xButtonPlanet.SetTextureFrame(worldframe);
 
 	// title text
 	switch (world) {
-		case PageSettings::eWorldIdEarth:
+		case LevelIndexer::eWorldIdEarth:
 		{
 			m_sTitle = "The blue planet";
 			break;
 		}
-		case PageSettings::eWorldIdMars:
+		case LevelIndexer::eWorldIdMars:
 		{
 			m_sTitle = "The planet of fire";
 			break;
 		}
-		case PageSettings::eWorldIdJupiter:
+		case LevelIndexer::eWorldIdJupiter:
 		{
 			m_sTitle = "The planet of rocks";
 			break;
@@ -165,12 +166,12 @@ void WorldMenu::ApplyWorld(PageSettings::WorldId world) {
 		ps.GetWorldColours().UpperLeft);
 }
 
-PageSettings::WorldId WorldMenu::GetNext(PageSettings::WorldId worldid) {
-	return (PageSettings::WorldId)((m_eWorld + 1) % PageSettings::eWorldIdMax);
+LevelIndexer::WorldId WorldMenu::GetNext(LevelIndexer::WorldId worldid) {
+	return (LevelIndexer::WorldId)((m_eWorld + 1) % LevelIndexer::eWorldIdMax);
 }
 
-PageSettings::WorldId WorldMenu::GetPrevious(PageSettings::WorldId worldid) {
-	return (PageSettings::WorldId)((m_eWorld + PageSettings::eWorldIdMax - 1) % PageSettings::eWorldIdMax);
+LevelIndexer::WorldId WorldMenu::GetPrevious(LevelIndexer::WorldId worldid) {
+	return (LevelIndexer::WorldId)((m_eWorld + LevelIndexer::eWorldIdMax - 1) % LevelIndexer::eWorldIdMax);
 }
 
 void WorldMenu::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {

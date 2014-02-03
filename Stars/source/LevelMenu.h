@@ -26,13 +26,13 @@ private:
 	Button m_xButtonBack;
 	NaviPanel m_xNaviPanel;
 
-	PageSettings::WorldId m_eWorldId;
+	LevelIndexer::WorldId m_eWorldId;
 	int m_iGroupId;
 
 	PageBackground m_xBackground;
 
 public:
-	LevelMenu(PageSettings::WorldId world);
+	LevelMenu(LevelIndexer::WorldId world);
 	virtual ~LevelMenu();
 
 	virtual void Initialize();
@@ -43,9 +43,9 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
-	std::string GetLevelKey(PageSettings::WorldId world, int level);
-	bool CheckLevelExists(PageSettings::WorldId world, int level);
-	bool CheckLevelOpen(PageSettings::WorldId world, int level);
+	std::string GetLevelKey(LevelIndexer::WorldId world, int level);
+	bool CheckLevelExists(LevelIndexer::WorldId world, int level);
+	bool CheckLevelOpen(LevelIndexer::WorldId world, int level);
 	
 	void EnableButtons(bool enable);
 	

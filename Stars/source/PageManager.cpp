@@ -90,7 +90,7 @@ void PageManager::SetNextPage(Page* page) {
 	m_pxNextPage = page;
 }
 
-void PageManager::SetWorld(PageSettings::WorldId world) {
+void PageManager::SetWorld(LevelIndexer::WorldId world) {
     m_xPageSettings.SetWorld(world);
 }
 

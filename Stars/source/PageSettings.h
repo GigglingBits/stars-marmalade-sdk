@@ -1,17 +1,10 @@
 #ifndef __PAGESETTINGS_H__
 #define __PAGESETTINGS_H__
 
-#include "Window.h"
+#include "LevelIndexer.h"
 
 class PageSettings {
 public: 
-	enum WorldId {
-		eWorldIdEarth = 0,
-		eWorldIdMars = 1,
-		eWorldIdJupiter = 2,
-        eWorldIdMax = 3
-	};
-    
 	struct Colours {
 		uint32 LowerLeft;
 		uint32 LowerRight;
@@ -24,12 +17,9 @@ public:
 	};
 	
 private:
-	WorldId m_eSelectedWorld;
-    int m_iLevel;
+	LevelIndexer::WorldId m_eSelectedWorld;
+    int m_iSelectedLevel;
     
-    std::string m_sWorldKey;
-    std::string m_sLevelKey;
-
 	Colours m_xNullColours;
 	Colours m_xWorldColours;
 	Colours m_xMarsColours;
@@ -38,21 +28,16 @@ private:
 public:
 	PageSettings();
     
-    void SetWorld(WorldId world);
-    WorldId GetWorld() const;
+    void SetWorld(LevelIndexer::WorldId world);
+	LevelIndexer::WorldId GetWorld() const;
 
     void SetLevel(int level);
     int GetLevel() const;
 
-    const std::string& GetWorldKey();
-    const std::string& GetLevelKey();
+    std::string GetWorldKey();
+    std::string GetLevelKey();
 
 	const Colours& GetWorldColours();
-	
-    static const std::string GetWorldKey(WorldId world);
-
-private:
-    void UpdateKeys();
 };
 
 #endif
