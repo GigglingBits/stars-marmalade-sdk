@@ -1,7 +1,7 @@
 #ifndef __PAGESETTINGS_H__
 #define __PAGESETTINGS_H__
 
-#include "LevelIndexer.h"
+#include "LevelIterator.h"
 
 class PageSettings {
 public: 
@@ -17,7 +17,7 @@ public:
 	};
 	
 private:
-	LevelIndexer::WorldId m_eSelectedWorld;
+	LevelIterator::WorldId m_eSelectedWorld;
     int m_iSelectedLevel;
     
 	Colours m_xNullColours;
@@ -28,14 +28,11 @@ private:
 public:
 	PageSettings();
     
-    void SetWorld(LevelIndexer::WorldId world);
-	LevelIndexer::WorldId GetWorld() const;
+    void SetWorld(LevelIterator::WorldId world);
+	LevelIterator::WorldId GetWorld() const;
 
     void SetLevel(int level);
     int GetLevel() const;
-
-    std::string GetWorldKey();
-    std::string GetLevelKey();
 
 	const Colours& GetWorldColours();
 };

@@ -9,7 +9,7 @@
 
 #define NO_BUTTON -1
 
-LevelMenu::LevelMenu(LevelIndexer::WorldId world) :
+LevelMenu::LevelMenu(LevelIterator::WorldId world) :
 	Page("menu.group", Configuration::GetInstance().IntroSong),
 	m_eWorldId(world),
 	m_iGroupId(0),
@@ -179,20 +179,18 @@ void LevelMenu::EnableButtons(bool enable) {
 	}
 }
 
-std::string LevelMenu::GetLevelKey(LevelIndexer::WorldId world, int level) {
-	PageSettings settings;
-	settings.SetWorld(world);
-	settings.SetLevel(level);
-	return settings.GetLevelKey();
+std::string LevelMenu::GetLevelKey(LevelIterator::WorldId world, int level) {
+	LevelIterator it;
+	return it.GetLevelName(world, level);
 }
 
-bool LevelMenu::CheckLevelExists(LevelIndexer::WorldId world, int level) {
+bool LevelMenu::CheckLevelExists(LevelIterator::WorldId world, int level) {
 	return FactoryManager::GetLevelFactory().ConfigExists(GetLevelKey(world, level));
 }
 
-bool LevelMenu::CheckLevelOpen(LevelIndexer::WorldId world, int level) {
+bool LevelMenu::CheckLevelOpen(LevelIterator::WorldId world, int level) {
 	return
-		(level == 1 && world == LevelIndexer::eWorldIdEarth) ||
+		(level == 1 && world == LevelIterator::eWorldIdEarth) ||
 		UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars >= 0;
 }
 

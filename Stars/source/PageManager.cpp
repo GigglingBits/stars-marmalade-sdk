@@ -7,6 +7,7 @@
 #include "Preamble.h"
 #include "Level.h"
 #include "LevelCompletion.h"
+#include "LevelIterator.h"
 #include "FactoryManager.h"
 #include "ResourceManager.h"
 #include "SoundEngine.h"
@@ -35,12 +36,12 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 	// predefined page flow
 	Page* nextpage = NULL;
 	if (dynamic_cast<Preamble*>(oldpage)) {
-		nextpage = FactoryManager::GetLevelFactory().Create(m_xPageSettings.GetLevelKey());
-
+		std::string levelname = GetCurrentLevelName();
+		nextpage = FactoryManager::GetLevelFactory().Create(levelname);
 	} else if (Level* level = dynamic_cast<Level*>(oldpage)) {
+		std::string levelname = GetCurrentLevelName();
 		const LevelCompletionInfo& info = level->GetCompletionInfo();
-		nextpage = new LevelCompletion(m_xPageSettings.GetLevelKey(), info);
-
+		nextpage = new LevelCompletion(levelname, info);
 	} else if (dynamic_cast<LevelCompletion*>(oldpage)) {
 		nextpage = new LevelMenu(m_xPageSettings.GetWorld());
 	}
@@ -54,16 +55,43 @@ Page* PageManager::CreateDefaultPage() {
 
 void PageManager::StartLevel() {
 	IW_CALLSTACK_SELF;
-	if (FactoryManager::GetPreambleFactory().ConfigExists(m_xPageSettings.GetLevelKey())) {
-		SetNextPage(FactoryManager::GetPreambleFactory().Create(m_xPageSettings.GetLevelKey()));
+	std::string levelname = GetCurrentLevelName();
+	if (FactoryManager::GetPreambleFactory().ConfigExists(levelname)) {
+		SetNextPage(FactoryManager::GetPreambleFactory().Create(levelname));
 	} else {
-		SetNextPage(FactoryManager::GetLevelFactory().Create(m_xPageSettings.GetLevelKey()));
+		SetNextPage(FactoryManager::GetLevelFactory().Create(levelname));
 	}
 }
 
 void PageManager::StartNextLevel() {
-    m_xPageSettings.SetLevel(m_xPageSettings.GetLevel() + 1);
-	StartLevel();
+	IW_CALLSTACK_SELF;
+
+	// get current state
+	LevelIterator::WorldId world = m_xPageSettings.GetWorld();
+	int level = m_xPageSettings.GetLevel();
+	
+	// iterate
+	LevelIterator it;
+	level = it.GetNextLevelInWorld(world, level);
+	
+	// manage world transitions, etc
+	if (level == LEVELITERATOR_NO_LEVEL) {
+		// there seems to be no next level in that world; move to new world
+		m_xPageSettings.SetWorld(it.GetNextWorld(world));
+		m_xPageSettings.SetLevel(it.GetFirstLevelInWorld(m_xPageSettings.GetWorld()));
+		if (m_xPageSettings.GetWorld() == it.GetFirstWorld()) {
+			// the previous world was the final world; game completed
+			// todo: congratulation screen
+			StartTitleScreen();
+		} else {
+			IwAssertMsg(MYAPP, m_xPageSettings.GetLevel() != LEVELITERATOR_NO_LEVEL, ("No first level found in world '%s'!", it.GetWorldName(world).c_str()));
+			StartLevelMenu();
+		}
+	} else {
+		// simply set next level
+		m_xPageSettings.SetLevel(level);
+		StartLevel();
+	}
 }
 
 void PageManager::StartTitleScreen() {
@@ -90,12 +118,19 @@ void PageManager::SetNextPage(Page* page) {
 	m_pxNextPage = page;
 }
 
-void PageManager::SetWorld(LevelIndexer::WorldId world) {
+void PageManager::SetWorld(LevelIterator::WorldId world) {
     m_xPageSettings.SetWorld(world);
 }
 
 void PageManager::SetLevel(int level) {
     m_xPageSettings.SetLevel(level);
+}
+
+std::string PageManager::GetCurrentLevelName() {
+	LevelIterator it;
+	return it.GetLevelName(
+		m_xPageSettings.GetWorld(),
+		m_xPageSettings.GetLevel());
 }
 
 void PageManager::OnUpdate(const FrameData& frame) {

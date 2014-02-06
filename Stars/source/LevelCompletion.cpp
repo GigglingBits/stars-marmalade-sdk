@@ -51,14 +51,14 @@ std::string LevelCompletion::GetCompletionText() {
 
 void LevelCompletion::SaveResults() {
 	UserSettings& settings = UserSettings::GetInstance();
-	UserSettings::LevelSetting& level = settings.GetLevel(m_sLevelId);
+	UserSettings::LevelSetting& levelsettings = settings.GetLevel(m_sLevelId);
 
-	level.PlayCount++;
+	levelsettings.PlayCount++;
 	
 	if (m_xCompletionInfo.IsCleared) {
-		level.Stars = 1;
-		if (level.HighScore < m_xCompletionInfo.DustFillPercent) {
-			level.HighScore = m_xCompletionInfo.DustFillPercent;
+		levelsettings.Stars = 1;
+		if (levelsettings.HighScore < m_xCompletionInfo.DustFillPercent) {
+			levelsettings.HighScore = m_xCompletionInfo.DustFillPercent;
 		}
 	}
 	

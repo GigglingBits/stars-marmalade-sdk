@@ -32,7 +32,7 @@ void TitleScreen::Initialize() {
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
 
 	PageSettings ps;
-	ps.SetWorld(LevelIndexer::eWorldIdEarth);
+	ps.SetWorld(LevelIterator::eWorldIdEarth);
 	SetBackground(
 		ps.GetWorldColours().LowerLeft,
 		ps.GetWorldColours().LowerRight,

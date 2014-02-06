@@ -14,7 +14,7 @@ class WorldMenu : public Page {
 private:
 	Camera m_xCamera;
 
-	LevelIndexer::WorldId m_eWorld;
+	LevelIterator::WorldId m_eWorld;
 	
 	CIwRect m_xTitlePos;
 	CIwRect m_xTitleShadowPos;
@@ -31,15 +31,15 @@ private:
 	PageBackground m_xBackground;
 
 public:
-	WorldMenu(LevelIndexer::WorldId world);
+	WorldMenu(LevelIterator::WorldId world);
 	virtual ~WorldMenu();
 
 	virtual void Initialize();
 
 private:
-    void ApplyWorld(LevelIndexer::WorldId world);
-	LevelIndexer::WorldId GetNext(LevelIndexer::WorldId worldid);
-	LevelIndexer::WorldId GetPrevious(LevelIndexer::WorldId worldid);
+    void ApplyWorld(LevelIterator::WorldId world);
+	LevelIterator::WorldId GetNext(LevelIterator::WorldId worldid);
+	LevelIterator::WorldId GetPrevious(LevelIterator::WorldId worldid);
 	
 	
 	

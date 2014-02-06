@@ -100,8 +100,8 @@ files {
 
 	Level.h
 	Level.cpp
- 	LevelIndexer.h
- 	LevelIndexer.cpp
+ 	LevelIterator.h
+ 	LevelIterator.cpp
 	LevelBackground.h
 	LevelBackground.cpp
 	LevelCompletion.h

@@ -217,7 +217,7 @@ void App::ButtonReleasedEventHandler(const InputManager& sender, const InputMana
 		m_xPageManager.StartWorldMenu();
         
 	} else if (args.cmdid == eButtonCommandIdOpenLevelMenu) {
-        m_xPageManager.SetWorld((LevelIndexer::WorldId)args.userdata);
+        m_xPageManager.SetWorld((LevelIterator::WorldId)args.userdata);
 		m_xPageManager.StartLevelMenu();
         
 	} else if (args.cmdid == eButtonCommandIdOpenLevel) {

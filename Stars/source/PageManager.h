@@ -19,7 +19,7 @@ public:
 	PageManager();
 	~PageManager();
 
-    void SetWorld(LevelIndexer::WorldId world);
+    void SetWorld(LevelIterator::WorldId world);
     void SetLevel(int level);
 
     
@@ -36,6 +36,8 @@ private:
 	void SetNextPage(Page* page);
 
 	void ApplyNextPage();
+	
+	std::string GetCurrentLevelName();
 	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
