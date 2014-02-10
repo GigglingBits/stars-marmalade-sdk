@@ -2,6 +2,7 @@
 #include "FactoryManager.h"
 #include "Debug.h"
 #include "Configuration.h"
+#include "UserSettings.h"
 
 WorldMenu::WorldMenu(LevelIterator::WorldId world) :
 	Page("menu.group", Configuration::GetInstance().IntroSong),
@@ -25,7 +26,8 @@ void WorldMenu::Initialize() {
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
     m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
-    
+    m_xButtonPlanet.SetHideWhenDisabled(false);
+	
 	m_xNaviPanel.Initialize();
 	m_xNaviPanel.AddButton("navipanel", LevelIterator::eWorldIdEarth);
 	m_xNaviPanel.AddButton("navipanel", LevelIterator::eWorldIdMars);
@@ -36,6 +38,18 @@ void WorldMenu::Initialize() {
 
     ApplyWorld(m_eWorld);
 }
+
+bool WorldMenu::CheckWorldOpen(LevelIterator::WorldId world) {
+	LevelIterator it;
+	if (world == it.GetFirstWorld()) {
+		return true;
+	}
+	
+	int level = it.GetFirstLevelInWorld(world);
+	std::string levelname = it.GetLevelName(world, level);
+	return UserSettings::GetInstance().GetLevel(levelname).Stars != USER_SETTINGS_NULL_STAR;
+}
+
 
 void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
@@ -112,27 +126,31 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	// title
 	renderer.DrawText(
-					  m_sTitle,
-					  m_xTitleShadowPos,
-					  Renderer::eFontTypeLarge,
-					  0xaa444444);
+		m_sTitle,
+		m_xTitleShadowPos,
+		Renderer::eFontTypeLarge,
+		0xaa444444);
 	renderer.DrawText(
-					  m_sTitle,
-					  m_xTitlePos,
-					  Renderer::eFontTypeLarge,
-					  0xffccfaff);
+		m_sTitle,
+		m_xTitlePos,
+		Renderer::eFontTypeLarge,
+		0xffccfaff);
 }
 
 void WorldMenu::ApplyWorld(LevelIterator::WorldId world) {
     // communicate the new level
     m_xButtonPlanet.SetUserData((int)world);
     m_xNaviPanel.ActivateButton((int)world);
-	
-    // find name for texture frame
-	LevelIterator iterator;
-    std::string worldframe = iterator.GetWorldName(world);
-    
+
     // buttons
+	LevelIterator iterator;
+	bool open = CheckWorldOpen(world);
+	m_xButtonPlanet.SetEnabled(open);
+
+	std::string worldframe = iterator.GetWorldName(world);
+	if (!open) {
+		worldframe += "_locked";
+	}
     m_xButtonPlanet.SetTextureFrame(worldframe);
 
 	// title text
@@ -166,12 +184,14 @@ void WorldMenu::ApplyWorld(LevelIterator::WorldId world) {
 		ps.GetWorldColours().UpperLeft);
 }
 
-LevelIterator::WorldId WorldMenu::GetNext(LevelIterator::WorldId worldid) {
-	return (LevelIterator::WorldId)((m_eWorld + 1) % LevelIterator::eWorldIdMax);
+LevelIterator::WorldId WorldMenu::GetNext(LevelIterator::WorldId world) {
+	LevelIterator it;
+	return it.GetNextWorld(world);
 }
 
-LevelIterator::WorldId WorldMenu::GetPrevious(LevelIterator::WorldId worldid) {
-	return (LevelIterator::WorldId)((m_eWorld + LevelIterator::eWorldIdMax - 1) % LevelIterator::eWorldIdMax);
+LevelIterator::WorldId WorldMenu::GetPrevious(LevelIterator::WorldId world) {
+	LevelIterator it;
+	return it.GetPreviousWorld(world);
 }
 
 void WorldMenu::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {

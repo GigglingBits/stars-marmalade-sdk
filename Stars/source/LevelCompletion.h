@@ -13,6 +13,7 @@ private:
 	Camera m_xCamera;
 
 	std::string m_sLevelId;
+	std::string m_sNextLevelId;
 	LevelCompletionInfo m_xCompletionInfo;
 	
 	std::string m_sCompletionText;
@@ -28,7 +29,7 @@ private:
 	PageBackground m_xBackground;
 
 public:
-	LevelCompletion(const std::string levelid, const LevelCompletionInfo& info);
+	LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info);
 
 	virtual void Initialize();
 

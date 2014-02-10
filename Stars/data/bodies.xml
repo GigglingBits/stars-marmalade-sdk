@@ -445,7 +445,9 @@
 		<texture id="button_planet">
 			<frame id="earth" image="world_earth"/>
 			<frame id="mars" image="world_mars"/>
+			<frame id="mars_locked" image="world_mars_locked"/>
 			<frame id="jupiter" image="world_jupiter"/>
+			<frame id="jupiter_locked" image="world_jupiter_locked"/>
 		</texture>
 		
 		<texture id="title_button" image="title_button"/>

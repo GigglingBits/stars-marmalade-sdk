@@ -37,11 +37,11 @@ public:
 	virtual void Initialize();
 
 private:
+	LevelIterator::WorldId GetNext(LevelIterator::WorldId world);
+	LevelIterator::WorldId GetPrevious(LevelIterator::WorldId world);
+
     void ApplyWorld(LevelIterator::WorldId world);
-	LevelIterator::WorldId GetNext(LevelIterator::WorldId worldid);
-	LevelIterator::WorldId GetPrevious(LevelIterator::WorldId worldid);
-	
-	
+	bool CheckWorldOpen(LevelIterator::WorldId wold);
 	
 protected:
 	virtual void OnUpdate(const FrameData& frame);

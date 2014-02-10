@@ -40,8 +40,9 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 		nextpage = FactoryManager::GetLevelFactory().Create(levelname);
 	} else if (Level* level = dynamic_cast<Level*>(oldpage)) {
 		std::string levelname = GetCurrentLevelName();
+		std::string nextlevelname = GetNextLevelName();
 		const LevelCompletionInfo& info = level->GetCompletionInfo();
-		nextpage = new LevelCompletion(levelname, info);
+		nextpage = new LevelCompletion(levelname, nextlevelname, info);
 	} else if (dynamic_cast<LevelCompletion*>(oldpage)) {
 		nextpage = new LevelMenu(m_xPageSettings.GetWorld());
 	}
@@ -129,8 +130,23 @@ void PageManager::SetLevel(int level) {
 std::string PageManager::GetCurrentLevelName() {
 	LevelIterator it;
 	return it.GetLevelName(
-		m_xPageSettings.GetWorld(),
-		m_xPageSettings.GetLevel());
+						   m_xPageSettings.GetWorld(),
+						   m_xPageSettings.GetLevel());
+}
+
+std::string PageManager::GetNextLevelName() {
+	LevelIterator::WorldId world = m_xPageSettings.GetWorld();
+	int level = m_xPageSettings.GetLevel();
+	
+	LevelIterator it;
+	level = it.GetNextLevelInWorld(world, level);
+	if (level == LEVELITERATOR_NO_LEVEL) {
+		// there seems to be no next level in that world; move to new world
+		world = it.GetNextWorld(world);
+		level = it.GetFirstLevelInWorld(world);
+		IwAssertMsg(MYAPP, level != LEVELITERATOR_NO_LEVEL, ("No first level found in world '%s'!", it.GetWorldName(world).c_str()));
+	}
+	return it.GetLevelName(world, level);
 }
 
 void PageManager::OnUpdate(const FrameData& frame) {

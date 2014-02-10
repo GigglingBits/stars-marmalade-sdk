@@ -38,6 +38,7 @@ private:
 	void ApplyNextPage();
 	
 	std::string GetCurrentLevelName();
+	std::string GetNextLevelName();
 	
 protected:
 	virtual void OnUpdate(const FrameData& frame);

@@ -7,13 +7,14 @@
 #include "Configuration.h"
 #include "UserSettings.h"
 
-LevelCompletion::LevelCompletion(const std::string levelid, const LevelCompletionInfo& info) :
+LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
 	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
 	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight),
     m_sLevelId(levelid),
+	m_sNextLevelId(nextlevelid),
     m_xCompletionInfo(info) {
 
 	m_sCompletionText = GetCompletionText();
@@ -54,11 +55,18 @@ void LevelCompletion::SaveResults() {
 	UserSettings::LevelSetting& levelsettings = settings.GetLevel(m_sLevelId);
 
 	levelsettings.PlayCount++;
-	
+
+	// save scores for current level
 	if (m_xCompletionInfo.IsCleared) {
 		levelsettings.Stars = 1;
 		if (levelsettings.HighScore < m_xCompletionInfo.DustFillPercent) {
 			levelsettings.HighScore = m_xCompletionInfo.DustFillPercent;
+		}
+		
+		// unlock next level
+		UserSettings::LevelSetting& nextlevelsettings = settings.GetLevel(m_sNextLevelId);
+		if (nextlevelsettings.Stars == USER_SETTINGS_NULL_STAR) {
+			nextlevelsettings.Stars = 0;
 		}
 	}
 	

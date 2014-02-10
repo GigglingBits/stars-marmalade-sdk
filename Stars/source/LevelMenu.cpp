@@ -189,9 +189,10 @@ bool LevelMenu::CheckLevelExists(LevelIterator::WorldId world, int level) {
 }
 
 bool LevelMenu::CheckLevelOpen(LevelIterator::WorldId world, int level) {
+	LevelIterator it;
 	return
-		(level == 1 && world == LevelIterator::eWorldIdEarth) ||
-		UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars >= 0;
+		(it.GetFirstLevelInWorld(world) == level && it.GetFirstWorld() == world) ||
+		UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars != USER_SETTINGS_NULL_STAR;
 }
 
 void LevelMenu::ApplyGroup(int groupid) {
