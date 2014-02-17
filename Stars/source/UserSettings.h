@@ -6,6 +6,8 @@
 
 #include "tinyxml.h"
 
+#define USER_SETTINGS_FILEFORMATVERSION_NULL 0
+
 #define USER_SETTINGS_FILEFORMATVERSION_ATTR "fileformatversion"
 #define USER_SETTINGS_FILEFORMATVERSION 1
 

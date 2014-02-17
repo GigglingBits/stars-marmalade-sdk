@@ -46,7 +46,7 @@ bool UserSettings::Load(const std::string& filename) {
 
 	TiXmlElement* elem = hdoc.FirstChildElement(USER_SETTINGS_SETTINGS_TAG).Element();
 	if (elem) {
-		int fileformatversion = -1;
+		int fileformatversion = USER_SETTINGS_FILEFORMATVERSION_NULL;
 		if (elem->Attribute(USER_SETTINGS_FILEFORMATVERSION_ATTR, &fileformatversion)) {
 			if (fileformatversion == USER_SETTINGS_FILEFORMATVERSION) {
 				TiXmlHandle settings(elem);
@@ -66,10 +66,10 @@ bool UserSettings::Load(const std::string& filename) {
 
 bool UserSettings::Load(TiXmlHandle& settings) {
 	// load levels
-	TiXmlElement* levelselem = settings.FirstChild(USER_SETTINGS_LEVELS_TAG).FirstChild().Element();
-	for (levelselem; levelselem; levelselem = levelselem->NextSiblingElement()) {
+	TiXmlElement* levelselem = settings.FirstChild(USER_SETTINGS_LEVELS_TAG).Element();
+	for (levelselem; levelselem; levelselem = levelselem->NextSiblingElement(USER_SETTINGS_LEVELS_TAG)) {
 		TiXmlElement* levelelem = levelselem->FirstChildElement(USER_SETTINGS_LEVEL_TAG);
-		for (levelelem; levelelem; levelelem = levelelem->NextSiblingElement()) {
+		for (levelelem; levelelem; levelelem = levelelem->NextSiblingElement(USER_SETTINGS_LEVEL_TAG)) {
 			if (const char* id = levelelem->Attribute (USER_SETTINGS_ID_ATTR)) {
 				LevelSetting& level = m_xLevels[id];
 				
