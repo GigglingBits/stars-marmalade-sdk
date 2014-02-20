@@ -20,8 +20,6 @@
 #define USER_SETTINGS_HIGHSCORE_ATTR "highscore"
 #define USER_SETTINGS_STARS_ATTR "stars"
 
-#define USER_SETTINGS_NULL_STAR -1
-
 
 class UserSettings {
 public:
@@ -32,7 +30,7 @@ public:
 		LevelSetting() {
 			PlayCount = 0;
 			HighScore = 0;
-			Stars = USER_SETTINGS_NULL_STAR;
+			Stars = 0;
 		}
 	};
 	

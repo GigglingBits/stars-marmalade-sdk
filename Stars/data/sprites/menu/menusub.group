@@ -11,11 +11,18 @@ CIwResGroup
 	./button_level_pressed.png
 	./button_level_locked.png
 
+	./button_level_0_star.png
+	./button_level_1_star.png
+	./button_level_2_star.png
+	./button_level_3_star.png
+
 	./title_button.png
 
  	./world_earth.png
+
 	./world_mars.png
 	./world_mars_locked.png
+
 	./world_jupiter.png
 	./world_jupiter_locked.png
 }

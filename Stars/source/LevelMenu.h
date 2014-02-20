@@ -4,31 +4,31 @@
 #include "Page.h"
 #include "PageSettings.h"
 #include "IwList.h"
-#include "Body.h"
 #include "Camera.h"
-#include "Button.h"
-#include "ButtonEx.h"
+#include "LevelMenuButton.h"
 #include "NaviPanel.h"
 #include "PageBackground.h"
 
 #define LVLMENU_BTN_COLS 3
 #define LVLMENU_BTN_ROWS 2
 #define LVLMENU_BTN_GROUP_COUNT 3
-#define LVLMENU_BTN_COUNT_PER_GROUP LVLMENU_BTN_COLS*LVLMENU_BTN_ROWS
+#define LVLMENU_BTN_COUNT_PER_GROUP (LVLMENU_BTN_COLS*LVLMENU_BTN_ROWS)
 
 class LevelMenu : public Page {
 private:
 	Camera m_xCamera;
 	
-	ButtonEx* m_apxButtons[LVLMENU_BTN_COUNT_PER_GROUP];
+	LevelMenuButton* m_apxButtons[LVLMENU_BTN_COUNT_PER_GROUP];
 	Button m_xButtonNext;
 	Button m_xButtonPrevious;
 	Button m_xButtonBack;
+	
 	NaviPanel m_xNaviPanel;
 
 	LevelIterator::WorldId m_eWorldId;
 	int m_iGroupId;
-
+	int m_iFirstUnachievedLevel;
+	
 	PageBackground m_xBackground;
 
 public:
@@ -45,7 +45,8 @@ protected:
 private:
 	std::string GetLevelKey(LevelIterator::WorldId world, int level);
 	bool CheckLevelExists(LevelIterator::WorldId world, int level);
-	bool CheckLevelOpen(LevelIterator::WorldId world, int level);
+	int GetFirstUnachievedLevel();
+	int GetAchievedStars(LevelIterator::WorldId world, int level);
 	
 	void EnableButtons(bool enable);
 	

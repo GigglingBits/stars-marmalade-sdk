@@ -1,8 +1,5 @@
-#include <sstream>
-
 #include "LevelMenu.h"
 #include "FactoryManager.h"
-#include "Debug.h"
 #include "Configuration.h"
 #include "UserSettings.h"
 #include "Debug.h"
@@ -13,12 +10,13 @@ LevelMenu::LevelMenu(LevelIterator::WorldId world) :
 	Page("menu.group", Configuration::GetInstance().IntroSong),
 	m_eWorldId(world),
 	m_iGroupId(0),
+	m_iFirstUnachievedLevel(LEVELITERATOR_NO_LEVEL),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),
     m_xButtonPrevious(eButtonCommandIdNone, s3eKeyAbsLeft),
     m_xButtonBack(eButtonCommandIdOpenWorldMenu, s3eKeyAbsGameD) {
 
 	memset(m_apxButtons, 0, sizeof(m_apxButtons));
-
+		
 	m_xButtonNext.PressedEvent.AddListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
 	m_xButtonPrevious.PressedEvent.AddListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
 }
@@ -26,7 +24,7 @@ LevelMenu::LevelMenu(LevelIterator::WorldId world) :
 LevelMenu::~LevelMenu() {
 	m_xButtonNext.PressedEvent.RemoveListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
 	m_xButtonPrevious.PressedEvent.RemoveListener<LevelMenu>(this, &LevelMenu::ButtonPressedEventHandler);
-
+	
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		if (m_apxButtons[i]) {
 			delete m_apxButtons[i];
@@ -36,23 +34,23 @@ LevelMenu::~LevelMenu() {
 
 void LevelMenu::Initialize() {
 	IW_CALLSTACK_SELF;
+	
+	// buttons
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
-
+	
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		IwAssertMsg(MYAPP, !m_apxButtons[i], ("Button %i already exists!", i));
-		m_apxButtons[i] = new ButtonEx(eButtonCommandIdOpenLevel, s3eKeyFirst, -1);
-		m_apxButtons[i]->SetTexture(FactoryManager::GetTextureFactory().Create("button_level"));
+		m_apxButtons[i] = new LevelMenuButton();
+		m_apxButtons[i]->SetTextures("button_level", "button_level_achieved_stars");
 	}
-
+	
 	m_xNaviPanel.Initialize();
 	for (int i = 0; i < LVLMENU_BTN_GROUP_COUNT; i++) {
 		m_xNaviPanel.AddButton("navipanel", i);
 	}
 
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
-
-	ApplyGroup(m_iGroupId);
 
 	// update background
 	PageSettings ps;
@@ -63,6 +61,11 @@ void LevelMenu::Initialize() {
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
 	m_xBackground.Initialize();
+	
+	// move to group where the first unachieved level is
+	m_iGroupId = std::max<int>(0, GetFirstUnachievedLevel() - 1) / LVLMENU_BTN_COUNT_PER_GROUP;
+	m_iGroupId = std::min<int>(m_iGroupId, LVLMENU_BTN_GROUP_COUNT - 1);
+	ApplyGroup(m_iGroupId);
 }
 
 void LevelMenu::OnDoLayout(const CIwSVec2& screensize) {
@@ -162,19 +165,7 @@ Button* LevelMenu::GetButton(int col, int row) {
 void LevelMenu::EnableButtons(bool enable) {
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		if (m_apxButtons[i]) {
-			if (enable) {
-				int level = m_apxButtons[i]->GetUserData();
-				if (CheckLevelExists(m_eWorldId, level)) {
-					m_apxButtons[i]->SetHideWhenDisabled(false);
-					m_apxButtons[i]->SetEnabled(CheckLevelOpen(m_eWorldId, level));
-				} else {
-					m_apxButtons[i]->SetHideWhenDisabled(true);
-					m_apxButtons[i]->SetEnabled(false);
-				}
-			} else {
-				m_apxButtons[i]->SetHideWhenDisabled(true);
-				m_apxButtons[i]->SetEnabled(false);
-			}
+			m_apxButtons[i]->SetEnabled(enable);
 		}
 	}
 }
@@ -188,11 +179,24 @@ bool LevelMenu::CheckLevelExists(LevelIterator::WorldId world, int level) {
 	return FactoryManager::GetLevelFactory().ConfigExists(GetLevelKey(world, level));
 }
 
-bool LevelMenu::CheckLevelOpen(LevelIterator::WorldId world, int level) {
-	LevelIterator it;
-	return
-		(it.GetFirstLevelInWorld(world) == level && it.GetFirstWorld() == world) ||
-		UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars != USER_SETTINGS_NULL_STAR;
+int LevelMenu::GetAchievedStars(LevelIterator::WorldId world, int level) {
+	return UserSettings::GetInstance().GetLevel(GetLevelKey(world, level)).Stars;
+}
+
+int LevelMenu::GetFirstUnachievedLevel() {
+	if (m_iFirstUnachievedLevel == LEVELITERATOR_NO_LEVEL) {
+		// scan and cache result
+		LevelIterator it;
+		int level = it.GetFirstLevelInWorld(m_eWorldId);
+		while (level != LEVELITERATOR_NO_LEVEL) {
+			if (GetAchievedStars(m_eWorldId, level) < 1) {
+				m_iFirstUnachievedLevel = level;
+				break;
+			}
+			level = it.GetNextLevelInWorld(m_eWorldId, level);
+		}
+	}
+	return m_iFirstUnachievedLevel;
 }
 
 void LevelMenu::ApplyGroup(int groupid) {
@@ -203,11 +207,11 @@ void LevelMenu::ApplyGroup(int groupid) {
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		int level = 1;	// index is zero based; levels start with 1
         level += groupid * LVLMENU_BTN_COUNT_PER_GROUP + i;
-		m_apxButtons[i]->SetUserData(level);
-        
-		std::ostringstream oss;
-		oss << level;
-		m_apxButtons[i]->SetText(oss.str(), 0xffccfaff, Renderer::eFontTypeLarge);
+		int stars = GetAchievedStars(m_eWorldId, level);
+		m_apxButtons[i]->SetLevel(level,
+			CheckLevelExists(m_eWorldId, level),
+			stars > 0 || level == GetFirstUnachievedLevel(),
+			stars);
 	}
 
 	// make sure they are locked/unlocked

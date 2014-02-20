@@ -40,14 +40,25 @@ void WorldMenu::Initialize() {
 }
 
 bool WorldMenu::CheckWorldOpen(LevelIterator::WorldId world) {
+	// the first world is always open
 	LevelIterator it;
 	if (world == it.GetFirstWorld()) {
 		return true;
 	}
 	
-	int level = it.GetFirstLevelInWorld(world);
-	std::string levelname = it.GetLevelName(world, level);
-	return UserSettings::GetInstance().GetLevel(levelname).Stars != USER_SETTINGS_NULL_STAR;
+	// check if there is an unachieved level in the previous world
+	LevelIterator::WorldId previousworld = it.GetPreviousWorld(world);
+	int level = it.GetFirstLevelInWorld(previousworld);
+	while (level != LEVELITERATOR_NO_LEVEL) {
+		std::string levelname = it.GetLevelName(previousworld, level);
+		if (UserSettings::GetInstance().GetLevel(levelname).Stars < 1) {
+			return false;
+		}
+		level = it.GetNextLevelInWorld(previousworld, level);
+	};
+
+	// this world can be opened
+	return true;
 }
 
 

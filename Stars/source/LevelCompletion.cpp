@@ -58,18 +58,11 @@ void LevelCompletion::SaveResults() {
 
 	// save scores for current level
 	if (m_xCompletionInfo.IsCleared) {
-		levelsettings.Stars = 1;
-		if (levelsettings.HighScore < m_xCompletionInfo.DustFillPercent) {
+		levelsettings.Stars = 1 + (levelsettings.PlayCount % 3); // just dummy evaluation
+ 		if (levelsettings.HighScore < m_xCompletionInfo.DustFillPercent) {
 			levelsettings.HighScore = m_xCompletionInfo.DustFillPercent;
 		}
-		
-		// unlock next level
-		UserSettings::LevelSetting& nextlevelsettings = settings.GetLevel(m_sNextLevelId);
-		if (nextlevelsettings.Stars == USER_SETTINGS_NULL_STAR) {
-			nextlevelsettings.Stars = 0;
-		}
 	}
-	
 	settings.Save();
 }
 
