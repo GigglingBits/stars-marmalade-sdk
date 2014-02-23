@@ -19,14 +19,6 @@ void Star::PeacefulState::BeginAttack() {
 	m_rxContext.SetState(new AttackState(m_rxContext));
 }
 
-void Star::PeacefulState::Collide(Body& body) {
-	if (body.GetTypeName() != Nugget::TypeName()) {
-		body.GetHealthManager().Injure(5.0f); // just arbitrarily 5... for testing
-		m_rxContext.SetTextureFrame("hurt");
-		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
-	}
-}
-
 void Star::PeacefulState::Update(uint16 timestep) {
 }
 

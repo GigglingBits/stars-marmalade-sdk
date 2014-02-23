@@ -44,7 +44,6 @@ void Star::OnColliding(Body& thisbody, Body& otherbody) {
 	IW_CALLSTACK_SELF;
 
 	GetMotionState().Collide(otherbody);
-	GetAttackState().Collide(otherbody);
 }
 
 void Star::OnUpdate(const FrameData& frame) {
@@ -107,10 +106,7 @@ void Star::SetAnchorLine(float xpos) {
 }
 
 void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed) {
-	// clear current path
-	while (!m_xPath.empty()) {
-		m_xPath.pop();
-	}
+	ClearPath();
 	
 	// copy new path
 	m_fPathSpeed = speed;
@@ -120,6 +116,12 @@ void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed
 	
 	// get the star to pollow
 	GetMotionState().FollowPath();
+}
+
+void Star::ClearPath() {
+	while (!m_xPath.empty()) {
+		m_xPath.pop();
+	}
 }
 
 bool Star::IsFollowingPath() {

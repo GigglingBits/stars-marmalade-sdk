@@ -37,7 +37,6 @@ public:
 		virtual void BeginAttack() {};
 		virtual void EndAttack() {};
 		
-		virtual void Collide(Body& body) {};
 		virtual void Update(uint16 timestep) {};
 	};
 	
@@ -85,6 +84,8 @@ public:
 	bool IsFollowingPath();
 
 private:
+	void ClearPath();
+
 	void SetMotionTextureFrame(const std::string& name);
 	void SetAttackTextureFrame(const std::string& name);
 	void ClearAttackTextureFrame();

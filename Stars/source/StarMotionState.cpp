@@ -62,18 +62,28 @@ void Star::FollowState::FollowPath() {
 }
 
 void Star::FollowState::Collide(Body& body) {
-	if (body.GetTypeName() != Nugget::TypeName()) {
-		return;
-	}
-	
 	IW_CALLSTACK_SELF;
-	SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
+
+	if (body.GetTypeName() == Nugget::TypeName()) {
+		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 	
-	DustEventArgs args;
-	args.EventType = eDustEventTypeCollect;
-	args.amount = 10;
-	args.position = body.GetPosition();
-	m_rxContext.DustEvent.Invoke(m_rxContext, args);
+		DustEventArgs args;
+		args.EventType = eDustEventTypeCollect;
+		args.amount = 10;
+		args.position = body.GetPosition();
+		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+	} else {
+		m_rxContext.SetTextureFrame("hurt");
+		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
+
+		DustEventArgs args;
+		args.EventType = eDustEventTypeRollback;
+		args.position = body.GetPosition();
+		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+
+		m_rxContext.ClearPath();
+		m_rxContext.SetState(new RetractingState(m_rxContext));
+	}
 }
 
 void Star::FollowState::Update(uint16 timestep) {

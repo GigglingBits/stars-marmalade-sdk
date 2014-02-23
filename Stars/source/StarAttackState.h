@@ -14,7 +14,6 @@ public:
 	virtual void BeginBlock();
 	virtual void BeginAttack();
 
-	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);
 };
 
