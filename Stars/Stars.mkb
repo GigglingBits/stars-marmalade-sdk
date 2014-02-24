@@ -189,6 +189,9 @@ files {
 	Nugget.h
 	Nugget.cpp
 
+	Enemy.h
+	Enemy.cpp
+
 	["Sources/Game Logic/Effects"]
 	LocalEffect.h
 	LocalEffect.cpp

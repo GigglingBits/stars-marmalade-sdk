@@ -21,7 +21,7 @@ b2BodyDef* BodyTemplate::CreatePhysicsBodyDef() {
 void BodyTemplate::Set(const std::string& id, const std::string& type, const std::string& shape, const std::string& fixture, const std::string& texture) {
 	m_sId = id;
 
-	if (!type.compare("dynamic") || !type.compare("star") || !type.compare("nugget")) {
+	if (!type.compare("dynamic") || !type.compare("star") || !type.compare("nugget") || !type.compare("enemy")) {
 		m_xDef.type = b2_dynamicBody;
 	} else if (!type.compare("kinematic") || !type.compare("buff") || !type.compare("splashtext")) {
 		m_xDef.type = b2_kinematicBody;

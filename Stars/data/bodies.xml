@@ -135,7 +135,7 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
-		<body id="bird_01" texture="none" type="dynamic" resilience="1.0" revolve="0">
+		<body id="bird_01" type="enemy" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.35" />
 				<point x="1.5" y="-0.35" />
@@ -176,7 +176,7 @@
 			</child>
 		</body>
 		
-		<body id="bird_02" texture="none" type="dynamic" resilience="1.0" revolve="0">
+		<body id="bird_02" type="enemy" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.3" />
 				<point x="1.1" y="-0.3" />
@@ -217,7 +217,7 @@
 			</child>
 		</body>
 		
-		<body id="bird_03" texture="none" type="dynamic" resilience="1.0" revolve="0">
+		<body id="bird_03" type="enemy" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.55" />
 				<point x="1.4" y="-0.55" />
