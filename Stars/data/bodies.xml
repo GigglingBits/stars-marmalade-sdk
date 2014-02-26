@@ -51,7 +51,7 @@
 		
 		
 		<!-- gameplay -->
-		<body id="star" type="star" texture="star" resilience="0.8" revolve="0" drag="1">
+		<body id="star" type="star" resilience="0.8" revolve="0" drag="1">
 			<shape type="polygon">
 				<point x="-0.6" y="-0.75" />
 				<point x="0.6" y="-0.75" />
@@ -61,6 +61,31 @@
 			</shape>
 			<port id="center" x="0.0" y="0.0" />
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
+			<texture>
+				<frame id="idle" image="star_happy" duration="2000" next="idle_01" />
+				<frame id="idle_01" image="star_blink" duration="100" next="idle_02" />
+				<frame id="idle_02" image="star_blink_1" duration="100" next="idle_03" />
+				<frame id="idle_03" image="star_blink_2" duration="100" next="idle_04" />
+				<frame id="idle_04" image="star_happy" duration="5000" next="idle_05" />
+				<frame id="idle_05" image="star_blink" duration="100" next="idle_06" />
+				<frame id="idle_06" image="star_blink_1" duration="100" next="idle_07" />
+				<frame id="idle_07" image="star_blink_2" duration="100" next="idle_08" />
+				<frame id="idle_08" image="star_happy" duration="3000" next="idle_09" />
+				<frame id="idle_09" image="star_lick" duration="300" next="idle" />
+				
+				<frame id="recover" image="star_hurt" duration="100" next="recover_01" />
+				<frame id="recover_01" image="star_hurt_2" duration="100" next="recover_02" />
+				<frame id="recover_02" image="star_hurt_3" duration="400" next="recover_03" />
+				<frame id="recover_03" image="star_hurt_2" duration="300" next="recover_02" />
+				
+				<frame id="followpath" image="star_moving" />
+				
+				<frame id="block" image="star_angry" />
+				
+				<frame id="hit" image="star_angry" />
+				
+				<frame id="attack" image="star_angry" />
+			</texture>
 		</body>
 		
 		<body id="nugget_01" type="nugget" resilience="1.0" revolve="1" drag="0">
@@ -346,33 +371,7 @@
 		<texture id="stardustsurface" image="hud_stardust_surface" />
 		<texture id="stardustsurface_queued" image="hud_stardust_surface_queued" />
 		<texture id="stardustvial_back" colour="0x6631353a" />
-		
-		<texture id="star">
-			<frame id="idle" image="star_happy" duration="2000" next="idle_01" />
-			<frame id="idle_01" image="star_blink" duration="100" next="idle_02" />
-			<frame id="idle_02" image="star_blink_1" duration="100" next="idle_03" />
-			<frame id="idle_03" image="star_blink_2" duration="100" next="idle_04" />
-			<frame id="idle_04" image="star_happy" duration="5000" next="idle_05" />
-			<frame id="idle_05" image="star_blink" duration="100" next="idle_06" />
-			<frame id="idle_06" image="star_blink_1" duration="100" next="idle_07" />
-			<frame id="idle_07" image="star_blink_2" duration="100" next="idle_08" />
-			<frame id="idle_08" image="star_happy" duration="3000" next="idle_09" />
-			<frame id="idle_09" image="star_lick" duration="300" next="idle" />
-			
-			<frame id="hurt" image="star_hurt" duration="100" next="hurt_01" />
-			<frame id="hurt_01" image="star_hurt_2" duration="100" next="hurt_02" />
-			<frame id="hurt_02" image="star_hurt_3" duration="400" next="hurt_03" />
-			<frame id="hurt_03" image="star_hurt_2" duration="100" next="idle" />
-			
-			<frame id="followpath" image="star_moving" />
-			
-			<frame id="block" image="star_angry" />
-			
-			<frame id="hit" image="star_angry" />
-			
-			<frame id="attack" image="star_angry" />
-		</texture>
-		
+				
 		<texture id="preamble_01" image="01" />
 		
 		<texture id="particle_yellow_star">

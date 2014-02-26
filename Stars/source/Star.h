@@ -43,6 +43,7 @@ public:
 protected:
 	class RetractingState;
 	class FollowState;
+	class RecoverState;
 
 	class PeacefulState;
 	class BlockState;

@@ -9,14 +9,15 @@
 // Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
+	m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
+
+	m_rxContext.GetBody().SetLinearDamping(5.0f);
 
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
-
-	m_rxContext.GetBody().SetLinearDamping(5.0f);
 }
 
 void Star::RetractingState::FollowPath() {
@@ -47,11 +48,11 @@ void Star::RetractingState::Update(uint16 timestep) {
 	}
 }
 
-
 /////////////////////////////////////////////////////////////
 // Follow
 /////////////////////////////////////////////////////////////
 void Star::FollowState::Initialize() {
+	m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
@@ -63,10 +64,10 @@ void Star::FollowState::FollowPath() {
 
 void Star::FollowState::Collide(Body& body) {
 	IW_CALLSTACK_SELF;
-
+	
 	if (body.GetTypeName() == Nugget::TypeName()) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
-	
+		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollect;
 		args.amount = 10;
@@ -75,14 +76,14 @@ void Star::FollowState::Collide(Body& body) {
 	} else {
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
-
+		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeRollback;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-
+		
 		m_rxContext.ClearPath();
-		m_rxContext.SetState(new RetractingState(m_rxContext));
+		m_rxContext.SetState(new RecoverState(m_rxContext));
 	}
 }
 
@@ -133,5 +134,42 @@ void Star::FollowState::Update(uint16 timestep) {
 	m_rxContext.MoveDragging(dragtarget);
 	if (m_rxContext.m_pxParticles) {
 		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
-	}	
+	}
+}
+
+/////////////////////////////////////////////////////////////
+// Recover
+/////////////////////////////////////////////////////////////
+void Star::RecoverState::Initialize() {
+	m_rxContext.EnableCollisions(false);
+	m_rxContext.SetMotionTextureFrame("recover");
+	m_rxContext.DisableParticles();
+
+	m_rxContext.GetBody().SetLinearDamping(5.0f);
+
+	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
+	dragtarget.x = m_rxContext.m_fAnchorLine;
+	m_rxContext.MoveDragging(dragtarget);
+	
+	m_uiRemainingTime = 2000; // sleep for 2 seconds
+}
+
+void Star::RecoverState::FollowPath() {
+	m_rxContext.SetState(new FollowState(m_rxContext));
+}
+
+void Star::RecoverState::Update(uint16 timestep) {
+	// balance the drag force
+	if (m_rxContext.IsDragging()) {
+		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
+		float force = (distance > 1.0f ? 1.0f + (distance / 10.0f) : distance) * 5.0f * m_rxContext.GetMass();
+		m_rxContext.SetDragForce(force);
+	}
+
+	// is recovery time over?
+	if (timestep < m_uiRemainingTime) {
+		m_uiRemainingTime -= timestep;
+	} else {
+		m_rxContext.SetState(new RetractingState(m_rxContext));
+	}
 }

@@ -27,4 +27,18 @@ public:
 	virtual void Update(uint16 timestep);
 };
 
+/////////////////////////////////////////////////////////////
+// Recover
+/////////////////////////////////////////////////////////////
+class Star::RecoverState : public Star::MotionStateBase {
+private:
+	uint32 m_uiRemainingTime;
+	
+public:
+	RecoverState(Star& context) : MotionStateBase(context), m_uiRemainingTime(0) {};
+	virtual void Initialize();
+	virtual void FollowPath();
+	virtual void Update(uint16 timestep);
+};
+
 #endif
