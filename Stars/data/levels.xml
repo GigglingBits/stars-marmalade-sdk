@@ -128,7 +128,7 @@
 				<line map="   n   " />
 				<line map="   n   " />
 				<line map="   n   " />
-				<line map="   n  " />
+				<line map="   n   " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
@@ -783,7 +783,7 @@
 				<line map="   M   " />
 			</spritesequence>
 		</level>
-		<level name="earth_10" width="12.0" height="12.0" dustrequirement="1500">
+		<level name="earth_10" width="12.0" height="12.0" dustrequirement="10">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="N" body="nugget_02" />
@@ -794,37 +794,9 @@
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
 				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="   n   " />
+				<line map="   N   " />
+				<line map="   m   " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />

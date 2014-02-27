@@ -55,6 +55,7 @@ public:
 
 	bool HitTest(const CIwFVec2& position);
 
+	void EmitBuff();
 	void ShowEffect(const std::string& effect);
 
 private:
@@ -89,6 +90,11 @@ protected:
 	virtual void OnColliding(Body& thisbody, Body& otherbody);
 	
 public:
+	struct BuffArgs {
+		CIwFVec2 pos;
+	};
+	Event<Body, BuffArgs> BuffRequested;
+
 	struct EffectArgs {
 		std::string id;
 		CIwFVec2 pos;

@@ -101,6 +101,7 @@ private:
 	void EmitBuff(const CIwFVec2& pos);
 	
 	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
+	void BuffRequestedEventHandler(const Body& sender, const Body::BuffArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);
 
 public:

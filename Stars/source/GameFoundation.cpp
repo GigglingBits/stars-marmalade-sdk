@@ -76,6 +76,7 @@ void GameFoundation::Add(Body* body) {
 		m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
 	}
 
+	body->BuffRequested.AddListener(this, &GameFoundation::BuffRequestedEventHandler);
 	body->EffectRequested.AddListener(this, &GameFoundation::EffectRequestedEventHandler);
 
 	Add((Sprite*)body);
@@ -143,6 +144,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 				m_pxStar = NULL;
 			}
 			if (Body* body = dynamic_cast<Body*>(sprite)) {
+				body->BuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
 				body->EffectRequested.RemoveListener(this, &GameFoundation::EffectRequestedEventHandler);
 			}
 			delete sprite;
@@ -295,7 +297,6 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 			
 		case Star::eDustEventTypeCollect: {
 			EnqueueDust(args.position, args.amount);
-			EmitBuff(args.position);
 			break;
 		}
 			
@@ -311,8 +312,12 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 	}
 }
 
+void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::BuffArgs& args) {
+	EmitBuff(args.pos);
+}
+
 void GameFoundation::EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args) {
-	 Sprite* fx = FactoryManager::GetEffectFactory().Create(args.id);
-	 fx->SetPosition(args.pos);
-	 Add(fx);
+	Sprite* fx = FactoryManager::GetEffectFactory().Create(args.id);
+	fx->SetPosition(args.pos);
+	Add(fx);
 }

@@ -21,6 +21,9 @@ void Enemy::OnColliding(Body& thisbody, Body& otherbody) {
 	// any collision leads to selfdestruction
 	GetHealthManager().Kill();
 	ShowEffect("star_collision");
+	
+	// todo: not all colisions should lead to buff emission
+	EmitBuff();
 }
 
 void Enemy::OnUpdate(const FrameData& frame) {
