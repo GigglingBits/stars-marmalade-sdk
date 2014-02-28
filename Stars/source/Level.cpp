@@ -194,6 +194,7 @@ void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
 			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
 			star->FollowPath(samplecount, samplepoints, (float)Configuration::GetInstance().PathSpeed);
 			IwTrace(MYAPP, ("Setting %i points path to star", samplecount));
+			m_xCompletionInfo.PathDrawnCount++;
 		}
 	}
 }
@@ -262,8 +263,11 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 }
 
 void Level::Conclude() {
-	m_xCompletionInfo.IsCleared = m_xGame.GetDustFillPercent() == 1.0f;
+	m_xCompletionInfo.DustFillAmount = m_xGame.GetDustFillAmount();
 	m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
+	m_xCompletionInfo.DustFillMax = m_xGame.GetDustFillMax();
+
+	m_xCompletionInfo.IsCleared = m_xCompletionInfo.DustFillPercent >= 1.0f;
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {

@@ -178,6 +178,10 @@ float GameFoundation::GetDustFillAmount() {
 	return m_xDust.GetCollectedDustAmount();
 }
 
+float GameFoundation::GetDustFillMax() {
+	return m_xDust.GetMaxDustAmount();
+}
+
 float GameFoundation::GetDustQueuedAmount() {
 	return m_xDust.GetQueuedDustAmount();
 }
@@ -304,7 +308,7 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 			CommitDust(args.position);
 			break;
 		}
-			
+				
 		case Star::eDustEventTypeRollback: {
 			CancelDust(args.position);
 			break;

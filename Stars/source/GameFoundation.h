@@ -80,6 +80,7 @@ public:
 	float GetDustQueuedAmount();
 	float GetDustQueuedPercent();
 
+	float GetDustFillMax();
 	float GetDustFillAmount();
 	float GetDustFillPercent();
 	

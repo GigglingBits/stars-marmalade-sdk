@@ -5,11 +5,21 @@
 
 struct LevelCompletionInfo {
 	bool IsCleared;
+
 	float DustFillPercent;
+	float DustFillAmount;
+	float DustFillMax;
+	
+	int PathDrawnCount;
 	
 	LevelCompletionInfo() {
 		IsCleared = false;
+	
 		DustFillPercent = 0.0f;
+		DustFillAmount = 0.0f;
+		DustFillMax = 0.0f;
+		
+		PathDrawnCount = 0;
 	}
 };
 

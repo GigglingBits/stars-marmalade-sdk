@@ -17,6 +17,7 @@ private:
 	LevelCompletionInfo m_xCompletionInfo;
 	
 	std::string m_sCompletionText;
+	std::string m_sStatsText;
 
 	Button m_xButtonStar;
 
@@ -40,6 +41,7 @@ protected:
 	
 private:
 	std::string GetCompletionText();
+	std::string GetStatsText();
 	void SaveResults();
 };
 

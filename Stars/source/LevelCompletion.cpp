@@ -18,6 +18,7 @@ LevelCompletion::LevelCompletion(const std::string levelid, const std::string ne
     m_xCompletionInfo(info) {
 
 	m_sCompletionText = GetCompletionText();
+	m_sStatsText = GetStatsText();
 
 	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 }
@@ -40,13 +41,23 @@ void LevelCompletion::Initialize() {
 
 std::string LevelCompletion::GetCompletionText() {
 	std::ostringstream oss;
-
+	
 	if (m_xCompletionInfo.IsCleared) {
 		oss << "The level is cleared" << std::endl;
 	} else {
 		oss << "Try again" << std::endl;
 	}
+	
+	return oss.str();
+}
 
+std::string LevelCompletion::GetStatsText() {
+	std::ostringstream oss;
+	oss << "Level cleared: " << m_xCompletionInfo.IsCleared << std::endl;
+	oss << "Dust fill max: " << m_xCompletionInfo.DustFillMax << std::endl;
+	oss << "Dust fill amount: " << m_xCompletionInfo.DustFillAmount << std::endl;
+	oss << "Dust fill percent: " << m_xCompletionInfo.DustFillPercent << std::endl;
+	oss << "Number of paths used: " << m_xCompletionInfo.PathDrawnCount << std::endl;
 	return oss.str();
 }
 
@@ -117,10 +128,18 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xBackground.Render(renderer, frame);
 
-	// text
+	// completion text
 	const CIwSVec2& screen = frame.GetScreensize();
-	CIwRect rect(0, 0, screen.x, screen.y / 2);
-	renderer.DrawText(m_sCompletionText, rect, Renderer::eFontTypeLarge, 0xffccfaff);
+	renderer.DrawText(
+		m_sCompletionText,
+	    CIwRect(0, 0, screen.x, screen.y / 2),
+		Renderer::eFontTypeLarge, 0xffccfaff);
+	
+	// stats text
+	renderer.DrawText(
+		m_sStatsText,
+		CIwRect(0, screen.y / 2, screen.x / 3, screen.y / 2),
+		Renderer::eFontTypeSmall, 0xffffffff);
 	
 	m_xDustFillPercent.Render(renderer, frame);
 
