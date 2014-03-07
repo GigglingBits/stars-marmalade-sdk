@@ -45,6 +45,15 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
+	name		"BirdCollision"
+	data		"09427_cartoon_bird_hit_scream"
+	vol 		0.8
+	pitchMin	1.05
+	pitchMax	1.25
+}
+
+CIwSoundSpec
+{
 	name		"level_win"
 	data		"level_win"
 	vol 		0.7

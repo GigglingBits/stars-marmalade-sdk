@@ -1,6 +1,8 @@
 #include "Bird.h"
 #include "Debug.h"
 
+#include "SoundEngine.h"
+
 Bird::Bird(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Enemy(id, bodydef, fixturedef, texturedef) {
 }
@@ -21,5 +23,5 @@ void Bird::KnockOut() {
 		body->SetTextureFrame("hurt");
 	}
 	
-	
+	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
 }
