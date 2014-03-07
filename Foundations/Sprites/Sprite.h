@@ -47,6 +47,8 @@ public:
 	Orientation GetOrientation();
 	void SetOrientation(Orientation orientation);
 
+	void SetTextureFrame(const std::string& name);
+	
 protected:
 	virtual Texture& GetTexture();
 	virtual VertexStreamWorld& GetShape();

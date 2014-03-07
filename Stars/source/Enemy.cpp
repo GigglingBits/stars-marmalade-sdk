@@ -4,6 +4,7 @@
 
 Enemy::Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
+	SetGravityScale(0.0f);
 }
 
 const char* Enemy::GetTypeName() {
@@ -15,11 +16,22 @@ const char* Enemy::TypeName() {
 	return type;
 }
 
+void Enemy::KnockOut() {
+	EnableCollisions(false);
+	EnableRotation(true);
+	
+	CIwFVec2 impulse(0.0f, 8.0f);
+	impulse *= GetMass();
+	SetImpulse(impulse);
+	
+	SetGravityScale(1.0f);
+}
+
 void Enemy::OnColliding(Body& thisbody, Body& otherbody) {
 	IW_CALLSTACK_SELF;
 	
 	// any collision leads to selfdestruction
-	GetHealthManager().Kill();
+	KnockOut();
 	ShowEffect("star_collision");
 	
 	// todo: not all colisions should lead to buff emission

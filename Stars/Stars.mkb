@@ -192,6 +192,9 @@ files {
 	Enemy.h
 	Enemy.cpp
 
+	Bird.h
+	Bird.cpp
+
 	["Sources/Game Logic/Effects"]
 	LocalEffect.h
 	LocalEffect.cpp

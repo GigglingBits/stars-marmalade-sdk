@@ -4,6 +4,7 @@
 
 Nugget::Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Body(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
+	SetGravityScale(0.0f);
 }
 
 const char* Nugget::GetTypeName() {

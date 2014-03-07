@@ -112,7 +112,7 @@ void Initialize() {
 	InputManager::Initialize();
 	LogManager::Initialize();
 	LocationServices::Initialize();
-	World::SetDefaultGravity(0.0f, 0.0f);
+	World::SetDefaultGravity(1.0f, -9.8f);
 
 	WriteandShowLog("Loading resources...");
 	ResourceManager::GetInstance().LoadPermament("base.group");

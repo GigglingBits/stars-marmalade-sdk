@@ -13,8 +13,10 @@ public:
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
-
+	
 protected:
+	virtual void KnockOut();
+	
 	virtual void OnColliding(Body& thisbody, Body& otherbody);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

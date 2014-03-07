@@ -4,6 +4,7 @@
 Buff::Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 : Body(id, bodydef, fixturedef, texturedef) {
 	SetRenderingLayer(Renderer::eRenderingLayerGameBackground);
+	SetGravityScale(0.0f);
 }
 
 const char* Buff::GetTypeName() {

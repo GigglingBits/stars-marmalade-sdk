@@ -9,7 +9,9 @@
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
 	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL) {
-	GetBody().SetBullet(true);
+
+	SetGravityScale(0.0f);
+		
 	SetState(new RetractingState(*this));
 	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);

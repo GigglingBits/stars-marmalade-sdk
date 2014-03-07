@@ -16,22 +16,21 @@ CIwResGroup
 	./sprites/buff_attack.png
 	./sprites/buff_block.png
 
-	./sprites/bird_01.png
-	./sprites/bird_01_wings_01.png
-	./sprites/bird_01_wings_02.png
-	./sprites/bird_01_wings_03.png
+	./sprites/characters/bird01/bird_01.png
+	./sprites/characters/bird01/bird_01_wings_01.png
+	./sprites/characters/bird01/bird_01_wings_02.png
+	./sprites/characters/bird01/bird_01_wings_03.png
+	./sprites/characters/bird01/bird_01_hurt.png
 
-	./sprites/bird_02.png
-	./sprites/bird_02_wings_01.png
-	./sprites/bird_02_wings_02.png
-	./sprites/bird_02_wings_03.png
+	./sprites/characters/bird02/bird_02.png
+	./sprites/characters/bird02/bird_02_wings_01.png
+	./sprites/characters/bird02/bird_02_wings_02.png
+	./sprites/characters/bird02/bird_02_wings_03.png
+	./sprites/characters/bird02/bird_02_hurt.png
 
-	./sprites/bird_03.png
-	./sprites/bird_03_wings_01.png
-	./sprites/bird_03_wings_02.png
-	./sprites/bird_03_wings_03.png
-
-	./sprites/airplane.png
-	./sprites/jetfighter.png
-	./sprites/jetfighter_missile.png
+	./sprites/characters/bird03/bird_03.png
+	./sprites/characters/bird03/bird_03_wings_01.png
+	./sprites/characters/bird03/bird_03_wings_02.png
+	./sprites/characters/bird03/bird_03_wings_03.png
+	./sprites/characters/bird03/bird_03_hurt.png
 }

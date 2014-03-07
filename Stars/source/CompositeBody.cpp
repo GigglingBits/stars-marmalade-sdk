@@ -48,10 +48,13 @@ void CompositeBody::AddChild(const std::string& childid, const std::string& body
 	Body* body = FactoryManager::GetBodyFactory().Create(bodyid);
 	body->SetId(childid);
 
+	// inheritable properties
+	body->SetGravityScale(GetGravityScale());
+
 	// no need to set position; 
 	// it will be set when adding joints
 	// body->SetPosition(GetPosition());
-
+	
 	AddChild(body, NULL);
 }
 
@@ -59,9 +62,9 @@ void CompositeBody::AddChild(Body* body, BodyJoint* joint) {
 	IW_CALLSTACK_SELF;
 	if (body) {
 		m_xChildList[body->GetId()] = body;
-	}
-	if (joint) {
-		m_xJointList.append(joint);
+		if (joint) {
+			m_xJointList.append(joint);
+		}
 	}
 }
 
@@ -90,6 +93,15 @@ void CompositeBody::SetSpeed(const CIwFVec2& vector) {
 	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
 		Body* body = it->second;
 		body->SetSpeed(vector);
+	}
+}
+
+void CompositeBody::SetGravityScale(float scale) {
+	Body::SetGravityScale(scale);
+	
+	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
+		Body* body = it->second;
+		body->SetGravityScale(scale);
 	}
 }
 

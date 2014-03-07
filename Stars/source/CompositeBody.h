@@ -35,6 +35,8 @@ public:
 	virtual void SetSpeed(const CIwFVec2& vector);
 
 	virtual float GetMass();
+	
+	virtual void SetGravityScale(float scale);
 
 private:
 	void AddChild(Body* body, BodyJoint* joint);

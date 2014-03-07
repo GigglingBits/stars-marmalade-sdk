@@ -6,6 +6,7 @@
 #include "Star.h"
 #include "Nugget.h"
 #include "Enemy.h"
+#include "Bird.h"
 #include "Buff.h"
 
 #include <sstream>
@@ -150,6 +151,8 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 		p = new Buff(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("enemy")) {
 		p = new Enemy(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("bird")) {
+		p = new Bird(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetChildren().empty()) {
 		p = new CompositeBody(instanceid, *bodydef, fixturedef, texturedef);
 	} else {

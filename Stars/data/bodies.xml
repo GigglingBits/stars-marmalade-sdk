@@ -141,26 +141,8 @@
 			<texture image="buff_block" />
 			<shape type="circle" width="1.0" />
 		</body>
-		
-		<body id="airplane" type="dynamic" resilience="0.0" revolve="0" drag="0">
-			<texture image="airplane" />
-			<shape type="rectangle" width="2.4" height="0.8" />
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
-		<body id="jetfighter" type="dynamic" resilience="0.0" revolve="0" drag="0">
-			<texture image="jetfighter" />
-			<shape type="rectangle" width="2.4" height="0.8" />
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
-		<body id="missile" type="dynamic" resilience="0.0" revolve="0" drag="0">
-			<texture image="jetfighter_missile" />
-			<shape type="rectangle" width="1.4" height="0.4" />
-			<fixture friction="0.6" restitution="0.5" density="1.0" />
-		</body>
-		
-		<body id="bird_01" type="enemy" texture="none" resilience="1.0" revolve="0">
+				
+		<body id="bird_01" type="bird" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.35" />
 				<point x="1.5" y="-0.35" />
@@ -189,7 +171,10 @@
 			</child>
 			<child id="body" port="nose" jointtype="weld">
 				<body type="dynamic" collide="0">
-					<texture image="bird_01" />
+					<texture>
+						<frame id="normal" image="bird_01" />
+						<frame id="hurt" image="bird_01_hurt" />
+					</texture>
 					<shape type="polygon">
 						<point x="0.0" y="-0.35" />
 						<point x="1.6" y="-0.35" />
@@ -201,7 +186,7 @@
 			</child>
 		</body>
 		
-		<body id="bird_02" type="enemy" texture="none" resilience="1.0" revolve="0">
+		<body id="bird_02" type="bird" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.3" />
 				<point x="1.1" y="-0.3" />
@@ -230,7 +215,10 @@
 			</child>
 			<child id="body" port="nose" jointtype="weld">
 				<body type="dynamic" collide="0">
-					<texture image="bird_02" />
+					<texture>
+						<frame id="normal" image="bird_02" />
+						<frame id="hurt" image="bird_02_hurt" />
+					</texture>
 					<shape type="polygon">
 						<point x="0.0" y="-0.3" />
 						<point x="1.1" y="-0.3" />
@@ -242,7 +230,7 @@
 			</child>
 		</body>
 		
-		<body id="bird_03" type="enemy" texture="none" resilience="1.0" revolve="0">
+		<body id="bird_03" type="bird" texture="none" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.55" />
 				<point x="1.4" y="-0.55" />
@@ -271,7 +259,10 @@
 			</child>
 			<child id="body" port="nose" jointtype="weld">
 				<body type="dynamic" collide="0">
-					<texture image="bird_03" />
+					<texture>
+						<frame id="normal" image="bird_03" />
+						<frame id="hurt" image="bird_03_hurt" />
+					</texture>
 					<shape type="polygon">
 						<point x="0.0" y="-0.55" />
 						<point x="1.4" y="-0.55" />

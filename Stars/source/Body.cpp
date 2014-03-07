@@ -106,6 +106,14 @@ float Body::GetMass() {
 	return m_pxBody->GetMass();
 }
 
+void Body::SetGravityScale(float scale) {
+	m_pxBody->SetGravityScale(scale);
+}
+
+float Body::GetGravityScale() {
+	return m_pxBody->GetGravityScale();
+}
+
 void Body::SetSpeed(const CIwFVec2& vector) {
 	m_pxBody->SetLinearVelocity(
 		b2Vec2(vector.x, vector.y));

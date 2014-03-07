@@ -46,18 +46,21 @@ public:
 	virtual void SetPosition(const CIwFVec2& position, float angle);
 	virtual CIwFVec2 GetPosition();
 	CIwFVec2 GetCenter();
-
+	
 	void SetImpulse(const CIwFVec2& vector);
 	virtual void SetSpeed(const CIwFVec2& vector);
 
 	void EnableCollisions(bool enable);
 	void EnableRotation(bool enable);
 
+	virtual void SetGravityScale(float scale);
+	float GetGravityScale();
+
 	bool HitTest(const CIwFVec2& position);
 
 	void EmitBuff();
 	void ShowEffect(const std::string& effect);
-
+	
 private:
 	void DestroyBody();
 	void RemoveShape(b2Fixture* fixture);
@@ -84,7 +87,7 @@ protected:
 
 	CIwFVec2 GetDragTarget();
 	void SetDragForce(float maxforce);
-
+	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnColliding(Body& thisbody, Body& otherbody);

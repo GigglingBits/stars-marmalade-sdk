@@ -67,6 +67,10 @@ Texture& Sprite::GetTexture() {
 	return m_xTexture;
 }
 
+void Sprite::SetTextureFrame(const std::string& name) {
+	m_xTexture.SelectFrame(name);
+}
+
 VertexStreamWorld& Sprite::GetShape() {
 	return m_xShape;
 }
