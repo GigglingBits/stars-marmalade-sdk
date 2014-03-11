@@ -35,6 +35,10 @@ LevelMenu::~LevelMenu() {
 void LevelMenu::Initialize() {
 	IW_CALLSTACK_SELF;
 	
+	LevelIterator it;
+	std::string worldkey = it.GetWorldName(m_eWorldId);
+	std::string levelbuttontexture = std::string("button_").append(worldkey).append("_level");
+	
 	// buttons
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
@@ -42,7 +46,7 @@ void LevelMenu::Initialize() {
 	for (int i = 0; i < LVLMENU_BTN_COUNT_PER_GROUP; i++) {
 		IwAssertMsg(MYAPP, !m_apxButtons[i], ("Button %i already exists!", i));
 		m_apxButtons[i] = new LevelMenuButton();
-		m_apxButtons[i]->SetTextures("button_level", "button_level_achieved_stars");
+		m_apxButtons[i]->SetTextures(levelbuttontexture, "button_level_achieved_stars");
 	}
 	
 	m_xNaviPanel.Initialize();

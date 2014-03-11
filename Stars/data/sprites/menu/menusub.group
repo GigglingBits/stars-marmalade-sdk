@@ -2,20 +2,6 @@ CIwResGroup
 {
 	name "menusub"
 
-	./button_arrow_left.png
-	./button_arrow_right.png
-	./navidot_filled.png
-	./navidot_empty.png
-
-	./button_level.png
-	./button_level_pressed.png
-	./button_level_locked.png
-
-	./button_level_0_star.png
-	./button_level_1_star.png
-	./button_level_2_star.png
-	./button_level_3_star.png
-
 	./title_button.png
 
  	./world_earth.png
@@ -25,4 +11,26 @@ CIwResGroup
 
 	./world_jupiter.png
 	./world_jupiter_locked.png
+
+	./button_arrow_left.png
+	./button_arrow_right.png
+	./navidot_filled.png
+	./navidot_empty.png
+
+	./button_earth_level.png
+	./button_earth_level_pressed.png
+	./button_earth_level_locked.png
+
+	./button_mars_level.png
+	./button_mars_level_pressed.png
+	./button_mars_level_locked.png
+
+	./button_jupiter_level.png
+	./button_jupiter_level_pressed.png
+	./button_jupiter_level_locked.png
+
+	./button_level_0_star.png
+	./button_level_1_star.png
+	./button_level_2_star.png
+	./button_level_3_star.png
 }
