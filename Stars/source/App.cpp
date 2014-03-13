@@ -213,6 +213,9 @@ void App::ButtonReleasedEventHandler(const InputManager& sender, const InputMana
 	} else if (args.cmdid == eButtonCommandIdOpenTitleScreen) {
 		m_xPageManager.StartTitleScreen();
         
+	} else if (args.cmdid == eButtonCommandIdOpenIntroMovie) {
+		m_xPageManager.StartIntroMovie();
+        
 	} else if (args.cmdid == eButtonCommandIdOpenWorldMenu) {
 		m_xPageManager.StartWorldMenu();
         

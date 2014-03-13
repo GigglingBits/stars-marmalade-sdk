@@ -433,6 +433,7 @@
 		</texture>
 		
 		<texture id="button_plain" image="button_plain" />
+		<texture id="button_movie" image="button_movie" />
 		<texture id="button_toggle_hud" image="button_toggle_hud" />
 		<texture id="button_restart" image="button_restart" />
 		<texture id="button_reload" image="button_reload" />

@@ -2,6 +2,7 @@
 #include "Debug.h"
 
 #include "TitleScreen.h"
+#include "IntroMovie.h"
 #include "WorldMenu.h"
 #include "LevelMenu.h"
 #include "Preamble.h"
@@ -11,6 +12,7 @@
 #include "FactoryManager.h"
 #include "ResourceManager.h"
 #include "SoundEngine.h"
+#include "Configuration.h"
 
 PageManager::PageManager() {
 	m_pxCurrentPage = NULL;
@@ -45,6 +47,8 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 		nextpage = new LevelCompletion(levelname, nextlevelname, info);
 	} else if (dynamic_cast<LevelCompletion*>(oldpage)) {
 		nextpage = new LevelMenu(m_xPageSettings.GetWorld());
+	} else if (dynamic_cast<IntroMovie*>(oldpage)) {
+		nextpage = new TitleScreen();
 	}
 
 	return nextpage;
@@ -98,6 +102,11 @@ void PageManager::StartNextLevel() {
 void PageManager::StartTitleScreen() {
 	IW_CALLSTACK_SELF;
 	SetNextPage(new TitleScreen());
+}
+
+void PageManager::StartIntroMovie() {
+	IW_CALLSTACK_SELF;
+	SetNextPage(new IntroMovie(Configuration::GetInstance().IntroMovie));
 }
 
 void PageManager::StartWorldMenu() {
@@ -200,9 +209,12 @@ void PageManager::ApplyNextPage() {
 	}
 	m_pxCurrentPage = m_pxNextPage;
 	if (m_pxCurrentPage) {
-		// load resources associated to that page
-		ResourceManager::GetInstance().LoadTemporary(
-			m_pxCurrentPage->GetResourceGroupName());
+		// load resources associated to that page, if any; otherwise
+		// leave the old resources be loaded. They will be re-used or unloaded later.
+		std::string groupname = m_pxCurrentPage->GetResourceGroupName();
+		if (!groupname.empty()) {
+			ResourceManager::GetInstance().LoadTemporary(groupname);
+		}
 		
 		// initialize the page
 		m_pxCurrentPage->SetBackground(

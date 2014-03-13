@@ -5,7 +5,7 @@
 #include "UserSettings.h"
 
 WorldMenu::WorldMenu(LevelIterator::WorldId world) :
-	Page("menu.group", Configuration::GetInstance().IntroSong),
+	Page("menu.group", Configuration::GetInstance().MenuSong),
     m_eWorld(world),
     m_xButtonPlanet(eButtonCommandIdOpenLevelMenu, s3eKeyAbsOk),
     m_xButtonNext(eButtonCommandIdNone, s3eKeyAbsRight),

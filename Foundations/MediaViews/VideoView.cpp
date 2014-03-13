@@ -14,7 +14,7 @@ VideoView::~VideoView() {
 }
 
 void VideoView::Initialize() {
-	Play();
+	//Play();
 }
 
 bool VideoView::IsPlaying() {

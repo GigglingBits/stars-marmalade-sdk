@@ -16,6 +16,7 @@ private:
 
 	PageBackground m_xBackground;
 	Button m_xButtonTitle;
+	Button m_xButtonMovie;
 
 	OptionsPanel m_xPanelOptions;
 	SocialPanel m_xPanelSocial;
@@ -27,9 +28,9 @@ public:
 	virtual void Initialize();
 	
 protected:
+	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);

@@ -4,8 +4,9 @@
 #include "Configuration.h"
 
 TitleScreen::TitleScreen() :
-	Page("menu.group", Configuration::GetInstance().IntroSong),
+	Page("menu.group", Configuration::GetInstance().MenuSong),
 	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
+	m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
 	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
 	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
 
@@ -30,6 +31,7 @@ void TitleScreen::Initialize() {
 	m_xPanelSocial.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_achievements"));
 
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
+    m_xButtonMovie.SetTexture(FactoryManager::GetTextureFactory().Create("button_movie"));
 
 	PageSettings ps;
 	ps.SetWorld(LevelIterator::eWorldIdEarth);
@@ -38,27 +40,6 @@ void TitleScreen::Initialize() {
 		ps.GetWorldColours().LowerRight,
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
-}
-
-void TitleScreen::OnUpdate(const FrameData& frame) {
-	IW_CALLSTACK_SELF;
-
-	m_xButtonTitle.Update(frame);
-	m_xPanelSocial.Update(frame);
-	m_xPanelOptions.Update(frame);
-	m_xBackground.Update(frame);
-}
-
-void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
-	IW_CALLSTACK_SELF;
-
-	renderer.SetViewport(m_xCamera.GetViewport());
-	m_xBackground.Render(renderer, frame);
-	
-    // buttons
-	m_xButtonTitle.Render(renderer, frame);
-	m_xPanelOptions.Render(renderer, frame);
-	m_xPanelSocial.Render(renderer, frame);
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -80,8 +61,34 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	button.y = screencenter.y + (extents / 3);
 	m_xPanelOptions.GetMainButton().SetPosition(button);
     
+	button.x = screencenter.x - (button.w / 2);
+	m_xButtonMovie.SetPosition(button);
+
 	button.x = screencenter.x + (extents / 2) - button.w;
 	m_xPanelSocial.GetMainButton().SetPosition(button);
+}
+
+void TitleScreen::OnUpdate(const FrameData& frame) {
+	IW_CALLSTACK_SELF;
+
+	m_xButtonTitle.Update(frame);
+	m_xPanelSocial.Update(frame);
+	m_xButtonMovie.Update(frame);
+	m_xPanelOptions.Update(frame);
+	m_xBackground.Update(frame);
+}
+
+void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
+	IW_CALLSTACK_SELF;
+
+	renderer.SetViewport(m_xCamera.GetViewport());
+	m_xBackground.Render(renderer, frame);
+	
+    // buttons
+	m_xButtonTitle.Render(renderer, frame);
+	m_xPanelOptions.Render(renderer, frame);
+	m_xButtonMovie.Render(renderer, frame);
+	m_xPanelSocial.Render(renderer, frame);
 }
 
 void TitleScreen::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {

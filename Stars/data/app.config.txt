@@ -26,7 +26,8 @@ levels					Name of the file containing the level definitions
 httpbodies				Name of the file containing the body definitions, available as HTTP download
 httplevels				Name of the file containing the level definitions, available as HTTP download
 
-introsong				Name of the sound file containing the intro song
+intromovie				Name of the movie file containing the intro movie
+menusong				Name of the sound file containing the menu song
 levelsong				Name of the sound file containing the level song
 
 settingsfile			Name of the file to be used for storing user settings

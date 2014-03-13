@@ -17,7 +17,8 @@ levels=levels.xml
 httpbodies="http://dl.dropboxusercontent.com/s/3igckh08mxx9gy4/bodies.xml?dl=1"
 httplevels="http://dl.dropboxusercontent.com/s/rk4wvu0f2k8bmpy/levels.xml?dl=1"
 
-introsong="music/Port Saint Johns.mp3"
+intromovie="stories/intro.mp4"
+menusong="music/Port Saint Johns.mp3"
 levelsong="music/Empire Games.mp3"
 
 settingsfile=settings.xml

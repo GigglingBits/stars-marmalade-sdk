@@ -28,7 +28,8 @@ public:
 	std::string BodiesFile;
 	std::string LevelsFile;
 
-	std::string IntroSong;
+	std::string IntroMovie;
+	std::string MenuSong;
 	std::string LevelSong;
 
 	std::string HttpBodiesFile;

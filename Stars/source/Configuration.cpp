@@ -25,12 +25,18 @@ Configuration::Configuration() {
 		LevelsFile = "levels.xml";
 	}
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "introsong", tmpstr)) {
-		IntroSong = tmpstr;
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "intromovie", tmpstr)) {
+		IntroMovie = tmpstr;
 	} else {
-		IntroSong = "music/introsong.mp3";
+		IntroMovie = "music/introsong.mp3";
 	}
-
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "menusong", tmpstr)) {
+		MenuSong = tmpstr;
+	} else {
+		MenuSong = "music/introsong.mp3";
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "levelsong", tmpstr)) {
 		LevelSong = tmpstr;
 	} else {

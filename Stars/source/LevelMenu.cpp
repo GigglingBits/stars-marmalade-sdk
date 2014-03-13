@@ -7,7 +7,7 @@
 #define NO_BUTTON -1
 
 LevelMenu::LevelMenu(LevelIterator::WorldId world) :
-	Page("menu.group", Configuration::GetInstance().IntroSong),
+	Page("menu.group", Configuration::GetInstance().MenuSong),
 	m_eWorldId(world),
 	m_iGroupId(0),
 	m_iFirstUnachievedLevel(LEVELITERATOR_NO_LEVEL),
