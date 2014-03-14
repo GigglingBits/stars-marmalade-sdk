@@ -28,7 +28,21 @@ void IntroMovie::Initialize() {
 }
 
 void IntroMovie::OnDoLayout(const CIwSVec2& screensize) {
-	m_xVideoView.SetPosition(CIwRect(0, 0, screensize.x, screensize.y));
+	// determine the size, so that the entire movie fits on the screen
+	// the movie is assumed to be 16:9 widescreen
+	float aspectratio = 16.0f / 9.0f;
+	CIwSVec2 moviesize(screensize);
+	moviesize.x = std::min<uint16>(moviesize.x, moviesize.y * aspectratio);
+	moviesize.y = std::min<uint16>(moviesize.y, moviesize.x / aspectratio);
+
+	// position the movie in the center
+	CIwSVec2 screencenter(screensize.x, screensize.y);
+	CIwRect moviearea(
+		(screencenter.x - moviesize.x) / 2,
+		(screensize.y - moviesize.y) / 2,
+		moviesize.x,
+		moviesize.y);
+	m_xVideoView.SetPosition(moviearea);
 }
 
 void IntroMovie::OnUpdate(const FrameData& frame) {
