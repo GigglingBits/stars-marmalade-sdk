@@ -2,6 +2,7 @@
 #define __LEVELDUSTVIAL_H__
 
 #include "Window.h"
+#include "ParticleSystem.h"
 
 class LevelDustVial : public Window {
 private:
@@ -22,6 +23,8 @@ private:
 	VertexStreamScreen m_xQueuedDustShape;
 	VertexStreamScreen m_xQueuedDustSurfaceShape;
 	Texture* m_pxQueuedDustSurface;
+
+	ParticleSystem* m_pxParticles;
 	
 public:
 	LevelDustVial();
@@ -34,6 +37,8 @@ public:
 private:
 	void UpdateVialShapes();
 	void UpdateAmountShapes();
+	
+	void DustDelta(float amount);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
