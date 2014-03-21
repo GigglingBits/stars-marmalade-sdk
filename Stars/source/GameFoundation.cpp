@@ -193,7 +193,7 @@ float GameFoundation::GetDustQueuedPercent() {
 void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
 	int multipliedamount = (m_xDust.GetQueuedDustCount() + 1) * amount;
 	m_xDust.EnqueueDust(multipliedamount);
-	CreateSplashNumber(multipliedamount, pos);
+	CreateSplashNumber(multipliedamount, pos, 0xffccfaff);
 }
 
 void GameFoundation::CommitDust(const CIwFVec2& pos) {
@@ -206,7 +206,7 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 	}
 
 	// cancel
-	CreateSplashNumber(-m_xDust.GetQueuedDustAmount(), pos);
+	CreateSplashNumber(-m_xDust.GetQueuedDustAmount(), pos, 0xff0000ff);
 	m_xDust.ClearDustQueue();
 
 	// quake effect
@@ -237,20 +237,20 @@ bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos, float margin) {
 	return (std::abs(pos.x) + margin > bounds.x || std::abs(pos.y) + margin > bounds.y);
 }
 
-void GameFoundation::CreateSplashNumber(long number, const CIwFVec2& position) {
+void GameFoundation::CreateSplashNumber(long number, const CIwFVec2& position, uint32 colour) {
 	IW_CALLSTACK_SELF;
-	
+		
 	std::ostringstream oss;
 	oss << number;
-	CreateSplashText(oss.str(), position);
+	CreateSplashText(oss.str(), position, colour);
 }
 
-void GameFoundation::CreateSplashText(std::string text, const CIwFVec2& position) {
+void GameFoundation::CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour) {
 	IW_CALLSTACK_SELF;
 	
 	SplashText* p = (SplashText*)FactoryManager::GetEffectFactory().Create("text");
 	if (p) {
-		p->SetText(text);
+		p->SetText(text, colour);
 		p->SetPosition(position);
 		p->SetVelocity(CIwFVec2(0.0f, 0.8f));
 		Add(p);

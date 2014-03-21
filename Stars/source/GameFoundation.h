@@ -68,8 +68,8 @@ public:
 	bool StarHitTest(CIwFVec2 position);
 
 	// managed effects
-	void CreateSplashNumber(long number, const CIwFVec2& position);
-	void CreateSplashText(std::string text, const CIwFVec2& position);
+	void CreateSplashNumber(long number, const CIwFVec2& position, uint32 colour = 0xffffffff);
+	void CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour = 0xffffffff);
 	void CreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
 	// gameplay
