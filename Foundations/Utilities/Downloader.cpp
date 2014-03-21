@@ -17,7 +17,7 @@ bool Downloader::Download(const std::string& url, std::string& data) {
 
 	IwAssertMsg(MYAPP, m_eHTTPStatus == kOK, ("Wrong HTTP status!"));
 
-	if (!m_xHttp.Get(url.c_str(), GotHeaders, (void*)this) == S3E_RESULT_SUCCESS) {
+	if (m_xHttp.Get(url.c_str(), GotHeaders, (void*)this) != S3E_RESULT_SUCCESS) {
 		IwAssertMsg(MYAPP, false, ("HTTP GET command failed with status: %u", m_xHttp.GetResponseCode()));
 		return false;
 	} else {
