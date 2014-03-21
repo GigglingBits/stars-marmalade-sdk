@@ -23,9 +23,7 @@ b2Shape* ShapeTemplate::CreatePhysicsShapeDef() const {
 		{
 			b2CircleShape* circle = new b2CircleShape();
 			circle->m_radius = (float32)(m_dDiameter/2.0f);
-			circle->m_p = b2Vec2(
-				(float32)(-m_dDiameter/2.0f),
-				(float32)(-m_dDiameter/2.0f));
+			circle->m_p = b2Vec2(0.0f, 0.0f);
 			shape = circle;
 		}
 		break;
