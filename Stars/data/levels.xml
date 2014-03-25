@@ -99,7 +99,7 @@
 				<line map="   nn  " />
 			</spritesequence>
 		</level>
-		<level name="earth_2" width="12.0" height="12.0" dustrequirement="1000">
+		<level name="earth_2" width="12.0" height="12.0" dustrequirement="800">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="b" body="bird_01" />
