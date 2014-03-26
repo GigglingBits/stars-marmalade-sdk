@@ -20,6 +20,7 @@ public:
 	virtual bool CanDispose();
 
 protected:
+	virtual void OnRemainingFadeTimeChanged(uint16 ms);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 };

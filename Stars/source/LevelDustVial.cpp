@@ -71,8 +71,8 @@ void LevelDustVial::SetDustAmount(float committed, float queued) {
 }
 
 void LevelDustVial::DustDelta(float amount) {
-	if (amount < 0.0f) {
-		//m_xParticles. shoot dust....
+	if (amount < 0.0f && m_pxParticles) {
+		m_pxParticles->Start();
 	}
 }
 

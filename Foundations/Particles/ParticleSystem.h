@@ -14,7 +14,7 @@ private:
 	int m_iNextParticleDueInMs;
 	
 	// system properties
-	bool m_bIsStarted;
+	uint64 m_ullSystemTimeLeft;
 
 	CIwFVec2 m_xPosition;
 	CIwFVec2 m_xGravity;
@@ -22,7 +22,7 @@ private:
 
 	std::string m_sCreateSound;
 	std::string m_sDestroySound;
-	
+		
 	// particle properties
 	TextureTemplate m_xTextureTpl;
 
@@ -35,7 +35,7 @@ public:
 	~ParticleSystem();
 	
 	bool IsStarted();
-	void Start();
+	void Start(uint64 durationms = UINT64_MAX);
 	void Stop();
 	
 	bool HasParticles();

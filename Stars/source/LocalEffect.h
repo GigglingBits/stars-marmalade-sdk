@@ -25,6 +25,7 @@ public:
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);
+	virtual void OnRemainingFadeTimeChanged(uint16 ms);
 };
 
 #endif

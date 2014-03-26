@@ -35,10 +35,15 @@ uint16 LocalEffect::GetRemainingFadeTime() {
 
 void LocalEffect::SetFadeTime(uint16 ms) {
 	m_iRemaingTimeMS = ms;
+	OnRemainingFadeTimeChanged(m_iRemaingTimeMS);
 }
 
 bool LocalEffect::CanDispose() {
 	return m_bCanDispose;
+}
+
+void LocalEffect::OnRemainingFadeTimeChanged(uint16 ms) {
+	// overwrite to handle timing in derived classes
 }
 
 void LocalEffect::OnUpdate(const FrameData& frame) {

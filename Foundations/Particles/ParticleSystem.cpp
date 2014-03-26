@@ -3,8 +3,8 @@
 
 ParticleSystem::ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound, const std::string& destroySound) :
 	m_xTextureTpl(tpl),
+	m_ullSystemTimeLeft(0),
 	m_iNextParticleDueInMs(0),
-	m_bIsStarted(false),
 	m_xPosition(0.0f, 0.0f),
 	m_xGravity(gravity),
 	m_sCreateSound(createSound),
@@ -22,16 +22,15 @@ ParticleSystem::~ParticleSystem() {
 }
 
 bool ParticleSystem::IsStarted() {
-	return m_bIsStarted;
+	return m_ullSystemTimeLeft > 0;
 }
 
-void ParticleSystem::Start() {
-	m_bIsStarted = true;
+void ParticleSystem::Start(uint64 durationms) {
+	m_ullSystemTimeLeft = durationms;
 }
 
 void ParticleSystem::Stop() {
-	m_bIsStarted = false;
-	
+	m_ullSystemTimeLeft = 0;
 }
 
 bool ParticleSystem::HasParticles() {
@@ -113,10 +112,13 @@ void ParticleSystem::RemoveDeadParticles() {
 
 void ParticleSystem::OnUpdate(const FrameData& frame) {
 	RemoveDeadParticles();
-	if (m_bIsStarted) {
-		CreateParticles(frame.GetSimulatedDurationMs());
-	}
 	
+	if (IsStarted()) {
+		uint16 frametime = frame.GetSimulatedDurationMs();
+		m_ullSystemTimeLeft = m_ullSystemTimeLeft > frametime ? m_ullSystemTimeLeft - frametime : 0;
+		CreateParticles(frametime);
+	}
+
 	for (ParticleList::iterator i = m_xParticles.begin(); i != m_xParticles.end(); i++) {
 		if (*i) {
 			(*i)->Update(frame);
