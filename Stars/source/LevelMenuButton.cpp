@@ -63,9 +63,11 @@ void LevelMenuButton::OnRender(Renderer& renderer, const FrameData& frame) {
 		rect.y -= rect.h;
 
 		// draw
-		VertexStreamScreen geom;
-		geom.SetRect(rect);
-		renderer.Draw(geom, *m_pxStars);
+		if (m_bLevelOpen) {
+			VertexStreamScreen geom;
+			geom.SetRect(rect);
+			renderer.Draw(geom, *m_pxStars);
+		}
 	}
 }
 
