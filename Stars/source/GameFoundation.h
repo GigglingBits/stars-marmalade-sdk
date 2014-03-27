@@ -49,7 +49,7 @@ public:
 	// sprite management
 	void Add(Sprite* sprite);
 	void Add(Body* body);
-
+	
 	Star* GetStar();
 	Sprite* FindSprite(const std::string& id);
 
@@ -110,6 +110,12 @@ public:
 		float amplitude;
 	};
 	Event<GameFoundation, QuakeImpactArgs> QuakeImpact;
+
+	struct SpriteRemovedArgs {
+		Sprite* sprite;
+		bool outofbounds;
+	};
+	Event<GameFoundation, SpriteRemovedArgs> SpriteRemoved;
 };
 
 #endif

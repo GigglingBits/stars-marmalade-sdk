@@ -4,6 +4,7 @@
 #include "SplashText.h"
 #include "FactoryManager.h"
 #include "Configuration.h"
+#include "Nugget.h"
 
 GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize) :
 m_xContactHandler(m_xWorld),
@@ -147,6 +148,12 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 				body->BuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
 				body->EffectRequested.RemoveListener(this, &GameFoundation::EffectRequestedEventHandler);
 			}
+			
+			SpriteRemovedArgs args;
+			args.sprite = sprite;
+			args.outofbounds = outofbounds;
+			SpriteRemoved.Invoke(*this, args);
+			
 			delete sprite;
 			m_xSpriteMap.erase(it++);
 		} else {

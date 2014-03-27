@@ -10,7 +10,10 @@ struct LevelCompletionInfo {
 	float DustFillAmount;
 	float DustFillMax;
 	
-	int PathDrawnCount;
+	int PathCount;
+	
+	int NuggetsColleted;
+	int NuggetsMissed;
 	
 	LevelCompletionInfo() {
 		IsCleared = false;
@@ -19,7 +22,10 @@ struct LevelCompletionInfo {
 		DustFillAmount = 0.0f;
 		DustFillMax = 0.0f;
 		
-		PathDrawnCount = 0;
+		PathCount = 0;
+		
+		NuggetsColleted = 0;
+		NuggetsMissed = 0;
 	}
 };
 

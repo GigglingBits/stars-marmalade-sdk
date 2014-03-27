@@ -63,6 +63,33 @@ public:
 		delete [] verts;
 	}
 	
+	bool GetAABB(TVec& lowerleft, TVec& upperright) {
+		if (m_iVertCount < 1) {
+			return false;
+		}
+		
+		lowerleft = m_axVerts[0];
+		upperright = m_axVerts[0];
+		
+		for (int i = 0; i < m_iVertCount; i++) {
+			TVec& v = m_axVerts[i];
+			if (upperright.x < v.x) {
+				upperright.x = v.x;
+			}
+			if (upperright.y < v.y) {
+				upperright.y = v.y;
+			}
+			if (lowerleft.x > v.x) {
+				lowerleft.x = v.x;
+			}
+			if (lowerleft.y > v.y) {
+				lowerleft.y = v.y;
+			}
+		}
+		
+		return true;
+	}
+	
 	VertexStream<TVec>& operator=(const VertexStream<TVec>& vertstream) {
 		if (&vertstream == this) {
 			return *this;

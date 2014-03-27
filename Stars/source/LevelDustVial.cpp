@@ -22,8 +22,7 @@ m_fCommittedDust(0.0f),
 m_fQueuedDust(0.0f),
 m_pxBack(NULL),
 m_pxCommittedDustSurface(NULL),
-m_pxQueuedDustSurface(NULL),
-m_pxParticles(NULL) {
+m_pxQueuedDustSurface(NULL) {
 	SetRenderingLayer(Renderer::eRenderingLayerHud);
 }
 
@@ -45,14 +44,6 @@ void LevelDustVial::Initialize() {
 	m_pxBack = FactoryManager::GetTextureFactory().Create("stardustvial_back");
 	m_pxCommittedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface");
 	m_pxQueuedDustSurface = FactoryManager::GetTextureFactory().Create("stardustsurface_queued");
-	
-	// particle system
-	m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("particle_white_star"), CIwFVec2(-9.81f, 0.0f));
-	m_pxParticles->SetRenderingLayer(Renderer::eRenderingLayerHud3);
-	m_pxParticles->SetPosition(CIwFVec2(2.0f, 2.0f)); // fix that; need to set it as screen pos
-	m_pxParticles->SetBirthRate(3);
-	m_pxParticles->SetParticleSize(CIwFVec2(0.175f, 0.175f));
-	m_pxParticles->SetParticleSpeed(CIwFVec2(5.0f, 5.0f));
 }
 
 void LevelDustVial::SetDustAmount(float committed, float queued) {
@@ -71,8 +62,8 @@ void LevelDustVial::SetDustAmount(float committed, float queued) {
 }
 
 void LevelDustVial::DustDelta(float amount) {
-	if (amount < 0.0f && m_pxParticles) {
-		m_pxParticles->Start();
+	if (amount < 0.0f) {
+		// make effect
 	}
 }
 
@@ -138,19 +129,11 @@ void LevelDustVial::OnUpdate(const FrameData& frame) {
 	if (m_pxQueuedDustSurface) {
 		m_pxQueuedDustSurface->Update(frame.GetRealDurationMs());
 	}
-	if (m_pxParticles) {
-		m_pxParticles->Update(frame);
-	}
 }
 
 void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	// particle effect
-	if (m_pxParticles) {
-		m_pxParticles->Render(renderer, frame);
-	}
-	
 	// vial background
 	renderer.SetRenderingLayer(Renderer::eRenderingLayerHud3);
 	if (m_pxBack) {

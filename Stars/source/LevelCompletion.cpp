@@ -57,7 +57,9 @@ std::string LevelCompletion::GetStatsText() {
 	oss << "Dust fill max: " << m_xCompletionInfo.DustFillMax << std::endl;
 	oss << "Dust fill amount: " << m_xCompletionInfo.DustFillAmount << std::endl;
 	oss << "Dust fill percent: " << m_xCompletionInfo.DustFillPercent << std::endl;
-	oss << "Number of paths used: " << m_xCompletionInfo.PathDrawnCount << std::endl;
+	oss << "Nuggets collected: " << m_xCompletionInfo.NuggetsColleted << std::endl;
+	oss << "Nuggets missed: " << m_xCompletionInfo.NuggetsMissed << std::endl;
+	oss << "Number of paths used: " << m_xCompletionInfo.PathCount << std::endl;
 	return oss.str();
 }
 

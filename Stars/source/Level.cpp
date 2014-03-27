@@ -5,6 +5,7 @@
 
 #include "Debug.h"
 #include "Configuration.h"
+#include "Nugget.h"
 #include "InputManager.h"
 #include "FactoryManager.h"
 #include "SoundEngine.h"
@@ -27,6 +28,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
 	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
+	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
 	
@@ -58,6 +60,7 @@ Level::~Level() {
 	// detach event handlers
 	m_xEventTimer.LastEventFired.RemoveListener(this, &Level::EventTimerClearedEventHandler);
 	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
+	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
@@ -194,7 +197,7 @@ void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
 			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
 			star->FollowPath(samplecount, samplepoints, (float)Configuration::GetInstance().PathSpeed);
 			IwTrace(MYAPP, ("Setting %i points path to star", samplecount));
-			m_xCompletionInfo.PathDrawnCount++;
+			m_xCompletionInfo.PathCount++;
 		}
 	}
 }
@@ -358,6 +361,16 @@ void Level::AppPanelStateChangedEventHandler(const ButtonPanel& sender, const Bu
 
 void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args) {
 	m_xCamera.StartQuakeEffect(args.amplitude, 700);
+}
+
+void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args) {
+	if (args.sprite->GetTypeName() == Nugget::TypeName()) {
+		if (args.outofbounds) {
+			m_xCompletionInfo.NuggetsMissed++;
+		} else {
+			m_xCompletionInfo.NuggetsColleted++;
+		}
+	}
 }
 
 void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args) {
