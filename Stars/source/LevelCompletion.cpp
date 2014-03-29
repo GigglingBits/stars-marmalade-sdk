@@ -8,7 +8,7 @@
 #include "UserSettings.h"
 
 LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
-	Page("levelcompletion.group", info.IsCleared ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
+	Page("levelcompletion.group", info.IsCleared() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
     m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
@@ -16,50 +16,61 @@ LevelCompletion::LevelCompletion(const std::string levelid, const std::string ne
     m_sLevelId(levelid),
 	m_sNextLevelId(nextlevelid),
     m_xCompletionInfo(info) {
-
-	m_sCompletionText = GetCompletionText();
-	m_sStatsText = GetStatsText();
-
-	m_xDustFillPercent.SetNumber(info.DustFillPercent * 100.0f, 5000);
 }
 
 void LevelCompletion::Initialize() {
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
-    m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared ? "won" : "lost");
+    m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared() ? "won" : "lost");
 	m_xButtonStar.SetShadedWhenPressed(false);
     
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
 
-	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsCleared);
+	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsCleared());
 	
 	m_xBackground.Initialize();
 
 	SaveResults();
+	
+	m_xTitle.SetText(GetCompletionText());
+	m_xTitle.SetFont(Renderer::eFontTypeLarge);
+	m_xTitle.SetColour(0xffccfaff);
+	
+	m_xDustAmountText.SetText("Dust collected:");
+	m_xDustAmountText.SetFont(Renderer::eFontTypeNormal);
+	m_xDustAmountText.SetColour(0xffccfaff);
+	
+	m_xDustAmount.SetNumber(m_xCompletionInfo.GetDustAmount(), 5000);
+	m_xDustAmount.SetFont(Renderer::eFontTypeNormal);
+	m_xDustAmount.SetColour(0xffccfaff);
+	
+	m_xNuggetsCollectedText.SetText("Nuggets collected:");
+	m_xNuggetsCollectedText.SetFont(Renderer::eFontTypeNormal);
+	m_xNuggetsCollectedText.SetColour(0xffccfaff);
+
+	m_xNuggetsCollected.SetNumber(m_xCompletionInfo.GetNuggetsCollected(), 5000);
+	m_xNuggetsCollected.SetFont(Renderer::eFontTypeNormal);
+	m_xNuggetsCollected.SetColour(0xffccfaff);
+
+	m_xNumberOfPathsText.SetText("Paths drawn:");
+	m_xNumberOfPathsText.SetFont(Renderer::eFontTypeNormal);
+	m_xNumberOfPathsText.SetColour(0xffccfaff);
+
+	m_xNumberOfPaths.SetNumber(m_xCompletionInfo.GetPathsStarted(), 5000);
+	m_xNumberOfPaths.SetFont(Renderer::eFontTypeNormal);
+	m_xNumberOfPaths.SetColour(0xffccfaff);
 }
 
 std::string LevelCompletion::GetCompletionText() {
 	std::ostringstream oss;
 	
-	if (m_xCompletionInfo.IsCleared) {
-		oss << "The level is cleared" << std::endl;
+	if (m_xCompletionInfo.IsCleared()) {
+		oss << "Congratulations!" << std::endl;
 	} else {
 		oss << "Try again" << std::endl;
 	}
 	
-	return oss.str();
-}
-
-std::string LevelCompletion::GetStatsText() {
-	std::ostringstream oss;
-	oss << "Level cleared: " << m_xCompletionInfo.IsCleared << std::endl;
-	oss << "Dust fill max: " << m_xCompletionInfo.DustFillMax << std::endl;
-	oss << "Dust fill amount: " << m_xCompletionInfo.DustFillAmount << std::endl;
-	oss << "Dust fill percent: " << m_xCompletionInfo.DustFillPercent << std::endl;
-	oss << "Nuggets collected: " << m_xCompletionInfo.NuggetsColleted << std::endl;
-	oss << "Nuggets missed: " << m_xCompletionInfo.NuggetsMissed << std::endl;
-	oss << "Number of paths used: " << m_xCompletionInfo.PathCount << std::endl;
 	return oss.str();
 }
 
@@ -70,10 +81,10 @@ void LevelCompletion::SaveResults() {
 	levelsettings.PlayCount++;
 
 	// save scores for current level
-	if (m_xCompletionInfo.IsCleared) {
-		levelsettings.Stars = 1 + (levelsettings.PlayCount % 3); // just dummy evaluation
- 		if (levelsettings.HighScore < m_xCompletionInfo.DustFillPercent) {
-			levelsettings.HighScore = m_xCompletionInfo.DustFillPercent;
+	if (m_xCompletionInfo.IsCleared()) {
+		levelsettings.Stars = 1; // just dummy evaluation
+		if (levelsettings.HighScore < m_xCompletionInfo.GetDustAmount()) {
+			levelsettings.HighScore = m_xCompletionInfo.GetDustAmount();
 		}
 	}
 	settings.Save();
@@ -84,7 +95,7 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int margin = extents / 4;	// 25%
 	int space = margin / 5;		// 25% / 5 = 5%
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
-	
+
 	// star button
 	CIwRect button;
 	button.h = extents / 2;
@@ -93,10 +104,6 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	button.y = screencenter.y - (button.w / 2);
 	m_xButtonStar.SetPosition(button);
     
-	// text
-	m_xDustFillPercent.SetPosition(150, 250);
-	m_xDustFillPercent.SetSize(150, 50);
-	
     // the button size is determined by the screen height
 	button.h = extents / 7;
 	button.w = button.h;
@@ -111,8 +118,30 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	
 	button.x += button.w + space;
 	m_xButtonNext.SetPosition(button);
-}
+	
+	// text boxes
+	m_xTitle.SetPosition(CIwRect(0, 0, screensize.x, screensize.y / 2));
+	
+	CIwRect textrect;
+	textrect.Make(screencenter.x - (extents / 2), extents / 3, extents / 2, extents / 15);
+	CIwRect numberrect(textrect);
+	numberrect.x = screencenter.x;
+	
+	m_xDustAmountText.SetPosition(textrect);
+	m_xDustAmount.SetPosition(numberrect);
+	
+	textrect.y += textrect.h + (textrect.h / 2);
+	numberrect.y = textrect.y;
+	
+	m_xNuggetsCollectedText.SetPosition(textrect);
+	m_xNuggetsCollected.SetPosition(numberrect);
 
+	textrect.y += textrect.h + (textrect.h / 2);
+	numberrect.y = textrect.y;
+
+	m_xNumberOfPathsText.SetPosition(textrect);
+	m_xNumberOfPaths.SetPosition(numberrect);
+}
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xBackground.Update(frame);
@@ -122,7 +151,16 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xButtonRetry.Update(frame);
 	m_xButtonNext.Update(frame);
 
-	m_xDustFillPercent.Update(frame);
+	m_xTitle.Update(frame);
+	
+	m_xDustAmountText.Update(frame);
+	m_xDustAmount.Update(frame);
+	
+	m_xNuggetsCollectedText.Update(frame);
+	m_xNuggetsCollected.Update(frame);
+	
+	m_xNumberOfPathsText.Update(frame);
+	m_xNumberOfPaths.Update(frame);
 }
 
 void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -130,7 +168,18 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xBackground.Render(renderer, frame);
 
-	// completion text
+	m_xTitle.Render(renderer, frame);
+	
+	m_xDustAmountText.Render(renderer, frame);
+	m_xDustAmount.Render(renderer, frame);
+	
+	m_xNuggetsCollectedText.Render(renderer, frame);
+	m_xNuggetsCollected.Render(renderer, frame);
+	
+	m_xNumberOfPathsText.Render(renderer, frame);
+	m_xNumberOfPaths.Render(renderer, frame);
+	
+/*	// completion text
 	const CIwSVec2& screen = frame.GetScreensize();
 	renderer.DrawText(
 		m_sCompletionText,
@@ -144,7 +193,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 		Renderer::eFontTypeSmall, 0xffffffff);
 	
 	m_xDustFillPercent.Render(renderer, frame);
-
+*/
 	// buttons
 	m_xButtonStar.Render(renderer, frame);
 	m_xButtonQuit.Render(renderer, frame);

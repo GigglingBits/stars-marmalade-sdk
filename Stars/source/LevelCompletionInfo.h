@@ -3,30 +3,37 @@
 
 #include <string>
 
-struct LevelCompletionInfo {
-	bool IsCleared;
+class LevelCompletionInfo {
+private:
+	float m_fDustFillMax;
+	float m_fDustFillAmount;
+	
+	int m_iPathsStarted;
+	int m_iPathsAborted;
+	
+	int m_iNuggetsColleted;
+	int m_iNuggetsMissed;
 
-	float DustFillPercent;
-	float DustFillAmount;
-	float DustFillMax;
+public:
+	LevelCompletionInfo();
 	
-	int PathCount;
+	bool IsCleared() const;
 	
-	int NuggetsColleted;
-	int NuggetsMissed;
+	void SetDustFillMax(float f);
+	void SetDustFillAmount(float f);
+
+	void IncrementPathsStarted();
+	void IncrementPathsAborted();
 	
-	LevelCompletionInfo() {
-		IsCleared = false;
+	void IncrementNuggetsCollected();
+	void IncrementNuggetsMissed();
 	
-		DustFillPercent = 0.0f;
-		DustFillAmount = 0.0f;
-		DustFillMax = 0.0f;
-		
-		PathCount = 0;
-		
-		NuggetsColleted = 0;
-		NuggetsMissed = 0;
-	}
+public:
+	float GetDustAmount() const;
+	int GetPathsStarted() const;
+	int GetNuggetsCollected() const;
+
+	bool GetDustAchievement() const;
 };
 
 #endif

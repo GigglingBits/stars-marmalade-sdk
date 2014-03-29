@@ -16,19 +16,25 @@ private:
 	std::string m_sNextLevelId;
 	LevelCompletionInfo m_xCompletionInfo;
 	
-	std::string m_sCompletionText;
-	std::string m_sStatsText;
-
 	Button m_xButtonStar;
 
 	Button m_xButtonQuit;
 	Button m_xButtonRetry;
 	Button m_xButtonNext;
-	
-	LevelHudNumber m_xDustFillPercent;
 
 	PageBackground m_xBackground;
 
+	LevelHudText m_xTitle;
+	
+	LevelHudText m_xDustAmountText;
+	LevelHudNumber m_xDustAmount;
+	
+	LevelHudText m_xNuggetsCollectedText;
+	LevelHudNumber m_xNuggetsCollected;
+	
+	LevelHudText m_xNumberOfPathsText;
+	LevelHudNumber m_xNumberOfPaths;
+	
 public:
 	LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info);
 
@@ -41,7 +47,6 @@ protected:
 	
 private:
 	std::string GetCompletionText();
-	std::string GetStatsText();
 	void SaveResults();
 };
 

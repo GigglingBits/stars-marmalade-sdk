@@ -197,7 +197,7 @@ void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
 			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
 			star->FollowPath(samplecount, samplepoints, (float)Configuration::GetInstance().PathSpeed);
 			IwTrace(MYAPP, ("Setting %i points path to star", samplecount));
-			m_xCompletionInfo.PathCount++;
+			m_xCompletionInfo.IncrementPathsStarted();
 		}
 	}
 }
@@ -235,7 +235,7 @@ CIwFVec2 Level::GetStarIdlePosition() {
 CIwFVec2 Level::GetStarHidePosition() {
 	const float offset = 4.0f;	
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsCleared) {
+	if (m_xCompletionInfo.IsCleared()) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
@@ -252,8 +252,8 @@ void Level::HideBannerText() {
 }
 
 void Level::ShowStatsBanner() {
-	ShowBannerText(m_xCompletionInfo.IsCleared ? "Well done!" : "Close. But no cigar...");
-	if (m_xCompletionInfo.IsCleared) {
+	ShowBannerText(m_xCompletionInfo.IsCleared() ? "Well done!" : "Close. But no cigar...");
+	if (m_xCompletionInfo.IsCleared()) {
 		SoundEngine::GetInstance().PlaySoundEffect("level_win");
 	}
 }
@@ -266,11 +266,8 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 }
 
 void Level::Conclude() {
-	m_xCompletionInfo.DustFillAmount = m_xGame.GetDustFillAmount();
-	m_xCompletionInfo.DustFillPercent = m_xGame.GetDustFillPercent();
-	m_xCompletionInfo.DustFillMax = m_xGame.GetDustFillMax();
-
-	m_xCompletionInfo.IsCleared = m_xCompletionInfo.DustFillPercent >= 1.0f;
+	m_xCompletionInfo.SetDustFillAmount(m_xGame.GetDustFillAmount());
+	m_xCompletionInfo.SetDustFillMax(m_xGame.GetDustFillMax());
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {
@@ -366,9 +363,9 @@ void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoun
 void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args) {
 	if (args.sprite->GetTypeName() == Nugget::TypeName()) {
 		if (args.outofbounds) {
-			m_xCompletionInfo.NuggetsMissed++;
+			m_xCompletionInfo.IncrementNuggetsMissed();
 		} else {
-			m_xCompletionInfo.NuggetsColleted++;
+			m_xCompletionInfo.IncrementNuggetsCollected();
 		}
 	}
 }

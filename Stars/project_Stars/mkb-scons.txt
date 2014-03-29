@@ -1,0 +1,2 @@
+SCONS;build_stars_scons_x86;
+SCONS;build_stars_scons_arm;
