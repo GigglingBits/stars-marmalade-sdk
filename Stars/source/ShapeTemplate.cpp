@@ -1,6 +1,7 @@
 #include "ShapeTemplate.h"
 #include "World.h"
 #include "IwDebug.h"
+#include "Debug.h"
 
 ShapeTemplate::ShapeTemplate() {
 	m_eShapeType = eUnknown;
@@ -59,23 +60,31 @@ b2Shape* ShapeTemplate::CreatePhysicsShapeDef() const {
 }
 
 void ShapeTemplate::CreateAABB(CIwFVec2 verts[4]) const {
+	IW_CALLSTACK_SELF;
+	
 	// use box2d to evaluate the shape data
-	b2Shape* shape = CreatePhysicsShapeDef();
-	b2AABB aabb;
-	b2Transform txidentity;
-	txidentity.SetIdentity();
-	shape->ComputeAABB(&aabb, txidentity, 0);
-	delete shape;
+	if (b2Shape* shape = CreatePhysicsShapeDef()) {
+		b2AABB aabb;
+		b2Transform txidentity;
+		txidentity.SetIdentity();
+		shape->ComputeAABB(&aabb, txidentity, 0);
+		delete shape;
 
-	// save the results
-	verts[0].x = aabb.lowerBound.x;
-	verts[0].y = aabb.lowerBound.y;
-	verts[1].x = aabb.upperBound.x;
-	verts[1].y = aabb.lowerBound.y;
-	verts[2].x = aabb.upperBound.x;
-	verts[2].y = aabb.upperBound.y;
-	verts[3].x = aabb.lowerBound.x;
-	verts[3].y = aabb.upperBound.y;
+		verts[0].x = aabb.lowerBound.x;
+		verts[0].y = aabb.lowerBound.y;
+		verts[1].x = aabb.upperBound.x;
+		verts[1].y = aabb.lowerBound.y;
+		verts[2].x = aabb.upperBound.x;
+		verts[2].y = aabb.upperBound.y;
+		verts[3].x = aabb.lowerBound.x;
+		verts[3].y = aabb.upperBound.y;
+	} else {
+		IwAssertMsg(MYAPP, false, ("Unable to calculate shape AABB; Setting to 0:0 size."));
+		verts[0] = CIwSVec2::g_Zero;
+		verts[1] = CIwSVec2::g_Zero;
+		verts[2] = CIwSVec2::g_Zero;
+		verts[3] = CIwSVec2::g_Zero;
+	}
 }
 
 void ShapeTemplate::Reset() {

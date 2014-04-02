@@ -370,7 +370,7 @@ void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFo
 	}
 }
 
-void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args) {
+void Level::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args) {
 	IW_CALLSTACK_SELF;
 	
 	switch (args.eventId) {
@@ -411,7 +411,7 @@ void Level::EventTimerEventHandler(const EventTimer<EventArgs>& sender, const Ev
 	}
 }
 
-void Level::EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy) {
+void Level::EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& sender, const int& dummy) {
 	SetCompletionState(eCompleted);
 }
 

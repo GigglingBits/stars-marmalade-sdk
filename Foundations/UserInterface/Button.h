@@ -63,8 +63,8 @@ public:
 		long userdata;
 		bool handled;
 	};
-	Event<Button, EventArgs> PressedEvent;
-	Event<Button, EventArgs> ReleasedEvent;
+	MulticastEvent<Button, EventArgs> PressedEvent;
+	MulticastEvent<Button, EventArgs> ReleasedEvent;
 };
 
 #endif

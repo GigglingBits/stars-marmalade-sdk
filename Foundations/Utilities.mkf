@@ -19,8 +19,8 @@ files {
 	Downloader.cpp
 
 	Functor.h
-	Event.h
-	EventTimer.h
+	MulticastEvent.h
+	MulticastEventTimer.h
 
 	FrequencyCounter.h
 	FrequencyCounter.cpp

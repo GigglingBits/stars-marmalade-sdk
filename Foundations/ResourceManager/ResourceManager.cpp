@@ -27,7 +27,7 @@ void ResourceManager::Initialize() {
 
 void ResourceManager::Initialize(uint32 memorybucketid) {
 	s_bUseSpecificMemoryBucket = true;
-	s_uiMemoryBucketId = s_uiMemoryBucketId = memorybucketid;
+	s_uiMemoryBucketId = memorybucketid;
 	Initialize();
 }
 

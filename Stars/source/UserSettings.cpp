@@ -67,9 +67,9 @@ bool UserSettings::Load(const std::string& filename) {
 bool UserSettings::Load(TiXmlHandle& settings) {
 	// load levels
 	TiXmlElement* levelselem = settings.FirstChild(USER_SETTINGS_LEVELS_TAG).Element();
-	for (levelselem; levelselem; levelselem = levelselem->NextSiblingElement(USER_SETTINGS_LEVELS_TAG)) {
+	for (; levelselem; levelselem = levelselem->NextSiblingElement(USER_SETTINGS_LEVELS_TAG)) {
 		TiXmlElement* levelelem = levelselem->FirstChildElement(USER_SETTINGS_LEVEL_TAG);
-		for (levelelem; levelelem; levelelem = levelelem->NextSiblingElement(USER_SETTINGS_LEVEL_TAG)) {
+		for (; levelelem; levelelem = levelelem->NextSiblingElement(USER_SETTINGS_LEVEL_TAG)) {
 			if (const char* id = levelelem->Attribute (USER_SETTINGS_ID_ATTR)) {
 				LevelSetting& level = m_xLevels[id];
 				

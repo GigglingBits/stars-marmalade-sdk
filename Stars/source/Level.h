@@ -11,7 +11,7 @@
 #include "Star.h"
 #include "Camera.h"
 #include "LevelInteractor.h"
-#include "EventTimer.h"
+#include "MulticastEventTimer.h"
 #include "LevelCompletionInfo.h"
 
 #define LEVEL_START_BANNER_LEADIN 500
@@ -56,7 +56,7 @@ private:
 	GameFoundation m_xGame;
 	LevelCompletionInfo m_xCompletionInfo;
 
-	EventTimer<EventArgs> m_xEventTimer;
+	MulticastEventTimer<EventArgs> m_xEventTimer;
 
 	CIwRect m_xBannerRect;
 	std::string m_sBannerText;
@@ -122,8 +122,8 @@ private:
 	void Conclude();
 	
 private:
-	void EventTimerEventHandler(const EventTimer<EventArgs>& sender, const EventArgs& args);
-	void EventTimerClearedEventHandler(const EventTimer<EventArgs>& sender, const int& dummy);
+	void EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args);
+	void EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& sender, const int& dummy);
 	
 	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 

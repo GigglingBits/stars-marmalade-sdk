@@ -2,7 +2,7 @@
 #define _TIMER_H_ 
 
 #include "IwGeom.h"
-#include "Event.h"
+#include "MulticastEvent.h"
 
 class Timer {
 private:
@@ -18,7 +18,7 @@ public:
 	void Stop();
 	void Update(uint32 timestep);
 
-	Event<Timer, long> ElapsedEvent;
+	MulticastEvent<Timer, long> ElapsedEvent;
 };
 
 #endif

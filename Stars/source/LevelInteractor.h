@@ -60,8 +60,8 @@ public:
 		int count;
 		CIwFVec2* samplepos;
 	};
-	Event<LevelInteractor, CIwFVec2> BeginDrawPath;
-	Event<LevelInteractor, PathEventArgs> EndDrawPath;
+	MulticastEvent<LevelInteractor, CIwFVec2> BeginDrawPath;
+	MulticastEvent<LevelInteractor, PathEventArgs> EndDrawPath;
 };
 
 #endif

@@ -109,13 +109,13 @@ public:
 	struct QuakeImpactArgs {
 		float amplitude;
 	};
-	Event<GameFoundation, QuakeImpactArgs> QuakeImpact;
+	MulticastEvent<GameFoundation, QuakeImpactArgs> QuakeImpact;
 
 	struct SpriteRemovedArgs {
 		Sprite* sprite;
 		bool outofbounds;
 	};
-	Event<GameFoundation, SpriteRemovedArgs> SpriteRemoved;
+	MulticastEvent<GameFoundation, SpriteRemovedArgs> SpriteRemoved;
 };
 
 #endif

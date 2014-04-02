@@ -8,7 +8,7 @@
 #include "IwGxTypes.h"
 
 #include "ButtonCommandId.h"
-#include "Event.h"
+#include "MulticastEvent.h"
 
 #define MAX_TOUCHES S3E_POINTER_TOUCH_MAX
 #define NO_TOUCH_ID (std::numeric_limits<int32>::max())
@@ -38,8 +38,8 @@ public:
 		struct EventArgs {
 			bool handled;
 		};
-		Event<VirtualButton, EventArgs> PressedEvent;
-		Event<VirtualButton, EventArgs> ReleasedEvent;
+		MulticastEvent<VirtualButton, EventArgs> PressedEvent;
+		MulticastEvent<VirtualButton, EventArgs> ReleasedEvent;
 	};
 
 private:
@@ -134,16 +134,16 @@ public:
 		ButtonCommandId cmdid;
 		long userdata;
 	};
-	Event<InputManager, ButtonEventArgs> ButtonPressedEvent;
-	Event<InputManager, ButtonEventArgs> ButtonReleasedEvent;
+	MulticastEvent<InputManager, ButtonEventArgs> ButtonPressedEvent;
+	MulticastEvent<InputManager, ButtonEventArgs> ButtonReleasedEvent;
 
 	struct TouchEventArgs {
 		TouchId id;
 		CIwSVec2 pos;
 	};
-	Event<InputManager, TouchEventArgs> TouchBeginEvent;
-	Event<InputManager, TouchEventArgs> TouchMoveEvent;
-	Event<InputManager, TouchEventArgs> TouchEndEvent;
+	MulticastEvent<InputManager, TouchEventArgs> TouchBeginEvent;
+	MulticastEvent<InputManager, TouchEventArgs> TouchMoveEvent;
+	MulticastEvent<InputManager, TouchEventArgs> TouchEndEvent;
 };
 
 #endif

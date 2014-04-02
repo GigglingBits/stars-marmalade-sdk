@@ -3,7 +3,7 @@
 
 #include <string>
 #include "Window.h"
-#include "Event.h"
+#include "MulticastEvent.h"
 
 class MediaView : public Window {
 private:
@@ -14,7 +14,7 @@ public:
 	MediaView();
 	
 public:
-	Event<MediaView, int> Finished;
+	MulticastEvent<MediaView, int> Finished;
 };
 
 #endif

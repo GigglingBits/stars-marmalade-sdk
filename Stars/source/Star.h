@@ -116,7 +116,7 @@ public:
 		int amount;
 		CIwFVec2 position;
 	};
-	Event<Star, DustEventArgs> DustEvent;
+	MulticastEvent<Star, DustEventArgs> DustEvent;
 };
 
 #endif

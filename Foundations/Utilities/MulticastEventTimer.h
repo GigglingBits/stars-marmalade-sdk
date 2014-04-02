@@ -1,11 +1,11 @@
-#ifndef __EVENTTIMER_H__
-#define __EVENTTIMER_H__
+#ifndef __MULTICASTEVENTTIMER_H__
+#define __MULTICASTEVENTTIMER_H__
 
 #include <queue>
-#include "Event.h"
+#include "MulticastEvent.h"
 
 template<typename TPayload>
-class EventTimer {
+class MulticastEventTimer {
 private:
 	struct EventSpec {
 		uint32 Delay;
@@ -21,7 +21,7 @@ private:
 	uint32 m_lLastTriggeredTime;
 
 public:
-	EventTimer() 
+	MulticastEventTimer() 
 		: m_lTotalDuration(0)
 		, m_lElapsedTime(0)
 		, m_lLastTriggeredTime(0) {
@@ -65,8 +65,8 @@ public:
 	}
 
 public:
-	Event<EventTimer, TPayload> Elapsed;
-	Event<EventTimer, int /* dummy */> LastEventFired;
+	MulticastEvent<MulticastEventTimer, TPayload> Elapsed;
+	MulticastEvent<MulticastEventTimer, int /* dummy */> LastEventFired;
 };
 
 #endif

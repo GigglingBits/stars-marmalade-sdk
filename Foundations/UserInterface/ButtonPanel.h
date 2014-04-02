@@ -49,7 +49,7 @@ public:
 	struct EventArgs {
 		bool IsPanelOpen;
 	};
-	Event<ButtonPanel, EventArgs> StateChanged;
+	MulticastEvent<ButtonPanel, EventArgs> StateChanged;
 };
 
 #endif

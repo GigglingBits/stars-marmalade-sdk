@@ -2,7 +2,7 @@
 #define __CONTACTLISTENER_H__
 
 #include "Box2D.h"
-#include "Event.h"
+#include "MulticastEvent.h"
 #include "IwGeom.h"
 
 class Body;
@@ -34,7 +34,7 @@ public:
 		float approachvelocity;
 		CIwFVec2 collisionpoint;
 	};
-	Event<ContactListener, CollisionEventArgs> CollisionEvent;
+	MulticastEvent<ContactListener, CollisionEventArgs> CollisionEvent;
 };
 
 #endif

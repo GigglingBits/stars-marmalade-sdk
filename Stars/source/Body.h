@@ -4,7 +4,7 @@
 #include <map>
 
 #include "IwGeom.h"
-#include "Event.h"
+#include "MulticastEvent.h"
 #include "Sprite.h"
 #include "World.h"
 #include "BodyShape.h"
@@ -96,13 +96,13 @@ public:
 	struct BuffArgs {
 		CIwFVec2 pos;
 	};
-	Event<Body, BuffArgs> BuffRequested;
+	MulticastEvent<Body, BuffArgs> BuffRequested;
 
 	struct EffectArgs {
 		std::string id;
 		CIwFVec2 pos;
 	};
-	Event<Body, EffectArgs> EffectRequested;
+	MulticastEvent<Body, EffectArgs> EffectRequested;
 };
 
 #endif

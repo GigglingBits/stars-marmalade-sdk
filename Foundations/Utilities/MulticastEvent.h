@@ -1,5 +1,5 @@
-#ifndef __EVENT_H__ 
-#define __EVENT_H__
+#ifndef __MULTICASTEVENT_H__
+#define __MULTICASTEVENT_H__
 
 #include "Functor.h"
 #include "Debug.h"
@@ -9,18 +9,18 @@
 
 // functor wrapper with subscriber support
 template <class TPublisher, class TArgs> 
-class Event : FunctorBase<TPublisher, TArgs> {
+class MulticastEvent : FunctorBase<TPublisher, TArgs> {
 private:
 	FunctorBase<TPublisher, TArgs>* m_apxFunctor[EVENT_MAX_SUBSCRIBERS];
 
 public:
-	Event() {
+	MulticastEvent() {
 		for (int i = 0; i < EVENT_MAX_SUBSCRIBERS; i++) {
 			m_apxFunctor[i] = NULL;
 		}
 	}
 
-	virtual ~Event() {
+	virtual ~MulticastEvent() {
 		for (int i = 0; i < EVENT_MAX_SUBSCRIBERS; i++) {
 			if (m_apxFunctor[i]) {
 				delete m_apxFunctor[i];
