@@ -1,5 +1,12 @@
 display_name "Foundation/Renderer"
 
+options { 
+#	arm-cpu=6
+#	arm-fpu=vfp
+	optimise-speed
+#	enable-exceptions
+}
+
 subprojects {
 	iwgx
 	iwgxfont

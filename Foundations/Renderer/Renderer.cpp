@@ -29,11 +29,11 @@ void Renderer::SetFonts(const std::string& large, const std::string& normal, con
 	IwGxFontSetFont(font);
 }
 
-CIwMaterial* Renderer::CreateGxCacheMaterial(CIwTexture* texture) {
+CIwMaterial* Renderer::CreateGxCacheMaterial(CIwTexture* texture, bool additivebelnding) {
 	CIwMaterial* mat = IW_GX_ALLOC_MATERIAL();
 	mat->SetColAmbient(0xffffffff);
 	mat->SetModulateMode(CIwMaterial::MODULATE_NONE);
-	mat->SetAlphaMode(CIwMaterial::ALPHA_BLEND);
+	mat->SetAlphaMode(additivebelnding ? CIwMaterial::ALPHA_ADD : CIwMaterial::ALPHA_BLEND);
 	mat->SetTexture(texture);
 	return mat;
 }
@@ -143,7 +143,7 @@ void Renderer::DrawImage(CIwTexture* image, const CIwFVec2& pos, const CIwFVec2&
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
-void Renderer::DrawImage(CIwTexture* image, CIwFVec2* vertices, int count, bool flipped) {
+void Renderer::DrawImage(CIwTexture* image, CIwFVec2 vertices[], int count, bool flipped) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
@@ -152,13 +152,33 @@ void Renderer::DrawImage(CIwTexture* image, CIwFVec2* vertices, int count, bool 
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
-void Renderer::DrawImage(CIwTexture* image, CIwSVec2* vertices, int count, bool flipped) {
+void Renderer::DrawImage(CIwTexture* image, CIwSVec2 vertices[], int count, bool flipped) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
 	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
 	DrawPolygonSubPixel(polystream, count, image, flipped);
+}
+
+void Renderer::DrawImage(CIwTexture* image, CIwFVec2 vertices[], CIwFVec2 uvs[], uint32 cols[], int count, bool additiveblend) {
+	IW_CALLSTACK_SELF;
+	
+	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
+	
+	CIwFVec2* gxverts = CreatGxCacheVertexStream(vertices, count);
+	CIwMaterial* gxmat = CreateGxCacheMaterial(image, additiveblend);
+	DrawImageSubPixel(gxmat, gxverts, CreatGxCacheUvStream(uvs, count), CreatGxCacheColourStream(cols, count), count);
+}
+
+void Renderer::DrawImage(CIwTexture* image, CIwSVec2 vertices[], CIwFVec2 uvs[], uint32 cols[], int count, bool additiveblend) {
+	IW_CALLSTACK_SELF;
+	
+	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
+	
+	CIwFVec2* gxverts = CreatGxCacheVertexStream(vertices, count);
+	CIwMaterial* gxmat = CreateGxCacheMaterial(image, additiveblend);
+	DrawImageSubPixel(gxmat, gxverts, CreatGxCacheUvStream(uvs, count), CreatGxCacheColourStream(cols, count), count);
 }
 
 void Renderer::DrawPolygon(CIwSVec2 vertices[], int count, CIwTexture* image) {
@@ -176,7 +196,7 @@ void Renderer::DrawPolygon(TVertex vertices[], int count, CIwTexture* image) {
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
 	CIwFVec2* polystream = CreatGxCacheVertexStream(vertices, count);
-	CIwFVec2* wrapuv = CreatGxCacheUvStream(polystream, count, image);
+	CIwFVec2* wrapuv = CreatGxCacheTiledUvStream(polystream, count, image);
 	IwGxSetUVStream(wrapuv);
 
 	IwGxSetColStream(NULL);
@@ -210,14 +230,17 @@ void Renderer::DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwTexture* i
 		CIwFVec2(1.0f, 0.0f),
 	};
 
-	IwGxSetUVStream((CIwFVec2*)(flipped ? flippeduv : standarduv));
+	DrawImageSubPixel(CreateGxCacheMaterial(image), vertices, (CIwFVec2*)(flipped ? flippeduv : standarduv), NULL, count);
+}
 
-	IwGxSetColStream(NULL);
-
-	IwGxSetMaterial(CreateGxCacheMaterial(image));
-
+void Renderer::DrawImageSubPixel(CIwMaterial* image, CIwFVec2 vertices[], CIwFVec2 uvs[], CIwColour cols[], int count) {
+	IW_CALLSTACK_SELF;
+	
+	IwGxSetMaterial(image);
+	IwGxSetUVStream(uvs);
+	IwGxSetColStream(cols);
 	IwGxSetVertStreamScreenSpace(vertices, count);
-
+	
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
 	IwGxDrawPrims(IW_GX_QUAD_LIST, NULL, count);
@@ -527,7 +550,17 @@ CIwColour* Renderer::CreatGxCacheColourStream(uint32 cols[], int count) {
 	return gxcols;
 }
 
-CIwFVec2* Renderer::CreatGxCacheUvStream(CIwFVec2 vertices[], int count, CIwTexture* image) {
+CIwFVec2* Renderer::CreatGxCacheUvStream(CIwFVec2 uvs[], int count) {
+	IwAssertMsg(MYAPP, count > 0 && uvs, ("Trying to allocate empty stream. This should probably never happen?"));
+
+	CIwFVec2* uvstream = IW_GX_ALLOC(CIwFVec2, count);
+	for (int i = 0; i < count; i++) {
+		uvstream[i] = uvs[i];
+	}
+	return uvstream;
+}
+
+CIwFVec2* Renderer::CreatGxCacheTiledUvStream(CIwFVec2 vertices[], int count, CIwTexture* image) {
 	// get aabb
 	CIwFVec2 topleft(0.0f, 0.0f), bottomright(0.0f, 0.0f);
 	CalculateAABB(vertices, count, topleft, bottomright);
