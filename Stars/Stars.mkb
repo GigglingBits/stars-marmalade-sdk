@@ -38,6 +38,7 @@ subprojects {
 	../Foundations/Particles
 
 	../s3eGyroscope
+	../Extensions/spine-runtimes/
 
 	iwgxfont
 
@@ -259,6 +260,8 @@ assets
 
 	music/.
 	stories/.
+	sprites/characters/spine/spineboy.atlas
+	sprites/characters/spine/spineboy.json
 
 	test.group
 	base.group
