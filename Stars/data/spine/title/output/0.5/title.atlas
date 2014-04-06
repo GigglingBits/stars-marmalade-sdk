@@ -1,0 +1,75 @@
+
+title.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+firedude
+  rotate: false
+  xy: 2, 90
+  size: 181, 198
+  orig: 181, 198
+  offset: 0, 0
+  index: -1
+meteor_1
+  rotate: false
+  xy: 106, 10
+  size: 66, 78
+  orig: 66, 78
+  offset: 0, 0
+  index: -1
+meteor_2
+  rotate: true
+  xy: 2, 2
+  size: 86, 102
+  orig: 86, 102
+  offset: 0, 0
+  index: -1
+meteor_fire
+  rotate: false
+  xy: 370, 143
+  size: 89, 145
+  orig: 89, 145
+  offset: 0, 0
+  index: -1
+nugget
+  rotate: false
+  xy: 185, 93
+  size: 47, 45
+  orig: 51, 48
+  offset: 3, 1
+  index: -1
+rockdude
+  rotate: false
+  xy: 185, 140
+  size: 183, 148
+  orig: 183, 148
+  offset: 0, 0
+  index: -1
+rockdude_fire
+  rotate: false
+  xy: 461, 169
+  size: 52, 119
+  orig: 52, 119
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 642, 186
+  size: 335, 323
+  orig: 335, 323
+  offset: 0, 0
+  index: -1
+subtitle
+  rotate: true
+  xy: 979, 167
+  size: 342, 43
+  orig: 343, 59
+  offset: 1, 6
+  index: -1
+title
+  rotate: false
+  xy: 2, 290
+  size: 638, 219
+  orig: 638, 219
+  offset: 0, 0
+  index: -1

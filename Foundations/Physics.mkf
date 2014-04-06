@@ -5,7 +5,7 @@ options {
 }
 
 subprojects {
-	../Box2D/box2d
+	../Extensions/Box2D/box2d
 	./Utilities
 }
 

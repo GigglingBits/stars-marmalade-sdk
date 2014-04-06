@@ -9,6 +9,7 @@
 #include "IwList.h"
 #include "Body.h"
 #include "Camera.h"
+#include "SpineAnimation.h"
 
 class TitleScreen : public Page {
 private:
@@ -20,6 +21,9 @@ private:
 
 	OptionsPanel m_xPanelOptions;
 	SocialPanel m_xPanelSocial;
+
+	SpineAnimation m_xAnim;
+	SpineAnimation m_xAnim2;
 	
 public:
 	TitleScreen();

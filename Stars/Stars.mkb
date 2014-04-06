@@ -29,6 +29,7 @@ subprojects {
 	../Foundations/Logging
 	../Foundations/ResourceManager
 	../Foundations/Renderer
+	../Foundations/Animation
 	../Foundations/UserInterface
 	../Foundations/MediaViews
 	../Foundations/Utilities
@@ -37,8 +38,7 @@ subprojects {
 	../Foundations/Sprites
 	../Foundations/Particles
 
-	../s3eGyroscope
-	../Extensions/spine-runtimes/
+	../Extensions/s3eGyroscope
 
 	iwgxfont
 
@@ -262,6 +262,9 @@ assets
 	stories/.
 	sprites/characters/spine/spineboy.atlas
 	sprites/characters/spine/spineboy.json
+
+	spine/title/output/title.atlas
+	spine/title/output/title.json
 
 	test.group
 	base.group

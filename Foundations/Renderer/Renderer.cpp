@@ -32,7 +32,7 @@ void Renderer::SetFonts(const std::string& large, const std::string& normal, con
 CIwMaterial* Renderer::CreateGxCacheMaterial(CIwTexture* texture, bool additivebelnding) {
 	CIwMaterial* mat = IW_GX_ALLOC_MATERIAL();
 	mat->SetColAmbient(0xffffffff);
-	mat->SetModulateMode(CIwMaterial::MODULATE_NONE);
+	mat->SetModulateMode(CIwMaterial::MODULATE_RGB);
 	mat->SetAlphaMode(additivebelnding ? CIwMaterial::ALPHA_ADD : CIwMaterial::ALPHA_BLEND);
 	mat->SetTexture(texture);
 	return mat;
@@ -47,7 +47,7 @@ CIwMaterial* Renderer::CreateGxCacheMaterial(uint colour) {
 CIwFVec2 Renderer::GetScreenCenterWorldSpace() {
 	// where in the world is the screen center?
 	CIwSVec2 screencenter = m_xViewport.GetViewportSize();
-	screencenter.x /= 2; 
+	screencenter.x /= 2;	
 	screencenter.y /= 2; 
 
 	// how far away is the world center from the screen center?
@@ -544,9 +544,7 @@ CIwColour* Renderer::CreatGxCacheColourStream(uint32 cols[], int count) {
 	IwAssertMsg(MYAPP, count > 0 && cols, ("Trying to allocate empty stream. This should probably never happen?"));
 
 	CIwColour* gxcols = IW_GX_ALLOC(CIwColour, count);
-	for (int i = 0; i < count; i++) {
-		gxcols[i] = cols[i];
-	}
+	memcpy(gxcols, cols, count * sizeof(*cols));
 	return gxcols;
 }
 

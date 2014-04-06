@@ -3,15 +3,16 @@
 #include "Debug.h"
 #include "Configuration.h"
 
-TitleScreen::TitleScreen() :
-	Page("menu.group", Configuration::GetInstance().MenuSong),
-	m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
-	m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
-	m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
-	m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
+#include "spine/extension.h"
 
-		m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
-		m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
+TitleScreen::TitleScreen() :
+Page("menu.group", Configuration::GetInstance().MenuSong),
+m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
+m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
+m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
+m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
+	m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
+	m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 }
 
 
@@ -22,6 +23,10 @@ TitleScreen::~TitleScreen() {
 
 void TitleScreen::Initialize() {
 	IW_CALLSTACK_SELF;
+	
+	m_xCamera.SetGeometry(CIwFVec2(1500.0f, 500.0f), CIwSVec2(IwGxGetScreenWidth(), IwGxGetScreenHeight()), 1000.0f);
+	m_xCamera.SetWorldFocus(CIwFVec2(0.0f, 0.0f));
+	m_xCamera.ZoomOut();
 	
 	m_xBackground.Initialize();
 	m_xPanelOptions.Initialize();
@@ -40,6 +45,20 @@ void TitleScreen::Initialize() {
 		ps.GetWorldColours().LowerRight,
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
+	
+	
+	/*
+	 std::string atlasfile("sprites/characters/spine/spineboy.atlas");
+	 std::string skeletonfile("sprites/characters/spine/spineboy.json");
+	 */
+	
+	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
+	m_xAnim.SetAnimation("enter");
+	m_xAnim.SetPosition(CIwFVec2(-300.0f, -100.0f));
+	
+	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
+	m_xAnim2.SetAnimation("exit");
+	m_xAnim2.SetPosition(CIwFVec2(300.0f, -100.0f));
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -76,6 +95,8 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xButtonMovie.Update(frame);
 	m_xPanelOptions.Update(frame);
 	m_xBackground.Update(frame);
+	m_xAnim.Update(frame);
+	m_xAnim2.Update(frame);
 }
 
 void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -83,6 +104,9 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	renderer.SetViewport(m_xCamera.GetViewport());
 	m_xBackground.Render(renderer, frame);
+
+	m_xAnim.Render(renderer, frame);
+	m_xAnim2.Render(renderer, frame);
 	
     // buttons
 	m_xButtonTitle.Render(renderer, frame);

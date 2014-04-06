@@ -1,0 +1,16 @@
+display_name "Foundation/Animation"
+
+subprojects {
+	./Renderer
+	../Extensions/spine-runtimes
+}
+
+includepaths {
+	./Animation
+}
+
+files {
+	(Animation)
+	SpineAnimation.h
+	SpineAnimation.cpp
+}

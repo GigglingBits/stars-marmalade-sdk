@@ -3,4 +3,6 @@ CIwResGroup
 	name "menu"
 	
 	shared true
+	
+	./spine/title/output/title.png
 }
