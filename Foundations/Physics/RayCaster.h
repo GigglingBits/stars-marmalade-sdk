@@ -1,7 +1,7 @@
 #ifndef __RAYCASTER_H__
 #define __RAYCASTER_H__
 
-#include "Box2D.h"
+#include "Box2D/Box2D.h"
 #include "IwGeom.h"
 #include "World.h"
 
