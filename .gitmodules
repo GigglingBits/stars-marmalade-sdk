@@ -1,0 +1,12 @@
+[submodule "Extensions/box2d"]
+	path = Extensions/box2d
+	url = git://github.com/olilanz/box2d.git
+[submodule "Extensions/dpi"]
+	path = Extensions/dpi
+	url = git://github.com/olilanz/dpi.git
+[submodule "Extensions/s3eGyroscope"]
+	path = Extensions/s3eGyroscope
+	url = git://github.com/olilanz/s3eGyroscope.git
+[submodule "Extensions/spine-runtimes"]
+	path = Extensions/spine-runtimes
+	url = git://github.com/olilanz/spine-runtimes.git
