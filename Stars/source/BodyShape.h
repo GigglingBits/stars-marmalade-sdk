@@ -1,7 +1,7 @@
 #ifndef __BODYSHAPE_H__
 #define __BODYSHAPE_H__
 
-#include "box2d.h"
+#include "Box2D/Box2D.h"
 #include "VertexStreamWorld.h"
 
 class BodyShape {

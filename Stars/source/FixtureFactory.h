@@ -2,7 +2,7 @@
 #define __FIXTUREFACTORY_H__
 
 #include "FactoryBase.h"
-#include "Box2D.h"
+#include "Box2D/Box2D.h"
 
 class FixtureFactory : public FactoryBase<b2FixtureDef, void> {
 public:

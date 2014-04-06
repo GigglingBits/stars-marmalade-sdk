@@ -1,7 +1,7 @@
 #ifndef __CONTACTLISTENER_H__
 #define __CONTACTLISTENER_H__
 
-#include "box2d.h"
+#include "Box2D/Box2D.h"
 #include "MulticastEvent.h"
 #include "IwGeom.h"
 

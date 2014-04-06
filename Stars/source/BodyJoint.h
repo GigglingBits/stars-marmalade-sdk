@@ -1,7 +1,7 @@
 #ifndef __BODYJOINT_H__
 #define __BODYJOINT_H__
 
-#include "Box2D.h"
+#include "Box2D/Box2D.h"
 #include "IwGeom.h"
 class Body;
 

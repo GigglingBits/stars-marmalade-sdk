@@ -1,7 +1,7 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
-#include "Box2D.h"
+#include "Box2D/Box2D.h"
 #include "ContactListener.h"
 
 class World {

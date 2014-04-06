@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include "IwGeom.h"
-#include "Box2d.h"
+#include "Box2D/Box2D.h"
 #include "BodyJoint.h"
 
 class BodyTemplate {

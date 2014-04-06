@@ -1,7 +1,7 @@
 #ifndef __SHAPETEMPLATE_H__
 #define __SHAPETEMPLATE_H__
 
-#include "Box2D.h"
+#include "Box2D/Box2D.h"
 #include "IwGeomFVec2.h"
 
 #define SHAPE_MAX_VERTS 16
