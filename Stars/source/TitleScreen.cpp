@@ -95,8 +95,8 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xButtonMovie.Update(frame);
 	m_xPanelOptions.Update(frame);
 	m_xBackground.Update(frame);
-	m_xAnim.Update(frame);
-	m_xAnim2.Update(frame);
+	m_xAnim.Update(frame.GetSimulatedDurationMs());
+	m_xAnim2.Update(frame.GetSimulatedDurationMs());
 }
 
 void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -105,8 +105,19 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	renderer.SetViewport(m_xCamera.GetViewport());
 	m_xBackground.Render(renderer, frame);
 
-	m_xAnim.Render(renderer, frame);
-	m_xAnim2.Render(renderer, frame);
+	int length = std::max<int>(m_xAnim.GetVertexCount(), m_xAnim2.GetVertexCount());
+	CIwFVec2* xys = new CIwFVec2[length];
+	CIwFVec2* uvs = new CIwFVec2[length];
+	uint32* cols = new uint32[length];
+	if (CIwTexture* texture = m_xAnim.GetStreams(length, xys, uvs, cols)) {
+		renderer.DrawImage(texture, xys, uvs, cols, length);
+	}
+	if (CIwTexture* texture = m_xAnim2.GetStreams(length, xys, uvs, cols)) {
+		renderer.DrawImage(texture, xys, uvs, cols, length);
+	}
+	delete [] xys;
+	delete [] uvs;
+	delete [] cols;
 	
     // buttons
 	m_xButtonTitle.Render(renderer, frame);

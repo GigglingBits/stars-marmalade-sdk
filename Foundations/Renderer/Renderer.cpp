@@ -238,7 +238,7 @@ void Renderer::DrawImageSubPixel(CIwMaterial* image, CIwFVec2 vertices[], CIwFVe
 	
 	IwGxSetMaterial(image);
 	IwGxSetUVStream(uvs);
-	IwGxSetColStream(cols);
+	IwGxSetColStream(cols, count);
 	IwGxSetVertStreamScreenSpace(vertices, count);
 	
 	int32 slot = IwGxGetScreenSpaceSlot();

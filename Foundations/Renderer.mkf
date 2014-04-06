@@ -10,6 +10,8 @@ options {
 subprojects {
 	iwgx
 	iwgxfont
+	
+	./Animation
 }
 
 includepaths {

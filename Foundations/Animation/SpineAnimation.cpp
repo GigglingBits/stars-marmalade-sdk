@@ -1,4 +1,5 @@
 #include "SpineAnimation.h"
+#include "IwDebug.h"
 #include "Debug.h"
 
 #include <spine/extension.h>
@@ -55,14 +56,6 @@ void SpineAnimation::SetScale(float scale) {
 	}
 }
 
-void SpineAnimation::OnUpdate(const FrameData& frame) {
-	UpdateSkeleton(frame);
-}
-
-void SpineAnimation::OnRender(Renderer& renderer, const FrameData& frame) {
-	RenderSkeleton(renderer);
-}
-
 void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile, float scale) {
 	IW_CALLSTACK_SELF;
 
@@ -108,62 +101,72 @@ void SpineAnimation::DestroySkeleton() {
 	}
 }
 
-void SpineAnimation::UpdateSkeleton(const FrameData& frame) {
-	float timestep = frame.GetSimulatedDurationMs() / 1000.0f;
+void SpineAnimation::Update(uint32 timestep) {
+	float seconds = timestep / 1000.0f;
 	
 	// let skeleton know about time (why is this needed?)
 	if (m_pxSkeleton) {
-		spSkeleton_update(m_pxSkeleton, timestep);
+		spSkeleton_update(m_pxSkeleton, seconds);
 	}
 	
 	// perform actual animation
 	if (m_pxAnimation) {
-		spAnimation_apply(m_pxAnimation, m_pxSkeleton, m_fAnimationTime, m_fAnimationTime + timestep, 1, NULL, 0);
+		spAnimation_apply(m_pxAnimation, m_pxSkeleton, m_fAnimationTime, m_fAnimationTime + seconds, 1, NULL, 0);
 		spSkeleton_updateWorldTransform(m_pxSkeleton);
 	}
 	
 	// accumulate
-	m_fAnimationTime += timestep;
+	m_fAnimationTime += seconds;
 }
 
-void SpineAnimation::RenderSkeleton(Renderer& renderer) {
+int SpineAnimation::GetVertexCount() {
+	return (m_pxSkeleton ? m_pxSkeleton->slotCount : 0) * SPINEANIMATION_VERTS_PER_SLOT;
+}
+
+CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
+	IW_CALLSTACK_SELF;
 	if (!m_pxSkeleton) {
-		return;
+		return NULL;
 	}
-	
+
+	CIwTexture* texture = NULL;
 	for (int slotid = 0; slotid < m_pxSkeleton->slotCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
+			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
 				if (attachment->type == ATTACHMENT_REGION) {
 					if (spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment) {
-						RenderSkeletonSlot(renderer, slot, regionAttachment);
+						int cursor = SPINEANIMATION_VERTS_PER_SLOT * slotid;
+						CIwTexture* tmp = ExtractStreams(slot, regionAttachment, SPINEANIMATION_VERTS_PER_SLOT, &xys[cursor], &uvs[cursor], &cols[cursor]);
+						IwAssertMsg(MYAPP, tmp, ("Slot %i seems to have no texture. Drawing errors will occur.", slotid));
+						IwAssertMsg(MYAPP, !texture || tmp == texture, ("Slot Not all slots seem to use the same texture. Multitexture animations are not supported. Drawing errors will occur."));
+						texture = tmp;
 					}
 				}
 			}
 		}
 	}
+	return texture;
 }
 
-void SpineAnimation::RenderSkeletonSlot(Renderer& renderer, spSlot* slot, spRegionAttachment* att) {
-	if (!slot || !slot->data || !att) {
-		return;
+CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
+	if (!slot || !slot->data || !att || length != SPINEANIMATION_VERTS_PER_SLOT) {
+		return NULL;
 	}
 	
 	float spineverts[8];
 	spRegionAttachment_computeWorldVertices(att, slot->skeleton->x, slot->skeleton->y, slot->bone, spineverts);
 	
-	CIwFVec2 verts[4];
-	verts[0].x = spineverts[VERTEX_X1];
-	verts[0].y = spineverts[VERTEX_Y1];
-	verts[1].x = spineverts[VERTEX_X2];
-	verts[1].y = spineverts[VERTEX_Y2];
-	verts[2].x = spineverts[VERTEX_X3];
-	verts[2].y = spineverts[VERTEX_Y3];
-	verts[3].x = spineverts[VERTEX_X4];
-	verts[3].y = spineverts[VERTEX_Y4];
+	xys[0].x = spineverts[VERTEX_X1];
+	xys[0].y = spineverts[VERTEX_Y1];
+	xys[1].x = spineverts[VERTEX_X2];
+	xys[1].y = spineverts[VERTEX_Y2];
+	xys[2].x = spineverts[VERTEX_X3];
+	xys[2].y = spineverts[VERTEX_Y3];
+	xys[3].x = spineverts[VERTEX_X4];
+	xys[3].y = spineverts[VERTEX_Y4];
 	
 	CIwTexture* texture = NULL;
-	CIwFVec2 uvs[4];
 	if (att->rendererObject) {
 		if (spAtlasRegion* atlasreg = (spAtlasRegion*)att->rendererObject) {
 			if (spAtlasPage* atlaspage = (spAtlasPage*)atlasreg->page) {
@@ -174,17 +177,10 @@ void SpineAnimation::RenderSkeletonSlot(Renderer& renderer, spSlot* slot, spRegi
 			}
 		}
 	}
-	
-	if (texture) {
-		bool additiveblend = slot->data->additiveBlending != 0;
+			
+	ExtractColours(cols, slot);
 		
-		uint32 cols[4];
-		ExtractColours(cols, slot);
-		
-		renderer.DrawImage(texture, verts, uvs, cols, 4, additiveblend);
-	} else {
-		renderer.DrawPolygon(verts, 4, 0xffffffff, 0xaa333333);
-	}
+	return texture;
 }
 
 void SpineAnimation::ExtractColours(uint32 cols[4], spSlot* slot) {
