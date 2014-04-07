@@ -26,6 +26,7 @@ public:
 
 	void SetPosition(const CIwFVec2& pos);
 	void SetScale(float scale);
+	void SetRotation(float angle);
 
 	void Update(uint32 timestep);
 	

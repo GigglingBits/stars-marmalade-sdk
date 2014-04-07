@@ -41,7 +41,7 @@ void SpineAnimation::SetAnimation(const std::string& name) {
 
 void SpineAnimation::SetPosition(const CIwFVec2& pos) {
 	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeletin loaded. Cannot set position."));
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set position."));
 	if (m_pxSkeleton) {
 		m_pxSkeleton->x = pos.x;
 		m_pxSkeleton->y = pos.y;
@@ -50,10 +50,26 @@ void SpineAnimation::SetPosition(const CIwFVec2& pos) {
 }
 
 void SpineAnimation::SetScale(float scale) {
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeletin loaded. Cannot set scale."));
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set scale."));
+	IwAssertMsg(MYAPP, m_pxSkeleton->root, ("Skeleton has no root bone. Cannot set scale."));
 	if (m_pxSkeleton) {
-		spSkeleton_updateWorldTransform(m_pxSkeleton);
+		if (m_pxSkeleton->root) {
+			m_pxSkeleton->root->scaleX = scale;
+			m_pxSkeleton->root->scaleY = scale;
+			spSkeleton_updateWorldTransform(m_pxSkeleton);
+		}
 	}
+}
+
+void SpineAnimation::SetRotation(float angle) {
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set rotation."));
+	IwAssertMsg(MYAPP, m_pxSkeleton->root, ("Skeleton has no root bone. Cannot set rotation."));
+	if (m_pxSkeleton) {
+		if (m_pxSkeleton->root) {
+			m_pxSkeleton->root->rotation = angle;
+			spSkeleton_updateWorldTransform(m_pxSkeleton);
+		}
+	}	
 }
 
 void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile, float scale) {

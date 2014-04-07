@@ -55,10 +55,14 @@ void TitleScreen::Initialize() {
 	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
 	m_xAnim.SetAnimation("enter");
 	m_xAnim.SetPosition(CIwFVec2(-300.0f, -100.0f));
+	m_xAnim.SetScale(1.5f);
+	m_xAnim.SetRotation(45.0f);
 	
 	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
 	m_xAnim2.SetAnimation("exit");
 	m_xAnim2.SetPosition(CIwFVec2(300.0f, -100.0f));
+	m_xAnim2.SetScale(0.75f);
+	m_xAnim2.SetRotation(-45.0f);
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
