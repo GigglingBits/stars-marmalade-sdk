@@ -17,15 +17,22 @@ private:
 	spAnimation* m_pxAnimation;
 	float m_fAnimationTime;
 	
+	CIwFVec2 m_xAABBLL;
+	CIwFVec2 m_xAABBUR;
+	
+	CIwFMat2D m_xTranslation;
+	float m_fScale;
+	
 public:
 	SpineAnimation();
 	~SpineAnimation();
 	
-	void Load(const std::string& atlasfile, const std::string& jsonfile, float scale = 1.0f);
+	void Load(const std::string& atlasfile, const std::string& jsonfile);
 	void SetAnimation(const std::string& name);
 
+	void ConfineShape(CIwFVec2 verts[], int vertcount);
+
 	void SetPosition(const CIwFVec2& pos);
-	void SetScale(float scale);
 	void SetRotation(float angle);
 
 	void Update(uint32 timestep);
@@ -33,14 +40,23 @@ public:
 	int GetVertexCount();
 	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 
-private:
-	CIwTexture* ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
+	void GetBoundigBox(CIwFVec2 bb[4]);
 	
-	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile, float scale);
+private:
+	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
 	void DestroySkeleton();
 
+	CIwTexture* ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 	void ExtractUVs(CIwFVec2 uvs[4], spAtlasRegion* atlasreg);
 	void ExtractColours(uint32 cols[4], spSlot* slot);
+	
+	bool ExtractLocalAABB(CIwFVec2& ll, CIwFVec2& ur);
+	void GrowAABB(CIwFVec2& ll, CIwFVec2& ur, const CIwFVec2& point);
+	float ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
+	CIwFVec2 OffsetAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
+	
+	void TransformToWorld(CIwFVec2 v[], int c);
+	void TransformToWorld(CIwFVec2& v);
 };
 
 #endif

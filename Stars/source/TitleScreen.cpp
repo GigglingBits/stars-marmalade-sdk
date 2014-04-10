@@ -24,7 +24,7 @@ TitleScreen::~TitleScreen() {
 void TitleScreen::Initialize() {
 	IW_CALLSTACK_SELF;
 	
-	m_xCamera.SetGeometry(CIwFVec2(1500.0f, 500.0f), CIwSVec2(IwGxGetScreenWidth(), IwGxGetScreenHeight()), 1000.0f);
+	m_xCamera.SetGeometry(CIwFVec2(15.0f, 5.0f), CIwSVec2(IwGxGetScreenWidth(), IwGxGetScreenHeight()), 10.0f);
 	m_xCamera.SetWorldFocus(CIwFVec2(0.0f, 0.0f));
 	m_xCamera.ZoomOut();
 	
@@ -45,24 +45,26 @@ void TitleScreen::Initialize() {
 		ps.GetWorldColours().LowerRight,
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
+
+	CIwFVec2 shape[2];
+	shape[0] = CIwFVec2(2.0f, 2.0f);
+	shape[1] = CIwFVec2(4.0f, 4.0f);
 	
-	
-	/*
-	 std::string atlasfile("sprites/characters/spine/spineboy.atlas");
-	 std::string skeletonfile("sprites/characters/spine/spineboy.json");
-	 */
-	
-	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
+	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim.SetAnimation("enter");
-	m_xAnim.SetPosition(CIwFVec2(-300.0f, -100.0f));
-	m_xAnim.SetScale(1.5f);
-	m_xAnim.SetRotation(45.0f);
+	m_xAnim.SetRotation(1.0f);
+	m_xAnim.SetPosition(CIwFVec2(-3.0f, -1.0f));
+	m_xAnim.ConfineShape(shape, 2);
+	//m_xAnim.SetScale(0.15f);
 	
-	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json", 0.25);
+	shape[0] = CIwFVec2(3.0f, 3.0f);
+	shape[1] = CIwFVec2(5.0f, 5.0f);
+
+	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim2.SetAnimation("exit");
-	m_xAnim2.SetPosition(CIwFVec2(300.0f, -100.0f));
-	m_xAnim2.SetScale(0.75f);
-	m_xAnim2.SetRotation(-45.0f);
+	m_xAnim2.SetRotation(-1.0f);
+	m_xAnim2.SetPosition(CIwFVec2(3.0f, -1.0f));
+	m_xAnim2.ConfineShape(shape, 2);
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -113,11 +115,16 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	CIwFVec2* xys = new CIwFVec2[length];
 	CIwFVec2* uvs = new CIwFVec2[length];
 	uint32* cols = new uint32[length];
+	CIwFVec2 bbox[4];
 	if (CIwTexture* texture = m_xAnim.GetStreams(length, xys, uvs, cols)) {
 		renderer.DrawImage(texture, xys, uvs, cols, length);
+		m_xAnim.GetBoundigBox(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
 	}
 	if (CIwTexture* texture = m_xAnim2.GetStreams(length, xys, uvs, cols)) {
 		renderer.DrawImage(texture, xys, uvs, cols, length);
+		m_xAnim2.GetBoundigBox(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
 	}
 	delete [] xys;
 	delete [] uvs;

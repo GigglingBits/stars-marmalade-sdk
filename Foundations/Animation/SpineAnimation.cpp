@@ -10,20 +10,60 @@ m_pxSkeletonJson(NULL),
 m_pxSkeletonData(NULL),
 m_pxSkeleton(NULL),
 m_pxAnimation(NULL),
-m_fAnimationTime(0.0f) {
+m_fAnimationTime(0.0f),
+m_fScale(0.0f) {
+	m_xTranslation.SetIdentity();
 }
 
 SpineAnimation::~SpineAnimation() {
 	DestroySkeleton();
 }
 
-void SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonfile, float scale) {
-	LoadSkeleton(atlasfile, jsonfile, scale);
+void SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonfile) {
+	LoadSkeleton(atlasfile, jsonfile);
+}
+
+void SpineAnimation::ConfineShape(CIwFVec2 verts[], int vertcount) {
+	if (vertcount < 1) {
+		// scale = 0.01f;
+		// center offset = 0,0f;
+		return;
+	}
+		
+	// find shape's AABB
+	CIwFVec2 ll(verts[0]);
+	CIwFVec2 ur(ll);
+	for (int i = 1; i < vertcount; i++) {
+		GrowAABB(ll, ur, verts[i]);
+	}
+	
+	// find scale
+	float scale = ContainAABB(m_xAABBLL, m_xAABBUR, ll, ur);
+	m_fScale = scale;
+	//m_xTranslation.Set
+	
+	// center offset
+	CIwFVec2 centeroffset = OffsetAABB(m_xAABBLL * scale, m_xAABBUR * scale, ll, ur);
+}
+
+float SpineAnimation::ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2) {
+	// aabb 1 is the content
+	// aabb 2 is the container
+	// return value is the scaleing factor for the content so that it fits into the container
+	return std::min<float>((ur2.x - ll2.x)/(ur1.x - ll1.x), (ur2.x - ll2.x)/(ur1.x - ll1.x));
+}
+
+CIwFVec2 SpineAnimation::OffsetAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2) {
+	// aabb 1 is the off aabb
+	// aabb 2 is the reference aabb
+	// return value is the distance from the off center to the reference center
+	CIwFVec2 center1(((ur1 - ll1)/2.0f) + ur1);
+	CIwFVec2 center2(((ur2 - ll2)/2.0f) + ur2);
+	return center2 - center1;
 }
 
 void SpineAnimation::SetAnimation(const std::string& name) {
 	IW_CALLSTACK_SELF;
-
 	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
 	if (!m_pxSkeletonData) {
 		return;
@@ -40,50 +80,24 @@ void SpineAnimation::SetAnimation(const std::string& name) {
 }
 
 void SpineAnimation::SetPosition(const CIwFVec2& pos) {
-	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set position."));
-	if (m_pxSkeleton) {
-		m_pxSkeleton->x = pos.x;
-		m_pxSkeleton->y = pos.y;
-		spSkeleton_updateWorldTransform(m_pxSkeleton);
-	}
-}
-
-void SpineAnimation::SetScale(float scale) {
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set scale."));
-	IwAssertMsg(MYAPP, m_pxSkeleton->root, ("Skeleton has no root bone. Cannot set scale."));
-	if (m_pxSkeleton) {
-		if (m_pxSkeleton->root) {
-			m_pxSkeleton->root->scaleX = scale;
-			m_pxSkeleton->root->scaleY = scale;
-			spSkeleton_updateWorldTransform(m_pxSkeleton);
-		}
-	}
+	m_xTranslation.SetTrans(pos);
 }
 
 void SpineAnimation::SetRotation(float angle) {
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("No skeleton loaded. Cannot set rotation."));
-	IwAssertMsg(MYAPP, m_pxSkeleton->root, ("Skeleton has no root bone. Cannot set rotation."));
-	if (m_pxSkeleton) {
-		if (m_pxSkeleton->root) {
-			m_pxSkeleton->root->rotation = angle;
-			spSkeleton_updateWorldTransform(m_pxSkeleton);
-		}
-	}	
+	m_xTranslation.SetRot(angle, CIwFVec2(0.0f, 0.0f));
 }
 
-void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile, float scale) {
+void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
 	IW_CALLSTACK_SELF;
-
 	if ((m_pxAtlas = spAtlas_readAtlasFile(atlasfile.c_str()))) {
 		if ((m_pxSkeletonJson = spSkeletonJson_create(m_pxAtlas))) {
-			m_pxSkeletonJson->scale = scale;
 			if ((m_pxSkeletonData = spSkeletonJson_readSkeletonDataFile(m_pxSkeletonJson, jsonfile.c_str()))) {
 				if ((m_pxSkeleton = spSkeleton_create(m_pxSkeletonData))) {
 					m_pxSkeleton->flipX = false;
 					m_pxSkeleton->flipY = false;
 					spSkeleton_setToSetupPose(m_pxSkeleton);
 					spSkeleton_updateWorldTransform(m_pxSkeleton);
+					ExtractLocalAABB(m_xAABBLL, m_xAABBUR);
 				} else {
 					IwAssertMsg(MYAPP, false, ("Unable to create generic skeleton"));
 				}
@@ -123,12 +137,12 @@ void SpineAnimation::Update(uint32 timestep) {
 	// let skeleton know about time (why is this needed?)
 	if (m_pxSkeleton) {
 		spSkeleton_update(m_pxSkeleton, seconds);
-	}
-	
-	// perform actual animation
-	if (m_pxAnimation) {
-		spAnimation_apply(m_pxAnimation, m_pxSkeleton, m_fAnimationTime, m_fAnimationTime + seconds, 1, NULL, 0);
-		spSkeleton_updateWorldTransform(m_pxSkeleton);
+
+		// perform actual animation
+		if (m_pxAnimation) {
+			spAnimation_apply(m_pxAnimation, m_pxSkeleton, m_fAnimationTime, m_fAnimationTime + seconds, 1, NULL, 0);
+			spSkeleton_updateWorldTransform(m_pxSkeleton);
+		}
 	}
 	
 	// accumulate
@@ -165,6 +179,68 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 	return texture;
 }
 
+void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
+	for (int i = 0; i < c; i++) {
+		TransformToWorld(v[i]);
+	}
+}
+
+void SpineAnimation::TransformToWorld(CIwFVec2& v) {
+	v *= m_fScale;
+	v = m_xTranslation.TransformVec(v);
+}
+
+void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {
+	// rescale the bounding box to match the skeleton
+	bb[0].x = m_xAABBLL.x;
+	bb[0].y = m_xAABBLL.y;
+	bb[1].x = m_xAABBUR.x;
+	bb[1].y = m_xAABBLL.y;
+	bb[2].x = m_xAABBUR.x;
+	bb[2].y = m_xAABBUR.y;
+	bb[3].x = m_xAABBLL.x;
+	bb[3].y = m_xAABBUR.y;
+	
+	TransformToWorld(bb, 4);
+}
+
+bool SpineAnimation::ExtractLocalAABB(CIwFVec2& ll, CIwFVec2& ur) {
+	IW_CALLSTACK_SELF;
+	
+	bool hasbounds = false;
+	for (int slotid = 0; slotid < m_pxSkeleton->slotCount; slotid++) {
+		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
+			if (spAttachment* attachment = slot->attachment) {
+				if (attachment->type == ATTACHMENT_BOUNDING_BOX) {
+					if (spBoundingBoxAttachment* boundingboxAttachment = (spBoundingBoxAttachment*)attachment) {
+						IwAssertMsg(MYAPP, boundingboxAttachment->verticesCount%2 == 0, ("Invalid number of vertices in bounding box."));
+						for (int i = 0; i < boundingboxAttachment->verticesCount - 1; i += 2) {
+							if (!hasbounds) {
+								// get starting vertice
+								hasbounds = true;
+								ll.x = boundingboxAttachment->vertices[i];
+								ll.y = boundingboxAttachment->vertices[i + 1];
+								ur = ll;
+							} else {
+								GrowAABB(ll, ur, CIwFVec2(boundingboxAttachment->vertices[i], boundingboxAttachment->vertices[i + 1]));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	IwAssertMsg(MYAPP, hasbounds, ("The skeleton does not seem to include any bounding box attachments. AABB cannot be calculated."));
+	return hasbounds;
+}
+
+void SpineAnimation::GrowAABB(CIwFVec2& ll, CIwFVec2& ur, const CIwFVec2& point) {
+	ll.x = std::min<float>(ll.x, point.x);
+	ll.y = std::min<float>(ll.y, point.y);
+	ur.x = std::max<float>(ur.x, point.x);
+	ur.y = std::max<float>(ur.y, point.y);
+}
+
 CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
 	if (!slot || !slot->data || !att || length != SPINEANIMATION_VERTS_PER_SLOT) {
 		return NULL;
@@ -181,7 +257,8 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	xys[2].y = spineverts[VERTEX_Y3];
 	xys[3].x = spineverts[VERTEX_X4];
 	xys[3].y = spineverts[VERTEX_Y4];
-	
+	TransformToWorld(xys, length);
+
 	CIwTexture* texture = NULL;
 	if (att->rendererObject) {
 		if (spAtlasRegion* atlasreg = (spAtlasRegion*)att->rendererObject) {
