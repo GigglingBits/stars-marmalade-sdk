@@ -10,9 +10,12 @@ m_pxSkeletonJson(NULL),
 m_pxSkeletonData(NULL),
 m_pxSkeleton(NULL),
 m_pxAnimation(NULL),
-m_fAnimationTime(0.0f),
-m_fScale(0.0f) {
+m_fAnimationTime(0.0f) {
+	m_xCenterOffset = CIwFVec2::g_Zero;
+	m_xScale.SetIdentity();
+	m_xRotation.SetIdentity();
 	m_xTranslation.SetIdentity();
+	m_xTransformation.SetIdentity();
 }
 
 SpineAnimation::~SpineAnimation() {
@@ -39,11 +42,11 @@ void SpineAnimation::ConfineShape(CIwFVec2 verts[], int vertcount) {
 	
 	// find scale
 	float scale = ContainAABB(m_xAABBLL, m_xAABBUR, ll, ur);
-	m_fScale = scale;
-	//m_xTranslation.Set
+	m_xScale.SetIdentity();
+	m_xScale.Scale(scale);
 	
 	// center offset
-	CIwFVec2 centeroffset = OffsetAABB(m_xAABBLL * scale, m_xAABBUR * scale, ll, ur);
+	m_xCenterOffset = OffsetAABB(m_xAABBLL * scale, m_xAABBUR * scale, ll, ur);
 }
 
 float SpineAnimation::ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2) {
@@ -79,12 +82,24 @@ void SpineAnimation::SetAnimation(const std::string& name) {
 	}
 }
 
+void SpineAnimation::SetScale(float scale) {
+	m_xScale.SetIdentity();
+	m_xScale.Scale(scale);
+	UpdateTransformationMatrix();
+}
+
 void SpineAnimation::SetPosition(const CIwFVec2& pos) {
 	m_xTranslation.SetTrans(pos);
+	UpdateTransformationMatrix();
 }
 
 void SpineAnimation::SetRotation(float angle) {
-	m_xTranslation.SetRot(angle, CIwFVec2(0.0f, 0.0f));
+	m_xRotation.SetRot(angle, CIwFVec2(0.0f, 0.0f));
+	UpdateTransformationMatrix();
+}
+
+void SpineAnimation::UpdateTransformationMatrix() {
+	m_xTransformation = m_xScale * m_xRotation * m_xTranslation;
 }
 
 void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
@@ -181,13 +196,8 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 
 void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
 	for (int i = 0; i < c; i++) {
-		TransformToWorld(v[i]);
+		v[i] = m_xTransformation.TransformVec(v[i]);
 	}
-}
-
-void SpineAnimation::TransformToWorld(CIwFVec2& v) {
-	v *= m_fScale;
-	v = m_xTranslation.TransformVec(v);
 }
 
 void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {

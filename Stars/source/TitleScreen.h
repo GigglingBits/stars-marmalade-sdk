@@ -25,6 +25,9 @@ private:
 	SpineAnimation m_xAnim;
 	SpineAnimation m_xAnim2;
 	
+	float m_fAnimRot;
+	float m_fAnimRot2;
+	
 public:
 	TitleScreen();
 	virtual ~TitleScreen();

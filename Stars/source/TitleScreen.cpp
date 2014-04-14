@@ -10,7 +10,9 @@ Page("menu.group", Configuration::GetInstance().MenuSong),
 m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
 m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
-m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
+m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst),
+m_fAnimRot(0.0f),
+m_fAnimRot2(0.0f) {
 	m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 	m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 }
@@ -47,24 +49,18 @@ void TitleScreen::Initialize() {
 		ps.GetWorldColours().UpperLeft);
 
 	CIwFVec2 shape[2];
-	shape[0] = CIwFVec2(2.0f, 2.0f);
-	shape[1] = CIwFVec2(4.0f, 4.0f);
+	shape[0] = CIwFVec2(-1.0f, -1.0f);
+	shape[1] = CIwFVec2(1.0f, 1.0f);
 	
 	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim.SetAnimation("enter");
-	m_xAnim.SetRotation(1.0f);
-	m_xAnim.SetPosition(CIwFVec2(-3.0f, -1.0f));
 	m_xAnim.ConfineShape(shape, 2);
-	//m_xAnim.SetScale(0.15f);
+	m_xAnim.SetPosition(CIwFVec2(-3.0f, -1.0f));
 	
-	shape[0] = CIwFVec2(3.0f, 3.0f);
-	shape[1] = CIwFVec2(5.0f, 5.0f);
-
 	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim2.SetAnimation("exit");
-	m_xAnim2.SetRotation(-1.0f);
-	m_xAnim2.SetPosition(CIwFVec2(3.0f, -1.0f));
 	m_xAnim2.ConfineShape(shape, 2);
+	m_xAnim2.SetPosition(CIwFVec2(3.0f, -1.0f));
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -101,7 +97,13 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xButtonMovie.Update(frame);
 	m_xPanelOptions.Update(frame);
 	m_xBackground.Update(frame);
+
+	m_fAnimRot += 0.01;
+	m_xAnim.SetRotation(m_fAnimRot);
 	m_xAnim.Update(frame.GetSimulatedDurationMs());
+
+	m_fAnimRot2 += 0.05;
+	m_xAnim2.SetRotation(m_fAnimRot2);
 	m_xAnim2.Update(frame.GetSimulatedDurationMs());
 }
 

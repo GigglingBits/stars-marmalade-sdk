@@ -20,8 +20,11 @@ private:
 	CIwFVec2 m_xAABBLL;
 	CIwFVec2 m_xAABBUR;
 	
+	CIwFVec2 m_xCenterOffset;
+	CIwFMat2D m_xScale;
+	CIwFMat2D m_xRotation;
 	CIwFMat2D m_xTranslation;
-	float m_fScale;
+	CIwFMat2D m_xTransformation;
 	
 public:
 	SpineAnimation();
@@ -32,6 +35,7 @@ public:
 
 	void ConfineShape(CIwFVec2 verts[], int vertcount);
 
+	void SetScale(float scale);
 	void SetPosition(const CIwFVec2& pos);
 	void SetRotation(float angle);
 
@@ -55,8 +59,8 @@ private:
 	float ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
 	CIwFVec2 OffsetAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
 	
+	void UpdateTransformationMatrix();
 	void TransformToWorld(CIwFVec2 v[], int c);
-	void TransformToWorld(CIwFVec2& v);
 };
 
 #endif
