@@ -127,10 +127,10 @@ void App::Render() {
 			 m_xRenderTime.GetAvgTickTimeMs());
 
 		rect.y += height;
-		PrintMem(rect, eMemoryBucketApp);
+		PrintMem(rect, eMemoryBucketApp, "main");
 
 		rect.y += height;
-		PrintMem(rect, eMemoryBucketResources);
+		PrintMem(rect, eMemoryBucketResources, "res");
 	}
 }
 
@@ -155,7 +155,7 @@ void App::PrintFps(const CIwRect& rect, float realframetime, float simframetime,
 		simratio > 0.95f ? 0xffffffff : 0xff0000ff);
 }
 
-void App::PrintMem(const CIwRect& rect, MemoryBuckets bucketid) {
+void App::PrintMem(const CIwRect& rect, MemoryBuckets bucketid, const char* bucketname) {
 	IW_CALLSTACK_SELF;
 
 	uint32 usedmem = IwMemBucketGetUsed(bucketid);
@@ -168,7 +168,7 @@ void App::PrintMem(const CIwRect& rect, MemoryBuckets bucketid) {
 	std::ostringstream oss;
 	oss.precision(1);
 	oss << std::fixed;
-	oss << "mem: " << mem << "% / LFB: " << lfb << "MB" << std::endl;
+	oss << "bucket: " << bucketname << "(" << bucketid << ") / mem: " << mem << "% / LFB: " << lfb << "MB" << std::endl;
 
 	GetRenderer().DrawText(
 		oss.str(), rect,

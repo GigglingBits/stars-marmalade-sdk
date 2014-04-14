@@ -35,7 +35,7 @@ private:
 
 private:
 	void PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime);
-	void PrintMem(const CIwRect& rect, MemoryBuckets bucketid);
+	void PrintMem(const CIwRect& rect, MemoryBuckets bucketid, const char* bucketname);
 
 	void ButtonReleasedEventHandler(const InputManager& sender, const InputManager::ButtonEventArgs& args);
 };
