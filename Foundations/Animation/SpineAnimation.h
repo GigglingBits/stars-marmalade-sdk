@@ -20,7 +20,7 @@ private:
 	CIwFVec2 m_xAABBLL;
 	CIwFVec2 m_xAABBUR;
 	
-	CIwFVec2 m_xCenterOffset;
+	CIwFVec2 m_xOffset;
 	CIwFMat2D m_xScale;
 	CIwFMat2D m_xRotation;
 	CIwFMat2D m_xTranslation;
@@ -35,7 +35,6 @@ public:
 
 	void ConfineShape(CIwFVec2 verts[], int vertcount);
 
-	void SetScale(float scale);
 	void SetPosition(const CIwFVec2& pos);
 	void SetRotation(float angle);
 
@@ -45,6 +44,9 @@ public:
 	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 
 	void GetBoundigBox(CIwFVec2 bb[4]);
+
+	void GetDebugAnimationOrigin(CIwFVec2 area[4]);
+	void GetDebugAnimationOffset(CIwFVec2 area[4]);
 	
 private:
 	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);

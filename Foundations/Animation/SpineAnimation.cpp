@@ -11,7 +11,7 @@ m_pxSkeletonData(NULL),
 m_pxSkeleton(NULL),
 m_pxAnimation(NULL),
 m_fAnimationTime(0.0f) {
-	m_xCenterOffset = CIwFVec2::g_Zero;
+	m_xOffset = CIwFVec2::g_Zero;
 	m_xScale.SetIdentity();
 	m_xRotation.SetIdentity();
 	m_xTranslation.SetIdentity();
@@ -46,7 +46,12 @@ void SpineAnimation::ConfineShape(CIwFVec2 verts[], int vertcount) {
 	m_xScale.Scale(scale);
 	
 	// center offset
-	m_xCenterOffset = OffsetAABB(m_xAABBLL * scale, m_xAABBUR * scale, ll, ur);
+	m_xOffset = OffsetAABB(ll, ur, m_xAABBLL * scale, m_xAABBUR * scale);
+	m_xRotation.SetIdentity();
+	m_xRotation.SetRot(0.0f, m_xOffset);
+	
+	// combine all matrices
+	UpdateTransformationMatrix();
 }
 
 float SpineAnimation::ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2) {
@@ -59,7 +64,7 @@ float SpineAnimation::ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, cons
 CIwFVec2 SpineAnimation::OffsetAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2) {
 	// aabb 1 is the off aabb
 	// aabb 2 is the reference aabb
-	// return value is the distance from the off center to the reference center
+	// return value is the distance from the origin of the off aabb to the origin of the reference aabb, when their centers are aligned
 	CIwFVec2 center1(((ur1 - ll1)/2.0f) + ur1);
 	CIwFVec2 center2(((ur2 - ll2)/2.0f) + ur2);
 	return center2 - center1;
@@ -80,26 +85,6 @@ void SpineAnimation::SetAnimation(const std::string& name) {
 		m_pxAnimation = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
 		IwAssertMsg(MYAPP, m_pxAnimation, ("Unable to find '%s' animation", name.c_str()));
 	}
-}
-
-void SpineAnimation::SetScale(float scale) {
-	m_xScale.SetIdentity();
-	m_xScale.Scale(scale);
-	UpdateTransformationMatrix();
-}
-
-void SpineAnimation::SetPosition(const CIwFVec2& pos) {
-	m_xTranslation.SetTrans(pos);
-	UpdateTransformationMatrix();
-}
-
-void SpineAnimation::SetRotation(float angle) {
-	m_xRotation.SetRot(angle, CIwFVec2(0.0f, 0.0f));
-	UpdateTransformationMatrix();
-}
-
-void SpineAnimation::UpdateTransformationMatrix() {
-	m_xTransformation = m_xScale * m_xRotation * m_xTranslation;
 }
 
 void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
@@ -194,8 +179,27 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 	return texture;
 }
 
+void SpineAnimation::SetPosition(const CIwFVec2& pos) {
+	m_xTranslation.SetIdentity();
+	m_xTranslation.SetTrans(pos + m_xOffset);
+	UpdateTransformationMatrix();
+}
+
+void SpineAnimation::SetRotation(float angle) {
+	m_xRotation.SetIdentity();
+	m_xRotation.SetRot(angle, m_xOffset);
+	UpdateTransformationMatrix();
+}
+
+void SpineAnimation::UpdateTransformationMatrix() {
+	m_xTransformation = m_xRotation * m_xScale * m_xTranslation;
+}
+
 void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
 	for (int i = 0; i < c; i++) {
+		//v[i] = m_xRotation.TransformVec(v[i]);
+		//v[i] = m_xScale.TransformVec(v[i]);
+		//v[i] = m_xTranslation.TransformVec(v[i]);
 		v[i] = m_xTransformation.TransformVec(v[i]);
 	}
 }
@@ -212,6 +216,24 @@ void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {
 	bb[3].y = m_xAABBUR.y;
 	
 	TransformToWorld(bb, 4);
+}
+
+void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
+	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 10.0f;
+	area[0] = CIwFVec2(-extent, 0.0f);
+	area[1] = CIwFVec2(0.0f, -extent);
+	area[2] = CIwFVec2(extent, 0.0f);
+	area[3] = CIwFVec2(0.0f, extent);
+	TransformToWorld(area, 4);
+}
+
+void SpineAnimation::GetDebugAnimationOffset(CIwFVec2 area[4]) {
+	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 10.0f;
+	area[0] = m_xOffset + CIwFVec2(-extent, 0.0f);
+	area[1] = m_xOffset + CIwFVec2(0.0f, -extent);
+	area[2] = m_xOffset + CIwFVec2(extent, 0.0f);
+	area[3] = m_xOffset + CIwFVec2(0.0f, extent);
+	TransformToWorld(area, 4);
 }
 
 bool SpineAnimation::ExtractLocalAABB(CIwFVec2& ll, CIwFVec2& ur) {
