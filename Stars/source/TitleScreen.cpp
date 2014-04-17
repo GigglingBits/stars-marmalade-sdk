@@ -105,7 +105,7 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xAnim.SetRotation(m_fAnimRot);
 	m_xAnim.Update(frame.GetSimulatedDurationMs());
 
-	m_fAnimRot2 += 0.05;
+	m_fAnimRot2 += 0.02;
 	m_xAnim2.SetRotation(m_fAnimRot2);
 	m_xAnim2.Update(frame.GetSimulatedDurationMs());
 }
@@ -125,11 +125,19 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 		renderer.DrawImage(texture, xys, uvs, cols, length);
 		m_xAnim.GetBoundigBox(bbox);
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
+		m_xAnim.GetDebugAnimationOrigin(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
+		m_xAnim.GetDebugAnimationOffset(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
 	}
 	if (CIwTexture* texture = m_xAnim2.GetStreams(length, xys, uvs, cols)) {
 		renderer.DrawImage(texture, xys, uvs, cols, length);
 		m_xAnim2.GetBoundigBox(bbox);
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
+		m_xAnim2.GetDebugAnimationOrigin(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
+		m_xAnim2.GetDebugAnimationOffset(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
 	}
 	delete [] xys;
 	delete [] uvs;

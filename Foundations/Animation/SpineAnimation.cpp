@@ -29,7 +29,7 @@ void SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonf
 void SpineAnimation::ConfineShape(CIwFVec2 verts[], int vertcount) {
 	if (vertcount < 1) {
 		// scale = 0.01f;
-		// center offset = 0,0f;
+		// center offset = 0.0f;
 		return;
 	}
 		
@@ -46,7 +46,7 @@ void SpineAnimation::ConfineShape(CIwFVec2 verts[], int vertcount) {
 	m_xScale.Scale(scale);
 	
 	// center offset
-	m_xOffset = OffsetAABB(ll, ur, m_xAABBLL * scale, m_xAABBUR * scale);
+	m_xOffset = OffsetAABB(ll / scale, ur / scale, m_xAABBLL, m_xAABBUR);
 	m_xRotation.SetIdentity();
 	m_xRotation.SetRot(0.0f, m_xOffset);
 	
@@ -181,7 +181,7 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 
 void SpineAnimation::SetPosition(const CIwFVec2& pos) {
 	m_xTranslation.SetIdentity();
-	m_xTranslation.SetTrans(pos + m_xOffset);
+	m_xTranslation.SetTrans(m_xScale.GetInverse().TransformVec(pos) - m_xOffset);
 	UpdateTransformationMatrix();
 }
 
@@ -197,10 +197,10 @@ void SpineAnimation::UpdateTransformationMatrix() {
 
 void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
 	for (int i = 0; i < c; i++) {
-		//v[i] = m_xRotation.TransformVec(v[i]);
-		//v[i] = m_xScale.TransformVec(v[i]);
-		//v[i] = m_xTranslation.TransformVec(v[i]);
-		v[i] = m_xTransformation.TransformVec(v[i]);
+		v[i] = m_xRotation.TransformVec(v[i]);
+		v[i] = m_xTranslation.TransformVec(v[i]);
+		v[i] = m_xScale.TransformVec(v[i]);
+		//v[i] = m_xTransformation.TransformVec(v[i]);
 	}
 }
 
@@ -219,7 +219,7 @@ void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {
 }
 
 void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
-	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 10.0f;
+	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
 	area[0] = CIwFVec2(-extent, 0.0f);
 	area[1] = CIwFVec2(0.0f, -extent);
 	area[2] = CIwFVec2(extent, 0.0f);
@@ -228,7 +228,7 @@ void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
 }
 
 void SpineAnimation::GetDebugAnimationOffset(CIwFVec2 area[4]) {
-	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 10.0f;
+	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
 	area[0] = m_xOffset + CIwFVec2(-extent, 0.0f);
 	area[1] = m_xOffset + CIwFVec2(0.0f, -extent);
 	area[2] = m_xOffset + CIwFVec2(extent, 0.0f);

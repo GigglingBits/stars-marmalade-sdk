@@ -19,11 +19,11 @@ private:
 	
 	CIwFVec2 m_xAABBLL;
 	CIwFVec2 m_xAABBUR;
-	
 	CIwFVec2 m_xOffset;
-	CIwFMat2D m_xScale;
+
 	CIwFMat2D m_xRotation;
 	CIwFMat2D m_xTranslation;
+	CIwFMat2D m_xScale;
 	CIwFMat2D m_xTransformation;
 	
 public:
