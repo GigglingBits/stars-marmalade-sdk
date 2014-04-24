@@ -11,8 +11,7 @@ m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
 m_xPanelOptions(eButtonCommandIdOptions, s3eKeyFirst),
 m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst),
-m_fAnimRot(0.0f),
-m_fAnimRot2(0.0f) {
+m_fAnimRot(0.0f) {
 	m_xPanelOptions.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 	m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 }
@@ -48,22 +47,18 @@ void TitleScreen::Initialize() {
 		ps.GetWorldColours().UpperRight,
 		ps.GetWorldColours().UpperLeft);
 
-	CIwFVec2 shape[2];
-	shape[0] = CIwFVec2(-2.0f, -2.0f);
-	shape[1] = CIwFVec2(0.0f, 0.0f);
+	float ll = -1.0f;
+	float ur = 2.0f;
+	
+	m_xShape[0] = CIwFVec2(ll, ll);
+	m_xShape[1] = CIwFVec2(ur, ll);
+	m_xShape[2] = CIwFVec2(ur, ur);
+	m_xShape[3] = CIwFVec2(ll, ur);
 	
 	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim.SetAnimation("enter");
-	m_xAnim.ConfineShape(shape, 2);
-	m_xAnim.SetPosition(CIwFVec2(-3.0f, 0.0f));
-
-	shape[0] = CIwFVec2(0.0f, 0.0f);
-	shape[1] = CIwFVec2(2.0f, 2.0f);
-
-	m_xAnim2.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
-	m_xAnim2.SetAnimation("exit");
-	m_xAnim2.ConfineShape(shape, 2);
-	m_xAnim2.SetPosition(CIwFVec2(3.0f, 0.0f));
+	m_xAnim.ConfineAnimation(m_xShape, 4);
+	//m_xAnim.SetPosition(CIwFVec2(-3.0f, 0.0f));
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -104,10 +99,6 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_fAnimRot += 0.01;
 	m_xAnim.SetRotation(m_fAnimRot);
 	m_xAnim.Update(frame.GetSimulatedDurationMs());
-
-	m_fAnimRot2 += 0.02;
-	m_xAnim2.SetRotation(m_fAnimRot2);
-	m_xAnim2.Update(frame.GetSimulatedDurationMs());
 }
 
 void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -116,7 +107,7 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	renderer.SetViewport(m_xCamera.GetViewport());
 	m_xBackground.Render(renderer, frame);
 
-	int length = std::max<int>(m_xAnim.GetVertexCount(), m_xAnim2.GetVertexCount());
+	int length = m_xAnim.GetVertexCount();
 	CIwFVec2* xys = new CIwFVec2[length];
 	CIwFVec2* uvs = new CIwFVec2[length];
 	uint32* cols = new uint32[length];
@@ -127,24 +118,15 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
 		m_xAnim.GetDebugAnimationOrigin(bbox);
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
-		m_xAnim.GetDebugAnimationOffset(bbox);
-		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
-	}
-	if (CIwTexture* texture = m_xAnim2.GetStreams(length, xys, uvs, cols)) {
-		renderer.DrawImage(texture, xys, uvs, cols, length);
-		m_xAnim2.GetBoundigBox(bbox);
-		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
-		m_xAnim2.GetDebugAnimationOrigin(bbox);
-		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
-		m_xAnim2.GetDebugAnimationOffset(bbox);
-		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
 	}
 	delete [] xys;
 	delete [] uvs;
 	delete [] cols;
 	
+	renderer.DrawPolygon(m_xShape, 4, 0xcc00eeff, 0x5544aacc);
+	
     // buttons
-	m_xButtonTitle.Render(renderer, frame);
+//	m_xButtonTitle.Render(renderer, frame);
 	m_xPanelOptions.Render(renderer, frame);
 	m_xButtonMovie.Render(renderer, frame);
 	m_xPanelSocial.Render(renderer, frame);

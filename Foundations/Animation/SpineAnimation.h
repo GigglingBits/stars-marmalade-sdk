@@ -19,12 +19,8 @@ private:
 	
 	CIwFVec2 m_xAABBLL;
 	CIwFVec2 m_xAABBUR;
-	CIwFVec2 m_xOffset;
-
-	CIwFMat2D m_xRotation;
-	CIwFMat2D m_xTranslation;
-	CIwFMat2D m_xScale;
-	CIwFMat2D m_xTransformation;
+	CIwFMat2D m_xConfineTransform;	// transformation for confining the skeleton within a given shape
+	CIwFMat2D m_xWorldTransform;	// transformation for placing the confined animation within a world
 	
 public:
 	SpineAnimation();
@@ -33,7 +29,7 @@ public:
 	void Load(const std::string& atlasfile, const std::string& jsonfile);
 	void SetAnimation(const std::string& name);
 
-	void ConfineShape(CIwFVec2 verts[], int vertcount);
+	void ConfineAnimation(CIwFVec2 verts[], int vertcount);
 
 	void SetPosition(const CIwFVec2& pos);
 	void SetRotation(float angle);
@@ -46,7 +42,6 @@ public:
 	void GetBoundigBox(CIwFVec2 bb[4]);
 
 	void GetDebugAnimationOrigin(CIwFVec2 area[4]);
-	void GetDebugAnimationOffset(CIwFVec2 area[4]);
 	
 private:
 	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
@@ -61,7 +56,6 @@ private:
 	float ContainAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
 	CIwFVec2 OffsetAABB(const CIwFVec2& ll1, const CIwFVec2& ur1, const CIwFVec2& ll2, const CIwFVec2& ur2);
 	
-	void UpdateTransformationMatrix();
 	void TransformToWorld(CIwFVec2 v[], int c);
 };
 
