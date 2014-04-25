@@ -17,8 +17,9 @@ private:
 	spAnimation* m_pxAnimation;
 	float m_fAnimationTime;
 	
-	CIwFVec2 m_xAABBLL;
-	CIwFVec2 m_xAABBUR;
+	CIwFVec2 m_xSkeletonAABBLL;		// AABB of the original skeleton in starting pose (lower left corner)
+	CIwFVec2 m_xSkeletonAABBUR;		// AABB of the original skeleton in starting pose (upper right corner)
+	
 	CIwFMat2D m_xConfineTransform;	// transformation for confining the skeleton within a given shape
 	CIwFMat2D m_xWorldTransform;	// transformation for placing the confined animation within a world
 	
@@ -39,9 +40,11 @@ public:
 	int GetVertexCount();
 	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 
+#ifdef IW_DEBUG
 	void GetDebugAnimationOrigin(CIwFVec2 area[4]);
 	void GetDebugSkeletonOrigin(CIwFVec2 area[4]);
 	void GetDebugSkeletonBoundigBox(CIwFVec2 bb[4]);
+#endif
 	
 private:
 	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);

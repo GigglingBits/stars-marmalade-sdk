@@ -39,8 +39,8 @@ void SpineAnimation::ConfineAnimation(CIwFVec2 verts[], int vertcount) {
 	
 	// configure transformation matrix for confining the skeleton
 	// in the shape's AABB
-	float scale = ContainAABB(m_xAABBLL, m_xAABBUR, ll, ur);
-	CIwFVec2 offset = OffsetAABB(m_xAABBLL * scale, m_xAABBUR * scale, ll, ur);
+	float scale = ContainAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR, ll, ur);
+	CIwFVec2 offset = OffsetAABB(m_xSkeletonAABBLL * scale, m_xSkeletonAABBUR * scale, ll, ur);
 	m_xConfineTransform.Scale(scale);
 	m_xConfineTransform.SetTrans(offset);
 }
@@ -88,7 +88,7 @@ void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::strin
 					m_pxSkeleton->flipY = false;
 					spSkeleton_setToSetupPose(m_pxSkeleton);
 					spSkeleton_updateWorldTransform(m_pxSkeleton);
-					ExtractLocalAABB(m_xAABBLL, m_xAABBUR);
+					ExtractLocalAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR);
 				} else {
 					IwAssertMsg(MYAPP, false, ("Unable to create generic skeleton"));
 				}
@@ -187,22 +187,23 @@ void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
 	}
 }
 
+#ifdef IW_DEBUG
 void SpineAnimation::GetDebugSkeletonBoundigBox(CIwFVec2 bb[4]) {
 	// rescale the bounding box to match the skeleton
-	bb[0].x = m_xAABBLL.x;
-	bb[0].y = m_xAABBLL.y;
-	bb[1].x = m_xAABBUR.x;
-	bb[1].y = m_xAABBLL.y;
-	bb[2].x = m_xAABBUR.x;
-	bb[2].y = m_xAABBUR.y;
-	bb[3].x = m_xAABBLL.x;
-	bb[3].y = m_xAABBUR.y;
+	bb[0].x = m_xSkeletonAABBLL.x;
+	bb[0].y = m_xSkeletonAABBLL.y;
+	bb[1].x = m_xSkeletonAABBUR.x;
+	bb[1].y = m_xSkeletonAABBLL.y;
+	bb[2].x = m_xSkeletonAABBUR.x;
+	bb[2].y = m_xSkeletonAABBUR.y;
+	bb[3].x = m_xSkeletonAABBLL.x;
+	bb[3].y = m_xSkeletonAABBUR.y;
 	
 	TransformToWorld(bb, 4);
 }
 
 void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
-	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
+	float extent = (m_xSkeletonAABBUR - m_xSkeletonAABBLL).GetLength() / 50.0f;
 	CIwFVec2 t = m_xConfineTransform.GetInverse().GetTrans();
 	area[0] = CIwFVec2(-extent, 0.0f) + t;
 	area[1] = CIwFVec2(0.0f, -extent) + t;
@@ -212,13 +213,14 @@ void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
 }
 
 void SpineAnimation::GetDebugSkeletonOrigin(CIwFVec2 area[4]) {
-	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
+	float extent = (m_xSkeletonAABBUR - m_xSkeletonAABBLL).GetLength() / 50.0f;
 	area[0] = CIwFVec2(-extent, 0.0f);
 	area[1] = CIwFVec2(0.0f, -extent);
 	area[2] = CIwFVec2(extent, 0.0f);
 	area[3] = CIwFVec2(0.0f, extent);
 	TransformToWorld(area, 4);
 }
+#endif
 
 bool SpineAnimation::ExtractLocalAABB(CIwFVec2& ll, CIwFVec2& ur) {
 	IW_CALLSTACK_SELF;
