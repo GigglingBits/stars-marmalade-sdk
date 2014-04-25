@@ -10,8 +10,8 @@ options {
 subprojects {
 	iwgx
 	iwgxfont
-	
-	./Animation
+
+	./Texture
 }
 
 includepaths {
@@ -37,13 +37,6 @@ files {
 	Renderable.cpp
 	FrameData.h
 	FrameData.cpp
-
-	Texture.h
-	Texture.cpp
-	TextureFrame.h
-	TextureFrame.cpp
-	TextureTemplate.h
-	TextureTemplate.cpp
 
 	VertexStream.h
 	VertexStreamWorld.h
