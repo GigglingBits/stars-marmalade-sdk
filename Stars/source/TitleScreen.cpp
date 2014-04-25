@@ -58,7 +58,6 @@ void TitleScreen::Initialize() {
 	m_xAnim.Load("spine/title/output/title.atlas", "spine/title/output/title.json");
 	m_xAnim.SetAnimation("enter");
 	m_xAnim.ConfineAnimation(m_xShape, 4);
-	//m_xAnim.SetPosition(CIwFVec2(-3.0f, 0.0f));
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
@@ -96,8 +95,6 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xPanelOptions.Update(frame);
 	m_xBackground.Update(frame);
 
-	m_fAnimRot += 0.01;
-	m_xAnim.SetRotation(m_fAnimRot);
 	m_xAnim.Update(frame.GetSimulatedDurationMs());
 }
 
@@ -112,10 +109,31 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	CIwFVec2* uvs = new CIwFVec2[length];
 	uint32* cols = new uint32[length];
 	CIwFVec2 bbox[4];
-	if (CIwTexture* texture = m_xAnim.GetStreams(length, xys, uvs, cols)) {
+
+	m_fAnimRot += 0.01;
+
+	if (CIwTexture* texture = m_xAnim.GetStreams(length, xys, uvs, cols)) {		
+		m_xAnim.SetPosition(CIwFVec2(1.0f, 1.0f));
+		m_xAnim.SetRotation(m_fAnimRot);
+		
 		renderer.DrawImage(texture, xys, uvs, cols, length);
-		m_xAnim.GetBoundigBox(bbox);
+		m_xAnim.GetDebugSkeletonBoundigBox(bbox);
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
+		m_xAnim.GetDebugSkeletonOrigin(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
+		m_xAnim.GetDebugAnimationOrigin(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
+	}
+		
+	if (CIwTexture* texture = m_xAnim.GetStreams(length, xys, uvs, cols)) {
+		m_xAnim.SetRotation(m_fAnimRot);
+		m_xAnim.SetPosition(CIwFVec2(-1.0f, -1.0f));
+		
+		renderer.DrawImage(texture, xys, uvs, cols, length);
+		m_xAnim.GetDebugSkeletonBoundigBox(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00ee00, 0x5544aa44);
+		m_xAnim.GetDebugSkeletonOrigin(bbox);
+		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xccffee00, 0x55ccaa44);
 		m_xAnim.GetDebugAnimationOrigin(bbox);
 		renderer.DrawPolygon(bbox, sizeof(bbox) / sizeof(CIwFVec2), 0xcc00eeff, 0x5544aacc);
 	}

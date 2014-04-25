@@ -175,7 +175,9 @@ void SpineAnimation::SetPosition(const CIwFVec2& pos) {
 }
 
 void SpineAnimation::SetRotation(float angle) {
+	CIwFVec2 t = m_xWorldTransform.GetTrans(); // preserve center
 	m_xWorldTransform.SetRot(angle);
+	m_xWorldTransform.SetTrans(t);
 }
 
 void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
@@ -185,7 +187,7 @@ void SpineAnimation::TransformToWorld(CIwFVec2 v[], int c) {
 	}
 }
 
-void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {
+void SpineAnimation::GetDebugSkeletonBoundigBox(CIwFVec2 bb[4]) {
 	// rescale the bounding box to match the skeleton
 	bb[0].x = m_xAABBLL.x;
 	bb[0].y = m_xAABBLL.y;
@@ -200,6 +202,16 @@ void SpineAnimation::GetBoundigBox(CIwFVec2 bb[4]) {
 }
 
 void SpineAnimation::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
+	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
+	CIwFVec2 t = m_xConfineTransform.GetInverse().GetTrans();
+	area[0] = CIwFVec2(-extent, 0.0f) + t;
+	area[1] = CIwFVec2(0.0f, -extent) + t;
+	area[2] = CIwFVec2(extent, 0.0f) + t;
+	area[3] = CIwFVec2(0.0f, extent) + t;
+	TransformToWorld(area, 4);
+}
+
+void SpineAnimation::GetDebugSkeletonOrigin(CIwFVec2 area[4]) {
 	float extent = (m_xAABBUR - m_xAABBLL).GetLength() / 50.0f;
 	area[0] = CIwFVec2(-extent, 0.0f);
 	area[1] = CIwFVec2(0.0f, -extent);

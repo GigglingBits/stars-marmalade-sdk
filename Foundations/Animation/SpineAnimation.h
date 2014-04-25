@@ -39,9 +39,9 @@ public:
 	int GetVertexCount();
 	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 
-	void GetBoundigBox(CIwFVec2 bb[4]);
-
 	void GetDebugAnimationOrigin(CIwFVec2 area[4]);
+	void GetDebugSkeletonOrigin(CIwFVec2 area[4]);
+	void GetDebugSkeletonBoundigBox(CIwFVec2 bb[4]);
 	
 private:
 	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
