@@ -78,7 +78,7 @@ void AnimSprite::GetDebugAnimationOrigin(CIwFVec2 area[4]) {
 	float extent = (GetAABBUR() - GetAABBLL()).GetLength() / 50.0f;
 	CIwFVec2 t = m_xConfineTransform.GetInverse().GetTrans();
 	area[0] = CIwFVec2(-extent, 0.0f) + t;
-	area[1] = CIwFVec2(0.0f, -extent) + t;a
+	area[1] = CIwFVec2(0.0f, -extent) + t;
 	area[2] = CIwFVec2(extent, 0.0f) + t;
 	area[3] = CIwFVec2(0.0f, extent) + t;
 	TransformToWorld(area, 4);
