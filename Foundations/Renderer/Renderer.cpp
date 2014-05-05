@@ -468,51 +468,54 @@ void Renderer::DebugDrawTouch(const CIwSVec2& startpos, const CIwSVec2& endpos, 
 #endif
 }
 
-void Renderer::DebugDrawCoords(const CIwSVec2& point) {
+void Renderer::DebugDrawCoords(const CIwSVec2& point, uint32 colour, int16 size) {
 #ifdef IW_DEBUG
 	IW_CALLSTACK_SELF;
 
 	std::ostringstream oss;
 	oss << '(' << point.x << '/' << point.y << ')';
-	DrawText(oss.str(), point, eFontTypeSmall);
+	DrawText(oss.str(), point, eFontTypeSystem);
 
-	uint32 col = 0xffffffff;
+	int16 len = size / 2;
 	CIwSVec2 line[2] = { point, point };
-	line[0] = point;
-	line[0].x -= 10;
-	line[1] = point;
-	line[1].x += 10;
-	DrawLine(line[0], line[1], col);
 
 	line[0] = point;
-	line[0].y -= 10;
+	line[0].x -= len;
 	line[1] = point;
-	line[1].y += 10;
-	DrawLine(line[0], line[1], col);
+	line[1].x += len;
+	DrawLine(line[0], line[1], colour);
+
+	line[0] = point;
+	line[0].y -= len;
+	line[1] = point;
+	line[1].y += len;
+	DrawLine(line[0], line[1], colour);
 #endif
 }
 
-void Renderer::DebugDrawCoords(const CIwFVec2& point) {
+void Renderer::DebugDrawCoords(const CIwFVec2& point, uint32 colour, float size) {
 #ifdef IW_DEBUG
 	IW_CALLSTACK_SELF;
 
 	std::ostringstream oss;
-	oss.precision(4);
+	oss.precision(2);
 	oss << '(' << point.x << '/' << point.y << ')';
-	DrawText(oss.str(), point, eFontTypeSmall);
+	DrawText(oss.str(), point, eFontTypeSystem);
 
-	uint32 cols[2] = { 0xffffffff, 0xffffffff };
+	uint32 cols[2] = { colour, colour };
+	float len = size / 2.0f;
 	CIwFVec2 line[2] = { point, point };
+
 	line[0] = point;
-	line[0].x -= 1.0f;
+	line[0].x -= len;
 	line[1] = point;
-	line[1].x += 1.0f;
+	line[1].x += len;
 	DrawLine(line, 2, cols);
 
 	line[0] = point;
-	line[0].y -= 1.0f;
+	line[0].y -= len;
 	line[1] = point;
-	line[1].y += 1.0f;
+	line[1].y += len;
 	DrawLine(line, 2, cols);
 #endif
 }

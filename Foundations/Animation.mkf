@@ -13,9 +13,6 @@ files {
 	SpineAnimation.h
 	SpineAnimation.cpp
 
-	AnimSprite.h
-	AnimSprite.cpp
-
 	AnimTexture.h
 	AnimTexture.cpp
 }

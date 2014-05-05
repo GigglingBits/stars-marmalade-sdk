@@ -29,9 +29,6 @@ public:
 
 	void Update(uint32 timestep);
 	
-	int GetVertexCount();
-	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
-
 #ifdef IW_DEBUG
 	void GetDebugSkeletonOrigin(CIwFVec2 area[4]);
 	void GetDebugSkeletonBoundigBox(CIwFVec2 bb[4]);
@@ -47,6 +44,9 @@ private:
 	bool ExtractAABB(CIwFVec2& ll, CIwFVec2& ur);
 	
 protected:
+	int GetVertexCount();
+	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
+
 	const CIwFVec2& GetAABBLL() const;
 	const CIwFVec2& GetAABBUR() const;
 	void GrowAABB(CIwFVec2& ll, CIwFVec2& ur, const CIwFVec2& point) const;

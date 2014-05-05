@@ -10,7 +10,7 @@
 #include "Body.h"
 #include "Camera.h"
 
-#include "AnimSprite.h"
+#include "AnimTexture.h"
 
 class TitleScreen : public Page {
 private:
@@ -23,10 +23,6 @@ private:
 	OptionsPanel m_xPanelOptions;
 	SocialPanel m_xPanelSocial;
 
-	AnimSprite m_xAnim;
-	float m_fAnimRot;
-	
-	CIwFVec2 m_xShape[4];
 public:
 	TitleScreen();
 	virtual ~TitleScreen();

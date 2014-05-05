@@ -68,7 +68,7 @@ public:
 	void DrawText(std::string text, const CIwFVec2& pos, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
 	void DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
 
-	void DebugDrawCoords(const CIwFVec2& point);
+	void DebugDrawCoords(const CIwFVec2& point, uint32 colour = 0xffffffff, float size = 1.0f);
 
 	// drawing to screen (pixel coordinates)
 	void Draw(VertexStreamScreen& shape, Texture& texture);
@@ -85,7 +85,7 @@ public:
 	void DrawText(std::string text, const CIwRect& rect, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
 
 	void DebugDrawTouch(const CIwSVec2& startpos, const CIwSVec2& endpos, uint32 col = 0xff888888);
-	void DebugDrawCoords(const CIwSVec2& point);
+	void DebugDrawCoords(const CIwSVec2& point, uint32 colour = 0xffffffff, int16 size = 10);
 
 private:
 	// create Gx cached streams
