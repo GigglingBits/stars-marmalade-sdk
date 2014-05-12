@@ -95,6 +95,17 @@ void Renderer::DrawTexture(TVertexStream& shape, Texture& texture) {
 			shape.GetVerts(), 
 			shape.GetVertCount(), 
 			texture.GetPattern());
+	} else if (texture.IsSkeleton()) {
+		if (BufferedAnimTexture* anim = texture.GetSkeleton()) {
+			anim->SetAll(shape.GetVerts(), shape.GetVertCount());
+			DrawImage(anim->GetBufferedSpriteSheet(),
+					  anim->GetBufferedXYs(TVertex()),
+					  anim->GetBufferedUVs(),
+					  anim->GetBufferedCols(),
+					  anim->GetBufferedVertexCount());
+		} else {
+			IwAssertMsg(MYAPP, false, ("No skeleton available for rendering!"));
+		}
 	} else if (texture.IsColour()) {
 		uint32 col = texture.GetColour();
 		TVertex* verts = shape.GetVerts();
@@ -107,7 +118,9 @@ void Renderer::DrawTexture(TVertexStream& shape, Texture& texture) {
 			count,
 			isclosed ? 0x00000000 : col,
 			isclosed ? col : 0x00000000);
-	} 
+	} else {
+		IwAssertMsg(MYAPP, false, ("No rendering mechanism implemented for current texture frame!"));
+	}
 }
 
 void Renderer::DrawRect(const CIwRect& rect, uint32 framecol, uint32 bodycol) {

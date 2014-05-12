@@ -1,10 +1,13 @@
 #include "TextureTemplate.h"
 #include "IwDebug.h"
+#include "Debug.h"
 
-void TextureTemplate::AddFrame(const std::string& id, int healthlevel, const std::string& image, const std::string& pattern, uint32 colour, int duration, const std::string& nextid) {
+void TextureTemplate::AddFrame(const std::string& id, int healthlevel, const std::string& image, const std::string& pattern, const std::string& animation, uint32 colour, int duration, const std::string& nextid) {
+	IW_CALLSTACK_SELF;
+	
 	if (!image.empty()) {
 		if (duration != 0 && !nextid.empty()) {
-			AddAnimation(id, healthlevel, image, duration, nextid);
+			AddImageAnimation(id, healthlevel, image, duration, nextid);
 		} else if (duration == 0 && nextid.empty()) {
 			AddImage(id, healthlevel, image);
 		} else {
@@ -13,6 +16,9 @@ void TextureTemplate::AddFrame(const std::string& id, int healthlevel, const std
 	} else if (!pattern.empty()) {
 		IwAssertMsg(MYAPP, duration == 0 && nextid.empty(), ("Frame definition '%s' in texture is invalid. Neither 'duration' nor 'nextid' must be defined for pattern frames.", id.c_str()));
 		AddPattern(id, healthlevel, pattern);
+	} else if (!animation.empty()) {
+		IwAssertMsg(MYAPP, duration == 0 && nextid.empty(), ("Frame definition '%s' in texture is invalid. Neither 'duration' nor 'nextid' must be defined for animation frames.", id.c_str()));
+		AddSkeletonAnimation(id, healthlevel, animation, duration, nextid);
 	} else {
 		IwAssertMsg(MYAPP, duration == 0 && nextid.empty(), ("Frame definition '%s' in texture is invalid. Neither 'duration' nor 'nextid' must be defined for colour frames.", id.c_str()));
 		AddColour(id, healthlevel, colour);
@@ -37,12 +43,23 @@ void TextureTemplate::AddPattern(const std::string& id, int healthlevel, const s
 	m_xFrames.push_back(frame);
 }
 
-void TextureTemplate::AddAnimation(const std::string& id, int healthlevel, const std::string& image, int duration, const std::string& nextid) {
+void TextureTemplate::AddImageAnimation(const std::string& id, int healthlevel, const std::string& image, int duration, const std::string& nextid) {
 	TextureFrame frame;
-	frame.type = eFrameTypeAnimation;
+	frame.type = eFrameTypeImageAnimation;
 	frame.id = id;
 	frame.healthlevel = healthlevel;
 	frame.imageresource = image;
+	frame.duration = duration;
+	frame.nextid = nextid;
+	m_xFrames.push_back(frame);
+}
+
+void TextureTemplate::AddSkeletonAnimation(const std::string& id, int healthlevel, const std::string& animation, int duration, const std::string& nextid) {
+	TextureFrame frame;
+	frame.type = eFrameTypeSkeletonAnimation;
+	frame.id = id;
+	frame.healthlevel = healthlevel;
+	frame.skeletonanimation = animation;
 	frame.duration = duration;
 	frame.nextid = nextid;
 	m_xFrames.push_back(frame);

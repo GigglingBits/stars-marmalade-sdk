@@ -3,13 +3,15 @@
 
 #include "IwList.h"
 #include "IwTexture.h"
+#include "BufferedAnimTexture.h"
 #include "TextureTemplate.h"
 
 class Texture {
 	class InternalFrame : public TextureFrame {
 	public:
 		CIwTexture* image;
-		InternalFrame() : image(NULL) {}
+		BufferedAnimTexture* skeleton;
+		InternalFrame() : image(NULL), skeleton(NULL) {}
 	};
 
 private:
@@ -34,7 +36,10 @@ public:
 
 	bool IsColour();
 	uint32 GetColour();
-
+	
+	bool IsSkeleton();
+	BufferedAnimTexture* GetSkeleton();
+	
 	bool ContainsFrame(const std::string name);
 	
 	bool SelectFirstFrame();

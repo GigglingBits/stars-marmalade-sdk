@@ -2,7 +2,7 @@
 
 TextureFactory::TextureFactory() : FactoryBase<TextureTemplate, Texture>("root", "textures", "texture") {
 	TextureTemplate tpl;
-	tpl.AddFrame("_default", 100, "image_missing", "", 0, 0, "");
+	tpl.AddFrame("_default", 100, "image_missing", "", "", 0, 0, "");
 	SetDefaultConfig(tpl);
 }
 
@@ -14,6 +14,7 @@ std::string TextureFactory::PopulateConfig(TiXmlElement* node, TextureTemplate& 
 
 	std::string image((pc = (char*)node->Attribute("image")) ? pc : "");
 	std::string pattern((pc = (char*)node->Attribute("pattern")) ? pc : "");
+	std::string animation((pc = (char*)node->Attribute("animation")) ? pc : "");
 	std::string colour((pc = (char*)node->Attribute("colour")) ? pc : "");
 
 	int duration = 0;
@@ -21,26 +22,27 @@ std::string TextureFactory::PopulateConfig(TiXmlElement* node, TextureTemplate& 
 	std::string nextid((pc = (char*)node->Attribute("next")) ? pc : "");
 
 	// build the template
-	if (!image.empty() || !pattern.empty() || !colour.empty()) {
-		conf.AddFrame(id, healthlevel, image, pattern, HexToColour(colour), duration, nextid);
+	if (!image.empty() || !pattern.empty() || !animation.empty() || !colour.empty()) {
+		conf.AddFrame(id, healthlevel, image, pattern, animation, HexToColour(colour), duration, nextid);
 	}
 
 	TiXmlElement* subnode = node->FirstChildElement("frame");
 	while (subnode) {
 		std::string frameid((pc = (char*)subnode->Attribute("id")) ? pc : GenerateUniqueId((long)subnode));
-		image = (pc = (char*)subnode->Attribute("image")) ? pc : "";
 
 		healthlevel = 0;
 		subnode->Attribute("healthlevel", &healthlevel);
 
+		image = (pc = (char*)subnode->Attribute("image")) ? pc : "";
 		pattern = (pc = (char*)subnode->Attribute("pattern")) ? pc : "";
+		animation = (pc = (char*)subnode->Attribute("animation")) ? pc : "";
 		colour = (pc = (char*)subnode->Attribute("colour")) ? pc : "";
 
 		duration = 0;
 		subnode->Attribute("duration", &duration);
 		nextid = (pc = (char*)subnode->Attribute("next")) ? pc : "";
 
-		conf.AddFrame(frameid, healthlevel, image, pattern, HexToColour(colour), duration, nextid);
+		conf.AddFrame(frameid, healthlevel, image, pattern, animation, HexToColour(colour), duration, nextid);
 
 		subnode = subnode->NextSiblingElement();
 	}

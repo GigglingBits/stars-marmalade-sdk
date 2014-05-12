@@ -15,14 +15,23 @@ Texture::Texture(const TextureTemplate& texturedef) : m_rxCurrentFrame(m_xNullFr
 }
 
 bool Texture::IsImage() {
-	return (m_rxCurrentFrame.type == eFrameTypeImage || m_rxCurrentFrame.type == eFrameTypeAnimation) && m_rxCurrentFrame.image;
+	return (m_rxCurrentFrame.type == eFrameTypeImage || m_rxCurrentFrame.type == eFrameTypeImageAnimation) && m_rxCurrentFrame.image;
 }
 
 CIwTexture* Texture::GetImage() {
-	if (IsImage()) {
-		return m_rxCurrentFrame.image;
-	}
-	return NULL;
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, IsImage());
+	return m_rxCurrentFrame.image;
+}
+
+bool Texture::IsSkeleton() {
+	return m_rxCurrentFrame.type == eFrameTypeSkeletonAnimation && m_rxCurrentFrame.skeleton;
+}
+
+BufferedAnimTexture* Texture::GetSkeleton() {
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, IsSkeleton());
+	return m_rxCurrentFrame.skeleton;
 }
 
 bool Texture::IsPattern() {
@@ -30,21 +39,19 @@ bool Texture::IsPattern() {
 }
 
 CIwTexture* Texture::GetPattern() {
-	if (IsPattern()) {
-		return m_rxCurrentFrame.image;
-	}
-	return NULL;
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, IsPattern());
+	return m_rxCurrentFrame.image;
 }
 
 bool Texture::IsColour() {
-	return !IsImage() && !IsPattern();
+	return !IsImage() && !IsPattern() && !IsSkeleton();
 }
 
 uint32 Texture::GetColour() {
-	if (IsColour()) {
-		return m_rxCurrentFrame.colour;
-	}
-	return 0;
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, IsColour());
+	return m_rxCurrentFrame.colour;
 }
 
 bool Texture::ContainsFrame(const std::string name) {
@@ -69,18 +76,25 @@ void Texture::LoadFrames(TextureTemplate& texturedef) {
 		frame.id = frametpl.id;
 		frame.healthlevel = frametpl.healthlevel;
 		frame.imageresource = frametpl.imageresource;
+		frame.skeletonanimation = frametpl.skeletonanimation;
+		frame.colour = frametpl.colour;
 		frame.duration = frametpl.duration;
 		frame.nextid = frametpl.nextid;
 
-		if (frametpl.type == eFrameTypeImage || frametpl.type == eFrameTypeAnimation || frametpl.type == eFrameTypePattern) {
-			frame.image = (CIwTexture*)IwGetResManager()->GetResNamed(frametpl.imageresource.c_str(), "CIwTexture");
-			IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", frametpl.imageresource.c_str()));
+		if (frame.type == eFrameTypeImage || frame.type == eFrameTypeImageAnimation || frame.type == eFrameTypePattern) {
+			frame.image = (CIwTexture*)IwGetResManager()->GetResNamed(frame.imageresource.c_str(), "CIwTexture");
+			IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", frame.imageresource.c_str()));
 			if (!frame.image) {
 				frame.image = (CIwTexture*)IwGetResManager()->GetResNamed("image_missing", "CIwTexture");
 				IwAssertMsg(MYAPP, frame.image, ("Could not load texture '%s' because it seems to be missing in the resource file.", "image_missing"));
 			}			
-		} else {
-			frame.colour = frametpl.colour;
+		} else if (frame.type == eFrameTypeSkeletonAnimation) {
+			BufferedAnimTexture* anim = new BufferedAnimTexture();
+			if (anim->Load(frame.skeletonanimation)) {
+				frame.skeleton = anim;
+			} else {
+				delete anim;
+			}
 		}
 
 		m_xFrames.append(frame);
@@ -151,7 +165,7 @@ bool Texture::GetHorizontalFlip() {
 
 void Texture::Update(uint16 timestep) {
 	// progress the animations
-	if (m_rxCurrentFrame.type == eFrameTypeAnimation) {
+	if (m_rxCurrentFrame.type == eFrameTypeImageAnimation || m_rxCurrentFrame.type == eFrameTypeSkeletonAnimation) {
 		m_iFrameElapsed += timestep;
 		if (m_iFrameElapsed >= m_rxCurrentFrame.duration) {
 			m_iFrameElapsed -= m_rxCurrentFrame.duration;
@@ -160,5 +174,9 @@ void Texture::Update(uint16 timestep) {
 		}
 	} else {
 		m_iFrameElapsed = 0;
+	}
+	
+	if (m_rxCurrentFrame.skeleton) {
+		m_rxCurrentFrame.skeleton->Update(timestep);
 	}
 }

@@ -457,7 +457,7 @@
 			<frame id="jupiter_locked" image="world_jupiter_locked"/>
 		</texture>
 		
-		<texture id="title_button" image="title_button"/>
+		<texture id="title_button" animation="spine/title/output/title"/>
 		
 		<texture id="background_stars" image="background_stars" />
 		<texture id="background_stars_far" image="background_stars_far" />

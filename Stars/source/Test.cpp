@@ -127,7 +127,7 @@ void Test::RunFactoryConfigTest() {
 
 	// texture template
 	TextureTemplate tt1;
-	tt1.AddFrame("id", 12, "img", "pat", 0x00556677, 1, "next");
+	tt1.AddFrame("id", 12, "img", "pat", "", 0x00556677, 1, "next");
 	TextureTemplate tt2 = tt1;
 	TextureTemplate tt3(tt2);
 	IwAssert(MYAPP, tt3.GetFrameCount() == 1);

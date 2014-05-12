@@ -15,4 +15,6 @@ files {
 
 	AnimTexture.h
 	AnimTexture.cpp
+	BufferedAnimTexture.h
+	BufferedAnimTexture.cpp
 }

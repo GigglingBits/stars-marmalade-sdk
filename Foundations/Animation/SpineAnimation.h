@@ -24,10 +24,11 @@ public:
 	SpineAnimation();
 	~SpineAnimation();
 	
-	void Load(const std::string& atlasfile, const std::string& jsonfile);
+	bool Load(const std::string& filepart);
+	bool Load(const std::string& atlasfile, const std::string& jsonfile);
 	void SetAnimation(const std::string& name);
 
-	void Update(uint32 timestep);
+	virtual void Update(uint32 timestep);
 	
 #ifdef IW_DEBUG
 	void GetDebugSkeletonOrigin(CIwFVec2 area[4]);
@@ -35,7 +36,7 @@ public:
 #endif
 	
 private:
-	void LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
+	bool LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
 	void DestroySkeleton();
 
 	CIwTexture* ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);

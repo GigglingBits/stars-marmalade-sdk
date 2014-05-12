@@ -17,8 +17,12 @@ SpineAnimation::~SpineAnimation() {
 	DestroySkeleton();
 }
 
-void SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonfile) {
-	LoadSkeleton(atlasfile, jsonfile);
+bool SpineAnimation::Load(const std::string& filepart) {
+	return Load(filepart + std::string(".atlas"), filepart + std::string(".json"));
+}
+
+bool SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonfile) {
+	return LoadSkeleton(atlasfile, jsonfile);
 }
 
 void SpineAnimation::SetAnimation(const std::string& name) {
@@ -38,8 +42,9 @@ void SpineAnimation::SetAnimation(const std::string& name) {
 	}
 }
 
-void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
+bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
 	IW_CALLSTACK_SELF;
+	bool success = false;
 	if ((m_pxAtlas = spAtlas_readAtlasFile(atlasfile.c_str()))) {
 		if ((m_pxSkeletonJson = spSkeletonJson_create(m_pxAtlas))) {
 			if ((m_pxSkeletonData = spSkeletonJson_readSkeletonDataFile(m_pxSkeletonJson, jsonfile.c_str()))) {
@@ -49,6 +54,7 @@ void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::strin
 					spSkeleton_setToSetupPose(m_pxSkeleton);
 					spSkeleton_updateWorldTransform(m_pxSkeleton);
 					ExtractAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR);
+					success = true;
 				} else {
 					IwAssertMsg(MYAPP, false, ("Unable to create generic skeleton"));
 				}
@@ -61,6 +67,7 @@ void SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::strin
 	} else {
 		IwAssertMsg(MYAPP, false, ("Unable to load atlas file: %s", atlasfile.c_str()));
 	}
+	return success;
 }
 
 void SpineAnimation::DestroySkeleton() {
