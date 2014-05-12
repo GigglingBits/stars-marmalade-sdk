@@ -24,6 +24,8 @@ private:
 	CIwFVec2* m_apxShapeConverted;
 	CIwSVec2* m_apxXYConverted;
 	
+	bool m_bIsDirty;				// dirty means that the buffered vertices need to be updated
+	
 public:
 	BufferedAnimTexture();
 	~BufferedAnimTexture();

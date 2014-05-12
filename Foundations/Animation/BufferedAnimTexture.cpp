@@ -10,7 +10,8 @@ m_apxUVBuffer(NULL),
 m_auiColBuffer(NULL),
 m_iBufferedVertCount(0),
 m_bEnableConversion(false),
-m_pxSpriteSheet(NULL) {
+m_pxSpriteSheet(NULL),
+m_bIsDirty(false) {
 	AllocateBuffers(BUFFEREDANIMETEXTURE_DEFAULT_VERT_COUNT);
 }
 
@@ -62,6 +63,12 @@ void BufferedAnimTexture::DeleteBuffers() {
 }
 
 void BufferedAnimTexture::UpdateBuffers() {
+	IW_CALLSTACK_SELF;
+
+	if (!m_bIsDirty) {
+		return;
+	}
+	
 	m_iBufferedVertCount = GetVertexCount();
 	EnsureBufferSize(m_iBufferedVertCount);
 	m_pxSpriteSheet = GetStreams(m_iBufferedVertCount, m_apxXYBuffer, m_apxUVBuffer, m_auiColBuffer);
@@ -69,11 +76,14 @@ void BufferedAnimTexture::UpdateBuffers() {
 	if (m_bEnableConversion) {
 		CopyConvertXY();
 	}
+	
+	m_bIsDirty = false;
 }
 
 void BufferedAnimTexture::SetAll(CIwFVec2 verts[], int vertcount) {
 	IW_CALLSTACK_SELF;
 	AnimTexture::SetAll(verts, vertcount);
+	m_bIsDirty = true;
 }
 
 void BufferedAnimTexture::SetAll(CIwSVec2 verts[], int vertcount) {
@@ -87,6 +97,7 @@ void BufferedAnimTexture::SetAll(CIwSVec2 verts[], int vertcount) {
 void BufferedAnimTexture::SetShape(CIwFVec2 verts[], int vertcount) {
 	IW_CALLSTACK_SELF;
 	AnimTexture::SetShape(verts, vertcount);
+	m_bIsDirty = true;
 }
 
 void BufferedAnimTexture::SetShape(CIwSVec2 verts[], int vertcount) {
@@ -112,32 +123,39 @@ void BufferedAnimTexture::CopyConvertXY() {
 }
 
 void BufferedAnimTexture::Update(uint32 timestep) {
+	IW_CALLSTACK_SELF;
 	SpineAnimation::Update(timestep);
-	UpdateBuffers();
+	m_bIsDirty = true;
 }
 
 int BufferedAnimTexture::GetBufferedVertexCount() {
+	UpdateBuffers();
 	return m_iBufferedVertCount;
 }
 
 CIwTexture* BufferedAnimTexture::GetBufferedSpriteSheet() {
+	UpdateBuffers();
 	return m_pxSpriteSheet;
 }
 
 CIwFVec2* BufferedAnimTexture::GetBufferedXYs(const CIwFVec2& type) {
+	UpdateBuffers();
 	return m_apxXYBuffer;
 }
 
 CIwSVec2* BufferedAnimTexture::GetBufferedXYs(const CIwSVec2& type) {
 	IW_CALLSTACK_SELF;
 	IwAssert(MYAPP, m_bEnableConversion);
+	UpdateBuffers();
 	return m_apxXYConverted;
 }
 
 CIwFVec2* BufferedAnimTexture::GetBufferedUVs() {
+	UpdateBuffers();
 	return m_apxUVBuffer;
 }
 
 uint32* BufferedAnimTexture::GetBufferedCols() {
+	UpdateBuffers();
 	return m_auiColBuffer;
 }
