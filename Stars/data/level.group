@@ -33,4 +33,6 @@ CIwResGroup
 	./sprites/characters/bird03/bird_03_wings_02.png
 	./sprites/characters/bird03/bird_03_wings_03.png
 	./sprites/characters/bird03/bird_03_hurt.png
+
+	./spine/title/output/title.png
 }

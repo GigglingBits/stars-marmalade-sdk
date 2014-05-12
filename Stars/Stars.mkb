@@ -260,8 +260,6 @@ assets
 
 	music/.
 	stories/.
-	sprites/characters/spine/spineboy.atlas
-	sprites/characters/spine/spineboy.json
 
 	spine/title/output/title.atlas
 	spine/title/output/title.json

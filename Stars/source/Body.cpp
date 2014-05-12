@@ -268,7 +268,7 @@ void Body::UpdateShape() {
 	// push the shape of the body down into the base class
 	Texture& t = GetTexture();
 	VertexStreamWorld& v = GetShape();
-	if (t.IsImage()) {
+	if (t.IsImage() || t.IsSkeleton()) {
 		v.SetVerts(
 			m_xShape.GetBoundigBoxVerts(), 
 			m_xShape.GetBoundigBoxVertCount());

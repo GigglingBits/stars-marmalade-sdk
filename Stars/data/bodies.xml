@@ -142,7 +142,7 @@
 			<shape type="circle" width="1.0" />
 		</body>
 				
-		<body id="bird_01" type="bird" texture="none" resilience="1.0" revolve="0">
+		<body id="bird_01" type="bird" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="0.0" y="-0.35" />
 				<point x="1.5" y="-0.35" />
@@ -150,40 +150,7 @@
 				<point x="0.0" y="0.35" />
 			</shape>
 			<fixture friction="0.6" restitution="0.5" density="0.2" />
-			<port id="shoulder" x="0.8" y="0.05" />
-			<port id="nose" x="0.0" y="0.0" />
-			<child id="wing" port="shoulder" jointtype="weld">
-				<body type="dynamic" collide="0">
-					<texture>
-						<frame id="01" image="bird_01_wings_01" duration="300" next="02" />
-						<frame id="02" image="bird_01_wings_02" duration="130" next="03" />
-						<frame id="03" image="bird_01_wings_03" duration="130" next="04" />
-						<frame id="04" image="bird_01_wings_02" duration="130" next="01" />
-					</texture>
-					<shape type="polygon">
-						<point x="0.0" y="-0.6" />
-						<point x="0.6" y="-0.6" />
-						<point x="0.6" y="0.6" />
-						<point x="0.0" y="0.6" />
-					</shape>
-					<fixture friction="0.6" restitution="0.5" density="1.0" />
-				</body>
-			</child>
-			<child id="body" port="nose" jointtype="weld">
-				<body type="dynamic" collide="0">
-					<texture>
-						<frame id="normal" image="bird_01" />
-						<frame id="hurt" image="bird_01_hurt" />
-					</texture>
-					<shape type="polygon">
-						<point x="0.0" y="-0.35" />
-						<point x="1.6" y="-0.35" />
-						<point x="1.6" y="0.35" />
-						<point x="0.0" y="0.35" />
-					</shape>
-					<fixture friction="0.6" restitution="0.5" density="1.0" />
-				</body>
-			</child>
+			<texture animation="spine/title/output/title" />
 		</body>
 		
 		<body id="bird_02" type="bird" texture="none" resilience="1.0" revolve="0">
