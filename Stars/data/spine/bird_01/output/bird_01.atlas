@@ -1,6 +1,5 @@
 
 bird_01.png
-size: 1010,250
 format: RGBA8888
 filter: Linear,Linear
 repeat: none

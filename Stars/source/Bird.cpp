@@ -5,6 +5,7 @@
 
 Bird::Bird(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Enemy(id, bodydef, fixturedef, texturedef) {
+	SetTextureFrame("normal");
 }
 
 const char* Bird::GetTypeName() {
@@ -19,9 +20,7 @@ const char* Bird::TypeName() {
 void Bird::KnockOut() {
 	Enemy::KnockOut();
 
-	if (Body* body = GetChild("body")) {
-		body->SetTextureFrame("hurt");
-	}
-	
+	SetTextureFrame("hurt");
+		
 	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
 }
