@@ -33,7 +33,6 @@ bool SpineAnimation::SetAnimation(const std::string& name) {
 	}
 	
 	if (m_pxAnimation && name.compare(m_pxAnimation->name) != 0) {
-		spAnimation_dispose(m_pxAnimation);
 		m_pxAnimation = NULL;
 		return false;
 	}
@@ -57,7 +56,7 @@ bool SpineAnimation::ConstainsAnimation(const std::string& name) {
 bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
 	IW_CALLSTACK_SELF;
 	bool success = false;
-	if ((m_pxAtlas = spAtlas_readAtlasFile(atlasfile.c_str()))) {
+	if ((m_pxAtlas = spAtlas_createFromFile(atlasfile.c_str(), NULL))) {
 		if ((m_pxSkeletonJson = spSkeletonJson_create(m_pxAtlas))) {
 			if ((m_pxSkeletonData = spSkeletonJson_readSkeletonDataFile(m_pxSkeletonJson, jsonfile.c_str()))) {
 				if ((m_pxSkeleton = spSkeleton_create(m_pxSkeletonData))) {
@@ -134,7 +133,7 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
-				if (attachment->type == ATTACHMENT_REGION) {
+				if (attachment->type == SP_ATTACHMENT_REGION) {
 					if (spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment) {
 						int cursor = SPINEANIMATION_VERTS_PER_SLOT * slotid;
 						CIwTexture* tmp = ExtractStreams(slot, regionAttachment, SPINEANIMATION_VERTS_PER_SLOT, &xys[cursor], &uvs[cursor], &cols[cursor]);
@@ -178,7 +177,7 @@ bool SpineAnimation::ExtractAABB(CIwFVec2& ll, CIwFVec2& ur) {
 	for (int slotid = 0; slotid < m_pxSkeleton->slotCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			if (spAttachment* attachment = slot->attachment) {
-				if (attachment->type == ATTACHMENT_BOUNDING_BOX) {
+				if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
 					if (spBoundingBoxAttachment* boundingboxAttachment = (spBoundingBoxAttachment*)attachment) {
 						IwAssertMsg(MYAPP, boundingboxAttachment->verticesCount%2 == 0, ("Invalid number of vertices in bounding box."));
 						for (int i = 0; i < boundingboxAttachment->verticesCount - 1; i += 2) {
@@ -224,14 +223,14 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	float spineverts[8];
 	spRegionAttachment_computeWorldVertices(att, slot->skeleton->x, slot->skeleton->y, slot->bone, spineverts);
 	
-	xys[0].x = spineverts[VERTEX_X1];
-	xys[0].y = spineverts[VERTEX_Y1];
-	xys[1].x = spineverts[VERTEX_X2];
-	xys[1].y = spineverts[VERTEX_Y2];
-	xys[2].x = spineverts[VERTEX_X3];
-	xys[2].y = spineverts[VERTEX_Y3];
-	xys[3].x = spineverts[VERTEX_X4];
-	xys[3].y = spineverts[VERTEX_Y4];
+	xys[0].x = spineverts[SP_VERTEX_X1];
+	xys[0].y = spineverts[SP_VERTEX_Y1];
+	xys[1].x = spineverts[SP_VERTEX_X2];
+	xys[1].y = spineverts[SP_VERTEX_Y2];
+	xys[2].x = spineverts[SP_VERTEX_X3];
+	xys[2].y = spineverts[SP_VERTEX_Y3];
+	xys[3].x = spineverts[SP_VERTEX_X4];
+	xys[3].y = spineverts[SP_VERTEX_Y4];
 
 	CIwTexture* texture = NULL;
 	if (att->rendererObject) {
