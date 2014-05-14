@@ -21,7 +21,6 @@ public:
 	 */
 	void SetAll(CIwFVec2 verts[], int vertcount);
 
-
 	/**
 	 Derives the size and origin.
 	 The origin of the vertex is used as is.

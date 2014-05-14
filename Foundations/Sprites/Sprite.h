@@ -21,7 +21,7 @@ private:
 	std::string m_sId;
 
 	Orientation m_eOrientation;
-    Texture m_xTexture;
+    Texture* m_pxTexture;
 	VertexStreamWorld m_xShape;
 
 	CIwFVec2 m_xPosition;
@@ -50,7 +50,7 @@ public:
 	void SetTextureFrame(const std::string& name);
 	
 protected:
-	virtual Texture& GetTexture();
+	virtual Texture* GetTexture();
 	virtual VertexStreamWorld& GetShape();
 
 	virtual void OnUpdate(const FrameData& frame);

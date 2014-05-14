@@ -1,7 +1,7 @@
 #ifndef __PARTICLE_H__
 #define __PARTICLE_H__
 
-#include "Texture.h"
+#include "TextureFramed.h"
 #include "Renderable.h"
 
 class Particle : public Renderable {
@@ -13,7 +13,7 @@ private:
 	CIwFVec2 m_xPosition;
 	CIwFVec2 m_xSize;
 	VertexStreamWorld m_xShape;
-	Texture m_xTexture;
+	TextureFramed m_xTexture;
 
 	// behavior
 	CIwFVec2 m_xVelocity;

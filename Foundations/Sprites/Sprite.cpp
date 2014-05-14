@@ -3,15 +3,21 @@
 #include "IwDebug.h"
 
 Sprite::Sprite(const std::string& id, const TextureTemplate& texturedef) : 
-	m_eOrientation(eOrientationUndefined), m_xTexture(texturedef), m_sId(id) {
-	m_xPosition= CIwFVec2::g_Zero;
+	m_eOrientation(eOrientationUndefined), m_pxTexture(NULL), m_sId(id) {
+	m_xPosition = CIwFVec2::g_Zero;
 	SetRenderingLayer(Renderer::eRenderingLayerGameDynamicObjects);
+	
+	m_pxTexture = Texture::Create(texturedef);
 }
 
 Sprite::~Sprite() {
 	// don't delete this destructor;
 	// it is required to invoke destructors of derived classes when 
 	// deleting a Sprite*
+
+	if (m_pxTexture) {
+		delete m_pxTexture;
+	}
 }
 
 void Sprite::SetId(const std::string& id) {
@@ -57,18 +63,20 @@ void Sprite::SetShape(const VertexStreamWorld& shape) {
 }
 
 void Sprite::SetOrientation(Orientation orientation) {
-	if (m_eOrientation != orientation && orientation != eOrientationUndefined) {
-		m_xTexture.SetHorizontalFlip(orientation == eOrientationLeft);
+	if (m_pxTexture && m_eOrientation != orientation && orientation != eOrientationUndefined) {
+		m_pxTexture->SetHorizontalFlip(orientation == eOrientationLeft);
 	}
 	m_eOrientation = orientation;
 }
 
-Texture& Sprite::GetTexture() {
-	return m_xTexture;
+Texture* Sprite::GetTexture() {
+	return m_pxTexture;
 }
 
 void Sprite::SetTextureFrame(const std::string& name) {
-	m_xTexture.SelectFrame(name);
+	if (m_pxTexture) {
+		m_pxTexture->SelectFrame(name);
+	}
 }
 
 VertexStreamWorld& Sprite::GetShape() {
@@ -76,13 +84,17 @@ VertexStreamWorld& Sprite::GetShape() {
 }
 
 void Sprite::OnUpdate(const FrameData& frame) {
-	m_xTexture.Update(frame.GetSimulatedDurationMs());
+	if (m_pxTexture) {
+		m_pxTexture->Update(frame.GetSimulatedDurationMs());
+	}
 }
 
 void Sprite::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	renderer.Draw(m_xShape, m_xTexture);
+	if (m_pxTexture) {
+		renderer.Draw(m_xShape, *m_pxTexture);
+	}
 
 	// for debug:
 	//renderer.DrawPolygon(

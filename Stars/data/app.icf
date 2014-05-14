@@ -1,7 +1,7 @@
 ####################################################
 [Game]
 ####################################################
-showstats=1
+showstats=0
 
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
@@ -26,7 +26,7 @@ settingsfile=settings.xml
 ####################################################
 [Util]
 ####################################################
-#MemoryBreakpoint=742
+#MemoryBreakpoint=21203
 
 ####################################################
 [TRACE]

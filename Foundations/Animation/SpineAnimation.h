@@ -22,12 +22,14 @@ private:
 		
 public:
 	SpineAnimation();
-	~SpineAnimation();
+	virtual ~SpineAnimation();
 	
 	bool Load(const std::string& filepart);
 	bool Load(const std::string& atlasfile, const std::string& jsonfile);
-	void SetAnimation(const std::string& name);
 
+	bool SetAnimation(const std::string& name);
+	bool ConstainsAnimation(const std::string& name);
+	
 	virtual void Update(uint32 timestep);
 	
 #ifdef IW_DEBUG

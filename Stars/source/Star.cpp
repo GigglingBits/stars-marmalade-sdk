@@ -62,10 +62,14 @@ void Star::OnUpdate(const FrameData& frame) {
 	if (IsDragging()) {
 		// look in drag direction
 		CIwFVec2 target = GetDragTarget();
-		GetTexture().SetHorizontalFlip(GetPosition().x - 0.2f > target.x);
+		if (Texture* t = GetTexture()) {
+			t->SetHorizontalFlip(GetPosition().x - 0.2f > target.x);
+		}
 	} else {
 		// look in movement direction
-		GetTexture().SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
+		if (Texture* t = GetTexture()) {
+			t->SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
+		}
 	}
 }
 
@@ -87,7 +91,9 @@ void Star::ClearAttackTextureFrame() {
 }
 
 void Star::SetTextureFrame(std::string id) {
-	GetTexture().SelectFrame(id, GetHealthManager().GetHealthValue());
+	if (Texture* t = GetTexture()) {
+		t->SelectFrame(id, GetHealthManager().GetHealthValue());
+	}
 }
 
 void Star::OnRender(Renderer& renderer, const FrameData& frame) {

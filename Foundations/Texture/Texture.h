@@ -7,53 +7,38 @@
 #include "TextureTemplate.h"
 
 class Texture {
-	class InternalFrame : public TextureFrame {
-	public:
-		CIwTexture* image;
-		BufferedAnimTexture* skeleton;
-		InternalFrame() : image(NULL), skeleton(NULL) {}
-	};
-
-private:
-	bool m_bHorizontalFlip;
-
-	uint32 m_iFrameElapsed;
-
-	typedef CIwList<InternalFrame> FrameList;
-	FrameList m_xFrames;
-
-	InternalFrame& m_rxCurrentFrame;
-    InternalFrame m_xNullFrame;
-
 public:
-	Texture(const TextureTemplate& texturedef);
-
-	bool IsImage();
-	CIwTexture* GetImage();
-
-	bool IsPattern();
-	CIwTexture* GetPattern();
-
-	bool IsColour();
-	uint32 GetColour();
+	virtual ~Texture();
 	
-	bool IsSkeleton();
-	BufferedAnimTexture* GetSkeleton();
+	// capabilities
+public:
+	virtual bool IsImage();
+	virtual CIwTexture* GetImage();
+
+	virtual bool IsPattern();
+	virtual CIwTexture* GetPattern();
+
+	virtual bool IsColour();
+	virtual uint32 GetColour();
 	
-	bool ContainsFrame(const std::string name);
+	virtual bool IsSkeleton();
+	virtual BufferedAnimTexture* GetSkeleton();
 	
-	bool SelectFirstFrame();
-	bool SelectFrame(const std::string& id);
-	bool SelectFrame(const std::string& id, int health);
-	bool ReSelectFrame(int health);
+	// behaviors
+public:
+	virtual bool ContainsFrame(const std::string name) = 0;
+	
+	virtual bool SelectFrame(const std::string& id) = 0;
+	virtual bool SelectFrame(const std::string& id, int health) = 0;
+	virtual bool ReSelectFrame(int health) = 0;
 
-	void SetHorizontalFlip(bool flip);
-	bool GetHorizontalFlip();
+	virtual void SetHorizontalFlip(bool flip) = 0;
+	virtual bool GetHorizontalFlip() = 0;
 
-	void Update(uint16 timestep);
-
-protected:
-	void LoadFrames(TextureTemplate& texturedef);
+	virtual void Update(uint16 timestep) = 0;
+	
+public:
+	static Texture* Create(const TextureTemplate& tpl);
 };
 
 #endif

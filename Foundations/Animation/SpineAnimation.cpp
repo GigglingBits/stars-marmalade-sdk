@@ -25,21 +25,33 @@ bool SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonf
 	return LoadSkeleton(atlasfile, jsonfile);
 }
 
-void SpineAnimation::SetAnimation(const std::string& name) {
+bool SpineAnimation::SetAnimation(const std::string& name) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
 	if (!m_pxSkeletonData) {
-		return;
+		return false;
 	}
 	
 	if (m_pxAnimation && name.compare(m_pxAnimation->name) != 0) {
 		spAnimation_dispose(m_pxAnimation);
 		m_pxAnimation = NULL;
+		return false;
 	}
 	if (!m_pxAnimation) {
 		m_pxAnimation = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
 		IwAssertMsg(MYAPP, m_pxAnimation, ("Unable to find '%s' animation", name.c_str()));
 	}
+	return (bool)m_pxAnimation;
+}
+
+bool SpineAnimation::ConstainsAnimation(const std::string& name) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
+	if (!m_pxSkeletonData) {
+		return false;
+	}
+	
+	return (bool) spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
 }
 
 bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {

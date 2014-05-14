@@ -255,7 +255,9 @@ void Body::OnUpdate(const FrameData& frame) {
 	int health = m_xHealth.GetHealthValue();
 	if (m_iLastHealthValue != health) {
 		m_iLastHealthValue = health;
-		GetTexture().ReSelectFrame(health);
+		if (Texture* t = GetTexture()) {
+			t->ReSelectFrame(health);
+		}
 	}
 
 	UpdateShape();
@@ -266,13 +268,13 @@ void Body::UpdateShape() {
 	m_xShape.SetVertices(m_pxBody->GetTransform(), *m_pxFixture->GetShape());
 
 	// push the shape of the body down into the base class
-	Texture& t = GetTexture();
+	Texture* t = GetTexture();
 	VertexStreamWorld& v = GetShape();
-	if (t.IsImage() || t.IsSkeleton()) {
+	if (t && (t->IsImage() || t->IsSkeleton())) {
 		v.SetVerts(
 			m_xShape.GetBoundigBoxVerts(), 
 			m_xShape.GetBoundigBoxVertCount());
-	} else if (t.IsPattern() || t.IsColour()) {
+	} else if (t && (t->IsPattern() || t->IsColour())) {
 		v.SetVerts(
 			m_xShape.GetShapeVerts(), 
 			m_xShape.GetShapeVertCount());

@@ -2,7 +2,7 @@
 
 TextureFactory::TextureFactory() : FactoryBase<TextureTemplate, Texture>("root", "textures", "texture") {
 	TextureTemplate tpl;
-	tpl.AddFrame("_default", 100, "image_missing", "", "", 0, 0, "");
+	tpl.AddFrame("_default", 100, "image_missing", "", 0, 0, "");
 	SetDefaultConfig(tpl);
 }
 
@@ -22,37 +22,40 @@ std::string TextureFactory::PopulateConfig(TiXmlElement* node, TextureTemplate& 
 	std::string nextid((pc = (char*)node->Attribute("next")) ? pc : "");
 
 	// build the template
-	if (!image.empty() || !pattern.empty() || !animation.empty() || !colour.empty()) {
-		conf.AddFrame(id, healthlevel, image, pattern, animation, HexToColour(colour), duration, nextid);
+	if (!animation.empty()) {
+		conf.SetSkeletonAnimation(animation);
+	} else {
+		if (!image.empty() || !pattern.empty() || !animation.empty() || !colour.empty()) {
+			conf.AddFrame("", healthlevel, image, pattern, HexToColour(colour), duration, nextid);
+		}
+
+		TiXmlElement* subnode = node->FirstChildElement("frame");
+		while (subnode) {
+			std::string frameid((pc = (char*)subnode->Attribute("id")) ? pc : GenerateUniqueId((long)subnode));
+
+			healthlevel = 0;
+			subnode->Attribute("healthlevel", &healthlevel);
+
+			image = (pc = (char*)subnode->Attribute("image")) ? pc : "";
+			pattern = (pc = (char*)subnode->Attribute("pattern")) ? pc : "";
+			animation = (pc = (char*)subnode->Attribute("animation")) ? pc : "";
+			colour = (pc = (char*)subnode->Attribute("colour")) ? pc : "";
+
+			duration = 0;
+			subnode->Attribute("duration", &duration);
+			nextid = (pc = (char*)subnode->Attribute("next")) ? pc : "";
+
+			conf.AddFrame(frameid, healthlevel, image, pattern, HexToColour(colour), duration, nextid);
+
+			subnode = subnode->NextSiblingElement();
+		}
 	}
-
-	TiXmlElement* subnode = node->FirstChildElement("frame");
-	while (subnode) {
-		std::string frameid((pc = (char*)subnode->Attribute("id")) ? pc : GenerateUniqueId((long)subnode));
-
-		healthlevel = 0;
-		subnode->Attribute("healthlevel", &healthlevel);
-
-		image = (pc = (char*)subnode->Attribute("image")) ? pc : "";
-		pattern = (pc = (char*)subnode->Attribute("pattern")) ? pc : "";
-		animation = (pc = (char*)subnode->Attribute("animation")) ? pc : "";
-		colour = (pc = (char*)subnode->Attribute("colour")) ? pc : "";
-
-		duration = 0;
-		subnode->Attribute("duration", &duration);
-		nextid = (pc = (char*)subnode->Attribute("next")) ? pc : "";
-
-		conf.AddFrame(frameid, healthlevel, image, pattern, animation, HexToColour(colour), duration, nextid);
-
-		subnode = subnode->NextSiblingElement();
-	}
-
 	return id;
 }
 
 Texture* TextureFactory::CreateInstance(const TextureTemplate& conf) {
 	TextureTemplate myconf = conf;
-	return new Texture(myconf);
+	return Texture::Create(myconf);
 }
 
 uint32 TextureFactory::HexToColour(const std::string& coltext) {

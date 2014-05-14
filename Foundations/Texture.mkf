@@ -25,4 +25,9 @@ files {
 	TextureFrame.cpp
 	TextureTemplate.h
 	TextureTemplate.cpp
+
+	TextureFramed.h
+	TextureFramed.cpp
+	TextureAnimated.h
+	TextureAnimated.cpp
 }

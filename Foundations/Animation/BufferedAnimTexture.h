@@ -28,7 +28,7 @@ private:
 	
 public:
 	BufferedAnimTexture();
-	~BufferedAnimTexture();
+	virtual ~BufferedAnimTexture();
 	
 	void SetAll(CIwFVec2 verts[], int vertcount);
 	void SetAll(CIwSVec2 verts[], int vertcount);

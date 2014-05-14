@@ -15,7 +15,6 @@ m_xPanelSocial(eButtonCommandIdSocial, s3eKeyFirst) {
 	m_xPanelSocial.StateChanged.AddListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 }
 
-
 TitleScreen::~TitleScreen() {
 	m_xPanelOptions.StateChanged.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);
 	m_xPanelSocial.StateChanged.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPanelStateChangedEventHandler);

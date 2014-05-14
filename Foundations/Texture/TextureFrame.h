@@ -8,8 +8,7 @@ enum eFrameType {
 	eFrameTypeImage,
 	eFrameTypeColour,
 	eFrameTypePattern,
-	eFrameTypeImageAnimation,
-	eFrameTypeSkeletonAnimation
+	eFrameTypeImageAnimation
 };
 
 class TextureFrame {
@@ -18,7 +17,6 @@ public:
 	std::string id;
 	int healthlevel;
 	std::string imageresource;
-	std::string skeletonanimation;
 	uint32 colour;
 	uint duration;
 	std::string nextid;
