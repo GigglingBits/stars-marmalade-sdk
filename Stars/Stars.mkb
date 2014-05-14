@@ -264,6 +264,9 @@ assets
 	spine/title/output/title.atlas
 	spine/title/output/title.json
 
+	spine/bird_01/output/bird_01.atlas
+	spine/bird_01/output/bird_01.json
+
 	test.group
 	base.group
 	menu.group

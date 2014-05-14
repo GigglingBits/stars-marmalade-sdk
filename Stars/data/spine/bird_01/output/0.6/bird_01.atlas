@@ -1,0 +1,76 @@
+
+bird_01.png
+size: 1010,250
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bigredbird-beak-01
+  rotate: true
+  xy: 2, 2
+  size: 83, 76
+  orig: 83, 76
+  offset: 0, 0
+  index: -1
+bigredbird-beak-02
+  rotate: true
+  xy: 199, 24
+  size: 61, 20
+  orig: 61, 20
+  offset: 0, 0
+  index: -1
+bigredbird-body
+  rotate: false
+  xy: 2, 87
+  size: 421, 163
+  orig: 421, 163
+  offset: 0, 0
+  index: -1
+bigredbird-body-details
+  rotate: false
+  xy: 199, 5
+  size: 37, 17
+  orig: 37, 17
+  offset: 0, 0
+  index: -1
+bigredbird-claws
+  rotate: true
+  xy: 809, 50
+  size: 107, 100
+  orig: 107, 100
+  offset: 0, 0
+  index: -1
+bigredbird-eye-closed
+  rotate: true
+  xy: 140, 10
+  size: 75, 57
+  orig: 75, 58
+  offset: 0, 0
+  index: -1
+bigredbird-eye-open
+  rotate: true
+  xy: 80, 11
+  size: 74, 58
+  orig: 75, 58
+  offset: 0, 0
+  index: -1
+bigredbird-wing-01
+  rotate: false
+  xy: 617, 60
+  size: 190, 190
+  orig: 190, 190
+  offset: 0, 0
+  index: -1
+bigredbird-wing-02
+  rotate: false
+  xy: 809, 159
+  size: 201, 91
+  orig: 201, 91
+  offset: 0, 0
+  index: -1
+bigredbird-wing-03
+  rotate: false
+  xy: 425, 38
+  size: 190, 212
+  orig: 190, 212
+  offset: 0, 0
+  index: -1

@@ -150,7 +150,7 @@
 				<point x="0.0" y="0.35" />
 			</shape>
 			<fixture friction="0.6" restitution="0.5" density="0.2" />
-			<texture animation="spine/title/output/title" />
+			<texture animation="spine/bird_01/output/bird_01" />
 		</body>
 		
 		<body id="bird_02" type="bird" texture="none" resilience="1.0" revolve="0">

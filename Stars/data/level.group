@@ -16,12 +16,6 @@ CIwResGroup
 	./sprites/buff_attack.png
 	./sprites/buff_block.png
 
-	./sprites/characters/bird01/bird_01.png
-	./sprites/characters/bird01/bird_01_wings_01.png
-	./sprites/characters/bird01/bird_01_wings_02.png
-	./sprites/characters/bird01/bird_01_wings_03.png
-	./sprites/characters/bird01/bird_01_hurt.png
-
 	./sprites/characters/bird02/bird_02.png
 	./sprites/characters/bird02/bird_02_wings_01.png
 	./sprites/characters/bird02/bird_02_wings_02.png
@@ -35,4 +29,5 @@ CIwResGroup
 	./sprites/characters/bird03/bird_03_hurt.png
 
 	./spine/title/output/title.png
+	./spine/bird_01/output/bird_01.png
 }
