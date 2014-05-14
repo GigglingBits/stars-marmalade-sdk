@@ -141,6 +141,10 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 						IwAssertMsg(MYAPP, !texture || tmp == texture, ("Slot Not all slots seem to use the same texture. Multitexture animations are not supported. Drawing errors will occur."));
 						texture = tmp;
 					}
+				} else if (attachment->type == SP_ATTACHMENT_MESH) {
+					IwAssertMsg(MYAPP, false, ("Slot %i has a mesh attachment. Meshes are not supported by the renderer.", slotid));
+				} else if (attachment->type == SP_ATTACHMENT_SKINNED_MESH) {
+					IwAssertMsg(MYAPP, false, ("Slot %i has a skinned mesh attachment. Skinned meshes are not supported by the renderer.", slotid));
 				}
 			}
 		}
