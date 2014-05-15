@@ -39,8 +39,7 @@ bool TextureAnimated::SelectFrame(const std::string& id, int health) {
 }
 
 void TextureAnimated::SetHorizontalFlip(bool flip) {
-	IW_CALLSTACK_SELF;
-	IwError(("TextureAnimated::SelectFrame(const std::string& id, int health) not implemented"));
+	m_xAnimation.SetFlipX(flip);
 }
 
 bool TextureAnimated::GetHorizontalFlip() {

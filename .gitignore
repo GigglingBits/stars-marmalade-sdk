@@ -19,8 +19,7 @@ Warships/app/build_warships_xcode/
 Warships/server/Server/bin/
 Warships/server/Server/obj/
 
-Kidbook/build_kidbook_vc11/
-Kidbook/build_kidbook_xcode/
+Kidbook/build_kidbook_*/
 Kidbook/originals/
 Kidbook/dist/
 

@@ -19,7 +19,7 @@ private:
 	
 	CIwFVec2 m_xSkeletonAABBLL;		// AABB of the original skeleton in starting pose (lower left corner)
 	CIwFVec2 m_xSkeletonAABBUR;		// AABB of the original skeleton in starting pose (upper right corner)
-		
+	
 public:
 	SpineAnimation();
 	virtual ~SpineAnimation();
@@ -29,6 +29,12 @@ public:
 
 	bool SetAnimation(const std::string& name);
 	bool ConstainsAnimation(const std::string& name);
+	
+	bool GetFlipX();
+	void SetFlipX(bool flip);
+
+	bool GetFlipY();
+	void SetFlipY(bool flip);
 	
 	virtual void Update(uint32 timestep);
 	
@@ -50,6 +56,8 @@ protected:
 	int GetVertexCount();
 	CIwTexture* GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 
+	void RebuildGeometry();
+	
 	const CIwFVec2& GetAABBLL() const;
 	const CIwFVec2& GetAABBUR() const;
 	void GrowAABB(CIwFVec2& ll, CIwFVec2& ur, const CIwFVec2& point) const;

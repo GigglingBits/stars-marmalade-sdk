@@ -62,9 +62,7 @@ bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::strin
 				if ((m_pxSkeleton = spSkeleton_create(m_pxSkeletonData))) {
 					m_pxSkeleton->flipX = false;
 					m_pxSkeleton->flipY = false;
-					spSkeleton_setToSetupPose(m_pxSkeleton);
-					spSkeleton_updateWorldTransform(m_pxSkeleton);
-					ExtractAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR);
+					RebuildGeometry();
 					success = true;
 				} else {
 					IwAssertMsg(MYAPP, false, ("Unable to create generic skeleton"));
@@ -97,6 +95,16 @@ void SpineAnimation::DestroySkeleton() {
 	if (m_pxAtlas) {
 		spAtlas_dispose(m_pxAtlas);
 		m_pxAtlas = NULL;
+	}
+}
+
+void SpineAnimation::RebuildGeometry() {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("Rebuild of geometry failed. No skeleton available."));
+	if (m_pxSkeleton) {
+		spSkeleton_setToSetupPose(m_pxSkeleton);
+		spSkeleton_updateWorldTransform(m_pxSkeleton);
+		ExtractAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR);
 	}
 }
 
@@ -150,6 +158,42 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 		}
 	}
 	return texture;
+}
+
+bool SpineAnimation::GetFlipX() {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot read flip-x. No skeleton available."));
+	if (m_pxSkeleton) {
+		return m_pxSkeleton->flipX;
+	}
+	return false;
+}
+
+void SpineAnimation::SetFlipX(bool flip) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-x. No skeleton available."));
+	if (m_pxSkeleton) {
+		m_pxSkeleton->flipX = flip;
+		RebuildGeometry();
+	}
+}
+
+bool SpineAnimation::GetFlipY() {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot read flip-y. No skeleton available."));
+	if (m_pxSkeleton) {
+		return m_pxSkeleton->flipY;
+	}
+	return false;
+}
+
+void SpineAnimation::SetFlipY(bool flip) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-y. No skeleton available."));
+	if (m_pxSkeleton) {
+		m_pxSkeleton->flipY = flip;
+		RebuildGeometry();
+	}
 }
 
 #ifdef IW_DEBUG
