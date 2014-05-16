@@ -171,103 +171,6 @@
 			}
 		}
 	},
-	"Fly forward": {
-		"slots": {
-			"happy-star-chin-wound": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-eyes-hit1": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth-detail": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-open" },
-					{ "time": 0.3, "name": "happystar-eyes-closed" },
-					{ "time": 0.3666, "name": "happystar-eyes-open" }
-				]
-			}
-		},
-		"bones": {
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 7.09 },
-					{ "time": 0.1666, "angle": 12.84 },
-					{ "time": 0.3333, "angle": 7.13 },
-					{ "time": 0.5, "angle": 10.77 },
-					{ "time": 0.6666, "angle": 7.09 }
-				],
-				"translate": [
-					{ "time": 0, "x": -0.83, "y": -2.51 },
-					{ "time": 0.1666, "x": -0.83, "y": -3.51 },
-					{ "time": 0.5, "x": -0.83, "y": -3.84 },
-					{ "time": 0.6666, "x": -0.83, "y": -2.51 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": -2.81 },
-					{ "time": 0.1666, "angle": -7.59 },
-					{ "time": 0.3333, "angle": -2.41 },
-					{ "time": 0.5, "angle": -6.94 },
-					{ "time": 0.6666, "angle": -2.81 }
-				]
-			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": -10.86 },
-					{
-						"time": 0.1666,
-						"angle": -19.53,
-						"curve": [ 0.364, -0.01, 0.501, 1 ]
-					},
-					{ "time": 0.3333, "angle": -11 },
-					{ "time": 0.5, "angle": -16 },
-					{ "time": 0.6666, "angle": -10.86 }
-				],
-				"translate": [
-					{ "time": 0, "x": -2.09, "y": 5.02, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.09, "y": 5.02 }
-				]
-			},
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": 11.05 },
-					{ "time": 0.1666, "angle": 15.35 },
-					{ "time": 0.3333, "angle": 8.7 },
-					{ "time": 0.5, "angle": 12.99 },
-					{ "time": 0.6666, "angle": 11.05 }
-				],
-				"translate": [
-					{ "time": 0, "x": -6.7, "y": -6.6 },
-					{ "time": 0.1666, "x": -8.21, "y": -7.11 },
-					{ "time": 0.6666, "x": -6.7, "y": -6.6 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": 3.03 },
-					{ "time": 0.1666, "angle": 0.75 },
-					{ "time": 0.3333, "angle": 3.4 },
-					{ "time": 0.5, "angle": 0.91 },
-					{ "time": 0.6666, "angle": 3.78 }
-				]
-			}
-		}
-	},
 	"Fly upwards": {
 		"slots": {
 			"happy-star-chin-wound": {
@@ -354,7 +257,215 @@
 			}
 		}
 	},
-	"Happystar-angry": {
+	"Happystar-sad-2": {
+		"slots": {
+			"happy-star-chin-wound": {
+				"attachment": [
+					{ "time": 0, "name": "happy-star-chin-wound" }
+				]
+			},
+			"happystar-mouth.png": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-mouth-sad" }
+				]
+			},
+			"happystar-standard-eyes": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-eyes-sad" },
+					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
+					{ "time": 0.2, "name": "happystar-eyes-sad" }
+				]
+			}
+		},
+		"bones": {
+			"Mouth": {
+				"translate": [
+					{ "time": 0, "x": 3.4, "y": 13.5 },
+					{ "time": 0.3333, "x": 1.5, "y": 5.93 },
+					{ "time": 0.6666, "x": 3.4, "y": 13.5 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.662, "y": 0.7 },
+					{ "time": 0.3333, "x": 0.798, "y": 0.601 },
+					{ "time": 0.6666, "x": 0.662, "y": 0.7 }
+				]
+			},
+			"Happystar-chin.wound": {
+				"translate": [
+					{ "time": 0, "x": 16.31, "y": -23.8, "curve": "stepped" },
+					{ "time": 0.3333, "x": 16.31, "y": -23.8, "curve": "stepped" },
+					{ "time": 0.6666, "x": 16.31, "y": -23.8 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.8, "y": 0.8, "curve": "stepped" },
+					{ "time": 0.3333, "x": 0.8, "y": 0.8, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0.8, "y": 0.8 }
+				]
+			},
+			"Top": {
+				"rotate": [
+					{ "time": 0, "angle": 7.09 },
+					{ "time": 0.1666, "angle": 12.84 },
+					{ "time": 0.3333, "angle": 7.13 },
+					{ "time": 0.5, "angle": 12.84 },
+					{ "time": 0.6666, "angle": 7.09 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.83, "y": -2.5 },
+					{ "time": 0.1666, "x": -0.83, "y": -3.5 },
+					{ "time": 0.3333, "x": -0.83, "y": -3.67 },
+					{ "time": 0.5, "x": -0.83, "y": -3.5 },
+					{ "time": 0.6666, "x": -0.83, "y": -2.5 }
+				]
+			},
+			"Arm_R": {
+				"rotate": [
+					{ "time": 0, "angle": 11.05 },
+					{ "time": 0.1666, "angle": 15.35 },
+					{ "time": 0.3333, "angle": 8.7 },
+					{ "time": 0.5, "angle": 15.35 },
+					{ "time": 0.6666, "angle": 11.05 }
+				],
+				"translate": [
+					{ "time": 0, "x": -6.7, "y": -4.69 },
+					{ "time": 0.1666, "x": -8.21, "y": -4.19 },
+					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
+					{ "time": 0.5, "x": -8.21, "y": -4.19 },
+					{ "time": 0.6666, "x": -6.7, "y": -4.69 }
+				]
+			},
+			"Leg_R": {
+				"rotate": [
+					{ "time": 0, "angle": 349.14 },
+					{ "time": 0.1666, "angle": 340.46 },
+					{ "time": 0.3333, "angle": 348.99 },
+					{ "time": 0.5, "angle": 340.46 },
+					{ "time": 0.6666, "angle": 349.14 }
+				],
+				"translate": [
+					{ "time": 0, "x": -2.09, "y": 8.61, "curve": "stepped" },
+					{ "time": 0.6666, "x": -2.09, "y": 8.61 }
+				]
+			},
+			"Leg_L": {
+				"rotate": [
+					{ "time": 0, "angle": 357.18 },
+					{ "time": 0.1666, "angle": 352.4 },
+					{ "time": 0.3333, "angle": 357.58 },
+					{ "time": 0.5, "angle": 352.4 },
+					{ "time": 0.6666, "angle": 357.18 }
+				]
+			},
+			"Arm_L": {
+				"rotate": [
+					{ "time": 0, "angle": 3.04 },
+					{ "time": 0.1666, "angle": 0.75 },
+					{ "time": 0.3333, "angle": 3.4 },
+					{ "time": 0.5, "angle": 0.75 },
+					{ "time": 0.6666, "angle": 3.04 }
+				]
+			}
+		}
+	},
+	"Happystar-waving to the player": {
+		"slots": {
+			"happystar-mouth.png": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3333, "name": null },
+					{ "time": 0.6666, "name": null }
+				]
+			},
+			"happystar-standard-eyes": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-eyes-looking-totheplayer" }
+				]
+			}
+		},
+		"bones": {
+			"Arm_R": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 15.38,
+						"curve": [ 0.398, 0, 0.652, 1 ]
+					},
+					{
+						"time": 0.1666,
+						"angle": -8.52,
+						"curve": [ 0.438, -0.05, 0.472, 1 ]
+					},
+					{
+						"time": 0.3333,
+						"angle": 15.38,
+						"curve": [ 0.092, 0.39, 0.821, 0.67 ]
+					},
+					{
+						"time": 0.5,
+						"angle": -8.52,
+						"curve": [ 0.438, -0.05, 0.472, 1 ]
+					},
+					{ "time": 0.6666, "angle": 15.38 }
+				],
+				"translate": [
+					{ "time": 0, "x": -6.7, "y": -2.69 },
+					{ "time": 0.1666, "x": -9, "y": 3.99 },
+					{ "time": 0.3333, "x": -6.7, "y": -2.69 },
+					{ "time": 0.5, "x": -9, "y": 3.99 },
+					{ "time": 0.6666, "x": -6.7, "y": -2.69 }
+				]
+			},
+			"Leg_R": {
+				"rotate": [
+					{ "time": 0, "angle": -14.34 },
+					{ "time": 0.1666, "angle": -15.12 },
+					{ "time": 0.3333, "angle": -14.34 },
+					{ "time": 0.5, "angle": -15.12 },
+					{ "time": 0.6666, "angle": -14.34 }
+				],
+				"translate": [
+					{ "time": 0, "x": -2.09, "y": 5.03, "curve": "stepped" },
+					{ "time": 0.3333, "x": -2.09, "y": 5.03, "curve": "stepped" },
+					{ "time": 0.6666, "x": -2.09, "y": 5.03 }
+				]
+			},
+			"Top": {
+				"rotate": [
+					{ "time": 0, "angle": 7.09 },
+					{ "time": 0.1666, "angle": 7.79 },
+					{ "time": 0.3333, "angle": 7.09 },
+					{ "time": 0.5, "angle": 7.79 },
+					{ "time": 0.6666, "angle": 7.09 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.83, "y": -4.5, "curve": "stepped" },
+					{ "time": 0.1666, "x": -0.83, "y": -4.5, "curve": "stepped" },
+					{ "time": 0.3333, "x": -0.83, "y": -4.5, "curve": "stepped" },
+					{ "time": 0.5, "x": -0.83, "y": -4.5, "curve": "stepped" },
+					{ "time": 0.6666, "x": -0.83, "y": -4.5 }
+				]
+			},
+			"Leg_L": {
+				"rotate": [
+					{ "time": 0, "angle": 357.18 },
+					{ "time": 0.1666, "angle": -3.22 },
+					{ "time": 0.3333, "angle": 357.18 },
+					{ "time": 0.5, "angle": -3.22 },
+					{ "time": 0.6666, "angle": 357.18 }
+				]
+			},
+			"Arm_L": {
+				"rotate": [
+					{ "time": 0, "angle": 3.04 },
+					{ "time": 0.1666, "angle": 2.67 },
+					{ "time": 0.3333, "angle": 3.04 },
+					{ "time": 0.5, "angle": 2.67 },
+					{ "time": 0.6666, "angle": 3.04 }
+				]
+			}
+		}
+	},
+	"attack": {
 		"slots": {
 			"happystar-mouth.png": {
 				"attachment": [
@@ -465,7 +576,215 @@
 			}
 		}
 	},
-	"Happystar-got hit": {
+	"block": {
+		"slots": {
+			"happystar-mouth.png": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-mouth-angry" }
+				]
+			},
+			"happystar-standard-eyes": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-eyes-angry" },
+					{ "time": 0.1, "name": "happystar-eyes-angry-closed" },
+					{ "time": 0.2, "name": "happystar-eyes-angry" }
+				]
+			}
+		},
+		"bones": {
+			"Arm_R": {
+				"rotate": [
+					{ "time": 0, "angle": 11.05 },
+					{ "time": 0.1666, "angle": 15.35 },
+					{ "time": 0.3333, "angle": 8.7 },
+					{ "time": 0.5, "angle": 15.35 },
+					{ "time": 0.6666, "angle": 11.05 }
+				],
+				"translate": [
+					{ "time": 0, "x": -6.7, "y": -4.69 },
+					{ "time": 0.1666, "x": -8.21, "y": -7.11 },
+					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
+					{ "time": 0.5, "x": -8.21, "y": -7.11 },
+					{ "time": 0.6666, "x": -6.7, "y": -4.69 }
+				]
+			},
+			"Top": {
+				"rotate": [
+					{ "time": 0, "angle": 7.09 },
+					{ "time": 0.1666, "angle": 12.84 },
+					{ "time": 0.3333, "angle": 7.13 },
+					{ "time": 0.5, "angle": 12.84 },
+					{ "time": 0.6666, "angle": 7.09 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0.5, "y": -2.5 },
+					{ "time": 0.3333, "x": 0.5, "y": -3.67 },
+					{ "time": 0.6666, "x": 0.5, "y": -2.5 }
+				]
+			},
+			"Leg_R": {
+				"rotate": [
+					{ "time": 0, "angle": 349.14 },
+					{ "time": 0.1666, "angle": 340.46 },
+					{ "time": 0.3333, "angle": 348.99 },
+					{ "time": 0.5, "angle": 340.46 },
+					{ "time": 0.6666, "angle": 349.14 }
+				],
+				"translate": [
+					{ "time": 0, "x": -2.09, "y": 5.03, "curve": "stepped" },
+					{ "time": 0.6666, "x": -2.09, "y": 5.03 }
+				]
+			},
+			"Leg_L": {
+				"rotate": [
+					{ "time": 0, "angle": 357.18 },
+					{ "time": 0.1666, "angle": 352.4 },
+					{ "time": 0.3333, "angle": 357.58 },
+					{ "time": 0.5, "angle": 352.4 },
+					{ "time": 0.6666, "angle": 357.18 }
+				]
+			},
+			"Arm_L": {
+				"rotate": [
+					{ "time": 0, "angle": 3.04 },
+					{ "time": 0.1666, "angle": 0.75 },
+					{ "time": 0.3333, "angle": 3.4 },
+					{ "time": 0.5, "angle": 0.75 },
+					{ "time": 0.6666, "angle": 3.04 }
+				]
+			},
+			"Mouth": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 0.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 5.68 },
+					{
+						"time": 0.3333,
+						"x": 0,
+						"y": 6.62,
+						"curve": [ 0.375, 0.01, 0.652, 1 ]
+					},
+					{ "time": 0.6666, "x": 0, "y": 5.68 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1.088,
+						"y": 1.013,
+						"curve": [ 0.612, 0.05, 0.512, 1 ]
+					},
+					{
+						"time": 0.3333,
+						"x": 1.051,
+						"y": 1.013,
+						"curve": [ 0.597, -0.2, 0.627, 1 ]
+					},
+					{ "time": 0.6666, "x": 1.088, "y": 1.013 }
+				]
+			}
+		}
+	},
+	"followpath": {
+		"slots": {
+			"happy-star-chin-wound": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"happystar-eyes-hit1": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"happystar-mouth-detail": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"happystar-mouth.png": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"happystar-standard-eyes": {
+				"attachment": [
+					{ "time": 0, "name": "happystar-eyes-open" },
+					{ "time": 0.3, "name": "happystar-eyes-closed" },
+					{ "time": 0.3666, "name": "happystar-eyes-open" }
+				]
+			}
+		},
+		"bones": {
+			"Top": {
+				"rotate": [
+					{ "time": 0, "angle": 7.09 },
+					{ "time": 0.1666, "angle": 12.84 },
+					{ "time": 0.3333, "angle": 7.13 },
+					{ "time": 0.5, "angle": 10.77 },
+					{ "time": 0.6666, "angle": 7.09 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.83, "y": -2.51 },
+					{ "time": 0.1666, "x": -0.83, "y": -3.51 },
+					{ "time": 0.5, "x": -0.83, "y": -3.84 },
+					{ "time": 0.6666, "x": -0.83, "y": -2.51 }
+				]
+			},
+			"Leg_L": {
+				"rotate": [
+					{ "time": 0, "angle": -2.81 },
+					{ "time": 0.1666, "angle": -7.59 },
+					{ "time": 0.3333, "angle": -2.41 },
+					{ "time": 0.5, "angle": -6.94 },
+					{ "time": 0.6666, "angle": -2.81 }
+				]
+			},
+			"Leg_R": {
+				"rotate": [
+					{ "time": 0, "angle": -10.86 },
+					{
+						"time": 0.1666,
+						"angle": -19.53,
+						"curve": [ 0.364, -0.01, 0.501, 1 ]
+					},
+					{ "time": 0.3333, "angle": -11 },
+					{ "time": 0.5, "angle": -16 },
+					{ "time": 0.6666, "angle": -10.86 }
+				],
+				"translate": [
+					{ "time": 0, "x": -2.09, "y": 5.02, "curve": "stepped" },
+					{ "time": 0.6666, "x": -2.09, "y": 5.02 }
+				]
+			},
+			"Arm_R": {
+				"rotate": [
+					{ "time": 0, "angle": 11.05 },
+					{ "time": 0.1666, "angle": 15.35 },
+					{ "time": 0.3333, "angle": 8.7 },
+					{ "time": 0.5, "angle": 12.99 },
+					{ "time": 0.6666, "angle": 11.05 }
+				],
+				"translate": [
+					{ "time": 0, "x": -6.7, "y": -6.6 },
+					{ "time": 0.1666, "x": -8.21, "y": -7.11 },
+					{ "time": 0.6666, "x": -6.7, "y": -6.6 }
+				]
+			},
+			"Arm_L": {
+				"rotate": [
+					{ "time": 0, "angle": 3.03 },
+					{ "time": 0.1666, "angle": 0.75 },
+					{ "time": 0.3333, "angle": 3.4 },
+					{ "time": 0.5, "angle": 0.91 },
+					{ "time": 0.6666, "angle": 3.78 }
+				]
+			}
+		}
+	},
+	"hurt": {
 		"slots": {
 			"happy-star-chin-wound": {
 				"attachment": [
@@ -635,234 +954,7 @@
 			}
 		}
 	},
-	"Happystar-sad": {
-		"slots": {
-			"happy-star-chin-wound": {
-				"attachment": [
-					{ "time": 0, "name": "happy-star-chin-wound" }
-				]
-			},
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-mouth-angry" }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-sad" },
-					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
-					{ "time": 0.2, "name": "happystar-eyes-sad" }
-				]
-			}
-		},
-		"bones": {
-			"Mouth": {
-				"translate": [
-					{
-						"time": 0,
-						"x": 3.4,
-						"y": 13.5,
-						"curve": [ 0.395, 0, 0.75, 1 ]
-					},
-					{ "time": 0.1, "x": 3.4, "y": 7.82 },
-					{ "time": 0.2, "x": 3.4, "y": 13.5 },
-					{ "time": 0.3, "x": 3.4, "y": 8.77 },
-					{ "time": 0.5, "x": 3.4, "y": 13.5 },
-					{ "time": 0.5333, "x": 3.4, "y": 9.71 },
-					{ "time": 0.6666, "x": 3.4, "y": 13.5 }
-				],
-				"scale": [
-					{ "time": 0, "x": 0.838, "y": 0.759 }
-				]
-			},
-			"Happystar-chin.wound": {
-				"translate": [
-					{ "time": 0, "x": 16.31, "y": -23.8, "curve": "stepped" },
-					{ "time": 0.3333, "x": 16.31, "y": -23.8, "curve": "stepped" },
-					{ "time": 0.6666, "x": 16.31, "y": -23.8 }
-				],
-				"scale": [
-					{ "time": 0, "x": 0.8, "y": 0.8, "curve": "stepped" },
-					{ "time": 0.3333, "x": 0.8, "y": 0.8, "curve": "stepped" },
-					{ "time": 0.6666, "x": 0.8, "y": 0.8 }
-				]
-			},
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 7.09 },
-					{ "time": 0.1666, "angle": 12.84 },
-					{ "time": 0.3333, "angle": 7.13 },
-					{ "time": 0.5, "angle": 12.84 },
-					{ "time": 0.6666, "angle": 7.09 }
-				],
-				"translate": [
-					{ "time": 0, "x": -0.83, "y": -2.5 },
-					{ "time": 0.1666, "x": -0.83, "y": -3.5 },
-					{ "time": 0.3333, "x": -0.83, "y": -3.67 },
-					{ "time": 0.5, "x": -0.83, "y": -3.5 },
-					{ "time": 0.6666, "x": -0.83, "y": -2.5 }
-				]
-			},
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": 11.05 },
-					{ "time": 0.1666, "angle": 15.35 },
-					{ "time": 0.3333, "angle": 8.7 },
-					{ "time": 0.5, "angle": 15.35 },
-					{ "time": 0.6666, "angle": 11.05 }
-				],
-				"translate": [
-					{ "time": 0, "x": -6.7, "y": -4.69 },
-					{ "time": 0.1666, "x": -8.21, "y": -4.19 },
-					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
-					{ "time": 0.5, "x": -8.21, "y": -4.19 },
-					{ "time": 0.6666, "x": -6.7, "y": -4.69 }
-				]
-			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": 349.14 },
-					{ "time": 0.1666, "angle": 340.46 },
-					{ "time": 0.3333, "angle": 348.99 },
-					{ "time": 0.5, "angle": 340.46 },
-					{ "time": 0.6666, "angle": 349.14 }
-				],
-				"translate": [
-					{ "time": 0, "x": -2.09, "y": 8.61, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.09, "y": 8.61 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": 357.18 },
-					{ "time": 0.1666, "angle": 352.4 },
-					{ "time": 0.3333, "angle": 357.58 },
-					{ "time": 0.5, "angle": 352.4 },
-					{ "time": 0.6666, "angle": 357.18 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": 3.04 },
-					{ "time": 0.1666, "angle": 0.75 },
-					{ "time": 0.3333, "angle": 3.4 },
-					{ "time": 0.5, "angle": 0.75 },
-					{ "time": 0.6666, "angle": 3.04 }
-				]
-			}
-		}
-	},
-	"Happystar-sad-2": {
-		"slots": {
-			"happy-star-chin-wound": {
-				"attachment": [
-					{ "time": 0, "name": "happy-star-chin-wound" }
-				]
-			},
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-mouth-sad" }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-sad" },
-					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
-					{ "time": 0.2, "name": "happystar-eyes-sad" }
-				]
-			}
-		},
-		"bones": {
-			"Mouth": {
-				"translate": [
-					{ "time": 0, "x": 3.4, "y": 13.5 },
-					{ "time": 0.3333, "x": 1.5, "y": 5.93 },
-					{ "time": 0.6666, "x": 3.4, "y": 13.5 }
-				],
-				"scale": [
-					{ "time": 0, "x": 0.662, "y": 0.7 },
-					{ "time": 0.3333, "x": 0.798, "y": 0.601 },
-					{ "time": 0.6666, "x": 0.662, "y": 0.7 }
-				]
-			},
-			"Happystar-chin.wound": {
-				"translate": [
-					{ "time": 0, "x": 16.31, "y": -23.8, "curve": "stepped" },
-					{ "time": 0.3333, "x": 16.31, "y": -23.8, "curve": "stepped" },
-					{ "time": 0.6666, "x": 16.31, "y": -23.8 }
-				],
-				"scale": [
-					{ "time": 0, "x": 0.8, "y": 0.8, "curve": "stepped" },
-					{ "time": 0.3333, "x": 0.8, "y": 0.8, "curve": "stepped" },
-					{ "time": 0.6666, "x": 0.8, "y": 0.8 }
-				]
-			},
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 7.09 },
-					{ "time": 0.1666, "angle": 12.84 },
-					{ "time": 0.3333, "angle": 7.13 },
-					{ "time": 0.5, "angle": 12.84 },
-					{ "time": 0.6666, "angle": 7.09 }
-				],
-				"translate": [
-					{ "time": 0, "x": -0.83, "y": -2.5 },
-					{ "time": 0.1666, "x": -0.83, "y": -3.5 },
-					{ "time": 0.3333, "x": -0.83, "y": -3.67 },
-					{ "time": 0.5, "x": -0.83, "y": -3.5 },
-					{ "time": 0.6666, "x": -0.83, "y": -2.5 }
-				]
-			},
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": 11.05 },
-					{ "time": 0.1666, "angle": 15.35 },
-					{ "time": 0.3333, "angle": 8.7 },
-					{ "time": 0.5, "angle": 15.35 },
-					{ "time": 0.6666, "angle": 11.05 }
-				],
-				"translate": [
-					{ "time": 0, "x": -6.7, "y": -4.69 },
-					{ "time": 0.1666, "x": -8.21, "y": -4.19 },
-					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
-					{ "time": 0.5, "x": -8.21, "y": -4.19 },
-					{ "time": 0.6666, "x": -6.7, "y": -4.69 }
-				]
-			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": 349.14 },
-					{ "time": 0.1666, "angle": 340.46 },
-					{ "time": 0.3333, "angle": 348.99 },
-					{ "time": 0.5, "angle": 340.46 },
-					{ "time": 0.6666, "angle": 349.14 }
-				],
-				"translate": [
-					{ "time": 0, "x": -2.09, "y": 8.61, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.09, "y": 8.61 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": 357.18 },
-					{ "time": 0.1666, "angle": 352.4 },
-					{ "time": 0.3333, "angle": 357.58 },
-					{ "time": 0.5, "angle": 352.4 },
-					{ "time": 0.6666, "angle": 357.18 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": 3.04 },
-					{ "time": 0.1666, "angle": 0.75 },
-					{ "time": 0.3333, "angle": 3.4 },
-					{ "time": 0.5, "angle": 0.75 },
-					{ "time": 0.6666, "angle": 3.04 }
-				]
-			}
-		}
-	},
-	"Happystar-sleepy": {
+	"idle": {
 		"slots": {
 			"happystar-mouth-detail": {
 				"attachment": [
@@ -1003,99 +1095,118 @@
 			}
 		}
 	},
-	"Happystar-waving to the player": {
+	"recover": {
 		"slots": {
+			"happy-star-chin-wound": {
+				"attachment": [
+					{ "time": 0, "name": "happy-star-chin-wound" }
+				]
+			},
 			"happystar-mouth.png": {
 				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.3333, "name": null },
-					{ "time": 0.6666, "name": null }
+					{ "time": 0, "name": "happystar-mouth-angry" }
 				]
 			},
 			"happystar-standard-eyes": {
 				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-looking-totheplayer" }
+					{ "time": 0, "name": "happystar-eyes-sad" },
+					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
+					{ "time": 0.2, "name": "happystar-eyes-sad" }
 				]
 			}
 		},
 		"bones": {
-			"Arm_R": {
-				"rotate": [
+			"Mouth": {
+				"translate": [
 					{
 						"time": 0,
-						"angle": 15.38,
-						"curve": [ 0.398, 0, 0.652, 1 ]
+						"x": 3.4,
+						"y": 13.5,
+						"curve": [ 0.395, 0, 0.75, 1 ]
 					},
-					{
-						"time": 0.1666,
-						"angle": -8.52,
-						"curve": [ 0.438, -0.05, 0.472, 1 ]
-					},
-					{
-						"time": 0.3333,
-						"angle": 15.38,
-						"curve": [ 0.092, 0.39, 0.821, 0.67 ]
-					},
-					{
-						"time": 0.5,
-						"angle": -8.52,
-						"curve": [ 0.438, -0.05, 0.472, 1 ]
-					},
-					{ "time": 0.6666, "angle": 15.38 }
+					{ "time": 0.1, "x": 3.4, "y": 7.82 },
+					{ "time": 0.2, "x": 3.4, "y": 13.5 },
+					{ "time": 0.3, "x": 3.4, "y": 8.77 },
+					{ "time": 0.5, "x": 3.4, "y": 13.5 },
+					{ "time": 0.5333, "x": 3.4, "y": 9.71 },
+					{ "time": 0.6666, "x": 3.4, "y": 13.5 }
 				],
-				"translate": [
-					{ "time": 0, "x": -6.7, "y": -2.69 },
-					{ "time": 0.1666, "x": -9, "y": 3.99 },
-					{ "time": 0.3333, "x": -6.7, "y": -2.69 },
-					{ "time": 0.5, "x": -9, "y": 3.99 },
-					{ "time": 0.6666, "x": -6.7, "y": -2.69 }
+				"scale": [
+					{ "time": 0, "x": 0.838, "y": 0.759 }
 				]
 			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": -14.34 },
-					{ "time": 0.1666, "angle": -15.12 },
-					{ "time": 0.3333, "angle": -14.34 },
-					{ "time": 0.5, "angle": -15.12 },
-					{ "time": 0.6666, "angle": -14.34 }
-				],
+			"Happystar-chin.wound": {
 				"translate": [
-					{ "time": 0, "x": -2.09, "y": 5.03, "curve": "stepped" },
-					{ "time": 0.3333, "x": -2.09, "y": 5.03, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.09, "y": 5.03 }
+					{ "time": 0, "x": 16.31, "y": -23.8, "curve": "stepped" },
+					{ "time": 0.3333, "x": 16.31, "y": -23.8, "curve": "stepped" },
+					{ "time": 0.6666, "x": 16.31, "y": -23.8 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.8, "y": 0.8, "curve": "stepped" },
+					{ "time": 0.3333, "x": 0.8, "y": 0.8, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0.8, "y": 0.8 }
 				]
 			},
 			"Top": {
 				"rotate": [
 					{ "time": 0, "angle": 7.09 },
-					{ "time": 0.1666, "angle": 7.79 },
-					{ "time": 0.3333, "angle": 7.09 },
-					{ "time": 0.5, "angle": 7.79 },
+					{ "time": 0.1666, "angle": 12.84 },
+					{ "time": 0.3333, "angle": 7.13 },
+					{ "time": 0.5, "angle": 12.84 },
 					{ "time": 0.6666, "angle": 7.09 }
 				],
 				"translate": [
-					{ "time": 0, "x": -0.83, "y": -4.5, "curve": "stepped" },
-					{ "time": 0.1666, "x": -0.83, "y": -4.5, "curve": "stepped" },
-					{ "time": 0.3333, "x": -0.83, "y": -4.5, "curve": "stepped" },
-					{ "time": 0.5, "x": -0.83, "y": -4.5, "curve": "stepped" },
-					{ "time": 0.6666, "x": -0.83, "y": -4.5 }
+					{ "time": 0, "x": -0.83, "y": -2.5 },
+					{ "time": 0.1666, "x": -0.83, "y": -3.5 },
+					{ "time": 0.3333, "x": -0.83, "y": -3.67 },
+					{ "time": 0.5, "x": -0.83, "y": -3.5 },
+					{ "time": 0.6666, "x": -0.83, "y": -2.5 }
+				]
+			},
+			"Arm_R": {
+				"rotate": [
+					{ "time": 0, "angle": 11.05 },
+					{ "time": 0.1666, "angle": 15.35 },
+					{ "time": 0.3333, "angle": 8.7 },
+					{ "time": 0.5, "angle": 15.35 },
+					{ "time": 0.6666, "angle": 11.05 }
+				],
+				"translate": [
+					{ "time": 0, "x": -6.7, "y": -4.69 },
+					{ "time": 0.1666, "x": -8.21, "y": -4.19 },
+					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
+					{ "time": 0.5, "x": -8.21, "y": -4.19 },
+					{ "time": 0.6666, "x": -6.7, "y": -4.69 }
+				]
+			},
+			"Leg_R": {
+				"rotate": [
+					{ "time": 0, "angle": 349.14 },
+					{ "time": 0.1666, "angle": 340.46 },
+					{ "time": 0.3333, "angle": 348.99 },
+					{ "time": 0.5, "angle": 340.46 },
+					{ "time": 0.6666, "angle": 349.14 }
+				],
+				"translate": [
+					{ "time": 0, "x": -2.09, "y": 8.61, "curve": "stepped" },
+					{ "time": 0.6666, "x": -2.09, "y": 8.61 }
 				]
 			},
 			"Leg_L": {
 				"rotate": [
 					{ "time": 0, "angle": 357.18 },
-					{ "time": 0.1666, "angle": -3.22 },
-					{ "time": 0.3333, "angle": 357.18 },
-					{ "time": 0.5, "angle": -3.22 },
+					{ "time": 0.1666, "angle": 352.4 },
+					{ "time": 0.3333, "angle": 357.58 },
+					{ "time": 0.5, "angle": 352.4 },
 					{ "time": 0.6666, "angle": 357.18 }
 				]
 			},
 			"Arm_L": {
 				"rotate": [
 					{ "time": 0, "angle": 3.04 },
-					{ "time": 0.1666, "angle": 2.67 },
-					{ "time": 0.3333, "angle": 3.04 },
-					{ "time": 0.5, "angle": 2.67 },
+					{ "time": 0.1666, "angle": 0.75 },
+					{ "time": 0.3333, "angle": 3.4 },
+					{ "time": 0.5, "angle": 0.75 },
 					{ "time": 0.6666, "angle": 3.04 }
 				]
 			}

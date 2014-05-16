@@ -5,7 +5,6 @@ CIwResGroup
 	shared true
 
 	./sprites/hud/hud.group
-	./sprites/characters/star/star.group
 	./sprites/effects/effects.group
 	
 	./sprites/nugget_star_yellow.png
@@ -16,19 +15,12 @@ CIwResGroup
 	./sprites/buff_attack.png
 	./sprites/buff_block.png
 
-	./sprites/characters/bird02/bird_02.png
-	./sprites/characters/bird02/bird_02_wings_01.png
-	./sprites/characters/bird02/bird_02_wings_02.png
-	./sprites/characters/bird02/bird_02_wings_03.png
-	./sprites/characters/bird02/bird_02_hurt.png
-
-	./sprites/characters/bird03/bird_03.png
-	./sprites/characters/bird03/bird_03_wings_01.png
-	./sprites/characters/bird03/bird_03_wings_02.png
-	./sprites/characters/bird03/bird_03_wings_03.png
-	./sprites/characters/bird03/bird_03_hurt.png
-
 	./spine/title/output/title.png
-	./spine/bird_01/output/bird_01.png
+
 	./spine/star/output/star.png
+
+	./spine/bird_01/output/bird_01.png
+	./spine/bird_02/output/bird_02.png
+	./spine/bird_03/output/bird_03.png
+
 }

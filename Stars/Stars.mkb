@@ -245,7 +245,6 @@ files {
 	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
-	sprites/characters/star/star.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sprites/comp/comp.group
@@ -264,11 +263,17 @@ assets
 	spine/title/output/title.atlas
 	spine/title/output/title.json
 
+	spine/star/output/star.atlas
+	spine/star/output/star.json
+
 	spine/bird_01/output/bird_01.atlas
 	spine/bird_01/output/bird_01.json
 
-	spine/star/output/star.atlas
-	spine/star/output/star.json
+	spine/bird_02/output/bird_02.atlas
+	spine/bird_02/output/bird_02.json
+
+	spine/bird_03/output/bird_03.atlas
+	spine/bird_03/output/bird_03.json
 
 	test.group
 	base.group
@@ -280,7 +285,6 @@ assets
 	tutorials/tutorials.group
 	sprites/sprites.group
 	sprites/hud/hud.group
-	sprites/characters/star/star.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
 	sprites/comp/comp.group
@@ -297,7 +301,6 @@ assets
 	tutorials/tutorials.group.bin
 	sprites/sprites.group.bin
 	sprites/hud/hud.group.bin
-	sprites/characters/star/star.group.bin
 	sprites/menu/menusub.group.bin
 	sprites/effects/effects.group.bin
 	sprites/comp/comp.group.bin

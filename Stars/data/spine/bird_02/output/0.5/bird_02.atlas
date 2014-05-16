@@ -1,0 +1,76 @@
+
+bird_02.png
+size: 435,254
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+littlebluebird-beak
+  rotate: false
+  xy: 81, 40
+  size: 52, 41
+  orig: 52, 41
+  offset: 0, 0
+  index: -1
+littlebluebird-body
+  rotate: false
+  xy: 2, 119
+  size: 228, 135
+  orig: 235, 136
+  offset: 0, 1
+  index: -1
+littlebluebird-body-detail
+  rotate: false
+  xy: 171, 98
+  size: 39, 19
+  orig: 39, 19
+  offset: 0, 0
+  index: -1
+littlebluebird-claws
+  rotate: false
+  xy: 366, 230
+  size: 69, 24
+  orig: 69, 24
+  offset: 0, 0
+  index: -1
+littlebluebird-eye-closed
+  rotate: false
+  xy: 232, 127
+  size: 53, 47
+  orig: 53, 47
+  offset: 0, 0
+  index: -1
+littlebluebird-eye-open
+  rotate: false
+  xy: 311, 207
+  size: 53, 47
+  orig: 53, 47
+  offset: 0, 0
+  index: -1
+littlebluebird-tail
+  rotate: false
+  xy: 2, 2
+  size: 24, 23
+  orig: 24, 23
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-01
+  rotate: false
+  xy: 232, 176
+  size: 77, 78
+  orig: 77, 78
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-02
+  rotate: false
+  xy: 81, 83
+  size: 88, 34
+  orig: 88, 34
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-03
+  rotate: false
+  xy: 2, 27
+  size: 77, 90
+  orig: 77, 90
+  offset: 0, 0
+  index: -1

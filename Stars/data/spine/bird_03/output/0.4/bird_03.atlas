@@ -1,0 +1,76 @@
+
+bird_03.png
+size: 607,254
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bigbluebird-beak-01
+  rotate: false
+  xy: 153, 24
+  size: 53, 32
+  orig: 53, 32
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-02
+  rotate: false
+  xy: 555, 172
+  size: 40, 37
+  orig: 40, 37
+  offset: 0, 0
+  index: -1
+bigbluebird-body
+  rotate: false
+  xy: 2, 58
+  size: 334, 196
+  orig: 334, 196
+  offset: 0, 0
+  index: -1
+bigbluebird-body-detail
+  rotate: true
+  xy: 126, 2
+  size: 54, 25
+  orig: 54, 25
+  offset: 0, 0
+  index: -1
+bigbluebird-claws
+  rotate: false
+  xy: 338, 67
+  size: 93, 76
+  orig: 93, 76
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-closed
+  rotate: false
+  xy: 555, 211
+  size: 52, 43
+  orig: 52, 43
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-open
+  rotate: false
+  xy: 433, 100
+  size: 52, 43
+  orig: 52, 43
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-01
+  rotate: false
+  xy: 447, 145
+  size: 106, 109
+  orig: 106, 109
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-02
+  rotate: false
+  xy: 2, 11
+  size: 122, 45
+  orig: 127, 45
+  offset: 4, 0
+  index: -1
+bigbluebird-wing-03
+  rotate: false
+  xy: 338, 145
+  size: 107, 109
+  orig: 107, 109
+  offset: 0, 0
+  index: -1
