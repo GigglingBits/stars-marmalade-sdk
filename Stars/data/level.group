@@ -30,4 +30,5 @@ CIwResGroup
 
 	./spine/title/output/title.png
 	./spine/bird_01/output/bird_01.png
+	./spine/star/output/star.png
 }
