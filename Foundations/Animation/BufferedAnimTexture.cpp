@@ -88,7 +88,7 @@ void BufferedAnimTexture::SetAll(CIwFVec2 verts[], int vertcount) {
 
 void BufferedAnimTexture::SetAll(CIwSVec2 verts[], int vertcount) {
 	IW_CALLSTACK_SELF;
-	m_bEnableConversion = true;
+	SetScreenspaceMode();
 	EnsureBufferSize(vertcount);
 	CopyConvertShape(verts, vertcount);
 	SetAll(m_apxShapeConverted, vertcount);
@@ -102,7 +102,7 @@ void BufferedAnimTexture::SetShape(CIwFVec2 verts[], int vertcount) {
 
 void BufferedAnimTexture::SetShape(CIwSVec2 verts[], int vertcount) {
 	IW_CALLSTACK_SELF;
-	m_bEnableConversion = true;
+	SetScreenspaceMode();
 	EnsureBufferSize(vertcount);
 	CopyConvertShape(verts, vertcount);
 	SetShape(m_apxShapeConverted, vertcount);
@@ -158,4 +158,11 @@ CIwFVec2* BufferedAnimTexture::GetBufferedUVs() {
 uint32* BufferedAnimTexture::GetBufferedCols() {
 	UpdateBuffers();
 	return m_auiColBuffer;
+}
+
+void BufferedAnimTexture::SetScreenspaceMode() {
+	// screenspace mode enables conversion of streams to fixed point
+	// it also flips the Y axis because screenspace is inverted
+	m_bEnableConversion = true;
+	SetFlipY(true);
 }

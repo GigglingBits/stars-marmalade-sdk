@@ -41,7 +41,7 @@ void Button::SetTexture(Texture* texture) {
 	if (!texture) {
 		return;
 	}
-
+	
 	if (m_pxTexture) {
 		delete m_pxTexture;
 	}
@@ -101,7 +101,6 @@ const CIwRect& Button::GetPosition() {
 
 void Button::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
-
 	if (m_pxTexture) {
 		m_pxTexture->Update(frame.GetRealDurationMs());
 	}

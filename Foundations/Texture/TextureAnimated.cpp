@@ -43,9 +43,7 @@ void TextureAnimated::SetHorizontalFlip(bool flip) {
 }
 
 bool TextureAnimated::GetHorizontalFlip() {
-	IW_CALLSTACK_SELF;
-	IwError(("TextureAnimated::GetHorizontalFlip() not implemented"));
-	return false;
+	return m_xAnimation.GetFlipX();
 }
 
 void TextureAnimated::Update(uint16 timestep) {

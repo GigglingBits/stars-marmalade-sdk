@@ -170,11 +170,14 @@ bool SpineAnimation::GetFlipX() {
 }
 
 void SpineAnimation::SetFlipX(bool flip) {
-	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-x. No skeleton available."));
 	if (m_pxSkeleton) {
-		m_pxSkeleton->flipX = flip;
-		RebuildGeometry();
+		if (m_pxSkeleton->flipX != flip) {
+			m_pxSkeleton->flipX = flip;
+			RebuildGeometry();
+		}
+	} else {
+		IW_CALLSTACK_SELF;
+		IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-x. No skeleton available."));
 	}
 }
 
@@ -188,11 +191,14 @@ bool SpineAnimation::GetFlipY() {
 }
 
 void SpineAnimation::SetFlipY(bool flip) {
-	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-y. No skeleton available."));
 	if (m_pxSkeleton) {
-		m_pxSkeleton->flipY = flip;
-		RebuildGeometry();
+		if (m_pxSkeleton->flipY != flip) {
+			m_pxSkeleton->flipY = flip;
+			RebuildGeometry();
+		}
+	} else {
+		IW_CALLSTACK_SELF;
+		IwAssertMsg(MYAPP, m_pxSkeleton, ("Cannot set flip-y. No skeleton available."));
 	}
 }
 

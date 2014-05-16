@@ -53,6 +53,8 @@ private:
 	
 	void CopyConvertShape(CIwSVec2 verts[], int vertcount);
 	void CopyConvertXY();
+	
+	void SetScreenspaceMode();
 };
 
 #endif
