@@ -10,6 +10,9 @@ includepaths {
 
 files {
 	(Animation)
+	SpineResource.h
+	SpineResource.cpp
+
 	SpineAnimation.h
 	SpineAnimation.cpp
 

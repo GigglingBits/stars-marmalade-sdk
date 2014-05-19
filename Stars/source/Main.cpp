@@ -5,6 +5,7 @@
 #include "IwGx.h"
 #include "IwGxFont.h"
 #include "IwResHandlerWAV.h"
+#include "SpineResource.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
 #include "LocationServices.h"
@@ -93,6 +94,7 @@ void Initialize() {
 	PrintHeader();
 	
 	WriteandShowLog("Reading configuration...");
+	IW_CLASS_REGISTER(SpineResource);
 	Configuration::Initialize();
 	UserSettings::Initialize(Configuration::GetInstance().SettingsFile);
 	
@@ -134,6 +136,7 @@ void Terminate() {
 
 	UserSettings::Terminate();
 	Configuration::Terminate();
+	IW_CLASS_REMOVE(SpineResource);
 	DeviceInfo::Terminate();
 
 	IwGxTerminate();

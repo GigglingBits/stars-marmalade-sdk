@@ -61,7 +61,7 @@
 			</shape>
 			<port id="center" x="0.0" y="0.0" />
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
-			<texture animation="spine/star/output/star" />
+			<texture animation="spine_star" />
 		</body>
 		
 		<body id="nugget_01" type="nugget" resilience="1.0" revolve="1" drag="0">
@@ -126,7 +126,7 @@
 				<point x="0.0" y="0.35" />
 			</shape>
 			<fixture friction="0.6" restitution="0.5" density="0.2" />
-			<texture animation="spine/bird_01/output/bird_01" />
+			<texture animation="spine_bird_01" />
 		</body>
 		
 		<body id="bird_02" type="bird" resilience="1.0" revolve="0">
@@ -137,7 +137,7 @@
 				<point x="0.0" y="0.3" />
 			</shape>
 			<fixture friction="0.6" restitution="0.5" density="0.2" />
-			<texture animation="spine/bird_02/output/bird_02" />
+			<texture animation="spine_bird_02" />
 		</body>
 		
 		<body id="bird_03" type="bird" resilience="1.0" revolve="0">
@@ -148,7 +148,7 @@
 				<point x="0.0" y="0.55" />
 			</shape>
 			<fixture friction="0.6" restitution="0.5" density="0.2" />
-			<texture animation="spine/bird_03/output/bird_03" />
+			<texture animation="spine_bird_03" />
 		</body>
 	</bodies>
 		
@@ -334,7 +334,7 @@
 			<frame id="jupiter_locked" image="world_jupiter_locked"/>
 		</texture>
 		
-		<texture id="title_button" animation="spine/title/output/title"/>
+		<texture id="title_button" animation="spine_title"/>
 		
 		<texture id="background_stars" image="background_stars" />
 		<texture id="background_stars_far" image="background_stars_far" />

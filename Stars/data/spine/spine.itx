@@ -1,0 +1,34 @@
+SpineResource
+{
+	name	"spine_title"
+	atlas	"spine/title/output/title.atlas"
+	json	"spine/title/output/title.json"
+}
+
+SpineResource
+{
+	name	"spine_star"
+	atlas	"spine/star/output/star.atlas"
+	json	"spine/star/output/star.json"
+}
+
+SpineResource
+{
+	name	"spine_bird_01"
+	atlas	"spine/bird_01/output/bird_01.atlas"
+	json	"spine/bird_01/output/bird_01.json"
+}
+
+SpineResource
+{
+	name	"spine_bird_02"
+	atlas	"spine/bird_02/output/bird_02.atlas"
+	json	"spine/bird_02/output/bird_02.json"
+}
+
+SpineResource
+{
+	name	"spine_bird_03"
+	atlas	"spine/bird_03/output/bird_03.atlas"
+	json	"spine/bird_03/output/bird_03.json"
+}

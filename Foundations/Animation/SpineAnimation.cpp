@@ -1,5 +1,7 @@
 #include "SpineAnimation.h"
+#include "SpineResource.h"
 #include "IwDebug.h"
+#include "IwUtil.h"
 #include "Debug.h"
 
 #include <spine/extension.h>
@@ -17,12 +19,14 @@ SpineAnimation::~SpineAnimation() {
 	DestroySkeleton();
 }
 
-bool SpineAnimation::Load(const std::string& filepart) {
-	return Load(filepart + std::string(".atlas"), filepart + std::string(".json"));
-}
-
-bool SpineAnimation::Load(const std::string& atlasfile, const std::string& jsonfile) {
-	return LoadSkeleton(atlasfile, jsonfile);
+bool SpineAnimation::Load(const std::string& resourceid) {
+	SpineResource* resource = (SpineResource*)IwGetResManager()->GetResNamed(resourceid.c_str(), "SpineResource");
+	;
+	if (resource) {
+		return LoadSkeleton(resource->GetAtlasData(), resource->GetJsonData());
+	} else {
+		return false;
+	}
 }
 
 bool SpineAnimation::SetAnimation(const std::string& name) {
@@ -58,12 +62,12 @@ bool SpineAnimation::ConstainsAnimation(const std::string& name) {
 	return (bool) spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
 }
 
-bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile) {
+bool SpineAnimation::LoadSkeleton(const std::string& atlasdata, const std::string& jsondata) {
 	IW_CALLSTACK_SELF;
 	bool success = false;
-	if ((m_pxAtlas = spAtlas_createFromFile(atlasfile.c_str(), NULL))) {
+	if ((m_pxAtlas = spAtlas_create(atlasdata.c_str(), atlasdata.length(), "", NULL))) {
 		if ((m_pxSkeletonJson = spSkeletonJson_create(m_pxAtlas))) {
-			if ((m_pxSkeletonData = spSkeletonJson_readSkeletonDataFile(m_pxSkeletonJson, jsonfile.c_str()))) {
+			if ((m_pxSkeletonData = spSkeletonJson_readSkeletonData(m_pxSkeletonJson, jsondata.c_str()))) {
 				if ((m_pxSkeleton = spSkeleton_create(m_pxSkeletonData))) {
 					m_pxSkeleton->flipX = false;
 					m_pxSkeleton->flipY = false;
@@ -73,13 +77,13 @@ bool SpineAnimation::LoadSkeleton(const std::string& atlasfile, const std::strin
 					IwAssertMsg(MYAPP, false, ("Unable to create generic skeleton"));
 				}
 			} else {
-				IwAssertMsg(MYAPP, false, ("Unable to load skeleton data from: %s", jsonfile.c_str()));
+				IwAssertMsg(MYAPP, false, ("Unable to load skeleton data: %s", jsondata.c_str()));
 			}
 		} else {
 			IwAssertMsg(MYAPP, false, ("Unable to create JSON skeleton"));
 		}
 	} else {
-		IwAssertMsg(MYAPP, false, ("Unable to load atlas file: %s", atlasfile.c_str()));
+		IwAssertMsg(MYAPP, false, ("Unable to load atlas: %s", atlasdata.c_str()));
 	}
 	return success;
 }
@@ -348,23 +352,15 @@ extern "C" {
 	void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
 		IW_CALLSTACK_SELF;
 
-		// copy the path for manipulation
-		int len = strlen(path);
-		char* buf = new char[len + 1];
-		buf[len] = '\0';
-		strncpy(buf, path, len);
-		
-		// finding basename
-		char* basename = buf;
-		if (char* p = strrchr(basename, '/')) basename = &p[1];
-		if (char* p = strrchr(basename, '.')) (*p)='\0';
-		
-		CIwTexture* texture = (CIwTexture*)IwGetResManager()->GetResNamed(basename, "CIwTexture");
+		char* filename = new char[strlen(path) + 1];
+		IwPathGetFilename(path, filename, false);
+
+		CIwTexture* texture = (CIwTexture*)IwGetResManager()->GetResNamed(filename, "CIwTexture");
 		self->rendererObject = texture;
 		self->width = texture->GetWidth();
 		self->height = texture->GetHeight();
 		
-		delete [] buf;
+		delete [] filename;
 	}
 	
 	void _spAtlasPage_disposeTexture (spAtlasPage* self) {
@@ -377,7 +373,9 @@ extern "C" {
 	
 	char* _spUtil_readFile (const char* path, int* length) {
 		IW_CALLSTACK_SELF;
-
-		return _readFile(path, length);
+		IwAssertMsg(MYAPP, false, ("Attempting to read file: '%s'. Contents should have been created  via the resource system.", path));
+		*length = 0;
+		return NULL;
+		//return _readFile(path, length);
 	}
 }

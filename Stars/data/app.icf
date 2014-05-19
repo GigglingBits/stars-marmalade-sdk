@@ -50,7 +50,7 @@ IOSDispScaleFactor=200
 DispFixRot=Landscape		# locked because of the gyroscope
 
 MemSize=18000000			# main heap; the resource heap in Main.cpp must also fit in here
-MemSizeDebug=28000000		# debug / resource builder
+MemSizeDebug=38000000		# debug / resource builder
 
 SysTraceToFile=0
 

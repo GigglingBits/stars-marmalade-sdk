@@ -18,7 +18,7 @@
         </body>
       </sprite>
 
-      <!-- treferenced sprite -->
+      <!-- referenced sprite -->
       <sprite id="target" body="mybody" xpos="2" ypos="3" angle="4.0" />
     </level>
   </levels>

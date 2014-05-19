@@ -24,8 +24,7 @@ public:
 	SpineAnimation();
 	virtual ~SpineAnimation();
 	
-	bool Load(const std::string& filepart);
-	bool Load(const std::string& atlasfile, const std::string& jsonfile);
+	bool Load(const std::string& resourceid);
 
 	bool SetAnimation(const std::string& name);
 	bool ConstainsAnimation(const std::string& name);
@@ -44,7 +43,7 @@ public:
 #endif
 	
 private:
-	bool LoadSkeleton(const std::string& atlasfile, const std::string& jsonfile);
+	bool LoadSkeleton(const std::string& atlasdata, const std::string& jsondata);
 	void DestroySkeleton();
 
 	CIwTexture* ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
