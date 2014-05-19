@@ -31,6 +31,13 @@
 //--------------------------------------------------------------------------
 // Global helpers
 //--------------------------------------------------------------------------
+void UpdateScreen() {
+	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
+	IwGxTickUpdate();
+	IwGxFlush();
+	IwGxSwapBuffers();
+}
+
 void WriteandShowLog(const std::string& message, bool clear = false) {
 	static std::string s_Messages;
 
@@ -38,17 +45,18 @@ void WriteandShowLog(const std::string& message, bool clear = false) {
 		s_Messages.clear();
 	}
 
+	if (!Configuration::GetInstance().ShowStats) {
+		return;
+	}
+	
 	if (!message.empty()) {
 		std::ostringstream oss;
 		oss << s_Messages << message << std::endl;
 		s_Messages = oss.str();
 		
 		IwGxPrintString(50, 50, s_Messages.c_str());
-		
-		IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
-		IwGxTickUpdate();
-		IwGxFlush();
-		IwGxSwapBuffers();
+
+		UpdateScreen();
 	}
 }
 
@@ -85,19 +93,15 @@ void Initialize() {
 		pMat->SetBlendMode(CIwMaterial::BLEND_BLEND);
 		
 		IwGxSetColClear(0x20, 0x20, 0x20, 0x00);
-		IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
-		IwGxFlush();
-		IwGxSwapBuffers();
 	}
 	DeviceInfo::Initialize();
-	
-	PrintHeader();
-	
-	WriteandShowLog("Reading configuration...");
+		
 	IW_CLASS_REGISTER(SpineResource);
 	Configuration::Initialize();
 	UserSettings::Initialize(Configuration::GetInstance().SettingsFile);
 	
+	PrintHeader();
+
 	WriteandShowLog("Initializing foundation...");
 	IwResManagerInit();
 	IwGxFontInit();
