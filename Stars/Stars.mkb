@@ -19,6 +19,7 @@ defines {
 
 deployments {
 	iphone-enable-4inch-retina=1
+	auto-derbh
 }
 
 packages {
@@ -42,6 +43,7 @@ subprojects {
 
 	iwgxfont
 
+	derbh
 	tinyxml
 }
 
