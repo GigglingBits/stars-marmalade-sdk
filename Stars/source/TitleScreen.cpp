@@ -35,6 +35,8 @@ void TitleScreen::Initialize() {
 	m_xPanelSocial.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_achievements"));
 
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
+	m_xButtonTitle.SetTextureFrame("enter");
+	
     m_xButtonMovie.SetTexture(FactoryManager::GetTextureFactory().Create("button_movie"));
 
 	PageSettings ps;

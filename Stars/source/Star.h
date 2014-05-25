@@ -62,6 +62,7 @@ private:
 	std::queue<CIwFVec2> m_xPath;
 	float m_fPathSpeed;
 	float m_fAnchorLine;
+	bool m_bAllowFlip;
 	
 public:
 	Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
@@ -87,6 +88,8 @@ public:
 private:
 	void ClearPath();
 
+	void AllowTextureFlip(bool allow);
+	
 	void SetMotionTextureFrame(const std::string& name);
 	void SetAttackTextureFrame(const std::string& name);
 	void ClearAttackTextureFrame();

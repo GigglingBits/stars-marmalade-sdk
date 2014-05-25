@@ -18,6 +18,8 @@ void Star::RetractingState::Initialize() {
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
+	
+	m_rxContext.m_bAllowFlip = false;
 }
 
 void Star::RetractingState::FollowPath() {
@@ -65,6 +67,8 @@ void Star::FollowState::Initialize() {
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
+	
+	m_rxContext.m_bAllowFlip = true;
 }
 
 void Star::FollowState::FollowPath() {
@@ -161,6 +165,8 @@ void Star::RecoverState::Initialize() {
 	m_rxContext.MoveDragging(dragtarget);
 	
 	m_uiRemainingTime = 2000; // sleep for 2 seconds
+	
+	m_rxContext.m_bAllowFlip = true;
 }
 
 void Star::RecoverState::FollowPath() {
