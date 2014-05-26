@@ -8,7 +8,7 @@ worldmargin=2			# add 2 meters of margin around the wold
 
 buffspeed=0.5			# meters per second
 
-pathspeed=15			# meters per second
+pathspeed=12			# meters per second
 pathmaxlength=50		# max length of the path in meters
 
 bodies=bodies.xml

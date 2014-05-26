@@ -295,7 +295,7 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 	// create buff
 	CIwFVec2 speed(0.0f, Configuration::GetInstance().BuffSpeed);
 	EnqueueCreateBody(buff, pos, speed);
- */
+*/
 }
 
 void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
