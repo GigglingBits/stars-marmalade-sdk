@@ -8,7 +8,7 @@
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL), m_bAllowFlip(false) {
+	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL), m_bAutoOrient(false) {
 
 	SetGravityScale(0.0f);
 		
@@ -42,8 +42,8 @@ const char* Star::TypeName() {
 	return type;
 }
 
-void Star::AllowTextureFlip(bool allow) {
-	m_bAllowFlip = allow;
+void Star::AutoOrientTexture(bool allow) {
+	m_bAutoOrient = allow;
 }
 
 void Star::OnColliding(Body& thisbody, Body& otherbody) {
@@ -63,7 +63,7 @@ void Star::OnUpdate(const FrameData& frame) {
 	}
 	
 	// flip the texture according to movement
-	if (!m_bAllowFlip) {
+	if (!m_bAutoOrient) {
 		// look right
 		if (Texture* t = GetTexture()) {
 			t->SetHorizontalFlip(false);

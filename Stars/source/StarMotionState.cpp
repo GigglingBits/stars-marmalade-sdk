@@ -19,7 +19,7 @@ void Star::RetractingState::Initialize() {
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
 	
-	m_rxContext.m_bAllowFlip = false;
+	m_rxContext.m_bAutoOrient = false;
 }
 
 void Star::RetractingState::FollowPath() {
@@ -68,7 +68,7 @@ void Star::FollowState::Initialize() {
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
 	
-	m_rxContext.m_bAllowFlip = true;
+	m_rxContext.m_bAutoOrient = true;
 }
 
 void Star::FollowState::FollowPath() {
@@ -166,7 +166,7 @@ void Star::RecoverState::Initialize() {
 	
 	m_uiRemainingTime = 2000; // sleep for 2 seconds
 	
-	m_rxContext.m_bAllowFlip = true;
+	m_rxContext.m_bAutoOrient = true;
 }
 
 void Star::RecoverState::FollowPath() {
