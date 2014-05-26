@@ -281,7 +281,7 @@ bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 
 void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 	IW_CALLSTACK_SELF;
-
+/*
 	// evaluate probability
 	float probability = m_xDust.GetDustFillPercent();
 	float random = (float)(rand() % 100) / 100.0f;
@@ -295,6 +295,7 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 	// create buff
 	CIwFVec2 speed(0.0f, Configuration::GetInstance().BuffSpeed);
 	EnqueueCreateBody(buff, pos, speed);
+ */
 }
 
 void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
