@@ -93,10 +93,10 @@ protected:
 	virtual void OnColliding(Body& thisbody, Body& otherbody);
 	
 public:
-	struct BuffArgs {
+	struct EmitBuffArgs {
 		CIwFVec2 pos;
 	};
-	MulticastEvent<Body, BuffArgs> BuffRequested;
+	MulticastEvent<Body, EmitBuffArgs> EmitBuffRequested;
 
 	struct EffectArgs {
 		std::string id;

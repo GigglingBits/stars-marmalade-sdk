@@ -227,9 +227,9 @@ bool Body::HitTest(const CIwFVec2& position) {
 
 void Body::EmitBuff() {
 	IW_CALLSTACK_SELF;
-	BuffArgs args;
+	EmitBuffArgs args;
 	args.pos = GetPosition();
-	BuffRequested.Invoke(*this, args);
+	EmitBuffRequested.Invoke(*this, args);
 }
 
 void Body::ShowEffect(const std::string& effect) {

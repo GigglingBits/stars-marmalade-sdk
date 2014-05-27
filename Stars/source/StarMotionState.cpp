@@ -33,7 +33,7 @@ void Star::RetractingState::Collide(Body& body) {
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollectSingle;
-		args.amount = 10;
+		args.amount = 2;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {
@@ -83,7 +83,7 @@ void Star::FollowState::Collide(Body& body) {
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollect;
-		args.amount = 10;
+		args.amount = 5;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {

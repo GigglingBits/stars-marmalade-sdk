@@ -99,10 +99,12 @@ private:
 	bool CheckOutOfUniverse(const CIwFVec2& pos);
 	bool CheckOutOfBounds(const CIwFVec2& pos, float margin);
 
+	int GetDustMultiplier(int queuedcount);
+
 	void EmitBuff(const CIwFVec2& pos);
 	
 	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
-	void BuffRequestedEventHandler(const Body& sender, const Body::BuffArgs& args);
+	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);
 
 public:

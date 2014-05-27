@@ -11,6 +11,12 @@ public:
 	static const char* TypeName();
 	
 	virtual bool BeginDragging(const CIwFVec2& target);
+	
+public:
+	struct BuffArgs {
+		CIwFVec2 pos;
+	};
+	MulticastEvent<Body, BuffArgs> EmitBuff;
 };
 
 #endif

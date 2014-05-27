@@ -77,7 +77,7 @@ void GameFoundation::Add(Body* body) {
 		m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
 	}
 
-	body->BuffRequested.AddListener(this, &GameFoundation::BuffRequestedEventHandler);
+	body->EmitBuffRequested.AddListener(this, &GameFoundation::BuffRequestedEventHandler);
 	body->EffectRequested.AddListener(this, &GameFoundation::EffectRequestedEventHandler);
 
 	Add((Sprite*)body);
@@ -145,7 +145,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 				m_pxStar = NULL;
 			}
 			if (Body* body = dynamic_cast<Body*>(sprite)) {
-				body->BuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
+				body->EmitBuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
 				body->EffectRequested.RemoveListener(this, &GameFoundation::EffectRequestedEventHandler);
 			}
 			
@@ -197,8 +197,18 @@ float GameFoundation::GetDustQueuedPercent() {
 	return m_xDust.GetQueuedDustPercent();
 }
 
+int GameFoundation::GetDustMultiplier(int queuedcount) {
+	// the longer the queue, the more points to get
+	if (queuedcount < 4) { return 1; }
+	if (queuedcount < 7) { return 2; }
+	if (queuedcount < 9) { return 4; }
+	if (queuedcount < 11) { return 10; }
+	if (queuedcount < 15) { return 20; }
+	return queuedcount * 2;
+}
+
 void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
-	int multipliedamount = (m_xDust.GetQueuedDustCount() + 1) * amount;
+	int multipliedamount = amount * GetDustMultiplier(m_xDust.GetQueuedDustCount() + 1);
 	m_xDust.EnqueueDust(multipliedamount);
 	CreateSplashNumber(multipliedamount, pos, 0xffccfaff);
 }
@@ -324,7 +334,7 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 	}
 }
 
-void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::BuffArgs& args) {
+void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args) {
 	EmitBuff(args.pos);
 }
 
