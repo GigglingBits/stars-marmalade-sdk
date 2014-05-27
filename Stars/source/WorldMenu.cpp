@@ -45,6 +45,11 @@ bool WorldMenu::CheckWorldOpen(LevelIterator::WorldId world) {
 	if (world == it.GetFirstWorld()) {
 		return true;
 	}
+
+	// unlocked by configuration
+	if (Configuration::GetInstance().UnlockAll) {
+		return true;
+	}
 	
 	// check if there is an unachieved level in the previous world
 	LevelIterator::WorldId previousworld = it.GetPreviousWorld(world);

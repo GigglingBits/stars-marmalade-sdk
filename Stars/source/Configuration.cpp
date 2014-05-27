@@ -13,6 +13,12 @@ Configuration::Configuration() {
 		ShowStats = 0;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "unlockall", &tmpint)) {
+		UnlockAll = tmpint == 1;
+	} else {
+		UnlockAll = 0;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {
 		BodiesFile = tmpstr;
 	} else {

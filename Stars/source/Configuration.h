@@ -16,6 +16,7 @@ public:
 
 public:
 	bool ShowStats;
+	bool UnlockAll;
 
 	double MaxVisibleWorldSize;
 	double WorldMargin;

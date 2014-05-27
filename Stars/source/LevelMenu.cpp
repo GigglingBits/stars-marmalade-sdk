@@ -214,7 +214,7 @@ void LevelMenu::ApplyGroup(int groupid) {
 		int stars = GetAchievedStars(m_eWorldId, level);
 		m_apxButtons[i]->SetLevel(level,
 			CheckLevelExists(m_eWorldId, level),
-			stars > 0 || level == GetFirstUnachievedLevel(),
+			stars > 0 || level == GetFirstUnachievedLevel() || Configuration::GetInstance().UnlockAll,
 			stars);
 	}
 
