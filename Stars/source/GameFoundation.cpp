@@ -202,9 +202,9 @@ int GameFoundation::GetDustMultiplier(int queuedcount) {
 	if (queuedcount < 4) { return 1; }
 	if (queuedcount < 7) { return 2; }
 	if (queuedcount < 9) { return 4; }
-	if (queuedcount < 11) { return 10; }
-	if (queuedcount < 15) { return 20; }
-	return (queuedcount / 2) * 2 * 2; // double of queue count, but stepwise
+	if (queuedcount < 11) { return 6; }
+	if (queuedcount < 15) { return 10; }
+	return ((queuedcount - 5) / 2) * 2 * 2; // stepwise double of queue count, starting with 20
 }
 
 void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
