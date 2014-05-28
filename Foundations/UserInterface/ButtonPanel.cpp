@@ -40,6 +40,14 @@ bool ButtonPanel::IsPanelOpen() {
 	return m_bPanelOpen;
 }
 
+void ButtonPanel::SetAlpha(uint32 alpha) {
+	m_xCurtain.SetAlpha(alpha);
+}
+
+void ButtonPanel::SetFadeTime(uint32 fadetime) {
+	m_xCurtain.SetFadeTime(fadetime);
+}
+
 bool ButtonPanel::IsEnabled() {
 	return m_bPanelEnabled;
 }

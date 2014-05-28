@@ -1,10 +1,10 @@
-#ifndef __APPPANEL_H__
-#define __APPPANEL_H__
+#ifndef __LEVELPAUSEDPANEL_H__
+#define __LEVELPAUSEDPANEL_H__
 
 #include "ButtonPanel.h"
 #include "Button.h"
 
-class AppPanel : public ButtonPanel {
+class LevelPausedPanel : public ButtonPanel {
 private:
 	Button m_xBtnQuit;
 	Button m_xBtnRestart;
@@ -12,7 +12,7 @@ private:
 	Button m_xBtnReloadLocal;
 
 public:
-	AppPanel(ButtonCommandId cmdid, s3eKey key, long userdata = 0);
+	LevelPausedPanel(ButtonCommandId cmdid, s3eKey key, long userdata = 0);
 	virtual void Initialize();
 };
 

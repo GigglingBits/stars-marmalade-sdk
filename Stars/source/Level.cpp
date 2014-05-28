@@ -16,7 +16,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xGame(dustrequirement, worldsize),
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xHud(m_xGame),
-	m_xAppPanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
+	m_xPausePanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
 	m_xBackgroundClouds(m_xGame),
@@ -26,7 +26,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
 	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
 	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
-	m_xAppPanel.StateChanged.AddListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
+	m_xPausePanel.StateChanged.AddListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
@@ -62,7 +62,7 @@ Level::~Level() {
 	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
 	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
-	m_xAppPanel.StateChanged.RemoveListener<Level>(this, &Level::AppPanelStateChangedEventHandler);
+	m_xPausePanel.StateChanged.RemoveListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
 	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
@@ -71,8 +71,8 @@ Level::~Level() {
 void Level::Initialize() {
 	m_xGame.Initialize();
 	
-	m_xAppPanel.Initialize();
-	m_xAppPanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
+	m_xPausePanel.Initialize();
+	m_xPausePanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 
 	m_xHud.Initialize();
 	m_xBackgroundStars.Initialize();
@@ -159,7 +159,7 @@ void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CI
 void Level::SetPaused(bool paused) {
 	IwTrace(MYAPP, (paused ? "Pause" : "Unpause"));
 	if (paused) {
-		m_xAppPanel.OpenPanel();
+		m_xPausePanel.OpenPanel();
 		m_xHud.SetEnabled(false);
 	} else {
 		m_xHud.SetEnabled(true);
@@ -285,7 +285,7 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
 	uint32 btnsize = extents / 10;
 	uint32 btnmargin = extents / 30;
-	m_xAppPanel.GetMainButton().SetPosition(
+	m_xPausePanel.GetMainButton().SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
 				btnmargin, btnsize, btnsize));
 	
@@ -299,7 +299,7 @@ void Level::OnDoLayout(const CIwSVec2& screensize) {
 void Level::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	m_xAppPanel.Update(frame);
+	m_xPausePanel.Update(frame);
 
 	if (IsPaused()) {
 		return;
@@ -334,7 +334,7 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xBackgroundStars.Render(renderer, frame);
 	m_xGame.Render(renderer, frame);
 
-	m_xAppPanel.Render(renderer, frame);	
+	m_xPausePanel.Render(renderer, frame);
 	m_xInteractor.Render(renderer, frame);
 
 	m_xHud.Render(renderer, frame);
@@ -352,7 +352,7 @@ int32 Level::AppPausedCallback(void* systemData, void* userData) {
 	return 0;
 }
 
-void Level::AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
+void Level::PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {
 	SetPaused(args.IsPanelOpen);
 }
 

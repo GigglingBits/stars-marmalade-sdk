@@ -39,6 +39,9 @@ private:
 	void PressedEventHandler(const Button& sender, const Button::EventArgs& args);
 
 protected:
+	void SetAlpha(uint32 alpha);
+	void SetFadeTime(uint32 fadetime);
+	
 	void AddButton(Button& button);
 
 	virtual void OnUpdate(const FrameData& frame);

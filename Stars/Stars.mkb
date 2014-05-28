@@ -54,16 +54,14 @@ files {
 	App.h
 	App.cpp
 
-	NaviPanel.h
-	NaviPanel.cpp
-	AppPanel.h
-	AppPanel.cpp
-
 	Configuration.h
 	Configuration.cpp
 
 	LocationServices.h
 	LocationServices.cpp
+
+	NaviPanel.h
+	NaviPanel.cpp
 
 	PageManager.h
 	PageManager.cpp
@@ -119,6 +117,8 @@ files {
 	LevelHudNumber.cpp
 	LevelDustVial.h
 	LevelDustVial.cpp
+	LevelPausedPanel.h
+	LevelPausedPanel.cpp
 
 	LevelInteractor.h
 	LevelInteractor.cpp

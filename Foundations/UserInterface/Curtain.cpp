@@ -28,6 +28,14 @@ void Curtain::Open() {
 	m_iCountdown = m_uiFadeTime;
 }
 
+void Curtain::SetAlpha(uint32 alpha) {
+	m_uiAlpha = alpha;
+}
+
+void Curtain::SetFadeTime(uint32 fadetime) {
+	m_uiFadeTime = fadetime;
+}
+
 void Curtain::OnUpdate(const FrameData& frame) {
 	if (m_eState == eStateOpening) {
 		m_iCountdown -= frame.GetRealDurationMs();

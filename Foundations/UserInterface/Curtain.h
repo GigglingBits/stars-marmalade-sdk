@@ -25,6 +25,9 @@ public:
 
 	void Close();
 	void Open();
+	
+	void SetAlpha(uint32 alpha);
+	void SetFadeTime(uint32 fadetime);
 
 protected:
 	virtual void OnUpdate(const FrameData& frame);

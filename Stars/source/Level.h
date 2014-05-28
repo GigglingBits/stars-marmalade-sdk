@@ -3,7 +3,7 @@
 
 #include "Page.h"
 #include "Body.h"
-#include "AppPanel.h"
+#include "LevelPausedPanel.h"
 #include "GameFoundation.h"
 #include "LevelBackground.h"
 #include "PageBackground.h"
@@ -64,7 +64,7 @@ private:
 	bool m_bIsPaused;
 	bool m_bIsSetteling;
 	
-	AppPanel m_xAppPanel;
+	LevelPausedPanel m_xPausePanel;
 	LevelHud m_xHud;
 
 	LevelInteractor m_xInteractor;
@@ -125,7 +125,7 @@ private:
 	void EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args);
 	void EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& sender, const int& dummy);
 	
-	void AppPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
+	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
 	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
