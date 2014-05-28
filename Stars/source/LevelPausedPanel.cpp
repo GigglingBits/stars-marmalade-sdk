@@ -10,17 +10,17 @@ m_xBtnQuit(eButtonCommandIdQuitLevel, s3eKeyAbsGameD),
 m_xBtnRestart(eButtonCommandIdRestartLevel, s3eKeyR),
 m_xBtnReloadLocal(eButtonCommandIdReload, s3eKeyL, 0),
 m_xBtnReload(eButtonCommandIdReload, s3eKeyD, 1) {
-	SetAlpha(0x66);
+	SetAlpha(0x88);
 }
 
 void LevelPausedPanel::Initialize() {
 	uint32 textcol = 0xffccfaff;
 
-	m_xBtnRestart.SetText("Restart", textcol);
+	m_xBtnRestart.SetText("Retry", textcol, Renderer::eFontTypeLarge);
 	m_xBtnRestart.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_restart"));
 	AddButton(m_xBtnRestart);
 	
-	m_xBtnQuit.SetText("Quit", textcol);
+	m_xBtnQuit.SetText("Quit level", textcol, Renderer::eFontTypeLarge);
 	m_xBtnQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_quit"));
 	AddButton(m_xBtnQuit);
 
@@ -37,7 +37,7 @@ void LevelPausedPanel::Initialize() {
 
 void LevelPausedPanel::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int width = extents / 2;
+	int width = extents * 2 / 3;
 	int height = width / 2;
 	int space = height / 20;
 	

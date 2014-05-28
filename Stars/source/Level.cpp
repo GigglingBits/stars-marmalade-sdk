@@ -161,6 +161,7 @@ void Level::SetPaused(bool paused) {
 	if (paused) {
 		m_xPausePanel.OpenPanel();
 		m_xHud.SetEnabled(false);
+		HideBannerText();
 	} else {
 		m_xHud.SetEnabled(true);
 	}
