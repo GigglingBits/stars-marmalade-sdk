@@ -18,11 +18,10 @@ private:
 
 	PageBackground m_xBackground;
 	Button m_xButtonTitle;
-	Button m_xButtonMovie;
+	Button m_xButtonFacebook;
 
-	OptionsPanel m_xPanelOptions;
-	SocialPanel m_xPanelSocial;
-
+	bool m_bHasFacebookButton;
+	
 public:
 	TitleScreen();
 	virtual ~TitleScreen();
@@ -36,7 +35,6 @@ protected:
 
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ButtonPanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 };
 
 #endif

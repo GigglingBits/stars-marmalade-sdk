@@ -260,16 +260,12 @@
 			<frame id="03" image="particle_white_star_3" />
 		</texture>
 
-		<texture id="button_social" image="button_social" />
+		<texture id="button_facebook" image="button_facebook" />
 		<texture id="button_achievements" image="button_achievements" />
 		<texture id="button_leaderboards" image="button_leaderboards" />
 		
 		<texture id="button_options" image="button_options" />
 		<texture id="button_credits" image="button_credits" />
-		<texture id="button_music" image="button_music" />
-		<texture id="button_music_mute" image="button_music_mute" />
-		<texture id="button_soundfx_mute" image="button_soundfx_mute" />
-		<texture id="button_soundfx" image="button_soundfx" />
 		
 		<texture id="navipanel">
 			<frame id="on" image="navidot_filled"/>

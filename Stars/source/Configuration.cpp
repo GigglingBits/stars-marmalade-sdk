@@ -54,7 +54,13 @@ Configuration::Configuration() {
 	} else {
 		HttpBodiesFile = "";
 	}
-
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "facebookpage", tmpstr)) {
+		FacebookPage = tmpstr;
+	} else {
+		FacebookPage = "";
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httplevels", tmpstr)) {
 		HttpLevelsFile = tmpstr;
 	} else {

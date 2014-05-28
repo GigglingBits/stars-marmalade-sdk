@@ -36,6 +36,8 @@ public:
 	std::string HttpBodiesFile;
 	std::string HttpLevelsFile;
 	
+	std::string FacebookPage;
+	
 	std::string SettingsFile;
 };
 

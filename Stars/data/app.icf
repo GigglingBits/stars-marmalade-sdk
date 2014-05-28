@@ -18,6 +18,8 @@ levels=levels.xml
 httpbodies="http://dl.dropboxusercontent.com/s/3igckh08mxx9gy4/bodies.xml?dl=1"
 httplevels="http://dl.dropboxusercontent.com/s/rk4wvu0f2k8bmpy/levels.xml?dl=1"
 
+facebookpage="http://www.facebook.com/1447726568800401"
+
 intromovie="stories/intro.mp4"
 menusong="music/jst.Port_Saint_Johns.mp3"
 levelsong="music/csc.Empire_Games.mp3"

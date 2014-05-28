@@ -33,6 +33,7 @@ enum ButtonCommandId {
 	eButtonCommandIdCredits,
 	eButtonCommandIdToggleHud,
 	eButtonCommandIdReload,
+	eButtonCommandIdFacebook,
 	
 	// star game actions
 	eButtonCommandIdStarBlock,
