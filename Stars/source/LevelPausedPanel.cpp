@@ -1,5 +1,6 @@
 #include "LevelPausedPanel.h"
 #include "FactoryManager.h"
+#include "Configuration.h"
 
 #include "Debug.h"
 
@@ -13,13 +14,40 @@ m_xBtnReload(eButtonCommandIdReload, s3eKeyD, 1) {
 }
 
 void LevelPausedPanel::Initialize() {
-	m_xBtnReloadLocal.SetTexture(FactoryManager::GetTextureFactory().Create("button_reload_local"));
-	m_xBtnReload.SetTexture(FactoryManager::GetTextureFactory().Create("button_reload"));
-	m_xBtnQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
-	m_xBtnRestart.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
+	uint32 textcol = 0xffccfaff;
 
-	AddButton(m_xBtnQuit);
-	AddButton(m_xBtnReloadLocal);
-	AddButton(m_xBtnReload);
+	m_xBtnRestart.SetText("Restart", textcol);
+	m_xBtnRestart.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_restart"));
 	AddButton(m_xBtnRestart);
+	
+	m_xBtnQuit.SetText("Quit", textcol);
+	m_xBtnQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_quit"));
+	AddButton(m_xBtnQuit);
+
+	if (Configuration::GetInstance().UnlockAll) {
+		m_xBtnReload.SetText("Reload Dropbox", textcol);
+		m_xBtnReload.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_reload"));
+		AddButton(m_xBtnReload);
+	
+		m_xBtnReloadLocal.SetText("Reload Local", textcol);
+		m_xBtnReloadLocal.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_reload_local"));
+		AddButton(m_xBtnReloadLocal);
+	}
+}
+
+void LevelPausedPanel::OnDoLayout(const CIwSVec2& screensize) {
+	int extents = GetScreenExtents();
+	int width = extents / 2;
+	int height = width / 2;
+	int space = height / 20;
+	
+	CIwRect rect(0, 0, width, height);
+	int count = GetButtonCount();
+	for (int i = 0; i < count; i++) {
+		if (Button* p = GetButton(i)) {
+			rect.x = (screensize.x - width) / 2;
+			rect.y = (screensize.y - (count * (height + space) - space)) / 2 + (i * (height + space));
+			p->SetPosition(rect);
+		}
+	}
 }

@@ -80,6 +80,17 @@ void ButtonPanel::AddButton(Button& button) {
 	m_iButtonCount++;
 }
 
+int ButtonPanel::GetButtonCount() {
+	return m_iButtonCount;
+}
+
+Button* ButtonPanel::GetButton(int position) {
+	if (position >= m_iButtonCount || position < 0) {
+		return NULL;
+	}
+	return m_apxButtons[position];
+}
+
 void ButtonPanel::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
 	int width = extents / 7;	 

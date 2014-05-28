@@ -309,10 +309,13 @@
 		<texture id="button_movie" image="button_movie" />
 		<texture id="button_toggle_hud" image="button_toggle_hud" />
 		<texture id="button_restart" image="button_restart" />
-		<texture id="button_reload" image="button_reload" />
-		<texture id="button_reload_local" image="button_reload_local" />
 		<texture id="button_next" image="button_play" />
 		<texture id="button_quit" image="button_quit" />
+
+		<texture id="button_pause_restart" image="button_long_1" />
+		<texture id="button_pause_quit" image="button_long_2" />
+		<texture id="button_pause_reload" image="button_long_1" />
+		<texture id="button_pause_reload_local" image="button_long_2" />
 		
 		<texture id="button_arrow_left" image="button_arrow_left" />
 		<texture id="button_arrow_right" image="button_arrow_right" />
