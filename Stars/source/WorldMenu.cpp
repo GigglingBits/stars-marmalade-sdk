@@ -108,7 +108,7 @@ void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
 	m_xNaviPanel.SetPosition(button);
 	
     // back button
-	uint32 btnsize = extents / 10;
+	uint32 btnsize = extents / 8;
 	uint32 btnmargin = extents / 30;
 	m_xButtonBack.SetPosition(
 		CIwRect(screensize.x - (btnsize + btnmargin),
