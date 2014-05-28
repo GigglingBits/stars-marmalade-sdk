@@ -53,6 +53,9 @@ files {
 	Main.cpp
 	App.h
 	App.cpp
+
+	NaviPanel.h
+	NaviPanel.cpp
 	AppPanel.h
 	AppPanel.cpp
 
@@ -83,13 +86,6 @@ files {
 	LevelMenuButton.cpp
 	Preamble.h
 	Preamble.cpp
-
-	SocialPanel.h
-	SocialPanel.cpp
-	OptionsPanel.h
-	OptionsPanel.cpp
-	NaviPanel.h
-	NaviPanel.cpp
 
 	["Sources/Test"]
 	(source)

@@ -4,8 +4,6 @@
 #include "Page.h"
 #include "PageBackground.h"
 #include "Button.h"
-#include "SocialPanel.h"
-#include "OptionsPanel.h"
 #include "IwList.h"
 #include "Body.h"
 #include "Camera.h"
