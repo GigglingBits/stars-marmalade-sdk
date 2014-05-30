@@ -1,5 +1,6 @@
 #include <sstream>
 
+#include "Main.h"
 #include "GameFoundation.h"
 #include "SplashText.h"
 #include "FactoryManager.h"
@@ -256,15 +257,15 @@ void GameFoundation::CreatePointSplash(int amount, int bonusmultiplier, const CI
 	std::ostringstream oss;
 	if (amount > 0) {
 		oss << amount;
-		CreateSplashText(oss.str(), position, 0xffccfaff, Renderer::eFontTypeNormal);
+		CreateSplashText(oss.str(), position, GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeNormal);
 		if (bonusmultiplier > 1) {
 			oss.str(std::string());
-			oss << bonusmultiplier << "x";
-			CreateSplashText(oss.str(), position + CIwFVec2(0.3f, -0.1f), 0xff00cc00, Renderer::eFontTypeSmall);
+			oss << "x" << bonusmultiplier;
+			CreateSplashText(oss.str(), position + CIwFVec2(0.3f, -0.1f), GAME_COLOUR_FONT_BONUS, Renderer::eFontTypeSmall);
 		}
 	} else {
 		oss << amount;
-		CreateSplashText(oss.str(), position, 0xff0000ff, Renderer::eFontTypeSmall);
+		CreateSplashText(oss.str(), position, GAME_COLOUR_FONT_PENALTY, Renderer::eFontTypeSmall);
 	}
 }
 

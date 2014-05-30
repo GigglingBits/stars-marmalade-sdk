@@ -95,7 +95,7 @@ void Preamble::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 	
 	// text
-	renderer.DrawText(m_sText, m_xTextPosition, Renderer::eFontTypeNormal, 0xffccfaff);
+	renderer.DrawText(m_sText, m_xTextPosition, Renderer::eFontTypeNormal, GAME_COLOUR_FONT_MAIN);
 }
 
 void Preamble::TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {

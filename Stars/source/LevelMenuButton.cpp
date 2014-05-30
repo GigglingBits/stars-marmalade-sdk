@@ -27,7 +27,7 @@ void LevelMenuButton::SetLevel(int level, bool available, bool open, int stars) 
 	if (open) {
 		std::ostringstream oss;
 		oss << level;
-		SetText(oss.str(), 0xffccfaff, Renderer::eFontTypeLarge);
+		SetText(oss.str(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeLarge);
 	} else {
 		SetText("");
 	}

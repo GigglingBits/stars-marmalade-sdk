@@ -1,3 +1,4 @@
+#include "Main.h"
 #include "StarMotionState.h"
 #include "InputManager.h"
 #include "SoundEngine.h"
@@ -33,7 +34,7 @@ void Star::RetractingState::Collide(Body& body) {
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollectSingle;
-		args.amount = 2;
+		args.amount = GAME_POINTS_NUGGET;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {
@@ -83,7 +84,7 @@ void Star::FollowState::Collide(Body& body) {
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollect;
-		args.amount = 5;
+		args.amount = GAME_POINTS_NUGGET;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {

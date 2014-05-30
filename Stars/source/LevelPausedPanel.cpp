@@ -14,7 +14,7 @@ m_xBtnReload(eButtonCommandIdReload, s3eKeyD, 1) {
 }
 
 void LevelPausedPanel::Initialize() {
-	uint32 textcol = 0xffccfaff;
+	uint32 textcol = GAME_COLOUR_FONT_MAIN;
 
 	m_xBtnRestart.SetText("Retry", textcol, Renderer::eFontTypeLarge);
 	m_xBtnRestart.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_restart"));

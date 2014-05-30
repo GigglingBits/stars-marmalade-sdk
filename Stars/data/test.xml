@@ -30,8 +30,6 @@
   </bodies>
 
   <textures>
-    <texture id="aimingdevice" colour="0xff343423" />
-    <texture id="touch" colour="0xff343423" />
     <texture id="statspanel" colour="0xff343423" />
     <texture id="hero_mini" colour="0xff343423" />
     <texture id="hero_mini_faded" colour="0xff343423" />

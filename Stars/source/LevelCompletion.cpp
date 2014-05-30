@@ -35,31 +35,31 @@ void LevelCompletion::Initialize() {
 	
 	m_xTitle.SetText(GetCompletionText());
 	m_xTitle.SetFont(Renderer::eFontTypeLarge);
-	m_xTitle.SetColour(0xffccfaff);
+	m_xTitle.SetColour(GAME_COLOUR_FONT_MAIN);
 	
 	m_xDustAmountText.SetText("Dust collected:");
 	m_xDustAmountText.SetFont(Renderer::eFontTypeNormal);
-	m_xDustAmountText.SetColour(0xffccfaff);
+	m_xDustAmountText.SetColour(GAME_COLOUR_FONT_MAIN);
 	
 	m_xDustAmount.SetNumber(m_xCompletionInfo.GetDustAmount(), 5000);
 	m_xDustAmount.SetFont(Renderer::eFontTypeNormal);
-	m_xDustAmount.SetColour(0xffccfaff);
+	m_xDustAmount.SetColour(GAME_COLOUR_FONT_MAIN);
 	
 	m_xNuggetsCollectedText.SetText("Nuggets collected:");
 	m_xNuggetsCollectedText.SetFont(Renderer::eFontTypeNormal);
-	m_xNuggetsCollectedText.SetColour(0xffccfaff);
+	m_xNuggetsCollectedText.SetColour(GAME_COLOUR_FONT_MAIN);
 
 	m_xNuggetsCollected.SetNumber(m_xCompletionInfo.GetNuggetsCollected(), 5000);
 	m_xNuggetsCollected.SetFont(Renderer::eFontTypeNormal);
-	m_xNuggetsCollected.SetColour(0xffccfaff);
+	m_xNuggetsCollected.SetColour(GAME_COLOUR_FONT_MAIN);
 
 	m_xNumberOfPathsText.SetText("Paths drawn:");
 	m_xNumberOfPathsText.SetFont(Renderer::eFontTypeNormal);
-	m_xNumberOfPathsText.SetColour(0xffccfaff);
+	m_xNumberOfPathsText.SetColour(GAME_COLOUR_FONT_MAIN);
 
 	m_xNumberOfPaths.SetNumber(m_xCompletionInfo.GetPathsStarted(), 5000);
 	m_xNumberOfPaths.SetFont(Renderer::eFontTypeNormal);
-	m_xNumberOfPaths.SetColour(0xffccfaff);
+	m_xNumberOfPaths.SetColour(GAME_COLOUR_FONT_MAIN);
 }
 
 std::string LevelCompletion::GetCompletionText() {
@@ -184,7 +184,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	renderer.DrawText(
 		m_sCompletionText,
 	    CIwRect(0, 0, screen.x, screen.y / 2),
-		Renderer::eFontTypeLarge, 0xffccfaff);
+		Renderer::eFontTypeLarge, GAME_COLOUR_MAIN);
 	
 	// stats text
 	renderer.DrawText(

@@ -1,6 +1,7 @@
 //--------------------------------------------------------------------------
 // Start-up of the application, and event loop
 //--------------------------------------------------------------------------
+#include "Main.h"
 #include "s3e.h"
 #include "IwGx.h"
 #include "IwGxFont.h"

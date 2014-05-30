@@ -150,7 +150,7 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 		m_sTitle,
 		m_xTitlePos,
 		Renderer::eFontTypeLarge,
-		0xffccfaff);
+		GAME_COLOUR_FONT_MAIN);
 }
 
 void WorldMenu::ApplyWorld(LevelIterator::WorldId world) {

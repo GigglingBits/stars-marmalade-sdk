@@ -341,7 +341,7 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xHud.Render(renderer, frame);
 	
 	if (!m_sBannerText.empty()) {
-		renderer.DrawText(m_sBannerText, m_xBannerRect, Renderer::eFontTypeLarge, 0xffccfaff);
+		renderer.DrawText(m_sBannerText, m_xBannerRect, Renderer::eFontTypeLarge, GAME_COLOUR_FONT_MAIN);
 	}
 }
 
