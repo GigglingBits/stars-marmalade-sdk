@@ -23,12 +23,6 @@ private:
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap m_xSpriteMap;
 
-	struct SplashTextInfo {
-		std::string text;
-		CIwFVec2 position;
-	};
-	std::queue<SplashTextInfo> m_xSplashtextCreationQueue;
-
 	struct BodyInfo {
 		std::string id;
 		CIwFVec2 speed;
@@ -67,11 +61,6 @@ public:
 	bool RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend);
 	bool StarHitTest(CIwFVec2 position);
 
-	// managed effects
-	void CreateSplashNumber(long number, const CIwFVec2& position, uint32 colour = 0xffffffff);
-	void CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour = 0xffffffff);
-	void CreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
-
 	// gameplay
 	void EnqueueDust(const CIwFVec2& pos, int amount);
 	void CommitDust(const CIwFVec2& pos);
@@ -89,10 +78,14 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
+	void CreatePointSplash(int amount, int bonusmultiplier, const CIwFVec2& position);
+
+	void CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour, Renderer::FontType font);
+	void CreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
+
 	void UpdatePhysics(uint16 timestep);
 	void ManageSpriteLifeCicles(const FrameData& frame);
 
-	void EnqueueCreateSplashText(std::string text, const CIwFVec2& position);
 	void EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
 	bool CheckOutOfWorld(const CIwFVec2& pos);

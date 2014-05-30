@@ -92,13 +92,6 @@ void GameFoundation::Add(Sprite* sprite) {
 	m_xSpriteMap[id] = sprite;
 }
 
-void GameFoundation::EnqueueCreateSplashText(std::string text, const CIwFVec2& position) {
-	m_xSplashtextCreationQueue.push(SplashTextInfo());
-	SplashTextInfo& info = m_xSplashtextCreationQueue.back();
-	info.text = text;
-	info.position = position;
-}
-
 void GameFoundation::EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed) {
 	m_xBodyCreationQueue.push(BodyInfo());
 	BodyInfo& info = m_xBodyCreationQueue.back();
@@ -168,13 +161,6 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 		CreateBody(info.id, info.position, info.speed);
 		m_xBodyCreationQueue.pop();
 	}
-	
-	// create the queued splash texts
-	while (m_xSplashtextCreationQueue.size()) {
-		SplashTextInfo& info = m_xSplashtextCreationQueue.front();
-		CreateSplashText(info.text, info.position);
-		m_xSplashtextCreationQueue.pop();
-	}
 }
 
 float GameFoundation::GetDustFillPercent() {
@@ -208,9 +194,12 @@ int GameFoundation::GetDustMultiplier(int queuedcount) {
 }
 
 void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
-	int multipliedamount = amount * GetDustMultiplier(m_xDust.GetQueuedDustCount() + 1);
+	int multiplier = GetDustMultiplier(m_xDust.GetQueuedDustCount() + 1);
+	int multipliedamount = amount * multiplier;
 	m_xDust.EnqueueDust(multipliedamount);
-	CreateSplashNumber(multipliedamount, pos, 0xffccfaff);
+	
+	// display
+	CreatePointSplash(amount, multiplier, pos);
 }
 
 void GameFoundation::CommitDust(const CIwFVec2& pos) {
@@ -223,7 +212,7 @@ void GameFoundation::CancelDust(const CIwFVec2& pos) {
 	}
 
 	// cancel
-	CreateSplashNumber(-m_xDust.GetQueuedDustAmount(), pos, 0xff0000ff);
+	CreatePointSplash(-m_xDust.GetQueuedDustAmount(), 1, pos);
 	m_xDust.ClearDustQueue();
 
 	// quake effect
@@ -254,20 +243,36 @@ bool GameFoundation::CheckOutOfBounds(const CIwFVec2& pos, float margin) {
 	return (std::abs(pos.x) + margin > bounds.x || std::abs(pos.y) + margin > bounds.y);
 }
 
-void GameFoundation::CreateSplashNumber(long number, const CIwFVec2& position, uint32 colour) {
+void GameFoundation::CreatePointSplash(int amount, int bonusmultiplier, const CIwFVec2& position) {
 	IW_CALLSTACK_SELF;
-		
+	IwAssert(MYAPP, amount != 0);
+	IwAssert(MYAPP, bonusmultiplier >= 0);
+	IwAssert(MYAPP, (amount > 0 && bonusmultiplier > 0) || amount < 0);
+	
+	if (amount == 0 || bonusmultiplier == 0) {
+		return;
+	}
+
 	std::ostringstream oss;
-	oss << number;
-	CreateSplashText(oss.str(), position, colour);
+	if (amount > 0) {
+		oss << amount;
+		CreateSplashText(oss.str(), position, 0xffccfaff, Renderer::eFontTypeNormal);
+		if (bonusmultiplier > 1) {
+			oss.str(std::string());
+			oss << bonusmultiplier << "x";
+			CreateSplashText(oss.str(), position + CIwFVec2(0.3f, -0.1f), 0xff00cc00, Renderer::eFontTypeSmall);
+		}
+	} else {
+		oss << amount;
+		CreateSplashText(oss.str(), position, 0xff0000ff, Renderer::eFontTypeSmall);
+	}
 }
 
-void GameFoundation::CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour) {
+void GameFoundation::CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour, Renderer::FontType font) {
 	IW_CALLSTACK_SELF;
-	
 	SplashText* p = (SplashText*)FactoryManager::GetEffectFactory().Create("text");
 	if (p) {
-		p->SetText(text, colour);
+		p->SetText(text, colour, font);
 		p->SetPosition(position);
 		p->SetVelocity(CIwFVec2(0.0f, 0.8f));
 		Add(p);

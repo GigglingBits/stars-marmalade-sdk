@@ -2,7 +2,7 @@
 #include "Debug.h" 
 
 SplashText::SplashText(const std::string& id, const ShapeTemplate& shapedef, const TextureTemplate& texturedef) 
-	: LocalEffect(id, shapedef, texturedef), m_uiColour(0xffffffff) {
+: LocalEffect(id, shapedef, texturedef), m_uiColour(0xffffffff), m_eFont(Renderer::eFontTypeNormal) {
 }
 
 const char* SplashText::GetTypeName() {
@@ -14,9 +14,10 @@ const char* SplashText::TypeName() {
 	return type;
 }
 
-void SplashText::SetText(std::string text, uint32 colour) {
+void SplashText::SetText(std::string text, uint32 colour, Renderer::FontType font) {
 	m_sText = text;
 	m_uiColour = colour;
+	m_eFont = font;
 }
 
 void SplashText::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -26,5 +27,5 @@ void SplashText::OnRender(Renderer& renderer, const FrameData& frame) {
 	if (m_sText.empty()) {
 		return;
 	}
-	renderer.DrawText(m_sText, GetPosition(), Renderer::eFontTypeNormal, m_uiColour);
+	renderer.DrawText(m_sText, GetPosition(), m_eFont, m_uiColour);
 }
