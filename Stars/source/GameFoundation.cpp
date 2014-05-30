@@ -187,11 +187,8 @@ float GameFoundation::GetDustQueuedPercent() {
 int GameFoundation::GetDustMultiplier(int queuedcount) {
 	// the longer the queue, the more points to get
 	if (queuedcount < 4) { return 1; }
-	if (queuedcount < 7) { return 2; }
-	if (queuedcount < 9) { return 4; }
-	if (queuedcount < 11) { return 6; }
-	if (queuedcount < 15) { return 10; }
-	return ((queuedcount - 5) / 2) * 2 * 2; // stepwise double of queue count, starting with 20
+	if (queuedcount < 8) { return 2; }
+	return 5;
 }
 
 void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
