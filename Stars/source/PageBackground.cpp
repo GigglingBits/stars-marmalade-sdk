@@ -48,17 +48,17 @@ void PageBackground::OnRender(Renderer& renderer, const FrameData& frame) {
 	const LocationServices::DeviceOrientation& orientation =
 		LocationServices::GetInstance().GetDeviceOrientation();
 
-	if (m_pxBackground) {
-		CIwSVec2 orientationoffset(
-			orientation.x * -m_fParallaxCorrection,
-			orientation.y * m_fParallaxCorrection);
-		RenderBackground(renderer, *m_pxBackground, orientationoffset);
-	}
 	if (m_pxBackgroundFar) {
 		CIwSVec2 orientationoffset(
 			orientation.x * -m_fParallaxCorrection * 2.0f,
 			orientation.y * m_fParallaxCorrection * 2.0f);
 		RenderBackground(renderer, *m_pxBackgroundFar, orientationoffset);
+	}
+	if (m_pxBackground) {
+		CIwSVec2 orientationoffset(
+								   orientation.x * -m_fParallaxCorrection,
+								   orientation.y * m_fParallaxCorrection);
+		RenderBackground(renderer, *m_pxBackground, orientationoffset);
 	}
 }
 
