@@ -147,6 +147,12 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 		p = new Star(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("nugget")) {
 		p = new Nugget(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("nugget2")) {
+		p = new Nugget2(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("nugget3")) {
+		p = new Nugget3(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("nugget4")) {
+		p = new Nugget4(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("buff")) {
 		p = new Buff(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("enemy")) {

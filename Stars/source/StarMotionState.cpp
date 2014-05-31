@@ -29,13 +29,13 @@ void Star::RetractingState::FollowPath() {
 
 void Star::RetractingState::Collide(Body& body) {
 	IW_CALLSTACK_SELF;
-	if (body.GetTypeName() == Nugget::TypeName()) {
+	if (Nugget* nugget = dynamic_cast<Nugget*>(&body)) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollectSingle;
-		args.amount = GAME_POINTS_NUGGET;
-		args.position = body.GetPosition();
+		args.amount = nugget->GetDustAmount();
+		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {
 		m_rxContext.SetTextureFrame("hurt");
@@ -79,13 +79,13 @@ void Star::FollowState::FollowPath() {
 void Star::FollowState::Collide(Body& body) {
 	IW_CALLSTACK_SELF;
 	
-	if (body.GetTypeName() == Nugget::TypeName()) {
+	if (Nugget* nugget = dynamic_cast<Nugget*>(&body)) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCollect;
-		args.amount = GAME_POINTS_NUGGET;
-		args.position = body.GetPosition();
+		args.amount = nugget->GetDustAmount();
+		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else {
 		m_rxContext.SetTextureFrame("hurt");

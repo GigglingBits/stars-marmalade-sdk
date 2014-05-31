@@ -3,6 +3,9 @@
 
 // points
 #define GAME_POINTS_NUGGET (10)
+#define GAME_POINTS_NUGGET2 (20)
+#define GAME_POINTS_NUGGET3 (50)
+#define GAME_POINTS_NUGGET4 (100)
 
 // colours
 #define GAME_COLOUR_FONT_MAIN (0xffccfaff)

@@ -1,6 +1,7 @@
 #include "Nugget.h"
 #include "Debug.h"
 #include "FactoryManager.h"
+#include "Main.h"
 
 Nugget::Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Body(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
@@ -14,6 +15,10 @@ const char* Nugget::GetTypeName() {
 const char* Nugget::TypeName() {
 	static const char* type = "nugget";
 	return type;
+}
+
+int Nugget::GetDustAmount() {
+	return GAME_POINTS_NUGGET;
 }
 
 void Nugget::OnColliding(Body& thisbody, Body& otherbody) {
@@ -47,4 +52,52 @@ void Nugget::OnRender(Renderer& renderer, const FrameData& frame) {
 		m_pxParticles->Render(renderer, frame);
 	}
 	Body::OnRender(renderer, frame);
+}
+
+Nugget2::Nugget2(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) : Nugget(id, bodydef, fixturedef, texturedef) {
+}
+
+const char* Nugget2::GetTypeName() {
+	return Nugget2::TypeName();
+}
+
+const char* Nugget2::TypeName() {
+	static const char* type = "nugget2";
+	return type;
+}
+
+int Nugget2::GetDustAmount() {
+	return GAME_POINTS_NUGGET2;
+}
+
+Nugget3::Nugget3(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) : Nugget(id, bodydef, fixturedef, texturedef) {
+}
+
+const char* Nugget3::GetTypeName() {
+	return Nugget3::TypeName();
+}
+
+const char* Nugget3::TypeName() {
+	static const char* type = "nugget3";
+	return type;
+}
+
+int Nugget3::GetDustAmount() {
+	return GAME_POINTS_NUGGET3;
+}
+
+Nugget4::Nugget4(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) : Nugget(id, bodydef, fixturedef, texturedef) {
+}
+
+const char* Nugget4::GetTypeName() {
+	return Nugget4::TypeName();
+}
+
+const char* Nugget4::TypeName() {
+	static const char* type = "nugget4";
+	return type;
+}
+
+int Nugget4::GetDustAmount() {
+	return GAME_POINTS_NUGGET4;
 }

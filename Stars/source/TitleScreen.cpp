@@ -54,7 +54,7 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	
 	// main button
     button.w = extents;
-    button.h = button.w * 2 / 3;
+    button.h = button.w * 3 / 5;
     button.x = screencenter.x - (button.w / 2);
 	button.y = extents / 5;
 	m_xButtonTitle.SetPosition(button);
