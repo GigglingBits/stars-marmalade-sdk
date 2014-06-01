@@ -234,7 +234,8 @@ CIwFVec2 Level::GetStarIdlePosition() {
 }
 
 CIwFVec2 Level::GetStarHidePosition() {
-	const float offset = 4.0f;	
+	const float offset = 6.0f;
+	
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
 	if (m_xCompletionInfo.IsCleared()) {
 		pos.x = m_xWorldSize.x + offset;

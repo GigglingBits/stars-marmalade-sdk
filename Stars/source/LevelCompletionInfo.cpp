@@ -1,7 +1,7 @@
 #include "LevelCompletionInfo.h"
 
 LevelCompletionInfo::LevelCompletionInfo() :
-m_fDustFillMax(0.0f),
+m_fDustFillMax(1.0f),
 m_fDustFillAmount(0.0f),
 m_iPathsStarted(0),
 m_iPathsAborted(0),
