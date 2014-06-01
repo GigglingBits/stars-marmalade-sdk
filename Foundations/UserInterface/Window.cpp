@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "DeviceInfo.h"
 
-Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_xPosition(0, 0, 0, 0), m_bIsLayoutDone(false), m_bIsInitialPositionSet(false), m_pxBackgroundTexture(NULL), m_puiBackgroundColourStream(NULL) {
+Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_xPosition(0, 0, 0, 0), m_bIsLayoutDone(false), m_bIsInitialPositionSet(false), m_pxBackgroundTexture(NULL) {
 	m_iScreenPpcm = DeviceInfo::GetInstance().GetPixelsPerInch();
 }
 
@@ -54,22 +54,9 @@ void Window::SetBackground(Texture* texture) {
 	m_pxBackgroundTexture = texture;
 }
 
-void Window::SetBackground(uint32 blcolour, uint32 brcolour, uint32 urcolour, uint32 ulcolour) {
-	ClearBackground();
-
-	m_puiBackgroundColourStream = new uint32[WINDOW_NUM_COLOURS];
-	m_puiBackgroundColourStream[0] = blcolour;
-	m_puiBackgroundColourStream[1] = brcolour;
-	m_puiBackgroundColourStream[2] = urcolour;
-	m_puiBackgroundColourStream[3] = ulcolour;
-}
-
 void Window::ClearBackground() {
 	if (m_pxBackgroundTexture) {
 		delete m_pxBackgroundTexture;
-	}
-	if (m_puiBackgroundColourStream) {
-		delete [] m_puiBackgroundColourStream;
 	}
 }
 
@@ -105,11 +92,6 @@ void Window::Render(Renderer& renderer, const FrameData& frame) {
 	if (m_pxBackgroundTexture) {
 		renderer.SetRenderingLayer(GetRederingLayer());
 		renderer.Draw(m_xBackgroundShape, *m_pxBackgroundTexture);
-	} else if (m_puiBackgroundColourStream && sizeof(m_puiBackgroundColourStream) <= m_xBackgroundShape.GetVertCount()) {
-		renderer.SetRenderingLayer(GetRederingLayer());
-		renderer.DrawPolygon(m_xBackgroundShape.GetVerts(), m_xBackgroundShape.GetVertCount(), m_puiBackgroundColourStream, m_puiBackgroundColourStream);
-	} else if (m_puiBackgroundColourStream) {
-		IwAssertMsg(MYAPP,  sizeof(m_puiBackgroundColourStream) <= m_xBackgroundShape.GetVertCount(), ("The colour stream contains more colours than the windown shape. This is likely undesired, and could indicate an error."));
 	}
 	
 	Renderable::Render(renderer, frame);

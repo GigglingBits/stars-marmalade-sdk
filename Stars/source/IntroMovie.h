@@ -7,7 +7,7 @@
 #include "Timer.h"
 #include "Camera.h"
 #include "VideoView.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 
 class IntroMovie : public Page {
 private:

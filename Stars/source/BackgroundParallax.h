@@ -1,10 +1,10 @@
-#ifndef __PAGEBACKGROUND_H__
-#define __PAGEBACKGROUND_H__
+#ifndef __PACKGROUNDPARALLAX_H__
+#define __PACKGROUNDPARALLAX_H__
 
 #include "Window.h"
 #include "LocationServices.h"
 
-class PageBackground : public Window {
+class BackgroundParallax : public Window {
 private:
 	CIwRect m_xBackgroundRect;
 	Texture* m_pxBackground;
@@ -12,8 +12,8 @@ private:
 	float m_fParallaxCorrection;
 	
 public:
-	PageBackground();
-	~PageBackground();
+	BackgroundParallax();
+	~BackgroundParallax();
 	
 public:
 	void Initialize();

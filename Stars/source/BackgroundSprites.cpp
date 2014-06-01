@@ -1,16 +1,16 @@
-#include "LevelBackground.h"
+#include "BackgroundSprites.h"
 #include "Debug.h"
 #include <cmath>
 #include "FactoryManager.h"
 
-LevelBackground::LevelBackground(GameFoundation& game) : m_rxGame(game) {
+BackgroundSprites::BackgroundSprites(GameFoundation& game) : m_rxGame(game) {
 	m_xWorldCenter = CIwFVec2::g_Zero;
 	m_xWorldRadius = CIwFVec2::g_Zero;
 
 	m_uiNextCloudTime = 0;
 }
 
-void LevelBackground::SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& viewportsize, float margin) {
+void BackgroundSprites::SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& viewportsize, float margin) {
 	// space, wich needs a background
 	CIwFVec2 worldsizev(
 		std::fabs(worldsize.x), 
@@ -44,11 +44,11 @@ void LevelBackground::SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& vie
 	m_xWorldRadius = m_xWorldCenter + aspectcorrection + marginv;
 }
 
-uint32 LevelBackground::GetNextCloudTime() {
+uint32 BackgroundSprites::GetNextCloudTime() {
 	return (rand() % (CLOUD_INTERVAL_MAX - CLOUD_INTERVAL_MIN)) + CLOUD_INTERVAL_MIN;
 }
 
-CIwFVec2 LevelBackground::GetNextCloudPosition() {
+CIwFVec2 BackgroundSprites::GetNextCloudPosition() {
 	float rand1k = (((float)(rand() % 1000)) / 500.0f) - 1.0f; // range: -1 .. 1
 	float radius = m_xWorldRadius.GetLength();
 
@@ -57,7 +57,7 @@ CIwFVec2 LevelBackground::GetNextCloudPosition() {
 	return pos;
 }
 
-void LevelBackground::CreateCloud(const CIwFVec2& pos) {
+void BackgroundSprites::CreateCloud(const CIwFVec2& pos) {
 
 	std::string distance;
 	CIwFVec2 velocity;
@@ -110,7 +110,7 @@ void LevelBackground::CreateCloud(const CIwFVec2& pos) {
 	}
 }
 
-void LevelBackground::Update(uint16 frametime) {
+void BackgroundSprites::Update(uint16 frametime) {
 	if (m_uiNextCloudTime > frametime) {
 		// no cloud yet
 		m_uiNextCloudTime -= frametime;

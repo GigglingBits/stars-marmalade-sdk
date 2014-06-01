@@ -191,13 +191,7 @@ void WorldMenu::ApplyWorld(LevelIterator::WorldId world) {
 	}
 	
 	// update background
-	PageSettings ps;
-	ps.SetWorld(world);
-	SetBackground(
-		ps.GetWorldColours().LowerLeft,
-		ps.GetWorldColours().LowerRight,
-		ps.GetWorldColours().UpperRight,
-		ps.GetWorldColours().UpperLeft);
+	SetBackground(m_eWorld);
 }
 
 LevelIterator::WorldId WorldMenu::GetNext(LevelIterator::WorldId world) {

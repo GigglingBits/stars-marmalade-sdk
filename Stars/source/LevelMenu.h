@@ -7,7 +7,7 @@
 #include "Camera.h"
 #include "LevelMenuButton.h"
 #include "NaviPanel.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 
 #define LVLMENU_BTN_COLS 3
 #define LVLMENU_BTN_ROWS 2
@@ -29,7 +29,7 @@ private:
 	int m_iGroupId;
 	int m_iFirstUnachievedLevel;
 	
-	PageBackground m_xBackground;
+	BackgroundParallax m_xBackground;
 
 public:
 	LevelMenu(LevelIterator::WorldId world);
@@ -55,7 +55,7 @@ private:
 	void ApplyGroup(int groupid);
 	int GetNext(int groupid);
 	int GetPrevious(int groupid);
-	
+		
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 };

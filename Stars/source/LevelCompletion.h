@@ -2,7 +2,7 @@
 #define __LEVELCOMPLETION_H__
 
 #include "Page.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 #include "Button.h"
 #include "Camera.h"
 #include "LevelCompletionInfo.h"
@@ -22,7 +22,7 @@ private:
 	Button m_xButtonRetry;
 	Button m_xButtonNext;
 
-	PageBackground m_xBackground;
+	BackgroundParallax m_xBackground;
 
 	LevelHudText m_xTitle;
 	

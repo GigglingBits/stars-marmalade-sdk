@@ -68,10 +68,13 @@ files {
 	PageManager.cpp
 	Page.h
 	Page.cpp
-	PageBackground.h
-	PageBackground.cpp
 	PageSettings.h
 	PageSettings.cpp
+
+	BackgroundParallax.h
+	BackgroundParallax.cpp
+	BackgroundSprites.h
+	BackgroundSprites.cpp
 
 	TitleScreen.h
 	TitleScreen.cpp
@@ -104,8 +107,6 @@ files {
 	Level.cpp
  	LevelIterator.h
  	LevelIterator.cpp
-	LevelBackground.h
-	LevelBackground.cpp
 	LevelCompletion.h
 	LevelCompletion.cpp
 	LevelCompletionInfo.h

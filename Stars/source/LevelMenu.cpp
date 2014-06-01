@@ -56,14 +56,6 @@ void LevelMenu::Initialize() {
 
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 
-	// update background
-	PageSettings ps;
-	ps.SetWorld(m_eWorldId);
-	SetBackground(
-		ps.GetWorldColours().LowerLeft,
-		ps.GetWorldColours().LowerRight,
-		ps.GetWorldColours().UpperRight,
-		ps.GetWorldColours().UpperLeft);
 	m_xBackground.Initialize();
 	
 	// move to group where the first unachieved level is

@@ -2,7 +2,7 @@
 #define __TITLESCREEN_H__
 
 #include "Page.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 #include "Button.h"
 #include "IwList.h"
 #include "Body.h"
@@ -14,7 +14,7 @@ class TitleScreen : public Page {
 private:
 	Camera m_xCamera;
 
-	PageBackground m_xBackground;
+	BackgroundParallax m_xBackground;
 	Button m_xButtonTitle;
 	Button m_xButtonFacebook;
 

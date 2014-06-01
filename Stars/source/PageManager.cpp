@@ -217,11 +217,7 @@ void PageManager::ApplyNextPage() {
 		}
 		
 		// initialize the page
-		m_pxCurrentPage->SetBackground(
-			m_xPageSettings.GetWorldColours().LowerLeft,
-			m_xPageSettings.GetWorldColours().LowerRight,
-			m_xPageSettings.GetWorldColours().UpperRight,
-			m_xPageSettings.GetWorldColours().UpperLeft);
+		m_pxCurrentPage->SetBackground(m_xPageSettings.GetWorld());
 		m_pxCurrentPage->Initialize();
 		
 		// play music associated to the page

@@ -20,9 +20,6 @@ IntroMovie::~IntroMovie() {
 }
 
 void IntroMovie::Initialize() {
-	const uint32 BLACK = 0xff000000;
-	SetBackground(BLACK, BLACK, BLACK, BLACK);
-
 	m_xVideoView.Finished.AddListener<IntroMovie>(this, &IntroMovie::MediaFinishedEventHandler);
 	m_xVideoView.Initialize();
 }

@@ -10,6 +10,9 @@ CIwResGroup
 
 	./background_stars.png
 	./background_stars_far.png
+	./background_stars_far_earth.png
+	./background_stars_far_mars.png
+	./background_stars_far_jupiter.png
 
 	./button_long_1.png
 	./button_long_2.png

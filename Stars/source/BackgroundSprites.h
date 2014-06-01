@@ -1,5 +1,5 @@
-#ifndef __LEVELBACKGROUND_H__
-#define __LEVELBACKGROUND_H__
+#ifndef __BACKGROUNDSPRITES_H__
+#define __BACKGROUNDSPRITES_H__
 
 #include <string>
 #include "GameFoundation.h"
@@ -7,7 +7,7 @@
 #define CLOUD_INTERVAL_MAX 1000
 #define CLOUD_INTERVAL_MIN 300
 
-class LevelBackground {
+class BackgroundSprites {
 private:
 	CIwFVec2 m_xWorldCenter; // center of world
 	CIwFVec2 m_xWorldRadius; // distance vector from center to upper right corner
@@ -17,7 +17,7 @@ private:
 	uint32 m_uiNextCloudTime;
 
 public:
-	LevelBackground(GameFoundation& game);
+	BackgroundSprites(GameFoundation& game);
 
 	void SetGeometry(const CIwFVec2& worldsize, const CIwSVec2& viewportsize, float margin);
 	void Update(uint16 frametime);

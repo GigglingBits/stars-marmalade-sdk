@@ -5,8 +5,8 @@
 #include "Body.h"
 #include "LevelPausedPanel.h"
 #include "GameFoundation.h"
-#include "LevelBackground.h"
-#include "PageBackground.h"
+#include "BackgroundSprites.h"
+#include "BackgroundParallax.h"
 #include "LevelHud.h"
 #include "Star.h"
 #include "Camera.h"
@@ -50,8 +50,8 @@ private:
 
 	Camera m_xCamera;
 
-	PageBackground m_xBackgroundStars;
-	LevelBackground m_xBackgroundClouds;
+	BackgroundParallax m_xBackgroundStars;
+	BackgroundSprites m_xBackgroundClouds;
 
 	GameFoundation m_xGame;
 	LevelCompletionInfo m_xCompletionInfo;

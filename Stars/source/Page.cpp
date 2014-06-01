@@ -1,4 +1,5 @@
 #include "Page.h"
+#include "FactoryManager.h"
 #include "Debug.h"
 
 Page::Page(const std::string& resgrpname, const std::string& musicfilename) : Window(), m_eCompletionState(eInProgress), m_sResGrpName(resgrpname), m_sMusicFileName(musicfilename) {
@@ -23,4 +24,11 @@ const std::string& Page::GetResourceGroupName() {
 
 const std::string& Page::GetMusicFileName() {
 	return m_sMusicFileName;
+}
+
+void Page::SetBackground(LevelIterator::WorldId world) {
+	std::string texturename("background_stars_far_");
+	LevelIterator it;
+	texturename.append(it.GetWorldName(world));
+	Window::SetBackground(FactoryManager::GetTextureFactory().Create(texturename));
 }

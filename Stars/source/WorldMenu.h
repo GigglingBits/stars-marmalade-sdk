@@ -3,7 +3,7 @@
 
 #include "Page.h"
 #include "PageSettings.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 #include "Button.h"
 #include "NaviPanel.h"
 #include "IwList.h"
@@ -28,7 +28,7 @@ private:
 	Button m_xButtonBack;
 	NaviPanel m_xNaviPanel;
 	
-	PageBackground m_xBackground;
+	BackgroundParallax m_xBackground;
 
 public:
 	WorldMenu(LevelIterator::WorldId world);

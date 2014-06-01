@@ -9,7 +9,7 @@
 #include "WebView.h"
 #include "VideoView.h"
 #include "TextureView.h"
-#include "PageBackground.h"
+#include "BackgroundParallax.h"
 
 class Preamble : public Page {
 private:
@@ -23,7 +23,7 @@ private:
 	
 	MediaView* m_pxMediaView;
 
-	PageBackground m_xBackground;
+	BackgroundParallax m_xBackground;
 	
 public:
 	Preamble(const std::string& text, const std::string& textureid, const std::string& mediafile);

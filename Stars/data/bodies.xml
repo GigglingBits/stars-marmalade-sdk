@@ -335,6 +335,9 @@
 		
 		<texture id="background_stars" image="background_stars" />
 		<texture id="background_stars_far" image="background_stars_far" />
+		<texture id="background_stars_far_earth" image="background_stars_far_earth" />
+		<texture id="background_stars_far_mars" image="background_stars_far_mars" />
+		<texture id="background_stars_far_jupiter" image="background_stars_far_jupiter" />
 	</textures>
 	
 	<fixtures>

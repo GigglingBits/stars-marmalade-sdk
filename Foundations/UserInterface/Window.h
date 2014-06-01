@@ -16,7 +16,6 @@ private:
 
 	VertexStreamScreen m_xBackgroundShape;
 	Texture* m_pxBackgroundTexture;
-	uint32* m_puiBackgroundColourStream;
 	
 public:
 	Window();
@@ -35,7 +34,6 @@ public:
 	const CIwRect& GetPosition();
 	
 	void SetBackground(Texture* texture);
-	void SetBackground(uint32 blcolour, uint32 brcolour, uint32 urcolour, uint32 ulcolour);
 	void ClearBackground();
 	
 protected:

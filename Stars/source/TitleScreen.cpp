@@ -37,14 +37,6 @@ void TitleScreen::Initialize() {
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.SetTexture(FactoryManager::GetTextureFactory().Create("button_facebook"));
 	}
-	
-	PageSettings ps;
-	ps.SetWorld(LevelIterator::eWorldIdEarth);
-	SetBackground(
-		ps.GetWorldColours().LowerLeft,
-		ps.GetWorldColours().LowerRight,
-		ps.GetWorldColours().UpperRight,
-		ps.GetWorldColours().UpperLeft);
 }
 
 void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
