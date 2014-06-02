@@ -2,7 +2,6 @@
 #include "Debug.h"
 
 #include "TitleScreen.h"
-#include "IntroMovie.h"
 #include "WorldMenu.h"
 #include "LevelMenu.h"
 #include "Preamble.h"
@@ -47,8 +46,6 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 		nextpage = new LevelCompletion(levelname, nextlevelname, info);
 	} else if (dynamic_cast<LevelCompletion*>(oldpage)) {
 		nextpage = new LevelMenu(m_xPageSettings.GetWorld());
-	} else if (dynamic_cast<IntroMovie*>(oldpage)) {
-		nextpage = new TitleScreen();
 	}
 
 	return nextpage;
@@ -102,11 +99,6 @@ void PageManager::StartNextLevel() {
 void PageManager::StartTitleScreen() {
 	IW_CALLSTACK_SELF;
 	SetNextPage(new TitleScreen());
-}
-
-void PageManager::StartIntroMovie() {
-	IW_CALLSTACK_SELF;
-	SetNextPage(new IntroMovie(Configuration::GetInstance().IntroMovie));
 }
 
 void PageManager::StartWorldMenu() {

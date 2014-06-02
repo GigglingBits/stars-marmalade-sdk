@@ -78,8 +78,6 @@ files {
 
 	TitleScreen.h
 	TitleScreen.cpp
-	IntroMovie.h
-	IntroMovie.cpp
 	WorldMenu.h
 	WorldMenu.cpp
 	LevelMenu.h
