@@ -18,7 +18,7 @@ public:
 		std::string Id;
 		std::string Desc;
 		std::string DescLong;
-		uint PixelsPerInch;
+		uint ScreenDpi;
 	};
 	typedef std::map<std::string, Device> DeviceMap;
 	DeviceMap m_xDeviceLibrary;
@@ -36,7 +36,7 @@ public:
 	static DeviceInfo& GetInstance();
 
 public:
-	int GetPixelsPerInch() const;
+	int GetScreenDpi() const;
 	const std::string& GetLongDeviceId() const;
 
 private:

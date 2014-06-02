@@ -34,6 +34,8 @@ private:
 	Stopwatch& GetStopwatch();
 
 private:
+	void SetFonts(Renderer& renderer);
+	
 	void PrintFps(const CIwRect& rect, float realframetime, float simframetime, float pureupdatetime, float purerendertime);
 	void PrintMem(const CIwRect& rect, MemoryBuckets bucketid, const char* bucketname);
 

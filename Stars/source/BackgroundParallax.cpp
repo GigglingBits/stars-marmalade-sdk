@@ -31,8 +31,8 @@ void BackgroundParallax::OnDoLayout(const CIwSVec2& screensize) {
 		screensize.x + (2 * margin),
 		screensize.y + (2 * margin));
 
-	int ppi = DeviceInfo::GetInstance().GetPixelsPerInch();
-	m_fParallaxCorrection = ppi * 0.004f * (extents * 0.2f / ppi);
+	int dpi = DeviceInfo::GetInstance().GetScreenDpi();
+	m_fParallaxCorrection = dpi * 0.004f * (extents * 0.2f / dpi);
 }
 
 void BackgroundParallax::OnUpdate(const FrameData& frame) {

@@ -21,7 +21,7 @@ App::App() {
 	im.ButtonReleasedEvent.AddListener<App>(this, &App::ButtonReleasedEventHandler);
 	
 	// set the rendeer up
-	m_xRenderer.SetFonts("font_large", "font_normal", "font_small", "font_system");
+	SetFonts(m_xRenderer);
 }
 
 App::~App() {
@@ -30,6 +30,14 @@ App::~App() {
 	im.ButtonReleasedEvent.RemoveListener<App>(this, &App::ButtonReleasedEventHandler);
 
 	UnloadLevelData();
+}
+
+void App::SetFonts(Renderer& renderer) {
+	std::string large = "font_large";
+	std::string normal = "font_normal";
+	std::string small = "font_small";
+	std::string system = "font_system";
+	m_xRenderer.SetFonts(large, normal, small, system);
 }
 
 bool App::LoadOnlineLevelData() {

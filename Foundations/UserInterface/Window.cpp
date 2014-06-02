@@ -3,7 +3,7 @@
 #include "DeviceInfo.h"
 
 Window::Window() : m_xScreenSize(CIwSVec2::g_Zero), m_xPosition(0, 0, 0, 0), m_bIsLayoutDone(false), m_bIsInitialPositionSet(false), m_pxBackgroundTexture(NULL) {
-	m_iScreenPpcm = DeviceInfo::GetInstance().GetPixelsPerInch();
+	m_iScreenPpcm = DeviceInfo::GetInstance().GetScreenDpi();
 }
 
 Window::~Window() {

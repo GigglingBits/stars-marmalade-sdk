@@ -32,8 +32,8 @@ DeviceInfo& DeviceInfo::GetInstance() {
 	return *s_pxInstance;
 }
 
-int DeviceInfo::GetPixelsPerInch() const {
-	return m_xCurrentDevice.PixelsPerInch;
+int DeviceInfo::GetScreenDpi() const {
+	return m_xCurrentDevice.ScreenDpi;
 }
 
 const std::string& DeviceInfo::GetLongDeviceId() const {
@@ -45,7 +45,7 @@ void DeviceInfo::Add(const std::string& id, const std::string desc, uint resolut
 	info.IdType = eIdentificationLibrary;
 	info.Id = id;
 	info.Desc = desc;
-	info.PixelsPerInch = resolution;
+	info.ScreenDpi = resolution;
 	m_xDeviceLibrary[id] = info;
 }
 
@@ -61,13 +61,13 @@ void DeviceInfo::Update() {
 		m_xCurrentDevice.IdType = eIdentificationDpiExt;
 		m_xCurrentDevice.Id = deviceid;
 		m_xCurrentDevice.Desc = "unknown";
-		m_xCurrentDevice.PixelsPerInch = dpiExtGetDeviceDPI();
+		m_xCurrentDevice.ScreenDpi = dpiExtGetDeviceDPI();
 	} else {
 		// unknown device; just pick some defaults
 		m_xCurrentDevice.IdType = eIdentificationUnknown;
 		m_xCurrentDevice.Id = deviceid;
 		m_xCurrentDevice.Desc = "unknown";
-		m_xCurrentDevice.PixelsPerInch = 163;
+		m_xCurrentDevice.ScreenDpi = 163;
 	}
 	
 	// build long description
