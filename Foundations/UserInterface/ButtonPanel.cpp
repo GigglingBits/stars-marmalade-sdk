@@ -93,7 +93,7 @@ Button* ButtonPanel::GetButton(int position) {
 
 void ButtonPanel::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int width = extents / 7;	 
+	int width = extents / 6;
 	int space = width / 2;
 
 	CIwRect rect(0, 0, width, width);
