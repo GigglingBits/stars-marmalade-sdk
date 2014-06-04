@@ -9,6 +9,7 @@
 #include "SpineResource.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
+#include "Analytics.h"
 #include "LocationServices.h"
 #include "DeviceInfo.h"
 #include "MarmaladeVersion.h"
@@ -115,6 +116,7 @@ void Initialize() {
 	IwMemBucketCreate(eMemoryBucketResources, "resources", 15000000);
 	ResourceManager::Initialize(eMemoryBucketResources);
 
+	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	LogManager::Initialize();
@@ -134,6 +136,7 @@ void Terminate() {
 	LogManager::Terminate();
 	InputManager::Terminate();
 	SoundEngine::Terminate();
+	Analytics::Terminate();
 	ResourceManager::Terminate();
 
 	IwGxFontTerminate();

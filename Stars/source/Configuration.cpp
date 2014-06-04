@@ -96,11 +96,17 @@ Configuration::Configuration() {
 	} else {
 		PathMaxLength = 10.0f;
 	}
-
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "settingsfile", tmpstr)) {
 		SettingsFile = tmpstr;
 	} else {
 		SettingsFile = "settings.xml";
+	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "flurrykey", tmpstr)) {
+		FlurryKey = tmpstr;
+	} else {
+		FlurryKey = "";
 	}
 }
 

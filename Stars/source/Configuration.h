@@ -39,6 +39,8 @@ public:
 	std::string FacebookPage;
 	
 	std::string SettingsFile;
+
+	std::string FlurryKey;
 };
 
 #endif

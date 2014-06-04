@@ -38,11 +38,11 @@ subprojects {
 	../Foundations/Physics
 	../Foundations/Sprites
 	../Foundations/Particles
+	../Foundations/Analytics
 
 	../Extensions/s3eGyroscope
 
 	iwgxfont
-
 	derbh
 	tinyxml
 }
@@ -124,6 +124,8 @@ files {
 	LevelInteractor.cpp
 	PathRecorder.h
 	PathRecorder.cpp
+	PathTracker.h
+	PathTracker.cpp
 
 	["Sources/Game Logic/Factories"]
 	(source)

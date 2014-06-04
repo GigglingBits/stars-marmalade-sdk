@@ -1,0 +1,15 @@
+display_name "Foundation/Analytics"
+
+subprojects {
+	s3eFlurry
+}
+
+includepaths {
+	./Analytics
+}
+
+files {
+	(Analytics)
+	Analytics.h
+	Analytics.cpp
+}

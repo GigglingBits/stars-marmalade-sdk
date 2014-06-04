@@ -26,6 +26,12 @@ levelsong="music/csc.Empire_Games.mp3"
 
 settingsfile=settings.xml
 
+{OS=iphone}
+flurrykey="DD6GS77SP2NSG6D9JVVQ"
+{OS=android}
+flurrykey="XF7R4VWFXX6BVWYJPSTV"
+{}
+
 ####################################################
 [Util]
 ####################################################
