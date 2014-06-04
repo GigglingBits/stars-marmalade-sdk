@@ -31,6 +31,8 @@ CIwResGroup
 	./button_retry.png
 	./button_toggle_hud.png
 
+	./path_point.png
+
 	./cloud_01.png
 	./cloud_02.png
 	./cloud_03.png

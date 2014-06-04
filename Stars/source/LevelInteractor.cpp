@@ -64,9 +64,12 @@ void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 }
 
 void LevelInteractor::OnUpdate(const FrameData& frame) {
+	m_xTracker.Update(frame);
 }
 
 void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
+	m_xTracker.Render(renderer, frame);
+/*
 	uint16 count = m_xRecorder.GetPointCount();
 	if (count > 1) {
 		// polygon needs at least 2 vertices
@@ -87,6 +90,7 @@ void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
 		    Renderer::eFontTypeSystem, 0xffffffff);
 
 	}
+ */
 }
 
 void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {
@@ -141,6 +145,9 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		if (Configuration::GetInstance().PathMaxLength > m_xRecorder.GetLength()) {
 			m_xRecorder.Record(touch.worldendpos);
+			if (m_xRecorder.GetPointCount() >= 2) {
+				m_xTracker.ImportPath(m_xRecorder.GetPoints(), m_xRecorder.GetPointCount());
+			}
 		}
 	}
 }
@@ -162,7 +169,10 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		m_xRecorder.Record(touch.worldendpos);
-		
+		if (m_xRecorder.GetPointCount() >= 2) {
+			m_xTracker.ImportPath(m_xRecorder.GetPoints(), m_xRecorder.GetPointCount());
+		}
+
 		if (m_bInputEnabled) {
 			PathEventArgs args;
 			args.count = m_xRecorder.GetPointCount();

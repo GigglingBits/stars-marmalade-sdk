@@ -7,6 +7,7 @@
 #include "Renderable.h"
 
 #include "PathRecorder.h"
+#include "PathTracker.h"
 
 class LevelInteractor : public Renderable {
 private:
@@ -36,6 +37,7 @@ private:
 	bool m_bInputEnabled;
 	
     PathRecorder m_xRecorder;
+    PathTracker m_xTracker;
 
 public:
 	LevelInteractor(Camera& camera, GameFoundation& game);

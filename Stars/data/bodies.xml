@@ -231,6 +231,8 @@
 		<texture id="none" colour="0x00000000" />
 		<texture id="shade" colour="0x77343423" />
 		
+		<texture id="path_point" image="path_point" />
+
 		<texture id="number_back" image="hud_number_back" />
 		
 		<texture id="stardustvial" image="hud_stardust_vial" />
