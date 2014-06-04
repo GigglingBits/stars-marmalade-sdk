@@ -23,9 +23,9 @@ void LevelCompletion::Initialize() {
     m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared() ? "won" : "lost");
 	m_xButtonStar.SetShadedWhenPressed(false);
     
-	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
+	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_menu"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
-	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_restart"));
+	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_retry"));
 
 	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsCleared());
 	
