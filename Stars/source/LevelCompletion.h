@@ -48,6 +48,7 @@ protected:
 private:
 	std::string GetCompletionText();
 	void SaveResults();
+	void SubmitAnalytics();
 };
 
 #endif

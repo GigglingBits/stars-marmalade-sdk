@@ -1,5 +1,7 @@
 #include "Analytics.h"
 
+#include <sstream>
+
 #include "IwDebug.h"
 
 Analytics* Analytics::s_pxInstance = NULL;
@@ -39,3 +41,19 @@ Analytics& Analytics::GetInstance() {
 	}
 	return *s_pxInstance;
 }
+
+void Analytics::Write(const std::string& event) {
+	s3eFlurryLogEvent(event.c_str());
+}
+
+void Analytics::Write(const std::string& event, const Params& params) {
+	std::ostringstream oss;
+	for (Params::const_iterator it = params.begin(); it != params.end(); it++) {
+		if (it != params.begin()) {
+			oss << '|';
+		}
+		oss << it->first << '|' << it->second;
+	}
+	s3eFlurryLogEventParams(event.c_str(), oss.str().c_str());
+}
+

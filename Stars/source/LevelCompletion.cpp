@@ -1,11 +1,13 @@
 #include <sstream>
 
 #include "LevelCompletion.h"
-#include "Debug.h"
 #include "FactoryManager.h"
 #include "GameFoundation.h"
 #include "Configuration.h"
 #include "UserSettings.h"
+#include "Analytics.h"
+
+#include "Debug.h"
 
 LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
 	Page("levelcompletion.group", info.IsCleared() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
@@ -32,6 +34,7 @@ void LevelCompletion::Initialize() {
 	m_xBackground.Initialize();
 
 	SaveResults();
+	SubmitAnalytics();
 	
 	m_xTitle.SetText(GetCompletionText());
 	m_xTitle.SetFont(Renderer::eFontTypeLarge);
@@ -64,13 +67,11 @@ void LevelCompletion::Initialize() {
 
 std::string LevelCompletion::GetCompletionText() {
 	std::ostringstream oss;
-	
 	if (m_xCompletionInfo.IsCleared()) {
 		oss << "Congratulations!" << std::endl;
 	} else {
 		oss << "Try again" << std::endl;
 	}
-	
 	return oss.str();
 }
 
@@ -88,6 +89,24 @@ void LevelCompletion::SaveResults() {
 		}
 	}
 	settings.Save();
+}
+
+void LevelCompletion::SubmitAnalytics() {
+	std::ostringstream oss;
+	oss << m_xCompletionInfo.GetDustAmount();
+	std::string dust(oss.str());
+	
+	oss.clear(); oss.str("");
+	
+	oss << m_xCompletionInfo.GetPathsStarted();
+	std::string paths(oss.str());
+	
+	Analytics::Params params;
+	params["id"] = m_sLevelId;
+	params["cleared"] = m_xCompletionInfo.IsCleared() ? "yes" : "no";
+	params["dust amount"] = dust;
+	params["#paths"] = paths;
+	Analytics::GetInstance().Write("Level played", params);
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
@@ -179,21 +198,6 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xNumberOfPathsText.Render(renderer, frame);
 	m_xNumberOfPaths.Render(renderer, frame);
 	
-/*	// completion text
-	const CIwSVec2& screen = frame.GetScreensize();
-	renderer.DrawText(
-		m_sCompletionText,
-	    CIwRect(0, 0, screen.x, screen.y / 2),
-		Renderer::eFontTypeLarge, GAME_COLOUR_MAIN);
-	
-	// stats text
-	renderer.DrawText(
-		m_sStatsText,
-		CIwRect(0, screen.y / 2, screen.x / 3, screen.y / 2),
-		Renderer::eFontTypeSmall, 0xffffffff);
-	
-	m_xDustFillPercent.Render(renderer, frame);
-*/
 	// buttons
 	m_xButtonStar.Render(renderer, frame);
 	m_xButtonQuit.Render(renderer, frame);
