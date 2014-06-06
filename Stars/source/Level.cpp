@@ -248,7 +248,7 @@ void Level::HideBannerText() {
 }
 
 void Level::ShowStatsBanner() {
-	ShowBannerText(m_xCompletionInfo.IsCleared() ? "Well done!" : "Close. But no cigar...");
+	ShowBannerText(m_xCompletionInfo.IsCleared() ? "Well done!" : "Try again...");
 	if (m_xCompletionInfo.IsCleared()) {
 		SoundEngine::GetInstance().PlaySoundEffect("level_win");
 	}
