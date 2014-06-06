@@ -25,9 +25,12 @@ void PathTracker::ImportPath(const std::vector<CIwFVec2>& path, float leadindist
 	IW_CALLSTACK_SELF;
 	ClearPath();
 	
-	// qualify
-	if (path.size() < 2) {
-		IwAssertMsg(MYAPP, path.size() >= 2, ("Cannot import path consisting of less than 2 points."));
+	if (path.size() < 1) {
+		return;
+	}
+	
+	if (path.size() == 1) {
+		Append(path[0]);
 		return;
 	}
 	
