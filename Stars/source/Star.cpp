@@ -3,6 +3,7 @@
 #include "StarMotionState.h"
 #include "StarAttackState.h"
 #include "FactoryManager.h"
+#include "Configuration.h"
 
 /****
  * Star main implementation
@@ -17,6 +18,7 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	GetHealthManager().SetResilience(0.0f);
 	
 	m_fAnchorLine = 0.0f;
+	m_fPathSpeed = (float)Configuration::GetInstance().PathSpeed;
 }
 
 Star::~Star() {
@@ -61,6 +63,9 @@ void Star::OnUpdate(const FrameData& frame) {
 	if (m_pxParticles) {
 		m_pxParticles->Update(frame);
 	}
+	
+	// path
+	m_xPath.Update(frame);
 	
 	// flip the texture according to movement
 	if (!m_bAutoOrient) {
@@ -109,42 +114,47 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 	if (m_pxParticles) {
 		m_pxParticles->Render(renderer, frame);
 	}
+	m_xPath.Render(renderer, frame);
 	Body::OnRender(renderer, frame);
 }
 
 void Star::SetAnchorLine(float xpos) {
 	m_fAnchorLine = xpos;
 	
-	if (m_xPath.empty()) {
+	if (!m_xPath.IsWalking()) {
 		CIwFVec2 anchortarget(GetDragTarget());
 		anchortarget.x = m_fAnchorLine;
 		MoveDragging(anchortarget);
 	}
 }
 
-void Star::FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed) {
-	ClearPath();
-	
-	// copy new path
-	m_fPathSpeed = speed;
-	for (int i = 0; i < samplecount; i++) {
-		m_xPath.push(samplepoints[i]);
+void Star::FollowPath(const std::vector<CIwFVec2>& path) {
+	IW_CALLSTACK_SELF;
+	if (path.size() < 1) {
+		IwAssert(MYAPP, path.size() > 0);
+		return;
 	}
+	
+	// add lead-in
+	std::vector<CIwFVec2> newpath;
+	CIwFVec2 leadin = path[0] - GetPosition();
+	CIwFVec2 step = leadin.GetNormalised() * PATHTRACKER_STEP_LENGTH;
+	int stepcount = (int)(leadin.GetLength() / PATHTRACKER_STEP_LENGTH);
+	leadin = step * stepcount; // // ensures that lead-in does not make path points jump
+	newpath.push_back(path[0] - leadin);
+		
+	// copy new path
+	newpath.insert(newpath.end(), path.begin(), path.end());
+	m_xPath.ImportPath(newpath, leadin.GetLength());
 	
 	// get the star to pollow
 	GetMotionState().FollowPath();
 }
 
-void Star::ClearPath() {
-	while (!m_xPath.empty()) {
-		m_xPath.pop();
-	}
-}
-
 bool Star::IsFollowingPath() {
 	// RRR: this should have been solved by checking the state, rather than
 	///     the type! But I didn't find a simple way to test the state.
-	return !m_xPath.empty();
+	return m_xPath.IsWalking();
 }
 
 void Star::BeginBlock() {

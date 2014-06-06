@@ -4,12 +4,11 @@
 #include "GameFoundation.h"
 #include "Camera.h"
 #include "InputManager.h"
-#include "Renderable.h"
 
 #include "PathRecorder.h"
 #include "PathTracker.h"
 
-class LevelInteractor : public Renderable {
+class LevelInteractor {
 private:
 	GameFoundation& m_rxGame;
 	Camera& m_rxCamera;
@@ -35,9 +34,7 @@ private:
 	TouchMap m_xTouchMap;
     
 	bool m_bInputEnabled;
-	
-    PathRecorder m_xRecorder;
-    PathTracker m_xTracker;
+	PathRecorder m_xRecorder;
 
 public:
 	LevelInteractor(Camera& camera, GameFoundation& game);
@@ -50,20 +47,18 @@ private:
 	void EvaluateTouchPurpose(TouchSpec& touch);
 	void ClearTouchSpec(TouchSpec& touch);
 
-    virtual void OnUpdate(const FrameData& frame);
-	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-
+	void OnPathChanged(bool complete);
+	
 	void TouchBeginEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	void TouchMoveEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	void TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	
 public:
 	struct PathEventArgs {
-		int count;
-		CIwFVec2* samplepos;
+		bool complete;
+		std::vector<CIwFVec2> path;
 	};
-	MulticastEvent<LevelInteractor, CIwFVec2> BeginDrawPath;
-	MulticastEvent<LevelInteractor, PathEventArgs> EndDrawPath;
+	MulticastEvent<LevelInteractor, PathEventArgs> PathChanged;
 };
 
 #endif

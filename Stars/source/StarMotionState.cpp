@@ -46,7 +46,7 @@ void Star::RetractingState::Collide(Body& body) {
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
-		m_rxContext.ClearPath();
+		m_rxContext.m_xPath.ClearPath();
 		m_rxContext.SetState(new RecoverState(m_rxContext));
 	}
 }
@@ -96,15 +96,15 @@ void Star::FollowState::Collide(Body& body) {
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
-		m_rxContext.ClearPath();
+		m_rxContext.m_xPath.ClearPath();
 		m_rxContext.SetState(new RecoverState(m_rxContext));
 	}
 }
 
 void Star::FollowState::Update(uint16 timestep) {
 	// end condition
-	std::queue<CIwFVec2>& path = m_rxContext.m_xPath;
-	if (path.empty()) {
+	PathTracker& path = m_rxContext.m_xPath;
+	if (!path.IsWalking()) {
 		// transition to next state
 		DustEventArgs args;
 		args.EventType = eDustEventTypeCommit;
@@ -117,27 +117,8 @@ void Star::FollowState::Update(uint16 timestep) {
 	// calculate distance that can be travelled during this frame
 	const float velocity = m_rxContext.m_fPathSpeed; // m/s
 	float framedistance = velocity * ((float)timestep / 1000.0f);
-	
-	// identify the next point on the path
-	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
-	while (!path.empty() && framedistance > 0.0f) {
-		CIwFVec2 step = path.front() - dragtarget;
-		float stepdistance = step.GetLength();
-		if (stepdistance <= 0.0f) {
-			// nothing to move on this step; proceed
-			path.pop();
-		} else if (framedistance >= stepdistance) {
-			// move to end of current line, and proceed
-			framedistance -= stepdistance;
-			dragtarget = path.front();
-			path.pop();
-		} else {
-			// cannot move longer during this frame; quit
-			dragtarget += step * (framedistance / stepdistance);
-			break;
-		}
-	}
-	
+	path.Walk(framedistance);
+		
 	// balance the drag force
 	if (m_rxContext.IsDragging()) {
 		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
@@ -145,7 +126,7 @@ void Star::FollowState::Update(uint16 timestep) {
 	}
 	
 	// move particles to new place
-	m_rxContext.MoveDragging(dragtarget);
+	m_rxContext.MoveDragging(path.GetWalkingPosition());
 	if (m_rxContext.m_pxParticles) {
 		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
 	}

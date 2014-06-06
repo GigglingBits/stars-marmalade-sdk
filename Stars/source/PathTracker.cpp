@@ -2,13 +2,13 @@
 #include "FactoryManager.h"
 #include "Debug.h"
 
-PathTracker::PathTracker() : m_uiPointCount(0), m_pxTexture(NULL) {
+PathTracker::PathTracker() : m_uiPointCount(0), m_fPosition(0.0f), m_pxTexture(NULL) {
 	InitializeUV();
-	InitializeCols();
 }
 
-void PathTracker::Clear() {
+void PathTracker::ClearPath() {
 	m_uiPointCount = 0;
+	m_fPosition = 0.0f;
 }
 
 bool PathTracker::Append(const CIwFVec2& point) {
@@ -21,22 +21,22 @@ bool PathTracker::Append(const CIwFVec2& point) {
 	return false;
 }
 
-void PathTracker::ImportPath(CIwFVec2* verts, int vertcount) {
+void PathTracker::ImportPath(const std::vector<CIwFVec2>& path, float leadindistance) {
 	IW_CALLSTACK_SELF;
-	Clear();
+	ClearPath();
 	
 	// qualify
-	if (vertcount < 2) {
-		IwAssertMsg(MYAPP, vertcount >= 2, ("Cannot import path consisting of less than 2 points."));
+	if (path.size() < 2) {
+		IwAssertMsg(MYAPP, path.size() >= 2, ("Cannot import path consisting of less than 2 points."));
 		return;
 	}
 	
 	// path conditioning
 	int i = 0;
-	CIwFVec2 current = verts[i];
-	CIwFVec2 next = verts[++i];
+	CIwFVec2 current = path[i];
+	CIwFVec2 next = path[++i];
 	Append(current);
-	while (i < vertcount) {
+	while (i < path.size()) {
 		CIwFVec2 remaining = next - current;
 
 		// walk along the vector as long as possible; store each step
@@ -50,14 +50,14 @@ void PathTracker::ImportPath(CIwFVec2* verts, int vertcount) {
 		}
 		
 		// too short for next step; find next vector
-		if (i >= vertcount - 1) {
+		if (i >= path.size() - 1) {
 			// there is no next vector...
 			// could consider to record the last known point: Append(next);
 			break;
 		} else {
 			// increment, and recycle remainder
 			current = next;
-			next = verts[++i];
+			next = path[++i];
 			if (current != next) {
 				// extend next vector
 				current -= (next - current).GetNormalised() * remaining.GetLength();
@@ -67,9 +67,10 @@ void PathTracker::ImportPath(CIwFVec2* verts, int vertcount) {
 			}
 		}
 	}
-	
+
 	InitializeTexture();
 	InitializeXY();
+	InitializeCols(leadindistance);
 }
 
 void PathTracker::InitializeTexture() {
@@ -88,9 +89,10 @@ void PathTracker::InitializeUV() {
 	}
 }
 
-void PathTracker::InitializeCols() {
+void PathTracker::InitializeCols(float leadindistance) {
+	int leadin = (leadindistance / PATHTRACKER_STEP_LENGTH) * 4;
 	for (int i = 0; i < PATHTRACKER_MAX_PATH_POINTS * 4;i++) {
-		m_auiCols[i] = 0xffffffff;
+		m_auiCols[i] = i < leadin ? 0x00000000 : 0xffffffff;
 	}
 }
 
@@ -119,7 +121,50 @@ void PathTracker::OnRender(Renderer& renderer, const FrameData& frame) {
 	if (!m_pxTexture && !m_pxTexture->IsImage()) {
 		uint32 col = m_pxTexture->IsColour() ? m_pxTexture->GetColour() : 0xffffffff;
 		renderer.DrawPolygon(m_axPath, m_uiPointCount, col, 0x00000000);
-	} else {
-		renderer.DrawImage(m_pxTexture->GetImage(), m_axXY, m_axUV, m_auiCols, m_uiPointCount * 4);
+		return;
 	}
+	
+	int first = GetPositionIndex() * 4;
+	int count = (m_uiPointCount * 4) - first;
+	if (count > 0) {
+		renderer.DrawImage(m_pxTexture->GetImage(), &m_axXY[first], &m_axUV[first], &m_auiCols[first], count);
+	}
+}
+
+bool PathTracker::Walk(float distance) {
+	if (IsWalking() && (GetPositionIndex() >= m_uiPointCount - 1)) {
+		ClearPath();
+		return false;
+	}
+	m_fPosition += distance;
+	return true;
+}
+
+int PathTracker::GetPositionIndex() {
+	return (int)m_fPosition / PATHTRACKER_STEP_LENGTH;
+}
+
+CIwFVec2 PathTracker::GetWalkingPosition() {
+	IW_CALLSTACK_SELF;
+	
+	if (!IsWalking()) {
+		return CIwFVec2::g_Zero;
+	}
+
+	int i = GetPositionIndex();
+	if (i < 0) {
+		IwAssert(MYAPP, i >= 0);
+		return CIwFVec2::g_Zero;
+	}
+
+	if (i >= m_uiPointCount - 1) {
+		return m_axPath[m_uiPointCount - 1];
+	}
+	
+	// interpolate
+	return m_axPath[i] + (m_axPath[i + 1] - m_axPath[i]).GetNormalised() * (m_fPosition - (i * PATHTRACKER_STEP_LENGTH));
+}
+
+bool PathTracker::IsWalking() {
+	return m_uiPointCount != 0 ;
 }

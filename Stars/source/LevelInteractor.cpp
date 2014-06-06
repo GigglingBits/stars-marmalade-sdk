@@ -63,36 +63,6 @@ void LevelInteractor::ClearTouchSpec(TouchSpec& touch) {
 	touch.targetsprite.clear();
 }
 
-void LevelInteractor::OnUpdate(const FrameData& frame) {
-	m_xTracker.Update(frame);
-}
-
-void LevelInteractor::OnRender(Renderer& renderer, const FrameData& frame) {
-	m_xTracker.Render(renderer, frame);
-/*
-	uint16 count = m_xRecorder.GetPointCount();
-	if (count > 1) {
-		// polygon needs at least 2 vertices
-		renderer.DrawPolygon(
-			m_xRecorder.GetPoints(),
-			count,
-			0xffffffff,
-			0x00000000);
-		
-		// draw length
-		CIwFVec2 pos = m_xRecorder.GetPoints()[count - 1];
-		std::ostringstream oss;
-		oss.precision(2);
-		oss << std::fixed;
-		oss << "Length: " << m_xRecorder.GetLength() << 'm';
-		renderer.DrawText(
-			oss.str(), pos,
-		    Renderer::eFontTypeSystem, 0xffffffff);
-
-	}
- */
-}
-
 void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args) {
 	// record new touch
 	TouchSpec touch;
@@ -118,8 +88,7 @@ void LevelInteractor::TouchBeginEventHandler(const InputManager& sender, const I
 		IwAssertMsg(MYAPP, !m_xRecorder.IsRecording(), ("Already recording; this call is unintentional."));
 		m_xRecorder.StartRecording();
 		m_xRecorder.Record(touch.worldstartpos);
-		
-		BeginDrawPath.Invoke(*this, touch.worldstartpos);
+		OnPathChanged(false);
 	}
 
 	m_xTouchMap[args.id] = touch;
@@ -145,9 +114,7 @@ void LevelInteractor::TouchMoveEventHandler(const InputManager& sender, const In
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		if (Configuration::GetInstance().PathMaxLength > m_xRecorder.GetLength()) {
 			m_xRecorder.Record(touch.worldendpos);
-			if (m_xRecorder.GetPointCount() >= 2) {
-				m_xTracker.ImportPath(m_xRecorder.GetPoints(), m_xRecorder.GetPointCount());
-			}
+			OnPathChanged(false);
 		}
 	}
 }
@@ -169,20 +136,23 @@ void LevelInteractor::TouchEndEventHandler(const InputManager& sender, const Inp
 	} else if (touch.gesturetype == eGestureTypeDrawStarPath) {
 		IwAssertMsg(MYAPP, m_xRecorder.IsRecording(), ("Not recording; this call is unintentional."));
 		m_xRecorder.Record(touch.worldendpos);
-		if (m_xRecorder.GetPointCount() >= 2) {
-			m_xTracker.ImportPath(m_xRecorder.GetPoints(), m_xRecorder.GetPointCount());
-		}
-
-		if (m_bInputEnabled) {
-			PathEventArgs args;
-			args.count = m_xRecorder.GetPointCount();
-			args.samplepos = m_xRecorder.GetPoints();
-			EndDrawPath.Invoke(*this, args);
-		}
-		
+		OnPathChanged(true);
 		m_xRecorder.EndRecording();
 	}
 
 	// delete
 	m_xTouchMap.erase(args.id);
+}
+
+void LevelInteractor::OnPathChanged(bool complete) {
+	if (m_bInputEnabled) {
+		CIwFVec2* points = m_xRecorder.GetPoints();
+		int pointcount = m_xRecorder.GetPointCount();
+
+		PathEventArgs args;
+		args.complete = complete;
+		args.path.insert(args.path.end(), &points[0], &points[pointcount]);
+
+		PathChanged.Invoke(*this, args);
+	}
 }

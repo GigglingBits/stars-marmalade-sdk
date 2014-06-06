@@ -4,6 +4,7 @@
 #include <queue>
 #include "Body.h"
 #include "ParticleSystem.h"
+#include "PathTracker.h"
 
 class Star : public Body {
 public:
@@ -59,7 +60,7 @@ private:
 	ParticleSystem* m_pxParticles;
 	
 private:
-	std::queue<CIwFVec2> m_xPath;
+	PathTracker m_xPath;
 	float m_fPathSpeed;
 	float m_fAnchorLine;
 	bool m_bAutoOrient;
@@ -75,8 +76,7 @@ public:
 	virtual void OnColliding(Body& thisbody, Body& otherbody);
 
 	void SetAnchorLine(float xpos);
-
-	void FollowPath(int samplecount, const CIwFVec2* samplepoints, float speed);
+	void FollowPath(const std::vector<CIwFVec2>& path);
 	
 	void BeginBlock();
 	void EndBlock();
@@ -86,8 +86,6 @@ public:
 	bool IsFollowingPath();
 
 private:
-	void ClearPath();
-
 	void AutoOrientTexture(bool allow);
 	
 	void SetMotionTextureFrame(const std::string& name);

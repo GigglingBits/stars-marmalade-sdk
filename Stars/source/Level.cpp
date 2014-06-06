@@ -24,8 +24,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 
 	// attach event handlers
 	s3eDeviceRegister(S3E_DEVICE_PAUSE, AppPausedCallback, this);
-	m_xInteractor.BeginDrawPath.AddListener(this, &Level::BeginDrawPathEventHandler);
-	m_xInteractor.EndDrawPath.AddListener(this, &Level::EndDrawPathHandler);
+	m_xInteractor.PathChanged.AddListener(this, &Level::PathChangedEventHandler);
 	m_xPausePanel.StateChanged.AddListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
@@ -63,8 +62,7 @@ Level::~Level() {
 	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xPausePanel.StateChanged.RemoveListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
-	m_xInteractor.EndDrawPath.RemoveListener(this, &Level::EndDrawPathHandler);
-	m_xInteractor.BeginDrawPath.RemoveListener(this, &Level::BeginDrawPathEventHandler);
+	m_xInteractor.PathChanged.RemoveListener(this, &Level::PathChangedEventHandler);
 	s3eDeviceUnRegister(S3E_DEVICE_PAUSE, AppPausedCallback);
 }
 
@@ -74,6 +72,7 @@ void Level::Initialize() {
 	m_xPausePanel.Initialize();
 	m_xPausePanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 
+	m_xPath.InitializeTexture();
 	m_xHud.Initialize();
 	m_xBackgroundStars.Initialize();
 	
@@ -186,20 +185,15 @@ void Level::SetStarAnchor(const CIwFVec2& pos) {
 	if (Star* star = m_xGame.GetStar()) {
 		// adjust retraction line
 		star->SetAnchorLine(pos.x);
-		// move fast
-		star->FollowPath(1, &pos, (float)Configuration::GetInstance().PathSpeed);
 	}
 }
 
-void Level::SetStarPath(int samplecount, const CIwFVec2* samplepoints) {
+void Level::SetStarPath(const std::vector<CIwFVec2>& path) {
 	IW_CALLSTACK_SELF;
 	if (Star* star = m_xGame.GetStar()) {
-		if (samplecount > 0) {
-			IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-			star->FollowPath(samplecount, samplepoints, (float)Configuration::GetInstance().PathSpeed);
-			IwTrace(MYAPP, ("Setting %i points path to star", samplecount));
-			m_xCompletionInfo.IncrementPathsStarted();
-		}
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		star->FollowPath(path);
+		m_xCompletionInfo.IncrementPathsStarted();
 	}
 }
 
@@ -318,14 +312,12 @@ void Level::OnUpdate(const FrameData& frame) {
 	// update game logic (create new, remove dead, etc...)
 	m_xGame.Update(frame);
 
-	// interaction
-	m_xInteractor.Update(frame);
-	
 	// scene and widgets
 	m_xCamera.Update(frame.GetScreensize(), frame.GetSimulatedDurationMs());
 	m_xBackgroundStars.Update(frame);
 	m_xBackgroundClouds.Update(frame.GetAvgSimulatedDurationMs());
 	
+	m_xPath.Update(frame);
 	m_xHud.Update(frame);
 }
 
@@ -337,8 +329,8 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xGame.Render(renderer, frame);
 
 	m_xPausePanel.Render(renderer, frame);
-	m_xInteractor.Render(renderer, frame);
 
+	m_xPath.Render(renderer, frame);
 	m_xHud.Render(renderer, frame);
 	
 	if (!m_sBannerText.empty()) {
@@ -417,15 +409,13 @@ void Level::EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& 
 	SetCompletionState(eCompleted);
 }
 
-void Level::BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos) {
+void Level::PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
 	IW_CALLSTACK_SELF;
-	if (Star* star = m_xGame.GetStar()) {
-		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
-		star->MoveDragging(star->GetPosition());
+	
+	if (path.complete) {
+		m_xPath.ClearPath();
+		SetStarPath(path.path);
+	} else {
+		m_xPath.ImportPath(path.path);
 	}
-}
-
-void Level::EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
-	IW_CALLSTACK_SELF;
-	SetStarPath(path.count, path.samplepos);
 }

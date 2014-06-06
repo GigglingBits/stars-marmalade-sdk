@@ -9,10 +9,13 @@
 #include "BackgroundParallax.h"
 #include "LevelHud.h"
 #include "Star.h"
+#include "PathTracker.h"
 #include "Camera.h"
 #include "LevelInteractor.h"
 #include "MulticastEventTimer.h"
 #include "LevelCompletionInfo.h"
+
+#include <vector>
 
 #define LEVEL_START_BANNER_LEADIN 500
 #define LEVEL_START_BANNER_DURATION 1000
@@ -68,6 +71,7 @@ private:
 	LevelHud m_xHud;
 
 	LevelInteractor m_xInteractor;
+	PathTracker m_xPath;
 	
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement);
@@ -117,7 +121,7 @@ private:
 	CIwFVec2 GetStarHidePosition();
 	
 	void SetStarAnchor(const CIwFVec2& pos);
-	void SetStarPath(int samplecount, const CIwFVec2* samplepoints);
+	void SetStarPath(const std::vector<CIwFVec2>& path);
 
 	void Conclude();
 	
@@ -127,8 +131,7 @@ private:
 	
 	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
-	void BeginDrawPathEventHandler(const LevelInteractor& sender, const CIwFVec2& pos);
-	void EndDrawPathHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
+	void PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
 
 	void QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args);
 	void SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args);
