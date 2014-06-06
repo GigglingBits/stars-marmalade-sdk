@@ -1,21 +1,35 @@
 
 bird_03.png
-size: 607,254
+size: 1017,254
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bigbluebird-beak-01
   rotate: false
-  xy: 153, 24
+  xy: 348, 24
   size: 53, 32
   orig: 53, 32
   offset: 0, 0
   index: -1
 bigbluebird-beak-02
-  rotate: false
-  xy: 555, 172
+  rotate: true
+  xy: 901, 103
   size: 40, 37
   orig: 40, 37
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-hurt-01
+  rotate: true
+  xy: 604, 71
+  size: 58, 82
+  orig: 58, 82
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-hurt-02
+  rotate: false
+  xy: 688, 57
+  size: 78, 72
+  orig: 78, 72
   offset: 0, 0
   index: -1
 bigbluebird-body
@@ -27,35 +41,56 @@ bigbluebird-body
   index: -1
 bigbluebird-body-detail
   rotate: true
-  xy: 126, 2
+  xy: 403, 2
   size: 54, 25
   orig: 54, 25
   offset: 0, 0
   index: -1
 bigbluebird-claws
-  rotate: false
-  xy: 338, 67
+  rotate: true
+  xy: 941, 161
   size: 93, 76
   orig: 93, 76
   offset: 0, 0
   index: -1
+bigbluebird-claws-attack
+  rotate: false
+  xy: 480, 108
+  size: 122, 146
+  orig: 122, 146
+  offset: 0, 0
+  index: -1
 bigbluebird-eye-closed
   rotate: false
-  xy: 555, 211
+  xy: 847, 100
   size: 52, 43
   orig: 52, 43
   offset: 0, 0
   index: -1
-bigbluebird-eye-open
+bigbluebird-eye-hurt
   rotate: false
-  xy: 433, 100
+  xy: 480, 17
+  size: 100, 89
+  orig: 100, 89
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-open
+  rotate: true
+  xy: 430, 4
   size: 52, 43
   orig: 52, 43
+  offset: 0, 0
+  index: -1
+bigbluebird-hurt-patch
+  rotate: false
+  xy: 768, 66
+  size: 77, 77
+  orig: 77, 77
   offset: 0, 0
   index: -1
 bigbluebird-wing-01
   rotate: false
-  xy: 447, 145
+  xy: 833, 145
   size: 106, 109
   orig: 106, 109
   offset: 0, 0
@@ -69,8 +104,43 @@ bigbluebird-wing-02
   index: -1
 bigbluebird-wing-03
   rotate: false
-  xy: 338, 145
+  xy: 724, 145
   size: 107, 109
   orig: 107, 109
   offset: 0, 0
+  index: -1
+bigbluebird-wing-hurt
+  rotate: false
+  xy: 338, 58
+  size: 140, 196
+  orig: 140, 196
+  offset: 0, 0
+  index: -1
+blue-feathers-01
+  rotate: false
+  xy: 274, 24
+  size: 72, 32
+  orig: 72, 32
+  offset: 0, 0
+  index: -1
+blue-feathers-02
+  rotate: true
+  xy: 204, 15
+  size: 41, 68
+  orig: 41, 68
+  offset: 0, 0
+  index: -1
+blue-feathers-03
+  rotate: false
+  xy: 604, 131
+  size: 118, 123
+  orig: 120, 125
+  offset: 2, 0
+  index: -1
+blue-feathers-04
+  rotate: true
+  xy: 126, 4
+  size: 52, 76
+  orig: 53, 76
+  offset: 1, 0
   index: -1

@@ -1,76 +1,139 @@
 
 bird_01.png
-size: 493,254
+size: 1013,254
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+bigredbird-attack
+  rotate: true
+  xy: 595, 105
+  size: 149, 197
+  orig: 149, 197
+  offset: 0, 0
+  index: -1
 bigredbird-beak-01
   rotate: false
-  xy: 285, 141
+  xy: 853, 18
   size: 56, 50
   orig: 56, 50
   offset: 0, 0
   index: -1
 bigredbird-beak-02
   rotate: false
-  xy: 131, 2
+  xy: 2, 11
   size: 41, 14
   orig: 41, 14
   offset: 0, 0
   index: -1
+bigredbird-beak-hurt
+  rotate: true
+  xy: 923, 148
+  size: 106, 90
+  orig: 106, 90
+  offset: 0, 0
+  index: -1
 bigredbird-body
   rotate: false
-  xy: 2, 146
+  xy: 312, 146
   size: 281, 108
   orig: 281, 108
   offset: 0, 0
   index: -1
 bigredbird-body-details
   rotate: false
-  xy: 395, 179
+  xy: 561, 132
   size: 24, 12
   orig: 24, 12
   offset: 0, 0
   index: -1
+bigredbird-body-details-02
+  rotate: false
+  xy: 635, 13
+  size: 57, 27
+  orig: 57, 27
+  offset: 0, 0
+  index: -1
+bigredbird-body-hurt
+  rotate: false
+  xy: 2, 27
+  size: 308, 227
+  orig: 308, 227
+  offset: 0, 0
+  index: -1
 bigredbird-claws
   rotate: false
-  xy: 421, 188
+  xy: 779, 37
   size: 72, 66
   orig: 72, 66
   offset: 0, 0
   index: -1
 bigredbird-eye-closed
   rotate: false
-  xy: 343, 152
+  xy: 923, 53
   size: 50, 39
   orig: 50, 39
   offset: 0, 0
   index: -1
-bigredbird-eye-open
+bigredbird-eye-hurt
   rotate: false
-  xy: 260, 100
+  xy: 697, 37
+  size: 80, 66
+  orig: 80, 66
+  offset: 0, 0
+  index: -1
+bigredbird-eye-open
+  rotate: true
+  xy: 911, 2
   size: 49, 39
   orig: 50, 39
   offset: 0, 0
   index: -1
 bigredbird-wing-01
   rotate: false
-  xy: 131, 18
+  xy: 312, 18
   size: 127, 126
   orig: 127, 126
   offset: 0, 0
   index: -1
 bigredbird-wing-02
   rotate: false
-  xy: 285, 193
+  xy: 561, 42
   size: 134, 61
   orig: 134, 61
   offset: 0, 0
   index: -1
 bigredbird-wing-03
   rotate: false
-  xy: 2, 3
+  xy: 794, 113
   size: 127, 141
   orig: 127, 141
   offset: 0, 0
+  index: -1
+red-feathers-01
+  rotate: false
+  xy: 561, 8
+  size: 72, 32
+  orig: 72, 32
+  offset: 0, 0
+  index: -1
+red-feathers-02
+  rotate: true
+  xy: 853, 70
+  size: 41, 68
+  orig: 41, 68
+  offset: 0, 0
+  index: -1
+red-feathers-03
+  rotate: false
+  xy: 441, 21
+  size: 118, 123
+  orig: 120, 125
+  offset: 2, 0
+  index: -1
+red-feathers-04
+  rotate: true
+  xy: 923, 94
+  size: 52, 75
+  orig: 53, 75
+  offset: 1, 0
   index: -1

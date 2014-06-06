@@ -1,76 +1,139 @@
 
 bird_01.png
-size: 1010,250
+size: 1004,1022
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+bigredbird-attack
+  rotate: false
+  xy: 465, 727
+  size: 224, 295
+  orig: 224, 295
+  offset: 0, 0
+  index: -1
 bigredbird-beak-01
-  rotate: true
-  xy: 2, 2
+  rotate: false
+  xy: 883, 844
   size: 83, 76
   orig: 83, 76
   offset: 0, 0
   index: -1
 bigredbird-beak-02
   rotate: true
-  xy: 199, 24
+  xy: 425, 618
   size: 61, 20
   orig: 61, 20
   offset: 0, 0
   index: -1
+bigredbird-beak-hurt
+  rotate: false
+  xy: 194, 380
+  size: 158, 134
+  orig: 158, 134
+  offset: 0, 0
+  index: -1
 bigredbird-body
   rotate: false
-  xy: 2, 87
+  xy: 2, 516
   size: 421, 163
   orig: 421, 163
   offset: 0, 0
   index: -1
 bigredbird-body-details
-  rotate: false
-  xy: 199, 5
+  rotate: true
+  xy: 968, 883
   size: 37, 17
   orig: 37, 17
   offset: 0, 0
   index: -1
+bigredbird-body-details-02
+  rotate: false
+  xy: 465, 685
+  size: 86, 40
+  orig: 86, 40
+  offset: 0, 0
+  index: -1
+bigredbird-body-hurt
+  rotate: false
+  xy: 2, 681
+  size: 461, 341
+  orig: 461, 341
+  offset: 0, 0
+  index: -1
 bigredbird-claws
   rotate: true
-  xy: 809, 50
+  xy: 82, 8
   size: 107, 100
   orig: 107, 100
   offset: 0, 0
   index: -1
 bigredbird-eye-closed
   rotate: true
-  xy: 140, 10
+  xy: 894, 767
   size: 75, 57
   orig: 75, 58
   offset: 0, 0
   index: -1
+bigredbird-eye-hurt
+  rotate: false
+  xy: 883, 922
+  size: 121, 100
+  orig: 121, 100
+  offset: 0, 0
+  index: -1
 bigredbird-eye-open
   rotate: true
-  xy: 80, 11
+  xy: 298, 304
   size: 74, 58
   orig: 75, 58
   offset: 0, 0
   index: -1
 bigredbird-wing-01
   rotate: false
-  xy: 617, 60
+  xy: 691, 832
   size: 190, 190
   orig: 190, 190
   offset: 0, 0
   index: -1
 bigredbird-wing-02
   rotate: false
-  xy: 809, 159
+  xy: 691, 739
   size: 201, 91
   orig: 201, 91
   offset: 0, 0
   index: -1
 bigredbird-wing-03
   rotate: false
-  xy: 425, 38
+  xy: 2, 302
   size: 190, 212
   orig: 190, 212
   offset: 0, 0
+  index: -1
+red-feathers-01
+  rotate: true
+  xy: 354, 405
+  size: 109, 49
+  orig: 109, 49
+  offset: 0, 0
+  index: -1
+red-feathers-02
+  rotate: true
+  xy: 194, 317
+  size: 61, 102
+  orig: 61, 102
+  offset: 0, 0
+  index: -1
+red-feathers-03
+  rotate: false
+  xy: 2, 117
+  size: 177, 183
+  orig: 180, 187
+  offset: 3, 0
+  index: -1
+red-feathers-04
+  rotate: false
+  xy: 2, 2
+  size: 78, 113
+  orig: 79, 113
+  offset: 1, 0
   index: -1

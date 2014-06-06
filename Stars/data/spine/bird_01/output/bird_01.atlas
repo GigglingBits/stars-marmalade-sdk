@@ -1,76 +1,139 @@
 
 bird_01.png
-size: 1010,250
+size: 1012,509
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+bigredbird-attack
+  rotate: false
+  xy: 389, 263
+  size: 187, 246
+  orig: 187, 246
+  offset: 0, 0
+  index: -1
 bigredbird-beak-01
-  rotate: true
-  xy: 2, 2
-  size: 83, 76
-  orig: 83, 76
+  rotate: false
+  xy: 355, 131
+  size: 70, 63
+  orig: 70, 63
   offset: 0, 0
   index: -1
 bigredbird-beak-02
+  rotate: false
+  xy: 485, 201
+  size: 51, 17
+  orig: 51, 17
+  offset: 0, 0
+  index: -1
+bigredbird-beak-hurt
   rotate: true
-  xy: 199, 24
-  size: 61, 20
-  orig: 61, 20
+  xy: 900, 377
+  size: 132, 112
+  orig: 132, 112
   offset: 0, 0
   index: -1
 bigredbird-body
   rotate: false
   xy: 2, 87
-  size: 421, 163
-  orig: 421, 163
+  size: 351, 136
+  orig: 351, 136
   offset: 0, 0
   index: -1
 bigredbird-body-details
   rotate: false
-  xy: 199, 5
-  size: 37, 17
-  orig: 37, 17
+  xy: 739, 334
+  size: 31, 15
+  orig: 31, 15
+  offset: 0, 0
+  index: -1
+bigredbird-body-details-02
+  rotate: false
+  xy: 355, 95
+  size: 72, 34
+  orig: 72, 34
+  offset: 0, 0
+  index: -1
+bigredbird-body-hurt
+  rotate: false
+  xy: 2, 225
+  size: 385, 284
+  orig: 385, 284
   offset: 0, 0
   index: -1
 bigredbird-claws
-  rotate: true
-  xy: 809, 50
-  size: 107, 100
-  orig: 107, 100
+  rotate: false
+  xy: 275, 2
+  size: 90, 83
+  orig: 90, 83
   offset: 0, 0
   index: -1
 bigredbird-eye-closed
   rotate: true
-  xy: 140, 10
-  size: 75, 57
-  orig: 75, 58
+  xy: 427, 131
+  size: 63, 48
+  orig: 63, 49
+  offset: 0, 0
+  index: -1
+bigredbird-eye-hurt
+  rotate: false
+  xy: 172, 2
+  size: 101, 83
+  orig: 101, 83
   offset: 0, 0
   index: -1
 bigredbird-eye-open
   rotate: true
-  xy: 80, 11
-  size: 74, 58
-  orig: 75, 58
+  xy: 367, 31
+  size: 62, 49
+  orig: 63, 49
   offset: 0, 0
   index: -1
 bigredbird-wing-01
   rotate: false
-  xy: 617, 60
-  size: 190, 190
-  orig: 190, 190
+  xy: 739, 351
+  size: 159, 158
+  orig: 159, 158
   offset: 0, 0
   index: -1
 bigredbird-wing-02
   rotate: false
-  xy: 809, 159
-  size: 201, 91
-  orig: 201, 91
+  xy: 2, 9
+  size: 168, 76
+  orig: 168, 76
   offset: 0, 0
   index: -1
 bigredbird-wing-03
   rotate: false
-  xy: 425, 38
-  size: 190, 212
-  orig: 190, 212
+  xy: 578, 332
+  size: 159, 177
+  orig: 159, 177
   offset: 0, 0
+  index: -1
+red-feathers-01
+  rotate: false
+  xy: 485, 220
+  size: 91, 41
+  orig: 91, 41
+  offset: 0, 0
+  index: -1
+red-feathers-02
+  rotate: true
+  xy: 900, 324
+  size: 51, 85
+  orig: 51, 85
+  offset: 0, 0
+  index: -1
+red-feathers-03
+  rotate: true
+  xy: 578, 183
+  size: 147, 153
+  orig: 150, 156
+  offset: 3, 0
+  index: -1
+red-feathers-04
+  rotate: true
+  xy: 389, 196
+  size: 65, 94
+  orig: 66, 94
+  offset: 1, 0
   index: -1
