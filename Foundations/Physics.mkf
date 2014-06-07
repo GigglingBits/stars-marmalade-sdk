@@ -1,7 +1,7 @@
 display_name "Foundation/Physics"
 
 options {
-	arm-fpu=1 # Box2D will not work without FPU
+	arm-fpu=vfp # Box2D will not work without FPU
 }
 
 subprojects {

@@ -4,7 +4,7 @@
 #include "Main.h"
 #include "Window.h"
 
-#include "LevelIterator.h";
+#include "LevelIterator.h"
 
 class Page : public Window {
 public: 

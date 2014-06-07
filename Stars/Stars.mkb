@@ -2,7 +2,8 @@
 
 options {
 	strict
-	arm-fpu=1 # Box2D will not work without FPU
+	arm-fpu=vfp # Box2D will not work without FPU
+	optimise-speed
 #	enable-exceptions
 #   builddir = build_temp
 }
