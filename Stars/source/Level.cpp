@@ -185,6 +185,10 @@ void Level::SetStarAnchor(const CIwFVec2& pos) {
 	if (Star* star = m_xGame.GetStar()) {
 		// adjust retraction line
 		star->SetAnchorLine(pos.x);
+		// move fast
+		std::vector<CIwFVec2> path;
+		path.push_back(pos);
+		star->FollowPath(path);
 	}
 }
 
