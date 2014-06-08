@@ -40,7 +40,7 @@ void UpdateScreen() {
 	IwGxSwapBuffers();
 }
 
-void WriteandShowLog(const std::string& message, bool clear = false) {
+void WriteAndShowLog(const std::string& message, bool clear = false) {
 	static std::string s_Messages;
 
 	if (clear) {
@@ -77,7 +77,7 @@ void PrintHeader() {
 	oss << "SDK:           " << MARMALADE_VERSION_STRING_FULL << std::endl;
 	oss << "Locale:        " << s3eDeviceGetString(S3E_DEVICE_LOCALE) << std::endl;
 	oss << "*************************************************************";
-	WriteandShowLog(oss.str());
+	WriteAndShowLog(oss.str());
 }
 
 void Initialize() {
@@ -104,14 +104,14 @@ void Initialize() {
 	
 	PrintHeader();
 
-	WriteandShowLog("Initializing foundation...");
+	WriteAndShowLog("Initializing foundation...");
 	IwResManagerInit();
 	IwGxFontInit();
 
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
-	WriteandShowLog("Initializing game frameworks...");
+	WriteAndShowLog("Initializing game frameworks...");
 	IwMemBucketInit();
 	IwMemBucketCreate(eMemoryBucketResources, "resources", 15000000);
 	ResourceManager::Initialize(eMemoryBucketResources);
@@ -123,7 +123,7 @@ void Initialize() {
 	LocationServices::Initialize();
 	World::SetDefaultGravity(1.0f, -9.8f);
 
-	WriteandShowLog("Loading resources...");
+	WriteAndShowLog("Loading resources...");
 	ResourceManager::GetInstance().LoadPermament("base.group");
 	
 	std::srand((unsigned int)s3eTimerGetUST());
@@ -189,11 +189,11 @@ S3E_MAIN_DECL void IwMain() {
 	s3eDeviceYield();
 
 #ifdef IW_DEBUG
-	WriteandShowLog("Running tests...");
+	WriteAndShowLog("Running tests...");
 	Test::RunTest();
 #endif
 
-	WriteandShowLog("", true);
+	WriteAndShowLog("", true);
 
 	DoLoop();
 
