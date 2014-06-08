@@ -144,7 +144,7 @@ bool PathTracker::Walk(float distance) {
 }
 
 int PathTracker::GetPositionIndex() {
-	return (int)m_fPosition / PATHTRACKER_STEP_LENGTH;
+	return (int)(m_fPosition / PATHTRACKER_STEP_LENGTH);
 }
 
 CIwFVec2 PathTracker::GetWalkingPosition() {

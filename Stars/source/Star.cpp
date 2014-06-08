@@ -153,7 +153,7 @@ void Star::FollowPath(const std::vector<CIwFVec2>& path) {
 
 bool Star::IsFollowingPath() {
 	// RRR: this should have been solved by checking the state, rather than
-	///     the type! But I didn't find a simple way to test the state.
+	///     the type! But I didn't see a good way to test the state.
 	return m_xPath.IsWalking();
 }
 

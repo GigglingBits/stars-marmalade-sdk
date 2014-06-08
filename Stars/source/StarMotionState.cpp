@@ -117,7 +117,9 @@ void Star::FollowState::Update(uint16 timestep) {
 	// calculate distance that can be travelled during this frame
 	const float velocity = m_rxContext.m_fPathSpeed; // m/s
 	float framedistance = velocity * ((float)timestep / 1000.0f);
-	path.Walk(framedistance);
+	if (path.Walk(framedistance)) {
+		m_rxContext.MoveDragging(path.GetWalkingPosition());
+	}
 		
 	// balance the drag force
 	if (m_rxContext.IsDragging()) {
@@ -126,7 +128,6 @@ void Star::FollowState::Update(uint16 timestep) {
 	}
 	
 	// move particles to new place
-	m_rxContext.MoveDragging(path.GetWalkingPosition());
 	if (m_rxContext.m_pxParticles) {
 		m_rxContext.m_pxParticles->SetPosition(m_rxContext.GetPosition());
 	}
