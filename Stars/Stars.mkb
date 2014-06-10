@@ -189,6 +189,12 @@ files {
 
 	Buff.h
 	Buff.cpp
+	BuffMagnet.h
+	BuffMagnet.cpp
+	BuffShoot.h
+	BuffShoot.cpp
+	BuffShield.h
+	BuffShield.cpp
 
 	Nugget.h
 	Nugget.cpp
