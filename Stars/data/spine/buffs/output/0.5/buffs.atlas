@@ -1,0 +1,48 @@
+
+buffs.png
+size: 414,91
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+magnet_buff
+  rotate: false
+  xy: 260, 41
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+magnet_button
+  rotate: false
+  xy: 2, 2
+  size: 84, 89
+  orig: 84, 89
+  offset: 0, 0
+  index: -1
+protect_buff
+  rotate: false
+  xy: 312, 41
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+protect_button
+  rotate: false
+  xy: 88, 2
+  size: 84, 89
+  orig: 84, 89
+  offset: 0, 0
+  index: -1
+shoot_buff
+  rotate: false
+  xy: 364, 41
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+shoot_button
+  rotate: false
+  xy: 174, 2
+  size: 84, 89
+  orig: 84, 89
+  offset: 0, 0
+  index: -1

@@ -32,3 +32,10 @@ SpineResource
 	atlas	"spine/bird_03/output/bird_03.atlas"
 	json	"spine/bird_03/output/bird_03.json"
 }
+
+SpineResource
+{
+	name	"spine_buffs"
+	atlas	"spine/buffs/output/buffs.atlas"
+	json	"spine/buffs/output/buffs.json"
+}

@@ -1,0 +1,48 @@
+{
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "button", "bone": "root", "attachment": "button" },
+	{ "name": "buff", "bone": "root", "attachment": "buff" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
+],
+"skins": {
+	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -94.13341, -95.78796, 95.18363, -94.82697, 93.26162, 95.45101, -96.055374, 94.49002 ]
+			}
+		}
+	},
+	"magnet": {
+		"buff": {
+			"buff": { "name": "images/magnet_buff", "width": 100, "height": 100 }
+		},
+		"button": {
+			"button": { "name": "images/magnet_button", "width": 168, "height": 178 }
+		}
+	},
+	"protect": {
+		"buff": {
+			"buff": { "name": "images/protect_buff", "width": 100, "height": 100 }
+		},
+		"button": {
+			"button": { "name": "images/protect_button", "width": 168, "height": 178 }
+		}
+	},
+	"shoot": {
+		"buff": {
+			"buff": { "name": "images/shoot_buff", "width": 100, "height": 100 }
+		},
+		"button": {
+			"button": { "name": "images/shoot_button", "width": 168, "height": 178 }
+		}
+	}
+},
+"animations": {
+	"buff": {},
+	"button": {}
+}
+}
