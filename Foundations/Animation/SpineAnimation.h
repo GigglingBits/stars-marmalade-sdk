@@ -26,6 +26,9 @@ public:
 	
 	bool Load(const std::string& resourceid);
 
+	bool SetSkin(const std::string& name);
+	bool ConstainsSkin(const std::string& name);
+	
 	bool SetAnimation(const std::string& name);
 	bool ConstainsAnimation(const std::string& name);
 	

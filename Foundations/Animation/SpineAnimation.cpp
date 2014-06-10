@@ -29,6 +29,27 @@ bool SpineAnimation::Load(const std::string& resourceid) {
 	}
 }
 
+
+bool SpineAnimation::SetSkin(const std::string& name) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeletonData && m_pxSkeleton, ("Skeleton must be loaded before setting the skin"));
+	if (!m_pxSkeletonData || !m_pxSkeleton) {
+		return false;
+	}
+	
+	return (bool) spSkeleton_setSkinByName(m_pxSkeleton, name.c_str());
+}
+
+bool SpineAnimation::ConstainsSkin(const std::string& name) {
+	IW_CALLSTACK_SELF;
+	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before checking the skin"));
+	if (!m_pxSkeletonData) {
+		return false;
+	}
+	
+	return (bool) spSkeletonData_findSkin(m_pxSkeletonData, name.c_str());
+}
+
 bool SpineAnimation::SetAnimation(const std::string& name) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
@@ -54,7 +75,7 @@ bool SpineAnimation::SetAnimation(const std::string& name) {
 
 bool SpineAnimation::ConstainsAnimation(const std::string& name) {
 	IW_CALLSTACK_SELF;
-	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
+	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before checking the animation"));
 	if (!m_pxSkeletonData) {
 		return false;
 	}
