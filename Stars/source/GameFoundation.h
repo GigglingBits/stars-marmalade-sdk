@@ -7,6 +7,7 @@
 #include "Renderable.h"
 #include "Sprite.h"
 #include "Body.h"
+#include "Buff.h"
 #include "Star.h"
 #include "World.h"
 #include "ContactHandler.h"
@@ -98,6 +99,7 @@ private:
 	
 	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
 	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
+	void BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);
 
 public:

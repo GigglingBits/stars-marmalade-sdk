@@ -16,7 +16,7 @@ public:
 	struct BuffArgs {
 		CIwFVec2 pos;
 	};
-	MulticastEvent<Body, BuffArgs> Collected;
+	MulticastEvent<Buff, BuffArgs> Collected;
 };
 
 #endif

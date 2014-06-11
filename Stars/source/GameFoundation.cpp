@@ -76,6 +76,8 @@ void GameFoundation::Add(Body* body) {
 		IwAssertMsg(MYAPP, !m_pxStar, ("There seems to be a star already. There should by not more than one star at any given time."));
 		m_pxStar = (Star*)body;
 		m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
+	} else if (Buff* buff = dynamic_cast<Buff*>(body)) {
+		buff->Collected.AddListener(this, &GameFoundation::BuffCollectedEventHandler);
 	}
 
 	body->EmitBuffRequested.AddListener(this, &GameFoundation::BuffRequestedEventHandler);
@@ -348,6 +350,10 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 
 void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args) {
 	EmitBuff(args.pos);
+}
+
+void GameFoundation::BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args) {
+	;
 }
 
 void GameFoundation::EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args) {
