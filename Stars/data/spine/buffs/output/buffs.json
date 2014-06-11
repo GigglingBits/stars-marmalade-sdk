@@ -12,37 +12,63 @@
 		"aabb": {
 			"aabb": {
 				"type": "boundingbox",
-				"vertices": [ -94.13341, -95.78796, 95.18363, -94.82697, 93.26162, 95.45101, -96.055374, 94.49002 ]
+				"vertices": [ -80.67842, -90.522964, 85.82365, -91.31698, 85.65661, 86.09104, -82.01538, 86.30003 ]
 			}
 		}
 	},
 	"magnet": {
 		"buff": {
-			"buff": { "name": "magnet_buff", "width": 100, "height": 100 }
+			"buff": { "name": "magnet_buff", "scaleX": 1.5, "scaleY": 1.5, "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "magnet_button", "width": 168, "height": 178 }
+			"button": { "name": "magnet_button", "width": 167, "height": 178 }
 		}
 	},
 	"shield": {
 		"buff": {
-			"buff": { "name": "shield_buff", "width": 100, "height": 100 }
+			"buff": { "name": "shield_buff", "scaleX": 1.5, "scaleY": 1.5, "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "shield_button", "width": 168, "height": 178 }
+			"button": { "name": "shield_button", "width": 167, "height": 178 }
 		}
 	},
 	"shoot": {
 		"buff": {
-			"buff": { "name": "shoot_buff", "width": 100, "height": 100 }
+			"buff": { "name": "shoot_buff", "scaleX": 1.5, "scaleY": 1.5, "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "shoot_button", "width": 168, "height": 178 }
+			"button": { "name": "shoot_button", "width": 167, "height": 178 }
 		}
 	}
 },
 "animations": {
-	"buff": {},
-	"button": {}
+	"buff": {
+		"slots": {
+			"buff": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			},
+			"button": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		}
+	},
+	"button": {
+		"slots": {
+			"buff": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"button": {
+				"color": [
+					{ "time": 0, "color": "ffffffff" }
+				]
+			}
+		}
+	}
 }
 }
