@@ -108,16 +108,21 @@
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 		</body>
 		
-		<body id="buff_attack" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
-			<texture image="buff_attack" />
+		<body id="buff_magnet" type="buff_magnet" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
 			<shape type="circle" width="1.0" />
 		</body>
 		
-		<body id="buff_block" type="buff" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
-			<texture image="buff_block" />
+		<body id="buff_shield" type="buff_shield" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
 			<shape type="circle" width="1.0" />
 		</body>
-				
+		
+		<body id="buff_shoot" type="buff_shoot" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
+			<shape type="circle" width="1.0" />
+		</body>
+		
 		<body id="bird_01" type="bird" resilience="1.0" revolve="0">
 			<shape type="polygon">
 				<point x="-0.75" y="-0.35" />

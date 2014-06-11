@@ -294,21 +294,30 @@ bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 
 void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 	IW_CALLSTACK_SELF;
-/*
 	// evaluate probability
-	float probability = m_xDust.GetDustFillPercent();
+	float probability = 1.0f;
 	float random = (float)(rand() % 100) / 100.0f;
 	if (probability <= random) {
 		return;
 	}
 	
 	// select buff (based on even/odd number )
-	std::string buff = ((int)(random * 100.0f))%2 ? "buff_attack" : "buff_block";
-	
+	std::string buff;
+	switch ((int)(random * 100.0f)%3) {
+	case 0:
+		buff = "buff_magnet";
+		break;
+	case 1:
+		buff = "buff_shield";
+		break;
+	case 2:
+		buff = "buff_shoot";
+		break;
+	}
+		
 	// create buff
 	CIwFVec2 speed(0.0f, Configuration::GetInstance().BuffSpeed);
 	EnqueueCreateBody(buff, pos, speed);
-*/
 }
 
 void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {

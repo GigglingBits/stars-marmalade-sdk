@@ -3,6 +3,7 @@
 
 BuffShoot::BuffShoot(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 : Buff(id, bodydef, fixturedef, texturedef) {
+	SetBuffAppearance("shoot", "buff");
 }
 
 const char* BuffShoot::GetTypeName() {

@@ -18,26 +18,26 @@
 	},
 	"magnet": {
 		"buff": {
-			"buff": { "name": "images/magnet_buff", "width": 100, "height": 100 }
+			"buff": { "name": "magnet_buff", "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "images/magnet_button", "width": 168, "height": 178 }
+			"button": { "name": "magnet_button", "width": 168, "height": 178 }
 		}
 	},
-	"protect": {
+	"shield": {
 		"buff": {
-			"buff": { "name": "images/protect_buff", "width": 100, "height": 100 }
+			"buff": { "name": "shield_buff", "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "images/protect_button", "width": 168, "height": 178 }
+			"button": { "name": "shield_button", "width": 168, "height": 178 }
 		}
 	},
 	"shoot": {
 		"buff": {
-			"buff": { "name": "images/shoot_buff", "width": 100, "height": 100 }
+			"buff": { "name": "shoot_buff", "width": 100, "height": 100 }
 		},
 		"button": {
-			"button": { "name": "images/shoot_button", "width": 168, "height": 178 }
+			"button": { "name": "shoot_button", "width": 168, "height": 178 }
 		}
 	}
 },

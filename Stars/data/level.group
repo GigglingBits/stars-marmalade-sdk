@@ -18,6 +18,7 @@ CIwResGroup
 	./spine/title/output/title.png
 
 	./spine/star/output/star.png
+	./spine/buffs/output/buffs.png
 
 	./spine/bird_01/output/bird_01.png
 	./spine/bird_02/output/bird_02.png

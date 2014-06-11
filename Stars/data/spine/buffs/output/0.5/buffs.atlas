@@ -18,14 +18,14 @@ magnet_button
   orig: 84, 89
   offset: 0, 0
   index: -1
-protect_buff
+shield_buff
   rotate: false
   xy: 312, 41
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
-protect_button
+shield_button
   rotate: false
   xy: 88, 2
   size: 84, 89

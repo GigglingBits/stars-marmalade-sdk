@@ -3,6 +3,7 @@
 
 BuffShield::BuffShield(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 : Buff(id, bodydef, fixturedef, texturedef) {
+	SetBuffAppearance("shield", "buff");
 }
 
 const char* BuffShield::GetTypeName() {

@@ -7,7 +7,9 @@
 #include "Nugget.h"
 #include "Enemy.h"
 #include "Bird.h"
-#include "Buff.h"
+#include "BuffMagnet.h"
+#include "BuffShield.h"
+#include "BuffShoot.h"
 
 #include <sstream>
 #include <string>
@@ -153,8 +155,12 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 		p = new Nugget3(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("nugget4")) {
 		p = new Nugget4(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("buff")) {
-		p = new Buff(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("buff_shoot")) {
+		p = new BuffShoot(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("buff_magnet")) {
+		p = new BuffMagnet(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("buff_shield")) {
+		p = new BuffShield(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("enemy")) {
 		p = new Enemy(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("bird")) {

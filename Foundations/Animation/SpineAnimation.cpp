@@ -183,10 +183,15 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 					IwAssertMsg(MYAPP, false, ("Slot %i has a mesh attachment. Meshes are not supported by the renderer.", slotid));
 				} else if (attachment->type == SP_ATTACHMENT_SKINNED_MESH) {
 					IwAssertMsg(MYAPP, false, ("Slot %i has a skinned mesh attachment. Skinned meshes are not supported by the renderer.", slotid));
+				} else if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
+					; // bounding boxes are legal, but are not rendered
+				} else {
+					IwAssertMsg(MYAPP, false, ("Slot %i has an unidentified attachment. It will be ignoered.", slotid));
 				}
 			}
 		}
 	}
+	IwAssertMsg(MYAPP, texture, ("None of the attachments has a texture. This is likely an error. Is the skeleton skinned, but the skin was not set?"));
 	return texture;
 }
 

@@ -7,17 +7,32 @@ Buff::Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	SetGravityScale(0.0f);
 }
 
-const char* Buff::GetTypeName() {
-	return Buff::TypeName();
-}
-
-const char* Buff::TypeName() {
-	static const char* type = "buff";
-	return type;
-}
-
 bool Buff::BeginDragging(const CIwFVec2& target) {
-	GetHealthManager().Kill();
 	ShowEffect("buff_touch");
-	return false;
+
+	BuffArgs args;
+	args.pos = GetCenter();
+	Collected.Invoke(*this, args);
+	
+	GetHealthManager().Kill();
+	return true;
+}
+
+void Buff::SetBuffAppearance(const std::string& skin, const std::string& animation) {
+	IW_CALLSTACK_SELF;
+	
+	Texture* texture = GetTexture();
+	IwAssert(MYAPP, texture);
+	if (!texture) {
+		return;
+	}
+	IwAssert(MYAPP, texture->IsSkeleton());
+	if (!texture->IsSkeleton()) {
+		return;
+	}
+	
+	if (SpineAnimation* skeleton = texture->GetSkeleton()) {
+		skeleton->SetSkin(skin);
+		skeleton->SetAnimation(animation);
+	}
 }
