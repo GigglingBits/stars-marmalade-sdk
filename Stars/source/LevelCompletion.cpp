@@ -93,20 +93,22 @@ void LevelCompletion::SaveResults() {
 
 void LevelCompletion::SubmitAnalytics() {
 	std::ostringstream oss;
+	oss << "Level completed: " << m_sLevelId;
+	std::string message(oss.str());
+	
+	oss.clear(); oss.str("");
 	oss << m_xCompletionInfo.GetDustAmount();
 	std::string dust(oss.str());
 	
 	oss.clear(); oss.str("");
-	
 	oss << m_xCompletionInfo.GetPathsStarted();
 	std::string paths(oss.str());
 	
 	Analytics::Params params;
-	params["id"] = m_sLevelId;
 	params["cleared"] = m_xCompletionInfo.IsCleared() ? "yes" : "no";
 	params["dust amount"] = dust;
 	params["#paths"] = paths;
-	Analytics::GetInstance().Write("Level played", params);
+	Analytics::GetInstance().Write(message, params);
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
