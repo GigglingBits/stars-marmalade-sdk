@@ -15,6 +15,15 @@
 #include "DustCounter.h"
 
 class GameFoundation : public Renderable {
+public:
+	enum BuffType {
+		eBuffTypeMagnet,
+		eBuffTypeShield,
+		eBuffTypeShoot
+	};
+	
+	typedef std::map<BuffType, int> BuffContainer;
+
 private:
 	World m_xWorld;
 	CIwFVec2 m_xWorldSize;
@@ -34,6 +43,7 @@ private:
 	Star* m_pxStar;
 
 	DustCounter m_xDust;
+	BuffContainer m_xBuffCounter;
 	
 public:
 	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
@@ -113,6 +123,8 @@ public:
 		bool outofbounds;
 	};
 	MulticastEvent<GameFoundation, SpriteRemovedArgs> SpriteRemoved;
+
+	MulticastEvent<GameFoundation, BuffContainer> BuffCountChanged;
 };
 
 #endif

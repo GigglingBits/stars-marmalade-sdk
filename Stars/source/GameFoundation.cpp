@@ -6,6 +6,12 @@
 #include "FactoryManager.h"
 #include "Configuration.h"
 #include "Nugget.h"
+#include "BuffMagnet.h"
+#include "BuffShield.h"
+#include "BuffShoot.h"
+
+#include "Debug.h"
+#include "IwDebug.h"
 
 GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize) :
 m_xContactHandler(m_xWorld),
@@ -353,7 +359,26 @@ void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::E
 }
 
 void GameFoundation::BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args) {
-	;
+	IW_CALLSTACK_SELF;
+	
+	// figure out which buff was collected
+	BuffType bt;
+	if (dynamic_cast<BuffMagnet*>((Buff*)&sender)) {
+		bt = eBuffTypeMagnet;
+	} else if (dynamic_cast<BuffShield*>((Buff*)&sender)) {
+		bt = eBuffTypeShield;
+	} else if (dynamic_cast<BuffShoot*>((Buff*)&sender)) {
+		bt = eBuffTypeShoot;
+	} else {
+		IwAssertMsg(MYAPP, false, ("Unkown buff type found. The buff will be ignored."));
+		return;
+	}
+	
+	// increment buff counter
+	m_xBuffCounter[bt]++;
+
+	// notify the
+	BuffCountChanged.Invoke(*this, BuffContainer(m_xBuffCounter));
 }
 
 void GameFoundation::EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args) {
