@@ -11,9 +11,11 @@ LevelHud::LevelHud(GameFoundation& game) :
 	m_xButtonBlock.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_xButtonAttack.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
+	m_rxGame.BuffCountChanged.AddListener(this, &LevelHud::BuffCountChangedEventHandler);
 }
 
 LevelHud::~LevelHud() {
+	m_rxGame.BuffCountChanged.RemoveListener(this, &LevelHud::BuffCountChangedEventHandler);
 	m_xButtonBlock.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_xButtonBlock.ReleasedEvent.RemoveListener(this, &LevelHud::ButtonReleasedEventHandler);
 	m_xButtonAttack.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
@@ -129,4 +131,8 @@ void LevelHud::ButtonReleasedEventHandler(const Button& sender, const Button::Ev
 		default:
 			break;
 	}
+}
+
+void LevelHud::BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args) {
+	
 }

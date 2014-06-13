@@ -12,6 +12,7 @@
 #include "ResourceManager.h"
 #include "SoundEngine.h"
 #include "Configuration.h"
+#include "AppAnalytics.h"
 
 PageManager::PageManager() {
 	m_pxCurrentPage = NULL;
@@ -196,9 +197,12 @@ void PageManager::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void PageManager::ApplyNextPage() {
+	SubmitAnalytics(m_pxCurrentPage, m_pxNextPage);
+
 	if (m_pxCurrentPage) {
 		delete m_pxCurrentPage;
 	}
+	
 	m_pxCurrentPage = m_pxNextPage;
 	if (m_pxCurrentPage) {
 		// load resources associated to that page, if any; otherwise
@@ -217,5 +221,28 @@ void PageManager::ApplyNextPage() {
 		if (!musicfile.empty() && SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
 			SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
 		}
+	}
+}
+
+void PageManager::SubmitAnalytics(Page* oldpage, Page* newpage) {
+	LevelIterator i;
+	std::string worldid(i.GetWorldName(m_xPageSettings.GetWorld()));
+	std::string levelid(i.GetLevelName(m_xPageSettings.GetWorld(), m_xPageSettings.GetLevel()));
+	
+	AppAnalytics a;
+	if (dynamic_cast<TitleScreen*>(newpage)) {
+		a.RegisterTitleScreenOpened();
+	} else if (dynamic_cast<WorldMenu*>(newpage)) {
+		a.RegisterWorldMenuOpened();
+	} else if (dynamic_cast<LevelMenu*>(newpage)) {
+		a.RegisterLevelMenuOpened(worldid);
+	} else if (dynamic_cast<Level*>(newpage)) {
+		if (dynamic_cast<Level*>(oldpage)) {
+			a.RegisterLevelCancelled(levelid);
+		}
+		a.RegisterLevelStarted(levelid);
+	} else if (LevelCompletion* lc = dynamic_cast<LevelCompletion*>(newpage)) {
+		const LevelCompletionInfo& info = lc->GetCompletionInfo();
+		a.RegisterLevelCompleted(levelid, info.GetDustAmount(), info.GetPathsStarted(), info.IsCleared());
 	}
 }

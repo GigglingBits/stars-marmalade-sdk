@@ -40,6 +40,8 @@ private:
 	std::string GetCurrentLevelName();
 	std::string GetNextLevelName();
 	
+	void SubmitAnalytics(Page* oldpage, Page* newpage);
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

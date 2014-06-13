@@ -34,6 +34,7 @@ protected:
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args);
+	void  BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args);
 };
 
 #endif

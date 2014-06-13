@@ -55,6 +55,8 @@ files {
 	Main.cpp
 	App.h
 	App.cpp
+	AppAnalytics.h
+	AppAnalytics.cpp
 
 	Configuration.h
 	Configuration.cpp

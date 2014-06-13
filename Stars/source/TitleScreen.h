@@ -32,6 +32,8 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
+	void OpenFacebook();
+	
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 };
 

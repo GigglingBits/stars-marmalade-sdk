@@ -40,6 +40,8 @@ public:
 
 	virtual void Initialize();
 
+	const LevelCompletionInfo& GetCompletionInfo();
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
@@ -48,7 +50,6 @@ protected:
 private:
 	std::string GetCompletionText();
 	void SaveResults();
-	void SubmitAnalytics();
 };
 
 #endif

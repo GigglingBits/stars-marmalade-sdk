@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "Configuration.h"
 #include "LogManager.h"
+#include "AppAnalytics.h"
 
 #include "s3eOsExec.h"
 
@@ -88,10 +89,17 @@ void TitleScreen::ButtonPressedEventHandler(const Button& sender, const Button::
     if (&sender == &m_xButtonTitle) {
 		SetCompletionState(eCompleted);
     } else if (&sender == &m_xButtonFacebook) {
-		s3eResult res = s3eOSExecExecute(Configuration::GetInstance().FacebookPage.c_str(), false);
-		if (res != S3E_RESULT_SUCCESS) {
-			std::string msg = "I am very sorry. Something went wrong. I cannot open Facebook for you. But you can find us here: " + Configuration::GetInstance().FacebookPage;
-			LogManager::GetInstance().WriteMessage(msg);
-		}
+		OpenFacebook();
 	}
+}
+
+void TitleScreen::OpenFacebook() {
+	s3eResult res = s3eOSExecExecute(Configuration::GetInstance().FacebookPage.c_str(), false);
+	if (res != S3E_RESULT_SUCCESS) {
+		std::string msg = "I am very sorry. Something went wrong. I cannot open Facebook for you. But you can find us here: " + Configuration::GetInstance().FacebookPage;
+		LogManager::GetInstance().WriteMessage(msg);
+	}
+
+	AppAnalytics a;
+	a.RegisterFacebookOpened();
 }

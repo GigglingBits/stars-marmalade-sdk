@@ -5,7 +5,6 @@
 #include "GameFoundation.h"
 #include "Configuration.h"
 #include "UserSettings.h"
-#include "Analytics.h"
 
 #include "Debug.h"
 
@@ -34,7 +33,6 @@ void LevelCompletion::Initialize() {
 	m_xBackground.Initialize();
 
 	SaveResults();
-	SubmitAnalytics();
 	
 	m_xTitle.SetText(GetCompletionText());
 	m_xTitle.SetFont(Renderer::eFontTypeLarge);
@@ -65,6 +63,10 @@ void LevelCompletion::Initialize() {
 	m_xNumberOfPaths.SetColour(GAME_COLOUR_FONT_MAIN);
 }
 
+const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
+	return m_xCompletionInfo;
+}
+
 std::string LevelCompletion::GetCompletionText() {
 	std::ostringstream oss;
 	if (m_xCompletionInfo.IsCleared()) {
@@ -89,26 +91,6 @@ void LevelCompletion::SaveResults() {
 		}
 	}
 	settings.Save();
-}
-
-void LevelCompletion::SubmitAnalytics() {
-	std::ostringstream oss;
-	oss << "Level completed: " << m_sLevelId;
-	std::string message(oss.str());
-	
-	oss.clear(); oss.str("");
-	oss << m_xCompletionInfo.GetDustAmount();
-	std::string dust(oss.str());
-	
-	oss.clear(); oss.str("");
-	oss << m_xCompletionInfo.GetPathsStarted();
-	std::string paths(oss.str());
-	
-	Analytics::Params params;
-	params["cleared"] = m_xCompletionInfo.IsCleared() ? "yes" : "no";
-	params["dust amount"] = dust;
-	params["#paths"] = paths;
-	Analytics::GetInstance().Write(message, params);
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
