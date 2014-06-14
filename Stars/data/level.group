@@ -12,9 +12,6 @@ CIwResGroup
 	./sprites/nugget_star_purple.png
 	./sprites/nugget_diamond_purple.png
 
-	./sprites/buff_attack.png
-	./sprites/buff_block.png
-
 	./spine/title/output/title.png
 
 	./spine/star/output/star.png

@@ -22,11 +22,30 @@ LevelHud::~LevelHud() {
 }
 
 void LevelHud::Initialize() {
-	m_xButtonMagnet.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
-	m_xButtonShield.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
-	m_xButtonShoot.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
+	IW_CALLSTACK_SELF;
 	
+	SetButtonTexture(m_xButtonMagnet, "magnet");
+	SetButtonTexture(m_xButtonShield, "shield");
+	SetButtonTexture(m_xButtonShoot, "shoot");
+		
 	m_xVial.Initialize();
+}
+
+void LevelHud::SetButtonTexture(ButtonEx& button, const std::string& skin) {
+	if (Texture* texture = FactoryManager::GetTextureFactory().Create("buff")) {
+		SpineAnimation* animation;
+		if (texture && texture->IsSkeleton() && (animation = texture->GetSkeleton())) {
+			if (!animation->SetSkin(skin)) {
+				IwAssertMsg(MYAPP, false, ("Error setting skin for texture with name 'buff': %s", skin.c_str()));
+			};
+			if (!animation->SetAnimation("button")) {
+				IwAssertMsg(MYAPP, false, ("Error setting animation for texture with name 'buff': %s", skin.c_str()));
+			};
+		} else {
+			IwAssertMsg(MYAPP, false, ("Texture with name 'buff' must be a skeleton animation."));
+		}
+		button.SetTexture(texture);
+	}	
 }
 
 void LevelHud::SetEnabled(bool enabled) {

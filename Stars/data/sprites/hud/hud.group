@@ -8,11 +8,4 @@ CIwResGroup
 	./hud_stardust_surface.png
 	./hud_stardust_surface_queued.png
 	./hud_number_back.png
-
-	./button_action_block.png
-	./button_action_block_pressed.png
-	./button_action_block_disabled.png
-	./button_action_attack.png
-	./button_action_attack_pressed.png
-	./button_action_attack_disabled.png
 }

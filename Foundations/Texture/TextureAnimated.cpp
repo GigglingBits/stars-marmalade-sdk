@@ -18,9 +18,7 @@ BufferedAnimTexture* TextureAnimated::GetSkeleton() {
 }
 
 bool TextureAnimated::ContainsFrame(const std::string name) {
-	IW_CALLSTACK_SELF;
-	IwError(("TextureAnimated::ContainsFrame(const std::string name) not implemented"));
-	return false;
+	return m_xAnimation.ConstainsAnimation(name);
 }
 
 bool TextureAnimated::SelectFrame(const std::string& id) {

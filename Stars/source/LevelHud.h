@@ -33,6 +33,8 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	
 private:
+	void SetButtonTexture(ButtonEx& button, const std::string& skin);
+	
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args);
 };

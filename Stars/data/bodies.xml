@@ -298,17 +298,8 @@
 			<frame id="3" image="button_level_3_star"/>
 		</texture>
 		<texture id="button_play" image="button_play" />
-		
-		<texture id="button_action_block">
-			<frame id="released" image="button_action_block"/>
-			<frame id="pressed" image="button_action_block_pressed"/>
-			<frame id="disabled" image="button_action_block_disabled"/>
-		</texture>
-		<texture id="button_action_attack">
-			<frame id="released" image="button_action_attack"/>
-			<frame id="pressed" image="button_action_attack_pressed"/>
-			<frame id="disabled" image="button_action_attack_disabled"/>
-		</texture>
+
+		<texture id="buff" animation="spine_buffs" />
 		
 		<texture id="button_plain" image="button_plain" />
 		<texture id="button_movie" image="button_movie" />
