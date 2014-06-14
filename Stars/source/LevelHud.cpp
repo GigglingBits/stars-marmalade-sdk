@@ -4,35 +4,36 @@
 
 LevelHud::LevelHud(GameFoundation& game) :
 	m_rxGame(game),
-	m_xButtonBlock(eButtonCommandIdStarBlock, s3eKey1),
-	m_xButtonAttack(eButtonCommandIdStarAttack, s3eKey2),
+	m_xButtonMagnet(eButtonCommandIdStarMagnet, s3eKey1),
+	m_xButtonShield(eButtonCommandIdStarShield, s3eKey2),
+	m_xButtonShoot(eButtonCommandIdStarShoot, s3eKey3),
 	m_bIsEnabled(true) {
-	m_xButtonBlock.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonBlock.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
-	m_xButtonAttack.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonAttack.ReleasedEvent.AddListener(this, &LevelHud::ButtonReleasedEventHandler);
+	m_xButtonMagnet.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
+	m_xButtonShield.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
+	m_xButtonShoot.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
 	m_rxGame.BuffCountChanged.AddListener(this, &LevelHud::BuffCountChangedEventHandler);
 }
 
 LevelHud::~LevelHud() {
 	m_rxGame.BuffCountChanged.RemoveListener(this, &LevelHud::BuffCountChangedEventHandler);
-	m_xButtonBlock.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonBlock.ReleasedEvent.RemoveListener(this, &LevelHud::ButtonReleasedEventHandler);
-	m_xButtonAttack.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonAttack.ReleasedEvent.RemoveListener(this, &LevelHud::ButtonReleasedEventHandler);
+	m_xButtonMagnet.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
+	m_xButtonShield.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
+	m_xButtonShoot.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
 }
 
 void LevelHud::Initialize() {
-	m_xButtonBlock.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
-	m_xButtonAttack.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
+	m_xButtonMagnet.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
+	m_xButtonShield.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_block"));
+	m_xButtonShoot.SetTexture(FactoryManager::GetTextureFactory().Create("button_action_attack"));
 	
 	m_xVial.Initialize();
 }
 
 void LevelHud::SetEnabled(bool enabled) {
 	if (m_bIsEnabled != enabled) {
-		m_xButtonAttack.SetEnabled(enabled);
-		m_xButtonBlock.SetEnabled(enabled);
+		m_xButtonMagnet.SetEnabled(enabled);
+		m_xButtonShield.SetEnabled(enabled);
+		m_xButtonShoot.SetEnabled(enabled);
 	}
 	
 	m_bIsEnabled = enabled;
@@ -52,12 +53,14 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	// action buttons (right)
 	CIwRect rect;
 	rect.x = spacing;
-	rect.y = screensize.y - (2 * buttonheight) - (2 * spacing);
+	rect.y = screensize.y - (3 * buttonheight) - (3 * spacing);
 	rect.w = buttonwidth;
 	rect.h = buttonheight;
-	m_xButtonBlock.SetPosition(rect);
+	m_xButtonMagnet.SetPosition(rect);
 	rect.y += rect.h + spacing;
-	m_xButtonAttack.SetPosition(rect);
+	m_xButtonShield.SetPosition(rect);
+	rect.y += rect.h + spacing;
+	m_xButtonShoot.SetPosition(rect);
 	
 	// dust vial
 	int x = screensize.x - dustvialwidth - spacing;
@@ -71,8 +74,9 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 void LevelHud::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	m_xButtonBlock.Update(frame);
-	m_xButtonAttack.Update(frame);
+	m_xButtonMagnet.Update(frame);
+	m_xButtonShield.Update(frame);
+	m_xButtonShoot.Update(frame);
 	
 	m_xVial.SetDustAmount(m_rxGame.GetDustFillPercent(), m_rxGame.GetDustQueuedPercent());
 	m_xVial.Update(frame);
@@ -85,48 +89,23 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 		return;
 	}
 	
-	m_xButtonBlock.Render(renderer, frame);
-	m_xButtonAttack.Render(renderer, frame);
+	m_xButtonMagnet.Render(renderer, frame);
+	m_xButtonShield.Render(renderer, frame);
+	m_xButtonShoot.Render(renderer, frame);
 	
 	m_xVial.Render(renderer, frame);
 }
 
 void LevelHud::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
-	Star* star = m_rxGame.GetStar();
-	if (!star) {
-		IwAssertMsg(MYAPP, star, ("Cannot initiate action. Star not founnd."));
-		return;
-	}
-	
 	switch (args.id) {
-		case eButtonCommandIdStarBlock:
-			m_xButtonAttack.SetEnabled(false);
-			star->BeginBlock();
+		case eButtonCommandIdStarMagnet:
+			m_rxGame.ActivateMagnetBuff();
 			break;
-		case eButtonCommandIdStarAttack:
-			m_xButtonBlock.SetEnabled(false);
-			star->BeginAttack();
+		case eButtonCommandIdStarShield:
+			m_rxGame.ActivateShieldBuff();
 			break;
-		default:
-			break;
-	}
-}
-
-void LevelHud::ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args) {
-	Star* star = m_rxGame.GetStar();
-	if (!star) {
-		IwAssertMsg(MYAPP, star, ("Cannot finish action. Star not founnd."));
-		return;
-	}
-	
-	switch (args.id) {
-		case eButtonCommandIdStarBlock:
-			m_xButtonAttack.SetEnabled(true);
-			star->EndBlock();
-			break;
-		case eButtonCommandIdStarAttack:
-			m_xButtonBlock.SetEnabled(true);
-			star->EndAttack();
+		case eButtonCommandIdStarShoot:
+			m_rxGame.ActivateShootBuff();
 			break;
 		default:
 			break;
@@ -134,5 +113,4 @@ void LevelHud::ButtonReleasedEventHandler(const Button& sender, const Button::Ev
 }
 
 void LevelHud::BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args) {
-	
 }

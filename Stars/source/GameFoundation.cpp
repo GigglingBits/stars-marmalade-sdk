@@ -328,6 +328,24 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 	EnqueueCreateBody(buff, pos, speed);
 }
 
+void GameFoundation::ActivateMagnetBuff() {
+	if (Star* star = GetStar()) {
+		CreateSplashText("Magnet", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+	}
+}
+
+void GameFoundation::ActivateShieldBuff() {
+	if (Star* star = GetStar()) {
+		CreateSplashText("Shield", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+	}
+}
+
+void GameFoundation::ActivateShootBuff() {
+	if (Star* star = GetStar()) {
+		CreateSplashText("Shoot", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+	}
+}
+
 void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
 	switch (args.EventType) {
 		case Star::eDustEventTypeCollectSingle: {

@@ -73,6 +73,10 @@ public:
 	bool StarHitTest(CIwFVec2 position);
 
 	// gameplay
+	void ActivateMagnetBuff();
+	void ActivateShieldBuff();
+	void ActivateShootBuff();
+
 	void EnqueueDust(const CIwFVec2& pos, int amount);
 	void CommitDust(const CIwFVec2& pos);
 	void CancelDust(const CIwFVec2& pos);
@@ -83,7 +87,7 @@ public:
 	float GetDustFillMax();
 	float GetDustFillAmount();
 	float GetDustFillPercent();
-	
+		
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

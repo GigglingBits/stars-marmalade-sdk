@@ -35,8 +35,9 @@ enum ButtonCommandId {
 	eButtonCommandIdFacebook,
 	
 	// star game actions
-	eButtonCommandIdStarBlock,
-	eButtonCommandIdStarAttack,
+	eButtonCommandIdStarMagnet,
+	eButtonCommandIdStarShield,
+	eButtonCommandIdStarShoot,
 	
 	// gnome game actions
 	eButtonCommandIdSetHeroFocus,

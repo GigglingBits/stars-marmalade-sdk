@@ -15,8 +15,9 @@ private:
 
 	LevelDustVial m_xVial;
 	
-	ButtonEx m_xButtonBlock;
-	ButtonEx m_xButtonAttack;
+	ButtonEx m_xButtonMagnet;
+	ButtonEx m_xButtonShield;
+	ButtonEx m_xButtonShoot;
 
 public:
 	LevelHud(GameFoundation& game);
@@ -33,8 +34,7 @@ protected:
 	
 private:
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void ButtonReleasedEventHandler(const Button& sender, const Button::EventArgs& args);
-	void  BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args);
+	void BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args);
 };
 
 #endif
