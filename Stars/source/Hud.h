@@ -1,13 +1,13 @@
-#ifndef __LEVELHUD_H__
-#define __LEVELHUD_H__
+#ifndef __HUD_H__
+#define __HUD_H__
 
 #include "Window.h"
 #include "GameFoundation.h"
 #include "ButtonEx.h"
 #include "LevelDustVial.h"
-#include "LevelHudNumber.h"
+#include "HudNumber.h"
 
-class LevelHud : public Window {
+class Hud : public Window {
 private:
 	GameFoundation& m_rxGame;
 
@@ -20,8 +20,8 @@ private:
 	ButtonEx m_xButtonShoot;
 
 public:
-	LevelHud(GameFoundation& game);
-	virtual ~LevelHud();
+	Hud(GameFoundation& game);
+	virtual ~Hud();
 
 	virtual void Initialize();
 	

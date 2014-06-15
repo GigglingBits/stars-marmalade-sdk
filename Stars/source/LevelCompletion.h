@@ -6,7 +6,7 @@
 #include "Button.h"
 #include "Camera.h"
 #include "LevelCompletionInfo.h"
-#include "LevelHudNumber.h"
+#include "HudNumber.h"
 
 class LevelCompletion : public Page {
 private:
@@ -24,16 +24,16 @@ private:
 
 	BackgroundParallax m_xBackground;
 
-	LevelHudText m_xTitle;
+	HudText m_xTitle;
 	
-	LevelHudText m_xDustAmountText;
-	LevelHudNumber m_xDustAmount;
+	HudText m_xDustAmountText;
+	HudNumber m_xDustAmount;
 	
-	LevelHudText m_xNuggetsCollectedText;
-	LevelHudNumber m_xNuggetsCollected;
+	HudText m_xNuggetsCollectedText;
+	HudNumber m_xNuggetsCollected;
 	
-	LevelHudText m_xNumberOfPathsText;
-	LevelHudNumber m_xNumberOfPaths;
+	HudText m_xNumberOfPathsText;
+	HudNumber m_xNumberOfPaths;
 	
 public:
 	LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info);

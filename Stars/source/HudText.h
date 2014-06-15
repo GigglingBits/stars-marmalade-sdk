@@ -1,9 +1,9 @@
-#ifndef __LEVELHUDTEXT_H__
-#define __LEVELHUDTEXT_H__
+#ifndef __HUDTEXT_H__
+#define __HUDTEXT_H__
 
 #include "Window.h"
 
-class LevelHudText : public Window {
+class HudText : public Window {
 private:
 	Renderer::FontType m_eFont;
 	uint32 m_uiColour;
@@ -11,7 +11,7 @@ private:
 	std::string m_sText;
 	
 public:
-	LevelHudText();
+	HudText();
 
 	virtual void Initialize();
 

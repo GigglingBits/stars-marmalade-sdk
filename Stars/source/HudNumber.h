@@ -1,11 +1,11 @@
-#ifndef __LEVELHUDNUMBER_H__
-#define __LEVELHUDNUMBER_H__
+#ifndef __HUDNUMBER_H__
+#define __HUDNUMBER_H__
 
-#include "LevelHudText.h"
+#include "HudText.h"
 
 #define NUMBER_ROLL_TIME
 
-class LevelHudNumber : public LevelHudText {
+class HudNumber : public HudText {
 private:
 	long m_lTargetNumber;
 	long m_lLastTargetNumber;
@@ -14,7 +14,7 @@ private:
 	long m_lRemainingRollTime;
 	
 public:
-	LevelHudNumber();
+	HudNumber();
 	
 	void SetNumber(long number, int rolltime = 0);
 

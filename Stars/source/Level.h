@@ -7,7 +7,7 @@
 #include "GameFoundation.h"
 #include "BackgroundSprites.h"
 #include "BackgroundParallax.h"
-#include "LevelHud.h"
+#include "Hud.h"
 #include "Star.h"
 #include "PathTracker.h"
 #include "Camera.h"
@@ -68,7 +68,7 @@ private:
 	bool m_bIsSetteling;
 	
 	LevelPausedPanel m_xPausePanel;
-	LevelHud m_xHud;
+	Hud m_xHud;
 
 	LevelInteractor m_xInteractor;
 	PathTracker m_xPath;

@@ -112,16 +112,17 @@ files {
 	LevelCompletion.cpp
 	LevelCompletionInfo.h
 	LevelCompletionInfo.cpp
-	LevelHud.h
-	LevelHud.cpp
-	LevelHudText.h
-	LevelHudText.cpp
-	LevelHudNumber.h
-	LevelHudNumber.cpp
 	LevelDustVial.h
 	LevelDustVial.cpp
 	LevelPausedPanel.h
 	LevelPausedPanel.cpp
+
+	Hud.h
+	Hud.cpp
+	HudText.h
+	HudText.cpp
+	HudNumber.h
+	HudNumber.cpp
 
 	LevelInteractor.h
 	LevelInteractor.cpp

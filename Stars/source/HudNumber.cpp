@@ -1,13 +1,13 @@
 #include <sstream>
-#include "LevelHudNumber.h"
+#include "HudNumber.h"
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHudNumber::LevelHudNumber() : m_lTargetNumber(0), m_lLastTargetNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
+HudNumber::HudNumber() : m_lTargetNumber(0), m_lLastTargetNumber(0), m_lTotalRollTime(0), m_lRemainingRollTime(0) {
 	UpdateText();
 }
 
-void LevelHudNumber::SetNumber(long number, int rolltime) {
+void HudNumber::SetNumber(long number, int rolltime) {
 	if (m_lTargetNumber == number) {
 		return;
 	}
@@ -19,7 +19,7 @@ void LevelHudNumber::SetNumber(long number, int rolltime) {
 	m_lRemainingRollTime = m_lTotalRollTime;
 }
 
-void LevelHudNumber::UpdateText() {
+void HudNumber::UpdateText() {
 	// interpolate
 	float progress = m_lRemainingRollTime / (float) m_lTotalRollTime;
 	long number;
@@ -35,10 +35,10 @@ void LevelHudNumber::UpdateText() {
 	SetText(oss.str());
 }
 
-void LevelHudNumber::OnUpdate(const FrameData& frame) {
+void HudNumber::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	LevelHudText::OnUpdate(frame);
+	HudText::OnUpdate(frame);
 	
 	// needs rolling?
 	if (m_lLastTargetNumber != m_lTargetNumber) {

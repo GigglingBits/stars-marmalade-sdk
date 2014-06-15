@@ -1,27 +1,27 @@
-#include "LevelHud.h"
+#include "Hud.h"
 #include "Debug.h"
 #include "FactoryManager.h"
 
-LevelHud::LevelHud(GameFoundation& game) :
+Hud::Hud(GameFoundation& game) :
 	m_rxGame(game),
 	m_xButtonMagnet(eButtonCommandIdStarMagnet, s3eKey1),
 	m_xButtonShield(eButtonCommandIdStarShield, s3eKey2),
 	m_xButtonShoot(eButtonCommandIdStarShoot, s3eKey3),
 	m_bIsEnabled(true) {
-	m_xButtonMagnet.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonShield.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonShoot.PressedEvent.AddListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_rxGame.BuffCountChanged.AddListener(this, &LevelHud::BuffCountChangedEventHandler);
+	m_xButtonMagnet.PressedEvent.AddListener(this, &Hud::ButtonPressedEventHandler);
+	m_xButtonShield.PressedEvent.AddListener(this, &Hud::ButtonPressedEventHandler);
+	m_xButtonShoot.PressedEvent.AddListener(this, &Hud::ButtonPressedEventHandler);
+	m_rxGame.BuffCountChanged.AddListener(this, &Hud::BuffCountChangedEventHandler);
 }
 
-LevelHud::~LevelHud() {
-	m_rxGame.BuffCountChanged.RemoveListener(this, &LevelHud::BuffCountChangedEventHandler);
-	m_xButtonMagnet.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonShield.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
-	m_xButtonShoot.PressedEvent.RemoveListener(this, &LevelHud::ButtonPressedEventHandler);
+Hud::~Hud() {
+	m_rxGame.BuffCountChanged.RemoveListener(this, &Hud::BuffCountChangedEventHandler);
+	m_xButtonMagnet.PressedEvent.RemoveListener(this, &Hud::ButtonPressedEventHandler);
+	m_xButtonShield.PressedEvent.RemoveListener(this, &Hud::ButtonPressedEventHandler);
+	m_xButtonShoot.PressedEvent.RemoveListener(this, &Hud::ButtonPressedEventHandler);
 }
 
-void LevelHud::Initialize() {
+void Hud::Initialize() {
 	IW_CALLSTACK_SELF;
 	
 	SetButtonTexture(m_xButtonMagnet, "magnet");
@@ -31,7 +31,7 @@ void LevelHud::Initialize() {
 	m_xVial.Initialize();
 }
 
-void LevelHud::SetButtonTexture(ButtonEx& button, const std::string& skin) {
+void Hud::SetButtonTexture(ButtonEx& button, const std::string& skin) {
 	if (Texture* texture = FactoryManager::GetTextureFactory().Create("buff")) {
 		SpineAnimation* animation;
 		if (texture && texture->IsSkeleton() && (animation = texture->GetSkeleton())) {
@@ -48,7 +48,7 @@ void LevelHud::SetButtonTexture(ButtonEx& button, const std::string& skin) {
 	}	
 }
 
-void LevelHud::SetEnabled(bool enabled) {
+void Hud::SetEnabled(bool enabled) {
 	if (m_bIsEnabled != enabled) {
 		m_xButtonMagnet.SetEnabled(enabled);
 		m_xButtonShield.SetEnabled(enabled);
@@ -58,7 +58,7 @@ void LevelHud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
-void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
+void Hud::OnDoLayout(const CIwSVec2& screensize) {
 	int extent = GetScreenExtents();
 	
 	int spacing = extent / 40;
@@ -90,7 +90,7 @@ void LevelHud::OnDoLayout(const CIwSVec2& screensize) {
 	m_xVial.SetPosition(rect);
 }
 
-void LevelHud::OnUpdate(const FrameData& frame) {
+void Hud::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xButtonMagnet.Update(frame);
@@ -101,7 +101,7 @@ void LevelHud::OnUpdate(const FrameData& frame) {
 	m_xVial.Update(frame);
 }
 
-void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
+void Hud::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	if (!m_bIsEnabled) {
@@ -115,7 +115,7 @@ void LevelHud::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xVial.Render(renderer, frame);
 }
 
-void LevelHud::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
+void Hud::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
 	switch (args.id) {
 		case eButtonCommandIdStarMagnet:
 			m_rxGame.ActivateMagnetBuff();
@@ -131,5 +131,5 @@ void LevelHud::ButtonPressedEventHandler(const Button& sender, const Button::Eve
 	}
 }
 
-void LevelHud::BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args) {
+void Hud::BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args) {
 }
