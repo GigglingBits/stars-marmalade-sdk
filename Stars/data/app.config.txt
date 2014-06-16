@@ -15,7 +15,8 @@ showstats				Show statistical information on the screen
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
 
-buffspeed				Speed of a buff rising in meter per second
+buffspeed				Speed of a buff rising, specified in meter per second
+buffthreshold			Number of buffs need for unlocking the buff button
 
 pathspeed				Speed of the star along the path in meters per second.
 pathmaxlength			Max length of the path in meters.

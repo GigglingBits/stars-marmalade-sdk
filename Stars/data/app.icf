@@ -8,6 +8,7 @@ maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
 
 buffspeed=0.5			# meters per second
+buffthreshold=5			# 5 buffs needed to unlock the button
 
 pathspeed=12			# meters per second
 pathmaxlength=50		# max length of the path in meters

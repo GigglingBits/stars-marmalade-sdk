@@ -22,6 +22,7 @@ public:
 	double WorldMargin;
 
 	double BuffSpeed;
+	int BuffThreshold;
 	
 	double PathSpeed;
 	double PathMaxLength;

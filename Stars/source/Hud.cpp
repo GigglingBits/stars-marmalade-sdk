@@ -115,4 +115,20 @@ void Hud::ButtonPressedEventHandler(const Button& sender, const Button::EventArg
 }
 
 void Hud::BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args) {
+	GameFoundation::BuffContainer::const_iterator it;
+	for (it = args.begin(); it != args.end(); it++) {
+		switch (it->first) {
+			case GameFoundation::eBuffTypeMagnet:
+				m_xButtonMagnet.SetCount(it->second);
+				break;
+			case GameFoundation::eBuffTypeShield:
+				m_xButtonShield.SetCount(it->second);
+				break;
+			case GameFoundation::eBuffTypeShoot:
+				m_xButtonShoot.SetCount(it->second);
+				break;
+			default:
+				IwAssertMsg(MYAPP, false, ("Buff not known: %i. It will be ignored.", it->second));
+		}
+	}
 }

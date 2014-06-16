@@ -85,6 +85,12 @@ Configuration::Configuration() {
 		BuffSpeed = 0.5f;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffthreshold", tmpstr)) {
+		BuffThreshold = atoi(tmpstr);
+	} else {
+		BuffThreshold = 1;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {
 		PathSpeed = atof(tmpstr);
 	} else {
