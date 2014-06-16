@@ -22,5 +22,5 @@ void Grunt::KnockOut() {
 
 	SetTextureFrame("hurt");
 
-	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
+	SoundEngine::GetInstance().PlaySoundEffect("GruntCollision");
 }

@@ -13,6 +13,7 @@ CIwResGroup
 	./27995_SFX_FoleyDroppingEmptyBulletShell.wav
 	
 	./09427_cartoon_bird_hit_scream.wav
+	./monster_grunt.wav
 
 	./sounds.itx
 }

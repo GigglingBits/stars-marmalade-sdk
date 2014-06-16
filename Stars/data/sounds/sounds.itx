@@ -54,6 +54,15 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
+	name		"GruntCollision"
+	data		"monster_grunt"
+	vol 		0.8
+	pitchMin	1.05
+	pitchMax	1.25
+}
+
+CIwSoundSpec
+{
 	name		"level_win"
 	data		"level_win"
 	vol 		0.7
