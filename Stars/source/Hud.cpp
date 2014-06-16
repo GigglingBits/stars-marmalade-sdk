@@ -4,9 +4,9 @@
 
 Hud::Hud(GameFoundation& game) :
 	m_rxGame(game),
-	m_xButtonMagnet(eButtonCommandIdStarMagnet, s3eKey1),
-	m_xButtonShield(eButtonCommandIdStarShield, s3eKey2),
-	m_xButtonShoot(eButtonCommandIdStarShoot, s3eKey3),
+	m_xButtonMagnet("magnet", eButtonCommandIdStarMagnet, s3eKey1),
+	m_xButtonShield("shield", eButtonCommandIdStarShield, s3eKey2),
+	m_xButtonShoot("shoot", eButtonCommandIdStarShoot, s3eKey3),
 	m_bIsEnabled(true) {
 	m_xButtonMagnet.PressedEvent.AddListener(this, &Hud::ButtonPressedEventHandler);
 	m_xButtonShield.PressedEvent.AddListener(this, &Hud::ButtonPressedEventHandler);
@@ -24,28 +24,11 @@ Hud::~Hud() {
 void Hud::Initialize() {
 	IW_CALLSTACK_SELF;
 	
-	SetButtonTexture(m_xButtonMagnet, "magnet");
-	SetButtonTexture(m_xButtonShield, "shield");
-	SetButtonTexture(m_xButtonShoot, "shoot");
-		
+	m_xButtonMagnet.SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
+	m_xButtonShield.SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
+	m_xButtonShoot.SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
+	
 	m_xVial.Initialize();
-}
-
-void Hud::SetButtonTexture(ButtonEx& button, const std::string& skin) {
-	if (Texture* texture = FactoryManager::GetTextureFactory().Create("buff")) {
-		SpineAnimation* animation;
-		if (texture && texture->IsSkeleton() && (animation = texture->GetSkeleton())) {
-			if (!animation->SetSkin(skin)) {
-				IwAssertMsg(MYAPP, false, ("Error setting skin for texture with name 'buff': %s", skin.c_str()));
-			};
-			if (!animation->SetAnimation("button")) {
-				IwAssertMsg(MYAPP, false, ("Error setting animation for texture with name 'buff': %s", skin.c_str()));
-			};
-		} else {
-			IwAssertMsg(MYAPP, false, ("Texture with name 'buff' must be a skeleton animation."));
-		}
-		button.SetTexture(texture);
-	}	
 }
 
 void Hud::SetEnabled(bool enabled) {

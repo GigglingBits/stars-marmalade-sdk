@@ -3,9 +3,9 @@
 
 #include "Window.h"
 #include "GameFoundation.h"
-#include "ButtonEx.h"
 #include "LevelDustVial.h"
 #include "HudNumber.h"
+#include "HudBuffButton.h"
 
 class Hud : public Window {
 private:
@@ -15,9 +15,9 @@ private:
 
 	LevelDustVial m_xVial;
 	
-	ButtonEx m_xButtonMagnet;
-	ButtonEx m_xButtonShield;
-	ButtonEx m_xButtonShoot;
+	HudBuffButton m_xButtonMagnet;
+	HudBuffButton m_xButtonShield;
+	HudBuffButton m_xButtonShoot;
 
 public:
 	Hud(GameFoundation& game);
@@ -33,8 +33,6 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	
 private:
-	void SetButtonTexture(ButtonEx& button, const std::string& skin);
-	
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void BuffCountChangedEventHandler(const GameFoundation& sender, const GameFoundation::BuffContainer& args);
 };
