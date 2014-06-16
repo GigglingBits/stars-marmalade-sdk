@@ -7,6 +7,7 @@
 #include "Nugget.h"
 #include "Enemy.h"
 #include "Bird.h"
+#include "Grunt.h"
 #include "BuffMagnet.h"
 #include "BuffShield.h"
 #include "BuffShoot.h"
@@ -165,6 +166,8 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 		p = new Enemy(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("bird")) {
 		p = new Bird(instanceid, *bodydef, fixturedef, texturedef);
+	} else if (!copyconf.GetType().compare("grunt")) {
+		p = new Grunt(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetChildren().empty()) {
 		p = new CompositeBody(instanceid, *bodydef, fixturedef, texturedef);
 	} else {

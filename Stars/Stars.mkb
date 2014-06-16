@@ -209,6 +209,8 @@ files {
 
 	Bird.h
 	Bird.cpp
+	Grunt.h
+	Grunt.cpp
 
 	["Sources/Game Logic/Effects"]
 	LocalEffect.h

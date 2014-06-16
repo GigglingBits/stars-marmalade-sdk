@@ -39,3 +39,31 @@ SpineResource
 	atlas	"spine/buffs/output/buffs.atlas"
 	json	"spine/buffs/output/buffs.json"
 }
+
+SpineResource
+{
+	name	"spine_grunt_01"
+	atlas	"spine/grunt_01/output/grunt_01.atlas"
+	json	"spine/grunt_01/output/grunt_01.json"
+}
+
+SpineResource
+{
+	name	"spine_grunt_02"
+	atlas	"spine/grunt_02/output/grunt_02.atlas"
+	json	"spine/grunt_02/output/grunt_02.json"
+}
+
+SpineResource
+{
+	name	"spine_grunt_03"
+	atlas	"spine/grunt_03/output/grunt_03.atlas"
+	json	"spine/grunt_03/output/grunt_03.json"
+}
+
+SpineResource
+{
+	name	"spine_grunt_boss"
+	atlas	"spine/grunt_boss/output/grunt_boss.atlas"
+	json	"spine/grunt_boss/output/grunt_boss.json"
+}

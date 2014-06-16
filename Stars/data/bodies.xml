@@ -155,8 +155,54 @@
 			<fixture friction="0.6" restitution="0.5" density="1.8" />
 			<texture animation="spine_bird_03" />
 		</body>
+
+		<body id="grunt_01" type="grunt" resilience="1.0" revolve="0">
+			<shape type="polygon">
+				<point x="-0.75" y="-0.75" />
+				<point x="0.75" y="-0.75" />
+				<point x="0.75" y="0.75" />
+				<point x="-0.75" y="0.75" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<texture animation="spine_grunt_01" />
+		</body>
+
+		<body id="grunt_02" type="grunt" resilience="1.0" revolve="0">
+			<shape type="polygon">
+				<point x="-0.75" y="-0.75" />
+				<point x="0.75" y="-0.75" />
+				<point x="0.75" y="0.75" />
+				<point x="-0.75" y="0.75" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<texture animation="spine_grunt_02" />
+		</body>
+
+		<body id="grunt_03" type="grunt" resilience="1.0" revolve="0">
+			<shape type="polygon">
+				<point x="-0.75" y="-0.75" />
+				<point x="0.75" y="-0.75" />
+				<point x="0.75" y="0.75" />
+				<point x="-0.75" y="0.75" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<texture animation="spine_grunt_03" />
+		</body>
+
+		<body id="grunt_boss" type="grunt" resilience="1.0" revolve="0">
+			<shape type="polygon">
+				<point x="-0.75" y="-0.75" />
+				<point x="0.75" y="-0.75" />
+				<point x="0.75" y="0.75" />
+				<point x="-0.75" y="0.75" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<texture animation="spine_grunt_boss" />
+		</body>
+
 	</bodies>
-		
+
+
 	<effects>
 		<effect id="star_collision" type="particles" duration="100">
 			<shape type="circle" width="0.1" />

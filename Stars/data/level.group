@@ -21,4 +21,8 @@ CIwResGroup
 	./spine/bird_02/output/bird_02.png
 	./spine/bird_03/output/bird_03.png
 
+	./spine/grunt_01/output/grunt_01.png
+	./spine/grunt_02/output/grunt_02.png
+	./spine/grunt_03/output/grunt_03.png
+	./spine/grunt_boss/output/grunt_boss.png
 }
