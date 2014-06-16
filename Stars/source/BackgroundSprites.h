@@ -4,8 +4,8 @@
 #include <string>
 #include "GameFoundation.h"
 
-#define CLOUD_INTERVAL_MAX 1000
-#define CLOUD_INTERVAL_MIN 300
+#define CLOUD_INTERVAL_MAX 2500
+#define CLOUD_INTERVAL_MIN 800
 
 class BackgroundSprites {
 private:

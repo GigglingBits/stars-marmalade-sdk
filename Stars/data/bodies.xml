@@ -183,51 +183,51 @@
 			</shape>
 		</effect>
 		<effect id="cloud01sky" duration="20000">
-			<shape type="rectangle" width="0.75" height="0.29" />
-			<texture image="cloud_01" />
-		</effect>
-		<effect id="cloud02sky" duration="20000">
-			<shape type="rectangle" width="0.5" height="0.29" />
-			<texture image="cloud_02" />
-		</effect>
-		<effect id="cloud03sky" duration="20000">
-			<shape type="rectangle" width="0.75" height="0.2725" />
-			<texture image="cloud_03" />
-		</effect>
-		<effect id="cloud04sky" duration="20000">
-			<shape type="rectangle" width="0.626" height="0.3425" />
-			<texture image="cloud_04" />
-		</effect>
-		<effect id="cloud01far" duration="20000">
 			<shape type="rectangle" width="1.5" height="0.58" />
 			<texture image="cloud_01" />
 		</effect>
-		<effect id="cloud02far" duration="20000">
-			<shape type="rectangle" width="1.0" height="0.59" />
+		<effect id="cloud02sky" duration="20000">
+			<shape type="rectangle" width="1.0" height="0.58" />
 			<texture image="cloud_02" />
 		</effect>
-		<effect id="cloud03far" duration="20000">
-			<shape type="rectangle" width="1.5" height="0.545" />
+		<effect id="cloud03sky" duration="20000">
+			<shape type="rectangle" width="1.5" height="0.5050" />
 			<texture image="cloud_03" />
 		</effect>
-		<effect id="cloud04far" duration="20000">
-			<shape type="rectangle" width="1.25" height="0.685" />
+		<effect id="cloud04sky" duration="20000">
+			<shape type="rectangle" width="1.232" height="0.685" />
 			<texture image="cloud_04" />
 		</effect>
-		<effect id="cloud01near" duration="20000">
+		<effect id="cloud01far" duration="20000">
 			<shape type="rectangle" width="3.0" height="1.16" />
 			<texture image="cloud_01" />
 		</effect>
-		<effect id="cloud02near" duration="20000">
+		<effect id="cloud02far" duration="20000">
 			<shape type="rectangle" width="2.0" height="1.18" />
 			<texture image="cloud_02" />
 		</effect>
-		<effect id="cloud03near" duration="20000">
+		<effect id="cloud03far" duration="20000">
 			<shape type="rectangle" width="3.0" height="1.09" />
 			<texture image="cloud_03" />
 		</effect>
+		<effect id="cloud04far" duration="20000">
+			<shape type="rectangle" width="2.5" height="1.73" />
+			<texture image="cloud_04" />
+		</effect>
+		<effect id="cloud01near" duration="20000">
+			<shape type="rectangle" width="6.0" height="2.32" />
+			<texture image="cloud_01" />
+		</effect>
+		<effect id="cloud02near" duration="20000">
+			<shape type="rectangle" width="4.0" height="2.36" />
+			<texture image="cloud_02" />
+		</effect>
+		<effect id="cloud03near" duration="20000">
+			<shape type="rectangle" width="6.0" height="2.18" />
+			<texture image="cloud_03" />
+		</effect>
 		<effect id="cloud04near" duration="20000">
-			<shape type="rectangle" width="2.5" height="1.37" />
+			<shape type="rectangle" width="5.0" height="2.74" />
 			<texture image="cloud_04" />
 		</effect>
 	</effects>

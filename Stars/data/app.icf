@@ -2,7 +2,7 @@
 [Game]
 ####################################################
 showstats=0
-unlockall=0
+unlockall=1
 
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
