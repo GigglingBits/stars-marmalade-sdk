@@ -299,6 +299,7 @@ void Body::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	if (Configuration::GetInstance().ShowShapes) {
 		VertexStreamWorld shape;
+		/*
 		if (m_xShape.GetBoundigBoxVertCount() > 0) {
 			shape.SetVerts(m_xShape.GetBoundigBoxVerts(), m_xShape.GetBoundigBoxVertCount());
 			renderer.DrawPolygon(
@@ -307,6 +308,7 @@ void Body::OnRender(Renderer& renderer, const FrameData& frame) {
 				0xff00ff00,
 				0x00000000);
 		}
+		 */
 		if (m_xShape.GetShapeVertCount() > 0) {
 			shape.SetVerts(m_xShape.GetShapeVerts(), m_xShape.GetShapeVertCount());
 			renderer.DrawPolygon(

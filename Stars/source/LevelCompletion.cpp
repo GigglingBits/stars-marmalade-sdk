@@ -42,7 +42,7 @@ void LevelCompletion::Initialize() {
 	m_xDustAmountText.SetFont(Renderer::eFontTypeNormal);
 	m_xDustAmountText.SetColour(GAME_COLOUR_FONT_MAIN);
 	
-	m_xDustAmount.SetNumber(m_xCompletionInfo.GetDustAmount(), 5000);
+	m_xDustAmount.SetNumber(m_xCompletionInfo.GetDustAmount(), 3000);
 	m_xDustAmount.SetFont(Renderer::eFontTypeNormal);
 	m_xDustAmount.SetColour(GAME_COLOUR_FONT_MAIN);
 	
@@ -50,7 +50,7 @@ void LevelCompletion::Initialize() {
 	m_xNuggetsCollectedText.SetFont(Renderer::eFontTypeNormal);
 	m_xNuggetsCollectedText.SetColour(GAME_COLOUR_FONT_MAIN);
 
-	m_xNuggetsCollected.SetNumber(m_xCompletionInfo.GetNuggetsCollected(), 5000);
+	m_xNuggetsCollected.SetNumber(m_xCompletionInfo.GetNuggetsCollected(), 3000);
 	m_xNuggetsCollected.SetFont(Renderer::eFontTypeNormal);
 	m_xNuggetsCollected.SetColour(GAME_COLOUR_FONT_MAIN);
 
@@ -58,7 +58,7 @@ void LevelCompletion::Initialize() {
 	m_xNumberOfPathsText.SetFont(Renderer::eFontTypeNormal);
 	m_xNumberOfPathsText.SetColour(GAME_COLOUR_FONT_MAIN);
 
-	m_xNumberOfPaths.SetNumber(m_xCompletionInfo.GetPathsStarted(), 5000);
+	m_xNumberOfPaths.SetNumber(m_xCompletionInfo.GetPathsStarted(), 3000);
 	m_xNumberOfPaths.SetFont(Renderer::eFontTypeNormal);
 	m_xNumberOfPaths.SetColour(GAME_COLOUR_FONT_MAIN);
 }

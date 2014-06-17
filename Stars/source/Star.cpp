@@ -11,6 +11,8 @@
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
 	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL), m_bAutoOrient(false) {
 
+	GetBody().SetBullet(true); // improves collision detection
+
 	SetGravityScale(0.0f);
 		
 	SetState(new RetractingState(*this));

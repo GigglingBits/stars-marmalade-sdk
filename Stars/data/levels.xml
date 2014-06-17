@@ -841,14 +841,35 @@
 				<line map="       " />
 			</spritesequence>
 		</level>
-		<level name="earth_13" width="12.0" height="12.0" dustrequirement="100">
+		<level name="earth_13" width="10.0" height="10.0" dustrequirement="10">
 			<spritedefs>
-				<def id="n" body="nugget_01" />
+				<def id="a" body="nugget_01" />
+				<def id="b" body="nugget_02" />
+				<def id="c" body="nugget_03" />
+				<def id="d" body="nugget_04" />
+				<def id="e" body="bird_01" />
+				<def id="f" body="bird_02" />
+				<def id="g" body="bird_03" />
+				<def id="h" body="grunt_01" />
+				<def id="i" body="grunt_02" />
+				<def id="j" body="grunt_03" />
+				<def id="k" body="grunt_boss" />
 			</spritedefs>
-			<spritesequence delay="500" speed="2">
-				<line map="n  n    " />
+			<spritesequence delay="1200" speed="1.2">
+				<line map="a  " />
+				<line map=" b " />
+				<line map="  c" />
+				<line map="d  " />
+				<line map=" e " />
+				<line map="  f" />
+				<line map="g  " />
+				<line map=" h " />
+				<line map="  i" />
+				<line map="j  " />
+				<line map=" k " />
 			</spritesequence>
 		</level>
+
 		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget_01" />

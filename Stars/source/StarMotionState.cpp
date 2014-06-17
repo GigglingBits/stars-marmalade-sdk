@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "SoundEngine.h"
 #include "Nugget.h"
+#include "Enemy.h"
 #include "GameFoundation.h"
 #include "Debug.h"
 
@@ -33,11 +34,11 @@ void Star::RetractingState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeCollectSingle;
+		args.EventType = eDustEventTypeCollect;
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else {
+	} else if (dynamic_cast<Enemy*>(&body)) {
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
@@ -48,6 +49,8 @@ void Star::RetractingState::Collide(Body& body) {
 		
 		m_rxContext.m_xPath.ClearPath();
 		m_rxContext.SetState(new RecoverState(m_rxContext));
+	} else {
+		; // unhandled collision....
 	}
 }
 
@@ -87,7 +90,7 @@ void Star::FollowState::Collide(Body& body) {
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else {
+	} else if (dynamic_cast<Enemy*>(&body)) {
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
@@ -98,6 +101,8 @@ void Star::FollowState::Collide(Body& body) {
 		
 		m_rxContext.m_xPath.ClearPath();
 		m_rxContext.SetState(new RecoverState(m_rxContext));
+	} else {
+		; // unhandled collision....
 	}
 }
 
