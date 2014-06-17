@@ -2,6 +2,7 @@
 [Game]
 ####################################################
 showstats=0
+showshapes=1
 unlockall=1
 
 maxvisibleworldsize=8	# see max 20 meters on screen

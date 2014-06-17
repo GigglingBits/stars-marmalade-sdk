@@ -13,6 +13,12 @@ Configuration::Configuration() {
 		ShowStats = 0;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "showshapes", &tmpint)) {
+		ShowShapes = tmpint == 1;
+	} else {
+		ShowShapes = 0;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "unlockall", &tmpint)) {
 		UnlockAll = tmpint == 1;
 	} else {

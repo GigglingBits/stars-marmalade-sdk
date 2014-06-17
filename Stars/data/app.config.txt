@@ -11,6 +11,8 @@
 
 [Game]
 showstats				Show statistical information on the screen
+showshapes				Show geometrical information on the screen
+unlockall				Unlocks all levels
 
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
@@ -34,6 +36,5 @@ menusong				Name of the sound file containing the menu song
 levelsong				Name of the sound file containing the level song
 
 settingsfile			Name of the file to be used for storing user settings
-unlockall				Unlocks all levels
 
 flurrykey				Flurry API key
