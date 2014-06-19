@@ -112,8 +112,9 @@ void Initialize() {
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
 	WriteAndShowLog("Initializing game frameworks...");
+	long size = Configuration::GetInstance().ResourceHeapSize * 1000000L;
 	IwMemBucketInit();
-	IwMemBucketCreate(eMemoryBucketResources, "resources", 15000000);
+	IwMemBucketCreate(eMemoryBucketResources, "resources", size);
 	ResourceManager::Initialize(eMemoryBucketResources);
 
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);

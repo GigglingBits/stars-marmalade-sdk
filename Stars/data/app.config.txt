@@ -14,6 +14,8 @@ showstats				Show statistical information on the screen
 showshapes				Show geometrical information on the screen
 unlockall				Unlocks all levels
 
+resourceheapsize		Size of mem bucket used for loading resources (in MB)
+
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
 

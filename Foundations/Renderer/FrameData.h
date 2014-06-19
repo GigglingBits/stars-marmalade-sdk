@@ -31,7 +31,9 @@ public:
 	float GetAvgRealDurationMs() const;
 
 	void SetScreenSize(uint32 width, uint32 height);
+
 	void Tick();
+	void Tick(uint16 frametime, uint16 simulationcap);
 };
 
 #endif

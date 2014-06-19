@@ -24,6 +24,7 @@ private:
 	static void RunViewportTest();
 	static void RunOscillatorTest();
 	static void RunPinchGestureTest();
+	static void RunParticleTest();
 
 	static void Evaluate(uint32 systemcheckpoint, uint32 testcheckpoint);
 };

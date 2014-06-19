@@ -7,6 +7,7 @@ Configuration* Configuration::s_pxInstance = NULL;
 Configuration::Configuration() {
 	char tmpstr[S3E_CONFIG_STRING_MAX] = {'\0'};
 	int tmpint = 0;
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "showstats", &tmpint)) {
 		ShowStats = tmpint == 1;
 	} else {
@@ -23,6 +24,12 @@ Configuration::Configuration() {
 		UnlockAll = tmpint == 1;
 	} else {
 		UnlockAll = 0;
+	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "resourceheapsize", &tmpint)) {
+		ResourceHeapSize = tmpint;
+	} else {
+		ResourceHeapSize = 0;
 	}
 	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {

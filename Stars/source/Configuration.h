@@ -19,6 +19,8 @@ public:
 	bool ShowShapes;
 	bool UnlockAll;
 
+	int ResourceHeapSize;
+
 	double MaxVisibleWorldSize;
 	double WorldMargin;
 

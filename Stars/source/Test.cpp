@@ -73,6 +73,10 @@ void Test::RunTest() {
 	Evaluate(systemcheckpoint, testcheckpoint);
 	s3eDeviceYield(0);
 	
+	RunParticleTest();
+	Evaluate(systemcheckpoint, testcheckpoint);
+	s3eDeviceYield(0);
+	
 	IwMemBucketPop();
 	IwMemBucketPop();
 }
@@ -443,5 +447,46 @@ void Test::RunPinchGestureTest() {
 		IwAssert(MYAPP, pinch.IsPinching() == false);
 		IwAssert(MYAPP, info.movement == expectedtranslation);
 	}
+}
+
+void Test::RunParticleTest() {
+	IW_CALLSTACK_SELF;
+
+	ResourceManager::GetInstance().LoadTemporary("test.group");
+	
+	std::list<std::string> filenames;
+	filenames.push_back("test.xml");
+	FactoryManager::InitializeFromFiles(filenames);
+	
+	const TextureTemplate& tpl = FactoryManager::GetTextureFactory().GetConfig("mytexture");
+	ParticleSystem ps(tpl);
+	ps.SetBirthRate(100);
+	ps.SetParticleLifetime(1000);
+	IwAssert(MYAPP, !ps.IsStarted());
+	IwAssert(MYAPP, !ps.HasParticles());
+	
+	ps.Start();
+	IwAssert(MYAPP, ps.IsStarted());
+	IwAssert(MYAPP, !ps.HasParticles());
+	
+	FrameData frame;
+	frame.SetScreenSize(100, 100);
+	frame.Tick(100, 100);
+	ps.Update(frame);
+	IwAssert(MYAPP, ps.HasParticles());
+	
+	ps.Stop();
+	IwAssert(MYAPP, !ps.IsStarted());
+	IwAssert(MYAPP, ps.HasParticles());
+	
+	frame.Tick(1000, 1000);
+	ps.Update(frame);
+	frame.Tick(1, 1);
+	ps.Update(frame);
+	IwAssert(MYAPP, !ps.HasParticles());
+	
+	FactoryManager::Terminate();
+	
+	ResourceManager::GetInstance().UnloadTemporary();
 }
 

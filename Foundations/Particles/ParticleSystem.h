@@ -31,7 +31,7 @@ private:
 	uint16 m_uiParticleLifetime;
 		
 public:
-	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity, const std::string& createSound = "", const std::string& destroySound = "");
+	ParticleSystem(const TextureTemplate& tpl, const CIwFVec2& gravity = CIwFVec2::g_Zero, const std::string& createSound = "", const std::string& destroySound = "");
 	~ParticleSystem();
 	
 	bool IsStarted();

@@ -39,13 +39,18 @@ void FrameData::SetScreenSize(uint32 width, uint32 height) {
 
 void FrameData::Tick() {
 	// measure time between ticks (real measurement)
-	m_iRealFrameTime = (uint16)(s3eTimerGetMs() - m_lLastSystemClock);
+	// cap the simulation at 30ms; physics simulations become unstable with larger steps
+	Tick((uint16)(s3eTimerGetMs() - m_lLastSystemClock), 30);
+}
+
+void FrameData::Tick(uint16 frametime, uint16 simulationcap) {
+	m_iRealFrameTime = frametime;
 	m_lLastSystemClock += m_iRealFrameTime;
-
+	
 	// adjust time for sumulation
-	m_iSimFrameTime = std::min<uint16>(m_iRealFrameTime, 30); // cap the simulation at 30ms; the simulation becomes unstable with larger steps
+	m_iSimFrameTime = std::min<uint16>(m_iRealFrameTime, simulationcap);
 	m_iSimFrameTime = std::max<uint16>(m_iSimFrameTime, 1);  // minimal step is 1ms for avoiding numerical problems (eg. div by 0)
-
+	
 	// averages
 	m_xRealCounter.Tick(m_iRealFrameTime);
 	m_xSimCounter.Tick(m_iSimFrameTime);
