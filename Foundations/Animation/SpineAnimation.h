@@ -29,7 +29,7 @@ public:
 	bool SetSkin(const std::string& name);
 	bool ConstainsSkin(const std::string& name);
 	
-	bool SetAnimation(const std::string& name);
+	bool SetAnimation(const std::string& name, float position = 0.0f);
 	bool ConstainsAnimation(const std::string& name);
 	
 	bool GetFlipX();

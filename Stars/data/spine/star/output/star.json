@@ -959,7 +959,8 @@
 			"happystar-mouth-detail": {
 				"attachment": [
 					{ "time": 6.8, "name": "happystar-mouth-zzzz" },
-					{ "time": 8.1333, "name": "happystar-mouth-zzzz" }
+					{ "time": 8.1333, "name": "happystar-mouth-zzzz" },
+					{ "time": 9.4666, "name": null }
 				]
 			},
 			"happystar-mouth.png": {

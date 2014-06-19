@@ -50,26 +50,25 @@ bool SpineAnimation::ConstainsSkin(const std::string& name) {
 	return (bool) spSkeletonData_findSkin(m_pxSkeletonData, name.c_str());
 }
 
-bool SpineAnimation::SetAnimation(const std::string& name) {
+bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
 	if (!m_pxSkeletonData) {
 		return false;
 	}
 	
-	if (m_pxAnimation && name.compare(m_pxAnimation->name) == 0) {
-		// that animation is already running -> do nothing
-		return true;
-	}
-
 	// animations must start from setup pose in order to avoid
 	// leftovers from previous animations, e.g. if the new animations
 	// is lacking some key frames
 	spSkeleton_setToSetupPose(m_pxSkeleton);
-	
-	m_pxAnimation = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
-	IwAssertMsg(MYAPP, m_pxAnimation, ("Unable to find '%s' animation", name.c_str()));
 
+	if (!(m_pxAnimation && name.compare(m_pxAnimation->name) == 0)) {
+		m_pxAnimation = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
+		IwAssertMsg(MYAPP, m_pxAnimation, ("Unable to find '%s' animation", name.c_str()));
+	}
+
+	m_fAnimationTime = position;
+	
 	return (bool)m_pxAnimation;
 }
 
