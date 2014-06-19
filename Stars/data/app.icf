@@ -2,7 +2,7 @@
 [Game]
 ####################################################
 showstats=0
-showshapes=1
+showshapes=0
 unlockall=1
 
 maxvisibleworldsize=8	# see max 20 meters on screen
@@ -52,6 +52,9 @@ MYAPP=1
 ####################################################
 [S3E]
 ####################################################
+MemSize=18000000			# main heap; the resource heap in Main.cpp must also fit in here
+MemSizeDebug=38000000		# debug / resource builder
+
 SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
@@ -59,9 +62,6 @@ SplashscreenBkB=0
 IOSDispScaleFactor=200
 #DispFixRot=FixedLandscape	# locked because of the gyroscope
 DispFixRot=Landscape		# locked because of the gyroscope
-
-MemSize=18000000			# main heap; the resource heap in Main.cpp must also fit in here
-MemSizeDebug=38000000		# debug / resource builder
 
 SysTraceToFile=0
 
