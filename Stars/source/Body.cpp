@@ -119,10 +119,11 @@ void Body::SetSpeed(const CIwFVec2& vector) {
 		b2Vec2(vector.x, vector.y));
 }
 
-void Body::SetImpulse(const CIwFVec2& vector) {
+void Body::SetImpulse(const CIwFVec2& linear, float angular) {
 	m_pxBody->ApplyLinearImpulse(
-		b2Vec2(vector.x, vector.y),
+		b2Vec2(linear.x, linear.y),
 		m_pxBody->GetWorldCenter(), true);
+	m_pxBody->ApplyAngularImpulse(angular, true);
 }
 
 void Body::EnableCollisions(bool enable) {
@@ -241,10 +242,11 @@ void Body::ShowEffect(const std::string& effect) {
 }
 
 void Body::Collide(Body& body) {
-	OnColliding(*this, body);
+	OnColliding(body);
 }
 
-void Body::OnColliding(Body& thisbody, Body& otherbody) {
+void Body::OnColliding(Body& body) {
+	Colliding.Invoke(*this, body);
 }
 
 void Body::OnUpdate(const FrameData& frame) {

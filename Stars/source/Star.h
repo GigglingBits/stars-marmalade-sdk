@@ -73,7 +73,7 @@ public:
 	static const char* TypeName();
 
 	virtual void OnUpdate(const FrameData& frame);
-	virtual void OnColliding(Body& thisbody, Body& otherbody);
+	virtual void OnColliding(Body& body);
 
 	void SetAnchorLine(float xpos);
 	void FollowPath(const std::vector<CIwFVec2>& path);

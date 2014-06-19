@@ -21,12 +21,14 @@ int Nugget::GetDustAmount() {
 	return GAME_POINTS_NUGGET;
 }
 
-void Nugget::OnColliding(Body& thisbody, Body& otherbody) {
+void Nugget::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 	
 	// any collision leads to selfdestruction
 	GetHealthManager().Kill();
 	ShowEffect("star_collision");
+	
+	Body::OnColliding(body);
 }
 
 void Nugget::OnUpdate(const FrameData& frame) {

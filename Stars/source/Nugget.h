@@ -17,7 +17,7 @@ public:
 	virtual int GetDustAmount();
 	
 protected:
-	virtual void OnColliding(Body& thisbody, Body& otherbody);
+	virtual void OnColliding(Body& body);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 };

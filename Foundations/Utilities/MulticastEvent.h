@@ -30,7 +30,7 @@ public:
 
 	template <class TSubscriber>
 	void AddListener(TSubscriber* obj, void(TSubscriber::*func)(const TPublisher&, const TArgs&)) {
-//		IW_CALLSTACK_SELF; // commented out due to gcc compiler bug (gcc crashed while compiling)
+		IW_CALLSTACK_SELF;
 
 		IwAssertMsg(MYAPP, obj != NULL, ("Target instance must not be NULL."));
 		for (int i = 0; i < EVENT_MAX_SUBSCRIBERS; i++) {
@@ -46,7 +46,7 @@ public:
 
 	template <class TSubscriber>
 	void RemoveListener(TSubscriber* obj, void(TSubscriber::*func)(const TPublisher&, const TArgs&)) {
-//		IW_CALLSTACK_SELF; // commented out due to gcc compiler bug (gcc crashed while compiling)
+		IW_CALLSTACK_SELF;
 
 		// create instance to be able to calculate hash
 		Functor<TPublisher, TArgs, TSubscriber> functor(obj, func);

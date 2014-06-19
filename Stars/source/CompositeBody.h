@@ -40,7 +40,6 @@ public:
 
 private:
 	void AddChild(Body* body, BodyJoint* joint);
-	void DestroyChildren();
 	void DestroyChild(Body* body);
 
 	void DestroyJoints();
@@ -50,9 +49,14 @@ private:
 	bool TryAlignChildAddInfo(Body* parent, BodyJoint& joint, BodyHierarchy& bodies);
 
 protected:	
+	void DestroyChildren();
+
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	virtual void OnColliding(Body& thisbody, Body& otherbody);
+	virtual void OnChildColliding(Body& child, Body& body);
+	
+private:
+	void ChildCollisionHandler(const Body& sender, const Body& body);
 };
 
 #endif

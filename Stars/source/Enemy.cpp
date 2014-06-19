@@ -3,7 +3,7 @@
 #include "FactoryManager.h"
 
 Enemy::Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
-	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
+	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL), m_bKnockedOut(false) {
 	SetGravityScale(0.0f);
 }
 
@@ -20,22 +20,35 @@ void Enemy::KnockOut() {
 	EnableCollisions(false);
 	EnableRotation(true);
 	
-	CIwFVec2 impulse(0.0f, 8.0f);
+	CIwFVec2 impulse(0.0f, 2.0f);
 	impulse *= GetMass();
-	SetImpulse(impulse);
+	SetImpulse(impulse, 5.0f);
 	
 	SetGravityScale(1.0f);
+	
+	m_bKnockedOut = true;
 }
 
-void Enemy::OnColliding(Body& thisbody, Body& otherbody) {
-	IW_CALLSTACK_SELF;
+void Enemy::OnColliding(Body& body) {
+	if (!m_bKnockedOut && dynamic_cast<Enemy*>(&body)) {
+		// any collision with another enemy leads to destruction
+		KnockOut();
+		ShowEffect("star_collision");
+	}
 	
-	// any collision leads to selfdestruction
-	KnockOut();
-	ShowEffect("star_collision");
+	CompositeBody::OnColliding(body);
+}
+
+void Enemy::OnChildColliding(Body& child, Body& body) {
+	if (!m_bKnockedOut && dynamic_cast<Star*>(&body)) {
+		KnockOut();
+		ShowEffect("star_collision");
 	
-	// todo: not all colisions should lead to buff emission
-	EmitBuff();
+		// todo: not all colisions should lead to buff emission
+		EmitBuff();
+	}
+	
+	CompositeBody::OnChildColliding(child, body);
 }
 
 void Enemy::OnUpdate(const FrameData& frame) {

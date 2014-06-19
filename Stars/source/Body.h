@@ -47,7 +47,7 @@ public:
 	virtual CIwFVec2 GetPosition();
 	CIwFVec2 GetCenter();
 	
-	void SetImpulse(const CIwFVec2& vector);
+	void SetImpulse(const CIwFVec2& linear, float angular = 0.0f);
 	virtual void SetSpeed(const CIwFVec2& vector);
 
 	void EnableCollisions(bool enable);
@@ -90,7 +90,7 @@ protected:
 	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
-	virtual void OnColliding(Body& thisbody, Body& otherbody);
+	virtual void OnColliding(Body& body);
 	
 public:
 	struct EmitBuffArgs {
@@ -103,6 +103,8 @@ public:
 		CIwFVec2 pos;
 	};
 	MulticastEvent<Body, EffectArgs> EffectRequested;
+	
+	MulticastEvent<Body, Body> Colliding;
 };
 
 #endif

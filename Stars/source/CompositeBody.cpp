@@ -16,8 +16,8 @@ CompositeBody::~CompositeBody() {
 void CompositeBody::AddJoint(const std::string& jointid, const std::string& childa, const std::string& porta, const std::string& childb, const std::string& portb, BodyJoint::eJointType jointtype) {
 	IW_CALLSTACK_SELF;
 
-	// empty child id results in this body (parent)
-	// empty port id results in body origin
+	// empty child id means in this body (parent)
+	// empty port id means in body origin
 
 	Body* ba = childa.empty() ? this : GetChild(childa);
 	CIwFVec2* pa = ba ? ba->GetPort(porta) : &CIwFVec2::g_Zero;
@@ -61,6 +61,7 @@ void CompositeBody::AddChild(const std::string& childid, const std::string& body
 void CompositeBody::AddChild(Body* body, BodyJoint* joint) {
 	IW_CALLSTACK_SELF;
 	if (body) {
+		body->Colliding.AddListener(this, &CompositeBody::ChildCollisionHandler);
 		m_xChildList[body->GetId()] = body;
 		if (joint) {
 			m_xJointList.append(joint);
@@ -100,8 +101,8 @@ void CompositeBody::SetGravityScale(float scale) {
 	Body::SetGravityScale(scale);
 	
 	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
-		Body* body = it->second;
-		body->SetGravityScale(scale);
+		//Body* body = it->second;
+		//body->SetGravityScale(scale);
 	}
 }
 
@@ -252,6 +253,7 @@ void CompositeBody::DestroyChild(Body* body) {
 		}
 	}
 
+	body->Colliding.RemoveListener(this, &CompositeBody::ChildCollisionHandler);
 	delete body;
 }
 
@@ -275,10 +277,11 @@ void CompositeBody::OnRender(Renderer& renderer, const FrameData& frame) {
 	Body::OnRender(renderer, frame);
 }
 
-void CompositeBody::OnColliding(Body& thisbody, Body& otherbody) {
-	if (m_pxParentBody) {
-		m_pxParentBody->Collide(otherbody);
-	} else {
-		Body::OnColliding(thisbody, otherbody);
-	}
+void CompositeBody::OnChildColliding(Body& child, Body& body) {
+}
+
+void CompositeBody::ChildCollisionHandler(const Body& sender, const Body& body) {
+	// RRR: de-const
+	Colliding.Invoke(*(Body*)&sender, body);
+	OnChildColliding(*(Body*)&sender, *(Body*)&body);
 }

@@ -50,10 +50,11 @@ void Star::AutoOrientTexture(bool allow) {
 	m_bAutoOrient = allow;
 }
 
-void Star::OnColliding(Body& thisbody, Body& otherbody) {
+void Star::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 
-	GetMotionState().Collide(otherbody);
+	GetMotionState().Collide(body);
+	Body::OnColliding(body);
 }
 
 void Star::OnUpdate(const FrameData& frame) {

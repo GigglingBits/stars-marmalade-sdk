@@ -7,6 +7,7 @@
 class Enemy : public CompositeBody {
 private:
 	ParticleSystem* m_pxParticles;
+	bool m_bKnockedOut;
 	
 public:
 	Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
@@ -17,9 +18,10 @@ public:
 protected:
 	virtual void KnockOut();
 	
-	virtual void OnColliding(Body& thisbody, Body& otherbody);
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+	virtual void OnColliding(Body& body);
+	virtual void OnChildColliding(Body& child, Body& body);
 };
 
 #endif

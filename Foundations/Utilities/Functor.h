@@ -53,7 +53,7 @@ public:
 protected:
 	uint64 GetHash(TTarget* obj, void(TTarget::*func)(const TSender&, const TArgs&)) {
 		uint64 hash = ((uint64)obj) << 32;
-		// herer is some pointer magic because I didn't manage to cast 
+		// here is some pointer magic because I didn't manage to cast
 		// the function pointer to void* without tricking the compiler
 		return hash + ((uint64)*((long*)&func)); 
 	}

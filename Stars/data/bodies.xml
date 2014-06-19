@@ -52,13 +52,7 @@
 		
 		<!-- gameplay -->
 		<body id="star" type="star" resilience="0.8" revolve="0" drag="1">
-			<shape type="polygon">
-				<point x="-0.6" y="-0.75" />
-				<point x="0.6" y="-0.75" />
-				<point x="0.75" y="0.3" />
-				<point x="0.0" y="0.75" />
-				<point x="-0.75" y="0.3" />
-			</shape>
+			<shape type="circle" width="1.5" />
 			<port id="center" x="0.0" y="0.0" />
 			<fixture friction="0.6" restitution="0.5" density="1.0" />
 			<texture animation="spine_star" />
@@ -123,7 +117,7 @@
 			<shape type="circle" width="1.0" />
 		</body>
 		
-		<body id="softspot" type="dynamic" fixture="sensor" texture="none" resilience="1.0" revolve="0" drag="0" collide="1">
+		<body id="softspot" type="dynamic" fixture="sensor" texture="none" resilience="1.0" revolve="0" collide="1">
 			<shape type="circle" width="0.7" />
 		</body>
 
@@ -134,7 +128,7 @@
 				<point x="0.55" y="0.15" />
 				<point x="-0.75" y="0.35" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_bird_01" />
 			<port id="a" x="0.25" y="0.5" />
 			<port id="b" x="0.65" y="0.1" />
@@ -144,14 +138,14 @@
 			<child body="softspot" port="c" jointtype="weld" />
 		</body>
 		
-		<body id="bird_02" type="bird" resilience="1.0" revolve="0">
+		<body id="bird_02" type="bird" resilience="1.0" revolve="0" sensor="1" >
 			<shape type="polygon">
 				<point x="-0.55" y="-0.3" />
 				<point x="0.55" y="-0.3" />
 				<point x="0.25" y="0.1" />
 				<point x="-0.55" y="0.3" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_bird_02" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.65" y="0.0" />
@@ -159,14 +153,14 @@
 			<child body="softspot" port="b" jointtype="weld" />
 		</body>
 		
-		<body id="bird_03" type="bird" resilience="1.0" revolve="0">
+		<body id="bird_03" type="bird" resilience="1.0" revolve="0" sensor="1" >
 			<shape type="polygon">
 				<point x="-0.7" y="-0.55" />
 				<point x="0.7" y="-0.55" />
 				<point x="0.5" y="0.35" />
 				<point x="-0.7" y="0.55" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="1.8" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_bird_03" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.45" y="0.1" />
@@ -181,7 +175,7 @@
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="0.5" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_grunt_01" />
 		</body>
 
@@ -192,7 +186,7 @@
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="0.5" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_grunt_02" />
 		</body>
 
@@ -203,7 +197,7 @@
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="0.5" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_grunt_03" />
 		</body>
 
@@ -214,12 +208,12 @@
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.6" restitution="0.5" density="0.5" />
+			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
 			<texture animation="spine_grunt_boss" />
 		</body>
 
 	</bodies>
-
+	
 
 	<effects>
 		<effect id="star_collision" type="particles" duration="100">
@@ -407,27 +401,9 @@
 		<fixture id="sensor" friction="0.0" restitution="0.0" density="0.1" sensor="1" />
 		<fixture id="rubber" friction="0.8" restitution="0.65" density="1.0" />
 		<fixture id="ground" friction="0.8" restitution="0.2" density="3.0" />
-		<fixture id="ice" friction="0.04" restitution="0.1" density="3.0" />
-		<fixture id="stone" friction="0.4" restitution="0.1" density="3.0" />
-		<fixture id="box" friction="0.2" restitution="0.3" density="3.0" />
-		<fixture id="wood" friction="0.2" restitution="0.4" density="1.5" />
-		<fixture id="paper" friction="0.5" restitution="0.001" density="0.5" />
-		<fixture id="hero" friction="0.8" restitution="0.01" density="1.5" />
-		<fixture id="gnome" friction="0.8" restitution="0.3" density="1.5" sensor="1" />
 	</fixtures>
 	
 	<shapes>
-		<shape id="dino" type="rectangle" width="1.2" height="0.9" />
-		<shape id="dude" type="rectangle" width="0.8" height="1.2" />
-		<shape id="box" type="rectangle" width="0.8" height="0.5" />
-		<shape id="stick" type="rectangle" width="1.8" height="0.1" />
-		<shape id="croc" type="rectangle" width="1.5" height="0.5" />
-		<shape id="square" type="rectangle" width="0.7" height="0.7" />
-		<shape id="bigball" type="circle" width="1.5" />
-		<shape id="ball" type="circle" width="0.30" />
-		<shape id="smallball" type="circle" width="0.27" />
-		<shape id="rect" type="rectangle" width="10" height="3" />
-		<shape id="person" type="rectangle" width="0.5" height="1.5" />
 		<shape id="ground" type="polygon">
 			<point x="0" y="-1" />
 			<point x="5" y="-1" />
@@ -441,8 +417,6 @@
 			<point x="0.4" y="0" />
 			<point x="0" y="1.3" />
 		</shape>
-		
-		<shape id="platform01" type="rectangle" width="1.5" height="0.5" />
 	</shapes>
 	
 </root>
