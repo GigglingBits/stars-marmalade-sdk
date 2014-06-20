@@ -1,181 +1,195 @@
 
 star.png
-size: 1017,508
+size: 1018,1000
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 happy-star-chin-wound
   rotate: true
-  xy: 326, 178
+  xy: 837, 662
   size: 75, 74
   orig: 100, 81
   offset: 25, 1
   index: -1
 happystar-arm-L
-  rotate: false
-  xy: 184, 140
+  rotate: true
+  xy: 905, 860
   size: 140, 113
   orig: 140, 113
   offset: 0, 0
   index: -1
 happystar-arm-R
-  rotate: true
-  xy: 550, 208
+  rotate: false
+  xy: 771, 739
   size: 136, 113
   orig: 136, 113
   offset: 0, 0
   index: -1
 happystar-eyes-angry
-  rotate: false
-  xy: 665, 267
+  rotate: true
+  xy: 346, 588
   size: 155, 78
   orig: 176, 78
   offset: 10, 0
   index: -1
 happystar-eyes-angry-closed
   rotate: true
-  xy: 588, 51
+  xy: 553, 590
   size: 155, 78
   orig: 176, 78
   offset: 12, 0
   index: -1
 happystar-eyes-closed
   rotate: false
-  xy: 572, 347
+  xy: 582, 839
   size: 179, 161
   orig: 179, 161
   offset: 0, 0
   index: -1
 happystar-eyes-hit1
-  rotate: true
-  xy: 332, 2
+  rotate: false
+  xy: 209, 745
   size: 174, 62
   orig: 175, 62
   offset: 1, 0
   index: -1
 happystar-eyes-hit2
   rotate: false
-  xy: 209, 255
+  xy: 400, 747
   size: 191, 89
   orig: 191, 91
   offset: 0, 2
   index: -1
 happystar-eyes-looking-totheplayer
   rotate: false
-  xy: 391, 346
+  xy: 2, 261
   size: 179, 162
   orig: 179, 162
   offset: 0, 0
   index: -1
 happystar-eyes-lookingdown.png
   rotate: false
-  xy: 2, 136
+  xy: 2, 425
   size: 180, 162
   orig: 180, 162
   offset: 0, 0
   index: -1
 happystar-eyes-lookingup
   rotate: false
-  xy: 209, 346
+  xy: 400, 838
   size: 180, 162
   orig: 180, 162
   offset: 0, 0
   index: -1
 happystar-eyes-open
   rotate: false
-  xy: 753, 347
+  xy: 2, 98
   size: 179, 161
   orig: 179, 161
   offset: 0, 0
   index: -1
 happystar-eyes-sad
-  rotate: true
-  xy: 934, 332
+  rotate: false
+  xy: 593, 754
   size: 176, 83
   orig: 176, 83
   offset: 0, 0
   index: -1
 happystar-eyes-sad-closed
   rotate: true
-  xy: 396, 2
+  xy: 694, 578
   size: 174, 49
   orig: 175, 49
   offset: 1, 0
   index: -1
 happystar-eyes-sleepy
   rotate: false
-  xy: 2, 40
+  xy: 2, 2
   size: 181, 94
   orig: 181, 94
   offset: 0, 0
   index: -1
 happystar-leg-L
-  rotate: true
-  xy: 402, 204
+  rotate: false
+  xy: 763, 854
   size: 140, 146
   orig: 140, 146
   offset: 0, 0
   index: -1
 happystar-leg-R
   rotate: false
-  xy: 447, 56
+  xy: 205, 597
   size: 139, 146
   orig: 139, 146
   offset: 0, 0
   index: -1
 happystar-mouth-angry
   rotate: true
-  xy: 668, 108
+  xy: 633, 595
   size: 157, 59
   orig: 157, 59
   offset: 0, 0
   index: -1
 happystar-mouth-detail
-  rotate: true
-  xy: 2, 13
+  rotate: false
+  xy: 965, 702
   size: 25, 39
   orig: 25, 39
   offset: 0, 0
   index: -1
 happystar-mouth-hit.png
   rotate: false
-  xy: 920, 241
+  xy: 745, 648
   size: 90, 89
   orig: 90, 89
   offset: 0, 0
   index: -1
 happystar-mouth-sad
   rotate: false
-  xy: 729, 210
+  xy: 745, 591
   size: 77, 55
   orig: 77, 55
   offset: 0, 0
   index: -1
 happystar-mouth-sleepy
-  rotate: true
-  xy: 447, 4
+  rotate: false
+  xy: 913, 684
   size: 50, 57
   orig: 50, 57
   offset: 0, 0
   index: -1
 happystar-mouth-zzzz
   rotate: true
-  xy: 822, 230
+  xy: 909, 743
   size: 115, 96
   orig: 115, 96
   offset: 0, 0
   index: -1
 happystar-top
-  rotate: true
-  xy: 185, 13
+  rotate: false
+  xy: 426, 600
   size: 125, 145
   orig: 125, 145
   offset: 0, 0
   index: -1
 happystar-torso
   rotate: false
-  xy: 2, 300
+  xy: 2, 792
   size: 205, 208
   orig: 205, 209
+  offset: 0, 0
+  index: -1
+shield_background
+  rotate: false
+  xy: 2, 589
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+shield_foreground
+  rotate: false
+  xy: 209, 809
+  size: 189, 191
+  orig: 189, 191
   offset: 0, 0
   index: -1
