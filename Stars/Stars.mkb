@@ -16,6 +16,9 @@ defines {
 	# Define for TTF rendering support.
 	# Must be before iwgxfont subproject is first included.
 	IW_GXFONT_TTF
+	
+	# causes the default memory managers to be used instead of marmalade's own
+	# IW_USE_SYSTEM_STDLIB
 }
 
 deployments {

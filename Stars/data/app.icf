@@ -54,7 +54,7 @@ MYAPP=1
 ####################################################
 [S3E]
 ####################################################
-MemSize=15000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
+MemSize=14400000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
 MemSizeDebug=38000000		# debug / resource builder
 
 SplashscreenBkR=0

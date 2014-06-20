@@ -82,11 +82,14 @@
     <effect id="cloud01sky" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud02sky" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud03sky" shape="myshape" texture="mytexture" duration="1500" />
+    <effect id="cloud04sky" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud01far" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud02far" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud03far" shape="myshape" texture="mytexture" duration="1500" />
+    <effect id="cloud04far" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud01near" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud02near" shape="myshape" texture="mytexture" duration="1500" />
     <effect id="cloud03near" shape="myshape" texture="mytexture" duration="1500" />
+    <effect id="cloud04near" shape="myshape" texture="mytexture" duration="1500" />
   </effects>
 </root>
