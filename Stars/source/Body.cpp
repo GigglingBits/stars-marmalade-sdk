@@ -21,6 +21,9 @@ Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	m_pxBody->SetUserData(this);
 	m_pxFixture->SetUserData(this);
 
+	// origin port
+	AddPort("", CIwFVec2::g_Zero);
+		
 	// for texture tracking
 	m_iLastHealthValue = m_xHealth.GetHealthValue();
 

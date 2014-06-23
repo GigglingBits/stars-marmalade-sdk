@@ -10,12 +10,20 @@ BodyJoint::~BodyJoint() {
 	Separate();
 }
 
+void BodyJoint::SetId(const std::string& id) {
+	m_sId = id;
+}
+
+const std::string& BodyJoint::GetId() {
+	return m_sId;
+}
+
 void BodyJoint::Separate() {
 	if (m_pxJoint) {
 		if (b2Body* body = m_pxJoint->GetBodyA() ? m_pxJoint->GetBodyA() : m_pxJoint->GetBodyB()) {
 			body->GetWorld()->DestroyJoint(m_pxJoint);
 		} else {
-			IwAssertMsg(MYAPP, false, ("Could not delete joint. No bodies seem to be attached."));
+			IwAssertMsg(MYAPP, false, ("Could not delete joint with id '%s'. No bodies seem to be attached.", m_sId.c_str()));
 		}
 		m_pxBodyA = NULL;
 		m_pxBodyB = NULL;
@@ -30,7 +38,7 @@ void BodyJoint::Join(Body& bodya, const CIwFVec2& porta, Body& bodyb, const CIwF
 	if (m_pxJoint) {
 		Separate();
 	}
-	IwAssertMsg(MYAPP, !m_pxJoint && m_eType == eJointTypeUndefined, ("Physics joint already created."));
+	IwAssertMsg(MYAPP, !m_pxJoint && m_eType == eJointTypeUndefined, ("Physics joint already created for joint id '%s'.", m_sId.c_str()));
 	m_pxBodyA = &bodya;
 	m_pxBodyB = &bodyb;
 	m_eType = jointtype;

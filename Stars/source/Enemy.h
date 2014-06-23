@@ -4,16 +4,25 @@
 #include "CompositeBody.h"
 #include "ParticleSystem.h"
 
+#define ENEMY_SLEDGE_BODY "sledge"
+#define ENEMY_SLEDGE_CHILD "sledge"
+#define ENEMY_SLEDGE_JOINT "sledge"
+
 class Enemy : public CompositeBody {
 private:
 	ParticleSystem* m_pxParticles;
 	bool m_bKnockedOut;
+	bool m_bNeedDetachSledge;
 	
 public:
 	Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
+	
+private:
+	void AttachSledge();
+	void DetachSledge();
 	
 protected:
 	virtual void KnockOut();

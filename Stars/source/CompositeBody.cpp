@@ -16,8 +16,13 @@ CompositeBody::~CompositeBody() {
 void CompositeBody::AddJoint(const std::string& jointid, const std::string& childa, const std::string& porta, const std::string& childb, const std::string& portb, BodyJoint::eJointType jointtype) {
 	IW_CALLSTACK_SELF;
 
-	// empty child id means in this body (parent)
-	// empty port id means in body origin
+	if (m_xJointList.find(jointid) != m_xJointList.end()) {
+		IwAssertMsg(MYAPP, false, ("Trying to add a joint with id '%s' to body '%s'. A joint with the same name already exists. No new joind will be added.", jointid.c_str(), GetId().c_str()));
+		return;
+	}
+	
+	// empty child id means this body (parent)
+	// empty port id means origin of the body
 
 	Body* ba = childa.empty() ? this : GetChild(childa);
 	CIwFVec2* pa = ba ? ba->GetPort(porta) : &CIwFVec2::g_Zero;
@@ -27,18 +32,23 @@ void CompositeBody::AddJoint(const std::string& jointid, const std::string& chil
 
 	if (pa && ba && pb && bb) {
 		if (ba != bb) {
-			BodyJoint* joint = new BodyJoint();
-			joint->Join(*ba, *pa, *bb, *pb, jointtype);
-			m_xJointList.push_back(joint);
+			m_xJointList[jointid].Join(*ba, *pa, *bb, *pb, jointtype);
 			AlignChildren();
 			return;
 		} else {
-			IwAssertMsg(MYAPP, false, ("Joint in body %s could not be added. Port '%s'/'%s' or port %s/%s are located on the same body.", 
+			IwAssertMsg(MYAPP, false, ("Joint in body '%s' could not be added. Port '%s'/'%s' or port %s/%s are located on the same body.",
 				GetId().c_str(), childa.c_str(), porta.c_str(), childb.c_str(), portb.c_str()));
 		}
 	} else {
-		IwAssertMsg(MYAPP, false, ("Joint in body %s could not be added. Port '%s'/'%s' or port %s/%s could not be found.", 
+		IwAssertMsg(MYAPP, false, ("Joint in body '%s' could not be added. Port '%s'/'%s' or port %s/%s could not be found.",
 			GetId().c_str(), childa.c_str(), porta.c_str(), childb.c_str(), portb.c_str()));
+	}
+}
+
+void CompositeBody::RemoveJoint(const std::string&jointid) {
+	JointList::iterator it = m_xJointList.find(jointid);
+	if (it != m_xJointList.end()) {
+		m_xJointList.erase(jointid);
 	}
 }
 
@@ -55,17 +65,14 @@ void CompositeBody::AddChild(const std::string& childid, const std::string& body
 	// it will be set when adding joints
 	// body->SetPosition(GetPosition());
 	
-	AddChild(body, NULL);
+	AddChild(body);
 }
 
-void CompositeBody::AddChild(Body* body, BodyJoint* joint) {
+void CompositeBody::AddChild(Body* body) {
 	IW_CALLSTACK_SELF;
 	if (body) {
 		body->Colliding.AddListener(this, &CompositeBody::ChildCollisionHandler);
 		m_xChildList[body->GetId()] = body;
-		if (joint) {
-			m_xJointList.append(joint);
-		}
 	}
 }
 
@@ -79,6 +86,16 @@ Body* CompositeBody::GetChild(const std::string& childid) {
 		}
 	}
 	return NULL;
+}
+
+void CompositeBody::RemoveChild(const std::string& childid) {
+	ChildList::iterator it = m_xChildList.find(childid);
+	if (it != m_xChildList.end()) {
+		if (Body* sledge = it->second) {
+			DestroyChild(sledge);
+		}
+		m_xChildList.erase(it);
+	}
 }
 
 void CompositeBody::SetPosition(const CIwFVec2& position, float angle) {
@@ -110,9 +127,10 @@ void CompositeBody::AlignChildren() {
 	IW_CALLSTACK_SELF;
 
 	// copy the joint list; we use it as processing queue
-	JointList joints;
+	typedef CIwList<BodyJoint*> JointQueue;
+	JointQueue joints;
 	for (JointList::iterator it = m_xJointList.begin(); it != m_xJointList.end(); it++) {
-		joints.push_back(*it);
+		joints.push_back(&it->second);
 	}
 
 	// Build alignment strategy
@@ -120,7 +138,7 @@ void CompositeBody::AlignChildren() {
 	while (joints.num_p > 0) {
 		bool added = false;
 		// try adding bodies that can be connected to already connected bodies
-		JointList::iterator it = joints.begin();
+		JointQueue::iterator it = joints.begin();
 		while (it != joints.end()) {
 			if (TryAlignChild(**it, bodies, false)) {
 				added = true;
@@ -217,22 +235,15 @@ float CompositeBody::GetMass() {
 
 void CompositeBody::DestroyJoints() {
 	IW_CALLSTACK_SELF;
-
-	JointList::iterator it = m_xJointList.begin();
-	while (it != m_xJointList.end()) {
-		delete *it;
-		it = m_xJointList.erase(it);
-	}
+	m_xJointList.clear();
 }
 
 void CompositeBody::DestroyChildren() {
 	IW_CALLSTACK_SELF;
-
-	ChildList::iterator it = m_xChildList.begin();
-	while (it != m_xChildList.end()) {
-		DestroyChild(it->second);
-		it->second = NULL;
-		it++;
+	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); ++it) {
+		if (it->second) {
+			delete it->second;
+		}
 	}
 	m_xChildList.clear();
 }
@@ -242,17 +253,15 @@ void CompositeBody::DestroyChild(Body* body) {
 		return;
 	}
 
-	// remove joints, if any
-	JointList::iterator it = m_xJointList.begin();
-	while (it != m_xJointList.end()) {
-		if ((*it)->GetBodyA() == body || (*it)->GetBodyB() == body) {
-			delete *it;
-			it = m_xJointList.erase(it);
+	// remove any joints that are connected to the body
+	for (JointList::iterator it = m_xJointList.begin(); it != m_xJointList.end();) {
+		if (it->second.GetBodyA() == body || it->second.GetBodyB() == body) {
+			m_xJointList.erase(it++);
 		} else {
-			it++;
+			++it;
 		}
 	}
-
+	
 	body->Colliding.RemoveListener(this, &CompositeBody::ChildCollisionHandler);
 	delete body;
 }

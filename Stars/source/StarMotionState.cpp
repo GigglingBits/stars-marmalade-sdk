@@ -11,7 +11,7 @@
 // Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
-	m_rxContext.EnableCollisions(true);
+	//m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
 
@@ -67,7 +67,7 @@ void Star::RetractingState::Update(uint16 timestep) {
 // Follow
 /////////////////////////////////////////////////////////////
 void Star::FollowState::Initialize() {
-	m_rxContext.EnableCollisions(true);
+	//m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
@@ -142,7 +142,7 @@ void Star::FollowState::Update(uint16 timestep) {
 // Recover
 /////////////////////////////////////////////////////////////
 void Star::RecoverState::Initialize() {
-	m_rxContext.EnableCollisions(false);
+	//m_rxContext.EnableCollisions(false);
 	m_rxContext.SetMotionTextureFrame("recover");
 	m_rxContext.DisableParticles();
 

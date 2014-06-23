@@ -3,6 +3,8 @@
 
 #include "Box2D/Box2D.h"
 #include "IwGeom.h"
+#include <string>
+
 class Body;
 
 class BodyJoint {
@@ -16,6 +18,7 @@ public:
 
 private:
 	eJointType m_eType;
+	std::string m_sId;
 
 	Body* m_pxBodyA;
 	Body* m_pxBodyB;
@@ -25,6 +28,9 @@ public:
 	BodyJoint();
 	~BodyJoint();
 
+	void SetId(const std::string& id);
+	const std::string& GetId();
+	
 	void Join(Body& bodya, const CIwFVec2& porta, Body& bodyb, const CIwFVec2& portb, eJointType jointtype);
 	void Separate();
 

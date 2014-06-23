@@ -2,7 +2,7 @@
 [Game]
 ####################################################
 showstats=1
-showshapes=0
+showshapes=1
 unlockall=1
 
 resourceheapsize=12		# in megabytes
@@ -54,7 +54,7 @@ MYAPP=1
 ####################################################
 [S3E]
 ####################################################
-MemSize=14400000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
+MemSize=18000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
 MemSizeDebug=38000000		# debug / resource builder
 
 SplashscreenBkR=0

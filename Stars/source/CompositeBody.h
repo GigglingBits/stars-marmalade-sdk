@@ -12,7 +12,7 @@ private:
 	typedef std::map<std::string, Body*> ChildList;
 	ChildList m_xChildList;
 
-	typedef CIwList<BodyJoint*> JointList;
+	typedef std::map<std::string, BodyJoint> JointList;
 	JointList m_xJointList;
 
 	struct BodyNode {
@@ -28,8 +28,10 @@ public:
 
 	void AddChild(const std::string& childid, const std::string& bodyid);
 	Body* GetChild(const std::string& childid);
+	void RemoveChild(const std::string& childid);
 
 	void AddJoint(const std::string& jointid, const std::string& childaa, const std::string& porta, const std::string& childb, const std::string& portb, BodyJoint::eJointType jointtype);
+	void RemoveJoint(const std::string&jointid);
 
 	virtual void SetPosition(const CIwFVec2& position, float angle);
 	virtual void SetSpeed(const CIwFVec2& vector);
@@ -39,7 +41,7 @@ public:
 	virtual void SetGravityScale(float scale);
 
 private:
-	void AddChild(Body* body, BodyJoint* joint);
+	void AddChild(Body* body);
 	void DestroyChild(Body* body);
 
 	void DestroyJoints();

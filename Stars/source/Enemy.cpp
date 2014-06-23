@@ -3,8 +3,8 @@
 #include "FactoryManager.h"
 
 Enemy::Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
-	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL), m_bKnockedOut(false) {
-	SetGravityScale(0.0f);
+	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL), m_bKnockedOut(false), m_bNeedDetachSledge(false) {
+	AttachSledge();
 }
 
 const char* Enemy::GetTypeName() {
@@ -19,14 +19,19 @@ const char* Enemy::TypeName() {
 void Enemy::KnockOut() {
 	EnableCollisions(false);
 	EnableRotation(true);
-	
-	CIwFVec2 impulse(0.0f, 2.0f);
-	impulse *= GetMass();
-	SetImpulse(impulse, 5.0f);
-	
-	SetGravityScale(1.0f);
-	
+
+	m_bNeedDetachSledge = true;
 	m_bKnockedOut = true;
+}
+
+void Enemy::AttachSledge() {
+	AddChild(ENEMY_SLEDGE_CHILD, ENEMY_SLEDGE_BODY);
+	AddJoint(ENEMY_SLEDGE_JOINT, "", "", ENEMY_SLEDGE_CHILD, "", BodyJoint::eJointTypeWeld);
+}
+
+void Enemy::DetachSledge() {
+	// RemoveJoint(ENEMY_SLEDGE_JOINT); // joint will be implicitly removed
+	RemoveChild(ENEMY_SLEDGE_CHILD);
 }
 
 void Enemy::OnColliding(Body& body) {
@@ -54,6 +59,11 @@ void Enemy::OnChildColliding(Body& child, Body& body) {
 void Enemy::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 	CompositeBody::OnUpdate(frame);
+	
+	if (m_bNeedDetachSledge) {
+		DetachSledge();
+		m_bNeedDetachSledge = false;
+	}
 	
 	if (!m_pxParticles) {
 		m_pxParticles = new ParticleSystem(FactoryManager::GetTextureFactory().GetConfig("particle_white_star"), CIwFVec2(0.0f, 0.0f), "", "");

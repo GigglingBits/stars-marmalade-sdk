@@ -73,7 +73,6 @@ std::string BodyFactory::PopulateConfig(TiXmlElement* node, BodyTemplate& conf) 
 	IwAssertMsg(MYAPP, FactoryManager::GetTextureFactory().ConfigExists(conf.GetTextureId()), ("No texture '%s' could be found. It is referenced by body '%s'.", texture.c_str(), id.c_str()));
 
 	// add ports to body
-	conf.AddPort("", CIwFVec2(0.0f, 0.0f)); // origin port
 	if (TiXmlElement* portnode = node->FirstChildElement("port")) {
 		do {
 			std::string portid((pc = (char*)portnode->Attribute("id")) ? pc : GenerateUniqueId((long)portnode));
