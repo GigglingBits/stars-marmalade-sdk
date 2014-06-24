@@ -19,6 +19,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xPausePanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
+	m_iStarReviveDelay(-1),
 	m_xBackgroundClouds(m_xGame),
 	m_xBannerRect(0, 0, 0, 0) {
 
@@ -171,6 +172,22 @@ bool Level::IsPaused() {
 	return m_bIsPaused;
 }
 
+void Level::ReviveStar(uint16 frametime) {
+	if (m_iStarReviveDelay >= 0) {
+		// count down
+		m_iStarReviveDelay -= frametime;
+		if (m_iStarReviveDelay < 0 && !m_xGame.GetStar()) {
+			// create star when 0 is reached
+			CreateStar();
+			ShowStar();
+			m_iStarReviveDelay = -1;
+		}
+	} else if (!m_xGame.GetStar()) {
+		// star not present; start the countdown
+		m_iStarReviveDelay = Configuration::GetInstance().StarBirthDelay;
+	}
+}
+
 void Level::HideStar() {
 	IwTrace(MYAPP, ("Hiding star"));
 	SetStarAnchor(GetStarHidePosition());
@@ -183,12 +200,7 @@ void Level::ShowStar() {
 
 void Level::SetStarAnchor(const CIwFVec2& pos) {
 	if (Star* star = m_xGame.GetStar()) {
-		// adjust retraction line
 		star->SetAnchorLine(pos.x);
-		// move fast
-		std::vector<CIwFVec2> path;
-		path.push_back(pos);
-		star->FollowPath(path);
 	}
 }
 
@@ -312,6 +324,9 @@ void Level::OnUpdate(const FrameData& frame) {
 	if (!m_bIsSetteling) {
 		m_xEventTimer.Update(frame.GetSimulatedDurationMs());
 	}
+
+	// revive star, if it has died
+	ReviveStar(frame.GetSimulatedDurationMs());
 	
 	// update game logic (create new, remove dead, etc...)
 	m_xGame.Update(frame);

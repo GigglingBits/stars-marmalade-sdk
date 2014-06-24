@@ -24,6 +24,8 @@ public:
 	double MaxVisibleWorldSize;
 	double WorldMargin;
 
+	int StarBirthDelay;
+	
 	double BuffSpeed;
 	int BuffThreshold;
 	

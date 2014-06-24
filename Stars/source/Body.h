@@ -22,6 +22,7 @@ private:
 	bool m_bIsDynamic;
 
 	bool m_bCanDrag;
+	bool m_bEndDragging;
 	b2MouseJoint* m_pxDragHandle;
 
 	BodyHealth m_xHealth;

@@ -55,6 +55,9 @@ public:
 	void Add(Sprite* sprite);
 	void Add(Body* body);
 	
+	void RegisterStar(Star* star);
+	void UnregisterStar();
+	
 	Star* GetStar();
 	Sprite* FindSprite(const std::string& id);
 
@@ -112,6 +115,7 @@ private:
 	void EmitBuff(const CIwFVec2& pos);
 	
 	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
+	void StarKilledEventHandler(const Star& sender, const int& args);
 	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
 	void BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);

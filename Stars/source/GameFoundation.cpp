@@ -76,12 +76,23 @@ bool GameFoundation::IsGameGoing() {
 	return false;
 }
 
+void GameFoundation::RegisterStar(Star* star) {
+	m_pxStar = star;
+	m_pxStar->Killed.AddListener(this, &GameFoundation::StarKilledEventHandler);
+	m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
+}
+
+void GameFoundation::UnregisterStar() {
+	m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
+	m_pxStar->Killed.RemoveListener(this, &GameFoundation::StarKilledEventHandler);
+	m_pxStar = NULL;
+}
+
 void GameFoundation::Add(Body* body) {
 	// indexing of star
 	if (body->GetTypeName() == Star::TypeName()) {
 		IwAssertMsg(MYAPP, !m_pxStar, ("There seems to be a star already. There should by not more than one star at any given time."));
-		m_pxStar = (Star*)body;
-		m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
+		RegisterStar((Star*)body);
 	} else if (Buff* buff = dynamic_cast<Buff*>(body)) {
 		buff->Collected.AddListener(this, &GameFoundation::BuffCollectedEventHandler);
 	}
@@ -143,8 +154,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 		bool outofbounds = CheckOutOfUniverse(sprite->GetPosition());
 		if (outofbounds || sprite->CanDispose()) {
 			if (m_pxStar == sprite) {
-				m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
-				m_pxStar = NULL;
+				UnregisterStar();
 			}
 			if (Body* body = dynamic_cast<Body*>(sprite)) {
 				body->EmitBuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
@@ -370,6 +380,10 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 			break;
 		}
 	}
+}
+
+void GameFoundation::StarKilledEventHandler(const Star& sender, const int& args) {
+	UnregisterStar();
 }
 
 void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args) {

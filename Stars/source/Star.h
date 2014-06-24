@@ -42,9 +42,10 @@ public:
 	};
 	
 protected:
+	class RisingState;
 	class RetractingState;
 	class FollowState;
-	class RecoverState;
+	class FallingState;
 
 	class PeacefulState;
 	class BlockState;
@@ -118,6 +119,8 @@ public:
 		CIwFVec2 position;
 	};
 	MulticastEvent<Star, DustEventArgs> DustEvent;
+
+	MulticastEvent<Star, int> Killed;
 };
 
 #endif

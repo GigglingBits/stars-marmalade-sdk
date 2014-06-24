@@ -54,7 +54,7 @@
 		</body>
 		
 		<!-- gameplay -->
-		<body id="star" type="star" resilience="0.8" revolve="0" drag="1">
+		<body id="star" type="star" resilience="0.8" revolve="0" drag="1" collide="0">
 			<shape type="circle" width="1.5" />
 			<port id="center" x="0.0" y="0.0" />
 			<fixture friction="0.0" restitution="2.0" density="1.0" />

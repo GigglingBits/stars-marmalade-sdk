@@ -4,6 +4,17 @@
 #include "Star.h"
 
 /////////////////////////////////////////////////////////////
+// Rising
+/////////////////////////////////////////////////////////////
+class Star::RisingState : public Star::MotionStateBase {
+public:
+	RisingState(Star& context) : MotionStateBase(context) {};
+	virtual void Initialize();
+	virtual void FollowPath();
+	virtual void Update(uint16 timestep);
+};
+
+/////////////////////////////////////////////////////////////
 // Retracting
 /////////////////////////////////////////////////////////////
 class Star::RetractingState : public Star::MotionStateBase {
@@ -16,7 +27,7 @@ public:
 };
 
 /////////////////////////////////////////////////////////////
-// Follow path
+// Following path
 /////////////////////////////////////////////////////////////
 class Star::FollowState : public Star::MotionStateBase {
 public:
@@ -28,17 +39,12 @@ public:
 };
 
 /////////////////////////////////////////////////////////////
-// Recover
+// Falling
 /////////////////////////////////////////////////////////////
-class Star::RecoverState : public Star::MotionStateBase {
-private:
-	uint32 m_uiRemainingTime;
-	
+class Star::FallingState : public Star::MotionStateBase {
 public:
-	RecoverState(Star& context) : MotionStateBase(context), m_uiRemainingTime(0) {};
+	FallingState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
-	virtual void FollowPath();
-	virtual void Update(uint16 timestep);
 };
 
 #endif

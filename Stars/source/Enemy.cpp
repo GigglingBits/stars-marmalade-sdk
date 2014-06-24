@@ -18,7 +18,6 @@ const char* Enemy::TypeName() {
 
 void Enemy::KnockOut() {
 	EnableCollisions(false);
-	EnableRotation(true);
 
 	m_bNeedDetachSledge = true;
 	m_bKnockedOut = true;

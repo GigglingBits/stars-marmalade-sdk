@@ -67,6 +67,8 @@ private:
 	bool m_bIsPaused;
 	bool m_bIsSetteling;
 	
+	int m_iStarReviveDelay;
+	
 	LevelPausedPanel m_xPausePanel;
 	Hud m_xHud;
 
@@ -97,6 +99,7 @@ protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
+	void ReviveStar(uint16 frametime);
 	void CreateStar();
 
 	void CreateHud();

@@ -27,8 +27,9 @@ Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	// for texture tracking
 	m_iLastHealthValue = m_xHealth.GetHealthValue();
 
-	// show different texture
+	// drag handling
 	m_bCanDrag = false;
+	m_bEndDragging = false;
 	m_pxDragHandle = NULL;
 
 	// set the shape for initial rendering
@@ -213,10 +214,7 @@ void Body::MoveDragging(const CIwFVec2& target) {
 }
 
 void Body::EndDragging() {
-	if (m_pxDragHandle) {
-		m_pxBody->GetWorld()->DestroyJoint(m_pxDragHandle);
-		m_pxDragHandle = NULL;
-	}
+	m_bEndDragging = true;
 }
 
 bool Body::HitTest(const CIwFVec2& position) {
@@ -254,6 +252,12 @@ void Body::OnColliding(Body& body) {
 
 void Body::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
+	if (m_bEndDragging && m_pxDragHandle) {
+		m_pxBody->GetWorld()->DestroyJoint(m_pxDragHandle);
+		m_pxDragHandle = NULL;
+		m_bEndDragging = false;
+	}
+
 	Sprite::OnUpdate(frame);
 
 	// healh changed?

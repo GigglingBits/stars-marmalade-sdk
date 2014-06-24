@@ -15,7 +15,7 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 
 	SetGravityScale(0.0f);
 		
-	SetState(new RetractingState(*this));
+	SetState(new RisingState(*this));
 	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	

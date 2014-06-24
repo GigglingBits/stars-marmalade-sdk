@@ -8,15 +8,49 @@
 #include "Debug.h"
 
 /////////////////////////////////////////////////////////////
+// Rising
+/////////////////////////////////////////////////////////////
+void Star::RisingState::Initialize() {
+	m_rxContext.EnableCollisions(false);
+	m_rxContext.SetMotionTextureFrame("idle");
+	m_rxContext.DisableParticles();
+	
+	m_rxContext.GetBody().SetLinearDamping(5.0f);
+	
+	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
+	dragtarget.x = m_rxContext.m_fAnchorLine;
+	m_rxContext.MoveDragging(dragtarget);
+
+	m_rxContext.m_bAutoOrient = true;
+}
+
+void Star::RisingState::FollowPath() {
+	m_rxContext.SetState(new FollowState(m_rxContext));
+}
+
+void Star::RisingState::Update(uint16 timestep) {
+	// balance the drag force
+	if (m_rxContext.IsDragging()) {
+		/*
+		 float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
+		 float force = (distance > 1.0f ? 1.0f + (distance / 10.0f) : distance) * 5.0f * m_rxContext.GetMass();
+		 m_rxContext.SetDragForce(force);
+		 */
+		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
+		m_rxContext.SetDragForce(distance * 100.0f * m_rxContext.GetMass());
+	}
+}
+
+/////////////////////////////////////////////////////////////
 // Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
-	//m_rxContext.EnableCollisions(true);
+	m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
-
+	
 	m_rxContext.GetBody().SetLinearDamping(5.0f);
-
+	
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
@@ -48,7 +82,7 @@ void Star::RetractingState::Collide(Body& body) {
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
 		m_rxContext.m_xPath.ClearPath();
-		m_rxContext.SetState(new RecoverState(m_rxContext));
+		m_rxContext.SetState(new FallingState(m_rxContext));
 	} else {
 		; // unhandled collision....
 	}
@@ -64,10 +98,10 @@ void Star::RetractingState::Update(uint16 timestep) {
 }
 
 /////////////////////////////////////////////////////////////
-// Follow
+// Following path
 /////////////////////////////////////////////////////////////
 void Star::FollowState::Initialize() {
-	//m_rxContext.EnableCollisions(true);
+	m_rxContext.EnableCollisions(true);
 	m_rxContext.SetMotionTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
@@ -100,7 +134,7 @@ void Star::FollowState::Collide(Body& body) {
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
 		m_rxContext.m_xPath.ClearPath();
-		m_rxContext.SetState(new RecoverState(m_rxContext));
+		m_rxContext.SetState(new FallingState(m_rxContext));
 	} else {
 		; // unhandled collision....
 	}
@@ -139,40 +173,20 @@ void Star::FollowState::Update(uint16 timestep) {
 }
 
 /////////////////////////////////////////////////////////////
-// Recover
+// Falling
 /////////////////////////////////////////////////////////////
-void Star::RecoverState::Initialize() {
-	//m_rxContext.EnableCollisions(false);
+void Star::FallingState::Initialize() {
+	m_rxContext.EnableCollisions(false);
 	m_rxContext.SetMotionTextureFrame("recover");
 	m_rxContext.DisableParticles();
 
-	m_rxContext.GetBody().SetLinearDamping(5.0f);
+	m_rxContext.GetBody().SetLinearDamping(1.0f);
+	m_rxContext.SetDragForce(0.0f);
 
-	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
-	dragtarget.x = m_rxContext.m_fAnchorLine;
-	m_rxContext.MoveDragging(dragtarget);
-	
-	m_uiRemainingTime = 2000; // sleep for 2 seconds
-	
+	m_rxContext.SetGravityScale(1.0f);
+	m_rxContext.GetBody().SetLinearDamping(0.0f);
+
 	m_rxContext.m_bAutoOrient = true;
-}
-
-void Star::RecoverState::FollowPath() {
-	m_rxContext.SetState(new FollowState(m_rxContext));
-}
-
-void Star::RecoverState::Update(uint16 timestep) {
-	// balance the drag force
-	if (m_rxContext.IsDragging()) {
-		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
-		float force = (distance > 1.0f ? 1.0f + (distance / 10.0f) : distance) * 5.0f * m_rxContext.GetMass();
-		m_rxContext.SetDragForce(force);
-	}
-
-	// is recovery time over?
-	if (timestep < m_uiRemainingTime) {
-		m_uiRemainingTime -= timestep;
-	} else {
-		m_rxContext.SetState(new RetractingState(m_rxContext));
-	}
+	
+	m_rxContext.Killed.Invoke(m_rxContext, 0);
 }

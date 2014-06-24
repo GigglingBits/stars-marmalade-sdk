@@ -32,6 +32,12 @@ Configuration::Configuration() {
 		ResourceHeapSize = 0;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "starbirthdelay", &tmpint)) {
+		StarBirthDelay = tmpint;
+	} else {
+		StarBirthDelay = 0;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {
 		BodiesFile = tmpstr;
 	} else {
