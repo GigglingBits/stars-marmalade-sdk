@@ -6,9 +6,9 @@
 /////////////////////////////////////////////////////////////
 // Rising
 /////////////////////////////////////////////////////////////
-class Star::RisingState : public Star::MotionStateBase {
+class Star::PassiveState : public Star::MotionStateBase {
 public:
-	RisingState(Star& context) : MotionStateBase(context) {};
+	PassiveState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
 	virtual void FollowPath();
 	virtual void Update(uint16 timestep);
@@ -21,6 +21,7 @@ class Star::RetractingState : public Star::MotionStateBase {
 public:
 	RetractingState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
+	virtual void Passify();
 	virtual void FollowPath();
 	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);
@@ -33,6 +34,7 @@ class Star::FollowState : public Star::MotionStateBase {
 public:
 	FollowState(Star& context) : MotionStateBase(context) {};
 	virtual void Initialize();
+	virtual void Passify();
 	virtual void FollowPath();
 	virtual void Collide(Body& body);
 	virtual void Update(uint16 timestep);

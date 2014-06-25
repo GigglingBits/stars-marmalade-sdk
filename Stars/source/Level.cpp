@@ -201,6 +201,7 @@ void Level::ShowStar() {
 void Level::SetStarAnchor(const CIwFVec2& pos) {
 	if (Star* star = m_xGame.GetStar()) {
 		star->SetAnchorLine(pos.x);
+		star->Passify();
 	}
 }
 

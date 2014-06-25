@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////
 // Rising
 /////////////////////////////////////////////////////////////
-void Star::RisingState::Initialize() {
+void Star::PassiveState::Initialize() {
 	m_rxContext.EnableCollisions(false);
 	m_rxContext.SetMotionTextureFrame("idle");
 	m_rxContext.DisableParticles();
@@ -24,20 +24,15 @@ void Star::RisingState::Initialize() {
 	m_rxContext.m_bAutoOrient = true;
 }
 
-void Star::RisingState::FollowPath() {
+void Star::PassiveState::FollowPath() {
 	m_rxContext.SetState(new FollowState(m_rxContext));
 }
 
-void Star::RisingState::Update(uint16 timestep) {
+void Star::PassiveState::Update(uint16 timestep) {
 	// balance the drag force
 	if (m_rxContext.IsDragging()) {
-		/*
-		 float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
-		 float force = (distance > 1.0f ? 1.0f + (distance / 10.0f) : distance) * 5.0f * m_rxContext.GetMass();
-		 m_rxContext.SetDragForce(force);
-		 */
 		float distance = (m_rxContext.GetDragTarget() - m_rxContext.GetPosition()).GetLength();
-		m_rxContext.SetDragForce(distance * 100.0f * m_rxContext.GetMass());
+		m_rxContext.SetDragForce(distance * 10.0f * m_rxContext.GetMass());
 	}
 }
 
@@ -56,6 +51,10 @@ void Star::RetractingState::Initialize() {
 	m_rxContext.MoveDragging(dragtarget);
 	
 	m_rxContext.m_bAutoOrient = false;
+}
+
+void Star::RetractingState::Passify() {
+	m_rxContext.SetState(new PassiveState(m_rxContext));
 }
 
 void Star::RetractingState::FollowPath() {
@@ -107,6 +106,10 @@ void Star::FollowState::Initialize() {
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
 	
 	m_rxContext.m_bAutoOrient = true;
+}
+
+void Star::FollowState::Passify() {
+	m_rxContext.SetState(new PassiveState(m_rxContext));
 }
 
 void Star::FollowState::FollowPath() {

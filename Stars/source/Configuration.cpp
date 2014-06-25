@@ -98,6 +98,12 @@ Configuration::Configuration() {
 		WorldMargin = 5.0f;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "gravity", tmpstr)) {
+		Gravity = atof(tmpstr);
+	} else {
+		Gravity = -9.81f;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffspeed", tmpstr)) {
 		BuffSpeed = atof(tmpstr);
 	} else {

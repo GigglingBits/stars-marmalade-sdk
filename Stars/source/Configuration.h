@@ -23,6 +23,7 @@ public:
 
 	double MaxVisibleWorldSize;
 	double WorldMargin;
+	double Gravity;
 
 	int StarBirthDelay;
 	

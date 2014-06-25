@@ -15,7 +15,7 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 
 	SetGravityScale(0.0f);
 		
-	SetState(new RisingState(*this));
+	SetState(new PassiveState(*this));
 	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	
@@ -48,6 +48,10 @@ const char* Star::TypeName() {
 
 void Star::AutoOrientTexture(bool allow) {
 	m_bAutoOrient = allow;
+}
+
+void Star::Passify() {
+	GetMotionState().Passify();
 }
 
 void Star::OnColliding(Body& body) {

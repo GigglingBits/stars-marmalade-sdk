@@ -18,7 +18,8 @@ public:
 		
 		virtual void Initialize() {};
 		virtual void FollowPath() {};
-		
+
+		virtual void Passify() {};
 		virtual void Collide(Body& body) {};
 		virtual void Update(uint16 timestep) {};
 	};
@@ -42,7 +43,7 @@ public:
 	};
 	
 protected:
-	class RisingState;
+	class PassiveState;
 	class RetractingState;
 	class FollowState;
 	class FallingState;
@@ -78,6 +79,8 @@ public:
 
 	void SetAnchorLine(float xpos);
 	void FollowPath(const std::vector<CIwFVec2>& path);
+	
+	void Passify();
 	
 	void BeginBlock();
 	void EndBlock();

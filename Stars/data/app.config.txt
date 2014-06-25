@@ -18,6 +18,7 @@ resourceheapsize		Size of mem bucket used for loading resources (in MB)
 
 maxvisibleworldsize		Number of meters that are visible via the viewport. Limits the zoom-out.
 worldmargin				Number of meters of margin around the world. Limits the pan-out.
+gravity					Acceleration in m/s2 pointing upwards
 
 starbirthdelay			Number of milliseconds before a new star is born
 
