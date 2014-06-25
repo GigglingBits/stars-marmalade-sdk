@@ -1,0 +1,20 @@
+
+skeleton.png
+size: 321,173
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+collision_01
+  rotate: false
+  xy: 2, 2
+  size: 178, 171
+  orig: 178, 171
+  offset: 0, 0
+  index: -1
+collision_05
+  rotate: false
+  xy: 182, 4
+  size: 139, 169
+  orig: 139, 169
+  offset: 0, 0
+  index: -1
