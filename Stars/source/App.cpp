@@ -128,6 +128,8 @@ void App::Render() {
 		const int margin = 3;
 		const int height = 25;
 		CIwRect rect(margin, margin, screensize.x - (2 * margin), height);
+
+		rect.y += height;
 		PrintFps(rect,
 			 m_xFrameData.GetAvgRealDurationMs(),
 			 m_xFrameData.GetAvgSimulatedDurationMs(),
