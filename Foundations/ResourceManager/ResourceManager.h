@@ -3,8 +3,11 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "IwResGroup.h"
+
+#define RESOURCEMANAGER_FONT_GROUP_NAME "_fonts"
 
 class ResourceManager {
 private:
@@ -24,12 +27,18 @@ public:
 	static ResourceManager& GetInstance();
 	
 private:
+	CIwResGroup* m_pxFontGroup;
+
 	CIwResGroup* m_pxPermGroup;
 	
 	CIwResGroup* m_pxTempGroup;
 	std::string m_sTempGroup;
+
+	std::map<std::string, std::vector<char> > m_xFontDataCache;
 	
 public:
+	void LoadFontFileToResource(const std::string& ttffilename, const std::string& resname, int pointsize);
+	
 	void LoadPermament(const std::string& groupfile);
 
 	void LoadTemporary(const std::string& groupfile);
@@ -38,6 +47,8 @@ public:
 private:
 	void LoadPermamentInt(const std::string& groupfile);
 	void LoadTemporaryInt(const std::string& groupfile);
+	
+	std::vector<char>& GetFontData(const std::string& ttffilename);
 };
 
 #endif

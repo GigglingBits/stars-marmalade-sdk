@@ -67,7 +67,19 @@ Configuration::Configuration() {
 	} else {
 		LevelSong = "music/levelsong.mp3";
 	}
-
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "appfont", tmpstr)) {
+		AppFont = tmpstr;
+	} else {
+		AppFont = "fonts/app.ttf";
+	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "sysfont", tmpstr)) {
+		SysFont = tmpstr;
+	} else {
+		SysFont = "fonts/sys.ttf";
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httpbodies", tmpstr)) {
 		HttpBodiesFile = tmpstr;
 	} else {

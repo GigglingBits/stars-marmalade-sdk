@@ -40,6 +40,9 @@ intromovie				Name of the movie file containing the intro movie
 menusong				Name of the sound file containing the menu song
 levelsong				Name of the sound file containing the level song
 
+appfont					TTF font used in the app
+sysfont					TTF font used for system messages
+
 settingsfile			Name of the file to be used for storing user settings
 
 flurrykey				Flurry API key

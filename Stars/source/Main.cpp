@@ -125,6 +125,10 @@ void Initialize() {
 	World::SetDefaultGravity(0.0f, Configuration::GetInstance().Gravity);
 
 	WriteAndShowLog("Loading resources...");
+	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_small", 10);
+	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_normal", 22);
+	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_large", 32);
+	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().SysFont, "font_system", 5);
 	ResourceManager::GetInstance().LoadPermament("base.group");
 	
 	std::srand((unsigned int)s3eTimerGetUST());

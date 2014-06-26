@@ -4,7 +4,6 @@ CIwResGroup
 	
 	shared true
 
-	./fonts/fonts.group
 	./sprites/sprites.group
 	./sounds/sounds.group
 	./spine/spine.group

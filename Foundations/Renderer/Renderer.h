@@ -53,7 +53,7 @@ public:
 	void SetRenderingLayer(RenderingLayer renderinglayer);
 
 	void SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system);
-
+	
 public:
 	// drawing to world (world coordinates)
 	void Draw(VertexStreamWorld& shape, Texture& texture);

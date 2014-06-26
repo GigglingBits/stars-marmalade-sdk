@@ -40,6 +40,9 @@ public:
 	std::string MenuSong;
 	std::string LevelSong;
 
+	std::string AppFont;
+	std::string SysFont;
+	
 	std::string HttpBodiesFile;
 	std::string HttpLevelsFile;
 	
