@@ -126,6 +126,8 @@ files {
 	HudText.cpp
 	HudNumber.h
 	HudNumber.cpp
+	HudBuffPanel.h
+	HudBuffPanel.cpp
 	HudBuffButton.h
 	HudBuffButton.cpp
 

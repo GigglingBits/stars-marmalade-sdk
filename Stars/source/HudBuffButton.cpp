@@ -9,36 +9,36 @@
 #include "Debug.h"
 #include "IwDebug.h"
 
-HudBuffButton::HudBuffButton(const std::string& skin, ButtonCommandId cmdid, s3eKey key) :
-Button(cmdid, key, -1),
-m_sSkin(skin),
-m_iFillPercent(0) {
+HudBuffButton::HudBuffButton(GameFoundation& game, GameFoundation::BuffType bt) :
+Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_rxGame(game), m_bIsUsed(false) {
 	SetHideWhenDisabled(false);
-	UpdateBehavior();
+	SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
 }
 
-void HudBuffButton::SetCount(int count) {
-	int buffthreshold = Configuration::GetInstance().BuffThreshold;
-	int fillpercent = count * 100 / buffthreshold;
-	fillpercent = std::max<int>(fillpercent, 0);
-	fillpercent = std::min<int>(fillpercent, 100);
-	m_iFillPercent = fillpercent;
-
-	UpdateBehavior();
-}
-
-void HudBuffButton::UpdateBehavior() {
-	// locking
-	SetEnabled(m_iFillPercent >= 100);
+HudBuffButton::~HudBuffButton() {
 	
-	// text
-	if (m_iFillPercent > 0) {
-		std::ostringstream oss;
-		oss << m_iFillPercent << "%";
-		SetText(oss.str(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-	} else {
-		SetText("");
+}
+
+bool HudBuffButton::CanUnload() {
+	return m_bIsUsed;
+}
+
+GameFoundation::BuffType HudBuffButton::GetBuffType() {
+	return (GameFoundation::BuffType)GetUserData();
+}
+
+std::string HudBuffButton::GetSkinName(GameFoundation::BuffType bt) {
+	switch (bt) {
+		case GameFoundation::eBuffTypeMagnet:
+			return "magnet";
+		case GameFoundation::eBuffTypeShield:
+			return "shield";
+		case GameFoundation::eBuffTypeShoot:
+			return "shoot";
+		default:
+			IwAssertMsg(MYAPP, false, ("Buff not known: %i. It will be ignored.", bt));
 	}
+	return "";
 }
 
 void HudBuffButton::OnTextureLoaded(Texture& texture) {
@@ -50,13 +50,33 @@ void HudBuffButton::OnTextureLoaded(Texture& texture) {
 	}
 	
 	if (SpineAnimation* skeleton = texture.GetSkeleton()) {
-		skeleton->SetSkin(m_sSkin);
+		skeleton->SetSkin(GetSkinName(GetBuffType()));
 		skeleton->SetAnimation("button");
 	}
 	
 	Button::OnTextureLoaded(texture);
 }
 
-void HudBuffButton::OnRender(Renderer& renderer, const FrameData& frame) {
-	Button::OnRender(renderer, frame);
+void HudBuffButton::OnStateChanged(bool enabled, bool pressed) {
+	if (!enabled || !pressed) {
+		return;
+	}
+	
+	GameFoundation::BuffType bt = GetBuffType();
+	switch (bt) {
+		case GameFoundation::eBuffTypeMagnet:
+			m_rxGame.ActivateMagnetBuff();
+			break;
+		case GameFoundation::eBuffTypeShield:
+			m_rxGame.ActivateShieldBuff();
+			break;
+		case GameFoundation::eBuffTypeShoot:
+			m_rxGame.ActivateShootBuff();
+			break;
+		default:
+			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
+			break;
+	}
+	
+	m_bIsUsed = true;
 }

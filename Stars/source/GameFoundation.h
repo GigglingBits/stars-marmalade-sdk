@@ -41,9 +41,7 @@ private:
 	std::queue<BodyInfo> m_xBodyCreationQueue;
 
 	Star* m_pxStar;
-
 	DustCounter m_xDust;
-	BuffContainer m_xBuffCounter;
 	
 public:
 	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
@@ -132,7 +130,7 @@ public:
 	};
 	MulticastEvent<GameFoundation, SpriteRemovedArgs> SpriteRemoved;
 
-	MulticastEvent<GameFoundation, BuffContainer> BuffCountChanged;
+	MulticastEvent<GameFoundation, BuffType> BuffCollected;
 };
 
 #endif

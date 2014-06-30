@@ -2,23 +2,26 @@
 #define __HUDBUFFBUTTON_H__
 
 #include "Button.h"
+#include "GameFoundation.h"
 
 class HudBuffButton : public Button {
 private:
-	int m_iFillPercent;
-	std::string m_sSkin;
+	GameFoundation& m_rxGame;
+	bool m_bIsUsed;
 	
 public:
-	HudBuffButton(const std::string& skin, ButtonCommandId cmdid, s3eKey key);
-
-	void SetCount(int count);
+	HudBuffButton(GameFoundation& game, GameFoundation::BuffType bt);
+	~HudBuffButton();
 	
-private:
-	void UpdateBehavior();
+	bool CanUnload();
 	
 protected:
 	virtual void OnTextureLoaded(Texture& texture);
-	virtual void OnRender(Renderer& renderer, const FrameData& frame);
+	virtual void OnStateChanged(bool enabled, bool pressed);
+	
+private:
+	GameFoundation::BuffType GetBuffType();
+	std::string GetSkinName(GameFoundation::BuffType bt);
 };
 
 #endif

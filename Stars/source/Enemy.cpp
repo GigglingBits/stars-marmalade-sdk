@@ -47,8 +47,6 @@ void Enemy::OnChildColliding(Body& child, Body& body) {
 	if (!m_bKnockedOut && dynamic_cast<Star*>(&body)) {
 		KnockOut();
 		ShowEffect("star_collision");
-	
-		// todo: not all colisions should lead to buff emission
 		EmitBuff();
 	}
 	

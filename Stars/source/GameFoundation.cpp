@@ -364,17 +364,17 @@ void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventA
 			CommitDust(args.position);
 			break;
 		}
-			
+
 		case Star::eDustEventTypeCollect: {
 			EnqueueDust(args.position, args.amount);
 			break;
 		}
-			
+
 		case Star::eDustEventTypeCommit: {
 			CommitDust(args.position);
 			break;
 		}
-				
+
 		case Star::eDustEventTypeRollback: {
 			CancelDust(args.position);
 			break;
@@ -406,11 +406,8 @@ void GameFoundation::BuffCollectedEventHandler(const Buff& sender, const Buff::B
 		return;
 	}
 	
-	// increment buff counter
-	m_xBuffCounter[bt]++;
-
 	// notify the
-	BuffCountChanged.Invoke(*this, BuffContainer(m_xBuffCounter));
+	BuffCollected.Invoke(*this, bt);
 }
 
 void GameFoundation::EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args) {
