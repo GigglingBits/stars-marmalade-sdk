@@ -39,7 +39,7 @@ CIwSoundSpec
 	name		"LetsGo"
 	data		"letsgo"
 	vol 		0.8
-	pitchMin	0.8
+	pitchMin	1.0
 	pitchMax	1.2
 }
 

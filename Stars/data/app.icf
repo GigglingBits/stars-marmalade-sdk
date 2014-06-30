@@ -1,17 +1,17 @@
 ####################################################
 [Game]
 ####################################################
-showstats=1
-showshapes=1
+showstats=0
+showshapes=0
 unlockall=1
 
 resourceheapsize=14		# in megabytes
 
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
-gravity=-20.0					# m/s2
+gravity=-15.0					# m/s2
 
-starbirthdelay=2200		# milliseconds
+starbirthdelay=1400		# milliseconds
 
 buffspeed=0.5			# meters per second
 buffthreshold=5			# 5 buffs needed to unlock the button
