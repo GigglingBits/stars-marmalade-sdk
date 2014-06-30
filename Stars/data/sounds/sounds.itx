@@ -27,9 +27,27 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
+	name		"StarFall"
+	data		"06081_man_falling_2"
+	vol 		0.7
+	pitchMin	1.3
+	pitchMax	1.5
+}
+
+CIwSoundSpec
+{
+	name		"LetsGo"
+	data		"letsgo"
+	vol 		0.8
+	pitchMin	0.8
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
 	name		"Pop"
 	data		"eat_01"
-	vol 		0.1
+	vol 		0.08
 	pitchMin	1.0
 	pitchMax	2.0
 }

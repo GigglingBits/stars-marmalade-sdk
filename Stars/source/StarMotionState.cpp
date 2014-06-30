@@ -13,6 +13,7 @@
 void Star::PassiveState::Initialize() {
 	m_rxContext.EnableCollisions(false);
 	m_rxContext.SetMotionTextureFrame("idle");
+	SoundEngine::GetInstance().PlaySoundEffect("LetsGo");
 	m_rxContext.DisableParticles();
 	
 	m_rxContext.GetBody().SetLinearDamping(5.0f);
@@ -181,6 +182,7 @@ void Star::FollowState::Update(uint16 timestep) {
 void Star::FallingState::Initialize() {
 	m_rxContext.EnableCollisions(false);
 	m_rxContext.SetMotionTextureFrame("recover");
+	SoundEngine::GetInstance().PlaySoundEffect("StarFall");
 	m_rxContext.DisableParticles();
 
 	m_rxContext.GetBody().SetLinearDamping(1.0f);
@@ -190,6 +192,9 @@ void Star::FallingState::Initialize() {
 	m_rxContext.GetBody().SetLinearDamping(0.0f);
 
 	m_rxContext.m_bAutoOrient = true;
+
+	
+	m_rxContext.SetImpulse(CIwFVec2(0.0f, 5.0f * m_rxContext.GetMass()), 5.0f);
 	
 	m_rxContext.Killed.Invoke(m_rxContext, 0);
 }
