@@ -1,0 +1,305 @@
+{
+"bones": [
+	{ "name": "root" },
+	{ "name": "enemy_01", "parent": "root", "length": 389.25, "x": -3.48, "y": -227.85, "rotation": 88.64 },
+	{ "name": "enemy_02", "parent": "root", "length": 152.99, "x": -250.12, "y": 234.78, "rotation": 128.43 },
+	{ "name": "meteor_R_01", "parent": "root", "length": 91.01, "x": 305.5, "y": 269.63, "rotation": -66.2 },
+	{ "name": "meteor_R_02", "parent": "root", "length": 41.43, "x": 230, "y": 294.79, "rotation": -37.37 },
+	{
+		"name": "meteor_button_01",
+		"parent": "root",
+		"length": 35.32,
+		"x": -94.4,
+		"y": -358.05,
+		"scaleX": 0.601,
+		"scaleY": 0.601,
+		"rotation": -99.38
+	},
+	{ "name": "meteor_button_02", "parent": "root", "length": 26.33, "x": 1.55, "y": -359.56, "rotation": -107.07 },
+	{ "name": "meteor_fire_L_01", "parent": "root", "length": 200.99, "x": -219.14, "y": -142.73, "rotation": -159.14 },
+	{ "name": "meteor_fire_L_02", "parent": "root", "length": 136.4, "x": -304.33, "y": -86.59, "rotation": -173.7 },
+	{ "name": "meteor_fire_R_01", "parent": "root", "length": 278.63, "x": 214.51, "y": -61.42, "rotation": -22.26 },
+	{ "name": "meteor_fire_R_02", "parent": "root", "length": 160.4, "x": 245.49, "y": -212.43, "rotation": -23.41 },
+	{ "name": "radar", "parent": "root", "length": 68.5, "x": 222.25, "y": -305.36, "rotation": -132.65 },
+	{ "name": "2", "parent": "enemy_02", "length": 68.74, "x": 26.86, "y": 89.9, "rotation": 19.1 },
+	{
+		"name": "3",
+		"parent": "enemy_02",
+		"length": 94.52,
+		"x": -22.03,
+		"y": 119.57,
+		"scaleX": 0.585,
+		"scaleY": 0.585,
+		"rotation": 35.63
+	}
+],
+"slots": [
+	{ "name": "_planet_template", "bone": "root" },
+	{ "name": "enemy_01", "bone": "enemy_02", "attachment": "enemy_01" },
+	{ "name": "enemy_012", "bone": "2", "attachment": "enemy_01" },
+	{ "name": "enemy_03", "bone": "3", "attachment": "enemy_01" },
+	{ "name": "meteor_fire_04", "bone": "meteor_fire_R_02", "attachment": "meteor_fire_04" },
+	{ "name": "meteor_fire_03", "bone": "meteor_fire_L_02", "attachment": "meteor_fire_03" },
+	{ "name": "meteor_02", "bone": "meteor_R_01", "attachment": "meteor_02" },
+	{ "name": "meteor_03", "bone": "meteor_R_02", "attachment": "meteor_03" },
+	{ "name": "meteor_04", "bone": "meteor_button_01", "attachment": "meteor_04" },
+	{ "name": "meteor_01", "bone": "meteor_button_02", "attachment": "meteor_01" },
+	{ "name": "root", "bone": "root", "attachment": "planetoffire" },
+	{ "name": "meteor_fire_01", "bone": "meteor_fire_R_01", "attachment": "meteor_fire_01" },
+	{ "name": "meteor_fire_02", "bone": "meteor_fire_L_01", "attachment": "meteor_fire_02" },
+	{ "name": "radar", "bone": "radar", "attachment": "radar" },
+	{ "name": "enemy_02", "bone": "enemy_01", "attachment": "enemy_02" }
+],
+"skins": {
+	"default": {
+		"_planet_template": {
+			"_template": { "x": 22, "width": 924, "height": 772 }
+		},
+		"enemy_01": {
+			"enemy_01": { "x": 72.94, "y": -21.79, "rotation": -128.43, "width": 218, "height": 184 }
+		},
+		"enemy_012": {
+			"enemy_01": { "x": 33.15, "y": -8.22, "scaleX": 0.398, "scaleY": 0.398, "rotation": -147.54, "width": 218, "height": 184 }
+		},
+		"enemy_02": {
+			"enemy_02": { "x": 160.35, "y": -4.46, "rotation": -88.64, "width": 449, "height": 494 }
+		},
+		"enemy_03": {
+			"enemy_01": { "rotation": -144.68, "width": 218, "height": 184 }
+		},
+		"meteor_01": {
+			"meteor_01": { "x": 12.73, "y": 2.67, "scaleX": 0.741, "scaleY": 0.741, "rotation": 107.07, "width": 33, "height": 34 }
+		},
+		"meteor_02": {
+			"meteor_02": { "x": 40.93, "y": -6.45, "rotation": 66.2, "width": 63, "height": 87 }
+		},
+		"meteor_03": {
+			"meteor_03": { "x": 13.38, "y": 5.76, "rotation": 37.37, "width": 45, "height": 40 }
+		},
+		"meteor_04": {
+			"meteor_04": { "x": 21.29, "y": 3.51, "rotation": 99.38, "width": 50, "height": 58 }
+		},
+		"meteor_fire_01": {
+			"meteor_fire_01": { "x": 128.91, "y": -7.08, "rotation": 22.26, "width": 307, "height": 162 }
+		},
+		"meteor_fire_02": {
+			"meteor_fire_02": { "x": 96.88, "y": 15.98, "rotation": 159.14, "width": 222, "height": 126 }
+		},
+		"meteor_fire_03": {
+			"meteor_fire_03": { "x": 47.35, "y": -0.5, "rotation": 173.7, "width": 175, "height": 92 }
+		},
+		"meteor_fire_04": {
+			"meteor_fire_04": { "x": 51.03, "y": 6.67, "rotation": 23.41, "width": 220, "height": 141 }
+		},
+		"radar": {
+			"radar": { "x": 40.29, "y": 6.67, "rotation": 132.65, "width": 88, "height": 92 }
+		},
+		"root": {
+			"planetoffire": { "x": -2, "y": -8, "width": 837, "height": 812 }
+		}
+	}
+},
+"animations": {
+	"interactive": {
+		"bones": {
+			"enemy_02": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2, "x": -12.02, "y": -19.53 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": -12.02, "y": -19.53 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10, "x": -12.02, "y": -19.53 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14.0333, "x": -12.02, "y": -19.53 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				]
+			},
+			"meteor_R_02": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 17.3333, "angle": 133.55 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 17.3333, "x": 109.71, "y": -130.76 }
+				]
+			},
+			"meteor_R_01": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 17.3333, "angle": 166.17 }
+				],
+				"translate": [
+					{ "time": 0, "x": 1.5, "y": 19.53 },
+					{ "time": 17.3333, "x": 73.64, "y": -208.91 }
+				]
+			},
+			"meteor_fire_R_01": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2.0333, "x": 38.03, "y": -17.05 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": 38.03, "y": -17.05 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10.0333, "x": 38.03, "y": -17.05 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14, "x": 38.03, "y": -17.05 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 2.0333, "x": 0.922, "y": 0.956 },
+					{ "time": 4, "x": 1, "y": 1 },
+					{ "time": 6, "x": 0.922, "y": 0.956 },
+					{ "time": 8, "x": 1, "y": 1 },
+					{ "time": 10.0333, "x": 0.922, "y": 0.956 },
+					{ "time": 12, "x": 1, "y": 1 },
+					{ "time": 14, "x": 0.922, "y": 0.956 },
+					{ "time": 17.3333, "x": 1, "y": 1 }
+				]
+			},
+			"meteor_fire_R_02": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2, "x": 18.03, "y": -10 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": 18.03, "y": -10 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10, "x": 18.03, "y": -10 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14, "x": 18.03, "y": -10 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 2, "x": 0.931, "y": 0.958 },
+					{ "time": 4, "x": 1, "y": 1 },
+					{ "time": 6, "x": 0.931, "y": 0.958 },
+					{ "time": 8, "x": 1, "y": 1 },
+					{ "time": 10, "x": 0.931, "y": 0.958 },
+					{ "time": 12, "x": 1, "y": 1 },
+					{ "time": 14, "x": 0.931, "y": 0.958 },
+					{ "time": 17.3333, "x": 1, "y": 1 }
+				]
+			},
+			"meteor_fire_L_01": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2, "x": -31.56, "y": -6.01 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": -31.56, "y": -6.01 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10, "x": -31.56, "y": -6.01 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14, "x": -31.56, "y": -6.01 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 2, "x": 0.924, "y": 0.957 },
+					{ "time": 4, "x": 1, "y": 1 },
+					{ "time": 6, "x": 0.924, "y": 0.957 },
+					{ "time": 8, "x": 1, "y": 1 },
+					{ "time": 10, "x": 0.924, "y": 0.957 },
+					{ "time": 12, "x": 1, "y": 1 },
+					{ "time": 14, "x": 0.924, "y": 0.957 },
+					{ "time": 17.3333, "x": 1, "y": 1 }
+				]
+			},
+			"meteor_fire_L_02": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2, "x": -13.52, "y": -9.01 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": -13.52, "y": -9.01 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10, "x": -13.52, "y": -9.01 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14, "x": -13.52, "y": -9.01 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 2, "x": 0.963, "y": 0.926 },
+					{ "time": 4, "x": 1, "y": 1 },
+					{ "time": 6, "x": 0.963, "y": 0.926 },
+					{ "time": 8, "x": 1, "y": 1 },
+					{ "time": 10, "x": 0.963, "y": 0.926 },
+					{ "time": 12, "x": 1, "y": 1 },
+					{ "time": 14, "x": 0.963, "y": 0.926 },
+					{ "time": 17.3333, "x": 1, "y": 1 }
+				]
+			},
+			"meteor_button_01": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 17.3333, "angle": 52.92 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 17.3333, "x": -93.18, "y": 36.07 }
+				]
+			},
+			"meteor_button_02": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 17.3333, "angle": 175.2 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 17.3333, "x": 117.23, "y": 18.03 }
+				]
+			},
+			"enemy_01": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 2, "x": 0, "y": 12.02 },
+					{ "time": 4, "x": 0, "y": 0 },
+					{ "time": 6, "x": 0, "y": 12.02 },
+					{ "time": 8, "x": 0, "y": 0 },
+					{ "time": 10, "x": 0, "y": 12.02 },
+					{ "time": 12, "x": 0, "y": 0 },
+					{ "time": 14, "x": 0, "y": 12.02 },
+					{ "time": 17.3333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 2, "x": 1.03, "y": 1.03 },
+					{ "time": 4, "x": 1, "y": 1 },
+					{ "time": 6, "x": 1.03, "y": 1.03 },
+					{ "time": 8, "x": 1, "y": 1 },
+					{ "time": 10, "x": 1.03, "y": 1.03 },
+					{ "time": 12, "x": 1, "y": 1 },
+					{ "time": 14, "x": 1.03, "y": 1.03 },
+					{ "time": 17.3333, "x": 1, "y": 1 }
+				]
+			},
+			"radar": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 15, "angle": 156.97 }
+				],
+				"translate": [
+					{ "time": 0, "x": -72.14, "y": 25.55 },
+					{ "time": 15, "x": -311.12, "y": 661.31 },
+					{ "time": 17.3333, "x": -269.03, "y": 593.68 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.767, "y": 0.767 },
+					{ "time": 15, "x": 0.936, "y": 0.936 },
+					{ "time": 17.3333, "x": 0.604, "y": 0.604 }
+				]
+			}
+		},
+		"draworder": [
+			{
+				"time": 15,
+				"offsets": [
+					{ "slot": "radar", "offset": -3 }
+				]
+			}
+		]
+	}
+}
+}

@@ -1,0 +1,104 @@
+
+theblueplanet.png
+size: 995,976
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+_planet_template
+  rotate: false
+  xy: 2, 17
+  size: 525, 454
+  orig: 525, 454
+  offset: 0, 0
+  index: -1
+blue_bird2
+  rotate: true
+  xy: 827, 475
+  size: 92, 63
+  orig: 92, 63
+  offset: 0, 0
+  index: -1
+blue_bird3
+  rotate: true
+  xy: 721, 667
+  size: 174, 154
+  orig: 174, 154
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 507, 843
+  size: 344, 133
+  orig: 344, 133
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 718, 569
+  size: 175, 96
+  orig: 175, 96
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: false
+  xy: 853, 896
+  size: 134, 80
+  orig: 134, 80
+  offset: 0, 0
+  index: -1
+earth
+  rotate: false
+  xy: 2, 473
+  size: 503, 503
+  orig: 529, 529
+  offset: 13, 14
+  index: -1
+red_bird1
+  rotate: false
+  xy: 507, 527
+  size: 209, 144
+  orig: 209, 144
+  offset: 0, 0
+  index: -1
+speed strips_blue
+  rotate: true
+  xy: 718, 475
+  size: 92, 107
+  orig: 129, 107
+  offset: 37, 0
+  index: -1
+speed strips_red
+  rotate: false
+  xy: 507, 673
+  size: 212, 168
+  orig: 268, 168
+  offset: 56, 0
+  index: -1
+wave1
+  rotate: false
+  xy: 507, 519
+  size: 38, 6
+  orig: 38, 6
+  offset: 0, 0
+  index: -1
+wave2
+  rotate: false
+  xy: 2, 2
+  size: 84, 13
+  orig: 84, 13
+  offset: 0, 0
+  index: -1
+wave4
+  rotate: false
+  xy: 853, 886
+  size: 48, 8
+  orig: 48, 8
+  offset: 0, 0
+  index: -1
+wave6
+  rotate: true
+  xy: 989, 936
+  size: 40, 6
+  orig: 40, 6
+  offset: 0, 0
+  index: -1

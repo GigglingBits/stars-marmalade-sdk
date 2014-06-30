@@ -1,0 +1,97 @@
+
+skeleton.png
+size: 1012,510
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+_template
+  rotate: true
+  xy: 2, 48
+  size: 462, 386
+  orig: 462, 386
+  offset: 0, 0
+  index: -1
+enemy_01
+  rotate: false
+  xy: 546, 12
+  size: 109, 92
+  orig: 109, 92
+  offset: 0, 0
+  index: -1
+enemy_02
+  rotate: false
+  xy: 787, 263
+  size: 225, 247
+  orig: 225, 247
+  offset: 0, 0
+  index: -1
+meteor_01
+  rotate: false
+  xy: 111, 4
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+meteor_02
+  rotate: false
+  xy: 50, 2
+  size: 32, 44
+  orig: 32, 44
+  offset: 0, 0
+  index: -1
+meteor_03
+  rotate: true
+  xy: 111, 23
+  size: 23, 20
+  orig: 23, 20
+  offset: 0, 0
+  index: -1
+meteor_04
+  rotate: false
+  xy: 84, 17
+  size: 25, 29
+  orig: 25, 29
+  offset: 0, 0
+  index: -1
+meteor_fire_01
+  rotate: false
+  xy: 390, 23
+  size: 154, 81
+  orig: 154, 81
+  offset: 0, 0
+  index: -1
+meteor_fire_02
+  rotate: false
+  xy: 769, 41
+  size: 111, 63
+  orig: 111, 63
+  offset: 0, 0
+  index: -1
+meteor_fire_03
+  rotate: false
+  xy: 882, 215
+  size: 88, 46
+  orig: 88, 46
+  offset: 0, 0
+  index: -1
+meteor_fire_04
+  rotate: false
+  xy: 657, 33
+  size: 110, 71
+  orig: 110, 71
+  offset: 0, 0
+  index: -1
+planetoffire
+  rotate: true
+  xy: 390, 106
+  size: 404, 395
+  orig: 419, 406
+  offset: 8, 6
+  index: -1
+radar
+  rotate: true
+  xy: 2, 2
+  size: 44, 46
+  orig: 44, 46
+  offset: 0, 0
+  index: -1
