@@ -11,7 +11,6 @@
 
 HudBuffButton::HudBuffButton(GameFoundation& game, GameFoundation::BuffType bt) :
 Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_rxGame(game), m_bIsUsed(false) {
-	SetHideWhenDisabled(false);
 	SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
 }
 

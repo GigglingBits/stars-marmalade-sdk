@@ -16,6 +16,7 @@ void Hud::Initialize() {
 
 void Hud::SetEnabled(bool enabled) {
 	m_xBuffs.SetEnabled(enabled);
+	m_bIsEnabled = enabled;
 }
 
 void Hud::OnDoLayout(const CIwSVec2& screensize) {
