@@ -68,7 +68,7 @@ void Star::RetractingState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeCollect;
+		args.EventType = eDustEventTypeCollectSingle;
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
