@@ -1,15 +1,12 @@
 #include "HudBuffPanel.h"
 #include "FactoryManager.h"
 
-HudBuffPanel::HudBuffPanel(GameFoundation& game) :
-m_rxGame(game),
-m_bIsEnabled(true) {	
-	m_rxGame.BuffCollected.AddListener(this, &HudBuffPanel::BuffCollected);
+HudBuffPanel::HudBuffPanel() :
+m_bIsEnabled(true) {
 }
 
 HudBuffPanel::~HudBuffPanel() {
 	ClearBuffs();
-	m_rxGame.BuffCollected.RemoveListener(this, &HudBuffPanel::BuffCollected);
 }
 
 
@@ -30,7 +27,8 @@ void HudBuffPanel::SetEnabled(bool enabled) {
 }
 
 void HudBuffPanel::AddBuff(GameFoundation::BuffType bt) {
-	HudBuffButton* btn = new HudBuffButton(m_rxGame, bt);
+	HudBuffButton* btn = new HudBuffButton(bt);
+	btn->BuffTrigger.AddListener(this, &HudBuffPanel::BuffTriggerHandler);
 	m_xBuffs.push_back(btn);
 	
 	InvalidateLayout();
@@ -40,6 +38,7 @@ void HudBuffPanel::ClearBuffs() {
 	std::vector<HudBuffButton*>::const_iterator it;
 	for (it = m_xBuffs.begin(); it != m_xBuffs.end(); ++it) {
 		if (*it) {
+			(*it)->BuffTrigger.RemoveListener(this, &HudBuffPanel::BuffTriggerHandler);
 			delete *it;
 		}
 	}
@@ -73,6 +72,7 @@ void HudBuffPanel::OnUpdate(const FrameData& frame) {
 	std::vector<HudBuffButton*>::iterator it = m_xBuffs.begin();
 	while (it != m_xBuffs.end()) {
 		if (!*it || (*it)->CanUnload()) {
+			(*it)->BuffTrigger.RemoveListener(this, &HudBuffPanel::BuffTriggerHandler);
 			delete *it;
 			it = m_xBuffs.erase(it);
 			InvalidateLayout();
@@ -96,6 +96,6 @@ void HudBuffPanel::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 }
 
-void HudBuffPanel::BuffCollected(const GameFoundation& sender, const GameFoundation::BuffType& bt) {
-	AddBuff(bt);
+void HudBuffPanel::BuffTriggerHandler(const HudBuffButton& sender, const GameFoundation::BuffType& bt) {
+	BuffTrigger.Invoke(*this, bt);
 }

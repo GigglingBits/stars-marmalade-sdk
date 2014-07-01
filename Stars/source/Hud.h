@@ -9,20 +9,19 @@
 
 class Hud : public Window {
 private:
-	GameFoundation& m_rxGame;
-
 	bool m_bIsEnabled;
 	
 	LevelDustVial m_xVial;
 	HudBuffPanel m_xBuffs;
 
 public:
-	Hud(GameFoundation& game);
+	Hud();
 
 	virtual void Initialize();
 	void SetEnabled(bool enabled);
 	
-	void ClearBuffs();
+	LevelDustVial& GetDustVial();
+	HudBuffPanel& GetBuffPanel();
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

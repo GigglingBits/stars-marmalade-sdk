@@ -2,9 +2,7 @@
 #include "Debug.h"
 #include "FactoryManager.h"
 
-Hud::Hud(GameFoundation& game) :
-	m_rxGame(game),
-	m_xBuffs(game),
+Hud::Hud() :
 	m_bIsEnabled(true) {
 }
 
@@ -19,8 +17,12 @@ void Hud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
-void Hud::ClearBuffs() {
-	m_xBuffs.ClearBuffs();
+LevelDustVial& Hud::GetDustVial() {
+	return m_xVial;
+}
+
+HudBuffPanel& Hud::GetBuffPanel() {
+	return m_xBuffs;
 }
 
 void Hud::OnDoLayout(const CIwSVec2& screensize) {
@@ -43,9 +45,7 @@ void Hud::OnDoLayout(const CIwSVec2& screensize) {
 void Hud::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
-	m_xVial.SetDustAmount(m_rxGame.GetDustFillPercent(), m_rxGame.GetDustQueuedPercent());
 	m_xVial.Update(frame);
-
 	m_xBuffs.Update(frame);
 }
 

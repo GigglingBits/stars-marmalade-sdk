@@ -9,8 +9,8 @@
 #include "Debug.h"
 #include "IwDebug.h"
 
-HudBuffButton::HudBuffButton(GameFoundation& game, GameFoundation::BuffType bt) :
-Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_rxGame(game), m_bIsUsed(false) {
+HudBuffButton::HudBuffButton(GameFoundation::BuffType bt) :
+Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_bIsUsed(false) {
 	SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
 }
 
@@ -62,20 +62,7 @@ void HudBuffButton::OnStateChanged(bool enabled, bool pressed) {
 	}
 	
 	GameFoundation::BuffType bt = GetBuffType();
-	switch (bt) {
-		case GameFoundation::eBuffTypeMagnet:
-			m_rxGame.ActivateMagnetBuff();
-			break;
-		case GameFoundation::eBuffTypeShield:
-			m_rxGame.ActivateShieldBuff();
-			break;
-		case GameFoundation::eBuffTypeShoot:
-			m_rxGame.ActivateShootBuff();
-			break;
-		default:
-			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
-			break;
-	}
+	BuffTrigger.Invoke(*this, bt);
 	
 	m_bIsUsed = true;
 }

@@ -209,6 +209,7 @@ int GameFoundation::GetDustMultiplier(int queuedcount) {
 }
 
 void GameFoundation::BeginDustQueue() {
+	OnBuffEnd(); // just for testing
 	m_xDust.BeginDustQueue();
 }
 
@@ -236,7 +237,7 @@ void GameFoundation::RollbackDustQueue(const CIwFVec2& pos) {
 	int queueddustamount = m_xDust.GetQueuedDustAmount();
 	m_xDust.RollbackDustQueue();
 
-	if (queueddustamount >= 0) {
+	if (queueddustamount > 0) {
 		// cancel
 		CreatePointSplash(-queueddustamount, 1, pos);
 
@@ -351,19 +352,34 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 void GameFoundation::ActivateMagnetBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Magnet", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+		OnBuffBegin();
 	}
 }
 
 void GameFoundation::ActivateShieldBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Shield", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+		OnBuffBegin();
 	}
 }
 
 void GameFoundation::ActivateShootBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Shoot", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
+		OnBuffBegin();
 	}
+}
+
+void GameFoundation::OnBuffBegin() {
+	BuffProgressArgs args;
+	args.active = true;
+	BuffProgress.Invoke(*this, args);
+}
+
+void GameFoundation::OnBuffEnd() {
+	BuffProgressArgs args;
+	args.active = false;
+	BuffProgress.Invoke(*this, args);
 }
 
 void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventArgs& args) {

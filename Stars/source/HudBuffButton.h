@@ -6,11 +6,10 @@
 
 class HudBuffButton : public Button {
 private:
-	GameFoundation& m_rxGame;
 	bool m_bIsUsed;
 	
 public:
-	HudBuffButton(GameFoundation& game, GameFoundation::BuffType bt);
+	HudBuffButton(GameFoundation::BuffType bt);
 	~HudBuffButton();
 	
 	bool CanUnload();
@@ -22,6 +21,9 @@ protected:
 private:
 	GameFoundation::BuffType GetBuffType();
 	std::string GetSkinName(GameFoundation::BuffType bt);
+
+public:
+	MulticastEvent<HudBuffButton, GameFoundation::BuffType> BuffTrigger;
 };
 
 #endif

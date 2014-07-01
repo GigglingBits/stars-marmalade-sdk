@@ -14,6 +14,7 @@
 #include "LevelInteractor.h"
 #include "MulticastEventTimer.h"
 #include "LevelCompletionInfo.h"
+#include "Curtain.h"
 
 #include <vector>
 
@@ -55,6 +56,7 @@ private:
 
 	BackgroundParallax m_xBackgroundStars;
 	BackgroundSprites m_xBackgroundClouds;
+	Curtain m_xCurtain;
 
 	GameFoundation m_xGame;
 	LevelCompletionInfo m_xCompletionInfo;
@@ -135,6 +137,10 @@ private:
 	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
+
+	void BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt);
+	void BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt);
+	void BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args);
 
 	void QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args);
 	void SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args);

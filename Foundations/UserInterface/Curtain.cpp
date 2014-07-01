@@ -19,13 +19,17 @@ bool Curtain::IsOpen() {
 }
 
 void Curtain::Close() {
-	m_eState = eStateClosing;
-	m_iCountdown = m_uiFadeTime;
+	if (!IsClosed()) {
+		m_eState = eStateClosing;
+		m_iCountdown = m_uiFadeTime;
+	}
 }
 
 void Curtain::Open() {
-	m_eState = eStateOpening;
-	m_iCountdown = m_uiFadeTime;
+	if (!IsOpen()) {
+		m_eState = eStateOpening;
+		m_iCountdown = m_uiFadeTime;
+	}
 }
 
 void Curtain::SetAlpha(uint32 alpha) {

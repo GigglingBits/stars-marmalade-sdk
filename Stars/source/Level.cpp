@@ -15,7 +15,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
 	m_xInteractor(m_xCamera, m_xGame),
-	m_xHud(m_xGame),
 	m_xPausePanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
@@ -29,11 +28,14 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xPausePanel.StateChanged.AddListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
+	m_xGame.BuffCollected.AddListener(this, &Level::BuffCollectedHandler);
+	m_xHud.GetBuffPanel().BuffTrigger.AddListener(this, &Level::BuffTriggerHandler);
+	m_xGame.BuffProgress.AddListener(this, &Level::BuffProgressHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
 	
 	m_xInteractor.Disable();
-	
+		
 	// configure the start
 	EventArgs args;
 	args.eventId = eEventIdShowBanner;
@@ -60,6 +62,9 @@ Level::~Level() {
 	// detach event handlers
 	m_xEventTimer.LastEventFired.RemoveListener(this, &Level::EventTimerClearedEventHandler);
 	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
+	m_xGame.BuffProgress.RemoveListener(this, &Level::BuffProgressHandler);
+	m_xHud.GetBuffPanel().BuffTrigger.RemoveListener(this, &Level::BuffTriggerHandler);
+	m_xGame.BuffCollected.RemoveListener(this, &Level::BuffCollectedHandler);
 	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xPausePanel.StateChanged.RemoveListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
@@ -77,9 +82,13 @@ void Level::Initialize() {
 	m_xHud.Initialize();
 	m_xBackgroundStars.Initialize();
 	
+	m_xCurtain.SetRenderingLayer(Renderer::eRenderingLayerBackground);
+	m_xCurtain.SetFadeTime(200);
+	m_xCurtain.SetAlpha(0x99);
+	
 	CreateStar();
 	
-	// schedule the finish og the level
+	// schedule the finish of the level
 	// (assuming that it has been populated by the time this is called)
 	EventArgs args;
 	args.eventId = eEventIdSettle;
@@ -338,7 +347,9 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xBackgroundClouds.Update(frame.GetAvgSimulatedDurationMs());
 	
 	m_xPath.Update(frame);
+	m_xHud.GetDustVial().SetDustAmount(m_xGame.GetDustFillPercent(), m_xGame.GetDustQueuedPercent());
 	m_xHud.Update(frame);
+	m_xCurtain.Update(frame);
 }
 
 void Level::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -352,6 +363,7 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xPath.Render(renderer, frame);
 	m_xHud.Render(renderer, frame);
+	m_xCurtain.Render(renderer, frame);
 	
 	if (!m_sBannerText.empty()) {
 		renderer.DrawText(m_sBannerText, m_xBannerRect, Renderer::eFontTypeLarge, GAME_COLOUR_FONT_MAIN);
@@ -418,7 +430,7 @@ void Level::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender,
 			break;
 		}
 		case eEventIdFinish: {
-			m_xHud.ClearBuffs();
+			m_xHud.GetBuffPanel().ClearBuffs();
 			Conclude();
 			ShowStatsBanner();
 			break;
@@ -438,5 +450,34 @@ void Level::PathChangedEventHandler(const LevelInteractor& sender, const LevelIn
 		SetStarPath(path.path);
 	} else {
 		m_xPath.ImportPath(path.path);
+	}
+}
+
+void Level::BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt) {
+	m_xHud.GetBuffPanel().AddBuff(bt);
+}
+
+void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt) {
+	switch (bt) {
+		case GameFoundation::eBuffTypeMagnet:
+			m_xGame.ActivateMagnetBuff();
+			break;
+		case GameFoundation::eBuffTypeShield:
+			m_xGame.ActivateShieldBuff();
+			break;
+		case GameFoundation::eBuffTypeShoot:
+			m_xGame.ActivateShootBuff();
+			break;
+		default:
+			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
+			break;
+	}
+}
+
+void Level::BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args) {
+	if (args.active) {
+		m_xCurtain.Close();
+	} else {
+		m_xCurtain.Open();
 	}
 }
