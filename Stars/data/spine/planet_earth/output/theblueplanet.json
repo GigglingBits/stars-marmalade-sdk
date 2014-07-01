@@ -15,7 +15,6 @@
 	{ "name": "wave04", "parent": "root", "length": 84.88, "x": 204.26, "y": -202.77, "rotation": 179.54 }
 ],
 "slots": [
-	{ "name": "_planet_template", "bone": "root", "attachment": "_planet_template" },
 	{ "name": "cloud3", "bone": "cloud03", "attachment": "cloud3" },
 	{ "name": "cloud2", "bone": "cloud02", "attachment": "cloud2" },
 	{ "name": "root", "bone": "root", "attachment": "earth" },
@@ -32,9 +31,6 @@
 ],
 "skins": {
 	"default": {
-		"_planet_template": {
-			"_planet_template": { "x": -47, "y": 29, "scaleX": 1.125, "scaleY": 1.125, "width": 875, "height": 756 }
-		},
 		"blue_bird2": {
 			"blue_bird2": { "x": 78.81, "y": -4.92, "scaleX": 1.118, "scaleY": 1.118, "rotation": -153.25, "width": 153, "height": 105 }
 		},

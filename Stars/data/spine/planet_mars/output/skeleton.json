@@ -34,7 +34,6 @@
 	}
 ],
 "slots": [
-	{ "name": "_planet_template", "bone": "root" },
 	{ "name": "enemy_01", "bone": "enemy_02", "attachment": "enemy_01" },
 	{ "name": "enemy_012", "bone": "2", "attachment": "enemy_01" },
 	{ "name": "enemy_03", "bone": "3", "attachment": "enemy_01" },
@@ -52,9 +51,6 @@
 ],
 "skins": {
 	"default": {
-		"_planet_template": {
-			"_template": { "x": 22, "width": 924, "height": 772 }
-		},
 		"enemy_01": {
 			"enemy_01": { "x": 72.94, "y": -21.79, "rotation": -128.43, "width": 218, "height": 184 }
 		},

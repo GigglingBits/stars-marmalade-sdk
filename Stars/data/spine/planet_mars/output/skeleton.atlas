@@ -1,97 +1,90 @@
 
 skeleton.png
-size: 1012,510
+size: 998,507
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-_template
-  rotate: true
-  xy: 2, 48
-  size: 462, 386
-  orig: 462, 386
-  offset: 0, 0
-  index: -1
 enemy_01
   rotate: false
-  xy: 546, 12
-  size: 109, 92
-  orig: 109, 92
+  xy: 760, 397
+  size: 131, 110
+  orig: 131, 110
   offset: 0, 0
   index: -1
 enemy_02
   rotate: false
-  xy: 787, 263
-  size: 225, 247
-  orig: 225, 247
+  xy: 489, 211
+  size: 269, 296
+  orig: 269, 296
   offset: 0, 0
   index: -1
 meteor_01
   rotate: false
-  xy: 111, 4
-  size: 17, 17
-  orig: 17, 17
+  xy: 624, 90
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
 meteor_02
-  rotate: false
-  xy: 50, 2
-  size: 32, 44
-  orig: 32, 44
+  rotate: true
+  xy: 760, 223
+  size: 38, 52
+  orig: 38, 52
   offset: 0, 0
   index: -1
 meteor_03
-  rotate: true
-  xy: 111, 23
-  size: 23, 20
-  orig: 23, 20
+  rotate: false
+  xy: 847, 371
+  size: 27, 24
+  orig: 27, 24
   offset: 0, 0
   index: -1
 meteor_04
-  rotate: false
-  xy: 84, 17
-  size: 25, 29
-  orig: 25, 29
+  rotate: true
+  xy: 2, 2
+  size: 30, 35
+  orig: 30, 35
   offset: 0, 0
   index: -1
 meteor_fire_01
   rotate: false
-  xy: 390, 23
-  size: 154, 81
-  orig: 154, 81
+  xy: 489, 112
+  size: 184, 97
+  orig: 184, 97
   offset: 0, 0
   index: -1
 meteor_fire_02
   rotate: false
-  xy: 769, 41
-  size: 111, 63
-  orig: 111, 63
+  xy: 489, 34
+  size: 133, 76
+  orig: 133, 76
   offset: 0, 0
   index: -1
 meteor_fire_03
   rotate: false
-  xy: 882, 215
-  size: 88, 46
-  orig: 88, 46
+  xy: 893, 452
+  size: 105, 55
+  orig: 105, 55
   offset: 0, 0
   index: -1
 meteor_fire_04
-  rotate: false
-  xy: 657, 33
-  size: 110, 71
-  orig: 110, 71
+  rotate: true
+  xy: 760, 263
+  size: 132, 85
+  orig: 132, 85
   offset: 0, 0
   index: -1
 planetoffire
-  rotate: true
-  xy: 390, 106
-  size: 404, 395
-  orig: 419, 406
-  offset: 8, 6
+  rotate: false
+  xy: 2, 34
+  size: 485, 473
+  orig: 502, 487
+  offset: 9, 7
   index: -1
 radar
-  rotate: true
-  xy: 2, 2
-  size: 44, 46
-  orig: 44, 46
+  rotate: false
+  xy: 675, 154
+  size: 53, 55
+  orig: 53, 55
   offset: 0, 0
   index: -1

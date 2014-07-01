@@ -1,26 +1,19 @@
 
 theblueplanet.png
-size: 1013,501
+size: 490,501
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-_planet_template
-  rotate: false
-  xy: 339, 199
-  size: 350, 302
-  orig: 350, 302
-  offset: 0, 0
-  index: -1
 blue_bird2
-  rotate: false
-  xy: 952, 459
+  rotate: true
+  xy: 194, 11
   size: 61, 42
   orig: 61, 42
   offset: 0, 0
   index: -1
 blue_bird3
   rotate: false
-  xy: 834, 398
+  xy: 339, 186
   size: 116, 103
   orig: 116, 103
   offset: 0, 0
@@ -55,49 +48,49 @@ earth
   index: -1
 red_bird1
   rotate: false
-  xy: 691, 291
+  xy: 339, 291
   size: 139, 96
   orig: 139, 96
   offset: 0, 0
   index: -1
 speed strips_blue
-  rotate: false
-  xy: 691, 218
+  rotate: true
+  xy: 121, 11
   size: 61, 71
   orig: 86, 71
   offset: 25, 0
   index: -1
 speed strips_red
   rotate: false
-  xy: 691, 389
+  xy: 339, 389
   size: 141, 112
   orig: 179, 112
   offset: 38, 0
   index: -1
 wave1
   rotate: false
-  xy: 121, 68
+  xy: 2, 2
   size: 25, 4
   orig: 25, 4
   offset: 0, 0
   index: -1
 wave2
-  rotate: false
-  xy: 339, 189
+  rotate: true
+  xy: 482, 445
   size: 56, 8
   orig: 56, 8
   offset: 0, 0
   index: -1
 wave4
   rotate: false
-  xy: 834, 391
+  xy: 339, 179
   size: 32, 5
   orig: 32, 5
   offset: 0, 0
   index: -1
 wave6
-  rotate: false
-  xy: 2, 2
+  rotate: true
+  xy: 457, 263
   size: 26, 4
   orig: 26, 4
   offset: 0, 0

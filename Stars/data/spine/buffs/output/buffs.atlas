@@ -1,48 +1,55 @@
 
 buffs.png
-size: 492,109
+size: 252,239
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+gradient_effect
+  rotate: false
+  xy: 2, 93
+  size: 146, 146
+  orig: 150, 150
+  offset: 2, 2
+  index: -1
 magnet_buff
   rotate: false
-  xy: 308, 49
-  size: 60, 60
-  orig: 60, 60
+  xy: 150, 98
+  size: 50, 50
+  orig: 50, 50
   offset: 0, 0
   index: -1
 magnet_button
   rotate: false
   xy: 2, 2
-  size: 100, 107
-  orig: 100, 107
+  size: 84, 89
+  orig: 84, 89
   offset: 0, 0
   index: -1
 shield_buff
   rotate: false
-  xy: 370, 49
-  size: 60, 60
-  orig: 60, 60
+  xy: 202, 98
+  size: 50, 50
+  orig: 50, 50
   offset: 0, 0
   index: -1
 shield_button
   rotate: false
-  xy: 104, 2
-  size: 100, 107
-  orig: 100, 107
+  xy: 150, 150
+  size: 84, 89
+  orig: 84, 89
   offset: 0, 0
   index: -1
 shoot_buff
   rotate: false
-  xy: 432, 49
-  size: 60, 60
-  orig: 60, 60
+  xy: 174, 46
+  size: 50, 50
+  orig: 50, 50
   offset: 0, 0
   index: -1
 shoot_button
   rotate: false
-  xy: 206, 2
-  size: 100, 107
-  orig: 100, 107
+  xy: 88, 2
+  size: 84, 89
+  orig: 84, 89
   offset: 0, 0
   index: -1

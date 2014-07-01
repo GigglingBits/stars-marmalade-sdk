@@ -1,96 +1,89 @@
 
 skeleton.png
-size: 992,1018
+size: 998,507
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-_template
-  rotate: false
-  xy: 2, 555
-  size: 554, 463
-  orig: 554, 463
-  offset: 0, 0
-  index: -1
 enemy_01
   rotate: false
-  xy: 829, 908
+  xy: 760, 397
   size: 131, 110
   orig: 131, 110
   offset: 0, 0
   index: -1
 enemy_02
   rotate: false
-  xy: 558, 722
+  xy: 489, 211
   size: 269, 296
   orig: 269, 296
   offset: 0, 0
   index: -1
 meteor_01
   rotate: false
-  xy: 916, 886
+  xy: 624, 90
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 meteor_02
-  rotate: false
-  xy: 744, 668
+  rotate: true
+  xy: 760, 223
   size: 38, 52
   orig: 38, 52
   offset: 0, 0
   index: -1
 meteor_03
   rotate: false
-  xy: 829, 748
+  xy: 847, 371
   size: 27, 24
   orig: 27, 24
   offset: 0, 0
   index: -1
 meteor_04
-  rotate: false
-  xy: 962, 983
+  rotate: true
+  xy: 2, 2
   size: 30, 35
   orig: 30, 35
   offset: 0, 0
   index: -1
 meteor_fire_01
   rotate: false
-  xy: 558, 623
+  xy: 489, 112
   size: 184, 97
   orig: 184, 97
   offset: 0, 0
   index: -1
 meteor_fire_02
   rotate: false
-  xy: 2, 2
+  xy: 489, 34
   size: 133, 76
   orig: 133, 76
   offset: 0, 0
   index: -1
 meteor_fire_03
-  rotate: true
-  xy: 489, 448
+  rotate: false
+  xy: 893, 452
   size: 105, 55
   orig: 105, 55
   offset: 0, 0
   index: -1
 meteor_fire_04
   rotate: true
-  xy: 829, 774
+  xy: 760, 263
   size: 132, 85
   orig: 132, 85
   offset: 0, 0
   index: -1
 planetoffire
   rotate: false
-  xy: 2, 80
+  xy: 2, 34
   size: 485, 473
   orig: 502, 487
   offset: 9, 7
   index: -1
 radar
   rotate: false
-  xy: 558, 566
+  xy: 675, 154
   size: 53, 55
   orig: 53, 55
   offset: 0, 0
