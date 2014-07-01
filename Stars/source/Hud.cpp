@@ -19,6 +19,10 @@ void Hud::SetEnabled(bool enabled) {
 	m_bIsEnabled = enabled;
 }
 
+void Hud::ClearBuffs() {
+	m_xBuffs.ClearBuffs();
+}
+
 void Hud::OnDoLayout(const CIwSVec2& screensize) {
 	int extent = GetScreenExtents();
 	

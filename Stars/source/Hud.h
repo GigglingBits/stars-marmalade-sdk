@@ -22,6 +22,8 @@ public:
 	virtual void Initialize();
 	void SetEnabled(bool enabled);
 	
+	void ClearBuffs();
+	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);

@@ -19,7 +19,9 @@ public:
 	
 	void Initialize();
 	void SetEnabled(bool enabled);
-	
+
+	void ClearBuffs();
+
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	virtual void OnUpdate(const FrameData& frame);
@@ -27,7 +29,6 @@ protected:
 		
 private:
 	void AddBuff(GameFoundation::BuffType bt);
-	void ClearBuffs();
 		
 	void BuffCollected(const GameFoundation& sender, const GameFoundation::BuffType& bt);
 };

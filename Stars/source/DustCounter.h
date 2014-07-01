@@ -3,6 +3,8 @@
 
 class DustCounter {
 private:
+	bool m_bIsQueueing;
+	
 	int m_iQueuedCount;
 	float m_fQueuedAmount;
 	
@@ -12,10 +14,14 @@ private:
 public:
 	DustCounter(float maxdust);
 
+	// insert
+	void AddDust(float dustamount);
+
 	// queue
-	void EnqueueDust(float dustamount);
+	bool IsQueueing();
+	void BeginDustQueue();
 	void CommitDustQueue();
-	void ClearDustQueue();
+	void RollbackDustQueue();
 	
 	int GetQueuedDustCount();
 	float GetQueuedDustAmount();

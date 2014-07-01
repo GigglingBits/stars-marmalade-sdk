@@ -106,6 +106,19 @@ public:
 	MulticastEvent<Body, EffectArgs> EffectRequested;
 	
 	MulticastEvent<Body, Body> Colliding;
+	
+	enum DustEventType {
+		eDustEventTypeBegin,
+		eDustEventTypeAdd,
+		eDustEventTypeCommit,
+		eDustEventTypeRollback,
+	};
+	struct DustEventArgs {
+		DustEventType eventtype;
+		int amount;
+		CIwFVec2 position;
+	};
+	MulticastEvent<Body, DustEventArgs> DustEvent;
 };
 
 #endif

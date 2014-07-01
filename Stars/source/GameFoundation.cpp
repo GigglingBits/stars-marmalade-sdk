@@ -21,13 +21,12 @@ m_xDust(dustrequirement) {
 }
 
 GameFoundation::~GameFoundation() {
-	if (m_pxStar) {
-		m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
-	}
-	
 	SpriteMap::iterator it;
 	for (it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		Sprite* sprite = it->second;
+		if (Body* body = dynamic_cast<Body*>(sprite)) {
+			body->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
+		}
 		delete sprite;
 	}
 }
@@ -79,11 +78,9 @@ bool GameFoundation::IsGameGoing() {
 void GameFoundation::RegisterStar(Star* star) {
 	m_pxStar = star;
 	m_pxStar->Killed.AddListener(this, &GameFoundation::StarKilledEventHandler);
-	m_pxStar->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
 }
 
 void GameFoundation::UnregisterStar() {
-	m_pxStar->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
 	m_pxStar->Killed.RemoveListener(this, &GameFoundation::StarKilledEventHandler);
 	m_pxStar = NULL;
 }
@@ -99,6 +96,7 @@ void GameFoundation::Add(Body* body) {
 
 	body->EmitBuffRequested.AddListener(this, &GameFoundation::BuffRequestedEventHandler);
 	body->EffectRequested.AddListener(this, &GameFoundation::EffectRequestedEventHandler);
+	body->DustEvent.AddListener(this, &GameFoundation::DustEventHandler);
 
 	Add((Sprite*)body);
 }
@@ -159,6 +157,7 @@ void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
 			if (Body* body = dynamic_cast<Body*>(sprite)) {
 				body->EmitBuffRequested.RemoveListener(this, &GameFoundation::BuffRequestedEventHandler);
 				body->EffectRequested.RemoveListener(this, &GameFoundation::EffectRequestedEventHandler);
+				body->DustEvent.RemoveListener(this, &GameFoundation::DustEventHandler);
 			}
 			
 			SpriteRemovedArgs args;
@@ -209,32 +208,43 @@ int GameFoundation::GetDustMultiplier(int queuedcount) {
 	return 5;
 }
 
-void GameFoundation::EnqueueDust(const CIwFVec2& pos, int amount) {
-	int multiplier = GetDustMultiplier(m_xDust.GetQueuedDustCount() + 1);
+void GameFoundation::BeginDustQueue() {
+	m_xDust.BeginDustQueue();
+}
+
+void GameFoundation::AddDust(const CIwFVec2& pos, int amount) {
+	int multiplier = 1;
+	if (m_xDust.IsQueueing()) {
+		multiplier = GetDustMultiplier(m_xDust.GetQueuedDustCount() + 1);
+	}
+
 	int multipliedamount = amount * multiplier;
-	m_xDust.EnqueueDust(multipliedamount);
+	m_xDust.AddDust(multipliedamount);
 	
-	// display
 	CreatePointSplash(amount, multiplier, pos);
 }
 
-void GameFoundation::CommitDust(const CIwFVec2& pos) {
+void GameFoundation::CommitDustQueue(const CIwFVec2& pos) {
 	m_xDust.CommitDustQueue();
 }
 
-void GameFoundation::CancelDust(const CIwFVec2& pos) {
-	if (m_xDust.GetQueuedDustCount() <= 0) {
+void GameFoundation::RollbackDustQueue(const CIwFVec2& pos) {
+	if (!m_xDust.IsQueueing()) {
 		return;
 	}
 
-	// cancel
-	CreatePointSplash(-m_xDust.GetQueuedDustAmount(), 1, pos);
-	m_xDust.ClearDustQueue();
+	int queueddustamount = m_xDust.GetQueuedDustAmount();
+	m_xDust.RollbackDustQueue();
 
-	// quake effect
-	QuakeImpactArgs arg;
-	arg.amplitude = 0.3f;
-	QuakeImpact.Invoke(*this, arg);
+	if (queueddustamount >= 0) {
+		// cancel
+		CreatePointSplash(-queueddustamount, 1, pos);
+
+		// quake effect
+		QuakeImpactArgs arg;
+		arg.amplitude = 0.3f;
+		QuakeImpact.Invoke(*this, arg);
+	}
 }
 
 bool GameFoundation::CheckOutOfWorld(const CIwFVec2& pos) {
@@ -356,27 +366,25 @@ void GameFoundation::ActivateShootBuff() {
 	}
 }
 
-void GameFoundation::DustEventHandler(const Star& sender, const Star::DustEventArgs& args) {
-	switch (args.EventType) {
-		case Star::eDustEventTypeCollectSingle: {
-			IwAssert(MYAPP, m_xDust.GetQueuedDustCount() == 0);
-			EnqueueDust(args.position, args.amount);
-			CommitDust(args.position);
+void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventArgs& args) {
+	switch (args.eventtype) {
+		case Body::eDustEventTypeAdd: {
+			AddDust(args.position, args.amount);
 			break;
 		}
 
-		case Star::eDustEventTypeCollect: {
-			EnqueueDust(args.position, args.amount);
+		case Body::eDustEventTypeBegin: {
+			BeginDustQueue();
 			break;
 		}
 
-		case Star::eDustEventTypeCommit: {
-			CommitDust(args.position);
+		case Body::eDustEventTypeCommit: {
+			CommitDustQueue(args.position);
 			break;
 		}
 
-		case Star::eDustEventTypeRollback: {
-			CancelDust(args.position);
+		case Body::eDustEventTypeRollback: {
+			RollbackDustQueue(args.position);
 			break;
 		}
 	}

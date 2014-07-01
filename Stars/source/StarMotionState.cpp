@@ -68,7 +68,7 @@ void Star::RetractingState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeCollectSingle;
+		args.eventtype = eDustEventTypeAdd;
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
@@ -77,7 +77,7 @@ void Star::RetractingState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeRollback;
+		args.eventtype = eDustEventTypeRollback;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
@@ -106,6 +106,11 @@ void Star::FollowState::Initialize() {
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
 	
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeBegin;
+	args.position = m_rxContext.GetPosition();
+	m_rxContext.DustEvent.Invoke(m_rxContext, args);
+
 	m_rxContext.m_bAutoOrient = true;
 }
 
@@ -114,6 +119,10 @@ void Star::FollowState::Passify() {
 }
 
 void Star::FollowState::FollowPath() {
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeCommit;
+	m_rxContext.DustEvent.Invoke(m_rxContext, args);
+
 	m_rxContext.SetState(new FollowState(m_rxContext));
 }
 
@@ -124,7 +133,7 @@ void Star::FollowState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeCollect;
+		args.eventtype = eDustEventTypeAdd;
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
@@ -133,7 +142,7 @@ void Star::FollowState::Collide(Body& body) {
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
 		DustEventArgs args;
-		args.EventType = eDustEventTypeRollback;
+		args.eventtype = eDustEventTypeRollback;
 		args.position = body.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
@@ -148,11 +157,11 @@ void Star::FollowState::Update(uint16 timestep) {
 	// end condition
 	PathTracker& path = m_rxContext.m_xPath;
 	if (!path.IsWalking()) {
-		// transition to next state
 		DustEventArgs args;
-		args.EventType = eDustEventTypeCommit;
+		args.eventtype = eDustEventTypeCommit;
 		args.position = m_rxContext.GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+
 		m_rxContext.SetState(new RetractingState(m_rxContext));
 		return;
 	}

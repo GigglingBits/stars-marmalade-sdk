@@ -78,9 +78,10 @@ public:
 	void ActivateShieldBuff();
 	void ActivateShootBuff();
 
-	void EnqueueDust(const CIwFVec2& pos, int amount);
-	void CommitDust(const CIwFVec2& pos);
-	void CancelDust(const CIwFVec2& pos);
+	void BeginDustQueue();
+	void AddDust(const CIwFVec2& pos, int amount);
+	void CommitDustQueue(const CIwFVec2& pos);
+	void RollbackDustQueue(const CIwFVec2& pos);
 
 	float GetDustQueuedAmount();
 	float GetDustQueuedPercent();
@@ -112,7 +113,7 @@ private:
 
 	void EmitBuff(const CIwFVec2& pos);
 	
-	void DustEventHandler(const Star& sender, const Star::DustEventArgs& args);
+	void DustEventHandler(const Body& sender, const Star::DustEventArgs& args);
 	void StarKilledEventHandler(const Star& sender, const int& args);
 	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
 	void BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args);

@@ -2,6 +2,7 @@
 #include "Debug.h"
 
 #include "SoundEngine.h"
+#include "Main.h"
 
 Bird::Bird(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
 	: Enemy(id, bodydef, fixturedef, texturedef) {
@@ -23,4 +24,10 @@ void Bird::KnockOut() {
 	SetTextureFrame("hurt");
 		
 	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
+	
+	DustEventArgs args;
+	args.amount = GAME_POINTS_BIRD;
+	args.eventtype = eDustEventTypeAdd;
+	args.position = GetPosition();
+	DustEvent.Invoke(*this, args);
 }

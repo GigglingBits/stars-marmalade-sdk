@@ -418,6 +418,7 @@ void Level::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender,
 			break;
 		}
 		case eEventIdFinish: {
+			m_xHud.ClearBuffs();
 			Conclude();
 			ShowStatsBanner();
 			break;

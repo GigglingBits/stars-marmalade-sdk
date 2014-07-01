@@ -110,19 +110,6 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	
 public:
-	enum DustEventType {
-		eDustEventTypeCollectSingle,
-		eDustEventTypeCollect,
-		eDustEventTypeCommit,
-		eDustEventTypeRollback,
-	};
-	struct DustEventArgs {
-		DustEventType EventType;
-		int amount;
-		CIwFVec2 position;
-	};
-	MulticastEvent<Star, DustEventArgs> DustEvent;
-
 	MulticastEvent<Star, int> Killed;
 };
 
