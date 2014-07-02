@@ -51,7 +51,7 @@ public:
 	void SetImpulse(const CIwFVec2& linear, float angular = 0.0f);
 	virtual void SetSpeed(const CIwFVec2& vector);
 
-	void EnableCollisions(bool enable);
+	virtual void EnableCollisions(bool enable);
 	void EnableRotation(bool enable);
 
 	virtual void SetGravityScale(float scale);

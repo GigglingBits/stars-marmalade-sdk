@@ -38,6 +38,7 @@ public:
 
 	virtual float GetMass();
 	
+	virtual void EnableCollisions(bool enable);
 	virtual void SetGravityScale(float scale);
 
 private:

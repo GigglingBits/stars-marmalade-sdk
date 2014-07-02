@@ -33,16 +33,6 @@ void Enemy::DetachSledge() {
 	RemoveChild(ENEMY_SLEDGE_CHILD);
 }
 
-void Enemy::OnColliding(Body& body) {
-	if (!m_bKnockedOut && dynamic_cast<Enemy*>(&body)) {
-		// any collision with another enemy leads to destruction
-		KnockOut();
-		ShowEffect("star_collision");
-	}
-	
-	CompositeBody::OnColliding(body);
-}
-
 void Enemy::OnChildColliding(Body& child, Body& body) {
 	if (!m_bKnockedOut && dynamic_cast<Star*>(&body)) {
 		KnockOut();
