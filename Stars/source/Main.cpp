@@ -33,6 +33,33 @@
 //--------------------------------------------------------------------------
 // Global helpers
 //--------------------------------------------------------------------------
+void CreateFonts(ResourceManager& rm) {
+	// the font with size 5 is expected to
+	// fill 0.03125 (3.125%) of the screen extent
+	const uint16 refpointsize = 5;
+	const float refratio = 0.03125f;
+
+	// create the reference font, and measure size in pixels
+	uint16 refpixelheight = 0;
+	rm.LoadFontFileToResource(Configuration::GetInstance().SysFont, "font_system", refpointsize);
+	if (CIwGxFont* reffont = (CIwGxFont*)IwGetResManager()->GetResNamed("font_system", "CIwGxFont")) {
+		refpixelheight = reffont->GetHeight();
+	}
+	
+	// calibrate font size
+	float calibrationfactor = 1.0f;
+	if (refpixelheight != 0) {
+		uint32 screenextent = std::min<uint32>(IwGxGetScreenHeight(), IwGxGetScreenWidth());
+		float ratio = (float)refpixelheight / (float)screenextent;
+		calibrationfactor = refratio / ratio;
+	}
+
+	// load calibrated fonts
+	rm.LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_small", 10 * calibrationfactor);
+	rm.LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_normal", 22 * calibrationfactor);
+	rm.LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_large", 32 * calibrationfactor);
+}
+
 void UpdateScreen() {
 	IwGxClear(IW_GX_COLOUR_BUFFER_F | IW_GX_DEPTH_BUFFER_F);
 	IwGxTickUpdate();
@@ -125,11 +152,7 @@ void Initialize() {
 	World::SetDefaultGravity(0.0f, Configuration::GetInstance().Gravity);
 
 	WriteAndShowLog("Loading resources...");
-	
-	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_small", 10);
-	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_normal", 22);
-	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().AppFont, "font_large", 32);
-	ResourceManager::GetInstance().LoadFontFileToResource(Configuration::GetInstance().SysFont, "font_system", 5);
+	CreateFonts(ResourceManager::GetInstance());
 	ResourceManager::GetInstance().LoadPermament("base.group");
 	
 	std::srand((unsigned int)s3eTimerGetUST());
