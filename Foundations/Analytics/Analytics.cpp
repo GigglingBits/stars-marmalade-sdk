@@ -42,11 +42,11 @@ Analytics& Analytics::GetInstance() {
 	return *s_pxInstance;
 }
 
-void Analytics::Write(const std::string& event) {
+void Analytics::Log(const std::string& event) {
 	s3eFlurryLogEvent(event.c_str());
 }
 
-void Analytics::Write(const std::string& event, const Params& params) {
+void Analytics::Log(const std::string& event, const Params& params) {
 	std::ostringstream oss;
 	for (Params::const_iterator it = params.begin(); it != params.end(); it++) {
 		if (it != params.begin()) {
@@ -57,3 +57,6 @@ void Analytics::Write(const std::string& event, const Params& params) {
 	s3eFlurryLogEventParams(event.c_str(), oss.str().c_str());
 }
 
+void Analytics::LogError(const std::string& message) {
+	s3eFlurryLogError("Runtime Error", message.c_str());
+}

@@ -5,7 +5,7 @@ showstats=0
 showshapes=0
 unlockall=1
 
-resourceheapsize=14		# in megabytes
+resourceheapsize=20		# in megabytes
 
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
@@ -60,7 +60,7 @@ MYAPP=1
 ####################################################
 [S3E]
 ####################################################
-MemSize=20000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
+MemSize=26000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
 MemSizeDebug=38000000		# debug / resource builder
 
 SplashscreenBkR=0
@@ -110,7 +110,8 @@ VertCacheSize=4096
 ####################################################
 [GxFont]
 ####################################################
-CacheTextureMaxSize=512
+CacheTextureMaxSize=1024
+
 
 ####################################################
 [GL]

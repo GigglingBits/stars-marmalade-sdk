@@ -5,23 +5,23 @@
 #include "Debug.h"
 
 void AppAnalytics::RegisterTitleScreenOpened() {
-	Analytics::GetInstance().Write("Title screen opened");
+	Analytics::GetInstance().Log("Title screen opened");
 }
 
 void AppAnalytics::RegisterWorldMenuOpened() {
-	Analytics::GetInstance().Write("World menu opened");
+	Analytics::GetInstance().Log("World menu opened");
 }
 
 void AppAnalytics::RegisterLevelMenuOpened(const std::string& worldid) {
 	std::ostringstream oss;
 	oss << "Level menu opened: " << worldid;
-	Analytics::GetInstance().Write(oss.str());
+	Analytics::GetInstance().Log(oss.str());
 }
 
 void AppAnalytics::RegisterLevelStarted(const std::string& levelid) {
 	std::ostringstream oss;
 	oss << "Level started: " << levelid;
-	Analytics::GetInstance().Write(oss.str());
+	Analytics::GetInstance().Log(oss.str());
 }
 
 void AppAnalytics::RegisterLevelCompleted(const std::string& id, float dustamount, int pathsstarted, bool achieved) {
@@ -41,15 +41,15 @@ void AppAnalytics::RegisterLevelCompleted(const std::string& id, float dustamoun
 	params["cleared"] = achieved ? "yes" : "no";
 	params["dust amount"] = dust;
 	params["#paths"] = paths;
-	Analytics::GetInstance().Write(message, params);
+	Analytics::GetInstance().Log(message, params);
 }
 
 void AppAnalytics::RegisterLevelCancelled(const std::string& levelid) {
 	std::ostringstream oss;
 	oss << "Level cancelled: " << levelid;
-	Analytics::GetInstance().Write(oss.str());
+	Analytics::GetInstance().Log(oss.str());
 }
 
 void AppAnalytics::RegisterFacebookOpened() {
-	Analytics::GetInstance().Write("Facebook opened");
+	Analytics::GetInstance().Log("Facebook opened");
 }

@@ -24,8 +24,9 @@ public:
 	static Analytics& GetInstance();
 	
 public:
-	void Write(const std::string& event);
-	void Write(const std::string& event, const Params& params);
+	void Log(const std::string& event);
+	void Log(const std::string& event, const Params& params);
+	void LogError(const std::string& message);
 };
 
 #endif

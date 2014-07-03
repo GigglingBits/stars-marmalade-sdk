@@ -33,6 +33,12 @@
 //--------------------------------------------------------------------------
 // Global helpers
 //--------------------------------------------------------------------------
+int32 ErrorCallback(void* systemData, void* /*userData*/) {
+	const char* messageText = reinterpret_cast<const char*>(systemData);
+	Analytics::GetInstance().LogError(messageText ? messageText : "unkown");
+	return S3E_ERROR_SHOW_AGAIN;
+}
+
 void CreateFonts(ResourceManager& rm) {
 	// the font with size 5 is expected to
 	// fill 0.03125 (3.125%) of the screen extent
@@ -145,6 +151,8 @@ void Initialize() {
 	ResourceManager::Initialize(eMemoryBucketResources);
 
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
+	s3eDebugRegister(S3E_DEBUG_ERROR, ErrorCallback, NULL);
+	
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	LogManager::Initialize();
@@ -165,6 +173,8 @@ void Terminate() {
 	LogManager::Terminate();
 	InputManager::Terminate();
 	SoundEngine::Terminate();
+
+	s3eDebugUnRegister(S3E_DEBUG_ERROR, ErrorCallback);
 	Analytics::Terminate();
 	ResourceManager::Terminate();
 
