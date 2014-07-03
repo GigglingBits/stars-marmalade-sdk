@@ -427,7 +427,7 @@ void Renderer::DrawText(std::string text, const CIwSVec2& pos, FontType fonttype
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	DrawText(text.c_str(), CIwRect(pos.x, pos.y, 250, 50), fonttype, false, col);
+	DrawText(text.c_str(), CIwRect(pos.x, pos.y, 400, 50), fonttype, false, col);
 }
 
 void Renderer::DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype, uint32 col) {
@@ -446,7 +446,7 @@ void Renderer::DrawText(std::string text, const CIwFVec2& pos, FontType fonttype
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
 	CIwSVec2 screenpos = m_xViewport.WorldToScreen(pos);
-	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, 100, 50), fonttype, false, col);
+	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, 400, 50), fonttype, false, col);
 }
 
 void Renderer::DrawText(const char* text, const CIwRect& rect, FontType font, bool center, uint32 col) {
