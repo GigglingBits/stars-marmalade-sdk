@@ -7,6 +7,10 @@ HudNumber::HudNumber() : m_lTargetNumber(0), m_lLastTargetNumber(0), m_lTotalRol
 	UpdateText();
 }
 
+long HudNumber::GetNumber() {
+	return m_lTargetNumber;
+}
+
 void HudNumber::SetNumber(long number, int rolltime) {
 	if (m_lTargetNumber == number) {
 		return;
@@ -21,7 +25,7 @@ void HudNumber::SetNumber(long number, int rolltime) {
 
 void HudNumber::UpdateText() {
 	// interpolate
-	float progress = m_lRemainingRollTime / (float) m_lTotalRollTime;
+	float progress = m_lTotalRollTime == 0 ? 100.0f : m_lRemainingRollTime / (float) m_lTotalRollTime;
 	long number;
 	if (progress < 99.9f) {
 		number = (1 - progress) * m_lTargetNumber + progress * m_lLastTargetNumber;

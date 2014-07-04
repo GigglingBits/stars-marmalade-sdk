@@ -1,5 +1,3 @@
-#include <sstream>
-
 #include "LevelCompletion.h"
 #include "FactoryManager.h"
 #include "GameFoundation.h"
@@ -10,19 +8,28 @@
 
 LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
 	Page("levelcompletion.group", info.IsCleared() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
-    m_xButtonStar(eButtonCommandIdNone, s3eKeyFirst),
+m_xButtonStar(info.IsCleared() ? eButtonCommandIdOpenNextLevel : eButtonCommandIdOpenLevelMenu, s3eKeyFirst),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
 	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight),
     m_sLevelId(levelid),
 	m_sNextLevelId(nextlevelid),
     m_xCompletionInfo(info) {
+
+	m_xEventTimer.Elapsed.AddListener(this, &LevelCompletion::EventTimerEventHandler);
+}
+
+LevelCompletion::~LevelCompletion() {
+	m_xEventTimer.Elapsed.RemoveListener(this, &LevelCompletion::EventTimerEventHandler);
 }
 
 void LevelCompletion::Initialize() {
+	SaveResults();
+
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
     m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared() ? "won" : "lost");
 	m_xButtonStar.SetShadedWhenPressed(false);
+	m_xButtonStar.SetRenderingLayer(Renderer::eRenderingLayerGameBackground);
     
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_menu"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
@@ -31,36 +38,79 @@ void LevelCompletion::Initialize() {
 	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsCleared());
 	
 	m_xBackground.Initialize();
-
-	SaveResults();
 	
-	m_xTitle.SetText(GetCompletionText());
 	m_xTitle.SetFont(Renderer::eFontTypeLarge);
 	m_xTitle.SetColour(GAME_COLOUR_FONT_MAIN);
 	
-	m_xDustAmountText.SetText("Dust collected:");
-	m_xDustAmountText.SetFont(Renderer::eFontTypeNormal);
-	m_xDustAmountText.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xScoreText.SetText("Score:");
+	m_xScoreText.SetFont(Renderer::eFontTypeNormal);
+	m_xScoreText.SetColour(GAME_COLOUR_FONT_MAIN);
 	
-	m_xDustAmount.SetNumber(m_xCompletionInfo.GetDustAmount(), 3000);
-	m_xDustAmount.SetFont(Renderer::eFontTypeNormal);
-	m_xDustAmount.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xScoreAmount.SetNumber(0);
+	m_xScoreAmount.SetFont(Renderer::eFontTypeNormal);
+	m_xScoreAmount.SetColour(GAME_COLOUR_FONT_MAIN);
 	
-	m_xNuggetsCollectedText.SetText("Nuggets collected:");
-	m_xNuggetsCollectedText.SetFont(Renderer::eFontTypeNormal);
-	m_xNuggetsCollectedText.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xBonusText.SetText("");
+	m_xBonusText.SetFont(Renderer::eFontTypeSmall);
+	m_xBonusText.SetColour(GAME_COLOUR_FONT_MAIN);
 
-	m_xNuggetsCollected.SetNumber(m_xCompletionInfo.GetNuggetsCollected(), 3000);
-	m_xNuggetsCollected.SetFont(Renderer::eFontTypeNormal);
-	m_xNuggetsCollected.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xBonusAmount.SetNumber(0);
+	m_xBonusAmount.SetFont(Renderer::eFontTypeSmall);
+	m_xBonusAmount.SetColour(GAME_COLOUR_FONT_BONUS);
+	
+	ScheduleEvents();
+}
 
-	m_xNumberOfPathsText.SetText("Paths drawn:");
-	m_xNumberOfPathsText.SetFont(Renderer::eFontTypeNormal);
-	m_xNumberOfPathsText.SetColour(GAME_COLOUR_FONT_MAIN);
+void LevelCompletion::ScheduleEvents() {
+	int dustamount = GetCompletionInfo().GetDustAmount();
+	ScheduleTitle(GetCompletionText());
+	SchedulePoints();
+	ScheduleBonus("Dust collected", dustamount);
+	ScheduleBonus("All nuggets collected (bonus 20%)", dustamount / 5);
+	ScheduleBonus("All enemies dodged (bonus 20%)", dustamount / 5);
+	ScheduleBonus("All enemies killed (bonus 50%)", dustamount / 2);
+	ScheduleBonus("No buffs used (bonus 10%)", dustamount / 10);
+	ScheduleStars(1);
+}
 
-	m_xNumberOfPaths.SetNumber(m_xCompletionInfo.GetPathsStarted(), 3000);
-	m_xNumberOfPaths.SetFont(Renderer::eFontTypeNormal);
-	m_xNumberOfPaths.SetColour(GAME_COLOUR_FONT_MAIN);
+void LevelCompletion::ScheduleTitle(const std::string& title) {
+	EventArgs args;
+	args.type = eEventTypeSetTitle;
+	args.text = title;
+	m_xEventTimer.Enqueue(500, args);
+}
+
+void LevelCompletion::SchedulePoints() {
+	EventArgs args;
+	args.type = eEventTypeSetScore;
+	args.text = "Score:";
+	args.amount = 0;
+	m_xEventTimer.Enqueue(500, args);
+}
+
+void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
+	if (amount == 0) {
+		return;
+	}
+	
+	EventArgs args;
+	args.type = eEventTypeSetBonus;
+	args.text = name;
+	args.amount = amount;
+	m_xEventTimer.Enqueue(500, args);
+
+	args.type = eEventTypeTransferBonus;
+	m_xEventTimer.Enqueue(800, args);
+
+	args.type = eEventTypeClearBonus;
+	m_xEventTimer.Enqueue(2000, args);
+}
+
+void LevelCompletion::ScheduleStars(int count) {
+	EventArgs args;
+	args.type = eEventTypeSetStars;
+	args.amount = count;
+	m_xEventTimer.Enqueue(1000, args);
 }
 
 const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
@@ -68,13 +118,7 @@ const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
 }
 
 std::string LevelCompletion::GetCompletionText() {
-	std::ostringstream oss;
-	if (m_xCompletionInfo.IsCleared()) {
-		oss << "Congratulations!" << std::endl;
-	} else {
-		oss << "Try again" << std::endl;
-	}
-	return oss.str();
+	return m_xCompletionInfo.IsCleared() ? "You're the best!" : "Try again";
 }
 
 void LevelCompletion::SaveResults() {
@@ -130,23 +174,19 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	CIwRect numberrect(textrect);
 	numberrect.x = screencenter.x;
 	
-	m_xDustAmountText.SetPosition(textrect);
-	m_xDustAmount.SetPosition(numberrect);
+	m_xScoreText.SetPosition(textrect);
+	m_xScoreAmount.SetPosition(numberrect);
 	
 	textrect.y += textrect.h + (textrect.h / 2);
 	numberrect.y = textrect.y;
 	
-	m_xNuggetsCollectedText.SetPosition(textrect);
-	m_xNuggetsCollected.SetPosition(numberrect);
-
-	textrect.y += textrect.h + (textrect.h / 2);
-	numberrect.y = textrect.y;
-
-	m_xNumberOfPathsText.SetPosition(textrect);
-	m_xNumberOfPaths.SetPosition(numberrect);
+	m_xBonusText.SetPosition(textrect);
+	m_xBonusAmount.SetPosition(numberrect);
 }
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {
+	m_xEventTimer.Update(frame.GetSimulatedDurationMs());
+	
 	m_xBackground.Update(frame);
 	
 	m_xButtonStar.Update(frame);
@@ -156,14 +196,11 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 
 	m_xTitle.Update(frame);
 	
-	m_xDustAmountText.Update(frame);
-	m_xDustAmount.Update(frame);
+	m_xScoreText.Update(frame);
+	m_xScoreAmount.Update(frame);
 	
-	m_xNuggetsCollectedText.Update(frame);
-	m_xNuggetsCollected.Update(frame);
-	
-	m_xNumberOfPathsText.Update(frame);
-	m_xNumberOfPaths.Update(frame);
+	m_xBonusText.Update(frame);
+	m_xBonusAmount.Update(frame);
 }
 
 void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -171,20 +208,46 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xBackground.Render(renderer, frame);
 
-	m_xTitle.Render(renderer, frame);
-	
-	m_xDustAmountText.Render(renderer, frame);
-	m_xDustAmount.Render(renderer, frame);
-	
-	m_xNuggetsCollectedText.Render(renderer, frame);
-	m_xNuggetsCollected.Render(renderer, frame);
-	
-	m_xNumberOfPathsText.Render(renderer, frame);
-	m_xNumberOfPaths.Render(renderer, frame);
-	
-	// buttons
 	m_xButtonStar.Render(renderer, frame);
 	m_xButtonQuit.Render(renderer, frame);
 	m_xButtonRetry.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
+
+	m_xTitle.Render(renderer, frame);
+	
+	m_xScoreText.Render(renderer, frame);
+	m_xScoreAmount.Render(renderer, frame);
+	
+	m_xBonusText.Render(renderer, frame);
+	m_xBonusAmount.Render(renderer, frame);
 }
+
+void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args) {
+	switch (args.type) {
+		case eEventTypeNoOp:
+			break;
+		case eEventTypeSetTitle:
+			m_xTitle.SetText(args.text);
+			break;
+		case eEventTypeSetScore:
+			m_xScoreText.SetText(args.text);
+			m_xScoreAmount.SetNumber(args.amount);
+			break;
+		case eEventTypeClearBonus:
+			m_xBonusText.SetText("");
+			m_xBonusAmount.SetText("");
+			break;
+		case eEventTypeSetBonus:
+			m_xBonusText.SetText(args.text);
+			m_xBonusAmount.SetNumber(args.amount);
+			break;
+		case eEventTypeTransferBonus:
+			m_xScoreAmount.SetNumber(m_xScoreAmount.GetNumber() + m_xBonusAmount.GetNumber(), 1000);
+			m_xBonusAmount.SetNumber(0, 1000);
+			break;
+		case eEventTypeSetStars:
+			IwAssert(MYAPP, false);
+			break;
+	}
+}
+

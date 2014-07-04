@@ -17,7 +17,8 @@ public:
 	HudNumber();
 	
 	void SetNumber(long number, int rolltime = 0);
-
+	long GetNumber();
+	
 protected:
 	virtual void OnUpdate(const FrameData& frame);
 	
