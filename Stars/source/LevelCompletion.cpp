@@ -97,13 +97,13 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 	args.type = eEventTypeSetBonus;
 	args.text = name;
 	args.amount = amount;
-	m_xEventTimer.Enqueue(500, args);
+	m_xEventTimer.Enqueue(400, args);
 
 	args.type = eEventTypeTransferBonus;
 	m_xEventTimer.Enqueue(800, args);
 
 	args.type = eEventTypeClearBonus;
-	m_xEventTimer.Enqueue(2000, args);
+	m_xEventTimer.Enqueue(1000, args);
 }
 
 void LevelCompletion::ScheduleStars(int count) {
@@ -242,8 +242,8 @@ void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs
 			m_xBonusAmount.SetNumber(args.amount);
 			break;
 		case eEventTypeTransferBonus:
-			m_xScoreAmount.SetNumber(m_xScoreAmount.GetNumber() + m_xBonusAmount.GetNumber(), 1000);
-			m_xBonusAmount.SetNumber(0, 1000);
+			m_xScoreAmount.SetNumber(m_xScoreAmount.GetNumber() + m_xBonusAmount.GetNumber(), 500);
+			m_xBonusAmount.SetNumber(0, 500);
 			break;
 		case eEventTypeSetStars:
 			IwAssert(MYAPP, false);

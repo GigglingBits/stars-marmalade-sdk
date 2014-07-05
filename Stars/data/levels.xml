@@ -238,7 +238,7 @@
 		<level name="earth_5" width="12.0" height="12.0" dustrequirement="500">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
-				<def id="c" body="bird_02" />
+				<def id="c" body="bird" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
 				<line map="   c   " />
@@ -296,7 +296,7 @@
 		<level name="earth_6" width="12.0" height="12.0" dustrequirement="700">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
-				<def id="c" body="bird_02" />
+				<def id="c" body="bird" />
 			</spritedefs>
 			<spritesequence delay="450" speed="4.0" >
 				<line map=" n   n " />
@@ -376,8 +376,8 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="N" body="nugget_02" />
-				<def id="c" body="bird_02" />
-				<def id="d" body="bird_03" />
+				<def id="c" body="bird" />
+				<def id="d" body="bird_ripper" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
 				<line map="       " />
@@ -444,8 +444,8 @@
 				<def id="N" body="nugget_02" />
 				<def id="m" body="nugget_03" />
 				<def id="M" body="nugget_04" />
-				<def id="b" body="bird_01" />
-				<def id="c" body="bird_02" />
+				<def id="b" body="bird_screecher" />
+				<def id="c" body="bird" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
 				<line map=" n     " />
@@ -535,8 +535,8 @@
 				<def id="N" body="nugget_02" />
 				<def id="m" body="nugget_03" />
 				<def id="M" body="nugget_04" />
-				<def id="b" body="bird_01" />
-				<def id="c" body="bird_02" />
+				<def id="b" body="bird_screecher" />
+				<def id="c" body="bird" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
 				<line map="      n" />
@@ -627,8 +627,8 @@
 				<def id="N" body="nugget_02" />
 				<def id="m" body="nugget_03" />
 				<def id="M" body="nugget_04" />
-				<def id="b" body="bird_01" />
-				<def id="c" body="bird_02" />
+				<def id="b" body="bird_screecher" />
+				<def id="c" body="bird" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
 				<line map="       " />
@@ -685,15 +685,15 @@
 				<def id="b" body="nugget_02" />
 				<def id="c" body="nugget_03" />
 				<def id="d" body="nugget_04" />
-				<def id="e" body="bird_01" />
-				<def id="f" body="bird_02" />
-				<def id="g" body="bird_03" />
+				<def id="e" body="bird_screecher" />
+				<def id="f" body="bird" />
+				<def id="g" body="bird_ripper" />
 				<def id="h" body="grunt_01" />
 				<def id="i" body="grunt_02" />
 				<def id="j" body="grunt_03" />
 				<def id="k" body="grunt_boss" />
 			</spritedefs>
-			<spritesequence delay="1200" speed="1.2">
+			<spritesequence delay="1200" speed="2.8">
 				<line map="a  " />
 				<line map=" b " />
 				<line map="  c" />
@@ -817,8 +817,8 @@
 		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
-				<def id="1" body="bird_01" />
-				<def id="2" body="bird_02" />
+				<def id="1" body="bird_screecher" />
+				<def id="2" body="bird" />
 			</spritedefs>
 			<spritesequence delay="200" speed="2">
 				<line map="n  n    " />

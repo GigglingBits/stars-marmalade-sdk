@@ -214,6 +214,11 @@ files {
 
 	Bird.h
 	Bird.cpp
+	BirdRipper.h
+	BirdRipper.cpp
+	BirdScreecher.h
+	BirdScreecher.cpp
+
 	Grunt.h
 	Grunt.cpp
 
