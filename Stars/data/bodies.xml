@@ -133,7 +133,7 @@
 				<point x="-0.55" y="0.3" />
 			</shape>
 			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_bird_02" />
+			<texture animation="spine_bird" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.65" y="0.0" />
 			<child body="softspot" port="a" jointtype="weld" />
@@ -148,7 +148,7 @@
 				<point x="-0.75" y="0.35" />
 			</shape>
 			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_bird_01" />
+			<texture animation="spine_bird_screecher" />
 			<port id="a" x="0.25" y="0.5" />
 			<port id="b" x="0.65" y="0.1" />
 			<port id="c" x="0.75" y="-0.2" />
@@ -165,7 +165,7 @@
 				<point x="-0.7" y="0.55" />
 			</shape>
 			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_bird_03" />
+			<texture animation="spine_bird_ripper" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.45" y="0.1" />
 			<child body="softspot" port="a" jointtype="weld" />

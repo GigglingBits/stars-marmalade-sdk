@@ -1,146 +1,146 @@
 
-bird_03.png
-size: 1020,510
+bird_ripper.png
+size: 1017,254
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bigbluebird-beak-01
   rotate: false
-  xy: 852, 65
-  size: 79, 49
-  orig: 79, 49
+  xy: 348, 24
+  size: 53, 32
+  orig: 53, 32
   offset: 0, 0
   index: -1
 bigbluebird-beak-02
-  rotate: false
-  xy: 557, 2
-  size: 61, 55
-  orig: 61, 55
+  rotate: true
+  xy: 901, 103
+  size: 40, 37
+  orig: 40, 37
   offset: 0, 0
   index: -1
 bigbluebird-beak-hurt-01
-  rotate: false
-  xy: 477, 90
-  size: 87, 124
-  orig: 87, 124
+  rotate: true
+  xy: 604, 71
+  size: 58, 82
+  orig: 58, 82
   offset: 0, 0
   index: -1
 bigbluebird-beak-hurt-02
   rotate: false
-  xy: 683, 100
-  size: 116, 109
-  orig: 116, 109
+  xy: 688, 57
+  size: 78, 72
+  orig: 78, 72
   offset: 0, 0
   index: -1
 bigbluebird-body
   rotate: false
-  xy: 2, 216
-  size: 501, 294
-  orig: 502, 294
-  offset: 1, 0
+  xy: 2, 58
+  size: 334, 196
+  orig: 334, 196
+  offset: 0, 0
   index: -1
 bigbluebird-body-detail
   rotate: true
-  xy: 983, 264
-  size: 81, 37
-  orig: 81, 37
+  xy: 403, 2
+  size: 54, 25
+  orig: 54, 25
   offset: 0, 0
   index: -1
 bigbluebird-claws
-  rotate: false
-  xy: 842, 231
-  size: 139, 114
-  orig: 139, 114
+  rotate: true
+  xy: 941, 161
+  size: 93, 76
+  orig: 93, 76
   offset: 0, 0
   index: -1
 bigbluebird-claws-attack
   rotate: false
-  xy: 505, 292
-  size: 182, 218
-  orig: 182, 218
+  xy: 480, 108
+  size: 122, 146
+  orig: 122, 146
   offset: 0, 0
   index: -1
 bigbluebird-eye-closed
   rotate: false
-  xy: 477, 23
-  size: 78, 65
-  orig: 78, 65
+  xy: 847, 100
+  size: 52, 43
+  orig: 52, 43
   offset: 0, 0
   index: -1
 bigbluebird-eye-hurt
   rotate: false
-  xy: 689, 211
-  size: 151, 134
-  orig: 151, 134
+  xy: 480, 17
+  size: 100, 89
+  orig: 100, 89
   offset: 0, 0
   index: -1
 bigbluebird-eye-open
-  rotate: false
-  xy: 933, 59
-  size: 78, 65
-  orig: 78, 65
+  rotate: true
+  xy: 430, 4
+  size: 52, 43
+  orig: 52, 43
   offset: 0, 0
   index: -1
 bigbluebird-hurt-patch
   rotate: false
-  xy: 566, 104
-  size: 115, 116
-  orig: 115, 116
+  xy: 768, 66
+  size: 77, 77
+  orig: 77, 77
   offset: 0, 0
   index: -1
 bigbluebird-wing-01
   rotate: false
-  xy: 689, 347
-  size: 160, 163
-  orig: 160, 163
+  xy: 833, 145
+  size: 106, 109
+  orig: 106, 109
   offset: 0, 0
   index: -1
 bigbluebird-wing-02
   rotate: false
-  xy: 505, 222
-  size: 182, 68
-  orig: 190, 68
-  offset: 6, 0
+  xy: 2, 11
+  size: 122, 45
+  orig: 127, 45
+  offset: 4, 0
   index: -1
 bigbluebird-wing-03
   rotate: false
-  xy: 851, 347
-  size: 160, 163
-  orig: 160, 163
+  xy: 724, 145
+  size: 107, 109
+  orig: 107, 109
   offset: 0, 0
   index: -1
 bigbluebird-wing-hurt
-  rotate: true
-  xy: 2, 3
-  size: 211, 294
-  orig: 211, 294
+  rotate: false
+  xy: 338, 58
+  size: 140, 196
+  orig: 140, 196
   offset: 0, 0
   index: -1
 blue-feathers-01
-  rotate: true
-  xy: 801, 100
-  size: 109, 49
-  orig: 109, 49
+  rotate: false
+  xy: 274, 24
+  size: 72, 32
+  orig: 72, 32
   offset: 0, 0
   index: -1
 blue-feathers-02
-  rotate: false
-  xy: 932, 126
-  size: 61, 103
-  orig: 61, 103
+  rotate: true
+  xy: 204, 15
+  size: 41, 68
+  orig: 41, 68
   offset: 0, 0
   index: -1
 blue-feathers-03
   rotate: false
-  xy: 298, 30
-  size: 177, 184
-  orig: 180, 188
-  offset: 3, 0
+  xy: 604, 131
+  size: 118, 123
+  orig: 120, 125
+  offset: 2, 0
   index: -1
 blue-feathers-04
-  rotate: false
-  xy: 852, 116
-  size: 78, 113
-  orig: 79, 113
+  rotate: true
+  xy: 126, 4
+  size: 52, 76
+  orig: 53, 76
   offset: 1, 0
   index: -1

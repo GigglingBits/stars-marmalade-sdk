@@ -14,23 +14,23 @@ SpineResource
 
 SpineResource
 {
-	name	"spine_bird_01"
-	atlas	"spine/bird_01/output/bird_01.atlas"
-	json	"spine/bird_01/output/bird_01.json"
+	name	"spine_bird"
+	atlas	"spine/bird/output/bird.atlas"
+	json	"spine/bird/output/bird.json"
 }
 
 SpineResource
 {
-	name	"spine_bird_02"
-	atlas	"spine/bird_02/output/bird_02.atlas"
-	json	"spine/bird_02/output/bird_02.json"
+	name	"spine_bird_screecher"
+	atlas	"spine/bird_screecher/output/bird_screecher.atlas"
+	json	"spine/bird_screecher/output/bird_screecher.json"
 }
 
 SpineResource
 {
-	name	"spine_bird_03"
-	atlas	"spine/bird_03/output/bird_03.atlas"
-	json	"spine/bird_03/output/bird_03.json"
+	name	"spine_bird_ripper"
+	atlas	"spine/bird_ripper/output/bird_ripper.atlas"
+	json	"spine/bird_ripper/output/bird_ripper.json"
 }
 
 SpineResource
