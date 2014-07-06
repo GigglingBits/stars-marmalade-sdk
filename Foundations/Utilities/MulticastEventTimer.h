@@ -36,6 +36,17 @@ public:
 		m_xPayloads.push(spec);
 	}
 
+	void Clear() {
+		bool popped = false;
+		while (!m_xPayloads.empty()) {
+			m_xPayloads.pop();
+			popped = true;
+		}
+		if (popped) {
+			LastEventFired.Invoke(*this, 0);
+		}
+	}
+	
 	uint32 GetElapsedTime() const {
 		return m_lElapsedTime;
 	}

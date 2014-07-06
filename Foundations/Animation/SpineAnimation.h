@@ -5,6 +5,7 @@
 #include "IwGeom.h"
 #include "IwGx.h"
 #include "spine/spine.h"
+#include "MulticastEvent.h"
 
 #define SPINEANIMATION_VERTS_PER_SLOT 4
 
@@ -14,12 +15,13 @@ private:
 	spSkeletonJson* m_pxSkeletonJson;
 	spSkeletonData* m_pxSkeletonData;
 	spSkeleton* m_pxSkeleton;
-	spAnimation* m_pxAnimation;
+	spAnimationStateData* m_pxAnimationStateData;
+	spAnimationState* m_pxAnimationState;
 	float m_fAnimationTime;
 	
 	CIwFVec2 m_xSkeletonAABBLL;		// AABB of the original skeleton in starting pose (lower left corner)
 	CIwFVec2 m_xSkeletonAABBUR;		// AABB of the original skeleton in starting pose (upper right corner)
-	
+		
 public:
 	SpineAnimation();
 	virtual ~SpineAnimation();
@@ -28,9 +30,11 @@ public:
 
 	bool SetSkin(const std::string& name);
 	bool ConstainsSkin(const std::string& name);
+	std::string GetCurrentSkinName();
 	
 	bool SetAnimation(const std::string& name, float position = 0.0f);
 	bool ConstainsAnimation(const std::string& name);
+	std::string GetCurrentAnimationName();
 	
 	bool GetFlipX();
 	void SetFlipX(bool flip);
@@ -63,6 +67,18 @@ protected:
 	const CIwFVec2& GetAABBLL() const;
 	const CIwFVec2& GetAABBUR() const;
 	void GrowAABB(CIwFVec2& ll, CIwFVec2& ur, const CIwFVec2& point) const;
+		
+public:
+	struct EventArgs {
+		std::string type;
+		float float_param;
+		int int_param;
+		std::string string_param;
+	};
+	MulticastEvent<SpineAnimation, EventArgs> CustomEvent;
+		
+private:
+	void CustomEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args);
 };
 
 #endif

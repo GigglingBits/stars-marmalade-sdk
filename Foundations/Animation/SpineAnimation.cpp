@@ -6,16 +6,95 @@
 
 #include <spine/extension.h>
 
+extern "C" {
+	void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
+		IW_CALLSTACK_SELF;
+		
+		char* filename = new char[strlen(path) + 1];
+		IwPathGetFilename(path, filename, false);
+		
+		CIwTexture* texture = (CIwTexture*)IwGetResManager()->GetResNamed(filename, "CIwTexture");
+		self->rendererObject = texture;
+		self->width = texture->GetWidth();
+		self->height = texture->GetHeight();
+		
+		delete [] filename;
+	}
+	
+	void _spAtlasPage_disposeTexture (spAtlasPage* self) {
+		if (self->rendererObject) {
+			// delete (CIwTexture*)self->rendererObject;
+			// memory is managed by resource manager
+			self->rendererObject = NULL;
+		}
+	}
+	
+	char* _spUtil_readFile (const char* path, int* length) {
+		IW_CALLSTACK_SELF;
+		IwAssertMsg(MYAPP, false, ("Attempting to read file: '%s'. Contents should have been created  via the resource system.", path));
+		*length = 0;
+		return NULL;
+		//return _readFile(path, length);
+	}
+	
+	void _spAnimationStateCallback(spAnimationState* state, int trackIndex, spEventType type, spEvent* event, int loopCount) {
+		IW_CALLSTACK_SELF;
+		
+		SpineAnimation* spineanim = (SpineAnimation*)state->rendererObject;
+		IwAssertMsg(MYAPP, spineanim, ("No renderer object in animation callback. Cannot propagate event."));
+
+		switch (type) {
+			case SP_ANIMATION_START:
+				if (spineanim) {
+					IwTrace(MYAPP, ("Starting animation"));
+				} else {
+					IwTrace(MYAPP, ("Starting animation '%s'/'%s'", spineanim->GetCurrentSkinName().c_str(), spineanim->GetCurrentAnimationName().c_str()));
+				}
+				break;
+			case SP_ANIMATION_EVENT:
+				// custom animation event
+				if (spineanim) {
+					SpineAnimation::EventArgs args;
+					args.type = event->data->name;
+					args.float_param = event->floatValue;
+					args.int_param = event->intValue;
+					args.string_param = event->stringValue;
+					spineanim->CustomEvent.Invoke(*spineanim, args);
+				}
+				break;
+			case SP_ANIMATION_COMPLETE:
+				// animation finished will loop
+				if (spineanim) {
+					IwTrace(MYAPP, ("Completing animation and looping"));
+				} else {
+					IwTrace(MYAPP, ("Completing animation and looping '%s'/'%s'", spineanim->GetCurrentSkinName().c_str(), spineanim->GetCurrentAnimationName().c_str()));
+				}
+				break;
+			case SP_ANIMATION_END:
+				// not looping, is unloaded
+				if (spineanim) {
+					IwTrace(MYAPP, ("Ending animation"));
+				} else {
+					IwTrace(MYAPP, ("Ending animation '%s'/'%s'", spineanim->GetCurrentSkinName().c_str(), spineanim->GetCurrentAnimationName().c_str()));
+				}
+				break;
+		}
+	}
+}
+
 SpineAnimation::SpineAnimation() :
 m_pxAtlas(NULL),
 m_pxSkeletonJson(NULL),
 m_pxSkeletonData(NULL),
 m_pxSkeleton(NULL),
-m_pxAnimation(NULL),
+m_pxAnimationStateData(NULL),
+m_pxAnimationState(NULL),
 m_fAnimationTime(0.0f) {
+	CustomEvent.AddListener(this, &SpineAnimation::CustomEventHandler);
 }
 
 SpineAnimation::~SpineAnimation() {
+	CustomEvent.RemoveListener(this, &SpineAnimation::CustomEventHandler);
 	DestroySkeleton();
 }
 
@@ -50,6 +129,13 @@ bool SpineAnimation::ConstainsSkin(const std::string& name) {
 	return (bool) spSkeletonData_findSkin(m_pxSkeletonData, name.c_str());
 }
 
+std::string SpineAnimation::GetCurrentSkinName() {
+	if (m_pxSkeleton && m_pxSkeleton->skin && m_pxSkeleton->skin->name) {
+		return m_pxSkeleton->skin->name;
+	}
+	return "???";
+}
+
 bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, m_pxSkeletonData, ("Skeleton must be loaded before setting the animation"));
@@ -62,14 +148,28 @@ bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 	// is lacking some key frames
 	spSkeleton_setToSetupPose(m_pxSkeleton);
 
-	if (!(m_pxAnimation && name.compare(m_pxAnimation->name) == 0)) {
-		m_pxAnimation = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
-		IwAssertMsg(MYAPP, m_pxAnimation, ("Unable to find '%s' animation", name.c_str()));
+	if (m_pxAnimationState) {
+		spAnimationState_dispose(m_pxAnimationState);
 	}
-
-	m_fAnimationTime = position;
-	
-	return (bool)m_pxAnimation;
+	if (m_pxAnimationStateData) {
+		spAnimationStateData_dispose(m_pxAnimationStateData);
+	}
+	if (!(m_pxAnimationStateData = spAnimationStateData_create(m_pxSkeletonData))) {
+		IwAssertMsg(MYAPP, m_pxAnimationStateData, ("Unable to create animation state data for animation '%s'", name.c_str()));
+	} else if (!(m_pxAnimationState = spAnimationState_create(m_pxAnimationStateData))) {
+		IwAssertMsg(MYAPP, m_pxAnimationState, ("Unable to create animation state for animation '%s'", name.c_str()));
+	} else {
+		m_pxAnimationState->rendererObject = (void*) this;
+		m_pxAnimationState->listener = _spAnimationStateCallback;
+		m_fAnimationTime = position;
+		if (spAnimationState_setAnimationByName(m_pxAnimationState, 0, name.c_str(), true)) {
+			// note: using track index 0; assuming that we are not usng multiple tracks
+			return true;
+		} else {
+			IwAssertMsg(MYAPP, m_pxAnimationState, ("Unable to find animation '%s'", name.c_str()));
+		}
+	}
+	return false;
 }
 
 bool SpineAnimation::ConstainsAnimation(const std::string& name) {
@@ -80,6 +180,18 @@ bool SpineAnimation::ConstainsAnimation(const std::string& name) {
 	}
 	
 	return (bool) spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str());
+}
+
+std::string SpineAnimation::GetCurrentAnimationName() {
+	if (m_pxAnimationState) {
+		if (spTrackEntry* track = spAnimationState_getCurrent(m_pxAnimationState, 0)) {
+			if (track->animation && track->animation->name) {
+				return track->animation->name;
+			}
+		}
+	}
+
+	return "???";
 }
 
 bool SpineAnimation::LoadSkeleton(const std::string& atlasdata, const std::string& jsondata) {
@@ -145,10 +257,10 @@ void SpineAnimation::Update(uint32 timestep) {
 		spSkeleton_update(m_pxSkeleton, seconds);
 
 		// perform actual animation
-		if (m_pxAnimation) {
-			spAnimation_apply(m_pxAnimation, m_pxSkeleton, m_fAnimationTime, m_fAnimationTime + seconds, 1, NULL, 0);
-			spSkeleton_updateWorldTransform(m_pxSkeleton);
-		}
+		if (m_pxAnimationState) {
+			spAnimationState_update(m_pxAnimationState, seconds);
+			spAnimationState_apply(m_pxAnimationState, m_pxSkeleton);
+			spSkeleton_updateWorldTransform(m_pxSkeleton);		}
 	}
 	
 	// accumulate
@@ -373,34 +485,11 @@ void SpineAnimation::ExtractUVs(CIwFVec2 uvs[4], spAtlasRegion* atlasreg) {
 	}
 }
 
-extern "C" {
-	void _spAtlasPage_createTexture (spAtlasPage* self, const char* path) {
-		IW_CALLSTACK_SELF;
-
-		char* filename = new char[strlen(path) + 1];
-		IwPathGetFilename(path, filename, false);
-
-		CIwTexture* texture = (CIwTexture*)IwGetResManager()->GetResNamed(filename, "CIwTexture");
-		self->rendererObject = texture;
-		self->width = texture->GetWidth();
-		self->height = texture->GetHeight();
-		
-		delete [] filename;
-	}
+void SpineAnimation::CustomEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args) {
+	IW_CALLSTACK_SELF;
 	
-	void _spAtlasPage_disposeTexture (spAtlasPage* self) {
-		if (self->rendererObject) {
-			// delete (CIwTexture*)self->rendererObject;
-			// memory is managed by resource manager
-			self->rendererObject = NULL;
-		}
-	}
-	
-	char* _spUtil_readFile (const char* path, int* length) {
-		IW_CALLSTACK_SELF;
-		IwAssertMsg(MYAPP, false, ("Attempting to read file: '%s'. Contents should have been created  via the resource system.", path));
-		*length = 0;
-		return NULL;
-		//return _readFile(path, length);
+	if (!args.type.compare("animation")) {
+		IwAssertMsg(MYAPP, !args.string_param.empty(), ("Cannot swith to animation with empty name!"));
+		SetAnimation(args.string_param);
 	}
 }
