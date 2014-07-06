@@ -10,7 +10,7 @@ BirdScreecher::BirdScreecher(const std::string& id, const b2BodyDef& bodydef, co
 		
 	SetTextureFrame("normal");
 		
-	if (SpineAnimation* sp = GetTextureAnimation()) {
+	if (SpineAnimation* sp = GetTextureSkeleton()) {
 		sp->CustomEvent.AddListener(this, &BirdScreecher::AnimationEventHandler);
 	} else {
 		IwAssertMsg(MYAPP, false, ("Cannot get texture animation for body of type '%s'", GetTypeName()));
@@ -20,7 +20,7 @@ BirdScreecher::BirdScreecher(const std::string& id, const b2BodyDef& bodydef, co
 BirdScreecher::~BirdScreecher() {
 	IW_CALLSTACK_SELF;
 
-	if (SpineAnimation* sp = GetTextureAnimation()) {
+	if (SpineAnimation* sp = GetTextureSkeleton()) {
 		sp->CustomEvent.RemoveListener(this, &BirdScreecher::AnimationEventHandler);
 	} else {
 		IwAssertMsg(MYAPP, false, ("Cannot get texture animation for body of type '%s'", GetTypeName()));
@@ -34,15 +34,6 @@ const char* BirdScreecher::GetTypeName() {
 const char* BirdScreecher::TypeName() {
 	static const char* type = "birdscreecher";
 	return type;
-}
-
-SpineAnimation* BirdScreecher::GetTextureAnimation() {
-	if (Texture* t = GetTexture()) {
-		if (t->IsSkeleton()) {
-			return t->GetSkeleton();
-		}
-	}
-	return NULL;
 }
 
 void BirdScreecher::SetScreechCollision(bool enable) {
@@ -65,7 +56,6 @@ void BirdScreecher::AnimationEventHandler(const SpineAnimation& sender, const Sp
 	if (!args.type.compare("custom")) {
 		if (!args.string_param.compare("enable screech")) {
 			SetScreechCollision(true);
-			SoundEngine::GetInstance().PlaySoundEffect("Screech");
 		} else if (!args.string_param.compare("disable screech")) {
 			SetScreechCollision(false);
 		} else {

@@ -13,9 +13,7 @@ public:
 
 	virtual void KnockOut();
 
-private:
-	SpineAnimation* GetTextureAnimation();
-	
+private:	
 	void SetScreechCollision(bool enable);
 
 	void AnimationEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args);

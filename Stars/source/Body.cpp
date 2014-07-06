@@ -5,6 +5,7 @@
 #include "IwDebug.h"
 #include "Configuration.h"
 #include "FactoryManager.h"
+#include "SoundEngine.h"
 
 Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
 	: Sprite(id, texturedef) {
@@ -34,9 +35,18 @@ Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 
 	// set the shape for initial rendering
 	UpdateShape();
+
+	// sound support for animations
+	if (SpineAnimation* sp = GetTextureSkeleton()) {
+		sp->CustomEvent.AddListener(this, &Body::AnimationEventHandler);
+	}
 }
 
 Body::~Body() {
+	if (SpineAnimation* sp = GetTextureSkeleton()) {
+		sp->CustomEvent.RemoveListener(this, &Body::AnimationEventHandler);
+	}
+
 	if (IsDragging()) {
 		EndDragging();
 	}
@@ -52,6 +62,15 @@ const char* Body::GetTypeName() {
 const char* Body::TypeName() {
 	static const char* type = "body";
 	return type;
+}
+
+SpineAnimation* Body::GetTextureSkeleton() {
+	if (Texture* t = GetTexture()) {
+		if (t->IsSkeleton()) {
+			return t->GetSkeleton();
+		}
+	}
+	return NULL;
 }
 
 bool Body::CanDispose() {
@@ -329,3 +348,14 @@ void Body::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 }
 
+void Body::AnimationEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args) {
+	IW_CALLSTACK_SELF;
+	
+	if (!args.type.compare("sound")) {
+		if (!args.string_param.empty()) {
+			SoundEngine::GetInstance().PlaySoundEffect(args.string_param);
+		} else {
+			IwAssertMsg(MYAPP, false, ("Sound event received, but no string parameter found. No sound will be played."));
+		}
+	}
+}

@@ -84,6 +84,8 @@ public:
 	virtual float GetMass();
 
 protected:
+	SpineAnimation* GetTextureSkeleton();
+	
 	b2Fixture& GetFixture();
 
 	CIwFVec2 GetDragTarget();
@@ -93,6 +95,9 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnColliding(Body& body);
 	
+private:
+	void AnimationEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args);
+
 public:
 	struct EmitBuffArgs {
 		CIwFVec2 pos;
