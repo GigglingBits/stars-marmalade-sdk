@@ -81,6 +81,15 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
+	name		"Screech"
+	data		"screech"
+	vol 		0.8
+	pitchMin	1.00
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
 	name		"level_win"
 	data		"level_win"
 	vol 		0.7

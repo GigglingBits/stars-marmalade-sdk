@@ -4,6 +4,8 @@
 #include "CompositeBody.h"
 #include "ParticleSystem.h"
 
+#include <set>
+
 #define ENEMY_SLEDGE_BODY "sledge"
 #define ENEMY_SLEDGE_CHILD "sledge"
 #define ENEMY_SLEDGE_JOINT "sledge"
@@ -14,11 +16,16 @@ private:
 	bool m_bKnockedOut;
 	bool m_bNeedDetachSledge;
 	
+	std::set<std::string> m_xSoftSpots;
+	
 public:
 	Enemy(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
+	
+	void RegisterSoftsopt(const std::string& childid);
+	void UnregisterSoftsopt(const std::string& childid);
 	
 private:
 	void AttachSledge();

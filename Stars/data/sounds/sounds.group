@@ -8,6 +8,8 @@ CIwResGroup
 	./eat_01.wav
 	./ouch_01.wav
 
+	./screech.wav
+
 	./level_win.wav
 
 	./27995_SFX_FoleyDroppingEmptyBulletShell.wav

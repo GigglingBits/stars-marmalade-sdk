@@ -16,6 +16,14 @@ const char* Enemy::TypeName() {
 	return type;
 }
 
+void Enemy::RegisterSoftsopt(const std::string& childid) {
+	m_xSoftSpots.insert(childid);
+}
+
+void Enemy::UnregisterSoftsopt(const std::string& childid) {
+	m_xSoftSpots.erase(childid);
+}
+
 void Enemy::KnockOut() {
 	EnableCollisions(false);
 
@@ -35,9 +43,11 @@ void Enemy::DetachSledge() {
 
 void Enemy::OnChildColliding(Body& child, Body& body) {
 	if (!m_bKnockedOut && dynamic_cast<Star*>(&body)) {
-		KnockOut();
+		if (m_xSoftSpots.find(child.GetId()) != m_xSoftSpots.end()) {
+			KnockOut();
+			EmitBuff();
+		}
 		ShowEffect("star_collision");
-		EmitBuff();
 	}
 	
 	CompositeBody::OnChildColliding(child, body);

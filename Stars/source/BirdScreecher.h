@@ -6,9 +6,19 @@
 class BirdScreecher : public Bird {
 public:
 	BirdScreecher(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
-
+	virtual ~BirdScreecher();
+	
 	virtual const char* GetTypeName();
 	static const char* TypeName();
+
+	virtual void KnockOut();
+
+private:
+	SpineAnimation* GetTextureAnimation();
+	
+	void SetScreechCollision(bool enable);
+
+	void AnimationEventHandler(const SpineAnimation& sender, const SpineAnimation::EventArgs& args);
 };
 
 #endif

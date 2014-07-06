@@ -110,6 +110,10 @@
 		}
 	}
 },
+"events": {
+	"animation": {},
+	"custom": {}
+},
 "animations": {
 	"attack": {
 		"slots": {
@@ -328,7 +332,12 @@
 					{ "time": 3.3333, "x": 2.065, "y": 1.958 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "time": 2.5, "name": "custom", "string": "enable screech" },
+			{ "time": 3.2, "name": "custom", "string": "disable screech" },
+			{ "time": 3.6666, "name": "animation", "string": "normal" }
+		]
 	},
 	"hurt": {
 		"slots": {
@@ -726,7 +735,10 @@
 					{ "time": 2, "x": 0, "y": 0 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "time": 2, "name": "animation", "string": "attack" }
+		]
 	}
 }
 }

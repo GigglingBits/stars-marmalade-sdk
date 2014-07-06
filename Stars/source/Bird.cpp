@@ -5,8 +5,12 @@
 #include "Main.h"
 
 Bird::Bird(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
-	: Enemy(id, bodydef, fixturedef, texturedef) {
+: Enemy(id, bodydef, fixturedef, texturedef) {
 	SetTextureFrame("normal");
+
+	RegisterSoftsopt("softspot_a");
+	RegisterSoftsopt("softspot_b");
+	RegisterSoftsopt("softspot_c");
 }
 
 const char* Bird::GetTypeName() {

@@ -136,8 +136,8 @@
 			<texture animation="spine_bird" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.65" y="0.0" />
-			<child body="softspot" port="a" jointtype="weld" />
-			<child body="softspot" port="b" jointtype="weld" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
 		</body>
 
 		<body id="bird_screecher" type="bird_screecher" resilience="1.0" >
@@ -152,9 +152,20 @@
 			<port id="a" x="0.25" y="0.5" />
 			<port id="b" x="0.65" y="0.1" />
 			<port id="c" x="0.75" y="-0.2" />
-			<child body="softspot" port="a" jointtype="weld" />
-			<child body="softspot" port="b" jointtype="weld" />
-			<child body="softspot" port="c" jointtype="weld" />
+			<port id="d" x="-0.7" y="0.0" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
+			<child id="softspot_c" body="softspot" port="c" jointtype="weld" />
+			<child id="screech" port="d" jointtype="weld">
+				<body id="screech" type="dynamic" fixture="none" texture="none" resilience="1.0" revolve="0" collide="0">
+					<fixture friction="1.0" restitution="1.0" density="0.1" sensor="1" />
+					<shape type="polygon">
+						<point x="-2.5" y="-0.8" />
+						<point x="0.0" y="0.0" />
+						<point x="-2.5" y="0.8" />
+					</shape>
+				</body>
+			</child>
 		</body>
 		
 		<body id="bird_ripper" type="bird_ripper" resilience="1.0" >
@@ -168,8 +179,8 @@
 			<texture animation="spine_bird_ripper" />
 			<port id="a" x="0.25" y="0.1" />
 			<port id="b" x="0.45" y="0.1" />
-			<child body="softspot" port="a" jointtype="weld" />
-			<child body="softspot" port="b" jointtype="weld" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
 		</body>
 
 		<body id="grunt_01" type="grunt" resilience="1.0" revolve="0">
