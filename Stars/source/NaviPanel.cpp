@@ -68,7 +68,6 @@ void NaviPanel::AddButton(const std::string& textureid, int buttonid) {
 	m_apxButtons[cursor] = new Button(eButtonCommandIdNone, s3eKeyFirst, buttonid);
 	m_apxButtons[cursor]->SetTexture(t);
 	m_apxButtons[cursor]->SetHideWhenDisabled(true);
-	m_apxButtons[cursor]->SetShadedWhenPressed(false);
 
 	// houskeeping
 	m_iButtonCount++;

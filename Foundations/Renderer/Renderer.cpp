@@ -8,7 +8,17 @@ Renderer::Renderer() {
 	m_xScreenOffset = CIwSVec2::g_Zero;
 	m_eCurrentRenderingLayer = eRenderingLayerGameDynamicObjects;
 
+	ResetAmbientLightColour();
+	
 	memset(m_apxFonts, 0, sizeof(m_apxFonts));
+}
+
+void Renderer::SetAmbientLightColour(uint32 colour) {
+	m_uiAmbientLight = colour;
+}
+
+void Renderer::ResetAmbientLightColour() {
+	m_uiAmbientLight = 0xffffffff;
 }
 
 void Renderer::SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system) {
@@ -31,7 +41,7 @@ void Renderer::SetFonts(const std::string& large, const std::string& normal, con
 
 CIwMaterial* Renderer::CreateGxCacheMaterial(CIwTexture* texture, bool additivebelnding) {
 	CIwMaterial* mat = IW_GX_ALLOC_MATERIAL();
-	mat->SetColAmbient(0xffffffff);
+	mat->SetColAmbient(m_uiAmbientLight);
 	mat->SetModulateMode(CIwMaterial::MODULATE_RGB);
 	mat->SetAlphaMode(additivebelnding ? CIwMaterial::ALPHA_ADD : CIwMaterial::ALPHA_BLEND);
 	mat->SetTexture(texture);

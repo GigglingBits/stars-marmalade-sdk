@@ -18,15 +18,12 @@ CIwResGroup
 	./navidot_empty.png
 
 	./button_earth_level.png
-	./button_earth_level_pressed.png
 	./button_earth_level_locked.png
 
 	./button_mars_level.png
-	./button_mars_level_pressed.png
 	./button_mars_level_locked.png
 
 	./button_jupiter_level.png
-	./button_jupiter_level_pressed.png
 	./button_jupiter_level_locked.png
 
 	./button_level_0_star.png

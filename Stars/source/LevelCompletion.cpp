@@ -28,7 +28,6 @@ void LevelCompletion::Initialize() {
 
 	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create("button_completion"));
     m_xButtonStar.SetTextureFrame(m_xCompletionInfo.IsCleared() ? "won" : "lost");
-	m_xButtonStar.SetShadedWhenPressed(false);
 	m_xButtonStar.SetRenderingLayer(Renderer::eRenderingLayerGameBackground);
     
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_menu"));

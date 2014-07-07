@@ -41,6 +41,8 @@ private:
 	Viewport m_xViewport;
 	RenderingLayer m_eCurrentRenderingLayer;
 
+	uint32 m_uiAmbientLight;
+	
 	CIwGxFont* m_apxFonts[eFontTypeLast];
 
 public:
@@ -53,6 +55,9 @@ public:
 	void SetRenderingLayer(RenderingLayer renderinglayer);
 
 	void SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system);
+
+	void SetAmbientLightColour(uint32 colour);
+	void ResetAmbientLightColour();
 	
 public:
 	// drawing to world (world coordinates)

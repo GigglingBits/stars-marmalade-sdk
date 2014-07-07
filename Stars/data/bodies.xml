@@ -354,17 +354,17 @@
 		</texture>
 		<texture id="button_earth_level">
 			<frame id="released" image="button_earth_level"/>
-			<frame id="pressed" image="button_earth_level_pressed"/>
+			<frame id="pressed" image="button_earth_level"/>
 			<frame id="disabled" image="button_earth_level_locked"/>
 		</texture>
 		<texture id="button_mars_level">
 			<frame id="released" image="button_mars_level"/>
-			<frame id="pressed" image="button_mars_level_pressed"/>
+			<frame id="pressed" image="button_mars_level"/>
 			<frame id="disabled" image="button_mars_level_locked"/>
 		</texture>
 		<texture id="button_jupiter_level">
 			<frame id="released" image="button_jupiter_level"/>
-			<frame id="pressed" image="button_jupiter_level_pressed"/>
+			<frame id="pressed" image="button_jupiter_level"/>
 			<frame id="disabled" image="button_jupiter_level_locked"/>
 		</texture>
 		<texture id="button_level_achieved_stars">

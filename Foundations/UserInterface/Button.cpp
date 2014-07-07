@@ -113,17 +113,19 @@ void Button::OnRender(Renderer& renderer, const FrameData& frame) {
 		return;
 	}
 
+	if (m_bShadedWhenPressed && m_bDown) {
+		renderer.SetAmbientLightColour(0xff888888);
+	}
+	
 	if (m_pxTexture) {
-		renderer.Draw(m_xButtonVerts, *m_pxTexture); 
+		renderer.Draw(m_xButtonVerts, *m_pxTexture);
 	}
 
 	if (!m_sText.empty()) {
 		renderer.DrawText(m_sText, m_xButton.rect, m_eFontType, m_uiTextCol);
 	}
-
-	if (m_bShadedWhenPressed && m_bDown) {
-		renderer.DrawRect(m_xButton.rect, 0x00000000, 0x77000000);
-	}
+	
+	renderer.ResetAmbientLightColour();
 }
 
 void Button::OnTextureLoaded(Texture& texture) {
