@@ -335,8 +335,8 @@
 			}
 		},
 		"events": [
+			{ "time": 1.5666, "name": "sound", "string": "Screech" },
 			{ "time": 1.6, "name": "custom", "string": "enable screech" },
-			{ "time": 1.6, "name": "sound", "string": "Screech" },
 			{ "time": 2.3, "name": "custom", "string": "disable screech" },
 			{ "time": 2.7666, "name": "animation", "string": "normal" }
 		]
