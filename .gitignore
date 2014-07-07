@@ -5,6 +5,7 @@ data-ram
 
 Stars/build_*
 Stars/doxygen/output
+Stars/run_Stars*
 
 Kidpuzzle/build_kidpuzzle_vc11/
 Kidpuzzle/build_kidpuzzle_xcode/
