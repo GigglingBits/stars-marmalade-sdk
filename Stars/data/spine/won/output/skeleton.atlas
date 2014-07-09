@@ -1,0 +1,83 @@
+
+skeleton.png
+size: 830,247
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+happystar-eyes-sleepy
+  rotate: false
+  xy: 585, 153
+  size: 181, 94
+  orig: 181, 94
+  offset: 0, 0
+  index: -1
+won_star_01
+  rotate: false
+  xy: 348, 2
+  size: 235, 245
+  orig: 235, 245
+  offset: 0, 0
+  index: -1
+won_star_03
+  rotate: false
+  xy: 648, 123
+  size: 34, 28
+  orig: 34, 28
+  offset: 0, 0
+  index: -1
+won_star_04
+  rotate: true
+  xy: 768, 170
+  size: 42, 16
+  orig: 42, 16
+  offset: 0, 0
+  index: -1
+won_star_05
+  rotate: false
+  xy: 806, 221
+  size: 24, 26
+  orig: 36, 33
+  offset: 2, 0
+  index: -1
+won_star_06
+  rotate: false
+  xy: 585, 54
+  size: 24, 26
+  orig: 36, 33
+  offset: 2, 1
+  index: -1
+won_star_07
+  rotate: false
+  xy: 768, 214
+  size: 36, 33
+  orig: 36, 33
+  offset: 0, 0
+  index: -1
+won_star_08
+  rotate: false
+  xy: 585, 82
+  size: 36, 33
+  orig: 36, 33
+  offset: 0, 0
+  index: -1
+won_star_09
+  rotate: false
+  xy: 623, 102
+  size: 22, 13
+  orig: 22, 13
+  offset: 0, 0
+  index: -1
+won_star_10
+  rotate: false
+  xy: 585, 117
+  size: 61, 34
+  orig: 61, 34
+  offset: 0, 0
+  index: -1
+won_star_11
+  rotate: false
+  xy: 2, 2
+  size: 344, 245
+  orig: 369, 260
+  offset: 25, 15
+  index: -1

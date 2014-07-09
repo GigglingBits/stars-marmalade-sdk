@@ -851,7 +851,15 @@
 					{ "time": 6.8333, "x": 0, "y": 0 }
 				]
 			}
-		}
+		},
+		"draworder": [
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "bigbluebird-wing-01", "offset": 2 }
+				]
+			}
+		]
 	},
 	"hurt": {
 		"slots": {

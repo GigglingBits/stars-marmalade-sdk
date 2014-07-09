@@ -1,0 +1,83 @@
+
+skeleton.png
+size: 493,459
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+awards_base
+  rotate: false
+  xy: 2, 2
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+awards_gradient
+  rotate: false
+  xy: 2, 206
+  size: 253, 253
+  orig: 275, 275
+  offset: 11, 11
+  index: -1
+awards_stars_blank_01
+  rotate: true
+  xy: 336, 228
+  size: 75, 77
+  orig: 75, 77
+  offset: 0, 0
+  index: -1
+awards_stars_blank_02
+  rotate: false
+  xy: 337, 383
+  size: 77, 76
+  orig: 77, 76
+  offset: 0, 0
+  index: -1
+awards_stars_blank_03
+  rotate: false
+  xy: 257, 383
+  size: 78, 76
+  orig: 78, 76
+  offset: 0, 0
+  index: -1
+awards_stars_full_01
+  rotate: true
+  xy: 416, 306
+  size: 75, 77
+  orig: 75, 77
+  offset: 0, 0
+  index: -1
+awards_stars_full_02
+  rotate: false
+  xy: 257, 227
+  size: 77, 76
+  orig: 77, 76
+  offset: 0, 0
+  index: -1
+awards_stars_full_03
+  rotate: false
+  xy: 337, 305
+  size: 77, 76
+  orig: 77, 76
+  offset: 0, 0
+  index: -1
+awards_stars_shadow_01
+  rotate: false
+  xy: 223, 127
+  size: 75, 77
+  orig: 75, 77
+  offset: 0, 0
+  index: -1
+awards_stars_shadow_02
+  rotate: false
+  xy: 416, 383
+  size: 77, 76
+  orig: 77, 76
+  offset: 0, 0
+  index: -1
+awards_stars_shadow_03
+  rotate: false
+  xy: 257, 305
+  size: 78, 76
+  orig: 78, 76
+  offset: 0, 0
+  index: -1
