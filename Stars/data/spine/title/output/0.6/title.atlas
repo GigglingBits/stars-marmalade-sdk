@@ -1,6 +1,6 @@
 
 title.png
-size: 769,1008
+size: 992,1008
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -9,6 +9,20 @@ bluebird
   xy: 2, 2
   size: 290, 286
   orig: 290, 286
+  offset: 0, 0
+  index: -1
+meteor-brown-L
+  rotate: false
+  xy: 734, 732
+  size: 251, 276
+  orig: 251, 277
+  offset: 0, 0
+  index: -1
+meteor-brown-S
+  rotate: false
+  xy: 771, 494
+  size: 221, 236
+  orig: 221, 236
   offset: 0, 0
   index: -1
 redbird
