@@ -21,8 +21,8 @@ CIwResGroup
 	./spine/bird_screecher/output/bird_screecher.png
 	./spine/bird_ripper/output/bird_ripper.png
 
-	./spine/grunt_01/output/grunt_01.png
-	./spine/grunt_02/output/grunt_02.png
-	./spine/grunt_03/output/grunt_03.png
-	./spine/grunt_boss/output/grunt_boss.png
+	./spine/grunt/output/grunt.png
+	./spine/grunt_bully/output/grunt_bully.png
+	./spine/grunt_gunner/output/grunt_gunner.png
+	./spine/grunt_ufo/output/grunt_ufo.png
 }

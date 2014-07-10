@@ -7,6 +7,7 @@
 #define GAME_POINTS_NUGGET3 (50)
 #define GAME_POINTS_NUGGET4 (100)
 #define GAME_POINTS_BIRD (20)
+#define GAME_POINTS_GRUNT (50)
 
 // colours
 #define GAME_COLOUR_FONT_MAIN (0xffccfaff)

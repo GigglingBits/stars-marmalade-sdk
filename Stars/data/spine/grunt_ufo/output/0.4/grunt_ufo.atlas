@@ -1,0 +1,153 @@
+
+grunt_ufo.png
+size: 497,510
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+_bigbadboss-body
+  rotate: false
+  xy: 2, 229
+  size: 287, 281
+  orig: 287, 281
+  offset: 0, 0
+  index: -1
+bigbadboss-eye-details-01
+  rotate: false
+  xy: 103, 30
+  size: 39, 19
+  orig: 40, 19
+  offset: 1, 0
+  index: -1
+bigbadboss-eye-details-02
+  rotate: false
+  xy: 194, 146
+  size: 33, 14
+  orig: 33, 14
+  offset: 0, 0
+  index: -1
+bigbadboss-jetpack-detail-left
+  rotate: false
+  xy: 103, 2
+  size: 30, 26
+  orig: 30, 26
+  offset: 0, 0
+  index: -1
+bigbadboss-jetpack-detail-middle
+  rotate: false
+  xy: 345, 321
+  size: 46, 29
+  orig: 46, 29
+  offset: 0, 0
+  index: -1
+bigbadboss-jetpack-detail-right
+  rotate: false
+  xy: 160, 119
+  size: 28, 24
+  orig: 28, 24
+  offset: 0, 0
+  index: -1
+bigbadboss_arm_left
+  rotate: true
+  xy: 408, 445
+  size: 65, 89
+  orig: 65, 89
+  offset: 0, 0
+  index: -1
+bigbadboss_arm_right
+  rotate: true
+  xy: 194, 162
+  size: 65, 88
+  orig: 65, 88
+  offset: 0, 0
+  index: -1
+bigbadboss_attackeffect
+  rotate: false
+  xy: 2, 131
+  size: 96, 96
+  orig: 100, 100
+  offset: 2, 2
+  index: -1
+bigbadboss_eye_angry
+  rotate: false
+  xy: 100, 145
+  size: 92, 82
+  orig: 92, 82
+  offset: 0, 0
+  index: -1
+bigbadboss_eye_closed
+  rotate: true
+  xy: 291, 227
+  size: 91, 54
+  orig: 91, 54
+  offset: 0, 0
+  index: -1
+bigbadboss_eye_hurt
+  rotate: true
+  xy: 2, 21
+  size: 108, 75
+  orig: 108, 75
+  offset: 0, 0
+  index: -1
+bigbadboss_eye_open
+  rotate: true
+  xy: 345, 352
+  size: 86, 63
+  orig: 86, 63
+  offset: 0, 0
+  index: -1
+bigbadboss_eye_openrightbeforeclosing
+  rotate: true
+  xy: 410, 351
+  size: 92, 55
+  orig: 92, 55
+  offset: 0, 0
+  index: -1
+bigbadboss_eye_staringatplayer
+  rotate: true
+  xy: 103, 51
+  size: 92, 55
+  orig: 92, 55
+  offset: 0, 0
+  index: -1
+bigbadboss_mouth_angry
+  rotate: true
+  xy: 79, 19
+  size: 110, 22
+  orig: 110, 22
+  offset: 0, 0
+  index: -1
+bigbadboss_mouth_closed
+  rotate: true
+  xy: 467, 337
+  size: 106, 25
+  orig: 106, 25
+  offset: 0, 0
+  index: -1
+bigbadboss_mouth_hurt
+  rotate: false
+  xy: 291, 440
+  size: 115, 70
+  orig: 118, 70
+  offset: 0, 0
+  index: -1
+bigbadboss_mouth_open
+  rotate: true
+  xy: 291, 320
+  size: 118, 52
+  orig: 118, 52
+  offset: 0, 0
+  index: -1
+bigbadboss_nose
+  rotate: true
+  xy: 284, 164
+  size: 18, 22
+  orig: 18, 25
+  offset: 0, 0
+  index: -1
+bigbadboss_patch
+  rotate: false
+  xy: 284, 184
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
