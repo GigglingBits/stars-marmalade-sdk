@@ -11,6 +11,20 @@ bluebird
   orig: 242, 238
   offset: 0, 0
   index: -1
+meteor-brown-L
+  rotate: false
+  xy: 338, 459
+  size: 210, 230
+  orig: 210, 231
+  offset: 0, 0
+  index: -1
+meteor-brown-S
+  rotate: true
+  xy: 338, 273
+  size: 184, 197
+  orig: 184, 197
+  offset: 0, 0
+  index: -1
 redbird
   rotate: false
   xy: 2, 2

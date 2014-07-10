@@ -24,9 +24,7 @@
 	{ "name": "happystar-eyes-hit1", "bone": "Eyes-special-siturations" },
 	{ "name": "happystar-mouth-detail", "bone": "Mouth-details" },
 	{ "name": "happy-star-chin-wound", "bone": "Happystar-chin.wound" },
-	{ "name": "aabb", "bone": "Torso", "attachment": "aabb" },
-	{ "name": "shield_background", "bone": "Torso", "attachment": "S_background" },
-	{ "name": "shield_foreground", "bone": "Torso", "attachment": "S_foreground" }
+	{ "name": "aabb", "bone": "Torso", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
@@ -84,209 +82,9 @@
 		"happystar-top": {
 			"happystar-top": { "x": 75.69, "y": 0.39, "scaleX": 0.513, "scaleY": 0.513, "rotation": -90.13, "width": 208, "height": 241 }
 		}
-	},
-	"Shield": {
-		"shield_background": {
-			"S_background": { "name": "shield_background", "x": 2, "y": -10.99, "scaleX": 1.313, "scaleY": 1.313, "width": 335, "height": 335 }
-		},
-		"shield_foreground": {
-			"S_foreground": { "name": "shield_foreground", "x": 13.99, "scaleX": 1.315, "scaleY": 1.315, "width": 315, "height": 319 }
-		}
 	}
 },
 "animations": {
-	"Fly downwards": {
-		"slots": {
-			"happy-star-chin-wound": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-eyes-hit1": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth-detail": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-lookingdown.png" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			}
-		},
-		"bones": {
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 2.49 },
-					{ "time": 0.1666, "angle": 5.2 },
-					{ "time": 0.3333, "angle": 2.49 },
-					{ "time": 0.5, "angle": 5.2 },
-					{ "time": 0.6666, "angle": 2.49 }
-				]
-			},
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": 3.99 },
-					{ "time": 0.1666, "angle": 10.5 },
-					{ "time": 0.3333, "angle": 3.99 },
-					{ "time": 0.5, "angle": 9.17 },
-					{ "time": 0.6666, "angle": 3.99 }
-				],
-				"translate": [
-					{ "time": 0, "x": -5, "y": 0.99, "curve": "stepped" },
-					{ "time": 0.3333, "x": -5, "y": 0.99, "curve": "stepped" },
-					{ "time": 0.6666, "x": -5, "y": 0.99 }
-				]
-			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": -19.28 },
-					{ "time": 0.1666, "angle": -26.17 },
-					{ "time": 0.3333, "angle": -19.06 },
-					{ "time": 0.5, "angle": -26.17 },
-					{ "time": 0.6666, "angle": -19.28 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": -5.07 },
-					{ "time": 0.1666, "angle": -8.8 },
-					{ "time": 0.3333, "angle": -5.07 },
-					{ "time": 0.5, "angle": -8.8 },
-					{ "time": 0.6666, "angle": -5.07 }
-				],
-				"translate": [
-					{ "time": 0, "x": -1, "y": -1.99, "curve": "stepped" },
-					{ "time": 0.3333, "x": -1, "y": -1.99, "curve": "stepped" },
-					{ "time": 0.6666, "x": -1, "y": -1.99 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": -2.36 },
-					{ "time": 0.1666, "angle": -4.36 },
-					{ "time": 0.3333, "angle": -2.36 },
-					{ "time": 0.5, "angle": -5.19 },
-					{ "time": 0.6666, "angle": -2.36 }
-				]
-			}
-		}
-	},
-	"Fly upwards": {
-		"slots": {
-			"happy-star-chin-wound": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-eyes-hit1": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth-detail": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-lookingup" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			}
-		},
-		"bones": {
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": -19.02 },
-					{ "time": 0.1666, "angle": -27.26 },
-					{ "time": 0.3333, "angle": -19.02 },
-					{ "time": 0.5, "angle": -27.26 },
-					{ "time": 0.6666, "angle": -19.02 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": -2.49 },
-					{ "time": 0.1666, "angle": -5.65 },
-					{ "time": 0.3333, "angle": -2.49 },
-					{ "time": 0.5, "angle": -5.65 },
-					{ "time": 0.6666, "angle": -2.49 }
-				]
-			},
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": -6.74 },
-					{ "time": 0.1666, "angle": -13.75 },
-					{ "time": 0.3333, "angle": -6.74 },
-					{ "time": 0.5, "angle": -13.75 },
-					{ "time": 0.6666, "angle": -6.74 }
-				],
-				"translate": [
-					{ "time": 0, "x": -2.02, "y": -1, "curve": "stepped" },
-					{ "time": 0.3333, "x": -2.02, "y": -1, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.02, "y": -1 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": 3.95 },
-					{ "time": 0.1666, "angle": 6.41 },
-					{ "time": 0.3333, "angle": 3.95 },
-					{ "time": 0.5, "angle": 6.8 },
-					{ "time": 0.6666, "angle": 3.95 }
-				]
-			},
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 4.33 },
-					{ "time": 0.1666, "angle": 8.65 },
-					{ "time": 0.3333, "angle": 4.33 },
-					{ "time": 0.5, "angle": 8.65 },
-					{ "time": 0.6666, "angle": 4.33 }
-				],
-				"translate": [
-					{ "time": 0, "x": 1, "y": -6, "curve": "stepped" },
-					{ "time": 0.3333, "x": 1, "y": -6, "curve": "stepped" },
-					{ "time": 0.6666, "x": 1, "y": -6 }
-				]
-			}
-		}
-	},
 	"Happystar-sad-2": {
 		"slots": {
 			"happy-star-chin-wound": {
@@ -304,16 +102,6 @@
 					{ "time": 0, "name": "happystar-eyes-sad" },
 					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
 					{ "time": 0.2, "name": "happystar-eyes-sad" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -420,16 +208,6 @@
 				"attachment": [
 					{ "time": 0, "name": "happystar-eyes-looking-totheplayer" }
 				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
 			}
 		},
 		"bones": {
@@ -527,16 +305,6 @@
 					{ "time": 0, "name": "happystar-eyes-angry" },
 					{ "time": 0.1, "name": "happystar-eyes-angry-closed" },
 					{ "time": 0.2, "name": "happystar-eyes-angry" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -636,154 +404,6 @@
 			}
 		}
 	},
-	"block": {
-		"slots": {
-			"happystar-mouth.png": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-mouth-angry" }
-				]
-			},
-			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": "happystar-eyes-angry" },
-					{ "time": 0.1, "name": "happystar-eyes-angry-closed" },
-					{ "time": 0.2, "name": "happystar-eyes-angry" },
-					{ "time": 0.6666, "name": "happystar-eyes-angry" },
-					{ "time": 0.7666, "name": "happystar-eyes-angry-closed" },
-					{ "time": 0.8666, "name": "happystar-eyes-angry" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": "S_background" },
-					{ "time": 0.6666, "name": "S_background" }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": "S_foreground" },
-					{ "time": 0.6666, "name": "S_foreground" }
-				]
-			}
-		},
-		"bones": {
-			"Arm_R": {
-				"rotate": [
-					{ "time": 0, "angle": 11.05 },
-					{ "time": 0.1666, "angle": 15.35 },
-					{ "time": 0.3333, "angle": 8.7 },
-					{ "time": 0.5, "angle": 15.35 },
-					{ "time": 0.6666, "angle": 11.05 },
-					{ "time": 0.8333, "angle": 15.35 },
-					{ "time": 1, "angle": 8.7 },
-					{ "time": 1.1666, "angle": 15.35 },
-					{ "time": 1.3333, "angle": 11.05 }
-				],
-				"translate": [
-					{ "time": 0, "x": -6.7, "y": -4.69 },
-					{ "time": 0.1666, "x": -8.21, "y": -7.11 },
-					{ "time": 0.3333, "x": -7.71, "y": -6.94 },
-					{ "time": 0.5, "x": -8.21, "y": -7.11 },
-					{ "time": 0.6666, "x": -6.7, "y": -4.69 },
-					{ "time": 0.8333, "x": -8.21, "y": -7.11 },
-					{ "time": 1, "x": -7.71, "y": -6.94 },
-					{ "time": 1.1666, "x": -8.21, "y": -7.11 },
-					{ "time": 1.3333, "x": -6.7, "y": -4.69 }
-				]
-			},
-			"Top": {
-				"rotate": [
-					{ "time": 0, "angle": 7.09 },
-					{ "time": 0.1666, "angle": 12.84 },
-					{ "time": 0.3333, "angle": 7.13 },
-					{ "time": 0.5, "angle": 12.84 },
-					{ "time": 0.6666, "angle": 7.09 },
-					{ "time": 0.8333, "angle": 12.84 },
-					{ "time": 1, "angle": 7.13 },
-					{ "time": 1.1666, "angle": 12.84 },
-					{ "time": 1.3333, "angle": 7.09 }
-				],
-				"translate": [
-					{ "time": 0, "x": 0.5, "y": -2.5 },
-					{ "time": 0.3333, "x": 0.5, "y": -3.67 },
-					{ "time": 0.6666, "x": 0.5, "y": -2.5 },
-					{ "time": 1, "x": 0.5, "y": -3.67 },
-					{ "time": 1.3333, "x": 0.5, "y": -2.5 }
-				]
-			},
-			"Leg_R": {
-				"rotate": [
-					{ "time": 0, "angle": 349.14 },
-					{ "time": 0.1666, "angle": 340.46 },
-					{ "time": 0.3333, "angle": 348.99 },
-					{ "time": 0.5, "angle": 340.46 },
-					{ "time": 0.6666, "angle": 349.14 },
-					{ "time": 0.8333, "angle": 340.46 },
-					{ "time": 1, "angle": 348.99 },
-					{ "time": 1.1666, "angle": 340.46 },
-					{ "time": 1.3333, "angle": 349.14 }
-				],
-				"translate": [
-					{ "time": 0, "x": -2.09, "y": 5.03, "curve": "stepped" },
-					{ "time": 0.6666, "x": -2.09, "y": 5.03, "curve": "stepped" },
-					{ "time": 1.3333, "x": -2.09, "y": 5.03 }
-				]
-			},
-			"Leg_L": {
-				"rotate": [
-					{ "time": 0, "angle": 357.18 },
-					{ "time": 0.1666, "angle": 352.4 },
-					{ "time": 0.3333, "angle": 357.58 },
-					{ "time": 0.5, "angle": 352.4 },
-					{ "time": 0.6666, "angle": 357.18 },
-					{ "time": 0.8333, "angle": 352.4 },
-					{ "time": 1, "angle": 357.58 },
-					{ "time": 1.1666, "angle": 352.4 },
-					{ "time": 1.3333, "angle": 357.18 }
-				]
-			},
-			"Arm_L": {
-				"rotate": [
-					{ "time": 0, "angle": 3.04 },
-					{ "time": 0.1666, "angle": 0.75 },
-					{ "time": 0.3333, "angle": 3.4 },
-					{ "time": 0.5, "angle": 0.75 },
-					{ "time": 0.6666, "angle": 3.04 },
-					{ "time": 0.8333, "angle": 0.75 },
-					{ "time": 1, "angle": 3.4 },
-					{ "time": 1.1666, "angle": 0.75 },
-					{ "time": 1.3333, "angle": 3.04 }
-				]
-			},
-			"Mouth": {
-				"translate": [
-					{ "time": 0, "x": 0, "y": 5.68 },
-					{
-						"time": 0.6666,
-						"x": -3.78,
-						"y": 1.89,
-						"curve": [ 0.375, 0.01, 0.652, 1 ]
-					},
-					{ "time": 1.3333, "x": 0, "y": 5.68 }
-				],
-				"scale": [
-					{
-						"time": 0,
-						"x": 1.088,
-						"y": 1.013,
-						"curve": [ 0.612, 0.05, 0.512, 1 ]
-					},
-					{
-						"time": 0.6666,
-						"x": 1.215,
-						"y": 1.166,
-						"curve": [ 0.597, -0.2, 0.627, 1 ]
-					},
-					{ "time": 1.3333, "x": 1.088, "y": 1.013 }
-				]
-			}
-		}
-	},
 	"followpath": {
 		"slots": {
 			"happy-star-chin-wound": {
@@ -811,16 +431,6 @@
 					{ "time": 0, "name": "happystar-eyes-open" },
 					{ "time": 0.3, "name": "happystar-eyes-closed" },
 					{ "time": 0.3666, "name": "happystar-eyes-open" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -916,16 +526,6 @@
 				]
 			},
 			"happystar-standard-eyes": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -1111,16 +711,6 @@
 					{ "time": 5.8333, "name": "happystar-eyes-open" },
 					{ "time": 6.8, "name": "happystar-eyes-sleepy" },
 					{ "time": 8.1333, "name": "happystar-eyes-sleepy" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -1711,16 +1301,6 @@
 					{ "time": 0, "name": "happystar-eyes-sad" },
 					{ "time": 0.1333, "name": "happystar-eyes-sad-closed" },
 					{ "time": 0.2, "name": "happystar-eyes-sad" }
-				]
-			},
-			"shield_background": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_foreground": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
