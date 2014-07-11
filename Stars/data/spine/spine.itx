@@ -42,28 +42,28 @@ SpineResource
 
 SpineResource
 {
-	name	"spine_grunt_01"
-	atlas	"spine/grunt_01/output/grunt_01.atlas"
-	json	"spine/grunt_01/output/grunt_01.json"
+	name	"spine_grunt"
+	atlas	"spine/grunt/output/grunt.atlas"
+	json	"spine/grunt/output/grunt.json"
 }
 
 SpineResource
 {
-	name	"spine_grunt_02"
-	atlas	"spine/grunt_02/output/grunt_02.atlas"
-	json	"spine/grunt_02/output/grunt_02.json"
+	name	"spine_grunt_bully"
+	atlas	"spine/grunt_bully/output/grunt_bully.atlas"
+	json	"spine/grunt_bully/output/grunt_bully.json"
 }
 
 SpineResource
 {
-	name	"spine_grunt_03"
-	atlas	"spine/grunt_03/output/grunt_03.atlas"
-	json	"spine/grunt_03/output/grunt_03.json"
+	name	"spine_grunt_gunner"
+	atlas	"spine/grunt_gunner/output/grunt_gunner.atlas"
+	json	"spine/grunt_gunner/output/grunt_gunner.json"
 }
 
 SpineResource
 {
-	name	"spine_grunt_boss"
-	atlas	"spine/grunt_boss/output/grunt_boss.atlas"
-	json	"spine/grunt_boss/output/grunt_boss.json"
+	name	"spine_grunt_ufo"
+	atlas	"spine/grunt_ufo/output/grunt_ufo.atlas"
+	json	"spine/grunt_ufo/output/grunt_ufo.json"
 }

@@ -221,6 +221,12 @@ files {
 
 	Grunt.h
 	Grunt.cpp
+	GruntBully.h
+	GruntBully.cpp
+	GruntGunner.h
+	GruntGunner.cpp
+	GruntUfo.h
+	GruntUfo.cpp
 
 	["Sources/Game Logic/Effects"]
 	LocalEffect.h

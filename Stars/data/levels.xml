@@ -688,10 +688,10 @@
 				<def id="e" body="bird_screecher" />
 				<def id="f" body="bird" />
 				<def id="g" body="bird_ripper" />
-				<def id="h" body="grunt_01" />
-				<def id="i" body="grunt_02" />
-				<def id="j" body="grunt_03" />
-				<def id="k" body="grunt_boss" />
+				<def id="h" body="grunt" />
+				<def id="i" body="grunt_bully" />
+				<def id="j" body="grunt_gunner" />
+				<def id="k" body="grunt_ufo" />
 			</spritedefs>
 			<spritesequence delay="1200" speed="2.8">
 				<line map="a  " />
@@ -712,9 +712,9 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="N" body="nugget_02" />
-				<def id="1" body="grunt_01" />
-				<def id="2" body="grunt_02" />
-				<def id="3" body="grunt_03" />
+				<def id="1" body="grunt" />
+				<def id="2" body="grunt_bully" />
+				<def id="3" body="grunt_gunner" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2">
 				<line map=" 1      " />
@@ -764,9 +764,9 @@
 		<level name="mars_2" width="12.0" height="12.0" dustrequirement="100">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
-				<def id="1" body="grunt_01" />
-				<def id="2" body="grunt_02" />
-				<def id="3" body="grunt_03" />
+				<def id="1" body="grunt" />
+				<def id="2" body="grunt_bully" />
+				<def id="3" body="grunt_gunner" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2">
 				<line map="        " />

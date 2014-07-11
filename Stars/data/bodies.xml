@@ -195,48 +195,48 @@
 			</child>
 		</body>
 		
-		<body id="grunt_01" type="grunt" resilience="1.0" revolve="0">
+		<body id="grunt" type="grunt" resilience="1.0" >
 			<shape type="polygon">
 				<point x="-0.75" y="-0.75" />
 				<point x="0.75" y="-0.75" />
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
-			<texture animation="spine_grunt_01" />
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_grunt" />
 		</body>
 
-		<body id="grunt_02" type="grunt" resilience="1.0" revolve="0">
+		<body id="grunt_bully" type="grunt_bully" resilience="1.0" >
 			<shape type="polygon">
 				<point x="-0.75" y="-0.75" />
 				<point x="0.75" y="-0.75" />
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
-			<texture animation="spine_grunt_02" />
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_grunt_bully" />
 		</body>
 
-		<body id="grunt_03" type="grunt" resilience="1.0" revolve="0">
+		<body id="grunt_gunner" type="grunt_gunner" resilience="1.0" >
 			<shape type="polygon">
 				<point x="-0.75" y="-0.75" />
 				<point x="0.75" y="-0.75" />
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
-			<texture animation="spine_grunt_03" />
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_grunt_gunner" />
 		</body>
 
-		<body id="grunt_boss" type="grunt" resilience="1.0" revolve="0">
+		<body id="grunt_ufo" type="grunt_ufo" resilience="1.0" >
 			<shape type="polygon">
 				<point x="-0.75" y="-0.75" />
 				<point x="0.75" y="-0.75" />
 				<point x="0.75" y="0.75" />
 				<point x="-0.75" y="0.75" />
 			</shape>
-			<fixture friction="0.0" restitution="0.0" density="1.8" sensor="1" />
-			<texture animation="spine_grunt_boss" />
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_grunt_ufo" />
 		</body>
 
 	</bodies>

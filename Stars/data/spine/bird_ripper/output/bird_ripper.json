@@ -100,6 +100,11 @@
 		}
 	}
 },
+"events": {
+	"animation": {},
+	"custom": {},
+	"sound": {}
+},
 "animations": {
 	"attack": {
 		"slots": {
@@ -337,6 +342,12 @@
 				]
 			},
 			{ "time": 0.1666 }
+		],
+		"events": [
+			{ "time": 0.3333, "name": "custom", "string": "enable claws" },
+			{ "time": 0.6, "name": "sound", "string": "Claws" },
+			{ "time": 1.2333, "name": "custom", "string": "disable claws" },
+			{ "time": 1.3333, "name": "animation", "string": "normal" }
 		]
 	},
 	"before attack": {
@@ -1319,7 +1330,10 @@
 					{ "time": 1.1666, "x": 0, "y": 0 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "time": 1.1666, "name": "animation", "string": "attack" }
+		]
 	}
 }
 }
