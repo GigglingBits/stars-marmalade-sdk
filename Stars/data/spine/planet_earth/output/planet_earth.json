@@ -27,10 +27,17 @@
 	{ "name": "speed strips_red", "bone": "speed strips red", "attachment": "speed strips_red" },
 	{ "name": "red_bird1", "bone": "red bird", "attachment": "red_bird1" },
 	{ "name": "blue_bird2", "bone": "blue bird", "attachment": "blue_bird2" },
-	{ "name": "blue_bird3", "bone": "big blue bird", "attachment": "blue_bird3" }
+	{ "name": "blue_bird3", "bone": "big blue bird", "attachment": "blue_bird3" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -401.07492, -0.9984665, 0.0640564, -403.74835, 401.20294, -0.9984665, 0.0640564, 392.08548 ]
+			}
+		},
 		"blue_bird2": {
 			"blue_bird2": { "x": 78.81, "y": -4.92, "scaleX": 1.118, "scaleY": 1.118, "rotation": -153.25, "width": 153, "height": 105 }
 		},

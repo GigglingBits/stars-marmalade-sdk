@@ -47,10 +47,17 @@
 	{ "name": "meteor_fire_01", "bone": "meteor_fire_R_01", "attachment": "meteor_fire_01" },
 	{ "name": "meteor_fire_02", "bone": "meteor_fire_L_01", "attachment": "meteor_fire_02" },
 	{ "name": "radar", "bone": "radar", "attachment": "radar" },
-	{ "name": "enemy_02", "bone": "enemy_01", "attachment": "enemy_02" }
+	{ "name": "enemy_02", "bone": "enemy_01", "attachment": "enemy_02" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -336.53094, -2.5991745, -3.0540466, -352.1861, 351.3658, -2.5991745, 0.16790771, 335.7108 ]
+			}
+		},
 		"enemy_01": {
 			"enemy_01": { "x": 72.94, "y": -21.79, "rotation": -128.43, "width": 218, "height": 184 }
 		},
