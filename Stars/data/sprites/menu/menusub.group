@@ -2,8 +2,6 @@ CIwResGroup
 {
 	name "menusub"
 
-	./title_button.png
-
  	./world_earth.png
 
 	./world_mars.png
