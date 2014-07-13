@@ -162,13 +162,15 @@ bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 		m_pxAnimationState->rendererObject = (void*) this;
 		m_pxAnimationState->listener = _spAnimationStateCallback;
 		m_fAnimationTime = position;
-		// note: using track index 0; assuming that we are not usng multiple tracks
-		if (spAnimationState_setAnimationByName(m_pxAnimationState, 0, name.c_str(), true)) {
-			spAnimationState_apply(m_pxAnimationState, m_pxSkeleton);
-			spSkeleton_updateWorldTransform(m_pxSkeleton);
-			return true;
+		if (spAnimation* anim = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str())) {
+			// note: using track index 0; assuming that we are not usng multiple tracks
+			if (spAnimationState_setAnimation(m_pxAnimationState, 0, anim, true)) {
+				return true;
+			} else {
+				IwAssertMsg(MYAPP, false, ("Unable to set animation '%s'", name.c_str()));
+			}
 		} else {
-			IwAssertMsg(MYAPP, m_pxAnimationState, ("Unable to find animation '%s'", name.c_str()));
+			IwAssertMsg(MYAPP, false, ("Unable to find animation '%s'", name.c_str()));
 		}
 	}
 	return false;
