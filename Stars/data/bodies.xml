@@ -406,12 +406,12 @@
 			<frame id="lost" image="star_game_loser"/>
 		</texture>
 		
-		<texture id="button_planet">
-			<frame id="earth" image="world_earth"/>
-			<frame id="mars" image="world_mars"/>
-			<frame id="mars_locked" image="world_mars_locked"/>
-			<frame id="jupiter" image="world_jupiter"/>
-			<frame id="jupiter_locked" image="world_jupiter_locked"/>
+		<texture id="planet_earth" animation="spine_planet_earth" />
+		<texture id="planet_mars" animation="spine_planet_mars" />
+		<texture id="planet_jupiter">
+			<frame id="released" image="world_jupiter"/>
+			<frame id="pressed" image="world_jupiter"/>
+			<frame id="disabled" image="world_jupiter_locked"/>
 		</texture>
 		
 		<texture id="title_button" animation="spine_title"/>

@@ -5,6 +5,7 @@
 #include "PageSettings.h"
 #include "BackgroundParallax.h"
 #include "Button.h"
+#include "ButtonEx.h"
 #include "NaviPanel.h"
 #include "IwList.h"
 #include "Body.h"
@@ -20,8 +21,9 @@ private:
 	CIwRect m_xTitleShadowPos;
 	std::string m_sTitle;
 	
-    Button m_xButtonPlanet;
-
+    ButtonEx m_xButtonPlanet;
+	Texture* m_apxButtonPlanetTextures[LevelIterator::eWorldIdMax];
+	
 	Button m_xButtonNext;
 	Button m_xButtonPrevious;
 

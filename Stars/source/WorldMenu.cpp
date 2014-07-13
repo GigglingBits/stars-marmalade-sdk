@@ -14,9 +14,18 @@ WorldMenu::WorldMenu(LevelIterator::WorldId world) :
 
     m_xButtonNext.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
     m_xButtonPrevious.PressedEvent.AddListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
+	
+	memset(m_apxButtonPlanetTextures, 0, sizeof(m_apxButtonPlanetTextures)/sizeof(m_apxButtonPlanetTextures[0]));
 }
 
 WorldMenu::~WorldMenu() {
+	for (int i = 0; i < (sizeof(m_apxButtonPlanetTextures)/sizeof(m_apxButtonPlanetTextures[0])); i++) {
+		if (m_apxButtonPlanetTextures[i]) {
+			delete m_apxButtonPlanetTextures[i];
+			m_apxButtonPlanetTextures[i] = NULL;
+		}
+	}
+	
     m_xButtonNext.PressedEvent.RemoveListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
     m_xButtonPrevious.PressedEvent.RemoveListener<WorldMenu>(this, &WorldMenu::ButtonPressedEventHandler);
 }
@@ -25,14 +34,18 @@ void WorldMenu::Initialize() {
     m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
-    m_xButtonPlanet.SetTexture(FactoryManager::GetTextureFactory().Create("button_planet"));
-    m_xButtonPlanet.SetHideWhenDisabled(false);
-	
 	m_xNaviPanel.Initialize();
-	m_xNaviPanel.AddButton("navipanel", LevelIterator::eWorldIdEarth);
-	m_xNaviPanel.AddButton("navipanel", LevelIterator::eWorldIdMars);
-	m_xNaviPanel.AddButton("navipanel", LevelIterator::eWorldIdJupiter);
-	
+
+	LevelIterator it;
+	LevelIterator::WorldId worldid = it.GetFirstWorld();
+	do {
+		std::string texturename("planet_");
+		texturename.append(it.GetWorldName(worldid));
+		m_apxButtonPlanetTextures[worldid] = FactoryManager::GetTextureFactory().Create(texturename);
+		m_xNaviPanel.AddButton("navipanel", worldid);
+		worldid = it.GetNextWorld(worldid);
+	} while (worldid != it.GetFirstWorld());
+		
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xBackground.Initialize();
 
@@ -158,16 +171,9 @@ void WorldMenu::ApplyWorld(LevelIterator::WorldId world) {
     m_xButtonPlanet.SetUserData((int)world);
     m_xNaviPanel.ActivateButton((int)world);
 
-    // buttons
-	LevelIterator iterator;
-	bool open = CheckWorldOpen(world);
-	m_xButtonPlanet.SetEnabled(open);
-
-	std::string worldframe = iterator.GetWorldName(world);
-	if (!open) {
-		worldframe += "_locked";
-	}
-    m_xButtonPlanet.SetTextureFrame(worldframe);
+    // planet button
+	m_xButtonPlanet.SetEnabled(CheckWorldOpen(world));
+	m_xButtonPlanet.SetTexture(m_apxButtonPlanetTextures[world], true);
 
 	// title text
 	switch (world) {

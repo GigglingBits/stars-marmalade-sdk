@@ -80,7 +80,9 @@
 	}
 },
 "animations": {
-	"interactive": {
+	"disabled": {},
+	"pressed": {},
+	"released": {
 		"bones": {
 			"cloud02": {
 				"translate": [
