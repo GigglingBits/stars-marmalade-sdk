@@ -4,7 +4,7 @@
 #include "Debug.h"
 
 Button::Button(ButtonCommandId cmdid, s3eKey key, long userdata)
-	: m_pxTexture(NULL), m_bDown(false), m_bHideWhenDisabled(true), m_bShadedWhenPressed(true) {
+	: m_pxTexture(NULL), m_bExternalTexture(false), m_bDown(false), m_bHideWhenDisabled(true), m_bShadedWhenPressed(true) {
 
 	m_xButton.cmdid = cmdid;
 	m_xButton.key = key;
@@ -21,7 +21,7 @@ Button::Button(ButtonCommandId cmdid, s3eKey key, long userdata)
 }
 
 Button::~Button() {
-	if (m_pxTexture) {
+	if (!m_bExternalTexture && m_pxTexture) {
 		delete m_pxTexture;
 	}
 
@@ -37,15 +37,18 @@ long Button::GetUserData() const {
 	return m_xButton.userdata;
 }
 
-void Button::SetTexture(Texture* texture) {
+void Button::SetTexture(Texture* texture, bool external) {
 	if (!texture) {
 		return;
 	}
 	
-	if (m_pxTexture) {
+	if (!m_bExternalTexture && m_pxTexture) {
 		delete m_pxTexture;
 	}
+
 	m_pxTexture = texture;
+	m_bExternalTexture = external;
+	
 	OnTextureLoaded(*m_pxTexture);
 }
 

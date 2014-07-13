@@ -13,6 +13,7 @@ private:
 	VertexStreamScreen m_xButtonVerts;
 
 	Texture* m_pxTexture;
+	bool m_bExternalTexture;
 
 	std::string m_sText;
 	uint32 m_uiTextCol;
@@ -34,7 +35,7 @@ public:
 
 	void SetText(const std::string& text, uint32 colour = 0xff222222, Renderer::FontType font = Renderer::eFontTypeNormal);
 
-	void SetTexture(Texture* texture);
+	void SetTexture(Texture* texture, bool external = false);
 	void SetTextureFrame(const std::string& frame);
 
 	const CIwRect& GetPosition();
