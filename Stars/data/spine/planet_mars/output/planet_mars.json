@@ -43,7 +43,7 @@
 	{ "name": "meteor_03", "bone": "meteor_R_02", "attachment": "meteor_03" },
 	{ "name": "meteor_04", "bone": "meteor_button_01", "attachment": "meteor_04" },
 	{ "name": "meteor_01", "bone": "meteor_button_02", "attachment": "meteor_01" },
-	{ "name": "root", "bone": "root", "attachment": "planetoffire" },
+	{ "name": "root", "bone": "root", "attachment": "mars_locked" },
 	{ "name": "meteor_fire_01", "bone": "meteor_fire_R_01", "attachment": "meteor_fire_01" },
 	{ "name": "meteor_fire_02", "bone": "meteor_fire_L_01", "attachment": "meteor_fire_02" },
 	{ "name": "radar", "bone": "radar", "attachment": "radar" },
@@ -98,12 +98,20 @@
 			"radar": { "x": 40.29, "y": 6.67, "rotation": 132.65, "width": 88, "height": 92 }
 		},
 		"root": {
+			"mars_locked": { "x": 26, "width": 913, "height": 772 },
 			"planetoffire": { "x": -2, "y": -8, "width": 837, "height": 812 }
 		}
 	}
 },
 "animations": {
 	"interactive": {
+		"slots": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "planetoffire" }
+				]
+			}
+		},
 		"bones": {
 			"enemy_02": {
 				"translate": [
@@ -303,6 +311,75 @@
 				]
 			}
 		]
+	},
+	"locked": {
+		"slots": {
+			"enemy_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_012": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"radar": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
 	}
 }
 }

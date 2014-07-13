@@ -1,90 +1,97 @@
 
 planet_mars.png
-size: 998,507
+size: 1012,509
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemy_01
   rotate: false
-  xy: 760, 397
-  size: 131, 110
-  orig: 131, 110
+  xy: 546, 11
+  size: 109, 92
+  orig: 109, 92
   offset: 0, 0
   index: -1
 enemy_02
   rotate: false
-  xy: 489, 211
-  size: 269, 296
-  orig: 269, 296
+  xy: 787, 262
+  size: 225, 247
+  orig: 225, 247
+  offset: 0, 0
+  index: -1
+mars_locked
+  rotate: true
+  xy: 2, 52
+  size: 457, 386
+  orig: 457, 386
   offset: 0, 0
   index: -1
 meteor_01
   rotate: false
-  xy: 624, 90
-  size: 20, 20
-  orig: 20, 20
+  xy: 172, 2
+  size: 17, 17
+  orig: 17, 17
   offset: 0, 0
   index: -1
 meteor_02
-  rotate: true
-  xy: 760, 223
-  size: 38, 52
-  orig: 38, 52
+  rotate: false
+  xy: 138, 6
+  size: 32, 44
+  orig: 32, 44
   offset: 0, 0
   index: -1
 meteor_03
-  rotate: false
-  xy: 847, 371
-  size: 27, 24
-  orig: 27, 24
+  rotate: true
+  xy: 199, 27
+  size: 23, 20
+  orig: 23, 20
   offset: 0, 0
   index: -1
 meteor_04
-  rotate: true
-  xy: 2, 2
-  size: 30, 35
-  orig: 30, 35
+  rotate: false
+  xy: 172, 21
+  size: 25, 29
+  orig: 25, 29
   offset: 0, 0
   index: -1
 meteor_fire_01
   rotate: false
-  xy: 489, 112
-  size: 184, 97
-  orig: 184, 97
+  xy: 390, 22
+  size: 154, 81
+  orig: 154, 81
   offset: 0, 0
   index: -1
 meteor_fire_02
   rotate: false
-  xy: 489, 34
-  size: 133, 76
-  orig: 133, 76
+  xy: 769, 40
+  size: 111, 63
+  orig: 111, 63
   offset: 0, 0
   index: -1
 meteor_fire_03
   rotate: false
-  xy: 893, 452
-  size: 105, 55
-  orig: 105, 55
+  xy: 2, 4
+  size: 88, 46
+  orig: 88, 46
   offset: 0, 0
   index: -1
 meteor_fire_04
-  rotate: true
-  xy: 760, 263
-  size: 132, 85
-  orig: 132, 85
+  rotate: false
+  xy: 657, 32
+  size: 110, 71
+  orig: 110, 71
   offset: 0, 0
   index: -1
 planetoffire
-  rotate: false
-  xy: 2, 34
-  size: 485, 473
-  orig: 502, 487
-  offset: 9, 7
+  rotate: true
+  xy: 390, 105
+  size: 404, 395
+  orig: 419, 406
+  offset: 8, 6
   index: -1
 radar
   rotate: false
-  xy: 675, 154
-  size: 53, 55
-  orig: 53, 55
+  xy: 92, 4
+  size: 44, 46
+  orig: 44, 46
   offset: 0, 0
   index: -1
