@@ -138,6 +138,10 @@ bool TextureFramed::SelectFrame(const std::string& id, int health) {
 	return false;
 }
 
+std::string TextureFramed::GetCurrentFrame()  {
+	return m_rxCurrentFrame.id;
+}
+
 void TextureFramed::SetHorizontalFlip(bool flip) {
 	m_bHorizontalFlip = flip;
 }

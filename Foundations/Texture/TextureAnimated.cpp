@@ -36,6 +36,10 @@ bool TextureAnimated::SelectFrame(const std::string& id, int health) {
 	return SelectFrame(id);
 }
 
+std::string TextureAnimated::GetCurrentFrame() {
+	return m_xAnimation.GetCurrentAnimationName();
+}
+
 void TextureAnimated::SetHorizontalFlip(bool flip) {
 	m_xAnimation.SetFlipX(flip);
 }

@@ -32,6 +32,8 @@ public:
 	virtual bool SelectFrame(const std::string& id, int health) = 0;
 	virtual bool ReSelectFrame(int health) = 0;
 
+	virtual std::string GetCurrentFrame() = 0;
+
 	virtual void SetHorizontalFlip(bool flip) = 0;
 	virtual bool GetHorizontalFlip() = 0;
 
