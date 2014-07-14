@@ -18,7 +18,7 @@ void Renderer::SetAmbientLightColour(uint32 colour) {
 }
 
 void Renderer::ResetAmbientLightColour() {
-	m_uiAmbientLight = 0xffffffff;
+	m_uiAmbientLight = RENDERER_WHITE_LIGHT;
 }
 
 void Renderer::SetFonts(const std::string& large, const std::string& normal, const std::string& small, const std::string& system) {
@@ -556,6 +556,7 @@ CIwFVec2* Renderer::CreatGxCacheVertexStream(CIwSVec2 vertices[], int count) {
 
 CIwFVec2* Renderer::CreatGxCacheVertexStream(CIwFVec2 vertices[], int count){
 	IwAssertMsg(MYAPP, count > 0 && vertices, ("Trying to allocate empty stream. This should probably never happen?"));
+	if (!vertices || count <= 0) return NULL;
 
 	CIwFVec2* polystream = IW_GX_ALLOC(CIwFVec2, count);
 	for (int i = 0; i < count; i++) {
@@ -568,14 +569,27 @@ CIwFVec2* Renderer::CreatGxCacheVertexStream(CIwFVec2 vertices[], int count){
 
 CIwColour* Renderer::CreatGxCacheColourStream(uint32 cols[], int count) {
 	IwAssertMsg(MYAPP, count > 0 && cols, ("Trying to allocate empty stream. This should probably never happen?"));
+	if (!cols || count <= 0) return NULL;
 
 	CIwColour* gxcols = IW_GX_ALLOC(CIwColour, count);
-	memcpy(gxcols, cols, count * sizeof(*cols));
+	//memcpy(gxcols, cols, count * sizeof(*cols));
+	for (int i = 0; i < count; i++) {
+		gxcols[i].Set(cols[i]);
+		if (m_uiAmbientLight != RENDERER_WHITE_LIGHT) {
+			CIwColour ambientlight;
+			ambientlight.Set(m_uiAmbientLight);
+			gxcols[i].r = gxcols[i].r * (ambientlight.r / (float)0xff);
+			gxcols[i].g = gxcols[i].g * (ambientlight.g / (float)0xff);
+			gxcols[i].b = gxcols[i].b * (ambientlight.b / (float)0xff);
+			gxcols[i].a = gxcols[i].a * (ambientlight.a / (float)0xff);
+		}
+ 	}
 	return gxcols;
 }
 
 CIwFVec2* Renderer::CreatGxCacheUvStream(CIwFVec2 uvs[], int count) {
 	IwAssertMsg(MYAPP, count > 0 && uvs, ("Trying to allocate empty stream. This should probably never happen?"));
+	if (!uvs || count <= 0) return NULL;
 
 	CIwFVec2* uvstream = IW_GX_ALLOC(CIwFVec2, count);
 	for (int i = 0; i < count; i++) {
@@ -585,6 +599,8 @@ CIwFVec2* Renderer::CreatGxCacheUvStream(CIwFVec2 uvs[], int count) {
 }
 
 CIwFVec2* Renderer::CreatGxCacheTiledUvStream(CIwFVec2 vertices[], int count, CIwTexture* image) {
+	if (!vertices || count <= 0) return NULL;
+
 	// get aabb
 	CIwFVec2 topleft(0.0f, 0.0f), bottomright(0.0f, 0.0f);
 	CalculateAABB(vertices, count, topleft, bottomright);

@@ -9,6 +9,8 @@
 #include "VertexStreamWorld.h"
 #include "VertexStreamScreen.h"
 
+#define RENDERER_WHITE_LIGHT (0xffffffff)
+
 class Renderer {
 public:
 	enum RenderingLayer {
