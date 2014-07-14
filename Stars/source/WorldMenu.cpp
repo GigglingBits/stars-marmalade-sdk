@@ -34,6 +34,8 @@ void WorldMenu::Initialize() {
     m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_right"));
 	m_xButtonPrevious.SetTexture(FactoryManager::GetTextureFactory().Create("button_arrow_left"));
 
+	m_xButtonPlanet.SetTextureFramePressed("");
+	
 	m_xNaviPanel.Initialize();
 
 	LevelIterator it;
@@ -45,7 +47,7 @@ void WorldMenu::Initialize() {
 		m_xNaviPanel.AddButton("navipanel", worldid);
 		worldid = it.GetNextWorld(worldid);
 	} while (worldid != it.GetFirstWorld());
-		
+	
 	m_xButtonBack.SetTexture(FactoryManager::GetTextureFactory().Create("button_quit"));
 	m_xBackground.Initialize();
 
