@@ -36,7 +36,7 @@ public:
 	void SetText(const std::string& text, uint32 colour = 0xff222222, Renderer::FontType font = Renderer::eFontTypeNormal);
 
 	void SetTexture(Texture* texture, bool external = false);
-	void SetTextureFrame(const std::string& frame);
+	void SetTextureFrame(const std::string& frame, bool force = false);
 
 	const CIwRect& GetPosition();
 	void SetPosition(const CIwRect& rect);

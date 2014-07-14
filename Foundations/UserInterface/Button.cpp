@@ -52,8 +52,11 @@ void Button::SetTexture(Texture* texture, bool external) {
 	OnTextureLoaded(*m_pxTexture);
 }
 
-void Button::SetTextureFrame(const std::string& frame) {
+void Button::SetTextureFrame(const std::string& frame, bool force) {
 	if (m_pxTexture) {
+		if (!force && !m_pxTexture->GetCurrentFrame().compare(frame)) {
+			return;
+		}
 		if (!m_pxTexture->SelectFrame(frame)) {
 			IwAssertMsg(MYAPP, false, ("Could not select frame %s in current button texture.", frame.c_str()));
 		}
