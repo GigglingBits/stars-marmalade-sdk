@@ -278,7 +278,6 @@ files {
 	sprites/hud/hud.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
-	sprites/comp/comp.group
 
 	["Sources/Documentation"]
 	(doxygen)
@@ -307,7 +306,6 @@ assets
 	sprites/hud/hud.group
 	sprites/menu/menusub.group
 	sprites/effects/effects.group
-	sprites/comp/comp.group
 	sounds/sounds.group
 	sounds/sounds.itx
 	spine/spine.group
@@ -325,7 +323,6 @@ assets
 	sprites/hud/hud.group.bin
 	sprites/menu/menusub.group.bin
 	sprites/effects/effects.group.bin
-	sprites/comp/comp.group.bin
 	sounds/sounds.group.bin
 	spine/spine.group.bin
 }

@@ -4,5 +4,7 @@ CIwResGroup
 
 	shared true
 
-	./sprites/comp/comp.group
+	./spine/completion_won/output/completion_won.png
+	./spine/completion_lost/output/completion_lost.png
+	./spine/completion_award/output/completion_award.png
 }

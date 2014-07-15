@@ -401,10 +401,9 @@
 		<texture id="button_arrow_left" image="button_arrow_left" />
 		<texture id="button_arrow_right" image="button_arrow_right" />
 		
-		<texture id="button_completion">
-			<frame id="won" image="star_game_winner"/>
-			<frame id="lost" image="star_game_loser"/>
-		</texture>
+		<texture id="completion_won" animation="spine_completion_won" />
+		<texture id="completion_lost" animation="spine_completion_lost" />
+		<texture id="completion_award" animation="spine_completion_award" />
 		
 		<texture id="planet_earth" animation="spine_planet_earth" />
 		<texture id="planet_mars" animation="spine_planet_mars" />

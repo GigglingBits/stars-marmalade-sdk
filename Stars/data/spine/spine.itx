@@ -21,6 +21,27 @@ SpineResource
 
 SpineResource
 {
+	name	"spine_completion_won"
+	atlas	"spine/completion_won/output/completion_won.atlas"
+	json	"spine/completion_won/output/completion_won.json"
+}
+
+SpineResource
+{
+	name	"spine_completion_lost"
+	atlas	"spine/completion_lost/output/completion_lost.atlas"
+	json	"spine/completion_lost/output/completion_lost.json"
+}
+
+SpineResource
+{
+	name	"spine_completion_award"
+	atlas	"spine/completion_award/output/completion_award.atlas"
+	json	"spine/completion_award/output/completion_award.json"
+}
+
+SpineResource
+{
 	name	"spine_star"
 	atlas	"spine/star/output/star.atlas"
 	json	"spine/star/output/star.json"
