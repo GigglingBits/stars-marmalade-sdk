@@ -71,7 +71,7 @@
 	}
 },
 "animations": {
-	"won": {
+	"main": {
 		"slots": {
 			"happystar-eyes-sleepy": {
 				"attachment": [

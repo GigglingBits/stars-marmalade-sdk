@@ -91,7 +91,7 @@
 	}
 },
 "animations": {
-	"Lost": {
+	"main": {
 		"slots": {
 			"lost_star_01": {
 				"color": [
