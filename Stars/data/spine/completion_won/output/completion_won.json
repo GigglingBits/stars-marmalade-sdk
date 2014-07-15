@@ -24,10 +24,17 @@
 	{ "name": "won_star_03", "bone": "eyebrow_R", "attachment": "won_star_03" },
 	{ "name": "won_star_10", "bone": "mouth", "attachment": "won_star_10" },
 	{ "name": "won_star_09", "bone": "mouth_detail", "attachment": "won_star_09" },
-	{ "name": "happystar-eyes-sleepy", "bone": "happystar-eyes-sleepy", "attachment": "happystar-eyes-sleepy" }
+	{ "name": "happystar-eyes-sleepy", "bone": "happystar-eyes-sleepy", "attachment": "happystar-eyes-sleepy" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -667.1003, -287.55905, -254.80026, -288.73706, -251.26617, 35.21296, -670.63434, 30.500933 ]
+			}
+		},
 		"happystar-eyes-sleepy": {
 			"happystar-eyes-sleepy": { "x": 20.74, "y": 27.79, "scaleX": 0.628, "scaleY": 0.628, "rotation": 1.99, "width": 302, "height": 157 }
 		},

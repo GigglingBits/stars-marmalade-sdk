@@ -32,10 +32,17 @@
 	{ "name": "lost_star_07", "bone": "eyebrow_R", "attachment": "lost_star_07" },
 	{ "name": "lost_star_03", "bone": "effect_01", "attachment": "lost_star_03" },
 	{ "name": "lost_star_004", "bone": "effect_02", "attachment": "lost_star_03" },
-	{ "name": "lost_star_032", "bone": "effect_03", "attachment": "lost_star_03" }
+	{ "name": "lost_star_032", "bone": "effect_03", "attachment": "lost_star_03" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -720.8777, -173.46536, -338.93582, -173.46536, -342.79382, 142.89062, -723.4497, 142.89062 ]
+			}
+		},
 		"lost_star_004": {
 			"lost_star_03": { "x": 16.04, "y": 3.1, "scaleX": 0.612, "scaleY": 0.612, "rotation": 70.08, "width": 63, "height": 64 }
 		},

@@ -23,10 +23,17 @@
 	{ "name": "awards_stars_shadow_01", "bone": "shadow_01", "attachment": "awards_stars_shadow_01" },
 	{ "name": "awards_stars_full_01", "bone": "star_01", "attachment": "awards_stars_blank_01" },
 	{ "name": "awards_stars_full_02", "bone": "star_02", "attachment": "awards_stars_blank_02" },
-	{ "name": "awards_stars_full_03", "bone": "star_03", "attachment": "awards_stars_blank_03" }
+	{ "name": "awards_stars_full_03", "bone": "star_03", "attachment": "awards_stars_blank_03" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
 ],
 "skins": {
 	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ 5.2077026, -269.57315, 281.4478, -7.1452227, 1.7546997, 244.92387, -281.3913, -7.1452227 ]
+			}
+		},
 		"awards_base": {
 			"awards_base": { "scaleX": 1.5, "scaleY": 1.5, "width": 365, "height": 336 }
 		},
