@@ -53,7 +53,8 @@ private:
 	HudNumber m_xBonusAmount;
 
 	BackgroundParallax m_xBackground;
-
+	VertexStreamScreen m_xBackdropShape;
+	
 	MulticastEventTimer<EventArgs> m_xEventTimer;
 
 public:

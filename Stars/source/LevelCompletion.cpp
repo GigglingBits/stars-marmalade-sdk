@@ -153,6 +153,7 @@ void LevelCompletion::SaveResults() {
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
+	int backdropwidth = extents * 0.9;
 	int margin = extents / 4;	// 25%
 	int space = margin / 5;		// 25% / 5 = 5%
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
@@ -199,6 +200,9 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	
 	m_xBonusText.SetPosition(textrect);
 	m_xBonusAmount.SetPosition(numberrect);
+	
+	// readability
+	m_xBackdropShape.SetRect(screencenter.x - (backdropwidth / 2), 0, backdropwidth, screensize.y);
 }
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {
@@ -230,6 +234,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xBackground.Render(renderer, frame);
+	renderer.DrawPolygon(m_xBackdropShape.GetVerts(), m_xBackdropShape.GetVertCount(), 0x00000000, 0x88000000);
 	
 	if (m_pxStar) {
 		renderer.Draw(m_xStarShape, *m_pxStar);
