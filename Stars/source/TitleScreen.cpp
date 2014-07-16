@@ -6,6 +6,7 @@
 #include "AppAnalytics.h"
 
 #include "s3eOsExec.h"
+#include "s3eVideo.h"
 
 #include "spine/extension.h"
 
@@ -13,7 +14,9 @@ TitleScreen::TitleScreen() :
 Page("menu.group", Configuration::GetInstance().MenuSong),
 m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 m_xButtonFacebook(eButtonCommandIdFacebook, s3eKeyF),
-m_bHasFacebookButton(false) {
+m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyT),
+m_bHasFacebookButton(false),
+m_bHasMovieButton(false) {
 	m_xButtonFacebook.PressedEvent.AddListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
 }
 
@@ -23,8 +26,6 @@ TitleScreen::~TitleScreen() {
 
 void TitleScreen::Initialize() {
 	IW_CALLSTACK_SELF;
-
-	m_bHasFacebookButton = s3eOSExecAvailable() && !Configuration::GetInstance().FacebookPage.empty();
 	
 	m_xCamera.SetGeometry(CIwFVec2(15.0f, 5.0f), CIwSVec2(IwGxGetScreenWidth(), IwGxGetScreenHeight()), 10.0f);
 	m_xCamera.SetWorldFocus(CIwFVec2(0.0f, 0.0f));
@@ -35,8 +36,18 @@ void TitleScreen::Initialize() {
     m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
 	m_xButtonTitle.SetTextureFrame("enter");
 	
+	m_bHasFacebookButton = s3eOSExecAvailable();
+	m_bHasFacebookButton &= !Configuration::GetInstance().FacebookPage.empty();
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.SetTexture(FactoryManager::GetTextureFactory().Create("button_facebook"));
+	}
+
+	m_bHasMovieButton = s3eVideoGetInt(S3E_VIDEO_AVAILABLE) != 0;
+	m_bHasMovieButton &= !Configuration::GetInstance().IntroMovie.empty();
+	m_bHasMovieButton &= s3eVideoIsCodecSupported(S3E_VIDEO_CODEC_MPEG4_VIDEO_MPEG4);
+	m_bHasMovieButton &= s3eVideoIsCodecSupported(S3E_VIDEO_CODEC_MPEG4_AUDIO_AAC);
+	if (m_bHasMovieButton) {
+		m_xButtonMovie.SetTexture(FactoryManager::GetTextureFactory().Create("button_movie"));
 	}
 }
 
@@ -53,12 +64,16 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 	m_xButtonTitle.SetPosition(button);
 	
     // menu buttons
+	button.w = extents / 7;
+	button.h = extents / 7;
+	button.y = screensize.y - button.h - (button.h / 4);
 	if (m_bHasFacebookButton) {
-		button.w = extents / 7;
-		button.h = extents / 7;
 		button.x = screensize.x - button.w - (button.w / 4);
-		button.y = screensize.y - button.h - (button.h / 4);
 		m_xButtonFacebook.SetPosition(button);
+	}
+	if (m_bHasMovieButton) {
+		button.x = button.w / 4;
+		m_xButtonMovie.SetPosition(button);
 	}
 }
 
@@ -68,6 +83,9 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xButtonTitle.Update(frame);
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.Update(frame);
+	}
+	if (m_bHasMovieButton) {
+		m_xButtonMovie.Update(frame);
 	}
 	m_xBackground.Update(frame);
 }
@@ -82,6 +100,9 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonTitle.Render(renderer, frame);
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.Render(renderer, frame);
+	}
+	if (m_bHasMovieButton) {
+		m_xButtonMovie.Render(renderer, frame);
 	}
 }
 

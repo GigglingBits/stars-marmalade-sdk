@@ -24,6 +24,7 @@ public:
 
     
     void StartTitleScreen();
+    void StartIntroMovie();
     void StartWorldMenu();
 	void StartLevelMenu();
 	void StartLevel();

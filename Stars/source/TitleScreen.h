@@ -17,8 +17,10 @@ private:
 	BackgroundParallax m_xBackground;
 	Button m_xButtonTitle;
 	Button m_xButtonFacebook;
+	Button m_xButtonMovie;
 
 	bool m_bHasFacebookButton;
+	bool m_bHasMovieButton;
 	
 public:
 	TitleScreen();

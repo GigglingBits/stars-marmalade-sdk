@@ -12,6 +12,7 @@ enum ButtonCommandId {
 
 	// application navigation
 	eButtonCommandIdOpenTitleScreen,
+	eButtonCommandIdOpenIntroMovie,
 	eButtonCommandIdOpenWorldMenu,
 	eButtonCommandIdOpenLevelMenu,
 	
