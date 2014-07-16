@@ -34,12 +34,15 @@ private:
 	std::string m_sNextLevelId;
 	LevelCompletionInfo m_xCompletionInfo;
 	
-	Button m_xButtonStar;
+	Texture* m_pxStar;
+	VertexStreamScreen m_xStarShape;
+	
+	Texture* m_pxAward;
+	VertexStreamScreen m_xAwardShape;
+	
 	Button m_xButtonQuit;
 	Button m_xButtonRetry;
 	Button m_xButtonNext;
-
-	BackgroundParallax m_xBackground;
 
 	HudText m_xTitle;
 	
@@ -48,7 +51,10 @@ private:
 	
 	HudText m_xBonusText;
 	HudNumber m_xBonusAmount;
-	
+
+	BackgroundParallax m_xBackground;
+	VertexStreamScreen m_xBackdropShape;
+
 	MulticastEventTimer<EventArgs> m_xEventTimer;
 
 public:

@@ -1,16 +1,16 @@
 {
 "bones": [
-	{ "name": "root" },
-	{ "name": "background_gradient", "parent": "root", "length": 330.25, "x": 1.2, "y": -169.19, "rotation": 90 },
-	{ "name": "gradient_01", "parent": "root", "length": 55.6, "x": -76.84, "y": 46.22, "rotation": 110.3 },
-	{ "name": "gradient_02", "parent": "root", "length": 47, "x": 107.4, "y": 60.72, "rotation": 78.86 },
-	{ "name": "gradient_03", "parent": "root", "length": 51.81, "x": 27.22, "y": -119.26, "rotation": 122.84 },
-	{ "name": "shadow_01", "parent": "root", "length": 185.66, "x": -86.82, "y": -26.53, "rotation": 107.89 },
-	{ "name": "shadow_02", "parent": "root", "length": 177.97, "x": 57.31, "y": 4.61, "rotation": 74.17 },
-	{ "name": "shadow_03", "parent": "root", "length": 188.06, "x": 28.27, "y": -183.87, "rotation": 118.16 },
-	{ "name": "star_01", "parent": "root", "length": 180.97, "x": -70.94, "y": -15.13, "rotation": 108.7 },
-	{ "name": "star_02", "parent": "root", "length": 176.87, "x": 79.51, "y": 1.58, "rotation": 77.03 },
-	{ "name": "star_03", "parent": "root", "length": 184.39, "x": 47.36, "y": -172.02, "rotation": 119.89 }
+	{ "name": "root", "color": "9b9b9b00" },
+	{ "name": "background_gradient", "parent": "root", "length": 330.25, "x": 1.2, "y": -169.19, "rotation": 90, "color": "9b9b9b00" },
+	{ "name": "gradient_01", "parent": "root", "length": 55.6, "x": -76.84, "y": 46.22, "rotation": 110.3, "color": "9b9b9b00" },
+	{ "name": "gradient_02", "parent": "root", "length": 47, "x": 107.4, "y": 60.72, "rotation": 78.86, "color": "9b9b9b00" },
+	{ "name": "gradient_03", "parent": "root", "length": 51.81, "x": 27.22, "y": -119.26, "rotation": 122.84, "color": "9b9b9b00" },
+	{ "name": "shadow_01", "parent": "root", "length": 185.66, "x": -86.82, "y": -26.53, "rotation": 107.89, "color": "9b9b9b00" },
+	{ "name": "shadow_02", "parent": "root", "length": 177.97, "x": 57.31, "y": 4.61, "rotation": 74.17, "color": "9b9b9b00" },
+	{ "name": "shadow_03", "parent": "root", "length": 188.06, "x": 28.27, "y": -183.87, "rotation": 118.16, "color": "9b9b9b00" },
+	{ "name": "star_01", "parent": "root", "length": 180.97, "x": -70.94, "y": -15.13, "rotation": 108.7, "color": "9b9b9b00" },
+	{ "name": "star_02", "parent": "root", "length": 176.87, "x": 79.51, "y": 1.58, "rotation": 77.03, "color": "9b9b9b00" },
+	{ "name": "star_03", "parent": "root", "length": 184.39, "x": 47.36, "y": -172.02, "rotation": 119.89, "color": "9b9b9b00" }
 ],
 "slots": [
 	{ "name": "awards_gradient_back", "bone": "background_gradient", "color": "ffffff9a", "attachment": "awards_gradient" },
@@ -73,7 +73,66 @@
 	}
 },
 "animations": {
-	"1 star": {
+	"0": {
+		"slots": {
+			"awards_base": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient2": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient3": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient_back": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		}
+	},
+	"1": {
 		"slots": {
 			"awards_gradient": {
 				"attachment": [
@@ -201,7 +260,7 @@
 			}
 		}
 	},
-	"2 star": {
+	"2": {
 		"slots": {
 			"awards_gradient": {
 				"attachment": [
@@ -373,7 +432,7 @@
 			}
 		}
 	},
-	"3 star": {
+	"3": {
 		"slots": {
 			"awards_gradient": {
 				"attachment": [
@@ -585,6 +644,65 @@
 					{ "time": 16.3333, "x": 1.959, "y": 1.959 },
 					{ "time": 16.4333, "x": 1.5, "y": 1.5 },
 					{ "time": 16.6666, "x": 0.099, "y": 0.099 }
+				]
+			}
+		}
+	},
+	"hidden": {
+		"slots": {
+			"awards_base": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient2": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient3": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient_back": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
 				]
 			}
 		}

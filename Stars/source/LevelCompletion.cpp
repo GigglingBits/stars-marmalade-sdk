@@ -8,7 +8,8 @@
 
 LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
 	Page("levelcompletion.group", info.IsCleared() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
-m_xButtonStar(info.IsCleared() ? eButtonCommandIdOpenNextLevel : eButtonCommandIdOpenLevelMenu, s3eKeyFirst),
+	m_pxStar(NULL),
+	m_pxAward(NULL),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
 	m_xButtonRetry(eButtonCommandIdRestartLevel, s3eKeyAbsGameB),
 	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight),
@@ -20,6 +21,12 @@ m_xButtonStar(info.IsCleared() ? eButtonCommandIdOpenNextLevel : eButtonCommandI
 }
 
 LevelCompletion::~LevelCompletion() {
+	if (m_pxStar) {
+		delete m_pxStar;
+	}
+	if (m_pxAward) {
+		delete m_pxAward;
+	}
 	m_xEventTimer.Elapsed.RemoveListener(this, &LevelCompletion::EventTimerEventHandler);
 }
 
@@ -27,10 +34,14 @@ void LevelCompletion::Initialize() {
 	SaveResults();
 
 	std::string startexture = m_xCompletionInfo.IsCleared() ? "completion_won" : "completion_lost";
-	m_xButtonStar.SetTexture(FactoryManager::GetTextureFactory().Create(startexture));
-    m_xButtonStar.SetTextureFrame("main");
-	m_xButtonStar.SetRenderingLayer(Renderer::eRenderingLayerGameBackground);
-    
+	if ((m_pxStar = FactoryManager::GetTextureFactory().Create(startexture))) {
+		m_pxStar->SelectFrame("main");
+	}
+	
+	if ((m_pxAward = FactoryManager::GetTextureFactory().Create("completion_award"))) {
+		m_pxAward->SelectFrame("hidden");
+	}
+	
 	m_xButtonQuit.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_menu"));
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_retry"));
@@ -108,6 +119,9 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 
 void LevelCompletion::ScheduleStars(int count) {
 	EventArgs args;
+	args.type = eEventTypeClearBonus;
+	m_xEventTimer.Enqueue(0, args);
+
 	args.type = eEventTypeSetStars;
 	args.amount = count;
 	m_xEventTimer.Enqueue(1000, args);
@@ -139,18 +153,22 @@ void LevelCompletion::SaveResults() {
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
+	int backdropwidth = extents * 0.85f;
 	int margin = extents / 4;	// 25%
 	int space = margin / 5;		// 25% / 5 = 5%
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 
 	// star button
 	CIwRect button;
-	button.h = extents / 2;
+	button.h = extents / 4;
 	button.w = button.h;
 	button.x = screencenter.x - (button.h / 2);
 	button.y = screencenter.y - (button.w / 2);
-	m_xButtonStar.SetPosition(button);
-    
+	m_xStarShape.SetRect(button);
+
+	// awards
+	m_xAwardShape.SetRect(button);
+
     // the button size is determined by the screen height
 	button.h = extents / 7;
 	button.w = button.h;
@@ -182,14 +200,23 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	
 	m_xBonusText.SetPosition(textrect);
 	m_xBonusAmount.SetPosition(numberrect);
+	
+	// readability
+	m_xBackdropShape.SetRect(screencenter.x - (backdropwidth / 2), 0, backdropwidth, screensize.y);
 }
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xEventTimer.Update(frame.GetSimulatedDurationMs());
 	
 	m_xBackground.Update(frame);
+
+	if (m_pxStar) {
+		m_pxStar->Update(frame.GetRealDurationMs());
+	}
+	if (m_pxAward) {
+		m_pxAward->Update(frame.GetRealDurationMs());
+	}
 	
-	m_xButtonStar.Update(frame);
 	m_xButtonQuit.Update(frame);
 	m_xButtonRetry.Update(frame);
 	m_xButtonNext.Update(frame);
@@ -207,8 +234,15 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xBackground.Render(renderer, frame);
-
-	m_xButtonStar.Render(renderer, frame);
+	renderer.DrawPolygon(m_xBackdropShape.GetVerts(), m_xBackdropShape.GetVertCount(), 0x00000000, 0x88000000);
+	
+	if (m_pxStar) {
+		renderer.Draw(m_xStarShape, *m_pxStar);
+	}
+	if (m_pxAward) {
+		renderer.Draw(m_xAwardShape, *m_pxAward);
+	}
+	
 	m_xButtonQuit.Render(renderer, frame);
 	m_xButtonRetry.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
@@ -223,6 +257,8 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 }
 
 void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args) {
+	IW_CALLSTACK_SELF;
+	
 	switch (args.type) {
 		case eEventTypeNoOp:
 			break;
@@ -246,7 +282,11 @@ void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs
 			m_xBonusAmount.SetNumber(0, 500);
 			break;
 		case eEventTypeSetStars:
-			IwAssert(MYAPP, false);
+			if (m_pxAward) {
+				std::ostringstream oss;
+				oss << args.amount;
+				m_pxAward->SelectFrame(oss.str());
+			}
 			break;
 	}
 }
