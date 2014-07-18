@@ -1,15 +1,15 @@
 ####################################################
 [Game]
 ####################################################
-showstats=0
-showshapes=1
+showstats=1
+showshapes=0
 unlockall=1
 
 resourceheapsize=20		# in megabytes
 
 maxvisibleworldsize=8	# see max 20 meters on screen
 worldmargin=2			# add 2 meters of margin around the wold
-gravity=-15.0					# m/s2
+gravity=-15.0			# m/s2
 
 starbirthdelay=1400		# milliseconds
 
@@ -55,6 +55,8 @@ LOADER=0
 MEMORY=0
 DEVICE=0
 EXT=0
+GYROSCOPE=0
+DERBH_VERBOSE=0
 MYAPP=1
 
 ####################################################

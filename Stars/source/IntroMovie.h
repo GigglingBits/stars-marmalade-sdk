@@ -25,8 +25,6 @@ protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	
 private:
-	MediaView& SelectMediaView(const std::string& file);
-	
 	void TouchEndEventHandler(const InputManager& sender, const InputManager::TouchEventArgs& args);
 	void MediaFinishedEventHandler(const MediaView& sender, const int& args);
 };

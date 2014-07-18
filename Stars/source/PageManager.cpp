@@ -226,8 +226,12 @@ void PageManager::ApplyNextPage() {
 		
 		// play music associated to the page
 		const std::string& musicfile = m_pxCurrentPage->GetMusicFileName();
-		if (!musicfile.empty() && SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
-			SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
+		if (SoundEngine::GetInstance().GetPlayingMusicFile() != musicfile) {
+			if (musicfile.empty()) {
+				SoundEngine::GetInstance().StopMusicFile();
+			} else {
+				SoundEngine::GetInstance().PlayMusicFileLoop(musicfile);
+			}
 		}
 	}
 }
