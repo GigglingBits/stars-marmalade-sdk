@@ -24,6 +24,9 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	
 private:
+	std::string PrepareVideoFile();
+	bool CheckDriveExists(const std::string& drivename);
+	
 	static int32 OnVideoStopped(void* systemData, void* userData);
 };
 
