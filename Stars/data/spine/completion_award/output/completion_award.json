@@ -13,7 +13,7 @@
 	{ "name": "star_03", "parent": "root", "length": 184.39, "x": 47.36, "y": -172.02, "rotation": 119.89, "color": "9b9b9b00" }
 ],
 "slots": [
-	{ "name": "awards_gradient_back", "bone": "background_gradient", "color": "ffffff9a", "attachment": "awards_gradient" },
+	{ "name": "awards_gradient_back", "bone": "background_gradient", "color": "ffffffd8", "attachment": "awards_gradient" },
 	{ "name": "awards_base", "bone": "root", "attachment": "awards_base" },
 	{ "name": "awards_gradient3", "bone": "gradient_03", "attachment": "awards_gradient" },
 	{ "name": "awards_gradient2", "bone": "gradient_02", "attachment": "awards_gradient" },

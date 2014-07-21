@@ -1,6 +1,6 @@
 {
 "bones": [
-	{ "name": "root" },
+	{ "name": "root", "x": 300, "y": 130, "scaleX": 1.24, "scaleY": 1.24 },
 	{ "name": "body", "parent": "root", "length": 316.93, "x": -41.99, "y": -104.08, "rotation": 77.13 },
 	{ "name": "eye_L", "parent": "root", "length": 39.12, "x": -81.75, "y": 53.07, "rotation": -7.18 },
 	{ "name": "eye_R", "parent": "root", "length": 35.53, "x": 42.26, "y": 15.55, "rotation": 135.69 },
