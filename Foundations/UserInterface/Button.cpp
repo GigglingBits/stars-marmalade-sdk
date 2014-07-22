@@ -145,30 +145,25 @@ void Button::OnStateChanged(bool enabled, bool pressed) {
 void Button::PressedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
 	IwAssertMsg(MYAPP, m_xButton.enabled, ("Did not expect this handler to be called when the button was disabled!"));
 
-	// RRR: de-const
-	InputManager::VirtualButton::EventArgs* pargs = (InputManager::VirtualButton::EventArgs*)&args;
-
 	if (m_xButton.enabled) {
 		EventArgs newargs;
 		newargs.id = sender.cmdid;
 		newargs.userdata = sender.userdata;
 		newargs.handled = false;
 		PressedEvent.Invoke(*this, newargs);
-		pargs->handled = newargs.handled;
+		args.handled = newargs.handled;
 
 		SoundEngine::GetInstance().PlaySoundEffect("ButtonPressed");
 		m_bDown = true;
 	} else {
 		// button is disabled; suppress any further processing
-		pargs->handled = true;
+		args.handled = true;
 		m_bDown = false;
 	}
 	OnStateChanged(m_xButton.enabled, m_bDown);
 }
 
 void Button::ReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
-	// RRR: de-const
-	InputManager::VirtualButton::EventArgs* pargs = (InputManager::VirtualButton::EventArgs*)&args;
 
 	if (m_xButton.enabled || m_bDown) {
 		EventArgs newargs;
@@ -176,10 +171,10 @@ void Button::ReleasedEventHandler(const InputManager::VirtualButton& sender, con
 		newargs.userdata = sender.userdata;
 		newargs.handled = false;
 		ReleasedEvent.Invoke(*this, newargs);
-		pargs->handled = newargs.handled;
+		args.handled = newargs.handled;
 	} else {
 		// button is disabled; suppress any further processing
-		pargs->handled = true;
+		args.handled = true;
 	}
 	m_bDown = false;
 	OnStateChanged(m_xButton.enabled, m_bDown);

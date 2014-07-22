@@ -36,7 +36,7 @@ public:
 
 	public:
 		struct EventArgs {
-			bool handled;
+			mutable bool handled;
 		};
 		MulticastEvent<VirtualButton, EventArgs> PressedEvent;
 		MulticastEvent<VirtualButton, EventArgs> ReleasedEvent;
