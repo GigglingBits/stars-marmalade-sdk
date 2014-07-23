@@ -50,11 +50,8 @@ void LevelCompletion::Initialize() {
 	
 	m_xBackground.Initialize();
 	
-	m_xTitle.SetFont(Renderer::eFontTypeLarge);
-	m_xTitle.SetColour(GAME_COLOUR_FONT_MAIN);
-	
 	m_xScoreText.SetText("Score:");
-	m_xScoreText.SetFont(Renderer::eFontTypeNormal);
+	m_xScoreText.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreText.SetColour(GAME_COLOUR_FONT_MAIN);
 	
 	m_xScoreAmount.SetNumber(0);
@@ -74,7 +71,6 @@ void LevelCompletion::Initialize() {
 
 void LevelCompletion::ScheduleEvents() {
 	int dustamount = GetCompletionInfo().GetDustAmount();
-	ScheduleTitle(GetCompletionText());
 	SchedulePoints();
 	ScheduleBonus("Dust collected", dustamount);
 	ScheduleBonus("All nuggets collected (bonus 20%)", dustamount / 5);
@@ -82,13 +78,6 @@ void LevelCompletion::ScheduleEvents() {
 	ScheduleBonus("All enemies killed (bonus 50%)", dustamount / 2);
 	ScheduleBonus("No buffs used (bonus 10%)", dustamount / 10);
 	ScheduleStars(1);
-}
-
-void LevelCompletion::ScheduleTitle(const std::string& title) {
-	EventArgs args;
-	args.type = eEventTypeSetTitle;
-	args.text = title;
-	m_xEventTimer.Enqueue(500, args);
 }
 
 void LevelCompletion::SchedulePoints() {
@@ -129,10 +118,6 @@ void LevelCompletion::ScheduleStars(int count) {
 
 const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
 	return m_xCompletionInfo;
-}
-
-std::string LevelCompletion::GetCompletionText() {
-	return m_xCompletionInfo.IsCleared() ? "You're the best!" : "Try again";
 }
 
 void LevelCompletion::SaveResults() {
@@ -185,10 +170,8 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	m_xButtonNext.SetPosition(button);
 	
 	// text boxes
-	m_xTitle.SetPosition(CIwRect(0, 0, screensize.x, screensize.y / 2));
-	
 	CIwRect textrect;
-	textrect.Make(screencenter.x - (extents / 2), extents / 3, extents / 2, extents / 15);
+	textrect.Make(screencenter.x - (extents / 2), extents / 10, extents / 2, extents / 15);
 	CIwRect numberrect(textrect);
 	numberrect.x = screencenter.x;
 	
@@ -220,8 +203,6 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xButtonQuit.Update(frame);
 	m_xButtonRetry.Update(frame);
 	m_xButtonNext.Update(frame);
-
-	m_xTitle.Update(frame);
 	
 	m_xScoreText.Update(frame);
 	m_xScoreAmount.Update(frame);
@@ -247,8 +228,6 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonRetry.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
 
-	m_xTitle.Render(renderer, frame);
-	
 	m_xScoreText.Render(renderer, frame);
 	m_xScoreAmount.Render(renderer, frame);
 	
@@ -261,9 +240,6 @@ void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs
 	
 	switch (args.type) {
 		case eEventTypeNoOp:
-			break;
-		case eEventTypeSetTitle:
-			m_xTitle.SetText(args.text);
 			break;
 		case eEventTypeSetScore:
 			m_xScoreText.SetText(args.text);

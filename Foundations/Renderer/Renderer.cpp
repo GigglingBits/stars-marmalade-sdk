@@ -418,58 +418,81 @@ void Renderer::DrawImage(CIwTexture* image, const CIwSVec2& pos, const CIwSVec2&
 	DrawPolygonSubPixel(polystream, count, image, flipped);
 }
 
-void Renderer::DrawText(std::string text, const CIwRect& rect, FontType fonttype, uint32 col) {
+void Renderer::DrawText(std::string text, const CIwRect& rect, FontType fonttype, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	DrawText(text.c_str(), rect, fonttype, true, col);
+	DrawText(text.c_str(), rect, fonttype, col, align_h, align_v);
 }
 
-void Renderer::DrawText(std::string text, const CIwSVec2& pos, const CIwSVec2& size, FontType fonttype, uint32 col) {
+void Renderer::DrawText(std::string text, const CIwSVec2& pos, const CIwSVec2& size, FontType fonttype, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
-	DrawText(text, CIwRect(pos.x, pos.y, size.x, size.y), fonttype, col);
+	DrawText(text, CIwRect(pos.x, pos.y, size.x, size.y), fonttype, col, align_h, align_v);
 }
 
-void Renderer::DrawText(std::string text, const CIwSVec2& pos, FontType fonttype, uint32 col) {
+void Renderer::DrawText(std::string text, const CIwSVec2& pos, FontType fonttype, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&CIwSVec2::g_Zero);
 
-	DrawText(text.c_str(), CIwRect(pos.x, pos.y, 400, 50), fonttype, false, col);
+	DrawText(text.c_str(), CIwRect(pos.x, pos.y, 400, 50), fonttype, col, align_h, align_v);
 }
 
-void Renderer::DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype, uint32 col) {
+void Renderer::DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
 	CIwSVec2 screenpos = m_xViewport.WorldToScreen(pos);
 	CIwSVec2 screensize = m_xViewport.WorldToScreen(size);
-	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, screensize.x, screensize.y), fonttype, true, col);
+	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, screensize.x, screensize.y), fonttype, col, align_h, align_v);
 }
 
-void Renderer::DrawText(std::string text, const CIwFVec2& pos, FontType fonttype, uint32 col) {
+void Renderer::DrawText(std::string text, const CIwFVec2& pos, FontType fonttype, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
 	IwGxSetScreenSpaceOrg(&m_xScreenOffset);
 
 	CIwSVec2 screenpos = m_xViewport.WorldToScreen(pos);
-	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, 400, 50), fonttype, false, col);
+	DrawText(text.c_str(), CIwRect(screenpos.x, screenpos.y, 400, 50), fonttype, col, align_h, align_v);
 }
 
-void Renderer::DrawText(const char* text, const CIwRect& rect, FontType font, bool center, uint32 col) {
+void Renderer::DrawText(const char* text, const CIwRect& rect, FontType font, uint32 col, TextAlignmentHorizontal align_h, TextAlignmentVertical align_v) {
 	IW_CALLSTACK_SELF;
 
-	if (center) {
-		IwGxFontSetAlignmentHor(IW_GX_FONT_ALIGN_CENTRE);
-		IwGxFontSetAlignmentVer(IW_GX_FONT_ALIGN_MIDDLE);
-	} else {
-		IwGxFontSetAlignmentHor(IW_GX_FONT_ALIGN_LEFT);
-		IwGxFontSetAlignmentVer(IW_GX_FONT_ALIGN_BOTTOM);
+	IwGxFontAlignHor iw_align_h;
+	switch (align_h) {
+		case eTextAlignHLeft:
+			iw_align_h = IW_GX_FONT_ALIGN_LEFT;
+			break;
+		case eTextAlignHCenter:
+			iw_align_h = IW_GX_FONT_ALIGN_CENTRE;
+			break;
+		case eTextAlignHRight:
+			iw_align_h = IW_GX_FONT_ALIGN_RIGHT;
+			break;
+		case eTextAlignHBlock:
+			iw_align_h = IW_GX_FONT_ALIGN_PARAGRAPH;
+			break;
 	}
+	IwGxFontSetAlignmentHor(iw_align_h);
 
+	IwGxFontAlignVer iw_align_v;
+	switch (align_v) {
+		case eTextAlignVTop:
+			iw_align_v = IW_GX_FONT_ALIGN_TOP;
+			break;
+		case eTextAlignVMiddle:
+			iw_align_v = IW_GX_FONT_ALIGN_MIDDLE;
+			break;
+		case eTextAlignVBottom:
+			iw_align_v = IW_GX_FONT_ALIGN_BOTTOM;
+			break;
+	}
+	IwGxFontSetAlignmentVer(IW_GX_FONT_ALIGN_MIDDLE);
+	
 	if (m_apxFonts[font]) {
 		IwAssertMsg(MYAPP, m_apxFonts[font], ("Cannot draw text because font %i is not set. Please load the fonts before drawing text.", font));
 		IwGxFontSetFont(m_apxFonts[font]);

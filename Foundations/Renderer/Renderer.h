@@ -37,7 +37,20 @@ public:
 		eFontTypeSystem = 3,
 		eFontTypeLast = 4
 	};
-
+	
+	enum TextAlignmentHorizontal {
+		eTextAlignHLeft = 0,
+		eTextAlignHCenter = 1,
+		eTextAlignHRight = 2,
+		eTextAlignHBlock = 3,
+	};
+	
+	enum TextAlignmentVertical {
+		eTextAlignVTop = 0,
+		eTextAlignVMiddle = 1,
+		eTextAlignVBottom = 2,
+	};
+	
 private:
 	CIwSVec2 m_xScreenOffset;
 	Viewport m_xViewport;
@@ -72,8 +85,8 @@ public:
 	void DrawImage(CIwTexture* image, const CIwFVec2& pos, const CIwFVec2& size, bool flipped = false);
 	void DrawImage(CIwTexture* image, CIwFVec2 vertices[], int count, bool flipped = false);
 	void DrawImage(CIwTexture* image, CIwFVec2 vertices[], CIwFVec2 uvs[], uint32 cols[], int count, bool additiveblend = false);
-	void DrawText(std::string text, const CIwFVec2& pos, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
-	void DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
+	void DrawText(std::string text, const CIwFVec2& pos, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888, TextAlignmentHorizontal align_h = eTextAlignHLeft, TextAlignmentVertical align_v = eTextAlignVBottom);
+	void DrawText(std::string text, const CIwFVec2& pos, const CIwFVec2& size, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888, TextAlignmentHorizontal align_h = eTextAlignHCenter, TextAlignmentVertical align_v = eTextAlignVMiddle);
 
 	void DebugDrawCoords(const CIwFVec2& point, uint32 colour = 0xffffffff, float size = 1.0f);
 
@@ -87,9 +100,9 @@ public:
 	void DrawImage(CIwTexture* image, const CIwSVec2& pos, const CIwSVec2& size, bool flipped = false);
 	void DrawImage(CIwTexture* image, CIwSVec2 vertices[], int count, bool flipped = false);
 	void DrawImage(CIwTexture* image, CIwSVec2 vertices[], CIwFVec2 uvs[], uint32 cols[], int count, bool additiveblend = false);
-	void DrawText(std::string text, const CIwSVec2& pos, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
-	void DrawText(std::string text, const CIwSVec2& pos, const CIwSVec2& size, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
-	void DrawText(std::string text, const CIwRect& rect, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888);
+	void DrawText(std::string text, const CIwSVec2& pos, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888, TextAlignmentHorizontal align_h = eTextAlignHLeft, TextAlignmentVertical align_v = eTextAlignVBottom);
+	void DrawText(std::string text, const CIwSVec2& pos, const CIwSVec2& size, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888, TextAlignmentHorizontal align_h = eTextAlignHLeft, TextAlignmentVertical align_v = eTextAlignVBottom);
+	void DrawText(std::string text, const CIwRect& rect, FontType fonttype = eFontTypeNormal, uint32 col = 0xff888888, TextAlignmentHorizontal align_h = eTextAlignHCenter, TextAlignmentVertical align_v = eTextAlignVMiddle);
 
 	void DebugDrawTouch(const CIwSVec2& startpos, const CIwSVec2& endpos, uint32 col = 0xff888888);
 	void DebugDrawCoords(const CIwSVec2& point, uint32 colour = 0xffffffff, int16 size = 10);
@@ -111,7 +124,7 @@ private:
 	void DrawImageSubPixel(CIwMaterial* image, CIwFVec2 vertices[], CIwFVec2 uvs[], CIwColour cols[], int count);
 
 	// drawing to screen (pixel coordinates)
-	void DrawText(const char* text, const CIwRect& rect, FontType font, bool center, uint32 col);
+	void DrawText(const char* text, const CIwRect& rect, FontType font, uint32 col, TextAlignmentHorizontal align_h = eTextAlignHCenter, TextAlignmentVertical align_v = eTextAlignVMiddle);
 
 	// generic helpers
 	template <class TVertex>
