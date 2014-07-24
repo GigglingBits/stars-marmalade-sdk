@@ -15,8 +15,8 @@ LevelCompletion::LevelCompletion(const std::string levelid, const std::string ne
 	m_xButtonNext(eButtonCommandIdOpenNextLevel, s3eKeyAbsRight),
     m_sLevelId(levelid),
 	m_sNextLevelId(nextlevelid),
-    m_xCompletionInfo(info) {
-
+    m_xCompletionInfo(info),
+	m_bEnableStar(false) {
 	m_xEventTimer.Elapsed.AddListener(this, &LevelCompletion::EventTimerEventHandler);
 }
 
@@ -53,18 +53,26 @@ void LevelCompletion::Initialize() {
 	m_xScoreText.SetText("Score:");
 	m_xScoreText.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreText.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xScoreText.SetAlignH(Renderer::eTextAlignHLeft);
+	m_xScoreText.SetAlignV(Renderer::eTextAlignVMiddle);
 	
 	m_xScoreAmount.SetNumber(0);
-	m_xScoreAmount.SetFont(Renderer::eFontTypeNormal);
+	m_xScoreAmount.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreAmount.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xScoreAmount.SetAlignH(Renderer::eTextAlignHRight);
+	m_xScoreAmount.SetAlignV(Renderer::eTextAlignVMiddle);
 	
 	m_xBonusText.SetText("");
-	m_xBonusText.SetFont(Renderer::eFontTypeSmall);
+	m_xBonusText.SetFont(Renderer::eFontTypeNormal);
 	m_xBonusText.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xBonusText.SetAlignH(Renderer::eTextAlignHLeft);
+	m_xBonusText.SetAlignV(Renderer::eTextAlignVMiddle);
 
 	m_xBonusAmount.SetNumber(0);
-	m_xBonusAmount.SetFont(Renderer::eFontTypeSmall);
+	m_xBonusAmount.SetFont(Renderer::eFontTypeNormal);
 	m_xBonusAmount.SetColour(GAME_COLOUR_FONT_BONUS);
+	m_xBonusAmount.SetAlignH(Renderer::eTextAlignHRight);
+	m_xBonusAmount.SetAlignV(Renderer::eTextAlignVMiddle);
 	
 	ScheduleEvents();
 }
@@ -73,11 +81,12 @@ void LevelCompletion::ScheduleEvents() {
 	int dustamount = GetCompletionInfo().GetDustAmount();
 	SchedulePoints();
 	ScheduleBonus("Dust collected", dustamount);
-	ScheduleBonus("All nuggets collected (bonus 20%)", dustamount / 5);
-	ScheduleBonus("All enemies dodged (bonus 20%)", dustamount / 5);
-	ScheduleBonus("All enemies killed (bonus 50%)", dustamount / 2);
-	ScheduleBonus("No buffs used (bonus 10%)", dustamount / 10);
-	ScheduleStars(1);
+	ScheduleBonus("All nuggets collected", dustamount / 5);
+	ScheduleBonus("All enemies dodged", dustamount / 5);
+	ScheduleBonus("All enemies killed", dustamount / 2);
+	ScheduleBonus("No buffs used", dustamount / 10);
+	ScheduleAwards(1);
+	ScheduleEnableStar();
 }
 
 void LevelCompletion::SchedulePoints() {
@@ -100,20 +109,30 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 	m_xEventTimer.Enqueue(400, args);
 
 	args.type = eEventTypeTransferBonus;
-	m_xEventTimer.Enqueue(800, args);
+	m_xEventTimer.Enqueue(1000, args);
 
 	args.type = eEventTypeClearBonus;
 	m_xEventTimer.Enqueue(1000, args);
 }
 
-void LevelCompletion::ScheduleStars(int count) {
+void LevelCompletion::ScheduleAwards(int starcount) {
 	EventArgs args;
 	args.type = eEventTypeClearBonus;
 	m_xEventTimer.Enqueue(0, args);
-
-	args.type = eEventTypeSetStars;
-	args.amount = count;
+	
+	args.type = eEventTypeGiveAwards;
+	args.amount = starcount;
 	m_xEventTimer.Enqueue(1000, args);
+
+	args.type = eEventTypeNoOp;
+	args.amount = starcount;
+	m_xEventTimer.Enqueue(2500, args);
+}
+
+void LevelCompletion::ScheduleEnableStar() {
+	EventArgs args;
+	args.type = eEventTypeEnableStar;
+	m_xEventTimer.Enqueue(0, args);
 }
 
 const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
@@ -138,9 +157,13 @@ void LevelCompletion::SaveResults() {
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int extents = GetScreenExtents();
-	int backdropwidth = extents * 0.9;
+
 	int margin = extents / 4;	// 25%
 	int space = margin / 5;		// 25% / 5 = 5%
+
+	int backdropwidth = extents * 0.9;
+	int backdropmargin = backdropwidth * 0.08;
+
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 
 	// star button
@@ -171,14 +194,15 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	
 	// text boxes
 	CIwRect textrect;
-	textrect.Make(screencenter.x - (extents / 2), extents / 10, extents / 2, extents / 15);
+	textrect.Make(screencenter.x - (backdropwidth / 2) + backdropmargin, extents / 10, backdropwidth - (2 * backdropmargin), extents / 15);
 	CIwRect numberrect(textrect);
 	numberrect.x = screencenter.x;
+	numberrect.w = (backdropwidth / 2) - backdropmargin;
 	
 	m_xScoreText.SetPosition(textrect);
 	m_xScoreAmount.SetPosition(numberrect);
 	
-	textrect.y += textrect.h + (textrect.h / 2);
+	textrect.y += textrect.h + textrect.h;
 	numberrect.y = textrect.y;
 	
 	m_xBonusText.SetPosition(textrect);
@@ -193,7 +217,7 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	
 	m_xBackground.Update(frame);
 
-	if (m_pxStar) {
+	if (m_bEnableStar && m_pxStar) {
 		m_pxStar->Update(frame.GetRealDurationMs());
 	}
 	if (m_pxAward) {
@@ -217,7 +241,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xBackground.Render(renderer, frame);
 	renderer.DrawPolygon(m_xBackdropShape.GetVerts(), m_xBackdropShape.GetVertCount(), 0x00000000, 0x88000000);
 	
-	if (m_pxStar) {
+	if (m_bEnableStar && m_pxStar) {
 		renderer.Draw(m_xStarShape, *m_pxStar);
 	}
 	if (m_pxAward) {
@@ -254,15 +278,18 @@ void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs
 			m_xBonusAmount.SetNumber(args.amount);
 			break;
 		case eEventTypeTransferBonus:
-			m_xScoreAmount.SetNumber(m_xScoreAmount.GetNumber() + m_xBonusAmount.GetNumber(), 500);
-			m_xBonusAmount.SetNumber(0, 500);
+			m_xScoreAmount.SetNumber(m_xScoreAmount.GetNumber() + m_xBonusAmount.GetNumber(), 800);
+			m_xBonusAmount.SetNumber(0, 800);
 			break;
-		case eEventTypeSetStars:
+		case eEventTypeGiveAwards:
 			if (m_pxAward) {
 				std::ostringstream oss;
 				oss << args.amount;
 				m_pxAward->SelectFrame(oss.str());
 			}
+			break;
+		case eEventTypeEnableStar:
+			m_bEnableStar = true;
 			break;
 	}
 }

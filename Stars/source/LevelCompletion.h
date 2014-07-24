@@ -17,7 +17,8 @@ private:
 		eEventTypeSetBonus,
 		eEventTypeTransferBonus,
 		eEventTypeClearBonus,
-		eEventTypeSetStars,
+		eEventTypeGiveAwards,
+		eEventTypeEnableStar,
 	};
 	
 	struct EventArgs {
@@ -53,6 +54,8 @@ private:
 	VertexStreamScreen m_xBackdropShape;
 	
 	MulticastEventTimer<EventArgs> m_xEventTimer;
+	
+	bool m_bEnableStar;
 
 public:
 	LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info);
@@ -71,7 +74,8 @@ private:
 	void ScheduleEvents();
 	void SchedulePoints();
 	void ScheduleBonus(const std::string& name, int amount);
-	void ScheduleStars(int count);
+	void ScheduleAwards(int starcount);
+	void ScheduleEnableStar();
 
 	void SaveResults();
 	

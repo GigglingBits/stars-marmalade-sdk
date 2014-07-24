@@ -320,6 +320,7 @@
 	<textures>
 		<texture id="none" colour="0x00000000" />
 		<texture id="shade" colour="0x77343423" />
+		<texture id="white" colour="0xffffffff" />
 		
 		<texture id="path_point" image="path_point" />
 
