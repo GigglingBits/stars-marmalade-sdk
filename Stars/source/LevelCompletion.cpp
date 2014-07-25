@@ -69,6 +69,7 @@ void LevelCompletion::Initialize() {
 	m_xBonusText.SetAlignV(Renderer::eTextAlignVMiddle);
 
 	m_xBonusAmount.SetNumber(0);
+	m_xBonusAmount.SetText("");
 	m_xBonusAmount.SetFont(Renderer::eFontTypeNormal);
 	m_xBonusAmount.SetColour(GAME_COLOUR_FONT_BONUS);
 	m_xBonusAmount.SetAlignH(Renderer::eTextAlignHRight);
@@ -109,7 +110,7 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 	m_xEventTimer.Enqueue(400, args);
 
 	args.type = eEventTypeTransferBonus;
-	m_xEventTimer.Enqueue(1000, args);
+	m_xEventTimer.Enqueue(1200, args);
 
 	args.type = eEventTypeClearBonus;
 	m_xEventTimer.Enqueue(1000, args);
@@ -162,7 +163,7 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int space = margin / 5;		// 25% / 5 = 5%
 
 	int backdropwidth = extents * 0.9;
-	int backdropmargin = backdropwidth * 0.08;
+	int backdropmargin = backdropwidth * 0.12;
 
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 
@@ -239,7 +240,7 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
 
 	m_xBackground.Render(renderer, frame);
-	renderer.DrawPolygon(m_xBackdropShape.GetVerts(), m_xBackdropShape.GetVertCount(), 0x00000000, 0x88000000);
+	renderer.DrawPolygon(m_xBackdropShape.GetVerts(), m_xBackdropShape.GetVertCount(), 0x00000000, 0x33000000);
 	
 	if (m_bEnableStar && m_pxStar) {
 		renderer.Draw(m_xStarShape, *m_pxStar);
