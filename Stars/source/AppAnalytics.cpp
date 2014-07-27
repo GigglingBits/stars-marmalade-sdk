@@ -24,23 +24,23 @@ void AppAnalytics::RegisterLevelStarted(const std::string& levelid) {
 	Analytics::GetInstance().Log(oss.str());
 }
 
-void AppAnalytics::RegisterLevelCompleted(const std::string& id, float dustamount, int pathsstarted, bool achieved) {
+void AppAnalytics::RegisterLevelCompleted(const std::string& id, int score, int stars) {
 	std::ostringstream oss;
 	oss << "Level completed: " << id;
 	std::string message(oss.str());
 	
 	oss.clear(); oss.str("");
-	oss << dustamount;
-	std::string dust(oss.str());
+	oss << score;
+	std::string scoretxt(oss.str());
 	
 	oss.clear(); oss.str("");
-	oss << pathsstarted;
-	std::string paths(oss.str());
+	oss << stars;
+	std::string starstxt(oss.str());
 	
 	Analytics::Params params;
-	params["cleared"] = achieved ? "yes" : "no";
-	params["dust amount"] = dust;
-	params["#paths"] = paths;
+	params["cleared"] = stars > 0 ? "yes" : "no";
+	params["score"] = scoretxt;
+	params["stars"] = starstxt;
 	Analytics::GetInstance().Log(message, params);
 }
 

@@ -9,6 +9,9 @@
 #include "InputManager.h"
 #include "FactoryManager.h"
 #include "SoundEngine.h"
+#include "Enemy.h"
+#include "Buff.h"
+#include "Nugget.h"
 
 Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	Page("level.group", Configuration::GetInstance().LevelSong),
@@ -27,6 +30,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xInteractor.PathChanged.AddListener(this, &Level::PathChangedEventHandler);
 	m_xPausePanel.StateChanged.AddListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xGame.QuakeImpact.AddListener<Level>(this, &Level::QuakeImpactEventHandler);
+	m_xGame.SpriteAdded.AddListener<Level>(this, &Level::SpriteAddedEventHandler);
 	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.BuffCollected.AddListener(this, &Level::BuffCollectedHandler);
 	m_xHud.GetBuffPanel().BuffTrigger.AddListener(this, &Level::BuffTriggerHandler);
@@ -66,6 +70,7 @@ Level::~Level() {
 	m_xHud.GetBuffPanel().BuffTrigger.RemoveListener(this, &Level::BuffTriggerHandler);
 	m_xGame.BuffCollected.RemoveListener(this, &Level::BuffCollectedHandler);
 	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
+	m_xGame.SpriteAdded.RemoveListener<Level>(this, &Level::SpriteAddedEventHandler);
 	m_xGame.QuakeImpact.RemoveListener<Level>(this, &Level::QuakeImpactEventHandler);
 	m_xPausePanel.StateChanged.RemoveListener<Level>(this, &Level::PausePanelStateChangedEventHandler);
 	m_xInteractor.PathChanged.RemoveListener(this, &Level::PathChangedEventHandler);
@@ -257,7 +262,7 @@ CIwFVec2 Level::GetStarHidePosition() {
 	const float offset = 6.0f;
 	
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsCleared()) {
+	if (m_xCompletionInfo.IsAchieved()) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
@@ -274,8 +279,8 @@ void Level::HideBannerText() {
 }
 
 void Level::ShowStatsBanner() {
-	ShowBannerText(m_xCompletionInfo.IsCleared() ? "Well done!" : "Try again...");
-	if (m_xCompletionInfo.IsCleared()) {
+	ShowBannerText(m_xCompletionInfo.IsAchieved() ? "Well done!" : "Try again...");
+	if (m_xCompletionInfo.IsAchieved()) {
 		SoundEngine::GetInstance().PlaySoundEffect("level_win");
 	}
 }
@@ -290,6 +295,7 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 void Level::Conclude() {
 	m_xCompletionInfo.SetDustFillAmount(m_xGame.GetDustFillAmount());
 	m_xCompletionInfo.SetDustFillMax(m_xGame.GetDustFillMax());
+	m_xCompletionInfo.Evaluate();
 }
 
 void Level::OnDoLayout(const CIwSVec2& screensize) {
@@ -386,13 +392,27 @@ void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoun
 	m_xCamera.StartQuakeEffect(args.amplitude, 700);
 }
 
+void Level::SpriteAddedEventHandler(const GameFoundation& sender, const Sprite& args) {
+	if (dynamic_cast<const Nugget*>(&args)) {
+		m_xCompletionInfo.IncrementNuggetsDeployed();
+	} else if (dynamic_cast<const Enemy*>(&args)) {
+		m_xCompletionInfo.IncrementEnemiesDeployed();
+	} else if (dynamic_cast<const Buff*>(&args)) {
+		m_xCompletionInfo.IncrementBuffsDeployed();
+	}
+}
+
 void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args) {
-	if (args.sprite->GetTypeName() == Nugget::TypeName()) {
-		if (args.outofbounds) {
-			m_xCompletionInfo.IncrementNuggetsMissed();
-		} else {
+	if (dynamic_cast<const Nugget*>(args.sprite)) {
+		if (!args.outofbounds) {
 			m_xCompletionInfo.IncrementNuggetsCollected();
 		}
+	} else if (dynamic_cast<const Enemy*>(args.sprite)) {
+		if (!args.outofbounds) {
+			m_xCompletionInfo.IncrementEnemiesKilled();
+		}
+	} else if (dynamic_cast<const Star*>(args.sprite)) {
+		m_xCompletionInfo.IncrementEnemiesCollided();
 	}
 }
 
@@ -455,6 +475,7 @@ void Level::PathChangedEventHandler(const LevelInteractor& sender, const LevelIn
 
 void Level::BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt) {
 	m_xHud.GetBuffPanel().AddBuff(bt);
+	m_xCompletionInfo.IncrementBuffsDeployed();
 }
 
 void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt) {
@@ -472,6 +493,7 @@ void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation:
 			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
 			break;
 	}
+	m_xCompletionInfo.IncrementBuffsUsed();
 }
 
 void Level::BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args) {

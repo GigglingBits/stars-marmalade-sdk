@@ -108,6 +108,9 @@ void GameFoundation::Add(Sprite* sprite) {
 
 	// register the body
 	m_xSpriteMap[id] = sprite;
+	
+	// notify
+	SpriteAdded.Invoke(*this, *sprite);
 }
 
 void GameFoundation::EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed) {

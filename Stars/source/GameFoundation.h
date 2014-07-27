@@ -133,6 +133,8 @@ public:
 	};
 	MulticastEvent<GameFoundation, BuffProgressArgs> BuffProgress;
 	
+	MulticastEvent<GameFoundation, Sprite> SpriteAdded;
+
 	struct SpriteRemovedArgs {
 		Sprite* sprite;
 		bool outofbounds;

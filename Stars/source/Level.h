@@ -138,12 +138,14 @@ private:
 
 	void PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
 
+	void QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args);
+
+	void SpriteAddedEventHandler(const GameFoundation& sender, const Sprite& args);
+	void SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args);
+
 	void BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt);
 	void BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt);
 	void BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args);
-
-	void QuakeImpactEventHandler(const GameFoundation& sender, const GameFoundation::QuakeImpactArgs& args);
-	void SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args);
 };
 
 #endif

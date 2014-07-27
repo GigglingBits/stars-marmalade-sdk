@@ -10,7 +10,7 @@ public:
 	void RegisterLevelMenuOpened(const std::string& id);
 
 	void RegisterLevelStarted(const std::string& id);
-	void RegisterLevelCompleted(const std::string& id, float dustamount, int pathsstarted, bool achieved);
+	void RegisterLevelCompleted(const std::string& id, int score, int stars);
 	void RegisterLevelCancelled(const std::string& id);
 
 	void RegisterFacebookOpened();
