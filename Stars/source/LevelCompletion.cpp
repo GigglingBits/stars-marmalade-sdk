@@ -117,7 +117,7 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 	m_xEventTimer.Enqueue(1200, args);
 
 	args.type = eEventTypeClearBonus;
-	m_xEventTimer.Enqueue(1000, args);
+	m_xEventTimer.Enqueue(1300, args);
 }
 
 void LevelCompletion::ScheduleAwards(int starcount) {

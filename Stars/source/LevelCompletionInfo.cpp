@@ -101,10 +101,9 @@ void LevelCompletionInfo::Evaluate() {
 	m_bEvaluated = true;
 }
 
-void LevelCompletionInfo::GetPoints(std::vector<Points> points) const {
+void LevelCompletionInfo::GetPoints(std::vector<Points>& points) const {
 	IwAssert(MYAPP, m_bEvaluated);
-	points.clear();
-	points.assign(m_xPoints.begin(), m_xPoints.end());
+	points = m_xPoints;
 }
 
 float LevelCompletionInfo::GetTotalPoints() const {
@@ -130,6 +129,5 @@ int LevelCompletionInfo::GetAchievedStars() const {
 }
 
 bool LevelCompletionInfo::IsAchieved() const {
-	IwAssert(MYAPP, m_bEvaluated);
-	return GetAchievedStars() > 0;
+	return m_bEvaluated && GetAchievedStars() > 0;
 }

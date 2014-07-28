@@ -56,7 +56,7 @@ public:
 	void Evaluate();
 
 public:
-	void GetPoints(std::vector<Points> points) const;
+	void GetPoints(std::vector<Points>& points) const;
 	float GetTotalPoints() const;
 	int GetAchievedStars() const;
 	bool IsAchieved() const;
