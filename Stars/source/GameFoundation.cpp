@@ -290,7 +290,7 @@ void GameFoundation::CreatePointSplash(int amount, int bonusmultiplier, const CI
 		if (bonusmultiplier > 1) {
 			oss.str(std::string());
 			oss << "x" << bonusmultiplier;
-			CreateSplashText(oss.str(), position + CIwFVec2(0.3f, -0.1f), GAME_COLOUR_FONT_BONUS, Renderer::eFontTypeSmall);
+			CreateSplashText(oss.str(), position + CIwFVec2(0.4f, -0.3f), GAME_COLOUR_FONT_BONUS, Renderer::eFontTypeSmall);
 		}
 	} else {
 		oss << amount;
