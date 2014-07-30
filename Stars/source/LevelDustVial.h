@@ -14,11 +14,13 @@ private:
 	CIwRect m_xContentGeom;
 	
 	float m_fCommittedDust;
+	float m_fCommittedDustInternal;
 	VertexStreamScreen m_xCommittedDustShape;
 	VertexStreamScreen m_xCommittedDustSurfaceShape;
 	Texture* m_pxCommittedDustSurface;
 	
 	float m_fQueuedDust;
+	float m_fQueuedDustInternal;
 	VertexStreamScreen m_xQueuedDustShape;
 	VertexStreamScreen m_xQueuedDustSurfaceShape;
 	Texture* m_pxQueuedDustSurface;
@@ -32,10 +34,13 @@ public:
 	void SetDustAmount(float committed, float queued);
 	
 private:
+	void UpdateAmounts(uint32 timestep);
+	float Approximate(float value, float target, uint32 timestep);
+
 	void UpdateVialShapes();
 	void UpdateAmountShapes();
 	
-	void DustDelta(float amount);
+	void DustDeltaEffect(float amount);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

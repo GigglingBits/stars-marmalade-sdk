@@ -3,6 +3,8 @@
 #include "VertexStreamScreen.h"
 #include "Debug.h"
 
+#include <cmath>
+
 uint32 LevelDustVial::s_auCommittedColours[] = {
 	0xdd37f5eb,
 	0xdd37f5eb,
@@ -20,6 +22,8 @@ uint32 LevelDustVial::s_auQueuedColours[] = {
 LevelDustVial::LevelDustVial() :
 m_fCommittedDust(0.0f),
 m_fQueuedDust(0.0f),
+m_fCommittedDustInternal(0.0f),
+m_fQueuedDustInternal(0.0f),
 m_pxBack(NULL),
 m_pxCommittedDustSurface(NULL),
 m_pxQueuedDustSurface(NULL) {
@@ -49,22 +53,40 @@ void LevelDustVial::Initialize() {
 void LevelDustVial::SetDustAmount(float committed, float queued) {
 	committed = std::min<float>(committed, 1.0f);
 	committed = std::max<float>(committed, 0.0f);
-	queued = std::min<float>(queued, 1.0f - m_fCommittedDust);
+	queued = std::min<float>(queued, 1.0f - m_fCommittedDustInternal);
 	queued = std::max<float>(queued, 0.0f);
 	
-	DustDelta((committed + queued) - (m_fCommittedDust + m_fQueuedDust));
+	DustDeltaEffect((committed + queued) - (m_fCommittedDustInternal + m_fQueuedDustInternal));
 	
-	if (committed != m_fCommittedDust || queued != m_fQueuedDust) {
+	if (committed != m_fCommittedDustInternal || queued != m_fQueuedDustInternal) {
 		m_fCommittedDust = committed;
 		m_fQueuedDust = queued;
 		UpdateAmountShapes();
 	}
 }
 
-void LevelDustVial::DustDelta(float amount) {
+void LevelDustVial::DustDeltaEffect(float amount) {
 	if (amount < 0.0f) {
 		// make effect
 	}
+}
+
+float LevelDustVial::Approximate(float value, float target, uint32 timestep) {
+	if (value == target || std::fabs(target - value) < 0.005) {
+		return target;
+	}
+	
+	const float halflifeperiod = 0.1f; // seconds until value is half
+
+	float sec = timestep / 1000.0f;
+	float correction = (target - value) * 0.5f * std::min<float>(sec / halflifeperiod, 1.0);
+	return value + correction;
+	//IwTrace(MYAPP, ("Correction: %f.2, %f.2, %f.2", value, target, correction));
+}
+
+void LevelDustVial::UpdateAmounts(uint32 timestep) {
+	m_fCommittedDustInternal = Approximate(m_fCommittedDustInternal, m_fCommittedDust, timestep);
+	m_fQueuedDustInternal = Approximate(m_fQueuedDustInternal, m_fQueuedDust, timestep);
 }
 
 void LevelDustVial::UpdateVialShapes() {
@@ -94,7 +116,7 @@ void LevelDustVial::UpdateAmountShapes() {
 	int surfaceorigin = surfaceheight * 10 / 11;
 
 	CIwRect committed = m_xContentGeom;
-	committed.h = m_xContentGeom.h * m_fCommittedDust;
+	committed.h = m_xContentGeom.h * m_fCommittedDustInternal;
 	committed.y += m_xContentGeom.h - committed.h;
 	m_xCommittedDustShape.SetRect(committed);
 	
@@ -103,7 +125,7 @@ void LevelDustVial::UpdateAmountShapes() {
 		committed.w, surfaceheight);
 
 	CIwRect queued = m_xContentGeom;
-	queued.h = m_xContentGeom.h * m_fQueuedDust;
+	queued.h = m_xContentGeom.h * m_fQueuedDustInternal;
 	queued.y += m_xContentGeom.h - queued.h - committed.h;
 	m_xQueuedDustShape.SetRect(queued);
 	
@@ -119,7 +141,9 @@ void LevelDustVial::OnDoLayout(const CIwSVec2& screensize) {
 
 void LevelDustVial::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
-	
+
+	UpdateAmounts(frame.GetRealDurationMs());
+
 	if (m_pxBack) {
 		m_pxBack->Update(frame.GetRealDurationMs());
 	}
@@ -142,15 +166,15 @@ void LevelDustVial::OnRender(Renderer& renderer, const FrameData& frame) {
 	
 	// vial content
 	renderer.SetRenderingLayer(Renderer::eRenderingLayerHud2);
-	if (m_fCommittedDust > 0.0f) {
+	if (m_fCommittedDustInternal > 0.0f) {
 		renderer.DrawPolygon(
 			m_xCommittedDustShape.GetVerts(), m_xCommittedDustShape.GetVertCount(),
 			NULL, s_auCommittedColours);
-		if (m_fQueuedDust <= 0.0f && m_pxCommittedDustSurface) {
+		if (m_fQueuedDustInternal <= 0.0f && m_pxCommittedDustSurface) {
 			renderer.Draw(m_xCommittedDustSurfaceShape, *m_pxCommittedDustSurface);
 		}
 	}
-	if (m_fQueuedDust > 0.0f) {
+	if (m_fQueuedDustInternal > 0.0f) {
 		renderer.DrawPolygon(
 			m_xQueuedDustShape.GetVerts(), m_xQueuedDustShape.GetVertCount(),
 			NULL, s_auQueuedColours);
