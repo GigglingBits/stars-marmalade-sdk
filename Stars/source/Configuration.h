@@ -28,7 +28,7 @@ public:
 	int StarBirthDelay;
 	
 	double BuffSpeed;
-	int BuffThreshold;
+	int BuffShieldDuration;
 	
 	double PathSpeed;
 	double PathMaxLength;

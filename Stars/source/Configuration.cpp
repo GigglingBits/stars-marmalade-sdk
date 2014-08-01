@@ -122,10 +122,10 @@ Configuration::Configuration() {
 		BuffSpeed = 0.5f;
 	}
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffthreshold", tmpstr)) {
-		BuffThreshold = atoi(tmpstr);
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshieldduration", tmpstr)) {
+		BuffShieldDuration = atoi(tmpstr);
 	} else {
-		BuffThreshold = 1;
+		BuffShieldDuration = 1000;
 	}
 	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {

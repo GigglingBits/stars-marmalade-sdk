@@ -19,6 +19,8 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	
 	m_fAnchorLine = 0.0f;
 	m_fPathSpeed = (float)Configuration::GetInstance().PathSpeed;
+    
+        EndShield();
 }
 
 Star::~Star() {
@@ -148,6 +150,7 @@ void Star::BeginShield(uint32 duration) {
 	m_uiShieldDuration = duration;
 	if (Body* shield = GetChild("shield")) {
 		shield->SetTextureFrame("initiate");
+        shield->EnableCollisions(true);
 	}
 }
 
@@ -155,6 +158,7 @@ void Star::EndShield() {
 	m_uiShieldDuration = 0;
 	if (Body* shield = GetChild("shield")) {
 		shield->SetTextureFrame("burst");
+        shield->EnableCollisions(false);
 	}
 }
 

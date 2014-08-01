@@ -360,8 +360,7 @@ void GameFoundation::ActivateMagnetBuff() {
 
 void GameFoundation::ActivateShieldBuff() {
 	if (Star* star = GetStar()) {
-		CreateSplashText("Shield", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		star->BeginShield(5000);
+		star->BeginShield(Configuration::GetInstance().BuffShieldDuration);
 		//OnBuffBegin();
 	}
 }

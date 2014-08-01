@@ -14,7 +14,7 @@ gravity=-15.0			# m/s2
 starbirthdelay=1400		# milliseconds
 
 buffspeed=0.5			# meters per second
-buffthreshold=5			# 5 buffs needed to unlock the button
+buffshieldduration=3000 # milliseconds
 
 pathspeed=12			# meters per second
 pathmaxlength=40		# max length of the path in meters
