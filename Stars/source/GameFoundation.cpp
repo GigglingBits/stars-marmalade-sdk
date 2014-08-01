@@ -212,7 +212,6 @@ int GameFoundation::GetDustMultiplier(int queuedcount) {
 }
 
 void GameFoundation::BeginDustQueue() {
-	OnBuffEnd(); // just for testing
 	m_xDust.BeginDustQueue();
 }
 
@@ -355,21 +354,22 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 void GameFoundation::ActivateMagnetBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Magnet", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		OnBuffBegin();
+		//OnBuffBegin();
 	}
 }
 
 void GameFoundation::ActivateShieldBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Shield", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		OnBuffBegin();
+		star->BeginShield(5000);
+		//OnBuffBegin();
 	}
 }
 
 void GameFoundation::ActivateShootBuff() {
 	if (Star* star = GetStar()) {
 		CreateSplashText("Shoot", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		OnBuffBegin();
+		//OnBuffBegin();
 	}
 }
 

@@ -196,8 +196,6 @@ files {
 	Star.cpp
 	StarMotionState.h
 	StarMotionState.cpp
-	StarAttackState.h
-	StarAttackState.cpp
 
 	Buff.h
 	Buff.cpp

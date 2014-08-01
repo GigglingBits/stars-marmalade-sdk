@@ -77,6 +77,13 @@ SpineResource
 
 SpineResource
 {
+	name	"spine_buff_shield"
+	atlas	"spine/buff_shield/output/buff_shield.atlas"
+	json	"spine/buff_shield/output/buff_shield.json"
+}
+
+SpineResource
+{
 	name	"spine_grunt"
 	atlas	"spine/grunt/output/grunt.atlas"
 	json	"spine/grunt/output/grunt.json"

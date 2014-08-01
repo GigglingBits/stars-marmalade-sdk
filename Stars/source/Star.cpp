@@ -1,7 +1,6 @@
 #include "Star.h"
 #include "Nugget.h"
 #include "StarMotionState.h"
-#include "StarAttackState.h"
 #include "FactoryManager.h"
 #include "Configuration.h"
 
@@ -9,14 +8,13 @@
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Body(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxAttackState(NULL), m_pxParticles(NULL), m_bAutoOrient(false) {
+	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxParticles(NULL), m_bAutoOrient(false), m_uiShieldDuration(0) {
 
 	GetBody().SetBullet(true); // improves collision detection
 
 	SetGravityScale(0.0f);
 		
 	SetState(new PassiveState(*this));
-	SetState(new PeacefulState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	
 	m_fAnchorLine = 0.0f;
@@ -30,10 +28,6 @@ Star::~Star() {
 	
 	if (m_pxMotionState) {
 		delete m_pxMotionState;
-	}
-
-	if (m_pxAttackState) {
-		delete m_pxAttackState;
 	}
 }
 
@@ -58,13 +52,12 @@ void Star::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 
 	GetMotionState().Collide(body);
-	Body::OnColliding(body);
+	CompositeBody::OnColliding(body);
 }
 
 void Star::OnUpdate(const FrameData& frame) {
-	Body::OnUpdate(frame);
+	CompositeBody::OnUpdate(frame);
 	GetMotionState().Update(frame.GetSimulatedDurationMs());
-	GetAttackState().Update(frame.GetSimulatedDurationMs());
 	
 	// particle system
 	if (m_pxParticles) {
@@ -92,28 +85,15 @@ void Star::OnUpdate(const FrameData& frame) {
 			t->SetHorizontalFlip(GetBody().GetLinearVelocity().x <= 0.0f);
 		}
 	}
-}
-
-void Star::SetMotionTextureFrame(const std::string& name) {
-	m_sMotionTextureFrame = name;
-	if (m_sAttackTextureFrame.empty()) {
-		SetTextureFrame(m_sMotionTextureFrame);
-	}
-}
-
-void Star::SetAttackTextureFrame(const std::string& name) {
-	m_sAttackTextureFrame = name;
-	SetTextureFrame(m_sAttackTextureFrame);
-}
-
-void Star::ClearAttackTextureFrame() {
-	m_sAttackTextureFrame.clear();
-	SetTextureFrame(m_sMotionTextureFrame);
-}
-
-void Star::SetTextureFrame(std::string id) {
-	if (Texture* t = GetTexture()) {
-		t->SelectFrame(id, GetHealthManager().GetHealthValue());
+	
+	// shield
+	if (m_uiShieldDuration != 0) {
+		uint32 timestep = frame.GetAvgSimulatedDurationMs();
+		if (m_uiShieldDuration > timestep) {
+			m_uiShieldDuration -= timestep;
+		} else {
+			EndShield();
+		}
 	}
 }
 
@@ -122,7 +102,7 @@ void Star::OnRender(Renderer& renderer, const FrameData& frame) {
 		m_pxParticles->Render(renderer, frame);
 	}
 	m_xPath.Render(renderer, frame);
-	Body::OnRender(renderer, frame);
+	CompositeBody::OnRender(renderer, frame);
 }
 
 void Star::SetAnchorLine(float xpos) {
@@ -164,20 +144,18 @@ bool Star::IsFollowingPath() {
 	return m_xPath.IsWalking();
 }
 
-void Star::BeginBlock() {
-	GetAttackState().BeginBlock();
+void Star::BeginShield(uint32 duration) {
+	m_uiShieldDuration = duration;
+	if (Body* shield = GetChild("shield")) {
+		shield->SetTextureFrame("initiate");
+	}
 }
 
-void Star::EndBlock() {
-	GetAttackState().EndBlock();
-}
-
-void Star::BeginAttack() {
-	GetAttackState().BeginAttack();
-}
-
-void Star::EndAttack() {
-	GetAttackState().EndAttack();
+void Star::EndShield() {
+	m_uiShieldDuration = 0;
+	if (Body* shield = GetChild("shield")) {
+		shield->SetTextureFrame("burst");
+	}
 }
 
 void Star::EnableParticles() {
@@ -211,21 +189,7 @@ void Star::SetState(Star::MotionStateBase* newstate) {
 	m_pxMotionState = newstate;
 }
 
-void Star::SetState(Star::AttackStateBase* newstate) {
-	IwAssertMsg(MYAPP, newstate, ("Empty state must not be set."));
-	if (m_pxAttackState) {
-		delete m_pxAttackState;
-	}
-	newstate->Initialize();
-	m_pxAttackState = newstate;
-}
-
 Star::MotionStateBase& Star::GetMotionState() {
 	IwAssertMsg(MYAPP, m_pxMotionState, ("Program error. State must not be empty."));
 	return *m_pxMotionState;
-}
-
-Star::AttackStateBase& Star::GetAttackState() {
-	IwAssertMsg(MYAPP, m_pxAttackState, ("Program error. State must not be empty."));
-	return *m_pxAttackState;
 }

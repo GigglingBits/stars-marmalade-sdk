@@ -1,48 +1,48 @@
 
-star.png
-size: 792,202
+buff_shield.png
+size: 500,248
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 shield_background
   rotate: false
-  xy: 2, 34
-  size: 168, 168
-  orig: 168, 168
+  xy: 2, 114
+  size: 134, 134
+  orig: 134, 134
   offset: 0, 0
   index: -1
 shield_broke_01
   rotate: false
-  xy: 663, 114
-  size: 129, 88
-  orig: 129, 88
+  xy: 397, 178
+  size: 103, 70
+  orig: 103, 70
   offset: 0, 0
   index: -1
 shield_broke_02
   rotate: false
-  xy: 2, 2
-  size: 19, 30
-  orig: 19, 30
+  xy: 397, 152
+  size: 15, 24
+  orig: 15, 24
   offset: 0, 0
   index: -1
 shield_broke_06
   rotate: true
-  xy: 495, 64
-  size: 138, 166
-  orig: 138, 166
+  xy: 2, 2
+  size: 110, 132
+  orig: 110, 132
   offset: 0, 0
   index: -1
 shield_broke_07
   rotate: false
-  xy: 332, 53
-  size: 161, 149
-  orig: 161, 149
+  xy: 266, 129
+  size: 129, 119
+  orig: 129, 119
   offset: 0, 0
   index: -1
 shield_foreground
   rotate: false
-  xy: 172, 42
-  size: 158, 160
-  orig: 158, 160
+  xy: 138, 120
+  size: 126, 128
+  orig: 126, 128
   offset: 0, 0
   index: -1

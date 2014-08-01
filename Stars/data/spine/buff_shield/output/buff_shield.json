@@ -1,4 +1,5 @@
 {
+"skeleton": { "spine": "1.9.13", "hash": "tyGFLZIPeyHpM4P3pVQju48gwd0", "width": 440.13, "height": 440.9 },
 "bones": [
 	{ "name": "Torso", "y": 10 },
 	{ "name": "Normal_shield_background", "parent": "Torso" },
@@ -13,6 +14,7 @@
 	{ "name": "bone7", "parent": "Normal_shield_broke", "length": 79.53, "x": -122.9, "y": -44.05, "rotation": 179.84 },
 	{ "name": "bone8", "parent": "Normal_shield_broke", "length": 75.85, "x": -219.64, "y": -89.25, "rotation": -176.84 }
 ],
+"ik": [],
 "slots": [
 	{ "name": "aabb", "bone": "Torso", "attachment": "aabb" },
 	{ "name": "shield_background", "bone": "Normal_shield_background", "attachment": "shield_background" },
@@ -35,21 +37,6 @@
 				"vertices": [ -121.050186, 168.06201, -196.39381, 73.886826, -205.45964, -80.22211, -124.15373, -192.03316, -1.4990845, -230.46445, 127.08615, -189.75313, 205.92134, -78.90761, 206.08629, 60.847, 134.86143, 161.60756, 1.686203, 206.04684 ]
 			}
 		},
-		"shield_background": {
-			"shield_background": { "x": 2, "y": -10.99, "scaleX": 1.313, "scaleY": 1.313, "width": 335, "height": 335 }
-		},
-		"shield_broke_01": {
-			"shield_broke_07": { "x": 0.07, "y": 9.99, "rotation": -0.43, "width": 322, "height": 297 }
-		},
-		"shield_broke_02": {
-			"shield_broke_06": { "x": 101.29, "y": 30.15, "rotation": 58.97, "width": 275, "height": 331 }
-		},
-		"shield_broke_03": {
-			"shield_broke_01": { "x": 118.08, "y": -8.56, "rotation": 19.47, "width": 258, "height": 175 }
-		},
-		"shield_broke_04": {
-			"shield_broke_02": { "x": 31.18, "y": -4.59, "rotation": -59.98, "width": 38, "height": 60 }
-		},
 		"shield_broke_05": {
 			"shield_broke_02": { "x": 32.1, "y": 0.38, "rotation": -59.27, "width": 38, "height": 60 }
 		},
@@ -59,193 +46,38 @@
 		"shield_broke_07": {
 			"shield_broke_02": { "x": 29.91, "y": -4.31, "rotation": -58.67, "width": 38, "height": 60 }
 		},
-		"shield_broke_08": {
-			"shield_broke_02": { "x": 36.11, "y": -1.57, "scaleX": 0.617, "rotation": -73.88, "width": 38, "height": 60 }
+		"shield_background": {
+			"shield_background": { "x": 2, "y": -10.99, "scaleX": 1.313, "scaleY": 1.313, "width": 335, "height": 335 }
 		},
 		"shield_broke_09": {
 			"shield_broke_02": { "x": 35.79, "y": -1.93, "rotation": -62.8, "width": 38, "height": 60 }
 		},
+		"shield_broke_02": {
+			"shield_broke_06": { "x": 101.29, "y": 30.15, "rotation": 58.97, "width": 275, "height": 331 }
+		},
+		"shield_broke_08": {
+			"shield_broke_02": { "x": 36.11, "y": -1.57, "scaleX": 0.617, "rotation": -73.88, "width": 38, "height": 60 }
+		},
 		"shield_foreground": {
 			"shield_foreground": { "x": 13.99, "scaleX": 1.315, "scaleY": 1.315, "width": 315, "height": 319 }
+		},
+		"shield_broke_04": {
+			"shield_broke_02": { "x": 31.18, "y": -4.59, "rotation": -59.98, "width": 38, "height": 60 }
+		},
+		"shield_broke_01": {
+			"shield_broke_07": { "x": 0.07, "y": 9.99, "rotation": -0.43, "width": 322, "height": 297 }
+		},
+		"shield_broke_03": {
+			"shield_broke_01": { "x": 118.08, "y": -8.56, "rotation": 19.47, "width": 258, "height": 175 }
 		}
 	}
 },
+"events": {
+	"animation": {}
+},
 "animations": {
-	"Normal": {
+	"burst": {
 		"slots": {
-			"shield_broke_01": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_02": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_03": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_04": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_05": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_06": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_07": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_08": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_09": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			}
-		},
-		"bones": {
-			"Normal_shield_background": {
-				"rotate": [
-					{ "time": 0, "angle": 0 }
-				],
-				"translate": [
-					{ "time": 0, "x": 0, "y": 0 }
-				],
-				"scale": [
-					{ "time": 0, "x": 1, "y": 1 }
-				]
-			},
-			"Normal_shield_foreground": {
-				"rotate": [
-					{ "time": 0, "angle": 0 }
-				],
-				"translate": [
-					{ "time": 0, "x": 0, "y": 0 }
-				],
-				"scale": [
-					{ "time": 0, "x": 1, "y": 1 }
-				]
-			}
-		}
-	},
-	"Shield state_bouncing": {
-		"slots": {
-			"shield_broke_01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_03": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_04": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_05": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_06": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_07": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_08": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"shield_broke_09": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			}
-		},
-		"bones": {
-			"Normal_shield_background": {
-				"rotate": [
-					{ "time": 0.1, "angle": 0 },
-					{ "time": 0.2, "angle": -7.07 },
-					{ "time": 0.2666, "angle": -0.73 },
-					{ "time": 0.3333, "angle": -8.72 },
-					{ "time": 0.4333, "angle": 6.18 },
-					{ "time": 0.6666, "angle": 0 }
-				],
-				"translate": [
-					{ "time": 0, "x": 0, "y": 0 },
-					{ "time": 0.1, "x": -33.92, "y": 0 },
-					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 0.6666, "x": 0, "y": 0 }
-				],
-				"scale": [
-					{ "time": 0, "x": 1, "y": 1 },
-					{ "time": 0.1, "x": 0.839, "y": 0.929 },
-					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
-					{ "time": 0.6666, "x": 1, "y": 1 }
-				]
-			},
-			"Normal_shield_foreground": {
-				"rotate": [
-					{ "time": 0.1, "angle": 0 },
-					{ "time": 0.2, "angle": -7.07 },
-					{ "time": 0.2666, "angle": -0.73 },
-					{ "time": 0.3333, "angle": -8.72 },
-					{ "time": 0.4333, "angle": 6.18 },
-					{ "time": 0.6666, "angle": 0 }
-				],
-				"translate": [
-					{ "time": 0, "x": 0, "y": 0 },
-					{ "time": 0.1, "x": -33.92, "y": 0 },
-					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 0.6666, "x": 0, "y": 0 }
-				],
-				"scale": [
-					{ "time": 0, "x": 1, "y": 1 },
-					{ "time": 0.1, "x": 0.839, "y": 0.929 },
-					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
-					{ "time": 0.6666, "x": 1, "y": 1 }
-				]
-			}
-		}
-	},
-	"Shield state_broke": {
-		"slots": {
-			"shield_background": {
-				"attachment": [
-					{ "time": 0.3666, "name": null }
-				]
-			},
 			"shield_broke_01": {
 				"attachment": [
 					{ "time": 0, "name": null },
@@ -258,10 +90,10 @@
 					{ "time": 0.6666, "color": "ffffff00" }
 				]
 			},
-			"shield_broke_02": {
+			"shield_broke_09": {
 				"attachment": [
 					{ "time": 0, "name": null },
-					{ "time": 0.3666, "name": "shield_broke_06" }
+					{ "time": 0.3666, "name": "shield_broke_02" }
 				],
 				"color": [
 					{ "time": 0.3666, "color": "ffffff00" },
@@ -282,7 +114,31 @@
 					{ "time": 0.6666, "color": "ffffff00" }
 				]
 			},
-			"shield_broke_04": {
+			"shield_broke_08": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3666, "name": "shield_broke_02" }
+				],
+				"color": [
+					{ "time": 0.3666, "color": "ffffff00" },
+					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.5333, "color": "ffffffff" },
+					{ "time": 0.6666, "color": "0000ff00" }
+				]
+			},
+			"shield_broke_02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3666, "name": "shield_broke_06" }
+				],
+				"color": [
+					{ "time": 0.3666, "color": "ffffff00" },
+					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.5333, "color": "ffffffff" },
+					{ "time": 0.6666, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_06": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.3666, "name": "shield_broke_02" }
@@ -306,43 +162,7 @@
 					{ "time": 0.6666, "color": "ffffff00" }
 				]
 			},
-			"shield_broke_06": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.3666, "name": "shield_broke_02" }
-				],
-				"color": [
-					{ "time": 0.3666, "color": "ffffff00" },
-					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.5333, "color": "ffffffff" },
-					{ "time": 0.6666, "color": "ffffff00" }
-				]
-			},
 			"shield_broke_07": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.3666, "name": "shield_broke_02" }
-				],
-				"color": [
-					{ "time": 0.3666, "color": "ffffff00" },
-					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.5333, "color": "ffffffff" },
-					{ "time": 0.6666, "color": "ffffff00" }
-				]
-			},
-			"shield_broke_08": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.3666, "name": "shield_broke_02" }
-				],
-				"color": [
-					{ "time": 0.3666, "color": "ffffff00" },
-					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.5333, "color": "ffffffff" },
-					{ "time": 0.6666, "color": "0000ff00" }
-				]
-			},
-			"shield_broke_09": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.3666, "name": "shield_broke_02" }
@@ -357,6 +177,23 @@
 			"shield_foreground": {
 				"attachment": [
 					{ "time": 0.3666, "name": null }
+				]
+			},
+			"shield_background": {
+				"attachment": [
+					{ "time": 0.3666, "name": null }
+				]
+			},
+			"shield_broke_04": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3666, "name": "shield_broke_02" }
+				],
+				"color": [
+					{ "time": 0.3666, "color": "ffffff00" },
+					{ "time": 0.4333, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.5333, "color": "ffffffff" },
+					{ "time": 0.6666, "color": "ffffff00" }
 				]
 			}
 		},
@@ -482,6 +319,369 @@
 					{ "time": 0.3666, "x": 1, "y": 1 },
 					{ "time": 0.5333, "x": 1.455, "y": 1.455 },
 					{ "time": 0.6666, "x": 1.803, "y": 1.803 }
+				]
+			}
+		},
+		"events": [
+			{ "time": 0.7, "name": "animation", "string": "no-shield" }
+		]
+	},
+	"collide": {
+		"slots": {
+			"shield_broke_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_09": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_08": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_06": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_05": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_07": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"Normal_shield_background": {
+				"rotate": [
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.2, "angle": -7.07 },
+					{ "time": 0.2666, "angle": -0.73 },
+					{ "time": 0.3333, "angle": -8.72 },
+					{ "time": 0.4333, "angle": 6.18 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1, "x": -33.92, "y": 0 },
+					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1, "x": 0.839, "y": 0.929 },
+					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"Normal_shield_foreground": {
+				"rotate": [
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.2, "angle": -7.07 },
+					{ "time": 0.2666, "angle": -0.73 },
+					{ "time": 0.3333, "angle": -8.72 },
+					{ "time": 0.4333, "angle": 6.18 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1, "x": -33.92, "y": 0 },
+					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1, "x": 0.839, "y": 0.929 },
+					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"events": [
+			{ "time": 0, "name": "animation", "string": "shield" }
+		]
+	},
+	"initiate": {
+		"slots": {
+			"shield_broke_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_09": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_08": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_06": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_05": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_07": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"shield_broke_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"Normal_shield_background": {
+				"rotate": [
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.2, "angle": -7.07 },
+					{ "time": 0.2666, "angle": -0.73 },
+					{ "time": 0.3333, "angle": -8.72 },
+					{ "time": 0.4333, "angle": 6.18 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1, "x": -33.92, "y": 0 },
+					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1, "x": 0.839, "y": 0.929 },
+					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"Normal_shield_foreground": {
+				"rotate": [
+					{ "time": 0.1, "angle": 0 },
+					{ "time": 0.2, "angle": -7.07 },
+					{ "time": 0.2666, "angle": -0.73 },
+					{ "time": 0.3333, "angle": -8.72 },
+					{ "time": 0.4333, "angle": 6.18 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1, "x": -33.92, "y": 0 },
+					{ "time": 0.3333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.1, "x": 0.839, "y": 0.929 },
+					{ "time": 0.3333, "x": 1.078, "y": 1.078 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"Torso": {
+				"scale": [
+					{ "time": 0, "x": 0.009, "y": 0.009 },
+					{ "time": 0.4333, "x": 1.2, "y": 1.2 },
+					{ "time": 0.5, "x": 0.9, "y": 0.9 },
+					{ "time": 0.5666, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"events": [
+			{ "time": 0.7333, "name": "animation", "string": "shield" }
+		]
+	},
+	"no-shield": {
+		"slots": {
+			"shield_broke_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_09": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_08": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_06": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_05": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_background": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_07": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_foreground": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_04": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"Normal_shield_background": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"Normal_shield_foreground": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			}
+		}
+	},
+	"shield": {
+		"slots": {
+			"shield_broke_01": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_09": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_08": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_06": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_05": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_07": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_03": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"shield_broke_04": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"Normal_shield_background": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"Normal_shield_foreground": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			}
 		}
