@@ -8,13 +8,13 @@
 
 class Star : public CompositeBody {
 public:
-	class MotionStateBase {
+	class StateBase {
 	protected:
 		Star& m_rxContext;
 		
 	public:
-		MotionStateBase(Star& context) : m_rxContext(context) {};
-		virtual ~MotionStateBase() {};
+		StateBase(Star& context) : m_rxContext(context) {};
+		virtual ~StateBase() {};
 		
 		virtual void Initialize() {};
 		virtual void FollowPath() {};
@@ -25,13 +25,14 @@ public:
 	};
 		
 protected:
+	class InitialState;
 	class PassiveState;
 	class RetractingState;
 	class FollowState;
 	class FallingState;
 	
 private:
-	MotionStateBase* m_pxMotionState;
+	StateBase* m_pxMotionState;
 	
 	PathTracker m_xPath;
 	float m_fPathSpeed;
@@ -49,6 +50,8 @@ public:
 	virtual const char* GetTypeName();
 	static const char* TypeName();
 
+	void Initialize();
+	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnColliding(Body& body);
 
@@ -68,8 +71,8 @@ private:
 	void EnableParticles();
 	void DisableParticles();
 	
-	void SetState(MotionStateBase* newstate);
-	MotionStateBase& GetMotionState();
+	void SetState(StateBase* newstate);
+	StateBase& GetMotionState();
 
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);

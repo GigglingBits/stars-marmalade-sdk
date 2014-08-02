@@ -1,6 +1,6 @@
 #include "Star.h"
 #include "Nugget.h"
-#include "StarMotionState.h"
+#include "StarState.h"
 #include "FactoryManager.h"
 #include "Configuration.h"
 
@@ -14,13 +14,11 @@ Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 
 	SetGravityScale(0.0f);
 		
-	SetState(new PassiveState(*this));
+	SetState(new InitialState(*this));
 	GetHealthManager().SetResilience(0.0f);
 	
 	m_fAnchorLine = 0.0f;
 	m_fPathSpeed = (float)Configuration::GetInstance().PathSpeed;
-    
-        EndShield();
 }
 
 Star::~Star() {
@@ -40,6 +38,10 @@ const char* Star::GetTypeName() {
 const char* Star::TypeName() {
 	static const char* type = "star";
 	return type;
+}
+
+void Star::Initialize() {
+	EndShield();
 }
 
 void Star::AutoOrientTexture(bool allow) {
@@ -184,7 +186,7 @@ void Star::DisableParticles() {
 /****
  * State machine 
  **/
-void Star::SetState(Star::MotionStateBase* newstate) {
+void Star::SetState(Star::StateBase* newstate) {
 	IwAssertMsg(MYAPP, newstate, ("Empty state must not be set."));
 	if (m_pxMotionState) {
 		delete m_pxMotionState;
@@ -193,7 +195,7 @@ void Star::SetState(Star::MotionStateBase* newstate) {
 	m_pxMotionState = newstate;
 }
 
-Star::MotionStateBase& Star::GetMotionState() {
+Star::StateBase& Star::GetMotionState() {
 	IwAssertMsg(MYAPP, m_pxMotionState, ("Program error. State must not be empty."));
 	return *m_pxMotionState;
 }

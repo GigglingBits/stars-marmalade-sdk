@@ -4,11 +4,21 @@
 #include "Star.h"
 
 /////////////////////////////////////////////////////////////
-// Rising
+// Initial
 /////////////////////////////////////////////////////////////
-class Star::PassiveState : public Star::MotionStateBase {
+class Star::InitialState : public Star::StateBase {
 public:
-	PassiveState(Star& context) : MotionStateBase(context) {};
+	InitialState(Star& context) : StateBase(context) {};
+	virtual void Initialize();
+	virtual void Update(uint16 timestep);
+};
+
+/////////////////////////////////////////////////////////////
+// Passive
+/////////////////////////////////////////////////////////////
+class Star::PassiveState : public Star::StateBase {
+public:
+	PassiveState(Star& context) : StateBase(context) {};
 	virtual void Initialize();
 	virtual void FollowPath();
 	virtual void Update(uint16 timestep);
@@ -17,9 +27,9 @@ public:
 /////////////////////////////////////////////////////////////
 // Retracting
 /////////////////////////////////////////////////////////////
-class Star::RetractingState : public Star::MotionStateBase {
+class Star::RetractingState : public Star::StateBase {
 public:
-	RetractingState(Star& context) : MotionStateBase(context) {};
+	RetractingState(Star& context) : StateBase(context) {};
 	virtual void Initialize();
 	virtual void Passify();
 	virtual void FollowPath();
@@ -30,9 +40,9 @@ public:
 /////////////////////////////////////////////////////////////
 // Following path
 /////////////////////////////////////////////////////////////
-class Star::FollowState : public Star::MotionStateBase {
+class Star::FollowState : public Star::StateBase {
 public:
-	FollowState(Star& context) : MotionStateBase(context) {};
+	FollowState(Star& context) : StateBase(context) {};
 	virtual void Initialize();
 	virtual void Passify();
 	virtual void FollowPath();
@@ -43,9 +53,9 @@ public:
 /////////////////////////////////////////////////////////////
 // Falling
 /////////////////////////////////////////////////////////////
-class Star::FallingState : public Star::MotionStateBase {
+class Star::FallingState : public Star::StateBase {
 public:
-	FallingState(Star& context) : MotionStateBase(context) {};
+	FallingState(Star& context) : StateBase(context) {};
 	virtual void Initialize();
 };
 

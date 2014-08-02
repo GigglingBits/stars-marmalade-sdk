@@ -1,5 +1,5 @@
 #include "Main.h"
-#include "StarMotionState.h"
+#include "StarState.h"
 #include "InputManager.h"
 #include "SoundEngine.h"
 #include "Nugget.h"
@@ -8,7 +8,18 @@
 #include "Debug.h"
 
 /////////////////////////////////////////////////////////////
-// Rising
+// Initial
+/////////////////////////////////////////////////////////////
+void Star::InitialState::Initialize() {
+}
+
+void Star::InitialState::Update(uint16 timestep) {
+	m_rxContext.Initialize();
+	m_rxContext.SetState(new PassiveState(m_rxContext));
+}
+
+/////////////////////////////////////////////////////////////
+// Passive
 /////////////////////////////////////////////////////////////
 void Star::PassiveState::Initialize() {
 	m_rxContext.EnableCollisions(false);
@@ -20,7 +31,7 @@ void Star::PassiveState::Initialize() {
 	CIwFVec2 dragtarget = m_rxContext.GetDragTarget();
 	dragtarget.x = m_rxContext.m_fAnchorLine;
 	m_rxContext.MoveDragging(dragtarget);
-
+	
 	m_rxContext.m_bAutoOrient = true;
 }
 
