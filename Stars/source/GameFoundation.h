@@ -113,9 +113,6 @@ private:
 
 	void EmitBuff(const CIwFVec2& pos);
 	
-	void OnBuffBegin();
-	void OnBuffEnd();
-	
 	void DustEventHandler(const Body& sender, const Star::DustEventArgs& args);
 	void StarKilledEventHandler(const Star& sender, const int& args);
 	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
@@ -127,11 +124,6 @@ public:
 		float amplitude;
 	};
 	MulticastEvent<GameFoundation, QuakeImpactArgs> QuakeImpact;
-	
-	struct BuffProgressArgs {
-		bool active;
-	};
-	MulticastEvent<GameFoundation, BuffProgressArgs> BuffProgress;
 	
 	MulticastEvent<GameFoundation, Sprite> SpriteAdded;
 

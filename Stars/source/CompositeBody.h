@@ -38,6 +38,7 @@ public:
 
 	virtual float GetMass();
 	
+	virtual void EnableCollisions(bool enable, bool includechildren);
 	virtual void EnableCollisions(bool enable);
 	virtual void SetGravityScale(float scale);
 
@@ -48,7 +49,7 @@ private:
 	void DestroyJoints();
 
 	void AlignChildren();
-	bool TryAlignChild(BodyJoint& joint, BodyHierarchy& bodies, bool force=false);
+	bool TryAlignChild(BodyJoint& joint, BodyHierarchy& bodies, bool force = false);
 	bool TryAlignChildAddInfo(Body* parent, BodyJoint& joint, BodyHierarchy& bodies);
 
 protected:	

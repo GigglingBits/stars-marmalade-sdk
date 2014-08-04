@@ -34,7 +34,6 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xGame.SpriteRemoved.AddListener<Level>(this, &Level::SpriteRemovedEventHandler);
 	m_xGame.BuffCollected.AddListener(this, &Level::BuffCollectedHandler);
 	m_xHud.GetBuffPanel().BuffTrigger.AddListener(this, &Level::BuffTriggerHandler);
-	m_xGame.BuffProgress.AddListener(this, &Level::BuffProgressHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
 	
@@ -66,7 +65,6 @@ Level::~Level() {
 	// detach event handlers
 	m_xEventTimer.LastEventFired.RemoveListener(this, &Level::EventTimerClearedEventHandler);
 	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
-	m_xGame.BuffProgress.RemoveListener(this, &Level::BuffProgressHandler);
 	m_xHud.GetBuffPanel().BuffTrigger.RemoveListener(this, &Level::BuffTriggerHandler);
 	m_xGame.BuffCollected.RemoveListener(this, &Level::BuffCollectedHandler);
 	m_xGame.SpriteRemoved.RemoveListener<Level>(this, &Level::SpriteRemovedEventHandler);
@@ -494,12 +492,4 @@ void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation:
 			break;
 	}
 	m_xCompletionInfo.IncrementBuffsUsed();
-}
-
-void Level::BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args) {
-	if (args.active) {
-		m_xCurtain.Close();
-	} else {
-		m_xCurtain.Open();
-	}
 }

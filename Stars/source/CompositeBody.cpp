@@ -114,12 +114,18 @@ void CompositeBody::SetSpeed(const CIwFVec2& vector) {
 	}
 }
 
+void CompositeBody::EnableCollisions(bool enable, bool includechildren) {
+	EnableCollisions(enable);
+	if (includechildren) {
+		for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
+			Body* body = it->second;
+			body->EnableCollisions(enable);
+		}
+	}
+}
+
 void CompositeBody::EnableCollisions(bool enable) {
 	Body::EnableCollisions(enable);
-	for (ChildList::iterator it = m_xChildList.begin(); it != m_xChildList.end(); it++) {
-		Body* body = it->second;
-		body->EnableCollisions(enable);
-	}
 }
 
 void CompositeBody::SetGravityScale(float scale) {

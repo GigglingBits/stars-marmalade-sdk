@@ -128,6 +128,18 @@ Configuration::Configuration() {
 		BuffShieldDuration = 1000;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffmagnetduration", tmpstr)) {
+		BuffMagnetDuration = atoi(tmpstr);
+	} else {
+		BuffMagnetDuration = 1000;
+	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshootcount", tmpstr)) {
+		BuffShootCount = atoi(tmpstr);
+	} else {
+		BuffShootCount = 1;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {
 		PathSpeed = atof(tmpstr);
 	} else {

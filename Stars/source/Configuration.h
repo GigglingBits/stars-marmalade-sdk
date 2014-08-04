@@ -29,6 +29,8 @@ public:
 	
 	double BuffSpeed;
 	int BuffShieldDuration;
+	int BuffMagnetDuration;
+	int BuffShootCount;
 	
 	double PathSpeed;
 	double PathMaxLength;

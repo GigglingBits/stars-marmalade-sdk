@@ -22,7 +22,7 @@ void Star::InitialState::Update(uint16 timestep) {
 // Passive
 /////////////////////////////////////////////////////////////
 void Star::PassiveState::Initialize() {
-	m_rxContext.EnableCollisions(false);
+	m_rxContext.EnableCollisions(false, false);
 	SoundEngine::GetInstance().PlaySoundEffect("LetsGo");
 	m_rxContext.DisableParticles();
 	
@@ -51,7 +51,7 @@ void Star::PassiveState::Update(uint16 timestep) {
 // Retracting
 /////////////////////////////////////////////////////////////
 void Star::RetractingState::Initialize() {
-	m_rxContext.EnableCollisions(true);
+	m_rxContext.EnableCollisions(true, false);
 	m_rxContext.SetTextureFrame("idle");
 	m_rxContext.DisableParticles();
 	
@@ -111,7 +111,7 @@ void Star::RetractingState::Update(uint16 timestep) {
 // Following path
 /////////////////////////////////////////////////////////////
 void Star::FollowState::Initialize() {
-	m_rxContext.EnableCollisions(true);
+	m_rxContext.EnableCollisions(true, false);
 	m_rxContext.SetTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
@@ -199,7 +199,7 @@ void Star::FollowState::Update(uint16 timestep) {
 // Falling
 /////////////////////////////////////////////////////////////
 void Star::FallingState::Initialize() {
-	m_rxContext.EnableCollisions(false);
+	m_rxContext.EnableCollisions(false, false);
 	m_rxContext.SetTextureFrame("recover");
 	SoundEngine::GetInstance().PlaySoundEffect("StarFall");
 	m_rxContext.DisableParticles();

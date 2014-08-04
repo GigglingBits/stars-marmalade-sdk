@@ -145,7 +145,6 @@ private:
 
 	void BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt);
 	void BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt);
-	void BuffProgressHandler(const GameFoundation& sender, const GameFoundation::BuffProgressArgs& args);
 };
 
 #endif

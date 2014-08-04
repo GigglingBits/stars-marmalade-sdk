@@ -353,35 +353,20 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos) {
 
 void GameFoundation::ActivateMagnetBuff() {
 	if (Star* star = GetStar()) {
-		CreateSplashText("Magnet", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		//OnBuffBegin();
+		star->BeginMagnet(Configuration::GetInstance().BuffMagnetDuration);
 	}
 }
 
 void GameFoundation::ActivateShieldBuff() {
 	if (Star* star = GetStar()) {
 		star->BeginShield(Configuration::GetInstance().BuffShieldDuration);
-		//OnBuffBegin();
 	}
 }
 
 void GameFoundation::ActivateShootBuff() {
 	if (Star* star = GetStar()) {
-		CreateSplashText("Shoot", star->GetPosition(), GAME_COLOUR_FONT_MAIN, Renderer::eFontTypeSmall);
-		//OnBuffBegin();
+		star->BeginShoot(Configuration::GetInstance().BuffShootCount);
 	}
-}
-
-void GameFoundation::OnBuffBegin() {
-	BuffProgressArgs args;
-	args.active = true;
-	BuffProgress.Invoke(*this, args);
-}
-
-void GameFoundation::OnBuffEnd() {
-	BuffProgressArgs args;
-	args.active = false;
-	BuffProgress.Invoke(*this, args);
 }
 
 void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventArgs& args) {

@@ -23,7 +23,9 @@ gravity					Acceleration in m/s2 pointing upwards
 starbirthdelay			Number of milliseconds before a new star is born
 
 buffspeed				Speed of a buff rising, specified in meter per second
-buffshieldduration      Duration of the shueld buff in milliseconds
+buffshieldduration      Duration of the shield buff in milliseconds
+buffmagnetduration      Duration of the magnet buff in milliseconds
+buffshootcount			Number of enemies the shoot buff can attack
 
 pathspeed				Speed of the star along the path in meters per second.
 pathmaxlength			Max length of the path in meters.

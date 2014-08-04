@@ -24,10 +24,12 @@ int Nugget::GetDustAmount() {
 void Nugget::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 	
-	// any collision leads to selfdestruction
-	GetHealthManager().Kill();
-	ShowEffect("star_collision");
-	
+	if (body.GetId().compare("shield") != 0 && body.GetId().compare("magnet") != 0) {
+		// any non-star-sensor collision leads to selfdestruction
+		GetHealthManager().Kill();
+		ShowEffect("star_collision");
+	}
+		
 	Body::OnColliding(body);
 }
 

@@ -40,6 +40,7 @@ private:
 	bool m_bAutoOrient;
 
 	uint32 m_uiShieldDuration;
+	uint32 m_uiMagnetDuration;
 	
 	ParticleSystem* m_pxParticles;
 
@@ -54,6 +55,7 @@ public:
 	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnColliding(Body& body);
+	virtual void OnChildColliding(Body& child, Body& body);
 
 	void SetAnchorLine(float xpos);
 	void FollowPath(const std::vector<CIwFVec2>& path);
@@ -62,6 +64,12 @@ public:
 	
 	void BeginShield(uint32 duration);
 	void EndShield();
+	
+	void BeginMagnet(uint32 duration);
+	void EndMagnet();
+	
+	void BeginShoot(uint32 count);
+	void EndShoot();
 	
 	bool IsFollowingPath();
 

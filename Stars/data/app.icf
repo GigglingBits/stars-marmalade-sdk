@@ -14,7 +14,9 @@ gravity=-15.0			# m/s2
 starbirthdelay=1400		# milliseconds
 
 buffspeed=0.5			# meters per second
-buffshieldduration=3000 # milliseconds
+buffshieldduration=4000 # milliseconds
+buffmagnetduration=4000 # milliseconds
+buffshootcount=3		# count
 
 pathspeed=12			# meters per second
 pathmaxlength=40		# max length of the path in meters

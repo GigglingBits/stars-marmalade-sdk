@@ -8,7 +8,7 @@
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxParticles(NULL), m_bAutoOrient(false), m_uiShieldDuration(0) {
+	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxParticles(NULL), m_bAutoOrient(false), m_uiShieldDuration(0), m_uiMagnetDuration(0) {
 
 	GetBody().SetBullet(true); // improves collision detection
 
@@ -42,6 +42,8 @@ const char* Star::TypeName() {
 
 void Star::Initialize() {
 	EndShield();
+	EndMagnet();
+	EndShoot();
 }
 
 void Star::AutoOrientTexture(bool allow) {
@@ -58,6 +60,16 @@ void Star::OnColliding(Body& body) {
 	GetMotionState().Collide(body);
 	CompositeBody::OnColliding(body);
 }
+
+void Star::OnChildColliding(Body& child, Body& body) {
+	if (dynamic_cast<Nugget*>(&body)) {
+		if (0 == child.GetId().compare("magnet")) {
+			CIwFVec2 v = (GetPosition() - body.GetPosition()).GetNormalised() * 10.0f /* m/s */;
+			body.SetSpeed(v);
+		}
+	}
+}
+
 
 void Star::OnUpdate(const FrameData& frame) {
 	CompositeBody::OnUpdate(frame);
@@ -90,13 +102,23 @@ void Star::OnUpdate(const FrameData& frame) {
 		}
 	}
 	
-	// shield
+	// shield count down
 	if (m_uiShieldDuration != 0) {
 		uint32 timestep = frame.GetAvgSimulatedDurationMs();
 		if (m_uiShieldDuration > timestep) {
 			m_uiShieldDuration -= timestep;
 		} else {
 			EndShield();
+		}
+	}
+
+	// magnet count down
+	if (m_uiMagnetDuration != 0) {
+		uint32 timestep = frame.GetAvgSimulatedDurationMs();
+		if (m_uiMagnetDuration > timestep) {
+			m_uiMagnetDuration -= timestep;
+		} else {
+			EndMagnet();
 		}
 	}
 }
@@ -162,6 +184,30 @@ void Star::EndShield() {
 		shield->SetTextureFrame("burst");
         shield->EnableCollisions(false);
 	}
+}
+
+void Star::BeginMagnet(uint32 duration) {
+	m_uiMagnetDuration = duration;
+	if (Body* field = GetChild("magnet")) {
+		field->SetTextureFrame("on");
+        field->EnableCollisions(true);
+	}
+}
+
+void Star::EndMagnet() {
+	m_uiMagnetDuration = 0;
+	if (Body* field = GetChild("magnet")) {
+		field->SetTextureFrame("off");
+        field->EnableCollisions(false);
+	}
+}
+
+void Star::BeginShoot(uint32 count) {
+	
+}
+
+void Star::EndShoot() {
+	
 }
 
 void Star::EnableParticles() {

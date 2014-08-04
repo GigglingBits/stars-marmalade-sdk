@@ -64,11 +64,22 @@
 			<fixture friction="0.0" restitution="2.0" density="1.0" />
 			<texture animation="spine_star" />
 			<port id="shield_port" x="0.0" y="0.0" />
+			<port id="magnet_port" x="0.0" y="0.0" />
 			<child id="shield" port="shield_port" jointtype="weld">
                 <body id="shield" type="dynamic" resilience="1.0" collide="0">
-                    <fixture friction="1.0" restitution="1.0" density="0.1" sensor="1" />
+                    <fixture friction="1.0" restitution="1.0" density="0.00001" sensor="1" />
                     <shape type="circle" width="1.9" />
 					<texture animation="spine_buff_shield" />
+                </body>
+            </child>
+			<child id="magnet" port="magnet_port" jointtype="weld">
+                <body id="magnet" type="dynamic" resilience="1.0" collide="0">
+                    <fixture friction="1.0" restitution="1.0" density="0.00001" sensor="1" />
+                    <shape type="circle" width="9.0" />
+					<texture>
+						<frame id="on" colour="0x33aaaaaa" />
+						<frame id="off" colour="0x00000000" />
+					</texture>
                 </body>
             </child>
 		</body>
