@@ -31,7 +31,7 @@ public:
 	virtual ~Sprite();
 
 	void SetId(const std::string& id);
-	const std::string& GetId();
+	const std::string& GetId() const;
 
 	virtual const char* GetTypeName();
 	static const char* TypeName();
@@ -39,7 +39,7 @@ public:
 	virtual bool CanDispose();
 
 	virtual void SetPosition(const CIwFVec2& position);
-	virtual CIwFVec2 GetPosition();
+	virtual CIwFVec2 GetPosition() const;
 
 	void SetShape(CIwFVec2 verts[], int count, bool import);
 	void SetShape(const VertexStreamWorld& shape);

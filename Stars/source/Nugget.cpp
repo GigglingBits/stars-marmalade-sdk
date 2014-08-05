@@ -4,7 +4,7 @@
 #include "Main.h"
 
 Nugget::Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef)
-	: Body(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL) {
+	: Body(id, bodydef, fixturedef, texturedef), m_pxParticles(NULL), m_bMagnetActive(false) {
 	SetGravityScale(0.0f);
 }
 
@@ -19,6 +19,19 @@ const char* Nugget::TypeName() {
 
 int Nugget::GetDustAmount() {
 	return GAME_POINTS_NUGGET;
+}
+
+void Nugget::SetMagnetPosition(const CIwFVec2& pos) {
+	IW_CALLSTACK_SELF;
+	if (!m_bMagnetActive) {
+		m_bMagnetActive = true;
+		IwAssert(MYAPP, !CanDrag());
+		EnableDragging(true);
+		BeginDragging(GetPosition(), GetMass() * 10.0f);
+		MoveDragging(pos);
+	}
+	IwAssert(MYAPP, CanDrag());
+	MoveDragging(pos);
 }
 
 void Nugget::OnColliding(Body& body) {

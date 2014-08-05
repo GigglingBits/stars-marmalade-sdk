@@ -7,6 +7,7 @@
 class Nugget : public Body {
 private:
 	ParticleSystem* m_pxParticles;
+	bool m_bMagnetActive;
 	
 public:
 	Nugget(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
@@ -15,6 +16,8 @@ public:
 	static const char* TypeName();
 	
 	virtual int GetDustAmount();
+	
+	void SetMagnetPosition(const CIwFVec2& pos);
 	
 protected:
 	virtual void OnColliding(Body& body);

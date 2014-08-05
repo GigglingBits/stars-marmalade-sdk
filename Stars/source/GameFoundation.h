@@ -3,6 +3,7 @@
 
 #include <map>
 #include <queue>
+#include <list>
 
 #include "Renderable.h"
 #include "Sprite.h"
@@ -42,6 +43,8 @@ private:
 
 	Star* m_pxStar;
 	DustCounter m_xDust;
+
+	std::list<std::string> m_xMagnetSprites;
 	
 public:
 	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
@@ -105,6 +108,8 @@ private:
 
 	void EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
+	void UpdateMagnet(uint16 timestep);
+	
 	bool CheckOutOfWorld(const CIwFVec2& pos);
 	bool CheckOutOfUniverse(const CIwFVec2& pos);
 	bool CheckOutOfBounds(const CIwFVec2& pos, float margin);
@@ -115,6 +120,7 @@ private:
 	
 	void DustEventHandler(const Body& sender, const Star::DustEventArgs& args);
 	void StarKilledEventHandler(const Star& sender, const int& args);
+	void StarMagnetEventHandler(const Star& sender, const std::string& args);
 	void BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args);
 	void BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args);
 	void EffectRequestedEventHandler(const Body& sender, const Body::EffectArgs& args);

@@ -45,7 +45,7 @@ public:
 
 	virtual void SetPosition(const CIwFVec2& position);
 	virtual void SetPosition(const CIwFVec2& position, float angle);
-	virtual CIwFVec2 GetPosition();
+	virtual CIwFVec2 GetPosition() const;
 	CIwFVec2 GetCenter();
 	
 	void SetImpulse(const CIwFVec2& linear, float angular = 0.0f);
@@ -76,7 +76,7 @@ public:
 
 	void EnableDragging(bool enable);
 	bool CanDrag();
-	virtual bool BeginDragging(const CIwFVec2& target);
+	virtual bool BeginDragging(const CIwFVec2& target, float dragforce = 0.0f);
 	virtual void MoveDragging(const CIwFVec2& target);
 	virtual void EndDragging();
 	bool IsDragging();

@@ -101,7 +101,7 @@ b2Fixture& Body::GetFixture() {
 	return *m_pxFixture;
 }
 
-CIwFVec2 Body::GetPosition() {
+CIwFVec2 Body::GetPosition() const {
 	b2Vec2 pos = m_pxBody->GetPosition();
 	return  CIwFVec2(pos.x, pos.y);
 }
@@ -194,7 +194,7 @@ void Body::SetDragForce(float maxforce) {
 	}
 }
 
-bool Body::BeginDragging(const CIwFVec2& target) {
+bool Body::BeginDragging(const CIwFVec2& target, float dragforce) {
 	if (!m_bCanDrag) {
 		return false;
 	}
@@ -216,7 +216,7 @@ bool Body::BeginDragging(const CIwFVec2& target) {
 	def.target = b2Vec2(target.x, target.y); // pin at actual touch position
 	def.bodyA = &m_xWorld.GetAnchorBody();
 	def.bodyB = m_pxBody;
-	def.maxForce = 0.0f; //30.0f * m_pxBody->GetMass();
+	def.maxForce = dragforce;
 	def.dampingRatio = 1.0f;
 	
 	b2Joint* joint = m_pxBody->GetWorld()->CreateJoint(&def);

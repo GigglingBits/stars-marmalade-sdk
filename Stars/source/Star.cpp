@@ -64,8 +64,7 @@ void Star::OnColliding(Body& body) {
 void Star::OnChildColliding(Body& child, Body& body) {
 	if (dynamic_cast<Nugget*>(&body)) {
 		if (0 == child.GetId().compare("magnet")) {
-			CIwFVec2 v = (GetPosition() - body.GetPosition()).GetNormalised() * 10.0f /* m/s */;
-			body.SetSpeed(v);
+			Magnet.Invoke(*this, body.GetId());
 		}
 	}
 }

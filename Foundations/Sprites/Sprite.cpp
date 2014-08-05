@@ -24,7 +24,7 @@ void Sprite::SetId(const std::string& id) {
 	m_sId = id;
 }
 
-const std::string& Sprite::GetId() {
+const std::string& Sprite::GetId() const {
 	return m_sId;
 }
 
@@ -50,7 +50,7 @@ void Sprite::SetPosition(const CIwFVec2& position) {
 	m_xPosition = position;
 }
 
-CIwFVec2 Sprite::GetPosition() {
+CIwFVec2 Sprite::GetPosition() const {
 	return m_xPosition;
 }
 

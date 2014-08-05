@@ -78,9 +78,13 @@ bool GameFoundation::IsGameGoing() {
 void GameFoundation::RegisterStar(Star* star) {
 	m_pxStar = star;
 	m_pxStar->Killed.AddListener(this, &GameFoundation::StarKilledEventHandler);
+	m_pxStar->Magnet.AddListener(this, &GameFoundation::StarMagnetEventHandler);
 }
 
 void GameFoundation::UnregisterStar() {
+	m_xMagnetSprites.clear();
+	
+	m_pxStar->Magnet.RemoveListener(this, &GameFoundation::StarMagnetEventHandler);
 	m_pxStar->Killed.RemoveListener(this, &GameFoundation::StarKilledEventHandler);
 	m_pxStar = NULL;
 }
@@ -123,6 +127,7 @@ void GameFoundation::EnqueueCreateBody(std::string id, const CIwFVec2& position,
 
 void GameFoundation::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
+	UpdateMagnet(frame.GetSimulatedDurationMs());
 	UpdatePhysics(frame.GetSimulatedDurationMs());
 	ManageSpriteLifeCicles(frame);
 }
@@ -142,6 +147,26 @@ void GameFoundation::UpdatePhysics(uint16 timestep) {
 	float32 box2dtimestep = ((float32)timestep) / 1000.0f;
 	m_xWorld.GetWorld().Step(box2dtimestep, velocityIterations, positionIterations);
     m_xWorld.GetWorld().ClearForces();
+}
+
+void GameFoundation::UpdateMagnet(uint16 timestep) {
+	IW_CALLSTACK_SELF;
+
+	if (!m_pxStar) {
+		return;
+	}
+	
+	std::list<std::string>::iterator mit = m_xMagnetSprites.begin();
+	while (mit != m_xMagnetSprites.end()) {
+		Nugget* nugget;
+		SpriteMap::iterator sit = m_xSpriteMap.find(*mit);
+		if (sit != m_xSpriteMap.end() && sit->second && (nugget = dynamic_cast<Nugget*>(sit->second))) {
+			nugget->SetMagnetPosition(m_pxStar->GetPosition());
+			++mit;
+		} else {
+			m_xMagnetSprites.erase(mit++);
+		}
+	}
 }
 
 void GameFoundation::ManageSpriteLifeCicles(const FrameData& frame) {
@@ -395,6 +420,11 @@ void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventA
 
 void GameFoundation::StarKilledEventHandler(const Star& sender, const int& args) {
 	UnregisterStar();
+}
+
+void GameFoundation::StarMagnetEventHandler(const Star& sender, const std::string& args) {
+	// args is name id of the sprite that entered the magetic field
+	m_xMagnetSprites.push_back(args);
 }
 
 void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args) {

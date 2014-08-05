@@ -2,7 +2,7 @@
 [Game]
 ####################################################
 showstats=0
-showshapes=1
+showshapes=0
 unlockall=1
 
 resourceheapsize=20		# in megabytes

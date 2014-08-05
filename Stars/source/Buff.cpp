@@ -7,7 +7,7 @@ Buff::Buff(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& 
 	SetGravityScale(0.0f);
 }
 
-bool Buff::BeginDragging(const CIwFVec2& target) {
+bool Buff::BeginDragging(const CIwFVec2& target, float dragforce) {
 	ShowEffect("buff_touch");
 
 	BuffArgs args;

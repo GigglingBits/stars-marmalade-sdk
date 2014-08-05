@@ -87,6 +87,7 @@ protected:
 	
 public:
 	MulticastEvent<Star, int> Killed;
+	MulticastEvent<Star, std::string> Magnet;
 };
 
 #endif
