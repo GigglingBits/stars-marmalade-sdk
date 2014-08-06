@@ -49,6 +49,7 @@ private:
 	DustCounter m_xDust;
 
 	std::list<std::string> m_xMagnetSprites;
+	std::list<std::string> m_xShootSprites;
 	
 public:
 	GameFoundation(float dustrequirement, const CIwFVec2& worldsize);
@@ -113,6 +114,7 @@ private:
 	void EnqueueCreateBody(std::string id, const CIwFVec2& position, const CIwFVec2& speed);
 
 	void UpdateMagnet(uint16 timestep);
+	void UpdateShoot(uint16 timestep);
 	
 	bool CheckOutOfWorld(const CIwFVec2& pos);
 	bool CheckOutOfUniverse(const CIwFVec2& pos);

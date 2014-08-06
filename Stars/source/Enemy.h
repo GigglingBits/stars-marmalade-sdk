@@ -27,13 +27,13 @@ public:
 	void RegisterSoftsopt(const std::string& childid);
 	void UnregisterSoftsopt(const std::string& childid);
 	
+	virtual void KnockOut();
+
 private:
 	void AttachSledge();
 	void DetachSledge();
 	
 protected:
-	virtual void KnockOut();
-	
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnChildColliding(Body& child, Body& body);

@@ -6,6 +6,7 @@
 #include "FactoryManager.h"
 #include "Configuration.h"
 #include "Nugget.h"
+#include "Enemy.h"
 #include "BuffMagnet.h"
 #include "BuffShield.h"
 #include "BuffShoot.h"
@@ -135,18 +136,11 @@ void GameFoundation::OnUpdate(const FrameData& frame) {
 	uint32 simulframetime = frame.GetSimulatedDurationMs();
 	
 	UpdateMagnet(simulframetime);
+	UpdateShoot(simulframetime);
+
 	UpdatePhysics(simulframetime);
 	ManageSpriteLifeCicles(frame);
 
-	// shoot buff
-	if (m_uiShootBuffTimer > 0) {
-		if (m_uiShootBuffTimer > simulframetime) {
-			m_uiShootBuffTimer -= simulframetime;
-		} else {
-			m_uiShootBuffTimer = 0;
-			m_xShootBuffCurtain.Open();
-		}
-	}
 	m_xShootBuffCurtain.Update(frame);
 }
 
@@ -170,7 +164,7 @@ void GameFoundation::UpdatePhysics(uint16 timestep) {
 
 void GameFoundation::UpdateMagnet(uint16 timestep) {
 	IW_CALLSTACK_SELF;
-
+	
 	if (!m_pxStar) {
 		return;
 	}
@@ -184,6 +178,33 @@ void GameFoundation::UpdateMagnet(uint16 timestep) {
 			++mit;
 		} else {
 			m_xMagnetSprites.erase(mit++);
+		}
+	}
+}
+
+void GameFoundation::UpdateShoot(uint16 timestep) {
+	IW_CALLSTACK_SELF;
+
+	// shoot buff
+	if (m_uiShootBuffTimer <= 0) {
+		return;
+	}
+
+	if (m_uiShootBuffTimer > timestep) {
+		m_uiShootBuffTimer -= timestep;
+	} else {
+		m_uiShootBuffTimer = 0;
+		m_xShootBuffCurtain.Open();
+
+		// do the killing
+		std::list<std::string>::iterator shootit = m_xShootSprites.begin();
+		while (shootit != m_xShootSprites.end()) {
+			Enemy* enemy;
+			SpriteMap::iterator sit = m_xSpriteMap.find(*shootit);
+			if (sit != m_xSpriteMap.end() && sit->second && (enemy = dynamic_cast<Enemy*>(sit->second))) {
+				enemy->KnockOut();
+			}
+			m_xShootSprites.erase(shootit++);
 		}
 	}
 }
@@ -412,7 +433,17 @@ void GameFoundation::ActivateShootBuff() {
 	m_xShootBuffCurtain.Close();
 
 	int count = Configuration::GetInstance().BuffShootCount;
-	// todo: shoot those guys
+	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
+		if (it->second) {
+			if (dynamic_cast<Enemy*>(it->second)) {
+				m_xShootSprites.push_back((it->first));
+				count--;
+				if (count <= 0) {
+					break;
+				}
+			}
+		}
+	}
 }
 
 void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventArgs& args) {
