@@ -134,6 +134,12 @@ Configuration::Configuration() {
 		BuffMagnetDuration = 1000;
 	}
 	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshootduration", tmpstr)) {
+		BuffShootDuration = atoi(tmpstr);
+	} else {
+		BuffShootDuration = 1000;
+	}
+	
 	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshootcount", tmpstr)) {
 		BuffShootCount = atoi(tmpstr);
 	} else {

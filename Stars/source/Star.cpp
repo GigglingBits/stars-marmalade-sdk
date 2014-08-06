@@ -43,7 +43,6 @@ const char* Star::TypeName() {
 void Star::Initialize() {
 	EndShield();
 	EndMagnet();
-	EndShoot();
 }
 
 void Star::AutoOrientTexture(bool allow) {
@@ -199,14 +198,6 @@ void Star::EndMagnet() {
 		field->SetTextureFrame("off");
         field->EnableCollisions(false);
 	}
-}
-
-void Star::BeginShoot(uint32 count) {
-	
-}
-
-void Star::EndShoot() {
-	
 }
 
 void Star::EnableParticles() {

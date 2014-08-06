@@ -17,7 +17,8 @@ GameFoundation::GameFoundation(float dustrequirement, const CIwFVec2& worldsize)
 m_xContactHandler(m_xWorld),
 m_xWorldSize(worldsize),
 m_xRayCaster(m_xWorld), m_pxStar(NULL),
-m_xDust(dustrequirement) {
+m_xDust(dustrequirement),
+m_uiShootBuffTimer(0) {
 }
 
 GameFoundation::~GameFoundation() {
@@ -33,6 +34,10 @@ GameFoundation::~GameFoundation() {
 
 void GameFoundation::Initialize() {
 	m_xWorld.SetContactListener(m_xContactHandler);
+
+	m_xShootBuffCurtain.SetRenderingLayer(Renderer::eRenderingLayerBackground);
+	m_xShootBuffCurtain.SetFadeTime(200);
+	m_xShootBuffCurtain.SetAlpha(0x99);
 }
 
 std::map<std::string, Sprite*>& GameFoundation::GetSpriteMap() {
@@ -127,14 +132,28 @@ void GameFoundation::EnqueueCreateBody(std::string id, const CIwFVec2& position,
 
 void GameFoundation::OnUpdate(const FrameData& frame) {
 	IW_CALLSTACK_SELF;
-	UpdateMagnet(frame.GetSimulatedDurationMs());
-	UpdatePhysics(frame.GetSimulatedDurationMs());
+	uint32 simulframetime = frame.GetSimulatedDurationMs();
+	
+	UpdateMagnet(simulframetime);
+	UpdatePhysics(simulframetime);
 	ManageSpriteLifeCicles(frame);
+
+	// shoot buff
+	if (m_uiShootBuffTimer > 0) {
+		if (m_uiShootBuffTimer > simulframetime) {
+			m_uiShootBuffTimer -= simulframetime;
+		} else {
+			m_uiShootBuffTimer = 0;
+			m_xShootBuffCurtain.Open();
+		}
+	}
+	m_xShootBuffCurtain.Update(frame);
 }
 
 void GameFoundation::OnRender(Renderer& renderer, const FrameData& frame) {
 	IW_CALLSTACK_SELF;
-	
+	m_xShootBuffCurtain.Render(renderer, frame);
+
 	// rendering all registered sprites
 	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		it->second->Render(renderer, frame);
@@ -389,9 +408,11 @@ void GameFoundation::ActivateShieldBuff() {
 }
 
 void GameFoundation::ActivateShootBuff() {
-	if (Star* star = GetStar()) {
-		star->BeginShoot(Configuration::GetInstance().BuffShootCount);
-	}
+	m_uiShootBuffTimer	= Configuration::GetInstance().BuffShootDuration;
+	m_xShootBuffCurtain.Close();
+
+	int count = Configuration::GetInstance().BuffShootCount;
+	// todo: shoot those guys
 }
 
 void GameFoundation::DustEventHandler(const Body& sender, const Star::DustEventArgs& args) {

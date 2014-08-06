@@ -14,6 +14,7 @@
 #include "ContactHandler.h"
 #include "RayCaster.h"
 #include "DustCounter.h"
+#include "Curtain.h"
 
 class GameFoundation : public Renderable {
 public:
@@ -30,6 +31,9 @@ private:
 	CIwFVec2 m_xWorldSize;
 	RayCaster m_xRayCaster;
 	ContactHandler m_xContactHandler;
+
+	Curtain m_xShootBuffCurtain;
+	uint32 m_uiShootBuffTimer;
 
 	typedef std::map<std::string, Sprite*> SpriteMap;
 	SpriteMap m_xSpriteMap;

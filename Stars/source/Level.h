@@ -14,7 +14,6 @@
 #include "LevelInteractor.h"
 #include "MulticastEventTimer.h"
 #include "LevelCompletionInfo.h"
-#include "Curtain.h"
 
 #include <vector>
 
@@ -56,7 +55,6 @@ private:
 
 	BackgroundParallax m_xBackgroundStars;
 	BackgroundSprites m_xBackgroundClouds;
-	Curtain m_xCurtain;
 
 	GameFoundation m_xGame;
 	LevelCompletionInfo m_xCompletionInfo;

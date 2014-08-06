@@ -25,6 +25,7 @@ starbirthdelay			Number of milliseconds before a new star is born
 buffspeed				Speed of a buff rising, specified in meter per second
 buffshieldduration      Duration of the shield buff in milliseconds
 buffmagnetduration      Duration of the magnet buff in milliseconds
+buffshootduration		Duration o fthe shoot buff in milliseconds
 buffshootcount			Number of enemies the shoot buff can attack
 
 pathspeed				Speed of the star along the path in meters per second.

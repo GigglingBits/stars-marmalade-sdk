@@ -84,11 +84,7 @@ void Level::Initialize() {
 	m_xPath.InitializeTexture();
 	m_xHud.Initialize();
 	m_xBackgroundStars.Initialize();
-	
-	m_xCurtain.SetRenderingLayer(Renderer::eRenderingLayerBackground);
-	m_xCurtain.SetFadeTime(200);
-	m_xCurtain.SetAlpha(0x99);
-	
+		
 	CreateStar();
 	
 	// schedule the finish of the level
@@ -353,7 +349,6 @@ void Level::OnUpdate(const FrameData& frame) {
 	m_xPath.Update(frame);
 	m_xHud.GetDustVial().SetDustAmount(m_xGame.GetDustFillPercent(), m_xGame.GetDustQueuedPercent());
 	m_xHud.Update(frame);
-	m_xCurtain.Update(frame);
 }
 
 void Level::OnRender(Renderer& renderer, const FrameData& frame) {
@@ -367,7 +362,6 @@ void Level::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xPath.Render(renderer, frame);
 	m_xHud.Render(renderer, frame);
-	m_xCurtain.Render(renderer, frame);
 	
 	if (!m_sBannerText.empty()) {
 		renderer.DrawText(m_sBannerText, m_xBannerRect, Renderer::eFontTypeLarge, GAME_COLOUR_FONT_MAIN);

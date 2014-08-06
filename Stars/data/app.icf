@@ -16,6 +16,7 @@ starbirthdelay=1400		# milliseconds
 buffspeed=0.5			# meters per second
 buffshieldduration=4000 # milliseconds
 buffmagnetduration=4000 # milliseconds
+buffshootduration=2000	# milliseconds
 buffshootcount=3		# count
 
 pathspeed=12			# meters per second

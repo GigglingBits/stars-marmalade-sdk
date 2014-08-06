@@ -68,9 +68,6 @@ public:
 	void BeginMagnet(uint32 duration);
 	void EndMagnet();
 	
-	void BeginShoot(uint32 count);
-	void EndShoot();
-	
 	bool IsFollowingPath();
 
 private:

@@ -30,6 +30,7 @@ public:
 	double BuffSpeed;
 	int BuffShieldDuration;
 	int BuffMagnetDuration;
+	int BuffShootDuration;
 	int BuffShootCount;
 	
 	double PathSpeed;
