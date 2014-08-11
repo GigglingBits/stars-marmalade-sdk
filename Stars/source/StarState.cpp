@@ -23,6 +23,7 @@ void Star::InitialState::Update(uint16 timestep) {
 /////////////////////////////////////////////////////////////
 void Star::PassiveState::Initialize() {
 	m_rxContext.EnableCollisions(false, false);
+	m_rxContext.SetTextureFrame("recover");
 	SoundEngine::GetInstance().PlaySoundEffect("LetsGo");
 	m_rxContext.DisableParticles();
 	
@@ -83,7 +84,6 @@ void Star::RetractingState::Collide(Body& body) {
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
 	} else if (dynamic_cast<Enemy*>(&body)) {
-		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
 		DustEventArgs args;
@@ -200,19 +200,21 @@ void Star::FollowState::Update(uint16 timestep) {
 /////////////////////////////////////////////////////////////
 void Star::FallingState::Initialize() {
 	m_rxContext.EnableCollisions(false, false);
-	m_rxContext.SetTextureFrame("recover");
+	m_rxContext.SetTextureFrame("hurt");
 	SoundEngine::GetInstance().PlaySoundEffect("StarFall");
 	m_rxContext.DisableParticles();
 
 	m_rxContext.GetBody().SetLinearDamping(1.0f);
 	m_rxContext.SetDragForce(0.0f);
 
+	m_rxContext.EnableRotation(true);
+	
 	m_rxContext.SetGravityScale(1.0f);
 	m_rxContext.GetBody().SetLinearDamping(0.0f);
 
 	m_rxContext.m_bAutoOrient = true;
 
-	m_rxContext.SetImpulse(CIwFVec2(0.0f, 5.0f * m_rxContext.GetMass()), 5.0f);
+	m_rxContext.SetImpulse(CIwFVec2(0.0f, 5.0f * m_rxContext.GetMass()), 0.5f);
 	
 	m_rxContext.Killed.Invoke(m_rxContext, 0);
 }
