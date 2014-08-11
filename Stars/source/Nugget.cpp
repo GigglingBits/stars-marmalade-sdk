@@ -29,6 +29,7 @@ void Nugget::SetMagnetPosition(const CIwFVec2& pos) {
 		EnableDragging(true);
 		BeginDragging(GetPosition(), GetMass() * 10.0f);
 		MoveDragging(pos);
+		GetBody().SetLinearDamping(1.0f);
 	}
 	IwAssert(MYAPP, CanDrag());
 	MoveDragging(pos);
