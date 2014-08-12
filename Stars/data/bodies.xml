@@ -75,7 +75,7 @@
 			<child id="magnet" port="magnet_port" jointtype="weld">
                 <body id="magnet" type="dynamic" resilience="1.0" collide="0">
                     <fixture friction="0.01" restitution="0.001" density="0.000001" sensor="1" />
-                    <shape type="circle" width="15.0" />
+                    <shape type="circle" width="18.0" />
 					<texture>
 						<frame id="on" colour="0x00000000" />
 						<frame id="off" colour="0x00000000" />
