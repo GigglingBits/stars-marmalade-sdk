@@ -8,6 +8,14 @@
 
 class LevelTemplate {
 public:
+	struct SpriteDef {
+		std::string bodyid;
+		float magnetprobability;
+		float shieldprobability;
+		float shootprobability;
+	};
+
+public:
 	enum ElementType {
 		eElementTypeCreateBody,
 		eElementTypeBeginSection,
@@ -21,6 +29,9 @@ public:
 		std::string BodyName;
 		float Position;
 		float Speed;
+		float magnetprobability;
+		float shieldprobability;
+		float shootprobability;
 	};
 	typedef std::queue<LevelElement> ElementQueue;
 	
@@ -36,8 +47,8 @@ public:
 	void SetSize(float width, float height);
 	void SetDustRequirement(float amount);
 
-	void AddElement(std::string bodyname, uint16 delay, float position, float speed);
-	void AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map, int delay, float speed);
+	void AddElement(std::string bodyname, uint16 delay, float position, float speed, float magnetprobability=0.0f, float shieldprobability=0.0f, float shootprobability=0.0f);
+	void AddElements(float levelheight, const std::map<char, SpriteDef>& defs, const std::vector<std::string>& map, int delay, float speed);
 	void AddElementDelay(uint16 delay);
 
 	void BeginSection(std::string bannertext);

@@ -38,7 +38,7 @@
 	<levels>
 		<level name="earth_1" width="12.0" height="12.0" dustrequirement="200">
 			<spritedefs>
-				<def id="n" body="nugget_01" />
+				<def id="n" body="nugget_01" magnetprobability="0.5" shieldprobability="0.5" shootprobability="0.5" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.0" >
 				<line map="   n   " />

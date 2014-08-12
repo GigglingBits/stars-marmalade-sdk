@@ -57,7 +57,7 @@ void LevelTemplate::AddElementDelay(uint16 delay) {
 	}
 }
 
-void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float position, float speed) {
+void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float position, float speed, float magnetprobability, float shieldprobability, float shootprobability) {
 	LevelElement element;
 	element.Type = eElementTypeCreateBody;
 	element.BodyName = bodyname;
@@ -65,10 +65,13 @@ void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float positio
 	element.Position = position;
 	element.Speed = speed;
 	element.SectionText = "";
+	element.magnetprobability = magnetprobability;
+	element.shieldprobability = shieldprobability;
+	element.shootprobability = shootprobability;
 	m_xElements.push(element);
 }
 
-void LevelTemplate::AddElements(float levelheight, const std::map<char, std::string>& defs, const std::vector<std::string>& map, int delay, float speed) {
+void LevelTemplate::AddElements(float levelheight, const std::map<char, SpriteDef>& defs, const std::vector<std::string>& map, int delay, float speed) {
 	IW_CALLSTACK_SELF;
 	
 	// find number of lanes
@@ -90,15 +93,16 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, std::str
 		bool firstelement = true;
 		for (uint lane = 0; lane < it->length(); lane++) {
 			char bodydef = it->at(lane);
-			std::map<char, std::string>::const_iterator it = defs.find(bodydef);
+			std::map<char, SpriteDef>::const_iterator it = defs.find(bodydef);
 			if (bodydef == ' ') {
 				// nothing; just step over
 			} else if (it != defs.end()) {
+				const SpriteDef& def = it->second;
 				AddElement(
-					it->second,
+					def.bodyid,
 						   firstelement ? delay : 0,
 					worldmargin + (lanewidth / 2.0f) + (lane * lanewidth),
-					speed);
+					speed, def.magnetprobability, def.shieldprobability, def.shootprobability);
 				firstelement = false;
 			} else {
 				IwAssertMsg(MYAPP, false, ("Unrecognized body reference in lane map line %i: %c", lane, bodydef));

@@ -36,19 +36,31 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	
 	// build sprite defs
 	TiXmlElement* spritedefsnode = node->FirstChildElement("spritedefs");
-	std::map<char, std::string> defs;
+	std::map<char, LevelTemplate::SpriteDef> defs;
 	while (spritedefsnode) {
 		TiXmlElement* defnode = spritedefsnode->FirstChildElement("def");
 		while (defnode) {
+			LevelTemplate::SpriteDef def;
+			
 			// read data
 			std::string id((pc = (char*)defnode->Attribute("id")) ? pc : "");
-			std::string body((pc = (char*)defnode->Attribute("body")) ? pc : "");
+			def.bodyid = (pc = (char*)defnode->Attribute("body")) ? pc : "";
 
 			IwAssertMsg(MYAPP, id.length() == 1, ("Invalid spritedef. Ids must consist of one character only."));
 			IwAssertMsg(MYAPP, id != " ", ("Invalid spritedef. Ids must not be whitespaces."));
-			IwAssertMsg(MYAPP, FactoryManager::GetBodyFactory().ConfigExists(body), ("No body '%s' could be found. It is referenced by level '%s'.", body.c_str(), levelname.c_str()));
+			IwAssertMsg(MYAPP, FactoryManager::GetBodyFactory().ConfigExists(def.bodyid), ("No body '%s' could be found. It is referenced by level '%s'.", def.bodyid.c_str(), levelname.c_str()));
 
-			defs[id.at(0)] = body;
+			double d;
+			defnode->Attribute("magnetprobability", &d);
+			def.magnetprobability = d;
+			
+			defnode->Attribute("shieldprobability", &d);
+			def.shieldprobability = d;
+			
+			defnode->Attribute("shootprobability", &d);
+			def.shootprobability = d;
+			
+			defs[id.at(0)] = def;
 			
 			// move next
 			defnode = defnode->NextSiblingElement();
