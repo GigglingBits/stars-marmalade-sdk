@@ -168,7 +168,7 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int space = margin / 5;		// 25% / 5 = 5%
 
 	int backdropwidth = extents * 0.9;
-	int backdropmargin = backdropwidth * 0.12;
+	int backdropmargin = backdropwidth * 0.2;
 
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 
