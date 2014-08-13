@@ -26,9 +26,13 @@ void Enemy::UnregisterSoftsopt(const std::string& childid) {
 
 void Enemy::KnockOut() {
 	EnableCollisions(false);
-
+	
 	m_bNeedDetachSledge = true;
 	m_bKnockedOut = true;
+}
+
+void Enemy::Shoot() {
+	Enemy::KnockOut();
 }
 
 void Enemy::AttachSledge() {

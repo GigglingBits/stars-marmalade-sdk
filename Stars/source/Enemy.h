@@ -28,6 +28,7 @@ public:
 	void UnregisterSoftsopt(const std::string& childid);
 	
 	virtual void KnockOut();
+	virtual void Shoot();
 
 private:
 	void AttachSledge();

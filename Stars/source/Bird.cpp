@@ -24,11 +24,19 @@ const char* Bird::TypeName() {
 
 void Bird::KnockOut() {
 	Enemy::KnockOut();
-
-	SetTextureFrame("hurt");
-		
+	NotifyDust();
 	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
-	
+	SetTextureFrame("hurt");
+}
+
+void Bird::Shoot() {
+	Enemy::Shoot();
+	NotifyDust();
+	SoundEngine::GetInstance().PlaySoundEffect("BirdCollision");
+	SetTextureFrame("hurt_attack");
+}
+
+void Bird::NotifyDust() {
 	DustEventArgs args;
 	args.amount = GAME_POINTS_BIRD;
 	args.eventtype = eDustEventTypeAdd;

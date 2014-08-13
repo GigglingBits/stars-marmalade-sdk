@@ -12,6 +12,10 @@ public:
 	
 protected:
 	virtual void KnockOut();
+	virtual void Shoot();
+	
+private:
+	void NotifyDust();
 };
 
 #endif

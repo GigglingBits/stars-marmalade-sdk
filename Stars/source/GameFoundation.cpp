@@ -202,7 +202,7 @@ void GameFoundation::UpdateShoot(uint16 timestep) {
 			Enemy* enemy;
 			SpriteMap::iterator sit = m_xSpriteMap.find(*shootit);
 			if (sit != m_xSpriteMap.end() && sit->second && (enemy = dynamic_cast<Enemy*>(sit->second))) {
-				enemy->KnockOut();
+				enemy->Shoot();
 			}
 			m_xShootSprites.erase(shootit++);
 		}
