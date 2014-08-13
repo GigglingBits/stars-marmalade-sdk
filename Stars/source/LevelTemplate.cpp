@@ -53,11 +53,11 @@ void LevelTemplate::EndSection() {
 
 void LevelTemplate::AddElementDelay(uint16 delay) {
 	if (delay > 0) {
-		AddElement("", delay, 0.0f, 0.0f);
+		AddElement("", delay, 0.0f, 0.0f, Body::BuffProbabilities());
 	}
 }
 
-void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float position, float speed, float magnetprobability, float shieldprobability, float shootprobability) {
+void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float position, float speed, const Body::BuffProbabilities& buffprobs) {
 	LevelElement element;
 	element.Type = eElementTypeCreateBody;
 	element.BodyName = bodyname;
@@ -65,9 +65,7 @@ void LevelTemplate::AddElement(std::string bodyname, uint16 delay, float positio
 	element.Position = position;
 	element.Speed = speed;
 	element.SectionText = "";
-	element.magnetprobability = magnetprobability;
-	element.shieldprobability = shieldprobability;
-	element.shootprobability = shootprobability;
+	element.BuffProbs = buffprobs;
 	m_xElements.push(element);
 }
 
@@ -102,7 +100,7 @@ void LevelTemplate::AddElements(float levelheight, const std::map<char, SpriteDe
 					def.bodyid,
 						   firstelement ? delay : 0,
 					worldmargin + (lanewidth / 2.0f) + (lane * lanewidth),
-					speed, def.magnetprobability, def.shieldprobability, def.shootprobability);
+					speed, def.buffprobs);
 				firstelement = false;
 			} else {
 				IwAssertMsg(MYAPP, false, ("Unrecognized body reference in lane map line %i: %c", lane, bodydef));

@@ -42,6 +42,7 @@ void Nugget::OnColliding(Body& body) {
 		// any non-star-sensor collision leads to selfdestruction
 		GetHealthManager().Kill();
 		ShowEffect("star_collision");
+		EmitBuff();
 	}
 		
 	Body::OnColliding(body);

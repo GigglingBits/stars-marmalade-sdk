@@ -7,8 +7,7 @@
 #include "FactoryManager.h"
 #include "SoundEngine.h"
 
-Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: Sprite(id, texturedef) {
+Body::Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) : Sprite(id, texturedef) {
 
 	// construct physical body
 	m_pxBody = m_xWorld.GetWorld().CreateBody(&bodydef);
@@ -246,10 +245,15 @@ bool Body::HitTest(const CIwFVec2& position) {
 		b2Vec2(position.x, position.y));
 }
 
+void Body::SetBuffProbabilities(const Body::BuffProbabilities& probs) {
+	m_xBuffProbabilities = probs;
+}
+
 void Body::EmitBuff() {
 	IW_CALLSTACK_SELF;
 	EmitBuffArgs args;
 	args.pos = GetPosition();
+	args.probs = m_xBuffProbabilities;
 	EmitBuffRequested.Invoke(*this, args);
 }
 

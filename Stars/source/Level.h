@@ -29,23 +29,24 @@
 
 class Level : public Page {
 private:
-	enum EventId {
-		eEventIdNoOp = 0,
-		eEventIdShowBanner,
-		eEventIdHideBanner,
-		eEventIdEnableUserInput,
-		eEventIdDisableUserInput,
-		eEventIdCreateBody,
-		eEventIdSettle,
-		eEventIdFinish,
+	enum TimerEventId {
+		eTimerEventIdNoOp = 0,
+		eTimerEventIdShowBanner,
+		eTimerEventIdHideBanner,
+		eTimerEventIdEnableUserInput,
+		eTimerEventIdDisableUserInput,
+		eTimerEventIdCreateBody,
+		eTimerEventIdSettle,
+		eTimerEventIdFinish,
 	};
 
-	struct EventArgs {
-		EventId eventId;
+	struct TimerEventArgs {
+		TimerEventId eventId;
 		std::string bannerText;
 		std::string bodyName;
 		CIwFVec2 position;
 		CIwFVec2 speed;
+		Body::BuffProbabilities probs;
 	};
 	
 private:
@@ -59,7 +60,7 @@ private:
 	GameFoundation m_xGame;
 	LevelCompletionInfo m_xCompletionInfo;
 
-	MulticastEventTimer<EventArgs> m_xEventTimer;
+	MulticastEventTimer<TimerEventArgs> m_xEventTimer;
 
 	CIwRect m_xBannerRect;
 	std::string m_sBannerText;
@@ -82,7 +83,7 @@ public:
 	virtual void Initialize();
 
 	void Add(Body* body);
-	void Add(uint16 delay, const std::string& body, float ypos, float speed);
+	void Add(uint16 delay, const std::string& body, float ypos, float speed, const Body::BuffProbabilities& probs);
 
 	void StartSection(const std::string& bannertext);
 	void EndSection();
@@ -116,7 +117,7 @@ private:
 	void HideStar();
 	void ShowStar();
 	
-	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed);
+	void CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed, const Body::BuffProbabilities& probs);
 	
 	CIwFVec2 CalculateRelativeSoundPosition(const CIwFVec2& worldpos);
 
@@ -129,8 +130,8 @@ private:
 	void Conclude();
 	
 private:
-	void EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args);
-	void EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& sender, const int& dummy);
+	void EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const TimerEventArgs& args);
+	void EventTimerClearedEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const int& dummy);
 	
 	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 

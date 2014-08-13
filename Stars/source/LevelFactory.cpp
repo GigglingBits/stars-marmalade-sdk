@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 
+#include "Body.h"
 #include "FactoryManager.h"
 #include "Debug.h"
 
@@ -52,13 +53,13 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 
 			double d;
 			defnode->Attribute("magnetprobability", &d);
-			def.magnetprobability = d;
+			def.buffprobs.magnet = d;
 			
 			defnode->Attribute("shieldprobability", &d);
-			def.shieldprobability = d;
+			def.buffprobs.shield = d;
 			
 			defnode->Attribute("shootprobability", &d);
-			def.shootprobability = d;
+			def.buffprobs.shoot = d;
 			
 			defs[id.at(0)] = def;
 			
@@ -128,7 +129,7 @@ void LevelFactory::AddElement(Level& level, const LevelTemplate::LevelTemplate::
 			level.StartSection(element.SectionText);
 			break;
 		case LevelTemplate::eElementTypeCreateBody:
-			level.Add(element.Delay, element.BodyName, element.Position, element.Speed);
+			level.Add(element.Delay, element.BodyName, element.Position, element.Speed, element.BuffProbs);
 			break;
 		case LevelTemplate::eElementTypeEndSection:
 			level.EndSection();

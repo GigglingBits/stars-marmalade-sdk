@@ -122,7 +122,7 @@ private:
 
 	int GetDustMultiplier(int queuedcount);
 
-	void EmitBuff(const CIwFVec2& pos);
+	void EmitBuff(const CIwFVec2& pos, const Body::BuffProbabilities& probs);
 	
 	void DustEventHandler(const Body& sender, const Star::DustEventArgs& args);
 	void StarKilledEventHandler(const Star& sender, const int& args);

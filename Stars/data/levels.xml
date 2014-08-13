@@ -38,7 +38,7 @@
 	<levels>
 		<level name="earth_1" width="12.0" height="12.0" dustrequirement="200">
 			<spritedefs>
-				<def id="n" body="nugget_01" magnetprobability="0.5" shieldprobability="0.5" shootprobability="0.5" />
+				<def id="n" body="nugget_01" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.0" >
 				<line map="   n   " />
@@ -295,8 +295,8 @@
 		</level>
 		<level name="earth_6" width="12.0" height="12.0" dustrequirement="700">
 			<spritedefs>
-				<def id="n" body="nugget_01" />
-				<def id="c" body="bird" />
+				<def id="n" body="nugget_01" magnetprobability="0.1" />
+				<def id="c" body="bird" shieldprobability="0.3" shootprobability="0.2" />
 			</spritedefs>
 			<spritesequence delay="450" speed="4.0" >
 				<line map=" n   n " />

@@ -388,29 +388,42 @@ bool GameFoundation::RayHitTest(CIwFVec2 raystart, CIwFVec2 rayend) {
 	return m_xRayCaster.RayHitTest(raystart, rayend);
 }
 
-void GameFoundation::EmitBuff(const CIwFVec2& pos) {
+void GameFoundation::EmitBuff(const CIwFVec2& pos, const Body::BuffProbabilities& probs) {
 	IW_CALLSTACK_SELF;
 	// evaluate probability
-	float probability = 1.0f;
-	float random = (float)(rand() % 100) / 100.0f;
-	if (probability <= random) {
+	float totalprobability = probs.magnet + probs.shield + probs.shoot;
+	if (totalprobability <= 0.0f) {
 		return;
 	}
 	
-	// select buff (based on even/odd number )
-	std::string buff;
-	switch ((int)(random * 100.0f)%3) {
-	case 0:
-		buff = "buff_magnet";
-		break;
-	case 1:
-		buff = "buff_shield";
-		break;
-	case 2:
-		buff = "buff_shoot";
-		break;
+	float scale = 1.0f;
+	if (totalprobability > 1.0f) {
+		scale = 1.0 / totalprobability;
 	}
-		
+
+	float random = (float)(rand() % 100) / 100.0f;
+	float probability = 0.0f;
+	std::string buff;
+
+	probability += probs.magnet * scale;
+	if (probability >= random) {
+		buff = "buff_magnet";
+	} else {
+		probability += probs.shield * scale;
+		if (probability >= random) {
+			buff = "buff_shield";
+		} else {
+			probability += probs.shoot * scale;
+			if (probability >= random) {
+				buff = "buff_shoot";
+			} else {
+				// its ok to not emit a buff, if the total probability is smaller than 1.0
+				IwAssert(MYAPP, totalprobability < 1.0f);
+				return;
+			}
+		}
+	}
+	
 	// create buff
 	CIwFVec2 speed(0.0f, Configuration::GetInstance().BuffSpeed);
 	EnqueueCreateBody(buff, pos, speed);
@@ -480,7 +493,7 @@ void GameFoundation::StarMagnetEventHandler(const Star& sender, const std::strin
 }
 
 void GameFoundation::BuffRequestedEventHandler(const Body& sender, const Body::EmitBuffArgs& args) {
-	EmitBuff(args.pos);
+	EmitBuff(args.pos, args.probs);
 }
 
 void GameFoundation::BuffCollectedEventHandler(const Buff& sender, const Buff::BuffArgs& args) {

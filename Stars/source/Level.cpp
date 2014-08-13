@@ -40,23 +40,23 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xInteractor.Disable();
 		
 	// configure the start
-	EventArgs args;
-	args.eventId = eEventIdShowBanner;
+	TimerEventArgs args;
+	args.eventId = eTimerEventIdShowBanner;
 	args.bannerText = "Ready?";
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
 		
-	args.eventId = eEventIdShowBanner;
+	args.eventId = eTimerEventIdShowBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 	
-	args.eventId = eEventIdEnableUserInput;
+	args.eventId = eTimerEventIdEnableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 		
-	args.eventId = eEventIdShowBanner;
+	args.eventId = eTimerEventIdShowBanner;
 	args.bannerText = "Go!";
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
 		
-	args.eventId = eEventIdHideBanner;
+	args.eventId = eTimerEventIdHideBanner;
 	args.bannerText = "";
 	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
 }
@@ -89,17 +89,17 @@ void Level::Initialize() {
 	
 	// schedule the finish of the level
 	// (assuming that it has been populated by the time this is called)
-	EventArgs args;
-	args.eventId = eEventIdSettle;
+	TimerEventArgs args;
+	args.eventId = eTimerEventIdSettle;
 	m_xEventTimer.Enqueue(0, args);
 
-	args.eventId = eEventIdFinish;
+	args.eventId = eTimerEventIdFinish;
 	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
 
-	args.eventId = eEventIdDisableUserInput;
+	args.eventId = eTimerEventIdDisableUserInput;
 	m_xEventTimer.Enqueue(0, args);
 	
-	args.eventId = eEventIdNoOp;
+	args.eventId = eTimerEventIdNoOp;
 	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
 }
 
@@ -129,25 +129,26 @@ void Level::Add(Body* body) {
 	}
 }
 
-void Level::Add(uint16 delay, const std::string& body, float ypos, float speed) {
+void Level::Add(uint16 delay, const std::string& body, float ypos, float speed, const Body::BuffProbabilities& probs) {
 	IW_CALLSTACK_SELF;
 	
 	if (delay <= 0 && body.empty()) {
 		return;
 	}
 	
-	EventArgs args;
-	args.eventId = body.empty() ? eEventIdNoOp : eEventIdCreateBody;
+	TimerEventArgs args;
+	args.eventId = body.empty() ? eTimerEventIdNoOp : eTimerEventIdCreateBody;
 	args.bodyName = body;
 	args.position.x = m_xWorldSize.x * 1.5f;
 	args.position.y = ypos;
 	args.speed.y = 0.0f;
 	args.speed.x = -speed;
+	args.probs = probs;
 	
 	m_xEventTimer.Enqueue(delay, args);
 }
 
-void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed) {
+void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CIwFVec2 speed, const Body::BuffProbabilities& probs) {
 	IW_CALLSTACK_SELF;
 	
 	if (bodyName.empty()) {
@@ -158,6 +159,7 @@ void Level::CreateBody(const std::string& bodyName, const CIwFVec2 pos, const CI
 	if (Body* body = factory.Create(bodyName)) {
 		body->SetPosition(pos);
 		body->SetSpeed(speed);
+		body->SetBuffProbabilities(probs);
 		Add(body);
 	} else {
 		IwAssertMsg(MYAPP, body, ("Failed to create new body with name '%s'", bodyName.c_str()));
@@ -230,16 +232,16 @@ void Level::StartSection(const std::string& bannertext) {
 	IW_CALLSTACK_SELF;
 
 	if (!bannertext.empty()) {
-		EventArgs args;
-		args.eventId = eEventIdShowBanner;
+		TimerEventArgs args;
+		args.eventId = eTimerEventIdShowBanner;
 		args.bannerText = bannertext;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADIN, args);
 		
-		args.eventId = eEventIdShowBanner;
+		args.eventId = eTimerEventIdShowBanner;
 		args.bannerText = "";
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_DURATION, args);
 		
-		args.eventId = eEventIdSettle;
+		args.eventId = eTimerEventIdSettle;
 		m_xEventTimer.Enqueue(LEVEL_SECTION_BANNER_LEADOUT, args);
 	}
 }
@@ -408,40 +410,40 @@ void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFo
 	}
 }
 
-void Level::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args) {
+void Level::EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const TimerEventArgs& args) {
 	IW_CALLSTACK_SELF;
 	
 	switch (args.eventId) {
-		case eEventIdNoOp: {
+		case eTimerEventIdNoOp: {
 			break;
 		}
-		case eEventIdShowBanner: {
+		case eTimerEventIdShowBanner: {
 			ShowBannerText(args.bannerText);
 			break;
 		}
-		case eEventIdHideBanner: {
+		case eTimerEventIdHideBanner: {
 			HideBannerText();
 			break;
 		}
-		case eEventIdEnableUserInput: {
+		case eTimerEventIdEnableUserInput: {
 			m_xInteractor.Enable();
 			ShowStar();
 			break;
 		}
-		case eEventIdDisableUserInput: {
+		case eTimerEventIdDisableUserInput: {
 			m_xInteractor.Disable();
 			HideStar();
 			break;
 		}
-		case eEventIdSettle: {
+		case eTimerEventIdSettle: {
 			m_bIsSetteling = true;
 			break;
 		}
-		case eEventIdCreateBody: {
-			CreateBody(args.bodyName, args.position, args.speed);
+		case eTimerEventIdCreateBody: {
+			CreateBody(args.bodyName, args.position, args.speed, args.probs);
 			break;
 		}
-		case eEventIdFinish: {
+		case eTimerEventIdFinish: {
 			m_xHud.GetBuffPanel().ClearBuffs();
 			Conclude();
 			ShowStatsBanner();
@@ -450,7 +452,7 @@ void Level::EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender,
 	}
 }
 
-void Level::EventTimerClearedEventHandler(const MulticastEventTimer<EventArgs>& sender, const int& dummy) {
+void Level::EventTimerClearedEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const int& dummy) {
 	SetCompletionState(eCompleted);
 }
 

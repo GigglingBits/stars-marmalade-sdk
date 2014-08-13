@@ -11,6 +11,15 @@
 #include "BodyHealth.h"
 
 class Body : public Sprite {
+public:
+	struct BuffProbabilities {
+		float magnet;
+		float shield;
+		float shoot;
+		BuffProbabilities() : magnet(0.0f), shield(0.0f), shoot(0.0f) {
+		}
+	};
+	
 private:
 	World m_xWorld;
 
@@ -31,6 +40,8 @@ private:
 	typedef std::map<std::string, CIwFVec2> PortMap;
 	PortMap m_xPortMap;
 
+	BuffProbabilities m_xBuffProbabilities;
+	
 public:
 	Body(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef);
 	virtual ~Body();
@@ -59,7 +70,9 @@ public:
 
 	bool HitTest(const CIwFVec2& position);
 
+	void SetBuffProbabilities(const BuffProbabilities& probs);
 	void EmitBuff();
+	
 	void ShowEffect(const std::string& effect);
 	
 private:
@@ -101,6 +114,7 @@ private:
 public:
 	struct EmitBuffArgs {
 		CIwFVec2 pos;
+		BuffProbabilities probs;
 	};
 	MulticastEvent<Body, EmitBuffArgs> EmitBuffRequested;
 
