@@ -1,4 +1,5 @@
 {
+"skeleton": { "spine": "1.9.15", "hash": "QdtH5xmkGj08P9dpVnxq2xZ3zmY", "width": 800.27, "height": 648.31 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Beak/naeb", "parent": "root", "length": 51.42, "x": -104.61, "y": 71.65, "rotation": 176.84 },
@@ -30,8 +31,10 @@
 		"scaleX": 0.379,
 		"scaleY": 0.379,
 		"rotation": -156.96
-	}
+	},
+	{ "name": "slice", "parent": "root", "length": 396.98, "x": -68.45, "y": -37.75, "rotation": 59.1 }
 ],
+"ik": [],
 "slots": [
 	{ "name": "littlebluebird-body", "bone": "body", "attachment": "littlebluebird-body" },
 	{ "name": "littlebluebird-tail", "bone": "Tail", "attachment": "littlebluebird-tail" },
@@ -45,7 +48,8 @@
 	{ "name": "blue-feathers-01", "bone": "feather01", "attachment": "blue-feathers-01" },
 	{ "name": "blue-feathers-02", "bone": "feather02", "attachment": "blue-feathers-02" },
 	{ "name": "blue-feathers-03", "bone": "feather03", "attachment": "blue-feathers-03" },
-	{ "name": "blue-feathers-04", "bone": "feather014", "attachment": "blue-feathers-04" }
+	{ "name": "blue-feathers-04", "bone": "feather014", "attachment": "blue-feathers-04" },
+	{ "name": "slice", "bone": "slice", "attachment": "slice" }
 ],
 "skins": {
 	"default": {
@@ -54,6 +58,14 @@
 				"type": "boundingbox",
 				"vertices": [ -123.446365, 73.14838, -98.446365, 29.148378, 3.5536346, 0.1483841, 132.55363, 36.148373, 149.55365, 73.14838, 102.55365, 133.1484, -0.4463501, 157.14838, -95.446335, 127.14836 ]
 			}
+		},
+		"littlebluebird-body": {
+			"littlebluebird-body": { "x": 5, "y": 1, "scaleX": 0.61, "scaleY": 0.61, "width": 470, "height": 271 }
+		},
+		"littlebluebird-eye-open": {
+			"littlebluebird-eye-closed": { "x": 57.12, "y": -12.25, "scaleX": 1.06, "scaleY": 1.06, "rotation": 179.54, "width": 106, "height": 94 },
+			"littlebluebird-eye-hurt": { "x": 56.23, "y": -24.6, "scaleX": 0.666, "scaleY": 0.666, "rotation": 179.54, "width": 204, "height": 209 },
+			"littlebluebird-eye-open": { "x": 57.12, "y": -12.25, "scaleX": 1.058, "scaleY": 1.058, "rotation": 179.71, "width": 106, "height": 94 }
 		},
 		"blue-feathers-01": {
 			"blue-feathers-01": { "x": 82.31, "y": 2.64, "rotation": -157.02, "width": 181, "height": 81 }
@@ -67,29 +79,24 @@
 		"blue-feathers-04": {
 			"blue-feathers-04": { "x": 42.09, "y": -3.97, "scaleX": 0.507, "scaleY": 0.507, "rotation": -56.42, "width": 132, "height": 189 }
 		},
+		"littlebluebird-claws": {
+			"littlebluebird-claws": { "x": 39.59, "y": -1.46, "scaleX": 0.68, "scaleY": 0.68, "rotation": 8.06, "width": 137, "height": 48 }
+		},
 		"littlebluebird-beak": {
 			"littlebluebird-beak": { "x": 27.23, "y": -3.5, "scaleX": 0.612, "scaleY": 0.612, "rotation": -176.84, "width": 103, "height": 81 },
 			"littlebluebird-beak-hurt": { "x": 42.22, "y": 33.37, "scaleX": 0.441, "scaleY": 0.441, "rotation": -176.84, "width": 183, "height": 182 }
 		},
-		"littlebluebird-body": {
-			"littlebluebird-body": { "x": 5, "y": 1, "scaleX": 0.61, "scaleY": 0.61, "width": 470, "height": 271 }
-		},
-		"littlebluebird-body-detail": {
-			"littlebluebird-body-detail": { "x": 17.63, "y": -6.64, "scaleX": 0.73, "scaleY": 0.73, "rotation": -11.99, "width": 78, "height": 37 }
-		},
-		"littlebluebird-claws": {
-			"littlebluebird-claws": { "x": 39.59, "y": -1.46, "scaleX": 0.68, "scaleY": 0.68, "rotation": 8.06, "width": 137, "height": 48 }
-		},
-		"littlebluebird-eye-open": {
-			"littlebluebird-eye-closed": { "x": 57.12, "y": -12.25, "scaleX": 1.06, "scaleY": 1.06, "rotation": 179.54, "width": 106, "height": 94 },
-			"littlebluebird-eye-hurt": { "x": 56.23, "y": -24.6, "scaleX": 0.666, "scaleY": 0.666, "rotation": 179.54, "width": 204, "height": 209 },
-			"littlebluebird-eye-open": { "x": 57.12, "y": -12.25, "scaleX": 1.058, "scaleY": 1.058, "rotation": 179.71, "width": 106, "height": 94 }
+		"slice": {
+			"slice": { "x": 224.53, "y": -121.99, "rotation": -59.1, "width": 509, "height": 565 }
 		},
 		"littlebluebird-hurt": {
 			"littlebluebird-hurt": { "rotation": 156.96, "width": 157, "height": 157 }
 		},
 		"littlebluebird-tail": {
 			"littlebluebird-tail": { "x": 9.53, "y": 0.37, "scaleX": 0.591, "scaleY": 0.591, "rotation": -51.28, "width": 48, "height": 46 }
+		},
+		"littlebluebird-body-detail": {
+			"littlebluebird-body-detail": { "x": 17.63, "y": -6.64, "scaleX": 0.73, "scaleY": 0.73, "rotation": -11.99, "width": 78, "height": 37 }
 		},
 		"littlebluebird-wing-01": {
 			"littlebluebird-wing-01": { "x": 58.55, "y": -11.43, "scaleX": 0.654, "scaleY": 0.654, "rotation": -61.48, "width": 153, "height": 156 },
@@ -101,9 +108,10 @@
 "animations": {
 	"hurt": {
 		"slots": {
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
+			"blue-feathers-04": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"blue-feathers-01": {
@@ -112,19 +120,33 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"blue-feathers-02": {
+			"littlebluebird-claws": {
 				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"littlebluebird-eye-open": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-eye-hurt" }
+				],
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
 				]
 			},
 			"blue-feathers-03": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-04": {
 				"color": [
 					{ "time": 1.8333, "color": "ffffffff" },
 					{ "time": 2.1666, "color": "ffffff00" }
@@ -142,40 +164,25 @@
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-body-detail": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-eye-open": {
-				"attachment": [
-					{ "time": 0, "name": "littlebluebird-eye-hurt" }
-				],
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
 			"littlebluebird-hurt": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-tail": {
+			"littlebluebird-body-detail": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-wing-01": {
+			"blue-feathers-02": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-tail": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -351,14 +358,285 @@
 			}
 		}
 	},
-	"normal": {
+	"hurt_attack": {
 		"slots": {
+			"slice": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1666, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3333, "color": "ffffffff" },
+					{ "time": 0.6666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-tail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
 			"blue-feathers-01": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-claws": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"aabb": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
 			},
+			"littlebluebird-eye-open": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-eye-hurt" }
+				],
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"blue-feathers-04": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-beak": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-body": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-hurt": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-body-detail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
 			"blue-feathers-02": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"blue-feathers-03": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"Beak/naeb": {
+				"rotate": [
+					{ "time": 0, "angle": -5.28 },
+					{ "time": 0.3333, "angle": -16.62 },
+					{ "time": 2.1666, "angle": -19.7 }
+				],
+				"translate": [
+					{ "time": 0, "x": 21.12, "y": -20.06 },
+					{ "time": 0.3333, "x": 22.9, "y": -23.84 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 1.09, "y": 1.09 },
+					{ "time": 2.1666, "x": 1.129, "y": 1.129 }
+				]
+			},
+			"body": {
+				"rotate": [
+					{ "time": 0, "angle": 18.52 }
+				]
+			},
+			"Face": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 2.1666, "angle": 6.17 }
+				],
+				"translate": [
+					{ "time": 0, "x": -11.51, "y": -25.87 },
+					{ "time": 0.3333, "x": -6.17, "y": -27.67 },
+					{ "time": 2.1666, "x": 3.5, "y": -38.84 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.919, "y": 0.919 },
+					{ "time": 0.3333, "x": 1.083, "y": 1.094 },
+					{ "time": 2.1666, "x": 1.214, "y": 1.203 }
+				]
+			},
+			"hurt": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 3.72 }
+				],
+				"translate": [
+					{ "time": 0, "x": 4.75, "y": 7.39 },
+					{ "time": 0.3333, "x": 4.82, "y": 13.83 }
+				],
+				"scale": [
+					{ "time": 0.3333, "x": 1, "y": 1 },
+					{ "time": 2.1666, "x": 1.024, "y": 1.024 }
+				]
+			},
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 23.97 },
+					{ "time": 2.1666, "angle": 41.6 },
+					{ "time": 3, "angle": 48.31, "curve": "stepped" },
+					{ "time": 4, "angle": 48.31 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 0, "y": -10 },
+					{ "time": 2.1666, "x": 0, "y": -41.12 },
+					{ "time": 3, "x": 0, "y": -88.12, "curve": "stepped" },
+					{ "time": 4, "x": 0, "y": -88.12 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 1.015, "y": 1.015 },
+					{ "time": 2.1666, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 4, "x": 1, "y": 1 }
+				]
+			},
+			"Wing": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 22.5 },
+					{ "time": 2.1666, "angle": 41.33 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 1.08, "y": 1.02 },
+					{ "time": 2.1666, "x": 1.115, "y": 1.053 }
+				]
+			},
+			"Craws": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 13.54 },
+					{ "time": 2.1666, "angle": 17.74 }
+				]
+			},
+			"Tail": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 20.56 }
+				],
+				"translate": [
+					{ "time": 0, "x": 2.11, "y": 22.17 },
+					{ "time": 0.3333, "x": 1.19, "y": 25.87 }
+				]
+			},
+			"feather01": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 73.68 },
+					{ "time": 2.1666, "angle": 121.83 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 61.89, "y": 24.05 },
+					{ "time": 2.1666, "x": 43.47, "y": -6.76 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.407, "y": 0.407 },
+					{ "time": 0.3333, "x": 0.549, "y": 0.549 }
+				]
+			},
+			"feather014": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": -66.63 },
+					{ "time": 2.1666, "angle": -117.19 }
+				],
+				"translate": [
+					{ "time": 0, "x": -42.28, "y": 19.22 },
+					{ "time": 0.3333, "x": 3.09, "y": 4.4 },
+					{ "time": 2.1666, "x": 3.36, "y": -73.39 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.58, "y": 0.58 },
+					{ "time": 0.3333, "x": 1.14, "y": 1.14 }
+				]
+			},
+			"feather02": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 48.69 },
+					{ "time": 2.1666, "angle": -285.56 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": -23.06 },
+					{ "time": 0.3333, "x": -39.43, "y": 60.43 },
+					{ "time": 2.1666, "x": -52.22, "y": 39.67 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.526, "y": 0.526 },
+					{ "time": 0.3333, "x": 1.288, "y": 1.288 }
+				]
+			},
+			"feather03": {
+				"rotate": [
+					{ "time": 0, "angle": -348.37 },
+					{ "time": 0.3333, "angle": -272.2 },
+					{ "time": 2.1666, "angle": -230.64 }
+				],
+				"translate": [
+					{ "time": 0, "x": 8.64, "y": -27.86 },
+					{ "time": 0.3333, "x": -48.71, "y": -36.45 },
+					{ "time": 2.1666, "x": -108.52, "y": -101.78 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.471, "y": 0.471 },
+					{ "time": 0.3333, "x": 0.787, "y": 0.787 }
+				]
+			},
+			"slice": {
+				"rotate": [
+					{ "time": 0, "angle": 9.19 },
+					{ "time": 0.3333, "angle": 38.89 },
+					{ "time": 0.6666, "angle": 43.14 }
+				],
+				"translate": [
+					{ "time": 0, "x": 26.5, "y": 338.2 },
+					{ "time": 0.3333, "x": 85.51, "y": -243.3 },
+					{ "time": 0.6666, "x": 98.79, "y": -317.29 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.369, "y": 0.369 },
+					{ "time": 0.3333, "x": 1.238, "y": 1.238 }
+				]
+			}
+		}
+	},
+	"normal": {
+		"slots": {
+			"blue-feathers-04": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -368,14 +646,14 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"blue-feathers-04": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
 			"littlebluebird-beak": {
 				"attachment": [
 					{ "time": 0, "name": "littlebluebird-beak" }
+				]
+			},
+			"blue-feathers-02": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			},
 			"littlebluebird-eye-open": {
@@ -385,9 +663,9 @@
 					{ "time": 0.5666, "name": "littlebluebird-eye-open" }
 				]
 			},
-			"littlebluebird-hurt": {
+			"littlebluebird-body": {
 				"attachment": [
-					{ "time": 0, "name": null }
+					{ "time": 0, "name": "littlebluebird-body" }
 				]
 			},
 			"littlebluebird-wing-01": {
@@ -403,6 +681,16 @@
 					{ "time": 0.9, "name": "littlebluebird-wing-02" },
 					{ "time": 0.9333, "name": "littlebluebird-wing-03" },
 					{ "time": 1.1333, "name": "littlebluebird-wing-02" }
+				]
+			},
+			"littlebluebird-hurt": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"blue-feathers-01": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			}
 		},

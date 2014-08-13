@@ -1,125 +1,132 @@
 
 bird.png
-size: 1012,244
+size: 1021,506
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 blue-feathers-01
-  rotate: false
-  xy: 464, 68
+  rotate: true
+  xy: 432, 211
   size: 109, 49
   orig: 109, 49
   offset: 0, 0
   index: -1
 blue-feathers-02
   rotate: true
-  xy: 117, 19
+  xy: 488, 334
   size: 61, 103
   orig: 61, 103
   offset: 0, 0
   index: -1
 blue-feathers-03
-  rotate: true
-  xy: 278, 67
+  rotate: false
+  xy: 309, 322
   size: 177, 184
   orig: 180, 188
   offset: 3, 0
   index: -1
 blue-feathers-04
   rotate: true
-  xy: 2, 2
+  xy: 694, 428
   size: 78, 113
   orig: 79, 113
   offset: 1, 0
   index: -1
 littlebluebird-beak
-  rotate: true
-  xy: 222, 18
+  rotate: false
+  xy: 321, 86
   size: 62, 49
   orig: 62, 49
   offset: 0, 0
   index: -1
 littlebluebird-beak-hurt
   rotate: false
-  xy: 587, 135
+  xy: 488, 397
   size: 110, 109
   orig: 110, 109
   offset: 0, 0
   index: -1
 littlebluebird-body
   rotate: false
-  xy: 2, 82
+  xy: 2, 3
   size: 274, 162
   orig: 282, 163
   offset: 0, 1
   index: -1
 littlebluebird-body-detail
-  rotate: false
-  xy: 405, 43
+  rotate: true
+  xy: 999, 459
   size: 47, 22
   orig: 47, 22
   offset: 0, 0
   index: -1
 littlebluebird-claws
-  rotate: true
-  xy: 983, 162
+  rotate: false
+  xy: 694, 397
   size: 82, 29
   orig: 82, 29
   offset: 0, 0
   index: -1
 littlebluebird-eye-closed
   rotate: false
-  xy: 273, 9
+  xy: 278, 2
   size: 64, 56
   orig: 64, 56
   offset: 0, 0
   index: -1
 littlebluebird-eye-hurt
   rotate: false
-  xy: 464, 119
+  xy: 309, 195
   size: 121, 125
   orig: 122, 125
   offset: 1, 0
   index: -1
 littlebluebird-eye-open
   rotate: false
-  xy: 339, 9
+  xy: 321, 137
   size: 64, 56
   orig: 64, 56
   offset: 0, 0
   index: -1
 littlebluebird-hurt
   rotate: false
-  xy: 793, 150
+  xy: 809, 412
   size: 94, 94
   orig: 94, 94
   offset: 0, 0
   index: -1
 littlebluebird-tail
   rotate: false
-  xy: 405, 13
+  xy: 778, 398
   size: 29, 28
   orig: 29, 28
   offset: 0, 0
   index: -1
 littlebluebird-wing-01
   rotate: false
-  xy: 889, 150
+  xy: 905, 412
   size: 92, 94
   orig: 92, 94
   offset: 0, 0
   index: -1
 littlebluebird-wing-02
-  rotate: false
-  xy: 587, 92
+  rotate: true
+  xy: 278, 60
   size: 105, 41
   orig: 105, 41
   offset: 0, 0
   index: -1
 littlebluebird-wing-03
   rotate: false
-  xy: 699, 137
+  xy: 600, 399
   size: 92, 107
   orig: 92, 107
+  offset: 0, 0
+  index: -1
+slice
+  rotate: false
+  xy: 2, 167
+  size: 305, 339
+  orig: 305, 339
   offset: 0, 0
   index: -1
