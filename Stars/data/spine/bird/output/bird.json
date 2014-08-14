@@ -1,5 +1,5 @@
 {
-"skeleton": { "spine": "1.9.15", "hash": "QdtH5xmkGj08P9dpVnxq2xZ3zmY", "width": 800.27, "height": 648.31 },
+"skeleton": { "spine": "1.9.15", "hash": "B6JvUqZIc/DBv8N5gHPJuRDbSPk", "width": 559.66, "height": 521.9 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Beak/naeb", "parent": "root", "length": 51.42, "x": -104.61, "y": 71.65, "rotation": 176.84 },
@@ -108,10 +108,10 @@
 "animations": {
 	"hurt": {
 		"slots": {
-			"blue-feathers-04": {
+			"littlebluebird-wing-01": {
 				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
 				]
 			},
 			"blue-feathers-01": {
@@ -120,13 +120,60 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-claws": {
+			"littlebluebird-hurt": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-wing-01": {
+			"blue-feathers-04": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-beak": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-body-detail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"slice": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"blue-feathers-03": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-body": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"blue-feathers-02": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-tail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-claws": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -141,48 +188,6 @@
 				"attachment": [
 					{ "time": 0, "name": "littlebluebird-eye-hurt" }
 				],
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-03": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-beak": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-body": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-hurt": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-body-detail": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-02": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-tail": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -360,15 +365,7 @@
 	},
 	"hurt_attack": {
 		"slots": {
-			"slice": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" },
-					{ "time": 0.1666, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.3333, "color": "ffffffff" },
-					{ "time": 0.6666, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-tail": {
+			"littlebluebird-wing-01": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -380,27 +377,7 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-wing-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"littlebluebird-eye-open": {
-				"attachment": [
-					{ "time": 0, "name": "littlebluebird-eye-hurt" }
-				],
+			"littlebluebird-hurt": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -418,19 +395,33 @@
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"littlebluebird-body": {
+			"blue-feathers-03": {
 				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"littlebluebird-hurt": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"littlebluebird-body-detail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"slice": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1666, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.3333, "color": "ffffffff" },
+					{ "time": 0.6666, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-claws": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-body": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -442,10 +433,24 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"blue-feathers-03": {
+			"littlebluebird-eye-open": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-eye-hurt" }
+				],
 				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"littlebluebird-tail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -636,38 +641,6 @@
 	},
 	"normal": {
 		"slots": {
-			"blue-feathers-04": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"blue-feathers-03": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"littlebluebird-beak": {
-				"attachment": [
-					{ "time": 0, "name": "littlebluebird-beak" }
-				]
-			},
-			"blue-feathers-02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"littlebluebird-eye-open": {
-				"attachment": [
-					{ "time": 0, "name": "littlebluebird-eye-open" },
-					{ "time": 0.4666, "name": "littlebluebird-eye-closed" },
-					{ "time": 0.5666, "name": "littlebluebird-eye-open" }
-				]
-			},
-			"littlebluebird-body": {
-				"attachment": [
-					{ "time": 0, "name": "littlebluebird-body" }
-				]
-			},
 			"littlebluebird-wing-01": {
 				"attachment": [
 					{ "time": 0.1666, "name": "littlebluebird-wing-02" },
@@ -683,14 +656,51 @@
 					{ "time": 1.1333, "name": "littlebluebird-wing-02" }
 				]
 			},
+			"blue-feathers-01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"littlebluebird-hurt": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
 			},
-			"blue-feathers-01": {
+			"blue-feathers-04": {
 				"attachment": [
 					{ "time": 0, "name": null }
+				]
+			},
+			"littlebluebird-beak": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-beak" }
+				]
+			},
+			"slice": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"blue-feathers-03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"littlebluebird-body": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-body" }
+				]
+			},
+			"blue-feathers-02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"littlebluebird-eye-open": {
+				"attachment": [
+					{ "time": 0, "name": "littlebluebird-eye-open" },
+					{ "time": 0.4666, "name": "littlebluebird-eye-closed" },
+					{ "time": 0.5666, "name": "littlebluebird-eye-open" }
 				]
 			}
 		},
