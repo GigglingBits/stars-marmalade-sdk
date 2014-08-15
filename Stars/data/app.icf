@@ -25,8 +25,8 @@ pathmaxlength=40		# max length of the path in meters
 bodies=bodies.xml
 levels=levels.xml
 
-httpbodies="http://dl.dropboxusercontent.com/s/3igckh08mxx9gy4/bodies.xml?dl=1"
-httplevels="http://dl.dropboxusercontent.com/s/rk4wvu0f2k8bmpy/levels.xml?dl=1"
+httpbodies="http://dl.dropboxusercontent.com/s/nfbwqecmxdmvgyr/bodies.xml?dl=1"
+httplevels="http://dl.dropboxusercontent.com/s/45jchfbc4wdbgsx/levels.xml?dl=1"
 
 facebookpage="http://www.facebook.com/1447726568800401"
 
