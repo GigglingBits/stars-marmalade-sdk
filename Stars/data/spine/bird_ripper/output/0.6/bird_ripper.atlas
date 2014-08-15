@@ -1,146 +1,153 @@
 
 bird_ripper.png
-size: 1020,510
+size: 1009,1022
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bigbluebird-beak-01
-  rotate: false
-  xy: 852, 65
+  rotate: true
+  xy: 960, 943
   size: 79, 49
   orig: 79, 49
   offset: 0, 0
   index: -1
 bigbluebird-beak-02
-  rotate: false
-  xy: 557, 2
+  rotate: true
+  xy: 256, 213
   size: 61, 55
   orig: 61, 55
   offset: 0, 0
   index: -1
 bigbluebird-beak-hurt-01
   rotate: false
-  xy: 477, 90
+  xy: 871, 898
   size: 87, 124
   orig: 87, 124
   offset: 0, 0
   index: -1
 bigbluebird-beak-hurt-02
   rotate: false
-  xy: 683, 100
+  xy: 718, 777
   size: 116, 109
   orig: 116, 109
   offset: 0, 0
   index: -1
 bigbluebird-body
   rotate: false
-  xy: 2, 216
+  xy: 2, 728
   size: 501, 294
   orig: 502, 294
   offset: 1, 0
   index: -1
 bigbluebird-body-detail
-  rotate: true
-  xy: 983, 264
+  rotate: false
+  xy: 718, 738
   size: 81, 37
   orig: 81, 37
   offset: 0, 0
   index: -1
 bigbluebird-claws
   rotate: false
-  xy: 842, 231
+  xy: 488, 612
   size: 139, 114
   orig: 139, 114
   offset: 0, 0
   index: -1
 bigbluebird-claws-attack
   rotate: false
-  xy: 505, 292
+  xy: 2, 167
   size: 182, 218
   orig: 182, 218
   offset: 0, 0
   index: -1
 bigbluebird-eye-closed
-  rotate: false
-  xy: 477, 23
+  rotate: true
+  xy: 426, 462
   size: 78, 65
   orig: 78, 65
   offset: 0, 0
   index: -1
 bigbluebird-eye-hurt
   rotate: false
-  xy: 689, 211
+  xy: 718, 888
   size: 151, 134
   orig: 151, 134
   offset: 0, 0
   index: -1
 bigbluebird-eye-open
   rotate: false
-  xy: 933, 59
+  xy: 493, 482
   size: 78, 65
   orig: 78, 65
   offset: 0, 0
   index: -1
 bigbluebird-hurt-patch
   rotate: false
-  xy: 566, 104
+  xy: 309, 424
   size: 115, 116
   orig: 115, 116
   offset: 0, 0
   index: -1
 bigbluebird-wing-01
   rotate: false
-  xy: 689, 347
+  xy: 2, 2
   size: 160, 163
   orig: 160, 163
   offset: 0, 0
   index: -1
 bigbluebird-wing-02
-  rotate: false
-  xy: 505, 222
+  rotate: true
+  xy: 186, 203
   size: 182, 68
   orig: 190, 68
   offset: 6, 0
   index: -1
 bigbluebird-wing-03
   rotate: false
-  xy: 851, 347
+  xy: 164, 2
   size: 160, 163
   orig: 160, 163
   offset: 0, 0
   index: -1
 bigbluebird-wing-hurt
-  rotate: true
-  xy: 2, 3
+  rotate: false
+  xy: 505, 728
   size: 211, 294
   orig: 211, 294
   offset: 0, 0
   index: -1
 blue-feathers-01
   rotate: true
-  xy: 801, 100
+  xy: 256, 276
   size: 109, 49
   orig: 109, 49
   offset: 0, 0
   index: -1
 blue-feathers-02
-  rotate: false
-  xy: 932, 126
+  rotate: true
+  xy: 488, 549
   size: 61, 103
   orig: 61, 103
   offset: 0, 0
   index: -1
 blue-feathers-03
   rotate: false
-  xy: 298, 30
+  xy: 309, 542
   size: 177, 184
   orig: 180, 188
   offset: 3, 0
   index: -1
 blue-feathers-04
   rotate: false
-  xy: 852, 116
+  xy: 629, 613
   size: 78, 113
   orig: 79, 113
   offset: 1, 0
+  index: -1
+slice
+  rotate: false
+  xy: 2, 387
+  size: 305, 339
+  orig: 305, 339
+  offset: 0, 0
   index: -1

@@ -1,33 +1,33 @@
 
 bird_screecher.png
-size: 1012,509
+size: 1021,509
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bigredbird-attack
   rotate: false
-  xy: 389, 263
+  xy: 646, 263
   size: 187, 246
   orig: 187, 246
   offset: 0, 0
   index: -1
 bigredbird-beak-01
   rotate: false
-  xy: 355, 131
+  xy: 275, 22
   size: 70, 63
   orig: 70, 63
   offset: 0, 0
   index: -1
 bigredbird-beak-02
   rotate: false
-  xy: 485, 201
+  xy: 275, 3
   size: 51, 17
   orig: 51, 17
   offset: 0, 0
   index: -1
 bigredbird-beak-hurt
   rotate: true
-  xy: 900, 377
+  xy: 355, 91
   size: 132, 112
   orig: 132, 112
   offset: 0, 0
@@ -40,15 +40,15 @@ bigredbird-body
   offset: 0, 0
   index: -1
 bigredbird-body-details
-  rotate: false
-  xy: 739, 334
+  rotate: true
+  xy: 628, 193
   size: 31, 15
   orig: 31, 15
   offset: 0, 0
   index: -1
 bigredbird-body-details-02
   rotate: false
-  xy: 355, 95
+  xy: 556, 94
   size: 72, 34
   orig: 72, 34
   offset: 0, 0
@@ -62,14 +62,14 @@ bigredbird-body-hurt
   index: -1
 bigredbird-claws
   rotate: false
-  xy: 275, 2
+  xy: 469, 141
   size: 90, 83
   orig: 90, 83
   offset: 0, 0
   index: -1
 bigredbird-eye-closed
-  rotate: true
-  xy: 427, 131
+  rotate: false
+  xy: 894, 122
   size: 63, 48
   orig: 63, 49
   offset: 0, 0
@@ -82,15 +82,15 @@ bigredbird-eye-hurt
   offset: 0, 0
   index: -1
 bigredbird-eye-open
-  rotate: true
-  xy: 367, 31
+  rotate: false
+  xy: 959, 121
   size: 62, 49
   orig: 63, 49
   offset: 0, 0
   index: -1
 bigredbird-wing-01
   rotate: false
-  xy: 739, 351
+  xy: 835, 172
   size: 159, 158
   orig: 159, 158
   offset: 0, 0
@@ -104,36 +104,43 @@ bigredbird-wing-02
   index: -1
 bigredbird-wing-03
   rotate: false
-  xy: 578, 332
+  xy: 835, 332
   size: 159, 177
   orig: 159, 177
   offset: 0, 0
   index: -1
 red-feathers-01
   rotate: false
-  xy: 485, 220
+  xy: 801, 129
   size: 91, 41
   orig: 91, 41
   offset: 0, 0
   index: -1
 red-feathers-02
   rotate: true
-  xy: 900, 324
+  xy: 469, 88
   size: 51, 85
   orig: 51, 85
   offset: 0, 0
   index: -1
 red-feathers-03
   rotate: true
-  xy: 578, 183
+  xy: 646, 114
   size: 147, 153
   orig: 150, 156
   offset: 3, 0
   index: -1
 red-feathers-04
-  rotate: true
-  xy: 389, 196
+  rotate: false
+  xy: 561, 130
   size: 65, 94
   orig: 66, 94
   offset: 1, 0
+  index: -1
+slice
+  rotate: false
+  xy: 389, 226
+  size: 255, 283
+  orig: 255, 283
+  offset: 0, 0
   index: -1
