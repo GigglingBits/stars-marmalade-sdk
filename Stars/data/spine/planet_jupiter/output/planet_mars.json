@@ -1,0 +1,67 @@
+{
+"skeleton": { "spine": "1.9.15", "hash": "eb6+EMf3xlf5MJCSlMtNPz0RfH0", "width": 860, "height": 818 },
+"bones": [
+	{ "name": "root", "y": -20 }
+],
+"ik": [],
+"slots": [
+	{ "name": "root", "bone": "root", "attachment": "jupiter_locked" },
+	{ "name": "aabb", "bone": "root", "attachment": "aabb" }
+],
+"skins": {
+	"default": {
+		"aabb": {
+			"aabb": {
+				"type": "boundingbox",
+				"vertices": [ -421.77747, -1.6594272, -4.93134, -438.6431, 438.09348, -1.6594272, -0.9038973, 421.22803 ]
+			}
+		},
+		"root": {
+			"jupiter_coming soon": { "width": 860, "height": 818 },
+			"jupiter_locked": { "width": 860, "height": 818 }
+		}
+	}
+},
+"animations": {
+	"comingsoon": {
+		"slots": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "jupiter_coming soon" }
+				]
+			}
+		}
+	},
+	"disabled": {
+		"slots": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "jupiter_locked" }
+				]
+			}
+		}
+	},
+	"pressed": {
+		"slots": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "jupiter_coming soon" }
+				]
+			}
+		}
+	},
+	"released": {
+		"slots": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "jupiter_coming soon" }
+				]
+			}
+		},
+		"draworder": [
+			{ "time": 20 },
+			{ "time": 33.3333 }
+		]
+	}
+}
+}

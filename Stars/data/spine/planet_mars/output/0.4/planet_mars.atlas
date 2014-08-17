@@ -1,96 +1,103 @@
 
 planet_mars.png
-size: 929,509
+size: 948,510
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemy_01
-  rotate: false
-  xy: 202, 124
+  rotate: true
+  xy: 69, 56
   size: 87, 74
   orig: 87, 74
   offset: 0, 0
   index: -1
 enemy_02
   rotate: true
-  xy: 2, 18
+  xy: 624, 12
   size: 180, 198
   orig: 180, 198
   offset: 0, 0
   index: -1
+mars_coming soon
+  rotate: true
+  xy: 2, 145
+  size: 365, 309
+  orig: 365, 310
+  offset: 0, 0
+  index: -1
 mars_locked
-  rotate: false
-  xy: 2, 200
+  rotate: true
+  xy: 313, 145
   size: 365, 309
   orig: 365, 309
   offset: 0, 0
   index: -1
 meteor_01
   rotate: false
-  xy: 2, 2
+  xy: 22, 4
   size: 13, 14
   orig: 13, 14
   offset: 0, 0
   index: -1
 meteor_02
-  rotate: false
-  xy: 695, 349
+  rotate: true
+  xy: 145, 60
   size: 25, 35
   orig: 25, 35
   offset: 0, 0
   index: -1
 meteor_03
   rotate: false
-  xy: 911, 493
+  xy: 2, 2
   size: 18, 16
   orig: 18, 16
   offset: 0, 0
   index: -1
 meteor_04
   rotate: false
-  xy: 785, 419
+  xy: 182, 62
   size: 20, 23
   orig: 20, 23
   offset: 0, 0
   index: -1
 meteor_fire_01
-  rotate: false
-  xy: 695, 444
+  rotate: true
+  xy: 2, 20
   size: 123, 65
   orig: 123, 65
   offset: 0, 0
   index: -1
 meteor_fire_02
   rotate: false
-  xy: 820, 459
+  xy: 69, 4
   size: 89, 50
   orig: 89, 50
   offset: 0, 0
   index: -1
 meteor_fire_03
   rotate: false
-  xy: 202, 85
+  xy: 160, 21
   size: 70, 37
   orig: 70, 37
   offset: 0, 0
   index: -1
 meteor_fire_04
   rotate: false
-  xy: 695, 386
+  xy: 145, 87
   size: 88, 56
   orig: 88, 56
   offset: 0, 0
   index: -1
 planetoffire
   rotate: false
-  xy: 369, 193
+  xy: 624, 194
   size: 324, 316
   orig: 335, 325
   offset: 6, 5
   index: -1
 radar
   rotate: false
-  xy: 291, 161
+  xy: 232, 48
   size: 35, 37
   orig: 35, 37
   offset: 0, 0

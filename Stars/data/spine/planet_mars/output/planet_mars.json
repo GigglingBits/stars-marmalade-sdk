@@ -1,4 +1,5 @@
 {
+"skeleton": { "spine": "1.9.15", "hash": "AJ07cd9uk2Cv8+xa8BNwswk9KVk", "width": 923.61, "height": 785.99 },
 "bones": [
 	{ "name": "root", "y": -20 },
 	{ "name": "enemy_01", "parent": "root", "length": 389.25, "x": -3.48, "y": -227.85, "rotation": 88.64 },
@@ -33,6 +34,7 @@
 		"rotation": 35.63
 	}
 ],
+"ik": [],
 "slots": [
 	{ "name": "enemy_01", "bone": "enemy_02", "attachment": "enemy_01" },
 	{ "name": "enemy_012", "bone": "2", "attachment": "enemy_01" },
@@ -43,7 +45,7 @@
 	{ "name": "meteor_03", "bone": "meteor_R_02", "attachment": "meteor_03" },
 	{ "name": "meteor_04", "bone": "meteor_button_01", "attachment": "meteor_04" },
 	{ "name": "meteor_01", "bone": "meteor_button_02", "attachment": "meteor_01" },
-	{ "name": "root", "bone": "root", "attachment": "mars_locked" },
+	{ "name": "root", "bone": "root", "attachment": "mars_coming soon" },
 	{ "name": "meteor_fire_01", "bone": "meteor_fire_R_01", "attachment": "meteor_fire_01" },
 	{ "name": "meteor_fire_02", "bone": "meteor_fire_L_01", "attachment": "meteor_fire_02" },
 	{ "name": "radar", "bone": "radar", "attachment": "radar" },
@@ -58,17 +60,22 @@
 				"vertices": [ -421.77747, -1.6594272, -4.93134, -438.6431, 438.09348, -1.6594272, -0.9038973, 421.22803 ]
 			}
 		},
-		"enemy_01": {
-			"enemy_01": { "x": 72.94, "y": -21.79, "rotation": -128.43, "width": 218, "height": 184 }
+		"root": {
+			"mars_coming soon": { "x": 26, "width": 913, "height": 775 },
+			"mars_locked": { "x": 26, "width": 913, "height": 772 },
+			"planetoffire": { "x": -2, "y": -8, "width": 837, "height": 812 }
 		},
-		"enemy_012": {
-			"enemy_01": { "x": 33.15, "y": -8.22, "scaleX": 0.398, "scaleY": 0.398, "rotation": -147.54, "width": 218, "height": 184 }
+		"meteor_fire_01": {
+			"meteor_fire_01": { "x": 128.91, "y": -7.08, "rotation": 22.26, "width": 307, "height": 162 }
 		},
-		"enemy_02": {
-			"enemy_02": { "x": 160.35, "y": -4.46, "rotation": -88.64, "width": 449, "height": 494 }
+		"radar": {
+			"radar": { "x": 40.29, "y": 6.67, "rotation": 132.65, "width": 88, "height": 92 }
 		},
-		"enemy_03": {
-			"enemy_01": { "rotation": -144.68, "width": 218, "height": 184 }
+		"meteor_fire_04": {
+			"meteor_fire_04": { "x": 51.03, "y": 6.67, "rotation": 23.41, "width": 220, "height": 141 }
+		},
+		"meteor_fire_02": {
+			"meteor_fire_02": { "x": 96.88, "y": 15.98, "rotation": 159.14, "width": 222, "height": 126 }
 		},
 		"meteor_01": {
 			"meteor_01": { "x": 12.73, "y": 2.67, "scaleX": 0.741, "scaleY": 0.741, "rotation": 107.07, "width": 33, "height": 34 }
@@ -82,71 +89,27 @@
 		"meteor_04": {
 			"meteor_04": { "x": 21.29, "y": 3.51, "rotation": 99.38, "width": 50, "height": 58 }
 		},
-		"meteor_fire_01": {
-			"meteor_fire_01": { "x": 128.91, "y": -7.08, "rotation": 22.26, "width": 307, "height": 162 }
-		},
-		"meteor_fire_02": {
-			"meteor_fire_02": { "x": 96.88, "y": 15.98, "rotation": 159.14, "width": 222, "height": 126 }
+		"enemy_01": {
+			"enemy_01": { "x": 72.94, "y": -21.79, "rotation": -128.43, "width": 218, "height": 184 }
 		},
 		"meteor_fire_03": {
 			"meteor_fire_03": { "x": 47.35, "y": -0.5, "rotation": 173.7, "width": 175, "height": 92 }
 		},
-		"meteor_fire_04": {
-			"meteor_fire_04": { "x": 51.03, "y": 6.67, "rotation": 23.41, "width": 220, "height": 141 }
+		"enemy_012": {
+			"enemy_01": { "x": 33.15, "y": -8.22, "scaleX": 0.398, "scaleY": 0.398, "rotation": -147.54, "width": 218, "height": 184 }
 		},
-		"radar": {
-			"radar": { "x": 40.29, "y": 6.67, "rotation": 132.65, "width": 88, "height": 92 }
+		"enemy_02": {
+			"enemy_02": { "x": 160.35, "y": -4.46, "rotation": -88.64, "width": 449, "height": 494 }
 		},
-		"root": {
-			"mars_locked": { "x": 26, "width": 913, "height": 772 },
-			"planetoffire": { "x": -2, "y": -8, "width": 837, "height": 812 }
+		"enemy_03": {
+			"enemy_01": { "rotation": -144.68, "width": 218, "height": 184 }
 		}
 	}
 },
 "animations": {
-	"disabled": {
+	"comingsoon": {
 		"slots": {
-			"enemy_01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"enemy_02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"enemy_03": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
 			"enemy_012": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"meteor_01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"meteor_02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"meteor_03": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"meteor_04": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"meteor_fire_01": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -161,7 +124,27 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"meteor_fire_04": {
+			"root": {
+				"attachment": [
+					{ "time": 0, "name": "mars_coming soon" }
+				]
+			},
+			"meteor_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_01": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -171,9 +154,103 @@
 					{ "time": 0, "name": null }
 				]
 			},
+			"enemy_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		}
+	},
+	"disabled": {
+		"slots": {
+			"enemy_012": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"root": {
 				"attachment": [
 					{ "time": 0, "name": "mars_locked" }
+				]
+			},
+			"meteor_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"radar": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_fire_04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"meteor_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"enemy_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			}
 		}

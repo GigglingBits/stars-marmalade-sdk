@@ -1,4 +1,5 @@
 {
+"skeleton": { "spine": "1.9.15", "hash": "01Isv4YGnNgVmSVrzr+AIGQfW8g", "width": 1513.68, "height": 1513.68 },
 "bones": [
 	{ "name": "root", "color": "9b9b9b00" },
 	{ "name": "background_gradient", "parent": "root", "length": 330.25, "x": 1.2, "y": -169.19, "rotation": 90, "color": "9b9b9b00" },
@@ -12,6 +13,7 @@
 	{ "name": "star_02", "parent": "root", "length": 176.87, "x": 79.51, "y": 1.58, "rotation": 77.03, "color": "9b9b9b00" },
 	{ "name": "star_03", "parent": "root", "length": 184.39, "x": 47.36, "y": -172.02, "rotation": 119.89, "color": "9b9b9b00" }
 ],
+"ik": [],
 "slots": [
 	{ "name": "awards_gradient_back", "bone": "background_gradient", "color": "ffffffd8", "attachment": "awards_gradient" },
 	{ "name": "awards_base", "bone": "root", "attachment": "awards_base" },
@@ -34,20 +36,8 @@
 				"vertices": [ 5.2077026, -269.57315, 281.4478, -7.1452227, 1.7546997, 244.92387, -281.3913, -7.1452227 ]
 			}
 		},
-		"awards_base": {
-			"awards_base": { "scaleX": 1.5, "scaleY": 1.5, "width": 365, "height": 336 }
-		},
-		"awards_gradient": {
-			"awards_gradient": { "x": 21.92, "y": 10.07, "scaleX": 0.5, "scaleY": 0.5, "rotation": -110.3, "width": 458, "height": 458 }
-		},
-		"awards_gradient2": {
-			"awards_gradient": { "x": 9.81, "y": 1.93, "scaleX": 0.5, "scaleY": 0.5, "rotation": -78.86, "width": 458, "height": 458 }
-		},
-		"awards_gradient3": {
-			"awards_gradient": { "x": 27.64, "y": 5.95, "scaleX": 0.5, "scaleY": 0.5, "rotation": -122.84, "width": 458, "height": 458 }
-		},
-		"awards_gradient_back": {
-			"awards_gradient": { "x": 169.15, "scaleX": 2.203, "scaleY": 2.203, "rotation": -90, "width": 458, "height": 458 }
+		"awards_stars_shadow_02": {
+			"awards_stars_shadow_02": { "x": 81.67, "y": -27.77, "scaleX": 1.5, "scaleY": 1.5, "rotation": -74.17, "width": 129, "height": 126 }
 		},
 		"awards_stars_full_01": {
 			"awards_stars_blank_01": { "x": 84.45, "y": 6.23, "scaleX": 1.5, "scaleY": 1.5, "rotation": -108.7, "width": 125, "height": 128 },
@@ -61,87 +51,35 @@
 			"awards_stars_blank_03": { "x": 80.51, "y": 5.61, "scaleX": 1.5, "scaleY": 1.5, "rotation": -119.89, "width": 130, "height": 127 },
 			"awards_stars_full_03": { "x": 80.51, "y": 5.62, "scaleX": 1.5, "scaleY": 1.5, "rotation": -119.89, "width": 129, "height": 127 }
 		},
+		"awards_gradient_back": {
+			"awards_gradient": { "x": 169.15, "scaleX": 2.203, "scaleY": 2.203, "rotation": -90, "width": 458, "height": 458 }
+		},
 		"awards_stars_shadow_01": {
 			"awards_stars_shadow_01": { "x": 83.56, "y": -8.07, "scaleX": 1.5, "scaleY": 1.5, "rotation": -107.89, "width": 125, "height": 128 }
 		},
-		"awards_stars_shadow_02": {
-			"awards_stars_shadow_02": { "x": 81.67, "y": -27.77, "scaleX": 1.5, "scaleY": 1.5, "rotation": -74.17, "width": 129, "height": 126 }
+		"awards_gradient3": {
+			"awards_gradient": { "x": 27.64, "y": 5.95, "scaleX": 0.5, "scaleY": 0.5, "rotation": -122.84, "width": 458, "height": 458 }
+		},
+		"awards_gradient2": {
+			"awards_gradient": { "x": 9.81, "y": 1.93, "scaleX": 0.5, "scaleY": 0.5, "rotation": -78.86, "width": 458, "height": 458 }
+		},
+		"awards_base": {
+			"awards_base": { "scaleX": 1.5, "scaleY": 1.5, "width": 365, "height": 336 }
 		},
 		"awards_stars_shadow_03": {
 			"awards_stars_shadow_03": { "x": 73.98, "y": -10.11, "scaleX": 1.5, "scaleY": 1.5, "rotation": -118.16, "width": 130, "height": 127 }
+		},
+		"awards_gradient": {
+			"awards_gradient": { "x": 21.92, "y": 10.07, "scaleX": 0.5, "scaleY": 0.5, "rotation": -110.3, "width": 458, "height": 458 }
 		}
 	}
 },
 "animations": {
 	"0": {
 		"slots": {
-			"awards_base": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_gradient": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_gradient2": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_gradient3": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_gradient_back": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_full_01": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_full_02": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
 			"awards_stars_full_03": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_shadow_01": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_shadow_02": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_shadow_03": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			}
-		}
-	},
-	"1": {
-		"slots": {
-			"awards_gradient": {
 				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1666, "name": "awards_gradient" }
-				],
-				"color": [
-					{ "time": 1.1666, "color": "ffffff00" },
-					{ "time": 1.3333, "color": "ffffffff" }
+					{ "time": 0, "name": null }
 				]
 			},
 			"awards_gradient2": {
@@ -149,7 +87,103 @@
 					{ "time": 0, "name": null }
 				]
 			},
+			"awards_stars_shadow_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_stars_full_01": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.8333, "name": "awards_stars_full_01" }
+				],
+				"color": [
+					{ "time": 0.8333, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"awards_gradient3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_stars_full_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_gradient": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_stars_shadow_01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"star_01": {
+				"rotate": [
+					{ "time": 0.8333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0.8333, "x": -686.32, "y": 210.2 }
+				],
+				"scale": [
+					{ "time": 0.8333, "x": 3.907, "y": 3.907 }
+				]
+			},
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 180 },
+					{ "time": 0.5, "angle": 360 },
+					{ "time": 0.7333, "angle": 6.37 },
+					{ "time": 0.8333, "angle": 0, "curve": "stepped" },
+					{ "time": 16, "angle": 0 },
+					{ "time": 16.3333, "angle": 14.12 },
+					{ "time": 16.4333, "angle": 360 },
+					{ "time": 16.5333, "angle": 180 },
+					{ "time": 16.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 0.8333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 16, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 16.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 0.099, "y": 0.099 },
+					{ "time": 0.5, "x": 1.5, "y": 1.5 },
+					{ "time": 0.7333, "x": 1.694, "y": 1.694 },
+					{ "time": 0.8333, "x": 1.5, "y": 1.5, "curve": "stepped" },
+					{ "time": 16, "x": 1.5, "y": 1.5 },
+					{ "time": 16.3333, "x": 1.959, "y": 1.959 },
+					{ "time": 16.4333, "x": 1.5, "y": 1.5 },
+					{ "time": 16.6666, "x": 0.099, "y": 0.099 }
+				]
+			}
+		}
+	},
+	"1": {
+		"slots": {
+			"awards_stars_full_03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_gradient2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_stars_shadow_03": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -164,30 +198,35 @@
 					{ "time": 1.1666, "color": "ffffffff" }
 				]
 			},
+			"awards_stars_shadow_02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"awards_gradient3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"awards_stars_full_02": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
 			},
-			"awards_stars_full_03": {
+			"awards_gradient": {
 				"attachment": [
-					{ "time": 0, "name": null }
+					{ "time": 0, "name": null },
+					{ "time": 1.1666, "name": "awards_gradient" }
+				],
+				"color": [
+					{ "time": 1.1666, "color": "ffffff00" },
+					{ "time": 1.3333, "color": "ffffffff" }
 				]
 			},
 			"awards_stars_shadow_01": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.1666, "name": "awards_stars_shadow_01" }
-				]
-			},
-			"awards_stars_shadow_02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"awards_stars_shadow_03": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -262,14 +301,9 @@
 	},
 	"2": {
 		"slots": {
-			"awards_gradient": {
+			"awards_stars_full_03": {
 				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1666, "name": "awards_gradient" }
-				],
-				"color": [
-					{ "time": 1.1666, "color": "ffffff00" },
-					{ "time": 1.3333, "color": "ffffffff" }
+					{ "time": 0, "name": null }
 				]
 			},
 			"awards_gradient2": {
@@ -282,7 +316,7 @@
 					{ "time": 1.9, "color": "ffffffff" }
 				]
 			},
-			"awards_gradient3": {
+			"awards_stars_shadow_03": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -297,6 +331,17 @@
 					{ "time": 1.1666, "color": "ffffffff" }
 				]
 			},
+			"awards_stars_shadow_02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.7333, "name": "awards_stars_shadow_02" }
+				]
+			},
+			"awards_gradient3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"awards_stars_full_02": {
 				"attachment": [
 					{ "time": 0, "name": null },
@@ -307,26 +352,20 @@
 					{ "time": 1.7333, "color": "ffffffff" }
 				]
 			},
-			"awards_stars_full_03": {
+			"awards_gradient": {
 				"attachment": [
-					{ "time": 0, "name": null }
+					{ "time": 0, "name": null },
+					{ "time": 1.1666, "name": "awards_gradient" }
+				],
+				"color": [
+					{ "time": 1.1666, "color": "ffffff00" },
+					{ "time": 1.3333, "color": "ffffffff" }
 				]
 			},
 			"awards_stars_shadow_01": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.1666, "name": "awards_stars_shadow_01" }
-				]
-			},
-			"awards_stars_shadow_02": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.7333, "name": "awards_stars_shadow_02" }
-				]
-			},
-			"awards_stars_shadow_03": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -434,14 +473,14 @@
 	},
 	"3": {
 		"slots": {
-			"awards_gradient": {
+			"awards_stars_full_03": {
 				"attachment": [
 					{ "time": 0, "name": null },
-					{ "time": 1.1666, "name": "awards_gradient" }
+					{ "time": 2.0666, "name": "awards_stars_full_03" }
 				],
 				"color": [
-					{ "time": 1.1666, "color": "ffffff00" },
-					{ "time": 1.3333, "color": "ffffffff" }
+					{ "time": 2.0666, "color": "ffffff00" },
+					{ "time": 2.4, "color": "ffffffff" }
 				]
 			},
 			"awards_gradient2": {
@@ -454,14 +493,10 @@
 					{ "time": 1.9, "color": "ffffffff" }
 				]
 			},
-			"awards_gradient3": {
+			"awards_stars_shadow_03": {
 				"attachment": [
 					{ "time": 0, "name": null },
-					{ "time": 2.4, "name": "awards_gradient" }
-				],
-				"color": [
-					{ "time": 2.4, "color": "ffffff00" },
-					{ "time": 2.5666, "color": "ffffffff" }
+					{ "time": 2.4, "name": "awards_stars_shadow_03" }
 				]
 			},
 			"awards_stars_full_01": {
@@ -474,6 +509,22 @@
 					{ "time": 1.1666, "color": "ffffffff" }
 				]
 			},
+			"awards_stars_shadow_02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.7333, "name": "awards_stars_shadow_02" }
+				]
+			},
+			"awards_gradient3": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.4, "name": "awards_gradient" }
+				],
+				"color": [
+					{ "time": 2.4, "color": "ffffff00" },
+					{ "time": 2.5666, "color": "ffffffff" }
+				]
+			},
 			"awards_stars_full_02": {
 				"attachment": [
 					{ "time": 0, "name": null },
@@ -484,32 +535,20 @@
 					{ "time": 1.7333, "color": "ffffffff" }
 				]
 			},
-			"awards_stars_full_03": {
+			"awards_gradient": {
 				"attachment": [
 					{ "time": 0, "name": null },
-					{ "time": 2.0666, "name": "awards_stars_full_03" }
+					{ "time": 1.1666, "name": "awards_gradient" }
 				],
 				"color": [
-					{ "time": 2.0666, "color": "ffffff00" },
-					{ "time": 2.4, "color": "ffffffff" }
+					{ "time": 1.1666, "color": "ffffff00" },
+					{ "time": 1.3333, "color": "ffffffff" }
 				]
 			},
 			"awards_stars_shadow_01": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.1666, "name": "awards_stars_shadow_01" }
-				]
-			},
-			"awards_stars_shadow_02": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.7333, "name": "awards_stars_shadow_02" }
-				]
-			},
-			"awards_stars_shadow_03": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.4, "name": "awards_stars_shadow_03" }
 				]
 			}
 		},
@@ -650,12 +689,7 @@
 	},
 	"hidden": {
 		"slots": {
-			"awards_base": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_gradient": {
+			"awards_stars_full_03": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" }
 				]
@@ -665,12 +699,12 @@
 					{ "time": 0, "color": "ffffff00" }
 				]
 			},
-			"awards_gradient3": {
+			"awards_gradient_back": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" }
 				]
 			},
-			"awards_gradient_back": {
+			"awards_stars_shadow_03": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" }
 				]
@@ -680,27 +714,32 @@
 					{ "time": 0, "color": "ffffff00" }
 				]
 			},
-			"awards_stars_full_02": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_full_03": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
-			"awards_stars_shadow_01": {
-				"color": [
-					{ "time": 0, "color": "ffffff00" }
-				]
-			},
 			"awards_stars_shadow_02": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" }
 				]
 			},
-			"awards_stars_shadow_03": {
+			"awards_gradient3": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_full_02": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_gradient": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_base": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" }
+				]
+			},
+			"awards_stars_shadow_01": {
 				"color": [
 					{ "time": 0, "color": "ffffff00" }
 				]

@@ -1,0 +1,20 @@
+
+planet_mars.png
+size: 864,410
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+jupiter_coming soon
+  rotate: false
+  xy: 2, 2
+  size: 430, 408
+  orig: 430, 409
+  offset: 0, 0
+  index: -1
+jupiter_locked
+  rotate: false
+  xy: 434, 2
+  size: 430, 408
+  orig: 430, 409
+  offset: 0, 0
+  index: -1
