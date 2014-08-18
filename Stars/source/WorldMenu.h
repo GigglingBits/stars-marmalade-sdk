@@ -18,7 +18,6 @@ private:
 	LevelIterator::WorldId m_eWorld;
 	
 	CIwRect m_xTitlePos;
-	CIwRect m_xTitleShadowPos;
 	std::string m_sTitle;
 	
     ButtonEx m_xButtonPlanet;

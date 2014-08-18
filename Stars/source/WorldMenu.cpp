@@ -92,10 +92,6 @@ void WorldMenu::OnDoLayout(const CIwSVec2& screensize) {
     m_xTitlePos.x = screencenter.x - (extents / 2);
 	m_xTitlePos.y = screencenter.y - (extents * 5 / 12);
 	
-	m_xTitleShadowPos = m_xTitlePos;
-	m_xTitleShadowPos.x += extents / 150;
-	m_xTitleShadowPos.y += extents / 150;
-    
 	// world button
 	CIwRect button;
     button.w = (int16)(extents / 1.5f);
@@ -156,11 +152,6 @@ void WorldMenu::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonBack.Render(renderer, frame);
 	
 	// title
-	renderer.DrawText(
-		m_sTitle,
-		m_xTitleShadowPos,
-		Renderer::eFontTypeLarge,
-		0xaa444444);
 	renderer.DrawText(
 		m_sTitle,
 		m_xTitlePos,
