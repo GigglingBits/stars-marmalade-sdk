@@ -83,7 +83,7 @@ void Star::RetractingState::Collide(Body& body) {
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech")) {
+	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
 		DustEventArgs args;
@@ -147,7 +147,7 @@ void Star::FollowState::Collide(Body& body) {
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech")) {
+	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
 		m_rxContext.SetTextureFrame("hurt");
 		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
