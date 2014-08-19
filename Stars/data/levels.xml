@@ -26,6 +26,9 @@
 		<preamble name="earth_11" texture="preamble_01">
 			A new super amazing shield power has appeared!         
 		</preamble>
+		<preamble name="earth_12" texture="preamble_01">
+			Watch out! A superfast level!         
+		</preamble>
 		<!--
 		 <preamble name="earth_2" file="stories/intro.mp4">
 		 Catch all nuggets to get max points.
@@ -717,7 +720,7 @@
 				<line map="   N  N   " />
 				<line map="  N    N  " />
 				<line map=" N      N " />
-				<line map="N   bb   N" />
+				<line map="N   bc   N" />
 				<line map=" N      N " />
 				<line map="  N    N  " />
 				<line map="   N  N   " />
@@ -783,67 +786,67 @@
 				<line map="    nn    " />
 			</spritesequence>
 		</level>
-			<level name="earth_13" width="12.0" height="12.0" dustrequirement="1000">
+			<level name="earth_13" width="12.0" height="12.0" dustrequirement="1500">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
 				<def id="m" body="nugget_03" magnetprobability="0.0" />
 				<def id="M" body="nugget_04" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
-				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
+				<def id="c" body="bird" shieldprobability="0.3" shootprobability="0.0" magnetprobability="0.4" />
+				<def id="b" body="bird_screecher" shieldprobability="0.3" shootprobability="0.0" magnetprobability="0.4"/>
+				<def id="d" body="bird_ripper" shieldprobability="0.3" shootprobability="0.0" magnetprobability="0.4" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="              " />
+				<line map="   nn     b   " />
+				<line map="  nn          " />
+				<line map=" NN           " />
+				<line map="              " />
+				<line map="          nn  " />
+				<line map="    d      nn " />
+				<line map="            NN" />
+				<line map="              " />
+				<line map="    nn        " />
+				<line map="   nn         " />
+				<line map="  NN       b  " />
+				<line map="              " />
+				<line map="       nn     " />
+				<line map="        nn    " />
+				<line map="  c      NN   " />
+				<line map="              " />
+				<line map="    nn        " />
+				<line map="   nn    d    " />
+				<line map="  NN          " />
+				<line map="              " />
+				<line map="        nn    " />
+				<line map="       nn     " />
+				<line map="      NN      " />
+				<line map="              " />
+				<line map="  nn        b " />
+				<line map="   nn         " />
+				<line map=" c  NN        " />
+				<line map="              " />
+				<line map="           nn " />
+				<line map="          nn  " />
+				<line map="   b     NN   " />
+				<line map="              " />
+				<line map="      n       " />
+				<line map="      n   d   " />
+				<line map="      n       " />
+				<line map="      n       " />
+				<line map="      n       " />
+				<line map="      nn      " />
+				<line map="  d    nn     " />
+				<line map="       nn     " />
+				<line map="      nn      " />
+				<line map="     nn    b  " />
+				<line map="    nn        " />
+				<line map="   nn   nn    " />
+				<line map="  nn  m  nn   " />
+				<line map=" nn  mmm  nn  " />
+				<line map="  nn  m  nn   " />
+				<line map="   nn   nn    " />
+				<line map="    nnnnn     " />
 			</spritesequence>
 		</level>
 			<level name="earth_14" width="12.0" height="12.0" dustrequirement="1000">
