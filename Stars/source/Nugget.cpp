@@ -38,7 +38,7 @@ void Nugget::SetMagnetPosition(const CIwFVec2& pos) {
 void Nugget::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 	
-	if (body.GetId().compare("shield") != 0 && body.GetId().compare("magnet") != 0) {
+	if (body.GetId().compare("star")) {
 		// any non-star-sensor collision leads to selfdestruction
 		GetHealthManager().Kill();
 		ShowEffect("star_collision");

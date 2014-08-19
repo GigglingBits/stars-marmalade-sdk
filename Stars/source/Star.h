@@ -64,9 +64,11 @@ public:
 	
 	void BeginShield(uint32 duration);
 	void EndShield();
+	bool HasShield();
 	
 	void BeginMagnet(uint32 duration);
 	void EndMagnet();
+	bool HasMagnet();
 	
 	bool IsFollowingPath();
 

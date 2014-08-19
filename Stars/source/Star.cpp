@@ -184,6 +184,10 @@ void Star::EndShield() {
 	}
 }
 
+bool Star::HasShield() {
+	return m_uiShieldDuration > 0;
+}
+
 void Star::BeginMagnet(uint32 duration) {
 	m_uiMagnetDuration = duration;
 	if (Body* field = GetChild("magnet")) {
@@ -198,6 +202,10 @@ void Star::EndMagnet() {
 		field->SetTextureFrame("off");
         field->EnableCollisions(false);
 	}
+}
+
+bool Star::HasMagnet() {
+	return m_uiMagnetDuration > 0;
 }
 
 void Star::EnableParticles() {
