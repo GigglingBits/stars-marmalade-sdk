@@ -1,104 +1,104 @@
 
 planet_mars.png
-size: 1015,1021
+size: 948,510
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemy_01
   rotate: true
-  xy: 675, 42
-  size: 131, 110
-  orig: 131, 110
+  xy: 69, 56
+  size: 87, 74
+  orig: 87, 74
   offset: 0, 0
   index: -1
 enemy_02
-  rotate: false
-  xy: 546, 175
-  size: 269, 296
-  orig: 269, 296
+  rotate: true
+  xy: 624, 12
+  size: 180, 198
+  orig: 180, 198
   offset: 0, 0
   index: -1
 mars_coming soon
-  rotate: false
-  xy: 2, 557
-  size: 548, 464
-  orig: 548, 465
+  rotate: true
+  xy: 2, 145
+  size: 365, 309
+  orig: 365, 310
   offset: 0, 0
   index: -1
 mars_locked
   rotate: true
-  xy: 552, 473
-  size: 548, 463
-  orig: 548, 463
+  xy: 313, 145
+  size: 365, 309
+  orig: 365, 309
   offset: 0, 0
   index: -1
 meteor_01
   rotate: false
-  xy: 137, 3
-  size: 20, 20
-  orig: 20, 20
+  xy: 22, 4
+  size: 13, 14
+  orig: 13, 14
   offset: 0, 0
   index: -1
 meteor_02
-  rotate: false
-  xy: 192, 28
-  size: 38, 52
-  orig: 38, 52
+  rotate: true
+  xy: 145, 60
+  size: 25, 35
+  orig: 25, 35
   offset: 0, 0
   index: -1
 meteor_03
   rotate: false
-  xy: 192, 2
-  size: 27, 24
-  orig: 27, 24
+  xy: 2, 2
+  size: 18, 16
+  orig: 18, 16
   offset: 0, 0
   index: -1
 meteor_04
   rotate: false
-  xy: 232, 45
-  size: 30, 35
-  orig: 30, 35
+  xy: 182, 62
+  size: 20, 23
+  orig: 20, 23
   offset: 0, 0
   index: -1
 meteor_fire_01
-  rotate: false
-  xy: 489, 76
-  size: 184, 97
-  orig: 184, 97
+  rotate: true
+  xy: 2, 20
+  size: 123, 65
+  orig: 123, 65
   offset: 0, 0
   index: -1
 meteor_fire_02
   rotate: false
-  xy: 2, 4
-  size: 133, 76
-  orig: 133, 76
+  xy: 69, 4
+  size: 89, 50
+  orig: 89, 50
   offset: 0, 0
   index: -1
 meteor_fire_03
-  rotate: true
-  xy: 489, 450
-  size: 105, 55
-  orig: 105, 55
+  rotate: false
+  xy: 160, 21
+  size: 70, 37
+  orig: 70, 37
   offset: 0, 0
   index: -1
 meteor_fire_04
-  rotate: true
-  xy: 787, 41
-  size: 132, 85
-  orig: 132, 85
+  rotate: false
+  xy: 145, 87
+  size: 88, 56
+  orig: 88, 56
   offset: 0, 0
   index: -1
 planetoffire
   rotate: false
-  xy: 2, 82
-  size: 485, 473
-  orig: 502, 487
-  offset: 9, 7
+  xy: 624, 194
+  size: 324, 316
+  orig: 335, 325
+  offset: 6, 5
   index: -1
 radar
   rotate: false
-  xy: 137, 25
-  size: 53, 55
-  orig: 53, 55
+  xy: 232, 48
+  size: 35, 37
+  orig: 35, 37
   offset: 0, 0
   index: -1
