@@ -45,13 +45,26 @@ void Enemy::DetachSledge() {
 	RemoveChild(ENEMY_SLEDGE_CHILD);
 }
 
-void Enemy::OnChildColliding(Body& child, Body& body) {
-	if (!m_bKnockedOut && dynamic_cast<Star*>(&body)) {
-		if (m_xSoftSpots.find(child.GetId()) != m_xSoftSpots.end()) {
+void Enemy::OnColliding(Body& body) {
+	if (!m_bKnockedOut) {
+		if (!body.GetId().compare("shield")) {
 			KnockOut();
 			EmitBuff();
 		}
 		ShowEffect("star_collision");
+	}
+	CompositeBody::OnColliding(body);
+}
+
+void Enemy::OnChildColliding(Body& child, Body& body) {
+	if (!m_bKnockedOut) {
+		if (dynamic_cast<Star*>(&body)) {
+			if (m_xSoftSpots.find(child.GetId()) != m_xSoftSpots.end()) {
+				KnockOut();
+				EmitBuff();
+			}
+			ShowEffect("star_collision");
+		}
 	}
 	
 	CompositeBody::OnChildColliding(child, body);

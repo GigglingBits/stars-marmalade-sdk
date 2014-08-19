@@ -38,6 +38,7 @@ protected:
 	virtual void OnUpdate(const FrameData& frame);
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnChildColliding(Body& child, Body& body);
+	virtual void OnColliding(Body& body);
 };
 
 #endif
