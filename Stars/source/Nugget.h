@@ -18,7 +18,11 @@ public:
 	virtual int GetDustAmount();
 	
 	void SetMagnetPosition(const CIwFVec2& pos);
+	void CancelMagnet();
 	
+private:
+	void Kill();
+		
 protected:
 	virtual void OnColliding(Body& body);
 	virtual void OnUpdate(const FrameData& frame);

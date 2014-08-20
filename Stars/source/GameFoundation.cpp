@@ -88,8 +88,6 @@ void GameFoundation::RegisterStar(Star* star) {
 }
 
 void GameFoundation::UnregisterStar() {
-	m_xMagnetSprites.clear();
-	
 	m_pxStar->Magnet.RemoveListener(this, &GameFoundation::StarMagnetEventHandler);
 	m_pxStar->Killed.RemoveListener(this, &GameFoundation::StarKilledEventHandler);
 	m_pxStar = NULL;
@@ -162,10 +160,11 @@ void GameFoundation::UpdatePhysics(uint16 timestep) {
     m_xWorld.GetWorld().ClearForces();
 }
 
+
 void GameFoundation::UpdateMagnet(uint16 timestep) {
 	IW_CALLSTACK_SELF;
 	
-	if (!m_pxStar) {
+	if (m_xMagnetSprites.empty()) {
 		return;
 	}
 	
@@ -174,7 +173,13 @@ void GameFoundation::UpdateMagnet(uint16 timestep) {
 		Nugget* nugget;
 		SpriteMap::iterator sit = m_xSpriteMap.find(*mit);
 		if (sit != m_xSpriteMap.end() && sit->second && (nugget = dynamic_cast<Nugget*>(sit->second))) {
-			nugget->SetMagnetPosition(m_pxStar->GetPosition());
+			if (m_pxStar) {
+				// star is alive -> regular update
+				nugget->SetMagnetPosition(m_pxStar->GetPosition());
+			} else {
+				// star has died -> remove nugget
+				nugget->CancelMagnet();
+			}
 			++mit;
 		} else {
 			m_xMagnetSprites.erase(mit++);

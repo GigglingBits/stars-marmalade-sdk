@@ -113,6 +113,7 @@ void Level::CreateStar() {
 	Star* star = dynamic_cast<Star*>(FactoryManager::GetBodyFactory().Create("star"));
 	IwAssertMsg(MYAPP, star, ("Could not add star to level. It seems to be of a wrong type. Check its body definition."));
 	if (star) {
+		star->SetId("star");
 		star->SetPosition(GetStarHidePosition(), 0.0f);
 		Add(star);
 		IwAssertMsg(MYAPP, star->CanDrag(), ("Stars must be draggable. Cannot create star..."));

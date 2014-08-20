@@ -35,14 +35,32 @@ void Nugget::SetMagnetPosition(const CIwFVec2& pos) {
 	MoveDragging(pos);
 }
 
+void Nugget::CancelMagnet() {
+	IW_CALLSTACK_SELF;
+	if (m_bMagnetActive) {
+		IwAssert(MYAPP, IsDragging());
+		/*
+		m_bMagnetActive = false;
+		EndDragging();
+		EnableDragging(false);
+		GetBody().SetLinearDamping(0.0f);
+		 */
+		Kill();
+	}
+}
+
+void Nugget::Kill() {
+	GetHealthManager().Kill();
+	ShowEffect("star_collision");
+	EmitBuff();
+}
+
 void Nugget::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 	
-	if (body.GetId().compare("star")) {
+	if (!body.GetId().compare("star")) {
 		// any non-star-sensor collision leads to selfdestruction
-		GetHealthManager().Kill();
-		ShowEffect("star_collision");
-		EmitBuff();
+		Kill();
 	}
 		
 	Body::OnColliding(body);
