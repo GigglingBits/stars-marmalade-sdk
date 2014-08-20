@@ -29,6 +29,9 @@
 		<preamble name="earth_12" texture="preamble_01">
 			Watch out! A superfast level!         
 		</preamble>
+		<preamble name="earth_15" texture="preamble_01">
+			A new fun attack power has appeared!         
+		</preamble>
 		<!--
 		 <preamble name="earth_2" file="stories/intro.mp4">
 		 Catch all nuggets to get max points.
@@ -918,67 +921,71 @@
 				<line map="       M      " />
 			</spritesequence>
 		</level>
-		<level name="earth_15" width="12.0" height="12.0" dustrequirement="1000">
+		<level name="earth_15" width="12.0" height="12.0" dustrequirement="1700">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
 				<def id="m" body="nugget_03" magnetprobability="0.0" />
 				<def id="M" body="nugget_04" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
-				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
+				<def id="c" body="bird" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.1" />
+				<def id="b" body="bird_screecher" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.1"/>
+				<def id="d" body="bird_ripper" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.1" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
+				<line map="      c" />
+				<line map=" b     " />
 				<line map="       " />
 				<line map="       " />
+				<line map="    d  " />
+				<line map="       " />
+				<line map="c      " />
+				<line map="       " />
+				<line map="   b   " />
+				<line map="       " />
+				<line map="      c" />
+				<line map="       " />
+				<line map="   d   " />
 				<line map="       " />
 				<line map="       " />
+				<line map="b      " />
 				<line map="       " />
 				<line map="       " />
+				<line map="     d " />
+				<line map="       " />
+				<line map=" b     " />
+				<line map="       " />
+				<line map="      c" />
+				<line map="       " />
+				<line map="   d   " />
 				<line map="       " />
 				<line map="       " />
+				<line map="c      " />
 				<line map="       " />
 				<line map="       " />
+				<line map="    d  " />
 				<line map="       " />
 				<line map="       " />
+				<line map="  b    " />
 				<line map="       " />
 				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="  mNm  " />
+				<line map="M nNn  " />
+				<line map="  mNm  " />
+				<line map="  nNn  " />
+				<line map="  mNm M" />
+				<line map="  nNn  " />
+				<line map="  mNm  " />
+				<line map="M nNn  " />
+				<line map="  mNm  " />
+				<line map="  nNn  " />
+				<line map="  mNm M" />
+				<line map="  nNn  " />
+				<line map="  mNm  " />
+				<line map="M nNn  " />
+				<line map="  mNm  " />
+				<line map="  nNn  " />
+				<line map="  mNm M" />
+				<line map="  nNn  " />
 			</spritesequence>
 		</level>
 		<level name="earth_16" width="12.0" height="12.0" dustrequirement="1000">
@@ -987,11 +994,16 @@
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
 				<def id="m" body="nugget_03" magnetprobability="0.0" />
 				<def id="M" body="nugget_04" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
-				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
+				<def id="c" body="bird" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.2" />
+				<def id="b" body="bird_screecher" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.2"/>
+				<def id="d" body="bird_ripper" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.2" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
 				<line map="       " />
 				<line map="       " />
 				<line map="       " />
