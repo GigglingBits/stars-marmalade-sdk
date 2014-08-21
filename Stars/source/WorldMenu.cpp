@@ -21,8 +21,10 @@ WorldMenu::WorldMenu(LevelIterator::WorldId world) :
 WorldMenu::~WorldMenu() {
 	for (int i = 0; i < (sizeof(m_apxButtonPlanetTextures)/sizeof(m_apxButtonPlanetTextures[0])); i++) {
 		if (m_apxButtonPlanetTextures[i]) {
-			delete m_apxButtonPlanetTextures[i];
-			m_apxButtonPlanetTextures[i] = NULL;
+			if (m_apxButtonPlanetTextures[i]) {
+				delete m_apxButtonPlanetTextures[i];
+				m_apxButtonPlanetTextures[i] = NULL;
+			}
 		}
 	}
 	
