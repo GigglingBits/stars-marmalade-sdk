@@ -36,7 +36,7 @@
 			Watch out! A superfast level!         
 		</preamble>
 		<preamble name="earth_18" texture="preamble_01">
-			The last level! Fight the evil birds!        
+		 	Final level! Fight the last raging birds!   
 		</preamble>
 		<!--
 		 <preamble name="earth_2" file="stories/intro.mp4">
@@ -1146,67 +1146,93 @@
 				<line map="       " />
 			</spritesequence>
 		</level>
-		<level name="earth_18" width="12.0" height="12.0" dustrequirement="1000">
+		<level name="earth_18" width="15.0" height="15.0" dustrequirement="2500">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
 				<def id="m" body="nugget_03" magnetprobability="0.0" />
 				<def id="M" body="nugget_04" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
-				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
+				<def id="c" body="bird" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3" />
+				<def id="b" body="bird_screecher" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3"/>
+				<def id="d" body="bird_ripper" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3" />
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2">
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="              " />
+				<line map="      nnnnnn  " />
+				<line map="    nnnnnnnnn " />
+				<line map="   nnnnnnnnnn " />
+				<line map=" nnnnnnnnnnn  " />
+				<line map="nnnnnnnnnn    " />
+				<line map=" nnnnnnnnnnn  " />
+				<line map="   nnnnnnnnnn " />
+				<line map="    nnnnnnnnn " />
+				<line map="      nnnnnn  " />
 			</spritesequence>
 		</level>
 		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
