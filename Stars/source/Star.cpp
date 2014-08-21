@@ -41,8 +41,8 @@ const char* Star::TypeName() {
 }
 
 void Star::Initialize() {
-	EndShield();
-	EndMagnet();
+	EndShield(true);
+	EndMagnet(true);
 }
 
 void Star::AutoOrientTexture(bool allow) {
@@ -176,10 +176,10 @@ void Star::BeginShield(uint32 duration) {
 	}
 }
 
-void Star::EndShield() {
+void Star::EndShield(bool immediate) {
 	m_uiShieldDuration = 0;
 	if (Body* shield = GetChild("shield")) {
-		shield->SetTextureFrame("burst");
+		shield->SetTextureFrame(immediate ? "no-shield" : "burst");
         shield->EnableCollisions(false);
 	}
 }
@@ -196,7 +196,7 @@ void Star::BeginMagnet(uint32 duration) {
 	}
 }
 
-void Star::EndMagnet() {
+void Star::EndMagnet(bool immediate) {
 	m_uiMagnetDuration = 0;
 	if (Body* field = GetChild("magnet")) {
 		field->SetTextureFrame("off");

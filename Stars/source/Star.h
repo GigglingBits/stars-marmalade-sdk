@@ -63,11 +63,11 @@ public:
 	void Passify();
 	
 	void BeginShield(uint32 duration);
-	void EndShield();
+	void EndShield(bool immediate = false);
 	bool HasShield();
 	
 	void BeginMagnet(uint32 duration);
-	void EndMagnet();
+	void EndMagnet(bool immediate = false);
 	bool HasMagnet();
 	
 	bool IsFollowingPath();
