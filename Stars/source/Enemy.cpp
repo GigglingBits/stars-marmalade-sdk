@@ -25,7 +25,7 @@ void Enemy::UnregisterSoftsopt(const std::string& childid) {
 }
 
 void Enemy::KnockOut() {
-	if (!m_bKnockedOut) {
+	if (m_bKnockedOut) {
 		return;
 	}
 	
