@@ -165,6 +165,8 @@ bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 		if (spAnimation* anim = spSkeletonData_findAnimation(m_pxSkeletonData, name.c_str())) {
 			// note: using track index 0; assuming that we are not usng multiple tracks
 			if (spAnimationState_setAnimation(m_pxAnimationState, 0, anim, true)) {
+				// moving sekelton into new pose
+				spAnimationState_apply(m_pxAnimationState, m_pxSkeleton);
 				return true;
 			} else {
 				IwAssertMsg(MYAPP, false, ("Unable to set animation '%s'", name.c_str()));
@@ -264,6 +266,13 @@ void SpineAnimation::Update(uint32 timestep) {
 		if (m_pxAnimationState) {
 			spAnimationState_update(m_pxAnimationState, seconds);
 			spAnimationState_apply(m_pxAnimationState, m_pxSkeleton);
+			
+			// if animation change was requested by the animation
+			if (!m_sNextAnimation.empty()) {
+				SetAnimation(m_sNextAnimation, 0.0f);
+				m_sNextAnimation.clear();
+			}
+
 			spSkeleton_updateWorldTransform(m_pxSkeleton);
 		}
 	}
@@ -495,6 +504,6 @@ void SpineAnimation::CustomEventHandler(const SpineAnimation& sender, const Spin
 	
 	if (!args.type.compare("animation")) {
 		IwAssertMsg(MYAPP, !args.string_param.empty(), ("Cannot swith to animation with empty name!"));
-		SetAnimation(args.string_param);
+		m_sNextAnimation = args.string_param;
 	}
 }

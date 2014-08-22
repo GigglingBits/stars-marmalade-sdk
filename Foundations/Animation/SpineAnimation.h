@@ -22,6 +22,8 @@ private:
 	CIwFVec2 m_xSkeletonAABBLL;		// AABB of the original skeleton in starting pose (lower left corner)
 	CIwFVec2 m_xSkeletonAABBUR;		// AABB of the original skeleton in starting pose (upper right corner)
 		
+	std::string m_sNextAnimation;
+	
 public:
 	SpineAnimation();
 	virtual ~SpineAnimation();
