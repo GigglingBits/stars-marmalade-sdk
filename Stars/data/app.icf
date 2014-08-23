@@ -3,7 +3,7 @@
 ####################################################
 showstats=0
 showshapes=0
-unlockall=1
+unlockall=0
 
 resourceheapsize=20		# in megabytes
 

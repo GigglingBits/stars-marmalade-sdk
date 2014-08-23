@@ -80,19 +80,21 @@ void WriteAndShowLog(const std::string& message, bool clear = false) {
 		s_Messages.clear();
 	}
 
-	if (!Configuration::GetInstance().ShowStats) {
-		return;
+	if (!message.empty()) {
+		if (!Configuration::GetInstance().ShowStats) {
+			if (s_Messages.empty()) {
+				s_Messages = "loading";
+			}
+			s_Messages += ".";
+		} else {
+			std::ostringstream oss;
+			oss << s_Messages << message << std::endl;
+			s_Messages = oss.str();
+		}
 	}
 	
-	if (!message.empty()) {
-		std::ostringstream oss;
-		oss << s_Messages << message << std::endl;
-		s_Messages = oss.str();
-		
-		IwGxPrintString(50, 50, s_Messages.c_str());
-
-		UpdateScreen();
-	}
+	IwGxPrintString(50, 50, s_Messages.c_str());
+	UpdateScreen();
 }
 
 void PrintHeader() {
@@ -110,7 +112,7 @@ void PrintHeader() {
 	oss << "SDK:           " << MARMALADE_VERSION_STRING_FULL << std::endl;
 	oss << "Locale:        " << s3eDeviceGetString(S3E_DEVICE_LOCALE) << std::endl;
 	oss << "*************************************************************";
-	WriteAndShowLog(oss.str());
+	WriteAndShowLog(oss.str(), true);
 }
 
 void Initialize() {
@@ -127,7 +129,7 @@ void Initialize() {
 		pMat->SetAlphaMode(CIwMaterial::ALPHA_BLEND);
 		pMat->SetBlendMode(CIwMaterial::BLEND_BLEND);
 		
-		IwGxSetColClear(0x20, 0x20, 0x20, 0x00);
+		IwGxSetColClear(0x00, 0x00, 0x00, 0xff);
 	}
 	DeviceInfo::Initialize();
 		
