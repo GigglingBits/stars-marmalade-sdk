@@ -26,6 +26,12 @@ public:
 	
 	typedef std::map<BuffType, int> BuffContainer;
 
+	struct EnemyRef {
+		std::string BodyId;
+		float Distance;
+	};
+	typedef std::list<EnemyRef> EnemyRefs;
+
 private:
 	World m_xWorld;
 	CIwFVec2 m_xWorldSize;

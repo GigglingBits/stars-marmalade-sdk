@@ -450,17 +450,41 @@ void GameFoundation::ActivateShootBuff() {
 	m_uiShootBuffTimer	= Configuration::GetInstance().BuffShootDuration;
 	m_xShootBuffCurtain.Close();
 
-	int count = Configuration::GetInstance().BuffShootCount;
+	if (!m_pxStar) {
+		return;
+	}
+	
+	// find all enemies and their distances to star
+	EnemyRefs enemies;
 	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		if (it->second) {
 			if (dynamic_cast<Enemy*>(it->second)) {
-				m_xShootSprites.push_back((it->first));
-				count--;
-				if (count <= 0) {
-					break;
-				}
+				EnemyRef enemyref;
+				enemyref.BodyId = it->first;
+				enemyref.Distance = (it->second->GetPosition() - m_pxStar->GetPosition()).GetLength();
+				enemies.push_back(enemyref);
 			}
 		}
+	}
+		
+	// remove farest enemies
+	while (enemies.size() > Configuration::GetInstance().BuffShootCount) {
+		EnemyRefs::iterator eraseit = enemies.end();
+		float distance = 0.0f;
+		for (EnemyRefs::iterator it = enemies.begin(); it != enemies.end(); it++) {
+			if (it->Distance > distance) {
+				distance = it->Distance;
+				eraseit = it;
+			}
+		}
+		if (eraseit != enemies.end()) {
+			enemies.erase(eraseit);
+		}
+	}
+
+	// add remaining enemies to shoot list
+	for (EnemyRefs::iterator it = enemies.begin(); it != enemies.end(); it++) {
+		m_xShootSprites.push_back(it->BodyId);
 	}
 }
 
