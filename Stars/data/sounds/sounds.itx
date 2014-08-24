@@ -83,7 +83,7 @@ CIwSoundSpec
 {
 	name		"Screech"
 	data		"screech"
-	vol 		0.8
+	vol 		0.6
 	pitchMin	1.00
 	pitchMax	1.2
 }
@@ -92,7 +92,7 @@ CIwSoundSpec
 {
 	name		"Claws"
 	data		"claws"
-	vol 		0.8
+	vol 		0.2
 	pitchMin	1.00
 	pitchMax	1.2
 }

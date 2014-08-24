@@ -1,5 +1,5 @@
 {
-"skeleton": { "spine": "1.9.15", "hash": "Y2Lql5wKOfD1DnM0Tx0kIU+6c6Q", "width": 597.58, "height": 405.65 },
+"skeleton": { "spine": "1.9.15", "hash": "xiLedjlE2co0BnrkpWufShinK/Y", "width": 737.39, "height": 540.47 },
 "bones": [
 	{ "name": "Template" },
 	{ "name": "Body", "parent": "Template", "x": 52.17, "y": 248.86 },
@@ -41,7 +41,6 @@
 	{ "name": "blue-feathers-02", "bone": "feather02", "attachment": "blue-feathers-02" },
 	{ "name": "blue-feathers-03", "bone": "feather03", "attachment": "blue-feathers-03" },
 	{ "name": "blue-feathers-04", "bone": "feather04", "attachment": "blue-feathers-04" },
-	{ "name": "aabb02", "bone": "Template" },
 	{ "name": "slice", "bone": "slice", "attachment": "slice" }
 ],
 "skins": {
@@ -82,12 +81,6 @@
 		"blue-feathers-04": {
 			"blue-feathers-04": { "x": 76.31, "y": -0.45, "rotation": -54.28, "width": 132, "height": 189 }
 		},
-		"aabb02": {
-			"aabb02": {
-				"type": "boundingbox",
-				"vertices": [ -35.24411, 3.8743286, 134.5079, -62.99764, 329.97986, 48.88432, 341.55396, 214.77838, 251.53378, 276.50638, 205.2378, 106.75435, 99.78585, 51.45636, -18.526154, 63.03032 ]
-			}
-		},
 		"bigbluebird-beak-under": {
 			"bigbluebird-beak-02": { "x": 26.33, "y": 0.93, "scaleX": 0.678, "scaleY": 0.678, "rotation": 129.45, "width": 101, "height": 92 },
 			"bigbluebird-beak-hurt-02": { "x": 38.18, "y": 18.41, "scaleX": 0.403, "scaleY": 0.403, "rotation": 71.55, "width": 194, "height": 181 }
@@ -115,39 +108,12 @@
 "animations": {
 	"attack": {
 		"slots": {
-			"bigbluebird-beak-under": {
-				"attachment": [
-					{ "time": 0, "name": "bigbluebird-beak-02" },
-					{ "time": 1.3333, "name": "bigbluebird-beak-02" }
-				]
-			},
-			"blue-feathers-02": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.3333, "name": null }
-				]
-			},
 			"bigbluebird-claws": {
 				"attachment": [
 					{ "time": 0.3666, "name": "bigbluebird-claws-attack" },
-					{ "time": 0.8333, "name": "bigbluebird-claws-attack" },
-					{ "time": 1.3333, "name": "bigbluebird-claws" }
-				]
-			},
-			"bigbluebird-wing-01": {
-				"attachment": [
-					{ "time": 0, "name": "bigbluebird-wing-02" },
-					{ "time": 0.0666, "name": "bigbluebird-wing-03" },
-					{ "time": 0.1666, "name": "bigbluebird-wing-02" },
-					{ "time": 0.2333, "name": "bigbluebird-wing-01" },
-					{ "time": 1.3, "name": "bigbluebird-wing-01" },
-					{ "time": 1.3333, "name": "bigbluebird-wing-02" }
-				]
-			},
-			"bigbluebird-body-detail": {
-				"attachment": [
-					{ "time": 0.5, "name": null },
-					{ "time": 1.3333, "name": "bigbluebird-body-detail" }
+					{ "time": 0.7, "name": "bigbluebird-claws-attack" },
+					{ "time": 1.1, "name": "bigbluebird-claws-attack" },
+					{ "time": 1.5, "name": "bigbluebird-claws" }
 				]
 			},
 			"blue-feathers-01": {
@@ -156,7 +122,34 @@
 					{ "time": 1.3333, "name": null }
 				]
 			},
+			"bigbluebird-beak-under": {
+				"attachment": [
+					{ "time": 0, "name": "bigbluebird-beak-02" },
+					{ "time": 1.3333, "name": "bigbluebird-beak-02" }
+				]
+			},
+			"bigbluebird-body-detail": {
+				"attachment": [
+					{ "time": 0.5, "name": null },
+					{ "time": 1.5, "name": "bigbluebird-body-detail" }
+				]
+			},
 			"blue-feathers-03": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.3333, "name": null }
+				]
+			},
+			"bigbluebird-wing-01": {
+				"attachment": [
+					{ "time": 0, "name": "bigbluebird-wing-02" },
+					{ "time": 0.0666, "name": "bigbluebird-wing-03" },
+					{ "time": 0.1666, "name": "bigbluebird-wing-02" },
+					{ "time": 0.2333, "name": "bigbluebird-wing-01" },
+					{ "time": 1.4333, "name": "bigbluebird-wing-01" }
+				]
+			},
+			"blue-feathers-02": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.3333, "name": null }
@@ -167,12 +160,7 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"aabb02": {
-				"attachment": [
-					{ "time": 0.2333, "name": "aabb02" }
-				]
-			},
-			"bigbluebird-hurt-patch": {
+			"blue-feathers-04": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.3333, "name": null }
@@ -187,7 +175,7 @@
 					{ "time": 1.3333, "name": "bigbluebird-eye-open" }
 				]
 			},
-			"blue-feathers-04": {
+			"bigbluebird-hurt-patch": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 1.3333, "name": null }
@@ -243,34 +231,43 @@
 					{ "time": 0.1666, "angle": 316.88 },
 					{ "time": 0.3333, "angle": 6.19 },
 					{ "time": 0.3666, "angle": -16.61 },
-					{ "time": 0.5, "angle": 65.61 },
-					{ "time": 0.6666, "angle": 187.53 },
-					{ "time": 0.8333, "angle": -16.61 },
-					{ "time": 0.9666, "angle": 65.61 },
-					{ "time": 1.1333, "angle": 187.53 },
-					{ "time": 1.3333, "angle": -27.72 }
+					{ "time": 0.4666, "angle": 65.61 },
+					{ "time": 0.5666, "angle": 187.53 },
+					{ "time": 0.7, "angle": -16.61 },
+					{ "time": 0.8333, "angle": 65.61 },
+					{ "time": 0.9666, "angle": 187.53 },
+					{ "time": 1.1, "angle": -16.61 },
+					{ "time": 1.2333, "angle": 65.61 },
+					{ "time": 1.3666, "angle": 187.53 },
+					{ "time": 1.5, "angle": -27.72 }
 				],
 				"translate": [
 					{ "time": 0, "x": 0, "y": 11.99, "curve": "stepped" },
 					{ "time": 0.3333, "x": 0, "y": 11.99 },
 					{ "time": 0.3666, "x": -20, "y": 32.93, "curve": "stepped" },
-					{ "time": 0.5, "x": -20, "y": 32.93 },
-					{ "time": 0.6666, "x": -20, "y": 52.93 },
-					{ "time": 0.8333, "x": -20, "y": 32.93, "curve": "stepped" },
-					{ "time": 0.9666, "x": -20, "y": 32.93 },
-					{ "time": 1.1333, "x": -20, "y": 52.93 },
-					{ "time": 1.3333, "x": 0, "y": 11.99 }
+					{ "time": 0.4666, "x": -20, "y": 32.93 },
+					{ "time": 0.5666, "x": -20, "y": 52.93 },
+					{ "time": 0.7, "x": -20, "y": 32.93, "curve": "stepped" },
+					{ "time": 0.8333, "x": -20, "y": 32.93 },
+					{ "time": 0.9666, "x": -20, "y": 52.93 },
+					{ "time": 1.1, "x": -20, "y": 32.93, "curve": "stepped" },
+					{ "time": 1.2333, "x": -20, "y": 32.93 },
+					{ "time": 1.3666, "x": -20, "y": 52.93 },
+					{ "time": 1.5, "x": 0, "y": 11.99 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1.209, "y": 1.261 },
 					{ "time": 0.1666, "x": 1.36, "y": 1.402 },
 					{ "time": 0.3666, "x": 1.369, "y": 1.441 },
-					{ "time": 0.5, "x": 1.47, "y": 1.517 },
-					{ "time": 0.6666, "x": 3.036, "y": 3.143 },
-					{ "time": 0.8333, "x": 1.369, "y": 1.441 },
-					{ "time": 0.9666, "x": 1.47, "y": 1.517 },
-					{ "time": 1.1333, "x": 3.036, "y": 3.143 },
-					{ "time": 1.3333, "x": 1.209, "y": 1.261 }
+					{ "time": 0.4666, "x": 1.47, "y": 1.517 },
+					{ "time": 0.5666, "x": 3.036, "y": 3.143 },
+					{ "time": 0.7, "x": 1.369, "y": 1.441 },
+					{ "time": 0.8333, "x": 1.47, "y": 1.517 },
+					{ "time": 0.9666, "x": 3.036, "y": 3.143 },
+					{ "time": 1.1, "x": 1.369, "y": 1.441 },
+					{ "time": 1.2333, "x": 1.47, "y": 1.517 },
+					{ "time": 1.3666, "x": 3.036, "y": 3.143 },
+					{ "time": 1.5, "x": 1.209, "y": 1.261 }
 				]
 			},
 			"Wings": {
@@ -279,13 +276,12 @@
 				],
 				"translate": [
 					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 1.3, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 1.3333, "x": 0, "y": 0 }
+					{ "time": 1.4333, "x": 0, "y": 0 }
 				],
 				"scale": [
 					{ "time": 0.2333, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 1.2666, "x": 1, "y": 1 },
-					{ "time": 1.3, "x": 0.895, "y": 1.028 }
+					{ "time": 1.3333, "x": 1, "y": 1 },
+					{ "time": 1.4333, "x": 0.895, "y": 1.028 }
 				]
 			},
 			"Feathers - details": {
@@ -297,8 +293,8 @@
 					{ "time": 0.6666, "angle": 70.68 },
 					{ "time": 0.8333, "angle": 3.37 },
 					{ "time": 0.9666, "angle": 23.78 },
-					{ "time": 1.1333, "angle": 70.68 },
-					{ "time": 1.3333, "angle": -11.77 }
+					{ "time": 1.4, "angle": 70.68 },
+					{ "time": 1.5, "angle": -11.77 }
 				],
 				"translate": [
 					{ "time": 0, "x": -0.99, "y": 37.99 },
@@ -309,9 +305,9 @@
 					{ "time": 0.6666, "x": 9.59, "y": 23.59 },
 					{ "time": 0.8333, "x": 4.23, "y": 35.75 },
 					{ "time": 0.9666, "x": 4.23, "y": 31.28 },
-					{ "time": 1.1, "x": -17.34, "y": 13.37 },
-					{ "time": 1.1333, "x": 9.59, "y": 23.59 },
-					{ "time": 1.3333, "x": -0.99, "y": 37.99 }
+					{ "time": 1.3666, "x": -17.34, "y": 13.37 },
+					{ "time": 1.4, "x": 9.59, "y": 23.59 },
+					{ "time": 1.5, "x": -0.99, "y": 37.99 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1.037, "y": 1.038 },
@@ -320,8 +316,8 @@
 					{ "time": 0.6666, "x": 0.969, "y": 1.365 },
 					{ "time": 0.8333, "x": 0.804, "y": 1.133 },
 					{ "time": 0.9666, "x": 0.969, "y": 1.077 },
-					{ "time": 1.1333, "x": 0.969, "y": 1.365 },
-					{ "time": 1.3333, "x": 1.037, "y": 1.038 }
+					{ "time": 1.4, "x": 0.969, "y": 1.365 },
+					{ "time": 1.5, "x": 1.037, "y": 1.038 }
 				]
 			},
 			"Template": {
@@ -356,20 +352,27 @@
 			{ "time": 0.1666 }
 		],
 		"events": [
-			{ "time": 0.3333, "name": "custom", "string": "enable claws" },
-			{ "time": 0.6, "name": "sound", "string": "Claws" },
-			{ "time": 1.2333, "name": "custom", "string": "disable claws" },
-			{ "time": 1.3333, "name": "animation", "string": "normal" }
+			{ "time": 0.5333, "name": "sound", "string": "Claws" },
+			{ "time": 0.6, "name": "custom", "string": "enable claws" },
+			{ "time": 0.9333, "name": "sound", "string": "Claws" },
+			{ "time": 1.3, "name": "sound", "string": "Claws" },
+			{ "time": 1.4333, "name": "custom", "string": "disable claws" },
+			{ "time": 1.5, "name": "animation", "string": "normal" }
 		]
 	},
 	"before attack": {
 		"slots": {
+			"blue-feathers-01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"bigbluebird-beak-under": {
 				"attachment": [
 					{ "time": 0, "name": "bigbluebird-beak-02" }
 				]
 			},
-			"blue-feathers-02": {
+			"blue-feathers-03": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -445,12 +448,7 @@
 					{ "time": 6.8333, "name": "bigbluebird-wing-01" }
 				]
 			},
-			"blue-feathers-01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"blue-feathers-03": {
+			"blue-feathers-02": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -460,7 +458,7 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"bigbluebird-hurt-patch": {
+			"blue-feathers-04": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -473,7 +471,7 @@
 					{ "time": 0.8333, "name": "bigbluebird-eye-open" }
 				]
 			},
-			"blue-feathers-04": {
+			"bigbluebird-hurt-patch": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -891,31 +889,13 @@
 	},
 	"hurt": {
 		"slots": {
-			"bigbluebird-beak-under": {
+			"bigbluebird-body": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-02": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigbluebird-wing-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigbluebird-body-detail": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -927,15 +907,34 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
+			"bigbluebird-beak-under": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigbluebird-body-detail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
 			"blue-feathers-03": {
 				"color": [
 					{ "time": 1.8333, "color": "ffffffff" },
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
+			"bigbluebird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"blue-feathers-02": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"slice": {
@@ -943,10 +942,15 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"bigbluebird-hurt-patch": {
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"blue-feathers-04": {
 				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-eye-open": {
@@ -955,16 +959,10 @@
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"bigbluebird-body": {
+			"bigbluebird-hurt-patch": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-04": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-beak-over": {
@@ -1149,31 +1147,13 @@
 	},
 	"hurt_attack": {
 		"slots": {
-			"bigbluebird-beak-under": {
+			"bigbluebird-body": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-02": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigbluebird-wing-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigbluebird-body-detail": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
@@ -1185,15 +1165,34 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
+			"bigbluebird-beak-under": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigbluebird-body-detail": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
 			"blue-feathers-03": {
 				"color": [
 					{ "time": 1.8333, "color": "ffffffff" },
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
+			"bigbluebird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"blue-feathers-02": {
+				"color": [
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"slice": {
@@ -1204,10 +1203,15 @@
 					{ "time": 0.6666, "color": "ffffff00" }
 				]
 			},
-			"bigbluebird-hurt-patch": {
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"blue-feathers-04": {
 				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
+					{ "time": 1.8333, "color": "ffffffff" },
+					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-eye-open": {
@@ -1216,16 +1220,10 @@
 					{ "time": 3, "color": "ffffff00" }
 				]
 			},
-			"bigbluebird-body": {
+			"bigbluebird-hurt-patch": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"blue-feathers-04": {
-				"color": [
-					{ "time": 1.8333, "color": "ffffffff" },
-					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
 			"bigbluebird-beak-over": {
@@ -1424,12 +1422,17 @@
 	},
 	"normal": {
 		"slots": {
+			"blue-feathers-01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"bigbluebird-beak-under": {
 				"attachment": [
 					{ "time": 0, "name": "bigbluebird-beak-02" }
 				]
 			},
-			"blue-feathers-02": {
+			"blue-feathers-03": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -1450,12 +1453,7 @@
 					{ "time": 1.1666, "name": "bigbluebird-wing-01" }
 				]
 			},
-			"blue-feathers-01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"blue-feathers-03": {
+			"blue-feathers-02": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -1465,7 +1463,7 @@
 					{ "time": 0, "name": null }
 				]
 			},
-			"bigbluebird-hurt-patch": {
+			"blue-feathers-04": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -1477,7 +1475,7 @@
 					{ "time": 0.6333, "name": "bigbluebird-eye-closed" }
 				]
 			},
-			"blue-feathers-04": {
+			"bigbluebird-hurt-patch": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]

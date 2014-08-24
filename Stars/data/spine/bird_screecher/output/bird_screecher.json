@@ -1,5 +1,5 @@
 {
-"skeleton": { "spine": "1.9.15", "hash": "VlKFGG3iXcLSLvlUGRSFceftj90", "width": 835.91, "height": 677.66 },
+"skeleton": { "spine": "1.9.15", "hash": "BaHuWvmAO4ULjqxb/jMvSur9pbI", "width": 771.09, "height": 650.15 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "attack", "parent": "root", "length": 155.61, "x": -261.36, "y": 98.94, "rotation": -180 },
@@ -125,10 +125,52 @@
 "animations": {
 	"hurt": {
 		"slots": {
+			"bigredbird-beak-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-body-details": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-claws": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-body": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-beak-02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.1666, "name": null }
+				]
+			},
 			"red-feathers-02": {
 				"color": [
 					{ "time": 1.8333, "color": "ffffffff" },
 					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-attack": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			},
 			"red-feathers-03": {
@@ -143,17 +185,7 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
 			"slice": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"bigredbird-attack": {
 				"attachment": [
 					{ "time": 0, "name": null }
 				]
@@ -164,47 +196,15 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"bigredbird-eye-open": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-beak-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-body-details": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-body": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-wing-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-beak-02": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.1666, "name": null }
 				]
 			}
 		},
@@ -357,10 +357,52 @@
 	},
 	"hurt_attack": {
 		"slots": {
+			"bigredbird-beak-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-wing-01": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-body-details": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-claws": {
+				"color": [
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-body": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.1666, "color": "ffffffff" },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-beak-02": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.1666, "name": null }
+				]
+			},
 			"red-feathers-02": {
 				"color": [
 					{ "time": 1.8333, "color": "ffffffff" },
 					{ "time": 2.1666, "color": "ffffff00" }
+				]
+			},
+			"bigredbird-attack": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			},
 			"red-feathers-03": {
@@ -375,20 +417,10 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
-			"aabb": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
 			"slice": {
 				"color": [
 					{ "time": 0.3333, "color": "ffffffff" },
 					{ "time": 0.6666, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-attack": {
-				"attachment": [
-					{ "time": 0, "name": null }
 				]
 			},
 			"red-feathers-01": {
@@ -397,47 +429,15 @@
 					{ "time": 2.1666, "color": "ffffff00" }
 				]
 			},
+			"aabb": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"bigredbird-eye-open": {
 				"color": [
 					{ "time": 2.1666, "color": "ffffffff" },
 					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-claws": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-beak-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-body-details": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-body": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-wing-01": {
-				"color": [
-					{ "time": 2.1666, "color": "ffffffff" },
-					{ "time": 3, "color": "ffffff00" }
-				]
-			},
-			"bigredbird-beak-02": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.1666, "name": null }
 				]
 			}
 		},
@@ -606,63 +606,9 @@
 	},
 	"normal": {
 		"slots": {
-			"red-feathers-02": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"red-feathers-04": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"slice": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"bigredbird-attack": {
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.3, "name": "bigredbird-attack" }
-				],
-				"color": [
-					{ "time": 1.3, "color": "ffffff00" },
-					{ "time": 1.6, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.5333, "color": "ffffffff" },
-					{ "time": 2.7666, "color": "ffffff00" }
-				]
-			},
-			"red-feathers-01": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"bigredbird-eye-open": {
-				"attachment": [
-					{ "time": 0, "name": "bigredbird-eye-open" },
-					{ "time": 0.3333, "name": "bigredbird-eye-closed" },
-					{ "time": 0.7333, "name": "bigredbird-eye-open" }
-				]
-			},
 			"bigredbird-beak-01": {
 				"attachment": [
 					{ "time": 0, "name": "bigredbird-beak-01" }
-				]
-			},
-			"bigredbird-body-details": {
-				"attachment": [
-					{ "time": 0, "name": "bigredbird-body-details" }
-				]
-			},
-			"red-feathers-03": {
-				"attachment": [
-					{ "time": 0, "name": null }
-				]
-			},
-			"bigredbird-body": {
-				"attachment": [
-					{ "time": 0, "name": "bigredbird-body" }
 				]
 			},
 			"bigredbird-wing-01": {
@@ -677,9 +623,63 @@
 					{ "time": 1.1333, "name": "bigredbird-wing-01" }
 				]
 			},
+			"bigredbird-body-details": {
+				"attachment": [
+					{ "time": 0, "name": "bigredbird-body-details" }
+				]
+			},
+			"bigredbird-body": {
+				"attachment": [
+					{ "time": 0, "name": "bigredbird-body" }
+				]
+			},
 			"bigredbird-beak-02": {
 				"attachment": [
 					{ "time": 0, "name": "bigredbird-beak-02" }
+				]
+			},
+			"red-feathers-02": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"bigredbird-attack": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.3, "name": "bigredbird-attack" }
+				],
+				"color": [
+					{ "time": 1.3, "color": "ffffff00" },
+					{ "time": 1.6, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.2666, "color": "ffffffff" },
+					{ "time": 2.5, "color": "ffffff00" }
+				]
+			},
+			"red-feathers-03": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"red-feathers-04": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"slice": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"red-feathers-01": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"bigredbird-eye-open": {
+				"attachment": [
+					{ "time": 0, "name": "bigredbird-eye-open" },
+					{ "time": 0.3333, "name": "bigredbird-eye-closed" },
+					{ "time": 0.7333, "name": "bigredbird-eye-open" }
 				]
 			}
 		},
@@ -757,10 +757,10 @@
 					{ "time": 0.7333, "angle": 355.16 },
 					{ "time": 0.9, "angle": -0.77, "curve": "stepped" },
 					{ "time": 1.2666, "angle": -0.77 },
-					{ "time": 2.1, "angle": 352.14, "curve": "stepped" },
-					{ "time": 2.2666, "angle": 352.14 },
-					{ "time": 2.6, "angle": 0, "curve": "stepped" },
-					{ "time": 2.7666, "angle": 0 }
+					{ "time": 1.8333, "angle": 352.14, "curve": "stepped" },
+					{ "time": 2, "angle": 352.14 },
+					{ "time": 2.3333, "angle": 0, "curve": "stepped" },
+					{ "time": 2.5, "angle": 0 }
 				],
 				"translate": [
 					{ "time": 0, "x": 0, "y": 0 },
@@ -768,20 +768,20 @@
 					{ "time": 0.7333, "x": 0, "y": -2 },
 					{ "time": 0.9, "x": 0, "y": -0.3, "curve": "stepped" },
 					{ "time": 1.2666, "x": 0, "y": -0.3 },
-					{ "time": 2.1, "x": 0, "y": -2.3, "curve": "stepped" },
-					{ "time": 2.2666, "x": 0, "y": -2.3 },
-					{ "time": 2.6, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 2.7666, "x": 0, "y": 0 }
+					{ "time": 1.8333, "x": 0, "y": -2.3, "curve": "stepped" },
+					{ "time": 2, "x": 0, "y": -2.3 },
+					{ "time": 2.3333, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 2.5, "x": 0, "y": 0 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 },
 					{ "time": 0.3333, "x": 0.999, "y": 1.04 },
 					{ "time": 0.7333, "x": 0.999, "y": 1.004, "curve": "stepped" },
 					{ "time": 1.2666, "x": 0.999, "y": 1.004 },
-					{ "time": 2.1, "x": 1.086, "y": 1.092, "curve": "stepped" },
-					{ "time": 2.2666, "x": 1.086, "y": 1.092 },
-					{ "time": 2.6, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 2.7666, "x": 1, "y": 1 }
+					{ "time": 1.8333, "x": 1.086, "y": 1.092, "curve": "stepped" },
+					{ "time": 2, "x": 1.086, "y": 1.092 },
+					{ "time": 2.3333, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 2.5, "x": 1, "y": 1 }
 				]
 			},
 			"beak/naeb under": {
@@ -791,16 +791,16 @@
 					{ "time": 0.7333, "angle": 46.62 },
 					{ "time": 0.9, "angle": 6.57, "curve": "stepped" },
 					{ "time": 1.2666, "angle": 6.57 },
-					{ "time": 2.1, "angle": 48.44, "curve": "stepped" },
-					{ "time": 2.3, "angle": 48.44 },
-					{ "time": 2.6, "angle": 5.07 }
+					{ "time": 1.8333, "angle": 48.44, "curve": "stepped" },
+					{ "time": 2.0333, "angle": 48.44 },
+					{ "time": 2.3333, "angle": 5.07 }
 				],
 				"translate": [
 					{ "time": 0, "x": -0.79, "y": -0.3 },
 					{ "time": 1.2666, "x": 0, "y": 0 },
-					{ "time": 2.1, "x": -1.04, "y": -8.09, "curve": "stepped" },
-					{ "time": 2.3, "x": -1.04, "y": -8.09 },
-					{ "time": 2.6, "x": -0.79, "y": -0.3 }
+					{ "time": 1.8333, "x": -1.04, "y": -8.09, "curve": "stepped" },
+					{ "time": 2.0333, "x": -1.04, "y": -8.09 },
+					{ "time": 2.3333, "x": -0.79, "y": -0.3 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
@@ -811,9 +811,9 @@
 					{ "time": 0.3333, "x": 1, "y": 1 },
 					{ "time": 0.7333, "x": 0.934, "y": 1.25, "curve": "stepped" },
 					{ "time": 1.2666, "x": 0.934, "y": 1.25 },
-					{ "time": 2.1, "x": 1, "y": 0.902, "curve": "stepped" },
-					{ "time": 2.2666, "x": 1, "y": 0.902 },
-					{ "time": 2.5666, "x": 1, "y": 1 }
+					{ "time": 1.8333, "x": 1, "y": 0.902, "curve": "stepped" },
+					{ "time": 2, "x": 1, "y": 0.902 },
+					{ "time": 2.3, "x": 1, "y": 1 }
 				]
 			},
 			"attack": {
@@ -825,7 +825,7 @@
 						"y": -2.33,
 						"curve": [ 0.121, 0.91, 0.75, 1 ]
 					},
-					{ "time": 2.7666, "x": -180.09, "y": 0.85 }
+					{ "time": 2.5, "x": -180.09, "y": 0.85 }
 				],
 				"scale": [
 					{
@@ -835,20 +835,19 @@
 						"curve": [ 0.191, 0.5, 0.614, 0.82 ]
 					},
 					{
-						"time": 2.6,
+						"time": 2.3333,
 						"x": 3.331,
 						"y": 2.346,
 						"curve": [ 0.338, 0.37, 0.673, 0.7 ]
 					},
-					{ "time": 2.7666, "x": 3.303, "y": 2.233 }
+					{ "time": 2.5, "x": 3.303, "y": 2.233 }
 				]
 			}
 		},
 		"events": [
 			{ "time": 1.3333, "name": "sound", "string": "Screech" },
 			{ "time": 1.6666, "name": "custom", "string": "enable screech" },
-			{ "time": 2.5, "name": "custom", "string": "disable screech" },
-			{ "time": 2.7666, "name": "animation", "string": "normal" }
+			{ "time": 2.3333, "name": "custom", "string": "disable screech" }
 		]
 	}
 }
