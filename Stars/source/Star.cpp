@@ -68,7 +68,6 @@ void Star::OnChildColliding(Body& child, Body& body) {
 	}
 }
 
-
 void Star::OnUpdate(const FrameData& frame) {
 	CompositeBody::OnUpdate(frame);
 	GetMotionState().Update(frame.GetSimulatedDurationMs());
