@@ -83,16 +83,18 @@ void Star::RetractingState::Collide(Body& body) {
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
-		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
+	} else if (!m_rxContext.HasShield()) {
+		if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
+			SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
-		DustEventArgs args;
-		args.eventtype = eDustEventTypeRollback;
-		args.position = body.GetPosition();
-		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+			DustEventArgs args;
+			args.eventtype = eDustEventTypeRollback;
+			args.position = body.GetPosition();
+			m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
-		m_rxContext.m_xPath.ClearPath();
-		m_rxContext.SetState(new FallingState(m_rxContext));
+			m_rxContext.m_xPath.ClearPath();
+			m_rxContext.SetState(new FallingState(m_rxContext));
+		}
 	} else {
 		; // unhandled collision....
 	}
@@ -147,17 +149,19 @@ void Star::FollowState::Collide(Body& body) {
 		args.amount = nugget->GetDustAmount();
 		args.position = nugget->GetPosition();
 		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-	} else if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
-		m_rxContext.SetTextureFrame("hurt");
-		SoundEngine::GetInstance().PlaySoundEffect("Ouch");
+	} else if (!m_rxContext.HasShield()) {
+		if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
+			m_rxContext.SetTextureFrame("hurt");
+			SoundEngine::GetInstance().PlaySoundEffect("Ouch");
 		
-		DustEventArgs args;
-		args.eventtype = eDustEventTypeRollback;
-		args.position = body.GetPosition();
-		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+			DustEventArgs args;
+			args.eventtype = eDustEventTypeRollback;
+			args.position = body.GetPosition();
+			m_rxContext.DustEvent.Invoke(m_rxContext, args);
 		
-		m_rxContext.m_xPath.ClearPath();
-		m_rxContext.SetState(new FallingState(m_rxContext));
+			m_rxContext.m_xPath.ClearPath();
+			m_rxContext.SetState(new FallingState(m_rxContext));
+		}
 	} else {
 		; // unhandled collision....
 	}

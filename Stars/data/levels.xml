@@ -1358,25 +1358,45 @@
 				<line map="        " />
 			</spritesequence>
 		</level>
-		
 		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100">
+			<!-- this level is used for testing various game mechanics -->
 			<spritedefs>
+				<!-- guarantuued buffs -->
+				<def id="1" body="nugget_01" shieldprobability="1.0" shootprobability="0.0" magnetprobability="0.0" />
+				<def id="2" body="nugget_01" shieldprobability="0.0" shootprobability="1.0" magnetprobability="0.0" />
+				<def id="3" body="nugget_01" shieldprobability="0.0" shootprobability="0.0" magnetprobability="1.0" />
+				<!-- simulation stuff -->
 				<def id="n" body="nugget_01" />
-				<def id="1" body="bird_screecher" />
-				<def id="2" body="bird" />
+				<def id="N" body="nugget_02" />
+				<def id="m" body="nugget_03" />
+				<def id="M" body="nugget_04" />
+				<def id="c" body="bird" />
+				<def id="b" body="bird_screecher" />
+				<def id="d" body="bird_ripper" />
 			</spritedefs>
-			<spritesequence delay="200" speed="2">
+			<spritesequence delay="800" speed="2.5">
+				<line map="    1   " />
+				<line map="    2   " />
+				<line map="    3   " />
+				<line map="        " />
+				<line map="        " />
 				<line map="n  n    " />
-				<line map="n   1   " />
+				<line map="n   c d " />
 				<line map=" n    n " />
+				<line map="        " />
+				<line map="        " />
 				<line map="  nn    " />
 				<line map="   n    " />
 				<line map="   nn n " />
 				<line map=" n nnn  " />
 				<line map="      n " />
-				<line map="   n   n" />
+				<line map="   n  dn" />
 				<line map="        " />
-				<line map=" 21212  " />
+				<line map="        " />
+				<line map="        " />
+				<line map=" bcbcb  " />
+				<line map="        " />
+				<line map="        " />
 				<line map="        " />
 				<line map="   n n  " />
 			</spritesequence>
