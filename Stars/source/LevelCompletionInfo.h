@@ -29,9 +29,11 @@ private:
 	int m_iBuffsDeployed;
 	int m_iBuffsUsed;
 
+	int m_iLifesLeft;
+	
 	// scores
 	bool m_bEvaluated;
-	std::vector<Points> m_xPoints;
+	std::vector<Points> m_xIndividualPoints;
 	float m_fTotalPoints;
 
 public:
@@ -40,6 +42,8 @@ public:
 	void SetDustFillMax(float f);
 	void SetDustFillAmount(float f);
 
+	void SetNumberOfLifesLeft(int lives);
+	
 	void IncrementPathsStarted();
 	void IncrementPathsAborted();
 	
@@ -56,10 +60,11 @@ public:
 	void Evaluate();
 
 public:
-	void GetPoints(std::vector<Points>& points) const;
+	void GetIndividualPoints(std::vector<Points>& points) const;
 	float GetTotalPoints() const;
+
 	int GetAchievedStars() const;
-	bool IsAchieved() const;
+	bool IsLevelAchieved() const;
 	
 private:
 	void AddPoints(const std::string& text, float amount);

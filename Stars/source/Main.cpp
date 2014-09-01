@@ -161,8 +161,10 @@ void Initialize() {
 	LocationServices::Initialize();
 	World::SetDefaultGravity(0.0f, Configuration::GetInstance().Gravity);
 
-	WriteAndShowLog("Loading resources...");
+	WriteAndShowLog("Loading fonts...");
 	CreateFonts(ResourceManager::GetInstance());
+
+	WriteAndShowLog("Loading images and sounds...");
 	ResourceManager::GetInstance().LoadPermament("base.group");
 	
 	std::srand((unsigned int)s3eTimerGetUST());

@@ -21,6 +21,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xPausePanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
+	m_bIsAborting(false),
 	m_iStarReviveDelay(-1),
 	m_xBackgroundClouds(m_xGame),
 	m_xBannerRect(0, 0, 0, 0) {
@@ -38,27 +39,8 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
 	
 	m_xInteractor.Disable();
-		
-	// configure the start
-	TimerEventArgs args;
-	args.eventId = eTimerEventIdShowBanner;
-	args.bannerText = "Ready?";
-	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
-		
-	args.eventId = eTimerEventIdShowBanner;
-	args.bannerText = "";
-	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
-	
-	args.eventId = eTimerEventIdEnableUserInput;
-	m_xEventTimer.Enqueue(0, args);
-		
-	args.eventId = eTimerEventIdShowBanner;
-	args.bannerText = "Go!";
-	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
-		
-	args.eventId = eTimerEventIdHideBanner;
-	args.bannerText = "";
-	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
+
+	ScheduleBegin();
 }
 
 Level::~Level() {
@@ -81,26 +63,15 @@ void Level::Initialize() {
 	m_xPausePanel.Initialize();
 	m_xPausePanel.GetMainButton().SetTexture(FactoryManager::GetTextureFactory().Create("button_toggle_hud"));
 
+	m_xBackgroundStars.Initialize();
+
 	m_xPath.InitializeTexture();
 	m_xHud.Initialize();
-	m_xBackgroundStars.Initialize();
-		
+	m_xHud.GetLives().SetNumber(GAME_STAR_LIVES);
+	
 	CreateStar();
 	
-	// schedule the finish of the level
-	// (assuming that it has been populated by the time this is called)
-	TimerEventArgs args;
-	args.eventId = eTimerEventIdSettle;
-	m_xEventTimer.Enqueue(0, args);
-
-	args.eventId = eTimerEventIdFinish;
-	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
-
-	args.eventId = eTimerEventIdDisableUserInput;
-	m_xEventTimer.Enqueue(0, args);
-	
-	args.eventId = eTimerEventIdNoOp;
-	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
+	ScheduleFinish();
 }
 
 const std::string& Level::GetResourceGroupName() {
@@ -183,7 +154,7 @@ bool Level::IsPaused() {
 	return m_bIsPaused;
 }
 
-void Level::ReviveStar(uint16 frametime) {
+bool Level::ReviveStar(uint16 frametime) {
 	if (m_iStarReviveDelay >= 0) {
 		// count down
 		m_iStarReviveDelay -= frametime;
@@ -194,9 +165,31 @@ void Level::ReviveStar(uint16 frametime) {
 			m_iStarReviveDelay = -1;
 		}
 	} else if (!m_xGame.GetStar()) {
-		// star not present; start the countdown
-		m_iStarReviveDelay = Configuration::GetInstance().StarBirthDelay;
+		// star not present
+		// must just have died;
+		// start the countdown
+		long lives = m_xHud.GetLives().GetNumber() - 1;
+		m_xHud.GetLives().SetNumber(lives);
+		if (lives > 0) {
+			// got more lives... start count-down
+			m_iStarReviveDelay = Configuration::GetInstance().StarBirthDelay;
+		} else {
+			// no lives left... refuse to revive
+			return false;
+		}
 	}
+	return true;
+}
+
+void Level::AbortLevel() {
+	m_xGame.ClearDust();
+	m_xEventTimer.Clear(true);
+	ScheduleFinish(false);
+	m_bIsAborting = true;
+}
+
+bool Level::IsAborting() {
+	return m_bIsAborting;
 }
 
 void Level::HideStar() {
@@ -222,6 +215,18 @@ void Level::SetStarPath(const std::vector<CIwFVec2>& path) {
 		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
 		star->FollowPath(path);
 		m_xCompletionInfo.IncrementPathsStarted();
+	}
+}
+
+void Level::CancelStarPath() {
+	IW_CALLSTACK_SELF;
+	if (Star* star = m_xGame.GetStar()) {
+		IwAssertMsg(MYAPP, star->IsDragging(), ("Star is not being dragged. Something's wrong!"));
+		if (star->IsFollowingPath()) {
+			std::vector<CIwFVec2> path;
+			path.push_back(star->GetPosition());
+			star->FollowPath(path);
+		}
 	}
 }
 
@@ -259,7 +264,7 @@ CIwFVec2 Level::GetStarHidePosition() {
 	const float offset = 6.0f;
 	
 	CIwFVec2 pos(-offset, m_xWorldSize.y / 2.0f);
-	if (m_xCompletionInfo.IsAchieved()) {
+	if (m_xCompletionInfo.IsLevelAchieved()) {
 		pos.x = m_xWorldSize.x + offset;
 	}
 	return pos;
@@ -276,8 +281,8 @@ void Level::HideBannerText() {
 }
 
 void Level::ShowStatsBanner() {
-	ShowBannerText(m_xCompletionInfo.IsAchieved() ? "Well done!" : "Try again...");
-	if (m_xCompletionInfo.IsAchieved()) {
+	ShowBannerText(m_xCompletionInfo.IsLevelAchieved() ? "Well done!" : "Try again...");
+	if (m_xCompletionInfo.IsLevelAchieved()) {
 		SoundEngine::GetInstance().PlaySoundEffect("level_win");
 	}
 }
@@ -289,9 +294,59 @@ CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 	return CIwFVec2(soundpixelpos.x / (float)centeroffset.x, soundpixelpos.y / (float)centeroffset.y);
 }
 
+void Level::ScheduleBegin() {
+	// configure the start
+	TimerEventArgs args;
+	args.eventId = eTimerEventIdShowBanner;
+	args.bannerText = "Ready?";
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
+	
+	args.eventId = eTimerEventIdShowBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
+	
+	args.eventId = eTimerEventIdEnableUserInput;
+	m_xEventTimer.Enqueue(0, args);
+	
+	args.eventId = eTimerEventIdShowBanner;
+	args.bannerText = "Go!";
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_LEADIN, args);
+	
+	args.eventId = eTimerEventIdHideBanner;
+	args.bannerText = "";
+	m_xEventTimer.Enqueue(LEVEL_START_BANNER_DURATION, args);
+}
+
+void Level::ScheduleFinish(bool settle) {
+	// schedule the finish of the level
+	// (assuming that it has been populated by the time this is called)
+	TimerEventArgs args;
+	
+	if (settle) {
+		args.eventId = eTimerEventIdSettle;
+		m_xEventTimer.Enqueue(0, args);
+	}
+		
+	args.eventId = eTimerEventIdFinish;
+	m_xEventTimer.Enqueue(LEVEL_COMPLETION_DELAY, args);
+	
+	args.eventId = eTimerEventIdDisableUserInput;
+	m_xEventTimer.Enqueue(0, args);
+	
+	args.eventId = eTimerEventIdNoOp;
+	m_xEventTimer.Enqueue(LEVEL_LEADOUT_TIME, args);
+}
+
+void Level::ResetPlayerInteraction() {
+	m_xHud.GetBuffPanel().ClearBuffs();
+	m_xPath.ClearPath();
+	CancelStarPath();
+}
+
 void Level::Conclude() {
 	m_xCompletionInfo.SetDustFillAmount(m_xGame.GetDustFillAmount());
 	m_xCompletionInfo.SetDustFillMax(m_xGame.GetDustFillMax());
+	m_xCompletionInfo.SetNumberOfLifesLeft(m_xHud.GetLives().GetNumber());
 	m_xCompletionInfo.Evaluate();
 }
 
@@ -339,7 +394,10 @@ void Level::OnUpdate(const FrameData& frame) {
 	}
 
 	// revive star, if it has died
-	ReviveStar(frame.GetSimulatedDurationMs());
+	if (!IsAborting() && !ReviveStar(frame.GetSimulatedDurationMs())) {
+		// revive needed, but failed -> game over
+		AbortLevel();
+	}
 	
 	// update game logic (create new, remove dead, etc...)
 	m_xGame.Update(frame);
@@ -388,6 +446,10 @@ void Level::QuakeImpactEventHandler(const GameFoundation& sender, const GameFoun
 }
 
 void Level::SpriteAddedEventHandler(const GameFoundation& sender, const Sprite& args) {
+	if (IsAborting()) {
+		return;
+	}
+
 	if (dynamic_cast<const Nugget*>(&args)) {
 		m_xCompletionInfo.IncrementNuggetsDeployed();
 	} else if (dynamic_cast<const Enemy*>(&args)) {
@@ -398,6 +460,10 @@ void Level::SpriteAddedEventHandler(const GameFoundation& sender, const Sprite& 
 }
 
 void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args) {
+	if (IsAborting()) {
+		return;
+	}
+	
 	if (dynamic_cast<const Nugget*>(args.sprite)) {
 		if (!args.outofbounds) {
 			m_xCompletionInfo.IncrementNuggetsCollected();
@@ -445,7 +511,7 @@ void Level::EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& se
 			break;
 		}
 		case eTimerEventIdFinish: {
-			m_xHud.GetBuffPanel().ClearBuffs();
+			ResetPlayerInteraction();
 			Conclude();
 			ShowStatsBanner();
 			break;
@@ -459,7 +525,6 @@ void Level::EventTimerClearedEventHandler(const MulticastEventTimer<TimerEventAr
 
 void Level::PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path) {
 	IW_CALLSTACK_SELF;
-	
 	if (path.complete) {
 		m_xPath.ClearPath();
 		SetStarPath(path.path);

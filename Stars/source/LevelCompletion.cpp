@@ -7,7 +7,7 @@
 #include "Debug.h"
 
 LevelCompletion::LevelCompletion(const std::string levelid, const std::string nextlevelid, const LevelCompletionInfo& info) :
-	Page("levelcompletion.group", info.IsAchieved() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
+	Page("levelcompletion.group", info.IsLevelAchieved() ? Configuration::GetInstance().LevelSong : Configuration::GetInstance().LevelSong),
 	m_pxStar(NULL),
 	m_pxAward(NULL),
     m_xButtonQuit(eButtonCommandIdOpenLevelMenu, s3eKeyAbsGameD),
@@ -33,7 +33,7 @@ LevelCompletion::~LevelCompletion() {
 void LevelCompletion::Initialize() {
 	SaveResults();
 
-	std::string startexture = m_xCompletionInfo.IsAchieved() ? "completion_won" : "completion_lost";
+	std::string startexture = m_xCompletionInfo.IsLevelAchieved() ? "completion_won" : "completion_lost";
 	if ((m_pxStar = FactoryManager::GetTextureFactory().Create(startexture))) {
 		m_pxStar->SelectFrame("main");
 	}
@@ -46,7 +46,7 @@ void LevelCompletion::Initialize() {
 	m_xButtonNext.SetTexture(FactoryManager::GetTextureFactory().Create("button_next"));
 	m_xButtonRetry.SetTexture(FactoryManager::GetTextureFactory().Create("button_pause_retry"));
 
-	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsAchieved());
+	m_xButtonNext.SetEnabled(m_xCompletionInfo.IsLevelAchieved());
 	
 	m_xBackground.Initialize();
 	
@@ -84,7 +84,7 @@ void LevelCompletion::ScheduleEvents() {
 	SchedulePoints();
 
 	std::vector<LevelCompletionInfo::Points> points;
-	ci.GetPoints(points);
+	ci.GetIndividualPoints(points);
 	std::vector<LevelCompletionInfo::Points>::const_iterator it;
 	for (it = points.begin(); it != points.end(); ++it) {
 		ScheduleBonus(it->Text, it->Amount);
@@ -151,7 +151,7 @@ void LevelCompletion::SaveResults() {
 	levelsettings.PlayCount++;
 
 	// save scores for current level
-	if (m_xCompletionInfo.IsAchieved()) {
+	if (m_xCompletionInfo.IsLevelAchieved()) {
 		levelsettings.Stars = m_xCompletionInfo.GetAchievedStars();
 		int score = m_xCompletionInfo.GetTotalPoints();
 		if (levelsettings.HighScore < score) {

@@ -18,6 +18,12 @@ void DustCounter::AddDust(float dustamount) {
 	}
 }
 
+void DustCounter::Clear() {
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, !m_bIsQueueing);
+	m_fCollectedDust = 0.0f;
+}
+
 bool DustCounter::IsQueueing() {
 	return m_bIsQueueing;
 }

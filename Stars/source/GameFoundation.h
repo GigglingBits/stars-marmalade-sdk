@@ -96,7 +96,8 @@ public:
 	void AddDust(const CIwFVec2& pos, int amount);
 	void CommitDustQueue(const CIwFVec2& pos);
 	void RollbackDustQueue(const CIwFVec2& pos);
-
+	void ClearDust();
+	
 	float GetDustQueuedAmount();
 	float GetDustQueuedPercent();
 

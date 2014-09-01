@@ -25,6 +25,10 @@ void LevelCompletionInfo::SetDustFillAmount(float f) {
 	m_fDustFillAmount = f;
 }
 
+void LevelCompletionInfo::SetNumberOfLifesLeft(int lives) {
+	m_iLifesLeft = lives;
+}
+
 void LevelCompletionInfo::IncrementBuffsDeployed() {
 	IwAssert(MYAPP, !m_bEvaluated);
 	m_iBuffsUsed++;
@@ -76,13 +80,12 @@ void LevelCompletionInfo::AddPoints(const std::string& text, float amount) {
 	Points points;
 	points.Text = text;
 	points.Amount = amount;
-	m_xPoints.push_back(points);
+	m_xIndividualPoints.push_back(points);
 }
 
 void LevelCompletionInfo::Evaluate() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	
-	if (m_fDustFillAmount > 0.0f) {
+	if (m_fDustFillAmount > 0.0001f) {
 		AddPoints("Dust collected", m_fDustFillAmount);
 		if (m_iNuggetsDeployed > 0 && m_iNuggetsDeployed == m_iNuggetsColleted) {
 			AddPoints("All nuggets collected", m_fDustFillAmount / 5.0f);
@@ -101,9 +104,9 @@ void LevelCompletionInfo::Evaluate() {
 	m_bEvaluated = true;
 }
 
-void LevelCompletionInfo::GetPoints(std::vector<Points>& points) const {
+void LevelCompletionInfo::GetIndividualPoints(std::vector<Points>& points) const {
 	IwAssert(MYAPP, m_bEvaluated);
-	points = m_xPoints;
+	points = m_xIndividualPoints;
 }
 
 float LevelCompletionInfo::GetTotalPoints() const {
@@ -128,6 +131,6 @@ int LevelCompletionInfo::GetAchievedStars() const {
 	return 0;
 }
 
-bool LevelCompletionInfo::IsAchieved() const {
+bool LevelCompletionInfo::IsLevelAchieved() const {
 	return m_bEvaluated && GetAchievedStars() > 0;
 }

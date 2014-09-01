@@ -67,6 +67,7 @@ private:
 	
 	bool m_bIsPaused;
 	bool m_bIsSetteling;
+	bool m_bIsAborting;
 	
 	int m_iStarReviveDelay;
 	
@@ -100,8 +101,8 @@ protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 
 private:
-	void ReviveStar(uint16 frametime);
 	void CreateStar();
+	bool ReviveStar(uint16 frametime);
 
 	void CreateHud();
 	void DestroyHud();
@@ -126,13 +127,22 @@ private:
 	
 	void SetStarAnchor(const CIwFVec2& pos);
 	void SetStarPath(const std::vector<CIwFVec2>& path);
-
+	void CancelStarPath();
+	
+	void AbortLevel();
+	bool IsAborting();
+	
+	void ResetPlayerInteraction();
+	
 	void Conclude();
 	
 private:
+	void ScheduleBegin();
+	void ScheduleFinish(bool settle = true);
+
 	void EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const TimerEventArgs& args);
 	void EventTimerClearedEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const int& dummy);
-	
+
 	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);

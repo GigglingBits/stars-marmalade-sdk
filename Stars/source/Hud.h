@@ -13,13 +13,15 @@ private:
 	
 	LevelDustVial m_xVial;
 	HudBuffPanel m_xBuffs;
-
+	HudNumber m_xLives;
+	
 public:
 	Hud();
 
 	virtual void Initialize();
 	void SetEnabled(bool enabled);
 	
+	HudNumber& GetLives();
 	LevelDustVial& GetDustVial();
 	HudBuffPanel& GetBuffPanel();
 	

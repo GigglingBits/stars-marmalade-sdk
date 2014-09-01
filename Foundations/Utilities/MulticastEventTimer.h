@@ -36,13 +36,13 @@ public:
 		m_xPayloads.push(spec);
 	}
 
-	void Clear() {
+	void Clear(bool suppressevent = false) {
 		bool popped = false;
 		while (!m_xPayloads.empty()) {
 			m_xPayloads.pop();
 			popped = true;
 		}
-		if (popped) {
+		if (popped && !suppressevent) {
 			LastEventFired.Invoke(*this, 0);
 		}
 	}

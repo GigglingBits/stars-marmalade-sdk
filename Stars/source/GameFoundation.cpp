@@ -274,6 +274,11 @@ float GameFoundation::GetDustQueuedPercent() {
 	return m_xDust.GetQueuedDustPercent();
 }
 
+void GameFoundation::ClearDust() {
+	m_xDust.Clear();
+}
+
+
 int GameFoundation::GetDustMultiplier(int queuedcount) {
 	// the longer the queue, the more points to get
 	if (queuedcount < 4) { return 1; }

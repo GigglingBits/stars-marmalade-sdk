@@ -1,6 +1,9 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+// lives
+#define GAME_STAR_LIVES 3
+
 // points
 #define GAME_POINTS_NUGGET (10)
 #define GAME_POINTS_NUGGET2 (20)

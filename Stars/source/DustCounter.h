@@ -17,6 +17,9 @@ public:
 	// insert
 	void AddDust(float dustamount);
 
+	// empty
+	void Clear();
+	
 	// queue
 	bool IsQueueing();
 	void BeginDustQueue();
