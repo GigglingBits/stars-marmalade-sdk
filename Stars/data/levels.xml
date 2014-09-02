@@ -8,34 +8,34 @@
 		<preamble name="earth_1" texture="preamble_01">
 			Draw with your fingers to navigate Star!            
 		</preamble>
-		<preamble name="earth_2" texture="preamble_01">
+		<preamble name="earth_2" texture="preamble_02">
 			Collect tiny stars and fill up the dust-collector!<!-- to finish the level!-->             
 		</preamble>
-		<preamble name="earth_3" texture="preamble_01">
+		<preamble name="earth_3" texture="preamble_03">
 			Be tactical to collect all the tiny stars!
 		</preamble>
-		<preamble name="earth_5" texture="preamble_01">
+		<preamble name="earth_5" texture="preamble_04">
 			A raging bird has appeared! Hit them from behind!           
 		</preamble>
-		<preamble name="earth_6" texture="preamble_01">
+		<preamble name="earth_6" texture="preamble_05">
 			Hit birds from behind and gain super magnetic powers!          
 		</preamble>
-		<preamble name="earth_7" texture="preamble_01">
+		<preamble name="earth_7">
 			Watch out! A superfast level!          
 		</preamble>
-		<preamble name="earth_11" texture="preamble_01">
+		<preamble name="earth_11" texture="preamble_06">
 			A new super amazing shield power has appeared!         
 		</preamble>
-		<preamble name="earth_12" texture="preamble_01">
+		<preamble name="earth_12">
 			Watch out! A superfast level!         
 		</preamble>
-		<preamble name="earth_15" texture="preamble_01">
+		<preamble name="earth_15" texture="preamble_07">
 			A new fun attack power has appeared!
 		</preamble>
-		<preamble name="earth_16" texture="preamble_01">
+		<preamble name="earth_16">
 			Watch out! A superfast level!         
 		</preamble>
-		<preamble name="earth_18" texture="preamble_01">
+		<preamble name="earth_18" texture="preamble_08">
 		 	Final level! Fight the last raging birds!   
 		</preamble>
 		<!--
