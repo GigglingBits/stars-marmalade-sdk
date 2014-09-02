@@ -20,7 +20,7 @@
 		<preamble name="earth_6" texture="preamble_05">
 			Hit birds from behind and gain super magnetic powers!          
 		</preamble>
-		<preamble name="earth_7">
+		<preamble name="earth_8">
 			Watch out! A superfast level!          
 		</preamble>
 		<preamble name="earth_11" texture="preamble_06">
@@ -382,7 +382,73 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1000">
+		
+		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1400">
+			<spritedefs>
+				<def id="n" body="nugget_01" magnetprobability="0.0" />
+				<def id="N" body="nugget_02" magnetprobability="0.0" />
+				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3" />
+				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3"/>
+			</spritedefs>
+			<spritesequence delay="800" speed="2.2" >
+				<line map="  c    " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" n   b " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" c     " />
+				<line map="     n " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   b   " />
+				<line map="       " />
+				<line map="   n   " />
+				<line map="  nnn  " />
+				<line map=" nnnnn " />
+				<line map="nnnNnnn" />
+				<line map=" nnnnn " />
+				<line map="  nnn  " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   c   " />
+				<line map="   n   " />
+				<line map="n  n   " />
+				<line map="N  n   " />
+				<line map="n  n   " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" b     " />
+				<line map=" n     " />
+				<line map=" n   n " />
+				<line map=" n   N " />
+				<line map=" n   n " />
+				<line map=" n     " />
+				<line map="       " />
+				<line map="       " />
+				<line map="      b" />
+				<line map="      n" />
+				<line map=" n    n" />
+				<line map=" N    n" />
+				<line map=" n    n" />
+				<line map="      n" />
+				<line map="       " />
+				<line map="       " />
+				<line map="nn   nn" />
+				<line map=" nn nn " />
+				<line map="  nnn  " />
+				<line map="   n   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="Nn   nN" />
+				<line map="Nn c nN" />
+				<line map="Nn   nN" />		
+			</spritesequence>
+		</level>
+		<level name="earth_8" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.5" />
@@ -460,71 +526,6 @@
 				<line map="  nnn  " />
 				<line map="  nnn  " />
 				<line map="   n   " />
-			</spritesequence>
-		</level>
-		<level name="earth_8" width="12.0" height="12.0" dustrequirement="1400">
-			<spritedefs>
-				<def id="n" body="nugget_01" magnetprobability="0.0" />
-				<def id="N" body="nugget_02" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3"/>
-			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
-				<line map="  c    " />
-				<line map="       " />
-				<line map="       " />
-				<line map="       " />
-				<line map=" n   b " />
-				<line map="       " />
-				<line map="       " />
-				<line map=" c     " />
-				<line map="     n " />
-				<line map="       " />
-				<line map="       " />
-				<line map="   b   " />
-				<line map="       " />
-				<line map="   n   " />
-				<line map="  nnn  " />
-				<line map=" nnnnn " />
-				<line map="nnnNnnn" />
-				<line map=" nnnnn " />
-				<line map="  nnn  " />
-				<line map="   n   " />
-				<line map="       " />
-				<line map="       " />
-				<line map="   c   " />
-				<line map="   n   " />
-				<line map="n  n   " />
-				<line map="N  n   " />
-				<line map="n  n   " />
-				<line map="   n   " />
-				<line map="       " />
-				<line map="       " />
-				<line map=" b     " />
-				<line map=" n     " />
-				<line map=" n   n " />
-				<line map=" n   N " />
-				<line map=" n   n " />
-				<line map=" n     " />
-				<line map="       " />
-				<line map="       " />
-				<line map="      b" />
-				<line map="      n" />
-				<line map=" n    n" />
-				<line map=" N    n" />
-				<line map=" n    n" />
-				<line map="      n" />
-				<line map="       " />
-				<line map="       " />
-				<line map="nn   nn" />
-				<line map=" nn nn " />
-				<line map="  nnn  " />
-				<line map="   n   " />
-				<line map="       " />
-				<line map="       " />
-				<line map="Nn   nN" />
-				<line map="Nn c nN" />
-				<line map="Nn   nN" />		
 			</spritesequence>
 		</level>
 		<level name="earth_9" width="12.0" height="12.0" dustrequirement="1500">
