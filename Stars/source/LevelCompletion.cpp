@@ -215,7 +215,7 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	m_xBonusAmount.SetPosition(numberrect);
 	
 	// readability
-	m_xBackdropShape.SetRect(screencenter.x - (backdropwidth / 2), 0, backdropwidth, screensize.y);
+	m_xBackdropShape.SetRect(0, 0, screensize.x, screensize.y);
 }
 
 void LevelCompletion::OnUpdate(const FrameData& frame) {

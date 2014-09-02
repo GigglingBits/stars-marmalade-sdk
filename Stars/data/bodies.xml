@@ -350,6 +350,13 @@
 		<texture id="stardustvial_back" colour="0x6631353a" />
 				
 		<texture id="preamble_01" image="01" />
+		<texture id="preamble_02" image="02" />
+		<texture id="preamble_03" image="03" />
+		<texture id="preamble_04" image="04" />
+		<texture id="preamble_05" image="05_01" />
+		<texture id="preamble_06" image="06_01" />
+		<texture id="preamble_07" image="07_01" />
+		<texture id="preamble_08" image="08" />
 		
 		<texture id="particle_yellow_star">
 			<frame id="01" image="particle_yellow_star_1" duration="100" next="02" />
