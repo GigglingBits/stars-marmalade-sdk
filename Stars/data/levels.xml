@@ -326,11 +326,10 @@
 		<level name="earth_6" width="12.0" height="12.0" dustrequirement="800">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0"/>
-				<def id="c" body="bird" magnetprobability="0.5"/>
-				<def id="b" body="bird_screecher" magnetprobability="0.5"/>
+				<def id="c" body="bird" magnetprobability="0.4"/>
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
-				<line map=" b     " />
+				<line map=" c     " />
 				<line map=" n     " />
 				<line map=" n  n  " />
 				<line map=" n  n  " />
@@ -346,7 +345,7 @@
 				<line map="    n  " />
 				<line map="       " />
 				<line map="       " />
-				<line map=" c   b " />
+				<line map=" c   c " />
 				<line map=" n   n " />
 				<line map=" n   n " />
 				<line map=" n   n " />
@@ -362,7 +361,7 @@
 				<line map="   n   " />
 				<line map="       " />
 				<line map="       " />
-				<line map="  b    " />
+				<line map="  c    " />
 				<line map="  n    " />
 				<line map="  n    " />
 				<line map="  n    " />
@@ -383,7 +382,7 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_7" width="12.0" height="12.0" dustrequirement="900">
+		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1000">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.5" />
@@ -467,8 +466,8 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
-				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
-				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
+				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3" />
+				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3"/>
 			</spritedefs>
 			<spritesequence delay="800" speed="2.2" >
 				<line map="  c    " />
@@ -528,7 +527,7 @@
 				<line map="Nn   nN" />		
 			</spritesequence>
 		</level>
-		<level name="earth_9" width="12.0" height="12.0" dustrequirement="1200">
+		<level name="earth_9" width="12.0" height="12.0" dustrequirement="1500">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -593,7 +592,7 @@
 				<line map="  nn   " />
 			</spritesequence>
 		</level>
-		<level name="earth_10" width="12.0" height="12.0" dustrequirement="1400">
+		<level name="earth_10" width="12.0" height="12.0" dustrequirement="1600">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -609,7 +608,7 @@
 				<line map="   n   " />
 				<line map="c  n   " />
 				<line map="n  n   " />
-				<line map="n  m   " />
+				<line map="n  N   " />
 				<line map="n      " />
 				<line map="n      " />
 				<line map="n    b " />
@@ -618,17 +617,37 @@
 				<line map="     n " />
 				<line map="     n " />
 				<line map="  c  n " />
-				<line map="  n  m " />
+				<line map="  n  N " />
 				<line map="  n    " />
 				<line map="  n    " />
 				<line map="  n    " />
-				<line map="  n   b" />
-				<line map="  m   n" />
+				<line map="  n    " />
+				<line map="  m    " />
+				<line map="       " />
+				<line map="       " />
+				<line map=" nnn   " />
+				<line map="n   n  " />
+				<line map="n d n  " />
+				<line map="n   n  " />
+				<line map=" nnn   " />
+				<line map="       " />
+				<line map="       " />
+				<line map="   nnn " />
+				<line map="  n   n" />
+				<line map="  n b n" />
+				<line map="  n   n" />
+				<line map="   nnn " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="       " />
+				<line map="      b" />
+				<line map="      n" />
 				<line map="      n" />
 				<line map="      n" />
 				<line map="      n" />
 				<line map="   d  n" />
-				<line map="   n  m" />
+				<line map="   n  N" />
 				<line map="   n   " />
 				<line map="   n   " />
 				<line map="   n   " />
@@ -638,23 +657,23 @@
 				<line map="n      " />
 				<line map="n      " />
 				<line map="n     c" />
-				<line map="m     n" />
+				<line map="N     n" />
 				<line map="      n" />
+				<line map="   b  n" />
 				<line map="      n" />
-				<line map="   d  n" />
 				<line map="      n" />
 				<line map="      m" />
+				<line map=" d     " />
 				<line map="       " />
+				<line map="    d  " />
 				<line map="       " />
-				<line map="   b   " />
-				<line map="       " />
-				<line map=" NNNNN " />
-				<line map="NNNMNNN" />
-				<line map="NNNMNNN" />
-				<line map=" NNNNN " />
+				<line map=" nnnnn " />
+				<line map="nnnMnnn" />
+				<line map="nnnMnnn" />
+				<line map=" nnnnn " />
 			</spritesequence>
 		</level>
-		<level name="earth_11" width="12.0" height="12.0" dustrequirement="1400">
+		<level name="earth_11" width="12.0" height="12.0" dustrequirement="1600">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
