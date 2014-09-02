@@ -50,24 +50,28 @@ void LevelCompletion::Initialize() {
 	
 	m_xBackground.Initialize();
 	
+	//m_xScoreText.SetBackground("white");
 	m_xScoreText.SetText("Score:");
 	m_xScoreText.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreText.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xScoreText.SetAlignH(Renderer::eTextAlignHLeft);
 	m_xScoreText.SetAlignV(Renderer::eTextAlignVMiddle);
 	
+	//m_xScoreAmount.SetBackground("white");
 	m_xScoreAmount.SetNumber(0);
 	m_xScoreAmount.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreAmount.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xScoreAmount.SetAlignH(Renderer::eTextAlignHRight);
 	m_xScoreAmount.SetAlignV(Renderer::eTextAlignVMiddle);
 	
+	//m_xBonusText.SetBackground("white");
 	m_xBonusText.SetText("");
 	m_xBonusText.SetFont(Renderer::eFontTypeNormal);
 	m_xBonusText.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xBonusText.SetAlignH(Renderer::eTextAlignHLeft);
 	m_xBonusText.SetAlignV(Renderer::eTextAlignVMiddle);
 
+	//m_xBonusAmount.SetBackground("white");
 	m_xBonusAmount.SetNumber(0);
 	m_xBonusAmount.SetText("");
 	m_xBonusAmount.SetFont(Renderer::eFontTypeNormal);
