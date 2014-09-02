@@ -23,6 +23,14 @@ void HudNumber::SetNumber(long number, int rolltime) {
 	m_lRemainingRollTime = m_lTotalRollTime;
 }
 
+void HudNumber::SetPrefix(const std::string text) {
+	m_sPrefix = text;
+}
+
+void HudNumber::SetPostfix(const std::string text) {
+	m_sPostfix = text;
+}
+
 void HudNumber::UpdateText() {
 	// interpolate
 	float progress = m_lTotalRollTime == 0 ? 100.0f : m_lRemainingRollTime / (float) m_lTotalRollTime;
@@ -35,7 +43,7 @@ void HudNumber::UpdateText() {
 		
 	// display
 	std::ostringstream oss;
-	oss << number;
+	oss << m_sPrefix << number << m_sPostfix;
 	SetText(oss.str());
 }
 

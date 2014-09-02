@@ -13,11 +13,17 @@ private:
 	long m_lTotalRollTime;
 	long m_lRemainingRollTime;
 	
+	std::string m_sPrefix;
+	std::string m_sPostfix;
+	
 public:
 	HudNumber();
 	
 	void SetNumber(long number, int rolltime = 0);
 	long GetNumber();
+
+	void SetPrefix(const std::string text);
+	void SetPostfix(const std::string text);
 	
 protected:
 	virtual void OnUpdate(const FrameData& frame);

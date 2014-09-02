@@ -12,10 +12,12 @@ void Hud::Initialize() {
 	m_xBuffs.Initialize();
 	m_xLives.Initialize();
 	m_xLives.SetNumber(0);
-	m_xLives.SetFont(Renderer::eFontTypeLarge);
+
+	m_xLives.SetFont(Renderer::eFontTypeNormal);
 	m_xLives.SetColour(GAME_COLOUR_FONT_MAIN);
-	m_xLives.SetAlignH(Renderer::eTextAlignHCenter);
+	m_xLives.SetAlignH(Renderer::eTextAlignHLeft);
 	m_xLives.SetAlignV(Renderer::eTextAlignVMiddle);
+	m_xLives.SetPrefix("Stars: ");
 }
 
 void Hud::SetEnabled(bool enabled) {
@@ -41,12 +43,13 @@ void Hud::OnDoLayout(const CIwSVec2& screensize) {
 	int spacing = extent / 40;
 
 	// lives
-	int liveswidth = extent / 20;
+	int liveswidth = extent / 2;
+	int livesheight = extent / 20;
 	
 	int x = spacing;
 	int y = spacing;
 	int w = liveswidth;
-	int h = w;
+	int h = livesheight;
 	CIwRect rect(x, y, w, h);
 	m_xLives.SetPosition(rect);
 	
