@@ -34,7 +34,7 @@ intromovie="stories/intro.mp4"
 menusong="music/jst.Port_Saint_Johns.mp3"
 levelsong="music/csc.Empire_Games.mp3"
 
-appfont=fonts/JellyBelly.ttf
+appfont=fonts/JellyBellyEx.ttf
 sysfont=fonts/Tempesta.ttf
 
 settingsfile=settings.xml
