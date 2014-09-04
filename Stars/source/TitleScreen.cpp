@@ -15,12 +15,15 @@ Page("menu.group", Configuration::GetInstance().MenuSong),
 m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 m_xButtonFacebook(eButtonCommandIdFacebook, s3eKeyF),
 m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyT),
+m_xBackButton(eButtonCommandIdNone, s3eKeyAbsGameD),
 m_bHasFacebookButton(false),
 m_bHasMovieButton(false) {
 	m_xButtonFacebook.PressedEvent.AddListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
+	m_xBackButton.PressedEvent.AddListener(this, &TitleScreen::ButtonReleasedEventHandler);
 }
 
 TitleScreen::~TitleScreen() {
+	m_xBackButton.PressedEvent.RemoveListener(this, &TitleScreen::ButtonReleasedEventHandler);
 	m_xButtonFacebook.PressedEvent.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
 }
 
@@ -123,4 +126,11 @@ void TitleScreen::OpenFacebook() {
 
 	AppAnalytics a;
 	a.RegisterFacebookOpened();
+}
+
+void TitleScreen::ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
+	if (sender.key == s3eKeyAbsGameD) {
+		s3eDeviceRequestQuit();
+		args.handled = true;
+	}
 }

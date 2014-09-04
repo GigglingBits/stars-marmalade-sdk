@@ -19,6 +19,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xGame(dustrequirement, worldsize),
 	m_xInteractor(m_xCamera, m_xGame),
 	m_xPausePanel(eButtonCommandIdToggleHud, s3eKeyAbsGameA),
+	m_xBackButton(eButtonCommandIdNone, s3eKeyAbsGameD),
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
 	m_bIsAborting(false),
@@ -37,7 +38,8 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_xHud.GetBuffPanel().BuffTrigger.AddListener(this, &Level::BuffTriggerHandler);
 	m_xEventTimer.Elapsed.AddListener(this, &Level::EventTimerEventHandler);
 	m_xEventTimer.LastEventFired.AddListener(this, &Level::EventTimerClearedEventHandler);
-	
+		m_xBackButton.PressedEvent.AddListener(this, &Level::ButtonReleasedEventHandler);
+		
 	m_xInteractor.Disable();
 
 	ScheduleBegin();
@@ -45,6 +47,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 
 Level::~Level() {
 	// detach event handlers
+	m_xBackButton.PressedEvent.RemoveListener(this, &Level::ButtonReleasedEventHandler);
 	m_xEventTimer.LastEventFired.RemoveListener(this, &Level::EventTimerClearedEventHandler);
 	m_xEventTimer.Elapsed.RemoveListener(this, &Level::EventTimerEventHandler);
 	m_xHud.GetBuffPanel().BuffTrigger.RemoveListener(this, &Level::BuffTriggerHandler);
@@ -435,6 +438,21 @@ int32 Level::AppPausedCallback(void* systemData, void* userData) {
 	Level* lvl = (Level*) userData;
 	lvl->SetPaused(true);
 	return 0;
+}
+
+void Level::ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {
+	if (sender.key == s3eKeyAbsGameD) {
+		if (IsPaused()) {
+			InputManager::ButtonEventArgs arg;
+			arg.cmdid = eButtonCommandIdQuitLevel;
+			InputManager& im = InputManager::GetInstance();
+			im.ButtonPressedEvent.Invoke(im, arg);
+			im.ButtonReleasedEvent.Invoke(im, arg);
+		} else {
+			SetPaused(true);
+		}
+		args.handled = true;
+	}
 }
 
 void Level::PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args) {

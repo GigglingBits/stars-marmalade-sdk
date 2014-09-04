@@ -354,9 +354,9 @@ void InputManager::OnTouchEnd(TouchId id, const CIwSVec2& pos) {
 	TouchEndEvent(*this, args);
 }
 
-InputManager::VirtualButton::VirtualButton() {
-	cmdid = eButtonCommandIdNone;
-	key = s3eKeyFirst;
+InputManager::VirtualButton::VirtualButton(ButtonCommandId cmdid, s3eKey key) {
+	this->cmdid = cmdid;
+	this->key = key;
 	rect.Make(0, 0, 0, 0);
 	userdata = 0;
 	enabled = true;

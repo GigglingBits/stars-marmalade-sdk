@@ -7,6 +7,7 @@
 #include "IwList.h"
 #include "Body.h"
 #include "Camera.h"
+#include "InputManager.h"
 
 #include "AnimTexture.h"
 
@@ -22,6 +23,8 @@ private:
 	bool m_bHasFacebookButton;
 	bool m_bHasMovieButton;
 	
+	InputManager::VirtualButton m_xBackButton;
+
 public:
 	TitleScreen();
 	virtual ~TitleScreen();
@@ -37,6 +40,7 @@ private:
 	void OpenFacebook();
 	
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
+	void ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args);
 };
 
 #endif

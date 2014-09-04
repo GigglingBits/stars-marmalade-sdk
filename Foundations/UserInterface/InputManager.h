@@ -31,7 +31,7 @@ public:
 		bool enabled;	// disable processing of the button, if false
 
 	public:
-		VirtualButton();
+		VirtualButton(ButtonCommandId cmdid = eButtonCommandIdNone, s3eKey key = s3eKeyFirst);
 		~VirtualButton();
 
 	public:

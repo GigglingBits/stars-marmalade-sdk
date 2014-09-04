@@ -77,6 +77,8 @@ private:
 	LevelInteractor m_xInteractor;
 	PathTracker m_xPath;
 	
+	InputManager::VirtualButton m_xBackButton;
+	
 public:
 	Level(const CIwFVec2& worldsize, float dustrequirement);
 	virtual ~Level();
@@ -143,6 +145,7 @@ private:
 	void EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const TimerEventArgs& args);
 	void EventTimerClearedEventHandler(const MulticastEventTimer<TimerEventArgs>& sender, const int& dummy);
 
+	void ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args);
 	void PausePanelStateChangedEventHandler(const ButtonPanel& sender, const ButtonPanel::EventArgs& args);
 
 	void PathChangedEventHandler(const LevelInteractor& sender, const LevelInteractor::PathEventArgs& path);
