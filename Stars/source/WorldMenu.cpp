@@ -68,6 +68,8 @@ bool WorldMenu::CheckWorldOpen(LevelIterator::WorldId world) {
 		return true;
 	}
 	
+	return false;
+	/*
 	// check if there is an unachieved level in the previous world
 	LevelIterator::WorldId previousworld = it.GetPreviousWorld(world);
 	int level = it.GetFirstLevelInWorld(previousworld);
@@ -81,6 +83,7 @@ bool WorldMenu::CheckWorldOpen(LevelIterator::WorldId world) {
 
 	// this world can be opened
 	return true;
+ */
 }
 
 
