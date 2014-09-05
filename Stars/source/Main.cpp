@@ -75,26 +75,24 @@ void UpdateScreen() {
 
 void WriteAndShowLog(const std::string& message, bool clear = false) {
 	static std::string s_Messages;
-
+	
 	if (clear) {
 		s_Messages.clear();
 	}
-
-	if (!message.empty()) {
-		if (!Configuration::GetInstance().ShowStats) {
-			if (s_Messages.empty()) {
-				s_Messages = "loading";
-			}
-			s_Messages += ".";
-		} else {
-			std::ostringstream oss;
-			oss << s_Messages << message << std::endl;
-			s_Messages = oss.str();
-		}
+	
+	if (!Configuration::GetInstance().ShowStats) {
+		return;
 	}
 	
-	IwGxPrintString(50, 50, s_Messages.c_str());
-	UpdateScreen();
+	if (!message.empty()) {
+		std::ostringstream oss;
+		oss << s_Messages << message << std::endl;
+		s_Messages = oss.str();
+		
+		IwGxPrintString(50, 50, s_Messages.c_str());
+		
+		UpdateScreen();
+	}
 }
 
 void PrintHeader() {
