@@ -5,7 +5,6 @@
 #include "IwResource.h"
 
 #define SPINERESOURCE_TYPE "SpineResource"
-#define SPINERESOURCE_BUFSIZE 0xffff
 
 class SpineResource : public CIwResource {
 private:
@@ -29,9 +28,6 @@ public:
 private:
 	std::string GetFileData(const std::string& filename);
 
-	inline char* GetDataBuffer();
-	inline uint16 GetDataBufferSize();
-	
 	void SerialiseString(std::string& s);
 };
 

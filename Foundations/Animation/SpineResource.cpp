@@ -24,14 +24,16 @@ void SpineResource::Serialise() {
 
 bool SpineResource::ParseAttribute(CIwTextParserITX* pParser, const char* pAttrName) {
 	IW_CALLSTACK_SELF;
-	
+		
+	CIwStringL buf;
 	if (!strcmp(pAttrName, "json")) {
-		pParser->ReadString(GetDataBuffer(), GetDataBufferSize());
-		m_sJsonFile = GetDataBuffer();
+		pParser->ReadString(buf);
+		m_sJsonFile = buf.c_str();
 		m_sJsonData = GetFileData(m_sJsonFile);
+		
 	} else if (!strcmp(pAttrName, "atlas")) {
-		pParser->ReadString(GetDataBuffer(), GetDataBufferSize());
-		m_sAtlasFile = GetDataBuffer();
+		pParser->ReadString(buf);
+		m_sAtlasFile = buf.c_str();
 		m_sAtlasData = GetFileData(m_sAtlasFile);
 	} else {
 		return CIwManaged::ParseAttribute(pParser, pAttrName);
@@ -51,24 +53,20 @@ void SpineResource::ParseClose(CIwTextParserITX* pParser) {
 }
 
 void SpineResource::SerialiseString(std::string& s) {
-	if (IwSerialiseIsReading()) {
-		IwSerialiseString(GetDataBuffer(), GetDataBufferSize() - 1);
-		s = GetDataBuffer();
-	} else if (IwSerialiseIsWriting()) {
-		IwSerialiseString((char*)s.c_str());
-	} else {
-		IwAssertMsg(MYAPP, false, ("Neither reading not writing? Seems wrong..."));
+	unsigned int length = s.length();
+	IwSerialiseUInt32(length);
+	for (unsigned int i = 0; i < length; i++) {
+		if (IwSerialiseIsReading()) {
+			char c;
+			IwSerialiseChar(c);
+			s.push_back(c);
+		} else if (IwSerialiseIsWriting()) {
+			char c = s.at(i);
+			IwSerialiseChar(c);
+		} else {
+			IwAssertMsg(MYAPP, false, ("Neither reading nor writing? Seems wrong..."));
+		}
 	}
-}
-
-char* SpineResource::GetDataBuffer() {
-	// not thread safe!
-	static char BUF[SPINERESOURCE_BUFSIZE];
-	return BUF;
-}
-
-uint16 SpineResource::GetDataBufferSize() {
-	return SPINERESOURCE_BUFSIZE;
 }
 
 std::string SpineResource::GetFileData(const std::string& filename) {
