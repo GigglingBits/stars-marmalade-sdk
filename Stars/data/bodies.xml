@@ -432,7 +432,12 @@
 		<texture id="completion_award" animation="spine_completion_award" />
 		
 		<texture id="planet_earth" animation="spine_planet_earth" />
-		<texture id="planet_mars" animation="spine_planet_mars" />
+		<!-- <texture id="planet_mars" animation="spine_planet_mars" /> -->
+		<texture id="planet_mars">
+			<frame id="released" image="world_mars"/>
+			<frame id="pressed" image="world_mars"/>
+			<frame id="disabled" image="world_mars_locked"/>
+		</texture>
 		<texture id="planet_jupiter">
 			<frame id="released" image="world_jupiter"/>
 			<frame id="pressed" image="world_jupiter"/>

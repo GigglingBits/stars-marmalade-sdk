@@ -12,12 +12,12 @@ SpineResource
 	json	"spine/planet_earth/output/planet_earth.json"
 }
 
-SpineResource
-{
-	name	"spine_planet_mars"
-	atlas	"spine/planet_mars/output/planet_mars.atlas"
-	json	"spine/planet_mars/output/planet_mars.json"
-}
+#SpineResource
+#{
+#	name	"spine_planet_mars"
+#	atlas	"spine/planet_mars/output/planet_mars.atlas"
+#	json	"spine/planet_mars/output/planet_mars.json"
+#}
 
 SpineResource
 {
