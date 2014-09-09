@@ -63,6 +63,8 @@ public:
 	void GetIndividualPoints(std::vector<Points>& points) const;
 	float GetTotalPoints() const;
 
+	int GetLivesLeft() const;
+	
 	int GetAchievedStars() const;
 	bool IsLevelAchieved() const;
 	

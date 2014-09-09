@@ -114,17 +114,22 @@ float LevelCompletionInfo::GetTotalPoints() const {
 	return m_fTotalPoints;
 }
 
+int LevelCompletionInfo::GetLivesLeft() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iLifesLeft;
+}
+
 int LevelCompletionInfo::GetAchievedStars() const {
 	IwAssert(MYAPP, m_bEvaluated);
 	if (m_fDustFillAmount >= m_fDustFillMax) {
 		return 3;
 	}
 
-	if (m_fDustFillAmount >= m_fDustFillMax * 0.6f) {
+	if (m_fDustFillAmount >= m_fDustFillMax * 0.8f) {
 		return 2;
 	}
 	
-	if (m_fDustFillAmount >= m_fDustFillMax * 0.3f) {
+	if (m_fDustFillAmount >= m_fDustFillMax * 0.5f) {
 		return 1;
 	}
 	

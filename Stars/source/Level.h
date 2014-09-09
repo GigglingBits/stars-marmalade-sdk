@@ -24,8 +24,8 @@
 #define LEVEL_SECTION_BANNER_DURATION 3000
 #define LEVEL_SECTION_BANNER_LEADOUT 500
 
-#define LEVEL_COMPLETION_DELAY 1500
-#define LEVEL_LEADOUT_TIME 4000
+#define LEVEL_COMPLETION_DELAY 500
+#define LEVEL_LEADOUT_TIME 2300
 
 class Level : public Page {
 private:
@@ -115,7 +115,6 @@ private:
 
 	void ShowBannerText(const std::string& text);
 	void HideBannerText();
-	void ShowStatsBanner();
 	
 	void HideStar();
 	void ShowStar();

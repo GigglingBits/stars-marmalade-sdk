@@ -3,6 +3,7 @@
 #include "GameFoundation.h"
 #include "Configuration.h"
 #include "UserSettings.h"
+#include "SoundEngine.h"
 
 #include "Debug.h"
 
@@ -50,15 +51,23 @@ void LevelCompletion::Initialize() {
 	
 	m_xBackground.Initialize();
 	
+	//m_xTitleText.SetBackground("white");
+	m_xTitleText.SetText("");
+	m_xTitleText.SetFont(Renderer::eFontTypeLarge);
+	m_xTitleText.SetColour(GAME_COLOUR_FONT_MAIN);
+	m_xTitleText.SetAlignH(Renderer::eTextAlignHCenter);
+	m_xTitleText.SetAlignV(Renderer::eTextAlignVMiddle);
+	
 	//m_xScoreText.SetBackground("white");
-	m_xScoreText.SetText("Score:");
+	m_xScoreText.SetText("");
 	m_xScoreText.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreText.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xScoreText.SetAlignH(Renderer::eTextAlignHLeft);
 	m_xScoreText.SetAlignV(Renderer::eTextAlignVMiddle);
 	
 	//m_xScoreAmount.SetBackground("white");
-	m_xScoreAmount.SetNumber(0);
+	//m_xScoreAmount.SetNumber(-1);
+	m_xScoreAmount.SetText("");
 	m_xScoreAmount.SetFont(Renderer::eFontTypeLarge);
 	m_xScoreAmount.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xScoreAmount.SetAlignH(Renderer::eTextAlignHRight);
@@ -72,7 +81,7 @@ void LevelCompletion::Initialize() {
 	m_xBonusText.SetAlignV(Renderer::eTextAlignVMiddle);
 
 	//m_xBonusAmount.SetBackground("white");
-	m_xBonusAmount.SetNumber(0);
+	//m_xBonusAmount.SetNumber(-1);
 	m_xBonusAmount.SetText("");
 	m_xBonusAmount.SetFont(Renderer::eFontTypeNormal);
 	m_xBonusAmount.SetColour(GAME_COLOUR_FONT_BONUS);
@@ -80,22 +89,70 @@ void LevelCompletion::Initialize() {
 	m_xBonusAmount.SetAlignV(Renderer::eTextAlignVMiddle);
 	
 	ScheduleEvents();
+	
+	if (m_xCompletionInfo.IsLevelAchieved()) {
+		SoundEngine::GetInstance().PlaySoundEffect("level_win");
+	}
 }
 
 void LevelCompletion::ScheduleEvents() {
-	LevelCompletionInfo& ci = m_xCompletionInfo;
 	
-	SchedulePoints();
+	ScheduleTitle();
 
-	std::vector<LevelCompletionInfo::Points> points;
-	ci.GetIndividualPoints(points);
-	std::vector<LevelCompletionInfo::Points>::const_iterator it;
-	for (it = points.begin(); it != points.end(); ++it) {
-		ScheduleBonus(it->Text, it->Amount);
+	LevelCompletionInfo& ci = m_xCompletionInfo;
+	if (ci.GetLivesLeft() > 0) {
+		SchedulePause(2200);
+		ScheduleTitleClear();
+		SchedulePause(700);
+
+		SchedulePoints();
+		
+		std::vector<LevelCompletionInfo::Points> points;
+		ci.GetIndividualPoints(points);
+		std::vector<LevelCompletionInfo::Points>::const_iterator it;
+		for (it = points.begin(); it != points.end(); ++it) {
+			ScheduleBonus(it->Text, it->Amount);
+			SchedulePause(400);
+		}
+
+		ScheduleAwards(ci.GetAchievedStars());
 	}
-
-	ScheduleAwards(ci.GetAchievedStars());
+	
+	SchedulePause(1000);
 	ScheduleEnableStar();
+}
+
+void LevelCompletion::ScheduleTitle() {
+	std::string msg;
+	if (m_xCompletionInfo.IsLevelAchieved()) {
+		msg = "Well done!";
+	} else {
+		msg = "Try again...";
+	}
+	
+	EventArgs args;
+	args.type = eEventTypeSetTitle;
+	args.text = msg;
+	m_xEventTimer.Enqueue(0, args);
+}
+
+void LevelCompletion::ScheduleTitleClear() {
+	EventArgs args;
+	args.type = eEventTypeSetTitle;
+	args.text = "";
+	m_xEventTimer.Enqueue(0, args);
+}
+
+void LevelCompletion::ScheduleEnableStar() {
+	EventArgs args;
+	args.type = eEventTypeEnableStar;
+	m_xEventTimer.Enqueue(0, args);
+}
+
+void LevelCompletion::SchedulePause(int milliseconds) {
+	EventArgs args;
+	args.type = eEventTypeNoOp;
+	m_xEventTimer.Enqueue(milliseconds, args);
 }
 
 void LevelCompletion::SchedulePoints() {
@@ -103,7 +160,7 @@ void LevelCompletion::SchedulePoints() {
 	args.type = eEventTypeSetScore;
 	args.text = "Score:";
 	args.amount = 0;
-	m_xEventTimer.Enqueue(500, args);
+	m_xEventTimer.Enqueue(0, args);
 }
 
 void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
@@ -115,7 +172,7 @@ void LevelCompletion::ScheduleBonus(const std::string& name, int amount) {
 	args.type = eEventTypeSetBonus;
 	args.text = name;
 	args.amount = amount;
-	m_xEventTimer.Enqueue(400, args);
+	m_xEventTimer.Enqueue(0, args);
 
 	args.type = eEventTypeTransferBonus;
 	m_xEventTimer.Enqueue(1200, args);
@@ -136,12 +193,6 @@ void LevelCompletion::ScheduleAwards(int starcount) {
 	args.type = eEventTypeNoOp;
 	args.amount = starcount;
 	m_xEventTimer.Enqueue(2500, args);
-}
-
-void LevelCompletion::ScheduleEnableStar() {
-	EventArgs args;
-	args.type = eEventTypeEnableStar;
-	m_xEventTimer.Enqueue(0, args);
 }
 
 const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
@@ -171,8 +222,7 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	int margin = extents / 4;	// 25%
 	int space = margin / 5;		// 25% / 5 = 5%
 
-	int backdropwidth = extents * 0.9;
-	int backdropmargin = backdropwidth * 0.2;
+	int backdropwidth = extents * 0.7;
 
 	CIwSVec2 screencenter(screensize.x / 2, screensize.y / 2);
 
@@ -203,20 +253,17 @@ void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {
 	m_xButtonNext.SetPosition(button);
 	
 	// text boxes
-	CIwRect textrect;
-	textrect.Make(screencenter.x - (backdropwidth / 2) + backdropmargin, extents / 10, backdropwidth - (2 * backdropmargin), extents / 15);
-	CIwRect numberrect(textrect);
-	numberrect.x = screencenter.x;
-	numberrect.w = (backdropwidth / 2) - backdropmargin;
+	CIwRect rect;
+	rect.Make(screencenter.x - (backdropwidth / 2), extents / 10, backdropwidth, extents / 15);
+
+	m_xTitleText.SetPosition(rect);
+	m_xScoreText.SetPosition(rect);
+	m_xScoreAmount.SetPosition(rect);
 	
-	m_xScoreText.SetPosition(textrect);
-	m_xScoreAmount.SetPosition(numberrect);
+	rect.y += rect.h + rect.h;
 	
-	textrect.y += textrect.h + textrect.h;
-	numberrect.y = textrect.y;
-	
-	m_xBonusText.SetPosition(textrect);
-	m_xBonusAmount.SetPosition(numberrect);
+	m_xBonusText.SetPosition(rect);
+	m_xBonusAmount.SetPosition(rect);
 	
 	// readability
 	m_xBackdropShape.SetRect(0, 0, screensize.x, screensize.y);
@@ -238,6 +285,8 @@ void LevelCompletion::OnUpdate(const FrameData& frame) {
 	m_xButtonRetry.Update(frame);
 	m_xButtonNext.Update(frame);
 	
+	m_xTitleText.Update(frame);
+
 	m_xScoreText.Update(frame);
 	m_xScoreAmount.Update(frame);
 	
@@ -261,7 +310,9 @@ void LevelCompletion::OnRender(Renderer& renderer, const FrameData& frame) {
 	m_xButtonQuit.Render(renderer, frame);
 	m_xButtonRetry.Render(renderer, frame);
 	m_xButtonNext.Render(renderer, frame);
-
+	
+	m_xTitleText.Render(renderer, frame);
+	
 	m_xScoreText.Render(renderer, frame);
 	m_xScoreAmount.Render(renderer, frame);
 	
@@ -275,8 +326,15 @@ void LevelCompletion::EventTimerEventHandler(const MulticastEventTimer<EventArgs
 	switch (args.type) {
 		case eEventTypeNoOp:
 			break;
+		case eEventTypeSetTitle:
+			m_xTitleText.SetText(args.text);
+			m_xScoreText.SetText("");
+			m_xScoreAmount.SetText("");
+			break;
 		case eEventTypeSetScore:
+			m_xTitleText.SetText("");
 			m_xScoreText.SetText(args.text);
+			m_xScoreAmount.SetNumber(-1); // number is not visible initially if it is set to 0; force it != zero to make it visible
 			m_xScoreAmount.SetNumber(args.amount);
 			break;
 		case eEventTypeClearBonus:

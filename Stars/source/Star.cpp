@@ -148,11 +148,13 @@ void Star::FollowPath(const std::vector<CIwFVec2>& path) {
 	// add lead-in
 	std::vector<CIwFVec2> newpath;
 	CIwFVec2 leadin = path[0] - GetPosition();
-	CIwFVec2 step = leadin.GetNormalised() * PATHTRACKER_STEP_LENGTH;
-	int stepcount = (int)(leadin.GetLength() / PATHTRACKER_STEP_LENGTH);
-	leadin = step * stepcount; // // ensures that lead-in does not make path points jump
-	newpath.push_back(path[0] - leadin);
-		
+	if (leadin.GetLength() > 0.0f) {
+		CIwFVec2 step = leadin.GetNormalised() * PATHTRACKER_STEP_LENGTH;
+		int stepcount = (int)(leadin.GetLength() / PATHTRACKER_STEP_LENGTH);
+		leadin = step * stepcount; // ensures that lead-in does not make path points jump
+		newpath.push_back(path[0] - leadin);
+	}
+	
 	// copy new path
 	newpath.insert(newpath.end(), path.begin(), path.end());
 	m_xPath.ImportPath(newpath, leadin.GetLength());

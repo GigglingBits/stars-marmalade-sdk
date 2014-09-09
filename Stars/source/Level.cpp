@@ -8,7 +8,6 @@
 #include "Nugget.h"
 #include "InputManager.h"
 #include "FactoryManager.h"
-#include "SoundEngine.h"
 #include "Enemy.h"
 #include "Buff.h"
 #include "Nugget.h"
@@ -283,13 +282,6 @@ void Level::HideBannerText() {
 	m_sBannerText.clear();
 }
 
-void Level::ShowStatsBanner() {
-	ShowBannerText(m_xCompletionInfo.IsLevelAchieved() ? "Well done!" : "Try again...");
-	if (m_xCompletionInfo.IsLevelAchieved()) {
-		SoundEngine::GetInstance().PlaySoundEffect("level_win");
-	}
-}
-
 CIwFVec2 Level::CalculateRelativeSoundPosition(const CIwFVec2& worldpos) {
 	CIwSVec2 soundpixelpos = m_xCamera.GetViewport().WorldToView(worldpos);
 	CIwSVec2 centeroffset(IwGxGetScreenWidth() / 2, IwGxGetScreenHeight() / 2);
@@ -531,7 +523,6 @@ void Level::EventTimerEventHandler(const MulticastEventTimer<TimerEventArgs>& se
 		case eTimerEventIdFinish: {
 			ResetPlayerInteraction();
 			Conclude();
-			ShowStatsBanner();
 			break;
 		}
 	}

@@ -13,6 +13,7 @@ class LevelCompletion : public Page {
 private:
 	enum EventType {
 		eEventTypeNoOp = 0,
+		eEventTypeSetTitle,
 		eEventTypeSetScore,
 		eEventTypeSetBonus,
 		eEventTypeTransferBonus,
@@ -44,6 +45,7 @@ private:
 	Button m_xButtonRetry;
 	Button m_xButtonNext;
 
+	HudText m_xTitleText;
 	HudText m_xScoreText;
 	HudNumber m_xScoreAmount;
 	
@@ -70,9 +72,12 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	virtual void OnDoLayout(const CIwSVec2& screensize);
 	
-private:	
+private:
 	void ScheduleEvents();
+	void ScheduleTitle();
+	void ScheduleTitleClear();
 	void SchedulePoints();
+	void SchedulePause(int milliseconds);
 	void ScheduleBonus(const std::string& name, int amount);
 	void ScheduleAwards(int starcount);
 	void ScheduleEnableStar();
