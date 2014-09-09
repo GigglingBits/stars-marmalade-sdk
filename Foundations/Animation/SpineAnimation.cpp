@@ -249,9 +249,14 @@ void SpineAnimation::RebuildGeometry() {
 	IW_CALLSTACK_SELF;
 	IwAssertMsg(MYAPP, m_pxSkeleton, ("Rebuild of geometry failed. No skeleton available."));
 	if (m_pxSkeleton) {
+		// geometry is always calculated based on setup pose
 		spSkeleton_setToSetupPose(m_pxSkeleton);
 		spSkeleton_updateWorldTransform(m_pxSkeleton);
 		ExtractAABB(m_xSkeletonAABBLL, m_xSkeletonAABBUR);
+		if (m_pxAnimationState) {
+			// try to re-apply the last animation state
+			spAnimationState_apply(m_pxAnimationState, m_pxSkeleton);
+		}
 	}
 }
 
