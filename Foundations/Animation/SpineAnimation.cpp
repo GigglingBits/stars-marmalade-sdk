@@ -287,7 +287,7 @@ void SpineAnimation::Update(uint32 timestep) {
 }
 
 int SpineAnimation::GetVertexCount() {
-	return (m_pxSkeleton ? m_pxSkeleton->slotCount : 0) * SPINEANIMATION_VERTS_PER_SLOT;
+	return (m_pxSkeleton ? m_pxSkeleton->slotsCount : 0) * SPINEANIMATION_VERTS_PER_SLOT;
 }
 
 CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
@@ -297,7 +297,7 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 	}
 
 	CIwTexture* texture = NULL;
-	for (int slotid = 0; slotid < m_pxSkeleton->slotCount; slotid++) {
+	for (int slotid = 0; slotid < m_pxSkeleton->slotsCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
@@ -393,7 +393,7 @@ bool SpineAnimation::ExtractAABB(CIwFVec2& ll, CIwFVec2& ur) {
 	IW_CALLSTACK_SELF;
 	
 	bool hasbounds = false;
-	for (int slotid = 0; slotid < m_pxSkeleton->slotCount; slotid++) {
+	for (int slotid = 0; slotid < m_pxSkeleton->slotsCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			if (spAttachment* attachment = slot->attachment) {
 				if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
@@ -440,7 +440,7 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	}
 	
 	float spineverts[8];
-	spRegionAttachment_computeWorldVertices(att, slot->skeleton->x, slot->skeleton->y, slot->bone, spineverts);
+	spRegionAttachment_computeWorldVertices(att, slot->bone, spineverts);
 	
 	xys[0].x = spineverts[SP_VERTEX_X1];
 	xys[0].y = spineverts[SP_VERTEX_Y1];
