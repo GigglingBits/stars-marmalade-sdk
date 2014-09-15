@@ -55,7 +55,7 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.0" >
+			<spritesequence delay="800" speed="2.3" >
 				<line map="   n   " />
 				<line map="   n   " />
 				<line map="   n   " />
@@ -96,11 +96,11 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_2" width="12.0" height="12.0" dustrequirement="500">
+		<level name="earth_2" width="12.0" height="12.0" dustrequirement="400">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.0" >
+			<spritesequence delay="800" speed="2.3" >
 				<line map="n     n" />
 				<line map="n     n" />
 				<line map="n     n" />
@@ -151,11 +151,11 @@
 				<line map="      n" />
 			</spritesequence>
 		</level>
-		<level name="earth_3" width="12.0" height="12.0" dustrequirement="600">
+		<level name="earth_3" width="12.0" height="12.0" dustrequirement="500">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
+			<spritesequence delay="800" speed="2.3" >
 				<line map="n      " />
 				<line map="n     n" />
 				<line map="      n" />
@@ -212,7 +212,7 @@
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
+			<spritesequence delay="800" speed="2.5" >
 				<line map="   n   " />
 				<line map="   n   " />
 				<line map="   n   " />
@@ -270,7 +270,7 @@
 				<def id="n" body="nugget_01" />
 				<def id="c" body="bird" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
+			<spritesequence delay="800" speed="2.5" >
 				<line map="   c   " />
 				<line map="   n   " />
 				<line map="   n   " />
@@ -323,13 +323,14 @@
 				<line map="nn   nn" />
 			</spritesequence>
 		</level>
-		<level name="earth_6" width="12.0" height="12.0" dustrequirement="1000">
+		<level name="earth_6" width="12.0" height="12.0" dustrequirement="800">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0"/>
 				<def id="c" body="bird" magnetprobability="0.4"/>
+				<def id="C" body="bird" magnetprobability="1.0"/>
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
-				<line map=" c     " />
+			<spritesequence delay="800" speed="2.5" >
+				<line map=" C     " />
 				<line map=" n     " />
 				<line map=" n  n  " />
 				<line map=" n  n  " />
@@ -389,8 +390,9 @@
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
 				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3" />
 				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3"/>
+				<def id="B" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="1.0"/>
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2" >
+			<spritesequence delay="800" speed="2.6" >
 				<line map="  c    " />
 				<line map="       " />
 				<line map="       " />
@@ -402,7 +404,7 @@
 				<line map="     n " />
 				<line map="       " />
 				<line map="       " />
-				<line map="   b   " />
+				<line map="   B   " />
 				<line map="       " />
 				<line map="   n   " />
 				<line map="  nnn  " />
@@ -537,7 +539,7 @@
 				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.3"/>
 				<def id="m" body="nugget_03" magnetprobability="0.0" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2">
+			<spritesequence delay="800" speed="2.6">
 				<line map="   n   " />
 				<line map="    n  " />
 				<line map="  c  n " />
@@ -604,7 +606,7 @@
 				<def id="b" body="bird_screecher" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2"/>
 				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.2" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2">
+			<spritesequence delay="800" speed="2.7">
 				<line map="  n    " />
 				<line map=" n n   " />
 				<line map="n d n  " />
@@ -709,7 +711,7 @@
 				<def id="D" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="1.0" />
 				<def id="C" body="bird" shieldprobability="1.0" shootprobability="0.0" magnetprobability="0.0" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2">
+			<spritesequence delay="800" speed="2.7">
 				<line map="nn   C " />
 				<line map="nn     " />
 				<line map="nn     " />
@@ -873,7 +875,7 @@
 				<def id="b" body="bird_screecher" shieldprobability="0.3" shootprobability="0.0" magnetprobability="0.3"/>
 				<def id="d" body="bird_ripper" shieldprobability="0.5" shootprobability="0.0" magnetprobability="0.5" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.5">
+			<spritesequence delay="800" speed="2.7">
 				<line map="              " />
 				<line map="   nn     b   " />
 				<line map="  nn          " />
@@ -942,7 +944,7 @@
 				<def id="b" body="bird_screecher" shieldprobability="0.5" shootprobability="0.0" magnetprobability="0.2"/>
 				<def id="d" body="bird_ripper" shieldprobability="0.0" shootprobability="0.0" magnetprobability="1.0" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.5">
+			<spritesequence delay="800" speed="2.7">
 				<line map="  nnnnn       " />
 				<line map="nn     nn    c" />
 				<line map="nn  d  nn    m" />
@@ -1013,7 +1015,7 @@
 				<def id="d" body="bird_ripper" shieldprobability="0.2" shootprobability="0.5" magnetprobability="0.0" />
 				<def id="e" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.0" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.5">
+			<spritesequence delay="800" speed="2.7">
 				<line map="      c" />
 				<line map=" b     " />
 				<line map="       " />
@@ -1181,7 +1183,7 @@
 				<def id="d" body="bird_ripper" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3" />
 				<def id="C" body="bird_ripper" shieldprobability="0.0" shootprobability="1.0" magnetprobability="0.0" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.5">
+			<spritesequence delay="800" speed="2.7">
 				<line map="  nn          " />
 				<line map="  nn        d " />
 				<line map="  nn   c    m " />
@@ -1264,7 +1266,7 @@
 				<def id="b" body="bird_screecher" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3"/>
 				<def id="d" body="bird_ripper" shieldprobability="0.3" shootprobability="0.3" magnetprobability="0.3" />
 			</spritedefs>
-			<spritesequence delay="800" speed="2.2">
+			<spritesequence delay="800" speed="2.7">
 				<line map="  d           " />
 				<line map="  n           " />
 				<line map="  n         c " />
