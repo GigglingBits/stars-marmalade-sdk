@@ -17,7 +17,7 @@ void Hud::Initialize() {
 	m_xLives.SetColour(GAME_COLOUR_FONT_MAIN);
 	m_xLives.SetAlignH(Renderer::eTextAlignHLeft);
 	m_xLives.SetAlignV(Renderer::eTextAlignVMiddle);
-	m_xLives.SetPrefix("Lives: ");
+	m_xLives.SetPrefix("Stars: ");
 }
 
 void Hud::SetEnabled(bool enabled) {
