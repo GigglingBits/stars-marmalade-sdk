@@ -452,6 +452,12 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	xys[3].x = spineverts[SP_VERTEX_X4];
 	xys[3].y = spineverts[SP_VERTEX_Y4];
 	
+#ifdef IW_DEBUG
+	for (int i = 0; i < length; i++) {
+		IwAssertMsg(MYAPP, xys[i].GetLength() < 10000.0f, ("Odd looking coordinates (%f / %f). This may indicate an error.", xys[i].x, xys[i].y));
+	}
+#endif
+		
 	CIwTexture* texture = NULL;
 	if (att->rendererObject) {
 		if (spAtlasRegion* atlasreg = (spAtlasRegion*)att->rendererObject) {
