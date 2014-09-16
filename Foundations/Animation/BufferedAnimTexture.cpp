@@ -1,4 +1,7 @@
 #include "BufferedAnimTexture.h"
+
+#include "TypeConverter.h"
+
 #include "IwDebug.h"
 #include "Debug.h"
 
@@ -36,6 +39,8 @@ void BufferedAnimTexture::AllocateBuffers(int length) {
 	m_auiColBuffer = new uint32[length];
 	m_apxShapeConverted = new CIwFVec2[length];
 	m_apxXYConverted = new CIwSVec2[length];
+	
+	m_bIsDirty = true;
 }
 
 void BufferedAnimTexture::DeleteBuffers() {
@@ -117,8 +122,8 @@ void BufferedAnimTexture::CopyConvertShape(CIwSVec2 verts[], int vertcount) {
 
 void BufferedAnimTexture::CopyConvertXY() {
 	for (int i = 0; i < m_iBufferLength; i++) {
-		m_apxXYConverted[i].x = m_apxXYBuffer[i].x;
-		m_apxXYConverted[i].y = m_apxXYBuffer[i].y;
+		m_apxXYConverted[i].x = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].x);
+		m_apxXYConverted[i].y = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].y);
 	}
 }
 

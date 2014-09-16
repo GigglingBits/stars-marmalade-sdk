@@ -442,6 +442,7 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	float spineverts[8];
 	spRegionAttachment_computeWorldVertices(att, slot->bone, spineverts);
 	
+	IwAssertMsg(MYAPP, SPINEANIMATION_VERTS_PER_SLOT == 4, ("Length of SPINEANIMATION_VERTS_PER_SLOT has been changed. It shoudl be 4."));
 	xys[0].x = spineverts[SP_VERTEX_X1];
 	xys[0].y = spineverts[SP_VERTEX_Y1];
 	xys[1].x = spineverts[SP_VERTEX_X2];
@@ -450,7 +451,7 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	xys[2].y = spineverts[SP_VERTEX_Y3];
 	xys[3].x = spineverts[SP_VERTEX_X4];
 	xys[3].y = spineverts[SP_VERTEX_Y4];
-
+	
 	CIwTexture* texture = NULL;
 	if (att->rendererObject) {
 		if (spAtlasRegion* atlasreg = (spAtlasRegion*)att->rendererObject) {

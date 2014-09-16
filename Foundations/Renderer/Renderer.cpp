@@ -365,9 +365,6 @@ void Renderer::DrawPolygonSubPixel(CIwFVec2 vertices[], int count, CIwColour fra
 
 	int32 slot = IwGxGetScreenSpaceSlot();
 	IwGxSetScreenSpaceSlot((int32)m_eCurrentRenderingLayer);
-
-	//CIwMaterial* mat = IW_GX_ALLOC_MATERIAL();
-	//IwGxSetMaterial(mat);
 	IwGxSetMaterial(CreateGxCacheMaterial(0xffffffff));
 	
 	if (bodycols) {

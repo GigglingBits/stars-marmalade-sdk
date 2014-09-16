@@ -1,6 +1,10 @@
 #include <string>
 #include <math.h>
+
 #include "Viewport.h"
+#include "TypeConverter.h"
+#include "IwDebug.h"
+#include "Debug.h"
 
 Viewport::Viewport() {
 	// virtual camera
@@ -78,8 +82,8 @@ CIwSVec2 Viewport::WorldToScreen(const CIwFVec2& worldpoint) const {
 	CIwSVec2 screenpoint;
 	
 	// scaling
-	screenpoint.x = (int16)(m_fWorldToScreenFactor * worldpoint.x);
-	screenpoint.y = (int16)(m_fWorldToScreenFactor * worldpoint.y);
+	screenpoint.x = TypeConverter::SafeFloatToInt<float, int16>(m_fWorldToScreenFactor * worldpoint.x);
+	screenpoint.y = TypeConverter::SafeFloatToInt<float, int16>(m_fWorldToScreenFactor * worldpoint.y);
 	
 	// convert coord space (screen coords are upside down)
 	screenpoint.y = m_xWorldSizePx.y - screenpoint.y;

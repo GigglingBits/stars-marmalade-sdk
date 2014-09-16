@@ -42,4 +42,6 @@ files {
 	ThreadPool.cpp
 	ThreadPoolTask.h
 	ThreadPoolTask.cpp
+	
+	TypeConverter.h
 }
