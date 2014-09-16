@@ -326,7 +326,7 @@
 		<level name="earth_6" width="12.0" height="12.0" dustrequirement="800">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0"/>
-				<def id="c" body="bird" magnetprobability="0.4"/>
+				<def id="c" body="bird" magnetprobability="0.5"/>
 				<def id="C" body="bird" magnetprobability="1.0"/>
 			</spritedefs>
 			<spritesequence delay="800" speed="2.5" >
