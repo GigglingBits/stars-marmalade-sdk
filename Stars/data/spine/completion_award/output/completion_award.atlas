@@ -1,9 +1,16 @@
 
 completion_award.png
-size: 797,213
+size: 855,213
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Star_effects
+  rotate: false
+  xy: 799, 161
+  size: 56, 52
+  orig: 56, 52
+  offset: 0, 0
+  index: -1
 awards_base
   rotate: false
   xy: 215, 45

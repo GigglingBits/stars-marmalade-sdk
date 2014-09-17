@@ -4,6 +4,13 @@ size: 493,459
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Star_effects
+  rotate: false
+  xy: 223, 63
+  size: 67, 62
+  orig: 67, 62
+  offset: 0, 0
+  index: -1
 awards_base
   rotate: false
   xy: 2, 2
