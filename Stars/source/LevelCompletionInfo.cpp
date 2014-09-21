@@ -121,17 +121,13 @@ int LevelCompletionInfo::GetLivesLeft() const {
 
 int LevelCompletionInfo::GetAchievedStars() const {
 	IwAssert(MYAPP, m_bEvaluated);
-	if (m_fDustFillAmount >= m_fDustFillMax) {
-		return 3;
-	}
-
-	if (m_fDustFillAmount >= m_fDustFillMax * 0.8f) {
-		return 2;
-	}
 	
-	if (m_fDustFillAmount >= m_fDustFillMax * 0.5f) {
-		return 1;
-	}
+	float points = m_fTotalPoints;
+	float maxpoints = m_fDustFillMax;
+
+	if (points >= maxpoints) return 3;
+	if (points >= maxpoints * 0.8f) return 2;
+	if (points >= maxpoints * 0.5f) return 1;
 	
 	return 0;
 }
