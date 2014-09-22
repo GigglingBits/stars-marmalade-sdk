@@ -5,6 +5,9 @@
 #include "IwDebug.h"
 #include "Debug.h"
 
+#include <limits>
+
+
 BufferedAnimTexture::BufferedAnimTexture() :
 m_iBufferLength(0),
 m_apxXYConverted(NULL),
@@ -121,9 +124,17 @@ void BufferedAnimTexture::CopyConvertShape(CIwSVec2 verts[], int vertcount) {
 }
 
 void BufferedAnimTexture::CopyConvertXY() {
-	for (int i = 0; i < m_iBufferLength; i++) {
+	IW_CALLSTACK_SELF;
+	IwAssert(MYAPP, m_iBufferedVertCount <= m_iBufferLength);
+	
+	for (int i = 0; i < std::min<int>(m_iBufferedVertCount, m_iBufferLength); i++) {
 		m_apxXYConverted[i].x = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].x);
 		m_apxXYConverted[i].y = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].y);
+	}
+	for (int i = m_iBufferedVertCount; i < m_iBufferLength; i++) {
+		// this is simply to indicate an uninitialized vertex
+		m_apxXYConverted[i].x = std::numeric_limits<float>::max();
+		m_apxXYConverted[i].y = std::numeric_limits<float>::max();
 	}
 }
 
