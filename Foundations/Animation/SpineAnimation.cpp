@@ -42,7 +42,7 @@ extern "C" {
 		
 		SpineAnimation* spineanim = (SpineAnimation*)state->rendererObject;
 		IwAssertMsg(MYAPP, spineanim, ("No renderer object in animation callback. Cannot propagate event."));
-
+		
 		switch (type) {
 			case SP_ANIMATION_START:
 				if (spineanim) {
@@ -147,7 +147,7 @@ bool SpineAnimation::SetAnimation(const std::string& name, float position) {
 	// leftovers from previous animations, e.g. if the new animations
 	// is lacking some key frames
 	spSkeleton_setToSetupPose(m_pxSkeleton);
-
+	
 	if (m_pxAnimationState) {
 		spAnimationState_dispose(m_pxAnimationState);
 	}
@@ -196,7 +196,7 @@ std::string SpineAnimation::GetCurrentAnimationName() {
 			}
 		}
 	}
-
+	
 	return "???";
 }
 
@@ -266,7 +266,7 @@ void SpineAnimation::Update(uint32 timestep) {
 	// let skeleton know about time (why is this needed?)
 	if (m_pxSkeleton) {
 		spSkeleton_update(m_pxSkeleton, seconds);
-
+		
 		// perform actual animation
 		if (m_pxAnimationState) {
 			spAnimationState_update(m_pxAnimationState, seconds);
@@ -277,7 +277,7 @@ void SpineAnimation::Update(uint32 timestep) {
 				SetAnimation(m_sNextAnimation, 0.0f);
 				m_sNextAnimation.clear();
 			}
-
+			
 			spSkeleton_updateWorldTransform(m_pxSkeleton);
 		}
 	}
@@ -287,59 +287,69 @@ void SpineAnimation::Update(uint32 timestep) {
 }
 
 int SpineAnimation::GetVertexCount() {
-	// todo: some slots do not have vertices -> they should be removed
-
-	return (m_pxSkeleton ? m_pxSkeleton->slotsCount : 0) * SPINEANIMATION_VERTS_PER_SLOT;
+	int vertcount = 0;
+	
+	if (!m_pxSkeleton) {
+		return vertcount;
+	}
+	
+	for (int slotid = 0; slotid < m_pxSkeleton->slotsCount; slotid++) {
+		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
+			if (spAttachment* attachment = slot->attachment) {
+				if (attachment->type == SP_ATTACHMENT_REGION) {
+					vertcount += SPINEANIMATION_VERTS_PER_SLOT;
+				} else if (attachment->type == SP_ATTACHMENT_MESH) {
+					// ignored; not handled by GetStreams(...)
+				} else if (attachment->type == SP_ATTACHMENT_SKINNED_MESH) {
+					// ignored; not handled by GetStreams(...)
+				} else if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
+					// ignored; not handled by GetStreams(...)
+				} else {
+					IwAssertMsg(MYAPP, false, ("Slot %i contains an unknown attachment type: %i", slotid, attachment->type));
+				}
+			}
+		}
+	}
+	
+	return vertcount;
 }
 
 CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
-	// todo: some slots do not have vertices -> they should be removed
-
 	IW_CALLSTACK_SELF;
 	if (!m_pxSkeleton) {
 		return NULL;
 	}
-
+	
 	CIwTexture* texture = NULL;
+	int cursor = 0;
 	for (int slotid = 0; slotid < m_pxSkeleton->slotsCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
-				int cursor = SPINEANIMATION_VERTS_PER_SLOT * slotid;
 				if (attachment->type == SP_ATTACHMENT_REGION) {
 					if (spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment) {
 						CIwTexture* tmp = ExtractStreams(slot, regionAttachment, SPINEANIMATION_VERTS_PER_SLOT, &xys[cursor], &uvs[cursor], &cols[cursor]);
+						cursor += SPINEANIMATION_VERTS_PER_SLOT;
 						IwAssertMsg(MYAPP, tmp, ("Slot %i seems to have no texture. Drawing errors will occur.", slotid));
 						IwAssertMsg(MYAPP, !texture || tmp == texture, ("Slot Not all slots seem to use the same texture. Multitexture animations are not supported. Drawing errors will occur."));
 						texture = tmp;
 					} else {
-						ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
+						IwAssertMsg(MYAPP, false, ("Unable to read verticed in region attachment for slot %i.", slotid));
 					}
 				} else if (attachment->type == SP_ATTACHMENT_MESH) {
 					IwAssertMsg(MYAPP, false, ("Slot %i has a mesh attachment. Meshes are not supported by the renderer.", slotid));
-					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else if (attachment->type == SP_ATTACHMENT_SKINNED_MESH) {
 					IwAssertMsg(MYAPP, false, ("Slot %i has a skinned mesh attachment. Skinned meshes are not supported by the renderer.", slotid));
-					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
 					; // bounding boxes are legal, but are not rendered
-					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else {
 					IwAssertMsg(MYAPP, false, ("Slot %i has an unidentified attachment. It will be ignoered.", slotid));
-					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				}
 			}
 		}
 	}
 	IwAssertMsg(MYAPP, texture, ("None of the attachments has a texture. This is likely an error. Is the skeleton skinned, but the skin was not set?"));
 	return texture;
-}
-
-void SpineAnimation::ClearStream(CIwFVec2 verts[], int count) {
-	// clearing the streams should not be necessary; ignoring them would be better than just drawing empty rectagles!
-	for (int i = 0; i < count; i++) {
-		verts[i] = CIwFVec2::g_Zero;
-	}
 }
 
 bool SpineAnimation::GetFlipX() {
@@ -486,9 +496,9 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 			}
 		}
 	}
-			
+	
 	ExtractColours(cols, slot);
-		
+	
 	return texture;
 }
 

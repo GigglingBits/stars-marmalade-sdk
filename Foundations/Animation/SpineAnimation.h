@@ -55,7 +55,6 @@ private:
 	bool LoadSkeleton(const std::string& atlasdata, const std::string& jsondata);
 	void DestroySkeleton();
 
-	void ClearStream(CIwFVec2 verts[], int count);
 	CIwTexture* ExtractStreams(spSlot* slot, spRegionAttachment* att, int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]);
 	void ExtractUVs(CIwFVec2 uvs[4], spAtlasRegion* atlasreg);
 	void ExtractColours(uint32 cols[4], spSlot* slot);
