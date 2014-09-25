@@ -5,7 +5,7 @@
 #include "IwDebug.h"
 #include "Debug.h"
 
-#include <limits>
+#include <cmath>
 
 
 BufferedAnimTexture::BufferedAnimTexture() :
@@ -132,9 +132,8 @@ void BufferedAnimTexture::CopyConvertXY() {
 		m_apxXYConverted[i].y = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].y);
 	}
 	for (int i = m_iBufferedVertCount; i < m_iBufferLength; i++) {
-		// this is simply to indicate an uninitialized vertex
-		m_apxXYConverted[i].x = std::numeric_limits<float>::max();
-		m_apxXYConverted[i].y = std::numeric_limits<float>::max();
+		m_apxXYConverted[i].x = NAN;
+		m_apxXYConverted[i].y = NAN;
 	}
 }
 

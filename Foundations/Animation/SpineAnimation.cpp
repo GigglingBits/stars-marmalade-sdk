@@ -287,10 +287,14 @@ void SpineAnimation::Update(uint32 timestep) {
 }
 
 int SpineAnimation::GetVertexCount() {
+	// todo: some slots do not have vertices -> they should be removed
+
 	return (m_pxSkeleton ? m_pxSkeleton->slotsCount : 0) * SPINEANIMATION_VERTS_PER_SLOT;
 }
 
 CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[], uint32 cols[]) {
+	// todo: some slots do not have vertices -> they should be removed
+
 	IW_CALLSTACK_SELF;
 	if (!m_pxSkeleton) {
 		return NULL;
@@ -301,28 +305,41 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
 			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
+				int cursor = SPINEANIMATION_VERTS_PER_SLOT * slotid;
 				if (attachment->type == SP_ATTACHMENT_REGION) {
 					if (spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment) {
-						int cursor = SPINEANIMATION_VERTS_PER_SLOT * slotid;
 						CIwTexture* tmp = ExtractStreams(slot, regionAttachment, SPINEANIMATION_VERTS_PER_SLOT, &xys[cursor], &uvs[cursor], &cols[cursor]);
 						IwAssertMsg(MYAPP, tmp, ("Slot %i seems to have no texture. Drawing errors will occur.", slotid));
 						IwAssertMsg(MYAPP, !texture || tmp == texture, ("Slot Not all slots seem to use the same texture. Multitexture animations are not supported. Drawing errors will occur."));
 						texture = tmp;
+					} else {
+						ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 					}
 				} else if (attachment->type == SP_ATTACHMENT_MESH) {
 					IwAssertMsg(MYAPP, false, ("Slot %i has a mesh attachment. Meshes are not supported by the renderer.", slotid));
+					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else if (attachment->type == SP_ATTACHMENT_SKINNED_MESH) {
 					IwAssertMsg(MYAPP, false, ("Slot %i has a skinned mesh attachment. Skinned meshes are not supported by the renderer.", slotid));
+					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else if (attachment->type == SP_ATTACHMENT_BOUNDING_BOX) {
 					; // bounding boxes are legal, but are not rendered
+					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				} else {
 					IwAssertMsg(MYAPP, false, ("Slot %i has an unidentified attachment. It will be ignoered.", slotid));
+					ClearStream(&xys[cursor], SPINEANIMATION_VERTS_PER_SLOT);
 				}
 			}
 		}
 	}
 	IwAssertMsg(MYAPP, texture, ("None of the attachments has a texture. This is likely an error. Is the skeleton skinned, but the skin was not set?"));
 	return texture;
+}
+
+void SpineAnimation::ClearStream(CIwFVec2 verts[], int count) {
+	// clearing the streams should not be necessary; ignoring them would be better than just drawing empty rectagles!
+	for (int i = 0; i < count; i++) {
+		verts[i] = CIwFVec2::g_Zero;
+	}
 }
 
 bool SpineAnimation::GetFlipX() {
@@ -454,10 +471,10 @@ CIwTexture* SpineAnimation::ExtractStreams(spSlot* slot, spRegionAttachment* att
 	
 #ifdef IW_DEBUG
 	for (int i = 0; i < length; i++) {
-		IwAssertMsg(MYAPP, xys[i].GetLength() < 10000.0f, ("Odd looking coordinates (%f / %f). This may indicate an error.", xys[i].x, xys[i].y));
+		IwAssertMsg(MYAPP, !isnanf(xys[i].x) && !isnanf(xys[i].y), ("Undefined value in coordinate (%f / %f)", xys[i].x, xys[i].y));
 	}
 #endif
-		
+	
 	CIwTexture* texture = NULL;
 	if (att->rendererObject) {
 		if (spAtlasRegion* atlasreg = (spAtlasRegion*)att->rendererObject) {

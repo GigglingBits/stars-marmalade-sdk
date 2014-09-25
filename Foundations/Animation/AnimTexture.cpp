@@ -2,7 +2,7 @@
 #include "IwDebug.h"
 #include "Debug.h"
 
-#include <math.h>
+#include <cmath>
 
 AnimTexture::AnimTexture() {
 	m_xConfineTransform.SetIdentity();
@@ -50,9 +50,14 @@ void AnimTexture::SetRotation(float angle) {
 }
 
 void AnimTexture::TransformToWorld(CIwFVec2 v[], int c) {
+	IW_CALLSTACK_SELF;
+	
 	for (int i = 0; i < c; i++) {
+		IwAssertMsg(MYAPP, !isnanf(v[i].x) && !isnanf(v[i].y), ("Undefined value in coordinate (%f / %f)", v[i].x, v[i].y));
 		v[i] = m_xConfineTransform.TransformVec(v[i]);
 		v[i] = m_xWorldTransform.TransformVec(v[i]);
+		IwAssertMsg(MYAPP, !isnanf(v[i].x) && !isnanf(v[i].y), ("Undefined value in coordinate (%f / %f)", v[i].x, v[i].y));
+		IwAssertMsg(MYAPP, v[i].x < 10000.0f || v[i].y < 10000.0f || v[i].GetLength() < 10000.0f, ("Odd looking coordinates at %i (%f / %f). This may indicate an error.", i, v[i].x, v[i].y));
 	}
 }
 
