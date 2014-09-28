@@ -65,16 +65,19 @@ MYAPP=1
 ####################################################
 [S3E]
 ####################################################
-MemSize=31000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
+MemSize=35000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
 MemSizeDebug=38000000		# debug / resource builder
 
 SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
+SplashscreenMin=0
+SplashScreenMinTime=4000
+SplashScreenAutoMinTime=2000
 
 IOSDispScaleFactor=200
 #DispFixRot=FixedLandscape	# locked because of the gyroscope
-DispFixRot=Landscape		# locked because of the gyroscope
+DispFixRot=Landscape
 
 SysTraceToFile=0
 
@@ -116,7 +119,6 @@ VertCacheSize=4096
 [GxFont]
 ####################################################
 CacheTextureMaxSize=1024
-
 
 ####################################################
 [GL]
