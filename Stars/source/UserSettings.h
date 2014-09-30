@@ -20,6 +20,8 @@
 #define USER_SETTINGS_HIGHSCORE_ATTR "highscore"
 #define USER_SETTINGS_STARS_ATTR "stars"
 
+#define USER_SETTINGS_CHECKSUM_ATTR "checksum"
+#define USER_SETTINGS_NULL_CHECKSUM "********"
 
 class UserSettings {
 public:
@@ -63,6 +65,10 @@ private:
 	bool Load(TiXmlHandle& settings);
 
 	bool Save(const std::string& filename);
+	
+	std::string GetHash(const LevelSettings settings);
+	std::string DataToString(const LevelSettings settings);
+	std::string BytesToHex(uint8* data, uint8 datalen);
 };
 
 #endif
