@@ -1,0 +1,15 @@
+display_name "Foundation/Adverts"
+
+subprojects {
+	s3eFlurryAppSpot
+}
+
+includepaths {
+	./Adverts
+}
+
+files {
+	(Adverts)
+	Adverts.h
+	Adverts.cpp
+}

@@ -4,8 +4,6 @@
 #include <string>
 #include <map>
 
-#include "s3eFlurry.h"
-
 class Analytics {
 public:
 	typedef std::map<std::string, std::string> Params;

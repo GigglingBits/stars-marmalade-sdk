@@ -9,6 +9,7 @@
 #include "SpineResource.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
+#include "Adverts.h"
 #include "Analytics.h"
 #include "LocationServices.h"
 #include "DeviceInfo.h"
@@ -152,7 +153,8 @@ void Initialize() {
 
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
 	s3eDebugRegister(S3E_DEBUG_ERROR, ErrorCallback, NULL);
-	
+	Adverts::Initialize(Configuration::GetInstance().FlurryKey);
+
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	LogManager::Initialize();
@@ -176,6 +178,7 @@ void Terminate() {
 	InputManager::Terminate();
 	SoundEngine::Terminate();
 
+	Adverts::Terminate();
 	s3eDebugUnRegister(S3E_DEBUG_ERROR, ErrorCallback);
 	Analytics::Terminate();
 	ResourceManager::Terminate();

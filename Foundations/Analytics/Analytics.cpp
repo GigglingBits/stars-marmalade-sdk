@@ -1,21 +1,23 @@
 #include "Analytics.h"
 
-#include <sstream>
-
+#include "s3eFlurry.h"
 #include "IwDebug.h"
+
+#include <sstream>
 
 Analytics* Analytics::s_pxInstance = NULL;
 
 void Analytics::Initialize(const std::string& appid) {
 	if (!s3eFlurryAvailable()) {
         IwTrace(S3EFLURRY, ("Flurry extension not found"));
-    } else if (appid.empty()) {
-        IwTrace(S3EFLURRY, ("Please supply a valid Flurry Api ID for FLURRY_API_KEY"));
-    } else {
-        s3eFlurryStartSession(appid.c_str());
+		return;
     }
-
-	GetInstance();
+	if (appid.empty()) {
+        IwTrace(S3EFLURRY, ("Please supply a valid Flurry Api ID for FLURRY_API_KEY"));
+		return;
+    }
+	
+	s3eFlurryStartSession(appid.c_str());
 }
 
 void Analytics::Terminate() {
