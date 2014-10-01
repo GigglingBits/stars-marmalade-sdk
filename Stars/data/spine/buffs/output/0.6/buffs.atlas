@@ -4,6 +4,20 @@ size: 483,239
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+extra_buff
+  rotate: false
+  xy: 2, 2
+  size: 60, 60
+  orig: 60, 60
+  offset: 0, 0
+  index: -1
+extra_button
+  rotate: false
+  xy: 179, 132
+  size: 100, 107
+  orig: 100, 107
+  offset: 0, 0
+  index: -1
 gradient_effect
   rotate: false
   xy: 2, 64
@@ -13,42 +27,42 @@ gradient_effect
   index: -1
 magnet_buff
   rotate: false
-  xy: 2, 2
+  xy: 288, 70
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 magnet_button
   rotate: false
-  xy: 179, 132
+  xy: 281, 132
   size: 100, 107
   orig: 100, 107
   offset: 0, 0
   index: -1
 shield_buff
   rotate: false
-  xy: 179, 70
+  xy: 64, 2
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 shield_button
   rotate: false
-  xy: 281, 132
+  xy: 383, 132
   size: 100, 107
   orig: 100, 107
   offset: 0, 0
   index: -1
 shoot_buff
   rotate: false
-  xy: 64, 2
+  xy: 350, 70
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 shoot_button
-  rotate: false
-  xy: 383, 132
+  rotate: true
+  xy: 179, 30
   size: 100, 107
   orig: 100, 107
   offset: 0, 0
