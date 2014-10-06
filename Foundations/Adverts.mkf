@@ -1,7 +1,7 @@
 display_name "Foundation/Adverts"
 
 subprojects {
-	s3eFlurryAppSpot
+#	s3eFlurryAppSpot
 }
 
 includepaths {
