@@ -423,7 +423,10 @@
 		<texture id="button_pause_menu" image="button_menu" />
 		<texture id="button_pause_reload" image="button_reload" />
 		<texture id="button_pause_reload_local" image="button_reload_local" />
-		
+
+		<texture id="button_ads_watch" image="button_adwatch" />
+		<texture id="button_ads_remove" image="button_adremove" />
+
 		<texture id="button_arrow_left" image="button_arrow_left" />
 		<texture id="button_arrow_right" image="button_arrow_right" />
 		

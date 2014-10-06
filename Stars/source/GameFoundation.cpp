@@ -542,7 +542,7 @@ void GameFoundation::BuffCollectedEventHandler(const Buff& sender, const Buff::B
 	} else if (dynamic_cast<BuffShoot*>((Buff*)&sender)) {
 		bt = eBuffTypeShoot;
 	} else {
-		IwAssertMsg(MYAPP, false, ("Unkown buff type found. The buff will be ignored."));
+		IwAssertMsg(MYAPP, false, ("Unkown or invalid buff type found. The buff will be ignored."));
 		return;
 	}
 	

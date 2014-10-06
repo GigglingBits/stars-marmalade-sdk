@@ -19,11 +19,15 @@ files {
 	Button.cpp
 	ButtonEx.h
 	ButtonEx.cpp
+
 	ButtonPanel.h
 	ButtonPanel.cpp
 
 	Curtain.h
 	Curtain.cpp
+
+	Panel.h
+	Panel.cpp
 
 	Window.h
 	Window.cpp

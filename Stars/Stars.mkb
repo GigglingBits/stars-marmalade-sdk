@@ -120,6 +120,8 @@ files {
 	LevelCompletionInfo.cpp
 	LevelDustVial.h
 	LevelDustVial.cpp
+	LevelAdsPanel.h
+	LevelAdsPanel.cpp
 	LevelPausedPanel.h
 	LevelPausedPanel.cpp
 

@@ -18,6 +18,9 @@ CIwResGroup
 	./button_achievements.png
 	./button_leaderboards.png
 
+	./button_adwatch.png
+	./button_adremove.png
+
 	./button_options.png
 	./button_menu.png
 	./button_movie.png
