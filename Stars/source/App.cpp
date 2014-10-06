@@ -10,6 +10,7 @@
 #include "LevelFactory.h"
 #include "Downloader.h"
 #include "LogManager.h"
+#include "UserSettings.h"
 
 #include "Debug.h"
 
@@ -22,6 +23,9 @@ App::App() {
 	
 	// set the rendeer up
 	SetFonts(m_xRenderer);
+	
+	// start movie on first opening
+	SetStartPage();
 }
 
 App::~App() {
@@ -87,6 +91,20 @@ Renderer& App::GetRenderer() {
 
 Stopwatch& App::GetStopwatch() {
 	return m_xStopwatch;
+}
+
+void App::SetStartPage() {
+	
+	// checking, if the first level has been completed
+	LevelIterator lit;
+	LevelIterator::WorldId firstworld = lit.GetFirstWorld();
+	int firstlevel = lit.GetFirstLevelInWorld(firstworld);
+	UserSettings::LevelSetting& l = UserSettings::GetInstance().GetLevel(lit.GetLevelName(firstworld, firstlevel));
+
+	// if first level was never played, we start with showing the movie
+	if (l.PlayCount <= 0 && l.Stars <= 0) {
+		m_xPageManager.StartIntroMovie();
+	}
 }
 
 void App::Update() {
