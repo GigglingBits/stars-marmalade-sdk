@@ -1,19 +1,19 @@
 
 completion_award.png
-size: 855,213
+size: 1024,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Star_effects
   rotate: false
-  xy: 799, 161
+  xy: 233, 9
   size: 56, 52
   orig: 56, 52
   offset: 0, 0
   index: -1
 awards_base
   rotate: false
-  xy: 215, 45
+  xy: 233, 63
   size: 183, 168
   orig: 183, 168
   offset: 0, 0
@@ -21,69 +21,69 @@ awards_base
 awards_gradient
   rotate: false
   xy: 2, 2
-  size: 211, 211
+  size: 229, 229
   orig: 229, 229
-  offset: 9, 9
+  offset: 0, 0
   index: -1
 awards_stars_blank_01
   rotate: false
-  xy: 534, 83
+  xy: 552, 101
   size: 63, 64
   orig: 63, 64
   offset: 0, 0
   index: -1
 awards_stars_blank_02
   rotate: false
-  xy: 400, 149
+  xy: 418, 167
   size: 65, 64
   orig: 65, 64
   offset: 0, 0
   index: -1
 awards_stars_blank_03
   rotate: false
-  xy: 400, 83
+  xy: 418, 101
   size: 65, 64
   orig: 65, 64
   offset: 0, 0
   index: -1
 awards_stars_full_01
   rotate: true
-  xy: 667, 150
+  xy: 685, 168
   size: 63, 64
   orig: 63, 64
   offset: 0, 0
   index: -1
 awards_stars_full_02
   rotate: false
-  xy: 534, 149
+  xy: 552, 167
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 awards_stars_full_03
   rotate: false
-  xy: 467, 149
+  xy: 485, 167
   size: 65, 64
   orig: 65, 64
   offset: 0, 0
   index: -1
 awards_stars_shadow_01
   rotate: true
-  xy: 733, 150
+  xy: 751, 168
   size: 63, 64
   orig: 63, 64
   offset: 0, 0
   index: -1
 awards_stars_shadow_02
   rotate: false
-  xy: 600, 150
+  xy: 618, 168
   size: 65, 63
   orig: 65, 63
   offset: 0, 0
   index: -1
 awards_stars_shadow_03
   rotate: false
-  xy: 467, 83
+  xy: 485, 101
   size: 65, 64
   orig: 65, 64
   offset: 0, 0
