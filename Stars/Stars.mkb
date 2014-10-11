@@ -4,8 +4,8 @@ options {
 	strict
 	arm-fpu=vfp # Box2D will not work without FPU
 	optimise-speed
-#	enable-exceptions
-#   builddir = build_temp
+	# enable-exceptions
+	# builddir = build_temp
 }
 
 subprojects {
@@ -22,7 +22,6 @@ defines {
 }
 
 deployments {
-	iphone-enable-4inch-retina=1
 	auto-derbh
 }
 
