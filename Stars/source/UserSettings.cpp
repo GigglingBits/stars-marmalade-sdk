@@ -3,6 +3,7 @@
 #include "IwDebug.h"
 
 #include "s3eCrypto.h"
+#include "Analytics.h"
 
 #include <vector>
 #include <sstream>
@@ -110,15 +111,18 @@ bool UserSettings::Load(TiXmlHandle& settings) {
 	}
 	
 	// validate checksum
-	if (!checksum.compare(GetHash(levels)) ||
-		!checksum.compare(USER_SETTINGS_NULL_CHECKSUM) ||
-		!checksum.compare("")) {
+	if (!checksum.compare(GetHash(levels))) {
+		m_xLevels = levels;
+		return true;
+	} else if (!checksum.compare(USER_SETTINGS_NULL_CHECKSUM) || !checksum.compare("")) {
 		// todo: empty string should no longer be allowed once
 		//       all user have been converted
+		Analytics::GetInstance().Log("settings: no hash found -> hash will be added");
 		m_xLevels = levels;
 		return true;
 	} else {
-		IwAssertMsg(MYAPP, false, ("The settings file has an invalid checksum. All settings will be discarded. Has the settings fil ebeen tampered with?"));
+		Analytics::GetInstance().Log("settings: hash mismatch -> settings lost");
+		IwAssertMsg(MYAPP, false, ("The settings file has an invalid checksum. All settings will be discarded. Has the settings file been tampered with?"));
 		return false;
 	}
 }
@@ -172,6 +176,7 @@ std::string UserSettings::GetHash(const LevelSettings settings) {
 		return hash;
 	} else {
 		IwAssertMsg(MYAPP, false, ("Cannot create checksum: %s", s3eCryptoGetErrorString()));
+		Analytics::GetInstance().Log("settings: cannot calculate hash -> null hash will be added");
 		return USER_SETTINGS_NULL_CHECKSUM;
 	}
 }
