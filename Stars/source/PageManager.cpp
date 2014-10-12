@@ -85,7 +85,11 @@ void PageManager::StartNextLevel() {
 		// there seems to be no next level in that world; move to new world
 		m_xPageSettings.SetWorld(it.GetNextWorld(world));
 		m_xPageSettings.SetLevel(it.GetFirstLevelInWorld(m_xPageSettings.GetWorld()));
-		if (m_xPageSettings.GetWorld() == it.GetFirstWorld()) {
+		if (m_xPageSettings.GetWorld() != world) {
+			// moved to next world... but we currently have only one world...
+			// todo: when we have multiple worlds, this logic needs to be re-thought!
+			StartTitleScreen();
+		} else if (m_xPageSettings.GetWorld() == it.GetFirstWorld()) {
 			// the previous world was the final world; game completed
 			// todo: congratulation screen
 			StartTitleScreen();
