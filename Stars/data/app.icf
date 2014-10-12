@@ -71,7 +71,6 @@ MemSizeDebug=38000000		# debug / resource builder
 SplashscreenBkR=0
 SplashscreenBkG=0
 SplashscreenBkB=0
-SplashscreenMin=0
 SplashScreenMinTime=4000
 SplashScreenAutoMinTime=2000
 
@@ -112,7 +111,7 @@ UseDependencies=1
 ####################################################
 [Gx]
 ####################################################
-DataCacheSize=524288
+DataCacheSize=1048576
 VertCacheSize=4096
 
 ####################################################
