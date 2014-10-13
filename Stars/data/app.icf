@@ -68,11 +68,11 @@ MYAPP=1
 MemSize=35000000			# main heap; the resource heap in Main.cpp must also fit in here (set by resourceheapsize)
 MemSizeDebug=38000000		# debug / resource builder
 
-SplashscreenBkR=0
-SplashscreenBkG=0
-SplashscreenBkB=0
-SplashScreenMinTime=4000
-SplashScreenAutoMinTime=2000
+#SplashscreenBkR=0
+#SplashscreenBkG=0
+#SplashscreenBkB=0
+#SplashScreenMinTime=4000
+#SplashScreenAutoMinTime=2000
 
 IOSDispScaleFactor=200
 #DispFixRot=FixedLandscape	# locked because of the gyroscope
