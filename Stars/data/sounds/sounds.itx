@@ -83,7 +83,7 @@ CIwSoundSpec
 {
 	name		"Screech"
 	data		"screech"
-	vol 		0.6
+	vol 		0.5
 	pitchMin	1.00
 	pitchMax	1.2
 }
