@@ -1,19 +1,19 @@
 
 bird_ripper.png
-size: 1022,510
+size: 1024,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bigbluebird-beak-01
   rotate: false
-  xy: 969, 478
+  xy: 62, 5
   size: 53, 32
   orig: 53, 32
   offset: 0, 0
   index: -1
 bigbluebird-beak-02
   rotate: false
-  xy: 441, 205
+  xy: 441, 221
   size: 40, 37
   orig: 40, 37
   offset: 0, 0
@@ -27,7 +27,7 @@ bigbluebird-beak-hurt-01
   index: -1
 bigbluebird-beak-hurt-02
   rotate: false
-  xy: 889, 438
+  xy: 891, 438
   size: 78, 72
   orig: 78, 72
   offset: 0, 0
@@ -62,35 +62,35 @@ bigbluebird-claws-attack
   index: -1
 bigbluebird-eye-closed
   rotate: true
-  xy: 558, 333
+  xy: 558, 331
   size: 52, 43
   orig: 52, 43
   offset: 0, 0
   index: -1
 bigbluebird-eye-hurt
   rotate: false
-  xy: 708, 421
+  xy: 710, 421
   size: 100, 89
   orig: 100, 89
   offset: 0, 0
   index: -1
 bigbluebird-eye-open
-  rotate: false
-  xy: 969, 433
+  rotate: true
+  xy: 441, 260
   size: 52, 43
   orig: 52, 43
   offset: 0, 0
   index: -1
 bigbluebird-hurt-patch
   rotate: false
-  xy: 810, 433
+  xy: 812, 433
   size: 77, 77
   orig: 77, 77
   offset: 0, 0
   index: -1
 bigbluebird-wing-01
   rotate: false
-  xy: 600, 401
+  xy: 602, 401
   size: 106, 109
   orig: 106, 109
   offset: 0, 0
@@ -98,9 +98,9 @@ bigbluebird-wing-01
 bigbluebird-wing-02
   rotate: false
   xy: 62, 39
-  size: 122, 45
+  size: 127, 45
   orig: 127, 45
-  offset: 4, 0
+  offset: 0, 0
   index: -1
 bigbluebird-wing-03
   rotate: false
@@ -125,24 +125,24 @@ blue-feathers-01
   index: -1
 blue-feathers-02
   rotate: false
-  xy: 441, 244
+  xy: 971, 442
   size: 41, 68
   orig: 41, 68
   offset: 0, 0
   index: -1
 blue-feathers-03
   rotate: false
-  xy: 480, 387
-  size: 118, 123
+  xy: 480, 385
+  size: 120, 125
   orig: 120, 125
-  offset: 2, 0
+  offset: 0, 0
   index: -1
 blue-feathers-04
   rotate: true
-  xy: 480, 333
-  size: 52, 76
+  xy: 480, 330
+  size: 53, 76
   orig: 53, 76
-  offset: 1, 0
+  offset: 0, 0
   index: -1
 slice
   rotate: false
