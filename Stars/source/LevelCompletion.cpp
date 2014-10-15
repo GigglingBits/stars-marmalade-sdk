@@ -207,7 +207,10 @@ void LevelCompletion::SaveResults() {
 
 	// save scores for current level
 	if (m_xCompletionInfo.IsLevelAchieved()) {
-		levelsettings.Stars = m_xCompletionInfo.GetAchievedStars();
+		int stars = m_xCompletionInfo.GetAchievedStars();
+		if (levelsettings.Stars < stars) {
+			levelsettings.Stars = stars;
+		}
 		int score = m_xCompletionInfo.GetTotalPoints();
 		if (levelsettings.HighScore < score) {
 			levelsettings.HighScore = score;
