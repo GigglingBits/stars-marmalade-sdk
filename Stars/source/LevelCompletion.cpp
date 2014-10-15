@@ -205,17 +205,16 @@ void LevelCompletion::SaveResults() {
 
 	levelsettings.PlayCount++;
 
-	// save scores for current level
-	if (m_xCompletionInfo.IsLevelAchieved()) {
-		int stars = m_xCompletionInfo.GetAchievedStars();
-		if (levelsettings.Stars < stars) {
-			levelsettings.Stars = stars;
-		}
-		int score = m_xCompletionInfo.GetTotalPoints();
-		if (levelsettings.HighScore < score) {
-			levelsettings.HighScore = score;
-		}
+	int stars = m_xCompletionInfo.GetAchievedStars();
+	if (levelsettings.Stars < stars) {
+		levelsettings.Stars = stars;
 	}
+	
+	int score = m_xCompletionInfo.GetTotalPoints();
+	if (levelsettings.HighScore < score) {
+		levelsettings.HighScore = score;
+	}
+	
 	settings.Save();
 }
 
