@@ -24,7 +24,7 @@ void AppAnalytics::RegisterLevelStarted(const std::string& levelid) {
 	Analytics::GetInstance().Log(oss.str());
 }
 
-void AppAnalytics::RegisterLevelCompleted(const std::string& id, int score, int stars) {
+void AppAnalytics::RegisterLevelCompleted(const std::string& id, int score, int stars, bool achieved) {
 	std::ostringstream oss;
 	oss << "Level completed: " << id;
 	std::string message(oss.str());
@@ -38,7 +38,7 @@ void AppAnalytics::RegisterLevelCompleted(const std::string& id, int score, int 
 	std::string starstxt(oss.str());
 	
 	Analytics::Params params;
-	params["cleared"] = stars > 0 ? "yes" : "no";
+	params["cleared"] = achieved ? "yes" : "no";
 	params["score"] = scoretxt;
 	params["stars"] = starstxt;
 	Analytics::GetInstance().Log(message, params);

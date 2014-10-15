@@ -259,6 +259,6 @@ void PageManager::SubmitAnalytics(Page* oldpage, Page* newpage) {
 		a.RegisterLevelStarted(levelid);
 	} else if (LevelCompletion* lc = dynamic_cast<LevelCompletion*>(newpage)) {
 		const LevelCompletionInfo& info = lc->GetCompletionInfo();
-		a.RegisterLevelCompleted(levelid, info.GetTotalPoints(), info.GetAchievedStars());
+		a.RegisterLevelCompleted(levelid, info.GetTotalPoints(), info.GetAchievedStars(), info.IsLevelAchieved());
 	}
 }
