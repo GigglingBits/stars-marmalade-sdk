@@ -488,7 +488,7 @@ void Renderer::DrawText(const char* text, const CIwRect& rect, FontType font, ui
 			iw_align_v = IW_GX_FONT_ALIGN_BOTTOM;
 			break;
 	}
-	IwGxFontSetAlignmentVer(IW_GX_FONT_ALIGN_MIDDLE);
+	IwGxFontSetAlignmentVer(iw_align_v);
 	
 	if (m_apxFonts[font]) {
 		IwAssertMsg(MYAPP, m_apxFonts[font], ("Cannot draw text because font %i is not set. Please load the fonts before drawing text.", font));

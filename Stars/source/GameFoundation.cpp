@@ -473,7 +473,7 @@ void GameFoundation::ActivateShootBuff() {
 	}
 		
 	// remove farest enemies
-	while (enemies.size() > Configuration::GetInstance().BuffShootCount) {
+	while ((int)enemies.size() > Configuration::GetInstance().BuffShootCount) {
 		EnemyRefs::iterator eraseit = enemies.end();
 		float distance = 0.0f;
 		for (EnemyRefs::iterator it = enemies.begin(); it != enemies.end(); it++) {

@@ -26,6 +26,10 @@ private:
 		EventType type;
 		std::string text;
 		int amount;
+		EventArgs() {
+			type = eEventTypeNoOp;
+			amount = 0;
+		}
 	};
 
 private:

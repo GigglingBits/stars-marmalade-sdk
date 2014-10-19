@@ -35,7 +35,7 @@ void PathTracker::ImportPath(const std::vector<CIwFVec2>& path, float leadindist
 	}
 	
 	// path conditioning
-	int i = 0;
+	unsigned int i = 0;
 	CIwFVec2 current = path[i];
 	CIwFVec2 next = path[++i];
 	Append(current);

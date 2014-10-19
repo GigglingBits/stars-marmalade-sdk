@@ -30,7 +30,6 @@ void WebView::Show() {
 		res = s3eWebViewShow(
 			m_pxHandle, 
 			GetPosition().x, GetPosition().y, GetPosition().w, GetPosition().h);
-	
 		IwAssertMsg(MYAPP, res == S3E_RESULT_SUCCESS, ("Cannot show web view '%s'. Error: %s", GetFile().c_str(), s3eWebViewGetErrorString()));
 	}
 }
