@@ -14,6 +14,7 @@ public:
 	void RegisterLevelCancelled(const std::string& id);
 
 	void RegisterFacebookOpened();
+	void RegisterLeaderboardsOpened();
 };
 
 #endif

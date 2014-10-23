@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "Configuration.h"
 #include "LogManager.h"
+#include "Leaderboards.h"
 #include "AppAnalytics.h"
 
 #include "s3eOsExec.h"
@@ -14,16 +15,20 @@ TitleScreen::TitleScreen() :
 Page("menu.group", Configuration::GetInstance().MenuSong),
 m_xButtonTitle(eButtonCommandIdOpenWorldMenu, s3eKeyAbsOk),
 m_xButtonFacebook(eButtonCommandIdFacebook, s3eKeyF),
-m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyT),
+m_xButtonLeaderboards(eButtonCommandIdLeaderboards, s3eKeyL),
+m_xButtonMovie(eButtonCommandIdOpenIntroMovie, s3eKeyM),
 m_xBackButton(eButtonCommandIdNone, s3eKeyAbsGameD),
 m_bHasFacebookButton(false),
+m_bHasLeaderboardsButton(false),
 m_bHasMovieButton(false) {
 	m_xButtonFacebook.PressedEvent.AddListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
+	m_xButtonLeaderboards.PressedEvent.AddListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
 	m_xBackButton.PressedEvent.AddListener(this, &TitleScreen::ButtonReleasedEventHandler);
 }
 
 TitleScreen::~TitleScreen() {
 	m_xBackButton.PressedEvent.RemoveListener(this, &TitleScreen::ButtonReleasedEventHandler);
+	m_xButtonLeaderboards.PressedEvent.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
 	m_xButtonFacebook.PressedEvent.RemoveListener<TitleScreen>(this, &TitleScreen::ButtonPressedEventHandler);
 }
 
@@ -41,14 +46,23 @@ void TitleScreen::Initialize() {
 	
 	m_bHasFacebookButton = s3eOSExecAvailable();
 	m_bHasFacebookButton &= !Configuration::GetInstance().FacebookPage.empty();
+	m_bHasFacebookButton |= Configuration::GetInstance().UnlockAll;
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.SetTexture(FactoryManager::GetTextureFactory().Create("button_facebook"));
 	}
-
+	
+	m_bHasLeaderboardsButton = Leaderboards::GetInstance().IsAvailable();
+	m_bHasLeaderboardsButton &= !Configuration::GetInstance().LeaderboardKey.empty();
+	m_bHasLeaderboardsButton |= Configuration::GetInstance().UnlockAll;
+	if (m_bHasLeaderboardsButton) {
+		m_xButtonLeaderboards.SetTexture(FactoryManager::GetTextureFactory().Create("button_leaderboards"));
+	}
+	
 	m_bHasMovieButton = s3eVideoGetInt(S3E_VIDEO_AVAILABLE) != 0;
 	m_bHasMovieButton &= !Configuration::GetInstance().IntroMovie.empty();
 	m_bHasMovieButton &= s3eVideoIsCodecSupported(S3E_VIDEO_CODEC_MPEG4_VIDEO_MPEG4);
 	m_bHasMovieButton &= s3eVideoIsCodecSupported(S3E_VIDEO_CODEC_MPEG4_AUDIO_AAC);
+	m_bHasMovieButton |= Configuration::GetInstance().UnlockAll;
 	if (m_bHasMovieButton) {
 		m_xButtonMovie.SetTexture(FactoryManager::GetTextureFactory().Create("button_movie"));
 	}
@@ -74,6 +88,10 @@ void TitleScreen::OnDoLayout(const CIwSVec2& screensize) {
 		button.x = screensize.x - button.w - (button.w / 4);
 		m_xButtonFacebook.SetPosition(button);
 	}
+	if (m_bHasLeaderboardsButton) {
+		button.x -= button.w + (button.w / 4);
+		m_xButtonLeaderboards.SetPosition(button);
+	}
 	if (m_bHasMovieButton) {
 		button.x = button.w / 4;
 		m_xButtonMovie.SetPosition(button);
@@ -86,6 +104,9 @@ void TitleScreen::OnUpdate(const FrameData& frame) {
 	m_xButtonTitle.Update(frame);
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.Update(frame);
+	}
+	if (m_bHasLeaderboardsButton) {
+		m_xButtonLeaderboards.Update(frame);
 	}
 	if (m_bHasMovieButton) {
 		m_xButtonMovie.Update(frame);
@@ -104,6 +125,9 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 	if (m_bHasFacebookButton) {
 		m_xButtonFacebook.Render(renderer, frame);
 	}
+	if (m_bHasLeaderboardsButton) {
+		m_xButtonLeaderboards.Render(renderer, frame);
+	}	
 	if (m_bHasMovieButton) {
 		m_xButtonMovie.Render(renderer, frame);
 	}
@@ -112,8 +136,10 @@ void TitleScreen::OnRender(Renderer& renderer, const FrameData& frame) {
 void TitleScreen::ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args) {
     if (&sender == &m_xButtonTitle) {
 		SetCompletionState(eCompleted);
-    } else if (&sender == &m_xButtonFacebook) {
+	} else if (&sender == &m_xButtonFacebook) {
 		OpenFacebook();
+	} else if (&sender == &m_xButtonLeaderboards) {
+		OpenLeaderboards();
 	}
 }
 
@@ -123,9 +149,16 @@ void TitleScreen::OpenFacebook() {
 		std::string msg = "I am very sorry. Something went wrong. I cannot open Facebook for you. But you can find us here: " + Configuration::GetInstance().FacebookPage;
 		LogManager::GetInstance().WriteMessage(msg);
 	}
-
+	
 	AppAnalytics a;
 	a.RegisterFacebookOpened();
+}
+
+void TitleScreen::OpenLeaderboards() {
+	Leaderboards::GetInstance().ShowLeaderboard(Configuration::GetInstance().LeaderboardKey);
+	
+	AppAnalytics a;
+	a.RegisterLeaderboardsOpened();
 }
 
 void TitleScreen::ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args) {

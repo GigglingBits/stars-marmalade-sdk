@@ -169,6 +169,12 @@ Configuration::Configuration() {
 	} else {
 		FlurryKey = "";
 	}
+	
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "leaderboardkey", tmpstr)) {
+		LeaderboardKey = tmpstr;
+	} else {
+		LeaderboardKey = "";
+	}
 }
 
 void Configuration::Initialize() {

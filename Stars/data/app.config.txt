@@ -49,3 +49,4 @@ sysfont					TTF font used for system messages
 settingsfile			Name of the file to be used for storing user settings
 
 flurrykey				Flurry API key
+leaderboardkey			GameCenter Leaderboard key (aka category)

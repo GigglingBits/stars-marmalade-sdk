@@ -41,6 +41,7 @@ settingsfile=settings.xml
 
 {OS=iphone}
 flurrykey="DD6GS77SP2NSG6D9JVVQ"
+leaderboardkey=com.gigglingbits.stars.leaders
 {OS=android}
 flurrykey="XF7R4VWFXX6BVWYJPSTV"
 {}
@@ -61,6 +62,8 @@ EXT=0
 GYROSCOPE=0
 DERBH_VERBOSE=0
 MYAPP=1
+IOSGAMECENTER=1
+IOSGAMECENTER_VERBOSE=1
 
 ####################################################
 [S3E]

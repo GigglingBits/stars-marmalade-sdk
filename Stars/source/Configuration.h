@@ -54,6 +54,7 @@ public:
 	std::string SettingsFile;
 
 	std::string FlurryKey;
+	std::string LeaderboardKey;
 };
 
 #endif

@@ -35,11 +35,11 @@ public:
 			Stars = 0;
 		}
 	};
-	
+
+	typedef std::map<std::string, LevelSetting> LevelSettings;
+
 private:
 	std::string m_sSettingsFileName;
-	
-	typedef std::map<std::string, LevelSetting> LevelSettings;
 	LevelSettings m_xLevels;
 	
 private:
@@ -56,6 +56,8 @@ public:
 	LevelSettings& GetLevels();
 	LevelSetting& GetLevel(const std::string& name);
 
+	unsigned long GetTotalScore();
+	
 	void Save();
 
 private:

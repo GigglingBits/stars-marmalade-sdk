@@ -2,10 +2,13 @@
 
 options {
 	strict
-	arm-fpu=vfp # Box2D will not work without FPU
-	optimise-speed
+ 	optimise-speed
 	# enable-exceptions
 	# builddir = build_temp
+
+	#arm-arch=armv7-a
+	#arm-fpu=vfpv3
+	#arm-float-abi=softfp
 }
 
 subprojects {
@@ -30,6 +33,7 @@ packages {
 }
 
 subprojects {
+	../Foundations/Leaderboards
 	../Foundations/Logging
 	../Foundations/ResourceManager
 	../Foundations/Renderer

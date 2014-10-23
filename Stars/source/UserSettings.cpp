@@ -43,6 +43,15 @@ UserSettings::LevelSetting& UserSettings::GetLevel(const std::string& name) {
 	return m_xLevels[name];
 }
 
+unsigned long UserSettings::GetTotalScore() {
+	unsigned long totalscore = 0;
+	UserSettings::LevelSettings::iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalscore += (*it).second.HighScore;
+	}
+	return totalscore;
+}
+
 void UserSettings::Clear() {
 	m_xLevels.clear();
 }

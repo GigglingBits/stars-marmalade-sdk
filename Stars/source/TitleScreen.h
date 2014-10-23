@@ -18,9 +18,11 @@ private:
 	BackgroundParallax m_xBackground;
 	Button m_xButtonTitle;
 	Button m_xButtonFacebook;
+	Button m_xButtonLeaderboards;
 	Button m_xButtonMovie;
 
 	bool m_bHasFacebookButton;
+	bool m_bHasLeaderboardsButton;
 	bool m_bHasMovieButton;
 	
 	InputManager::VirtualButton m_xBackButton;
@@ -38,6 +40,7 @@ protected:
 
 private:
 	void OpenFacebook();
+	void OpenLeaderboards();
 	
 	void ButtonPressedEventHandler(const Button& sender, const Button::EventArgs& args);
 	void ButtonReleasedEventHandler(const InputManager::VirtualButton& sender, const InputManager::VirtualButton::EventArgs& args);

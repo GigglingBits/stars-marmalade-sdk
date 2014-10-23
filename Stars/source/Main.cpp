@@ -6,6 +6,7 @@
 #include "IwGx.h"
 #include "IwGxFont.h"
 #include "IwResHandlerWAV.h"
+#include "Leaderboards.h"
 #include "SpineResource.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
@@ -117,6 +118,8 @@ void PrintHeader() {
 void Initialize() {
 	IW_CALLSTACK_SELF;
 
+	std::srand((unsigned int)s3eTimerGetUST());
+
 	IwGxInit();
 	{
 		IwGxLightingOn(); // required only for IwGxFont colouring
@@ -145,16 +148,19 @@ void Initialize() {
 	//// flip y axis: https://www.airplaysdk.com/node/3193
 	//IwGetGxState()->m_InternalFlags |= IW_GX_INTERNAL_VERTICAL_FLIP_RENDER_F;
 
-	WriteAndShowLog("Initializing game frameworks...");
+	WriteAndShowLog("Initializing fundamental frameworks...");
 	long size = Configuration::GetInstance().ResourceHeapSize * 1000000L;
 	IwMemBucketInit();
 	IwMemBucketCreate(eMemoryBucketResources, "resources", size);
 	ResourceManager::Initialize(eMemoryBucketResources);
 
+	WriteAndShowLog("Loading integrations...");
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
 	s3eDebugRegister(S3E_DEBUG_ERROR, ErrorCallback, NULL);
 	Adverts::Initialize(Configuration::GetInstance().FlurryKey);
+	Leaderboards::Initialize();
 
+	WriteAndShowLog("Initializing app frameworks...");
 	SoundEngine::Initialize();
 	InputManager::Initialize();
 	LogManager::Initialize();
@@ -166,8 +172,6 @@ void Initialize() {
 
 	WriteAndShowLog("Loading images and sounds...");
 	ResourceManager::GetInstance().LoadPermament("base.group");
-	
-	std::srand((unsigned int)s3eTimerGetUST());
 }
 
 void Terminate() {
@@ -178,6 +182,7 @@ void Terminate() {
 	InputManager::Terminate();
 	SoundEngine::Terminate();
 
+	Leaderboards::Terminate();
 	Adverts::Terminate();
 	s3eDebugUnRegister(S3E_DEBUG_ERROR, ErrorCallback);
 	Analytics::Terminate();

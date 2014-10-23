@@ -3,6 +3,7 @@
 #include "GameFoundation.h"
 #include "Configuration.h"
 #include "UserSettings.h"
+#include "Leaderboards.h"
 #include "SoundEngine.h"
 
 #include "Debug.h"
@@ -203,19 +204,21 @@ void LevelCompletion::SaveResults() {
 	UserSettings& settings = UserSettings::GetInstance();
 	UserSettings::LevelSetting& levelsettings = settings.GetLevel(m_sLevelId);
 
+	// update specific level
 	levelsettings.PlayCount++;
-
 	int stars = m_xCompletionInfo.GetAchievedStars();
 	if (levelsettings.Stars < stars) {
 		levelsettings.Stars = stars;
 	}
-	
 	int score = m_xCompletionInfo.GetTotalPoints();
 	if (levelsettings.HighScore < score) {
 		levelsettings.HighScore = score;
 	}
-	
 	settings.Save();
+	
+	// update total score
+	Leaderboards& ld = Leaderboards::GetInstance();
+	ld.SaveScore(Configuration::GetInstance().LeaderboardKey, settings.GetTotalScore());
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {

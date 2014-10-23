@@ -53,3 +53,7 @@ void AppAnalytics::RegisterLevelCancelled(const std::string& levelid) {
 void AppAnalytics::RegisterFacebookOpened() {
 	Analytics::GetInstance().Log("Facebook opened");
 }
+
+void AppAnalytics::RegisterLeaderboardsOpened() {
+	Analytics::GetInstance().Log("Leaderboards opened");
+}
