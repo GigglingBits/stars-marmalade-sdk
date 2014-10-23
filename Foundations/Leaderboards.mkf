@@ -1,0 +1,15 @@
+display_name "Foundation/Leaderboards"
+
+subprojects {
+	s3eIOSGameCenter
+}
+
+includepaths {
+	./Leaderboards
+}
+
+files {
+	(Leaderboards)
+	Leaderboards.h
+	Leaderboards.cpp
+}
