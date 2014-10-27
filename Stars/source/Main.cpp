@@ -172,6 +172,9 @@ void Initialize() {
 
 	WriteAndShowLog("Loading images and sounds...");
 	ResourceManager::GetInstance().LoadPermament("base.group");
+	
+	WriteAndShowLog("Waiting for leaderboards to load...");
+	Leaderboards::GetInstance().WaitForAuthentication(5000);
 }
 
 void Terminate() {

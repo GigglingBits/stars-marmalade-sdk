@@ -155,7 +155,9 @@ void TitleScreen::OpenFacebook() {
 }
 
 void TitleScreen::OpenLeaderboards() {
-	Leaderboards::GetInstance().ShowLeaderboard(Configuration::GetInstance().LeaderboardKey);
+	if (!Leaderboards::GetInstance().ShowLeaderboard(Configuration::GetInstance().LeaderboardKey)) {
+		IwError(("Could not open leaderboard UI"));
+	}
 	
 	AppAnalytics a;
 	a.RegisterLeaderboardsOpened();

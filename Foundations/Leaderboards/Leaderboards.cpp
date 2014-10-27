@@ -6,7 +6,6 @@
 Leaderboards* Leaderboards::s_pxInstance = NULL;
 
 void Leaderboards::Initialize() {
-	IwError(("Initializing GC"));
 	if (!s_pxInstance) {
 		s_pxInstance = new Leaderboards();
 	}
@@ -23,26 +22,18 @@ void Leaderboards::Terminate() {
 	}
 }
 
-Leaderboards::Leaderboards() : m_bIsAuthenticated(false) {
-	if (!s3eIOSGameCenterAvailable()) {
-		IwError(("GC not available"));
+Leaderboards::Leaderboards() {
+	if (!IsAvailable()) {
 		return;
 	}
-	
-	m_bIsAuthenticated = s3eIOSGameCenterGetInt(S3E_IOSGAMECENTER_LOCAL_PLAYER_IS_AUTHENTICATED) ? true : false;
-	if (!m_bIsAuthenticated) {
-		IwError(("Authenticating GC"));
-		s3eIOSGameCenterAuthenticate(Leaderboards::OnAuthentication, NULL);
-	} else {
-		IwError(("Already authenticated GC"));
-	}
+
+	Authenticate();
 }
 
 Leaderboards::~Leaderboards() {
 }
 
 Leaderboards& Leaderboards::GetInstance() {
-	IwAssertMsg(MYAPP, s_pxInstance, ("The leaderboards are not initialized."));
 	return *s_pxInstance;
 }
 
@@ -50,31 +41,70 @@ bool Leaderboards::IsAvailable() {
 	return s3eIOSGameCenterAvailable();
 }
 
+bool Leaderboards::IsAuthenticated() {
+	return s3eIOSGameCenterGetInt(S3E_IOSGAMECENTER_LOCAL_PLAYER_IS_AUTHENTICATED) ? true : false;
+}
+
+bool Leaderboards::WaitForAuthentication(uint16 milliseconds) {
+	// No need to authenticate; Authentication is done in constructor
+	// Authenticate();
+	
+	const uint16 interval = 200;
+	uint16 counter = 0;
+	while (!IsAuthenticated()) {
+		s3eDeviceYield(interval);
+		counter += interval;
+		if (counter >= milliseconds) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void Leaderboards::SaveScore(const std::string& leaderboardid, unsigned long score) {
 	IW_CALLSTACK_SELF;
 	
-	if (m_bIsAuthenticated) {
-		s3eIOSGameCenterReportScore(score, "", NULL);
+	if (IsAuthenticated()) {
+		s3eIOSGameCenterReportScore(score, leaderboardid.c_str(), SaveScoreCallback);
 	}
 }
 
-void Leaderboards::ShowLeaderboard(const std::string& leaderboardid) {
-	IwError(("Showing GC leaderboard"));
+bool Leaderboards::ShowLeaderboard(const std::string& leaderboardid) {
+	if (!IsAuthenticated()) {
+		IwError(("Game Center not authenticated. Cannot show leaderboards."));
+		return false;
+	}
+	
 	if (s3eIOSGameCenterLeaderboardShowGUI(leaderboardid.c_str(), S3E_IOSGAMECENTER_PLAYER_SCOPE_ALL_TIME) == S3E_RESULT_ERROR) {
 		IwAssertMsg(LEADERBOARDS, false, ("Cannot open Game Center UI"));
+		return false;
+	}
+	
+	return true;
+}
+
+void Leaderboards::Authenticate() {
+	if (!IsAuthenticated()) {
+		s3eIOSGameCenterAuthenticate(Leaderboards::AuthenticationCallback, this);
 	}
 }
 
-void Leaderboards::OnAuthentication(s3eIOSGameCenterError* error, void* userData) {
+void Leaderboards::AuthenticationCallback(s3eIOSGameCenterError* error, void* userData) {
 	IW_CALLSTACK_SELF;
 	
 	Leaderboards* ld = (Leaderboards*)userData;
 	if (!ld) {
+		IwAssertMsg(LEADERBOARDS, false, ("Ivalid leaderboard handle!"));
 		return;
 	}
 	
-	ld->m_bIsAuthenticated = S3E_IOSGAMECENTER_ERR_NONE == *error;
-	IwAssertMsg(LEADERBOARDS, ld->m_bIsAuthenticated, ("Game Center authentication failed: %s", ErrorAsString(*error)));
+	IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center authentication failed: %s", ErrorAsString(*error)));
+}
+
+void Leaderboards::SaveScoreCallback(s3eIOSGameCenterError* error) {
+	IW_CALLSTACK_SELF;
+	
+	IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center score submission failed: %s", ErrorAsString(*error)));
 }
 
 const char* Leaderboards::ErrorAsString(s3eIOSGameCenterError error) {

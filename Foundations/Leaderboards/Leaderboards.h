@@ -7,9 +7,6 @@
 
 class Leaderboards {
 private:
-	bool m_bIsAuthenticated;
-	
-private:
 	static Leaderboards* s_pxInstance;
 	Leaderboards();
 	~Leaderboards();
@@ -21,12 +18,18 @@ public:
 	
 public:
 	bool IsAvailable();
+	bool IsAuthenticated();
+	
+	bool WaitForAuthentication(uint16 milliseconds);
 	
 	void SaveScore(const std::string& leaderboardid, unsigned long score);
-	void ShowLeaderboard(const std::string& leaderboardid);
+	bool ShowLeaderboard(const std::string& leaderboardid);
 
 private:
-	static void OnAuthentication(s3eIOSGameCenterError* error, void* userData);
+	void Authenticate();
+
+	static void AuthenticationCallback(s3eIOSGameCenterError* error, void* userData);
+	static void SaveScoreCallback(s3eIOSGameCenterError* error);
 
 	static const char* ErrorAsString(s3eIOSGameCenterError error);
 };
