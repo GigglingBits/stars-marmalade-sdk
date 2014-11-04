@@ -10,3 +10,6 @@
 [submodule "Extensions/spine-runtimes"]
 	path = Extensions/spine-runtimes
 	url = git://github.com/olilanz/spine-runtimes.git
+[submodule "Extensions/s3eGooglePlayGames"]
+	path = Extensions/s3eGooglePlayGames
+	url = https://github.com/GigglingBits/s3eGooglePlayGames.git
