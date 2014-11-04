@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include "s3eIOSGameCenter.h"
-
-class Leaderboards {
+class Leaderboards {	
 private:
 	static Leaderboards* s_pxInstance;
+	
+protected:
 	Leaderboards();
-	~Leaderboards();
+	virtual ~Leaderboards();
 	
 public:
 	static void Initialize();
@@ -17,21 +17,13 @@ public:
 	static Leaderboards& GetInstance();
 	
 public:
-	bool IsAvailable();
-	bool IsAuthenticated();
+	virtual bool IsAvailable() = 0;
+	virtual bool IsAuthenticated() = 0;
 	
-	bool WaitForAuthentication(uint16 milliseconds);
+	virtual bool WaitForAuthentication(uint16 milliseconds) = 0;
 	
-	void SaveScore(const std::string& leaderboardid, unsigned long score);
-	bool ShowLeaderboard(const std::string& leaderboardid);
-
-private:
-	void Authenticate();
-
-	static void AuthenticationCallback(s3eIOSGameCenterError* error, void* userData);
-	static void SaveScoreCallback(s3eIOSGameCenterError* error);
-
-	static const char* ErrorAsString(s3eIOSGameCenterError error);
+	virtual void SaveScore(const std::string& leaderboardid, unsigned long score) = 0;
+	virtual bool ShowLeaderboard(const std::string& leaderboardid) = 0;
 };
 
 #endif

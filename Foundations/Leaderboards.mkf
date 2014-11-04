@@ -1,6 +1,7 @@
 display_name "Foundation/Leaderboards"
 
 subprojects {
+	../Extensions/s3eGooglePlayGames
 	s3eIOSGameCenter
 }
 
@@ -12,4 +13,13 @@ files {
 	(Leaderboards)
 	Leaderboards.h
 	Leaderboards.cpp
+
+	LeaderboardsNull.h
+	LeaderboardsNull.cpp
+
+	LeaderboardsApple.h
+	LeaderboardsApple.cpp
+
+	LeaderboardsGoogle.h
+	LeaderboardsGoogle.cpp
 }
