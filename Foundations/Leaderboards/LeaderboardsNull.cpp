@@ -1,15 +1,15 @@
 #include "LeaderboardsNull.h"
 
 bool LeaderboardsNull::IsAvailable() {
-	return true;
+	return false;
 }
 
 bool LeaderboardsNull::IsAuthenticated() {
-	return true;
+	return false;
 }
 
 bool LeaderboardsNull::WaitForAuthentication(uint16 milliseconds) {
-	return true;
+	return false;
 }
 
 void LeaderboardsNull::SaveScore(const std::string& leaderboardid, unsigned long score) {
