@@ -25,8 +25,20 @@
         </provider>
         ${EXTRA_APPLICATION_MANIFESTS}
     </application>
-    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/>
-	<supports-screens
+
+    <!-- Required for Google Play game services: https://github.com/marmalade/s3eGooglePlayGames/wiki -->
+    <uses-sdk
+        android:minSdkVersion="13"
+        android:targetSdkVersion="17" /> 
+    <!-- <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/> -->
+    <!-- Required for Google Play game services -->
+    
+    <!-- Required for Google Play game services: https://github.com/marmalade/s3eGooglePlayGames/wiki -->
+    <meta-data android:name="com.google.android.gms.games.APP_ID"
+               android:value= "@string/app_id" />
+    <!-- Required for Google Play game services -->
+
+    <supports-screens
 		android:smallScreens="false"
 		android:normalScreens="true"
 		android:largeScreens="true"
