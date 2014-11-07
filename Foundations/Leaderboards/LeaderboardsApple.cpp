@@ -20,6 +20,8 @@ bool LeaderboardsApple::IsAvailable() {
 }
 
 bool LeaderboardsApple::IsAuthenticated() {
+	IW_CALLSTACK_SELF;
+
 	return s3eIOSGameCenterGetInt(S3E_IOSGAMECENTER_LOCAL_PLAYER_IS_AUTHENTICATED) ? true : false;
 }
 
@@ -62,6 +64,8 @@ bool LeaderboardsApple::ShowLeaderboard(const std::string& leaderboardid) {
 }
 
 void LeaderboardsApple::Authenticate() {
+	IW_CALLSTACK_SELF;
+
 	if (!IsAuthenticated()) {
 		s3eIOSGameCenterAuthenticate(LeaderboardsApple::AuthenticationCallback, this);
 	}

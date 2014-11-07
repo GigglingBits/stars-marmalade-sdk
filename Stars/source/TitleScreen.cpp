@@ -157,6 +157,8 @@ void TitleScreen::OpenFacebook() {
 void TitleScreen::OpenLeaderboards() {
 	if (!Leaderboards::GetInstance().ShowLeaderboard(Configuration::GetInstance().LeaderboardKey)) {
 		IwError(("Could not open leaderboard UI"));
+		std::string msg = "The leaderboards do not seem to be available at the moment. I am not sure why. Please try again later.";
+		LogManager::GetInstance().WriteMessage(msg);
 	}
 	
 	AppAnalytics a;

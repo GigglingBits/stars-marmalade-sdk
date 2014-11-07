@@ -10,6 +10,8 @@
 Leaderboards* Leaderboards::s_pxInstance = NULL;
 
 void Leaderboards::Initialize() {
+	IW_CALLSTACK_SELF;
+	
 	if (!s_pxInstance) {
 		s_pxInstance = new LeaderboardsApple();
 		if (s_pxInstance->IsAvailable()) {
@@ -24,7 +26,6 @@ void Leaderboards::Initialize() {
 		delete s_pxInstance;
 		
 		s_pxInstance = new LeaderboardsNull();
-		IwAssertMsg(LEADERBOARDS, s_pxInstance->IsAvailable(), ("No leaderboard available. Choosing default implementation."));
 	}
 }
 

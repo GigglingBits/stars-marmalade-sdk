@@ -49,6 +49,8 @@ void LeaderboardsGoogle::SaveScore(const std::string& leaderboardid, unsigned lo
 }
 
 bool LeaderboardsGoogle::ShowLeaderboard(const std::string& leaderboardid) {
+	IW_CALLSTACK_SELF;
+
 	if (!IsAuthenticated()) {
 		IwError(("Goggle Play Services not authenticated. Cannot show Leaderboards."));
 		return false;
