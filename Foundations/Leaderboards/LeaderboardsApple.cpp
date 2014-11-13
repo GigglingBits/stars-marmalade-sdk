@@ -4,7 +4,7 @@
 #include "Debug.h"
 
 
-LeaderboardsApple::LeaderboardsApple() {
+LeaderboardsApple::LeaderboardsApple() : m_bIsAuthenticating(false) {
 	if (!IsAvailable()) {
 		return;
 	}
@@ -26,18 +26,21 @@ bool LeaderboardsApple::IsAuthenticated() {
 }
 
 bool LeaderboardsApple::WaitForAuthentication(uint16 milliseconds) {
+	IW_CALLSTACK_SELF;
+
 	// No need to authenticate; Authentication is done in constructor
 	// Authenticate();
 	
 	const uint16 interval = 200;
 	uint16 counter = 0;
-	while (!IsAuthenticated()) {
+	while (m_bIsAuthenticating) {
 		s3eDeviceYield(interval);
 		counter += interval;
 		if (counter >= milliseconds) {
 			return false;
 		}
 	}
+	
 	return true;
 }
 
@@ -67,7 +70,9 @@ void LeaderboardsApple::Authenticate() {
 	IW_CALLSTACK_SELF;
 
 	if (!IsAuthenticated()) {
-		s3eIOSGameCenterAuthenticate(LeaderboardsApple::AuthenticationCallback, this);
+		s3eResult res = s3eIOSGameCenterAuthenticate(LeaderboardsApple::AuthenticationCallback, this);
+		m_bIsAuthenticating = S3E_RESULT_SUCCESS == res;
+		IwAssertMsg(LEADERBOARDS, m_bIsAuthenticating || IsAuthenticated(), ("Authentication should be in progress. But it seems not to be."));
 	}
 }
 
@@ -75,12 +80,12 @@ void LeaderboardsApple::AuthenticationCallback(s3eIOSGameCenterError* error, voi
 	IW_CALLSTACK_SELF;
 	
 	LeaderboardsApple* ld = (LeaderboardsApple*)userData;
-	if (!ld) {
+	if (ld) {
+		IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center authentication failed: %s", ErrorAsString(*error)));
+		ld->m_bIsAuthenticating = false;
+	} else {
 		IwAssertMsg(LEADERBOARDS, false, ("Ivalid leaderboard handle!"));
-		return;
 	}
-	
-	IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center authentication failed: %s", ErrorAsString(*error)));
 }
 
 void LeaderboardsApple::SaveScoreCallback(s3eIOSGameCenterError* error) {

@@ -9,6 +9,9 @@
 
 class LeaderboardsApple : public Leaderboards {
 	friend class Leaderboards;
+
+private:
+	bool m_bIsAuthenticating;
 	
 protected:
 	LeaderboardsApple();
