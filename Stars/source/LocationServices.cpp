@@ -11,7 +11,7 @@ LocationServices::LocationServices() {
 	
 	if (s3eGyroscopeAvailable()) {
 		s3eGyroscopeStart();
-		s3eGyroscopeSetSensorDelay(DELAY_GAME);
+		s3eGyroscopeSetSensorDelay(DELAY_UI);
 		s3eGyroscopeRegister(S3E_GYROSCOPE_CALLBACK_DATA_UPDATE, (s3eCallback)GyroscopeCallback, this);
 		
 		s3eSurfaceRegister(
@@ -55,6 +55,14 @@ const LocationServices::DeviceOrientation& LocationServices::GetDeviceOrientatio
 }
 
 void LocationServices::SetGyroData(const s3eGyroscopeData& data) {
+	
+	IwTrace(LOCATIONSERVICES, ("Gyro data received: x=%.4f y=%.4f z=%.4f", data.m_X, data.m_Y, data.m_Z));
+	
+	if (data.m_X == 0.0f && data.m_Y == 0.0f && data.m_Z == 0.0f) {
+		// no rotation detected; ignore callback
+		return;
+	}
+	
 	// fade the old data
 	m_xDeviceOrientation.x *= 0.98f;
 	m_xDeviceOrientation.y *= 0.98f;
