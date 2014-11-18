@@ -3,7 +3,8 @@
 #include "FactoryManager.h"
 
 Hud::Hud() :
-	m_bIsEnabled(true) {
+	m_bIsEnabled(true),
+	m_bShowLives(true) {
 }
 
 void Hud::Initialize() {
@@ -35,6 +36,10 @@ LevelDustVial& Hud::GetDustVial() {
 
 HudBuffPanel& Hud::GetBuffPanel() {
 	return m_xBuffs;
+}
+
+void Hud::ShowLives(bool show) {
+	m_bShowLives = show;
 }
 
 void Hud::OnDoLayout(const CIwSVec2& screensize) {
@@ -82,5 +87,8 @@ void Hud::OnRender(Renderer& renderer, const FrameData& frame) {
 
 	m_xVial.Render(renderer, frame);
 	m_xBuffs.Render(renderer, frame);
-	m_xLives.Render(renderer, frame);
+	
+	if (m_bShowLives) {
+		m_xLives.Render(renderer, frame);
+	}
 }

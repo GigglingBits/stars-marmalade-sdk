@@ -314,7 +314,7 @@ void Test::RunLevelTest() {
 	filenames.push_back("test.xml");
 	FactoryManager::InitializeFromFiles(filenames);
 
-	Page* p = new Level(CIwFVec2(15.0f, 10.0f), 0.5);
+	Page* p = new Level(CIwFVec2(15.0f, 10.0f), 0.5, 1);
 	CIwSVec2 pos(IwGxGetDeviceWidth(), IwGxGetDisplayHeight());
 	FrameData frame;
 	frame.SetScreenSize(480, 320);

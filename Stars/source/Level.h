@@ -68,7 +68,8 @@ private:
 	bool m_bIsPaused;
 	bool m_bIsSetteling;
 	bool m_bIsAborting;
-	
+
+	uint8 m_uiStarLiveCount;
 	int m_iStarReviveDelay;
 	
 	LevelPausedPanel m_xPausePanel;
@@ -80,7 +81,7 @@ private:
 	InputManager::VirtualButton m_xBackButton;
 	
 public:
-	Level(const CIwFVec2& worldsize, float dustrequirement);
+	Level(const CIwFVec2& worldsize, float dustrequirement, uint8 lives);
 	virtual ~Level();
 
 	virtual void Initialize();

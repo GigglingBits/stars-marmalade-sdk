@@ -1,6 +1,11 @@
 #include "LevelTemplate.h"
 #include "Debug.h"
 
+LevelTemplate::LevelTemplate() {
+	m_uiLives = 0;
+	m_fDustRequirement = 0.0f;
+}
+
 void LevelTemplate::SetName(std::string levelname) {
 	m_sLevelName = levelname;
 }
@@ -13,6 +18,10 @@ void LevelTemplate::SetDustRequirement(float amount) {
 	m_fDustRequirement = amount;
 }
 
+void LevelTemplate::SetNumberOfLives(uint8 lives) {
+	m_uiLives = lives;
+}
+
 void LevelTemplate::SetSize(float width, float height) {
 	m_xSize = CIwFVec2(width, height);
 }
@@ -23,6 +32,10 @@ CIwFVec2 LevelTemplate::GetSize() {
 
 float LevelTemplate::GetDustRequirement() {
 	return m_fDustRequirement;
+}
+
+uint8 LevelTemplate::GetNumberOfLives() {
+	return m_uiLives;
 }
 
 void LevelTemplate::BeginSection(std::string bannertext) {

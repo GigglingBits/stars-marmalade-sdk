@@ -25,15 +25,20 @@ std::string LevelFactory::PopulateConfig(TiXmlElement* node, LevelTemplate& conf
 	node->Attribute("width", &width);
 	node->Attribute("height", &height);
 	node->Attribute("dustrequirement", &dustrequirement);
+	
+	int lives;
+	node->Attribute("lives", &lives);
 
 	IwAssertMsg(MYAPP, !levelname.empty(), ("No level name is defined."));
 	IwAssertMsg(MYAPP, std::abs(width) > 0.1f, ("Level is not wide enough!"));
 	IwAssertMsg(MYAPP, std::abs(height) > 0.1f, ("Level is not tall enough!"));
 	IwAssertMsg(MYAPP, dustrequirement > 0.0f, ("Level does not have any dust requirements! Should be more than 0.0."));
+	IwAssertMsg(MYAPP, lives > 0 && lives < 20, ("Level has an invalid number of lives! Should be between >0 and <20."));
 
 	conf.SetName(levelname);
 	conf.SetSize((float)width, (float)height);
 	conf.SetDustRequirement((float)dustrequirement);
+	conf.SetNumberOfLives((uint8)lives);
 	
 	// build sprite defs
 	TiXmlElement* spritedefsnode = node->FirstChildElement("spritedefs");
@@ -110,7 +115,7 @@ Level* LevelFactory::CreateInstance(const LevelTemplate& conf) {
 	LevelTemplate leveltpl = conf;
 
 	// create level instance
-	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement());
+	Level* level = new Level(leveltpl.GetSize(), leveltpl.GetDustRequirement(), leveltpl.GetNumberOfLives());
 
 	// populate level
 	LevelTemplate::ElementQueue elems(leveltpl.GetElements());

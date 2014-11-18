@@ -32,7 +32,7 @@
 <root xmlns="http://www.gigglingbits.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
-	fileformatversion="2">
+	fileformatversion="3">
 	<bodies>
 		
 		<!-- infrastructure -->

@@ -15,6 +15,8 @@ private:
 	HudBuffPanel m_xBuffs;
 	HudNumber m_xLives;
 	
+	bool m_bShowLives;
+	
 public:
 	Hud();
 
@@ -24,6 +26,8 @@ public:
 	HudNumber& GetLives();
 	LevelDustVial& GetDustVial();
 	HudBuffPanel& GetBuffPanel();
+
+	void ShowLives(bool show);
 	
 protected:
 	virtual void OnDoLayout(const CIwSVec2& screensize);

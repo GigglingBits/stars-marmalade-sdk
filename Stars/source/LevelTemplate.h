@@ -35,13 +35,19 @@ public:
 private:
 	std::string m_sLevelName;
 	CIwFVec2 m_xSize;
+
+	uint8 m_uiLives;
 	float m_fDustRequirement;
 
 	ElementQueue m_xElements;
 	
 public:
+	LevelTemplate();
+	
 	void SetName(std::string levelname);
 	void SetSize(float width, float height);
+
+	void SetNumberOfLives(uint8 lives);
 	void SetDustRequirement(float amount);
 
 	void AddElement(std::string bodyname, uint16 delay, float position, float speed, const Body::BuffProbabilities& buffprobs);
@@ -53,7 +59,9 @@ public:
 	
 	std::string GetName();
 	CIwFVec2 GetSize();
+
 	float GetDustRequirement();
+	uint8 GetNumberOfLives();
 
 	ElementQueue& GetElements();
 };

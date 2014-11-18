@@ -12,7 +12,7 @@
 #include "Buff.h"
 #include "Nugget.h"
 
-Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
+Level::Level(const CIwFVec2& worldsize, float dustrequirement, uint8 lives) :
 	Page("level.group", Configuration::GetInstance().LevelSong),
 	m_xWorldSize(worldsize),
 	m_xGame(dustrequirement, worldsize),
@@ -22,6 +22,7 @@ Level::Level(const CIwFVec2& worldsize, float dustrequirement) :
 	m_bIsPaused(false),
 	m_bIsSetteling(false),
 	m_bIsAborting(false),
+	m_uiStarLiveCount(lives),
 	m_iStarReviveDelay(-1),
 	m_xBackgroundClouds(m_xGame),
 	m_xBannerRect(0, 0, 0, 0) {
@@ -69,7 +70,8 @@ void Level::Initialize() {
 
 	m_xPath.InitializeTexture();
 	m_xHud.Initialize();
-	m_xHud.GetLives().SetNumber(GAME_STAR_LIVES);
+	m_xHud.GetLives().SetNumber(m_uiStarLiveCount);
+	m_xHud.ShowLives(m_uiStarLiveCount > 1);
 	//m_xHud.GetBuffPanel().AddBuff(GameFoundation::eBuffTypeExtra);
 	
 	CreateStar();

@@ -5,7 +5,7 @@
 #include <sstream>
 
 #define FACTORY_FILE_FORMAT_NAMESPACE	"http://www.gigglingbits.com"
-#define FACTORY_FILE_FORMAT_VERSION		"2"
+#define FACTORY_FILE_FORMAT_VERSION		"3"
 
 ShapeFactory* FactoryManager::s_pxShapeFactory = NULL;
 TextureFactory* FactoryManager::s_pxTextureFactory = NULL;

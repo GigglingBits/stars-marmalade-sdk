@@ -2,7 +2,7 @@
 <root xmlns="http://www.gigglingbits.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
-	fileformatversion="2">
+	fileformatversion="3">
 	
 	<preambles>
 		<preamble name="earth_1" texture="preamble_01">
@@ -51,7 +51,7 @@
 		 -->
 	</preambles>
 	<levels>
-		<level name="earth_1" width="12.0" height="12.0" dustrequirement="300">
+		<level name="earth_1" width="12.0" height="12.0" dustrequirement="300" lives="1">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
@@ -96,7 +96,7 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_2" width="12.0" height="12.0" dustrequirement="400">
+		<level name="earth_2" width="12.0" height="12.0" dustrequirement="400" lives="1">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
@@ -151,7 +151,7 @@
 				<line map="      n" />
 			</spritesequence>
 		</level>
-		<level name="earth_3" width="12.0" height="12.0" dustrequirement="500">
+		<level name="earth_3" width="12.0" height="12.0" dustrequirement="500" lives="1">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
@@ -208,7 +208,7 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_4" width="12.0" height="12.0" dustrequirement="600">
+		<level name="earth_4" width="12.0" height="12.0" dustrequirement="600" lives="1">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 			</spritedefs>
@@ -265,7 +265,7 @@
 				<line map=" n n n " />
 			</spritesequence>
 		</level>
-		<level name="earth_5" width="12.0" height="12.0" dustrequirement="700">
+		<level name="earth_5" width="12.0" height="12.0" dustrequirement="700" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="c" body="bird" />
@@ -323,7 +323,7 @@
 				<line map="nn   nn" />
 			</spritesequence>
 		</level>
-		<level name="earth_6" width="12.0" height="12.0" dustrequirement="1000">
+		<level name="earth_6" width="12.0" height="12.0" dustrequirement="1000" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0"/>
 				<def id="c" body="bird" magnetprobability="0.5"/>
@@ -384,7 +384,7 @@
 			</spritesequence>
 		</level>
 		
-		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1400">
+		<level name="earth_7" width="12.0" height="12.0" dustrequirement="1400" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -450,7 +450,7 @@
 				<line map="Nn   nN" />		
 			</spritesequence>
 		</level>
-		<level name="earth_8" width="12.0" height="12.0" dustrequirement="1400">
+		<level name="earth_8" width="12.0" height="12.0" dustrequirement="1400" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="c" body="bird" shieldprobability="0.0" shootprobability="0.0" magnetprobability="0.5" />
@@ -531,7 +531,7 @@
 				<line map="   n   " />
 			</spritesequence>
 		</level>
-		<level name="earth_9" width="12.0" height="12.0" dustrequirement="1500">
+		<level name="earth_9" width="12.0" height="12.0" dustrequirement="1500" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -596,7 +596,7 @@
 				<line map="  NN   " />
 			</spritesequence>
 		</level>
-		<level name="earth_10" width="12.0" height="12.0" dustrequirement="2000">
+		<level name="earth_10" width="12.0" height="12.0" dustrequirement="2000" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -700,7 +700,7 @@
 				<line map=" nnnnn " />
 			</spritesequence>
 		</level>
-		<level name="earth_11" width="12.0" height="12.0" dustrequirement="2600">
+		<level name="earth_11" width="12.0" height="12.0" dustrequirement="2600" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -782,7 +782,7 @@
 				<line map="       " />
 			</spritesequence>
 		</level>
-		<level name="earth_12" width="12.0" height="12.0" dustrequirement="2600">
+		<level name="earth_12" width="12.0" height="12.0" dustrequirement="2600" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -867,7 +867,7 @@
 				<line map="    nn    " />
 			</spritesequence>
 		</level>
-			<level name="earth_13" width="12.0" height="12.0" dustrequirement="3000">
+		<level name="earth_13" width="12.0" height="12.0" dustrequirement="3000" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -936,7 +936,7 @@
 				<line map="     nnn      " />
 			</spritesequence>
 		</level>
-			<level name="earth_14" width="12.0" height="12.0" dustrequirement="3200">
+			<level name="earth_14" width="12.0" height="12.0" dustrequirement="3200" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -1005,7 +1005,7 @@
 				<line map="       M      " />
 			</spritesequence>
 		</level>
-		<level name="earth_15" width="12.0" height="12.0" dustrequirement="3200">
+		<level name="earth_15" width="12.0" height="12.0" dustrequirement="3200" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -1078,7 +1078,7 @@
 				<line map="  nNn  " />
 			</spritesequence>
 		</level>
-		<level name="earth_16" width="12.0" height="12.0" dustrequirement="3200">
+		<level name="earth_16" width="12.0" height="12.0" dustrequirement="3200" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -1175,7 +1175,7 @@
 				<line map="    nnnnn     " />
 			</spritesequence>
 		</level>
-		<level name="earth_17" width="12.0" height="12.0" dustrequirement="4000">
+		<level name="earth_17" width="12.0" height="12.0" dustrequirement="4000" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -1260,7 +1260,7 @@
 				<line map="      MM      " />
 			</spritesequence>
 		</level>
-		<level name="earth_18" width="15.0" height="15.0" dustrequirement="5000">
+		<level name="earth_18" width="15.0" height="15.0" dustrequirement="5000" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" magnetprobability="0.0" />
 				<def id="N" body="nugget_02" magnetprobability="0.0" />
@@ -1404,7 +1404,7 @@
 				<line map="      nnnnn   " />
 			</spritesequence>
 		</level>
-		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100">
+		<level name="mars_1" width="12.0" height="12.0" dustrequirement="100" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="N" body="nugget_02" />
@@ -1457,7 +1457,7 @@
 				<line map="n      n" />
 			</spritesequence>
 		</level>
-		<level name="mars_2" width="12.0" height="12.0" dustrequirement="100">
+		<level name="mars_2" width="12.0" height="12.0" dustrequirement="100" lives="3">
 			<spritedefs>
 				<def id="n" body="nugget_01" />
 				<def id="1" body="grunt" />
@@ -1509,7 +1509,7 @@
 				<line map="        " />
 			</spritesequence>
 		</level>
-		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100">
+		<level name="jupiter_1" width="12.0" height="12.0" dustrequirement="100" lives="3">
 			<!-- this level is used for testing various game mechanics -->
 			<spritedefs>
 				<!-- guarantuued buffs -->
