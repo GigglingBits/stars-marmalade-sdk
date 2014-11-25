@@ -44,7 +44,7 @@ flurrykey="DD6GS77SP2NSG6D9JVVQ"
 leaderboardkey="com.gigglingbits.stars.leaders"
 {OS=android}
 flurrykey="XF7R4VWFXX6BVWYJPSTV"
-leaderboardkey="CgkI15ac97cOEAIQAQ"
+leaderboardkey="CgkI_NabrbgCEAIQAQ"
 {}
 
 ####################################################
@@ -68,6 +68,9 @@ DERBH_VERBOSE=0
 
 IOSGAMECENTER=0
 IOSGAMECENTER_VERBOSE=0
+
+GOOGLEPLAYGAMES=1
+GOOGLEPLAYGAMES_VERBOSE=1
 
 LOCATIONSERVICES=0
 
