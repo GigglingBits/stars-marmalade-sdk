@@ -155,8 +155,17 @@ void TitleScreen::OpenFacebook() {
 }
 
 void TitleScreen::OpenLeaderboards() {
+	IW_CALLSTACK_SELF;
+	
+	if (!Leaderboards::GetInstance().IsAuthenticated()) {
+		IwError(("Could not open leaderboard UI; not authenticated."));
+		std::string msg = "You are not signed in to %s. You need to sign in to see the leaderboards.";
+		LogManager::GetInstance().WriteMessage(msg);
+		return;
+	}
+	
 	if (!Leaderboards::GetInstance().ShowLeaderboard(Configuration::GetInstance().LeaderboardKey)) {
-		IwError(("Could not open leaderboard UI"));
+		IwError(("Could not open leaderboard UI; general error. Check traces of underlying implementation."));
 		std::string msg = "The leaderboards do not seem to be available at the moment. I am not sure why. Please try again later.";
 		LogManager::GetInstance().WriteMessage(msg);
 	}

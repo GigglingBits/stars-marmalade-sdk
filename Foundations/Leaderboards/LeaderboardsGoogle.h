@@ -17,6 +17,8 @@ protected:
 	virtual ~LeaderboardsGoogle();
 	
 public:
+	virtual const std::string& GetMediaName();
+
 	virtual bool IsAvailable();
 	virtual bool IsAuthenticated();
 	

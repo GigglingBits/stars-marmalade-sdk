@@ -16,6 +16,11 @@ LeaderboardsGoogle::~LeaderboardsGoogle() {
 	}
 }
 
+const std::string& LeaderboardsGoogle::GetMediaName() {
+	static const std::string s("Google Play Services");
+	return s;
+}
+
 bool LeaderboardsGoogle::IsAvailable() {
 	return m_bIsInitialized;
 }

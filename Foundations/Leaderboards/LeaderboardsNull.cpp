@@ -1,5 +1,10 @@
 #include "LeaderboardsNull.h"
 
+const std::string& LeaderboardsNull::GetMediaName() {
+	static const std::string s("");
+	return s;
+}
+
 bool LeaderboardsNull::IsAvailable() {
 	return false;
 }

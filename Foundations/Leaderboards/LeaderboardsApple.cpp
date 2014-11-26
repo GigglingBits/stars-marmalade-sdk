@@ -15,6 +15,11 @@ LeaderboardsApple::LeaderboardsApple() : m_bIsAuthenticating(false) {
 LeaderboardsApple::~LeaderboardsApple() {
 }
 
+const std::string& LeaderboardsApple::GetMediaName() {
+	static const std::string s("Game Center");
+	return s;
+}
+
 bool LeaderboardsApple::IsAvailable() {
 	return s3eIOSGameCenterAvailable();
 }

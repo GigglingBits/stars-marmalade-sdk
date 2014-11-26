@@ -17,6 +17,8 @@ public:
 	static Leaderboards& GetInstance();
 	
 public:
+	virtual const std::string& GetMediaName() = 0;
+	
 	virtual bool IsAvailable() = 0;
 	virtual bool IsAuthenticated() = 0;
 	
