@@ -69,11 +69,11 @@ bool UserSettings::Load(const std::string& filename) {
 	if (elem) {
 		int fileformatversion = USER_SETTINGS_FILEFORMATVERSION_NULL;
 		if (elem->Attribute(USER_SETTINGS_FILEFORMATVERSION_ATTR, &fileformatversion)) {
-			if (fileformatversion == USER_SETTINGS_FILEFORMATVERSION) {
+			if (fileformatversion >= 1 && fileformatversion <= USER_SETTINGS_FILEFORMATVERSION) {
 				TiXmlHandle settings(elem);
-				return Load(settings);
+				return Load(settings, fileformatversion);
 			} else {
-				IwAssertMsg(MYAPP, fileformatversion == USER_SETTINGS_FILEFORMATVERSION, ("Error loading file %s. The file format version number does not match: %i <> %i. All settings will be lost.", filename.c_str(), fileformatversion, USER_SETTINGS_FILEFORMATVERSION));
+				IwAssertMsg(MYAPP, fileformatversion >= 1 && fileformatversion <= USER_SETTINGS_FILEFORMATVERSION, ("Error loading file %s. The file format version number %i is not valid. The expected number WAS %i. All settings will be discarded.", filename.c_str(), fileformatversion, USER_SETTINGS_FILEFORMATVERSION));
 			}
 		} else {
 			IwAssertMsg(MYAPP, false, ("Error loading file %s. The file format version number could not be found.", filename.c_str()));
@@ -85,7 +85,7 @@ bool UserSettings::Load(const std::string& filename) {
 	return false;
 }
 
-bool UserSettings::Load(TiXmlHandle& settings) {
+bool UserSettings::Load(TiXmlHandle& settings, int fileformatversion) {
 	LevelSettings levels;
 	
 	std::string checksum;
@@ -97,21 +97,53 @@ bool UserSettings::Load(TiXmlHandle& settings) {
 		for (; levelelem; levelelem = levelelem->NextSiblingElement(USER_SETTINGS_LEVEL_TAG)) {
 			if (const char* id = levelelem->Attribute(USER_SETTINGS_ID_ATTR)) {
 				LevelSetting& level = levels[id];
-				
-				int playcount = 0;
-				if (levelelem->Attribute(USER_SETTINGS_PLAYCOUNT_ATTR, &playcount)) {
-					level.PlayCount = playcount;
+
+				// file format version 1 and later
+				if (fileformatversion > 0) {
+					int playcount = 0;
+					if (levelelem->Attribute(USER_SETTINGS_PLAYCOUNT_ATTR, &playcount)) {
+						level.PlayCount = playcount;
+					}
+					
+					int highscore = 0;
+					if (levelelem->Attribute(USER_SETTINGS_HIGHSCORE_ATTR, &highscore)) {
+						level.HighScore = highscore;
+					}
+					
+					int stars = 0;
+					if (levelelem->Attribute(USER_SETTINGS_STARS_ATTR, &stars)) {
+						level.Stars = stars;
+					}
+				}
+
+				// file format version 2 and later
+				if (fileformatversion > 1) {
+					int birdkills = 0;
+					if (levelelem->Attribute(USER_SETTINGS_BIRDKILLS_ATTR, &birdkills)) {
+						level.BirdsKills = birdkills;
+					}
+					
+					int fulllifecompletions = 0;
+					if (levelelem->Attribute(USER_SETTINGS_FULLLIFECOMPLETIONS_ATTR, &fulllifecompletions)) {
+						level.FullLifeCompletions = fulllifecompletions;
+					}
+					
+					int buffmagnets = 0;
+					if (levelelem->Attribute(USER_SETTINGS_BUFFMAGNETS_ATTR, &buffmagnets)) {
+						level.BuffMagentsUsed = buffmagnets;
+					}
+					
+					int buffshields = 0;
+					if (levelelem->Attribute(USER_SETTINGS_BUFFSHIELDS_ATTR, &buffshields)) {
+						level.BuffShieldsUsed = buffshields;
+					}
+					
+					int buffshots = 0;
+					if (levelelem->Attribute(USER_SETTINGS_BUFFSHOTS_ATTR, &buffshots)) {
+						level.BuffShotsUsed = buffshots;
+					}
 				}
 				
-				int highscore = 0;
-				if (levelelem->Attribute(USER_SETTINGS_HIGHSCORE_ATTR, &highscore)) {
-					level.HighScore = highscore;
-				}
-				
-				int stars = 0;
-				if (levelelem->Attribute(USER_SETTINGS_STARS_ATTR, &stars)) {
-					level.Stars = stars;
-				}
 			}
 		}
 		
@@ -120,12 +152,15 @@ bool UserSettings::Load(TiXmlHandle& settings) {
 	}
 	
 	// validate checksum
-	if (!checksum.compare(GetHash(levels))) {
+	std::string data = DataToString(levels, fileformatversion);
+	if (!checksum.compare(GetHash(data))) {
 		m_xLevels = levels;
 		return true;
-	} else if (!checksum.compare(USER_SETTINGS_NULL_CHECKSUM) || !checksum.compare("")) {
-		// todo: empty string should no longer be allowed once
-		//       all user have been converted
+	} else if (!checksum.compare(USER_SETTINGS_NULL_CHECKSUM)) {
+		Analytics::GetInstance().Log("settings: null hash found -> hash will be added");
+		m_xLevels = levels;
+		return true;
+	} else if (fileformatversion < 2 && checksum.empty()) {
 		Analytics::GetInstance().Log("settings: no hash found -> hash will be added");
 		m_xLevels = levels;
 		return true;
@@ -155,7 +190,9 @@ bool UserSettings::Save(const std::string& filename) {
 	{
 		TiXmlElement* levels = new TiXmlElement(USER_SETTINGS_LEVELS_TAG);
 		root->LinkEndChild(levels);
-		levels->SetAttribute(USER_SETTINGS_CHECKSUM_ATTR, GetHash(m_xLevels).c_str());
+		
+		std::string data = DataToString(m_xLevels, USER_SETTINGS_FILEFORMATVERSION);
+		levels->SetAttribute(USER_SETTINGS_CHECKSUM_ATTR, GetHash(data).c_str());
 
 		for (LevelSettings::iterator i = m_xLevels.begin(); i != m_xLevels.end(); i++) {
 			TiXmlElement* level = new TiXmlElement(USER_SETTINGS_LEVEL_TAG);
@@ -165,16 +202,19 @@ bool UserSettings::Save(const std::string& filename) {
 			level->SetAttribute(USER_SETTINGS_PLAYCOUNT_ATTR, i->second.PlayCount);
 			level->SetAttribute(USER_SETTINGS_HIGHSCORE_ATTR, i->second.HighScore);
 			level->SetAttribute(USER_SETTINGS_STARS_ATTR, i->second.Stars);
+			level->SetAttribute(USER_SETTINGS_BIRDKILLS_ATTR, i->second.BirdsKills);
+			level->SetAttribute(USER_SETTINGS_FULLLIFECOMPLETIONS_ATTR, i->second.FullLifeCompletions);
+			level->SetAttribute(USER_SETTINGS_BUFFMAGNETS_ATTR, i->second.BuffMagentsUsed);
+			level->SetAttribute(USER_SETTINGS_BUFFSHIELDS_ATTR, i->second.BuffShieldsUsed);
+			level->SetAttribute(USER_SETTINGS_BUFFSHOTS_ATTR, i->second.BuffShotsUsed);
 		}
 	}
 	
 	return doc.SaveFile(filename.c_str());
 }
 
-std::string UserSettings::GetHash(const LevelSettings settings) {
+std::string UserSettings::GetHash(const std::string& data) {
 	IW_CALLSTACK_SELF;
-
-	std::string data = DataToString(settings);
 
 	const uint8 sha1buflen = 20;
 	uint8 sha1buf[sha1buflen];
@@ -190,16 +230,30 @@ std::string UserSettings::GetHash(const LevelSettings settings) {
 	}
 }
 
-std::string UserSettings::DataToString(const LevelSettings settings) {
+std::string UserSettings::DataToString(const LevelSettings& settings, int fileformatversion) {
 	std::ostringstream ss;
 	ss << std::uppercase;
 	
-	// std::map is always sorted by key; so, this will always produce the same
+	// std::map is always sorted by key; so, this will always produce the same result
 	for (LevelSettings::const_iterator it = settings.begin(); it != settings.end(); it++) {
-		ss << it->first << ",";
-		ss << it->second.Stars << ",";
-		ss << it->second.HighScore << ",";
-		ss << it->second.PlayCount << std::endl;
+		ss << it->first;
+		
+		// file format version 1 and later
+		if (fileformatversion > 0) {
+			ss << "," << it->second.Stars;
+			ss << "," << it->second.HighScore;
+			ss << "," << it->second.PlayCount;
+		}
+		
+		// file format version 2 and later
+		if (fileformatversion > 1) {
+			ss << "," << it->second.BirdsKills;
+			ss << "," << it->second.FullLifeCompletions;
+			ss << "," << it->second.BuffMagentsUsed;
+			ss << "," << it->second.BuffShieldsUsed;
+			ss << "," << it->second.BuffShotsUsed;
+		}
+		ss << std::endl;
 	}
 	return ss.str();
 }
