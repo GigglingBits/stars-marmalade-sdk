@@ -72,7 +72,8 @@ void Level::Initialize() {
 	m_xHud.Initialize();
 	m_xHud.GetLives().SetNumber(m_uiStarLiveCount);
 	m_xHud.ShowLives(m_uiStarLiveCount > 1);
-	//m_xHud.GetBuffPanel().AddBuff(GameFoundation::eBuffTypeExtra);
+	
+	m_xCompletionInfo.SetNumberOfLifesGranted(m_uiStarLiveCount);
 	
 	CreateStar();
 	
@@ -560,9 +561,6 @@ void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation:
 			break;
 		case GameFoundation::eBuffTypeShoot:
 			m_xGame.ActivateShootBuff();
-			break;
-		case GameFoundation::eBuffTypeExtra:
-			//m_xGame.ActivateShootBuff();
 			break;
 		default:
 			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));

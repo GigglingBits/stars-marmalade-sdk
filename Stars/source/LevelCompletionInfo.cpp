@@ -12,7 +12,8 @@ m_iEnemiesDeployed(0),
 m_iEnemiesKilled(0),
 m_iEnemiesCollided(0),
 m_bEvaluated(false),
-m_fTotalPoints(0.0f) {
+m_fTotalPoints(0.0f),
+m_iLifesGranted(0) {
 }
 
 void LevelCompletionInfo::SetDustFillMax(float f) {
@@ -27,6 +28,10 @@ void LevelCompletionInfo::SetDustFillAmount(float f) {
 
 void LevelCompletionInfo::SetNumberOfLifesLeft(int lives) {
 	m_iLifesLeft = lives;
+}
+
+void LevelCompletionInfo::SetNumberOfLifesGranted(int lives) {
+	m_iLifesGranted = lives;
 }
 
 void LevelCompletionInfo::IncrementBuffsDeployed() {
@@ -117,6 +122,11 @@ float LevelCompletionInfo::GetTotalPoints() const {
 int LevelCompletionInfo::GetLivesLeft() const {
 	IwAssert(MYAPP, m_bEvaluated);
 	return m_iLifesLeft;
+}
+
+int LevelCompletionInfo::GetLivesUsed() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iLifesGranted - m_iLifesLeft;
 }
 
 int LevelCompletionInfo::GetAchievedStars() const {

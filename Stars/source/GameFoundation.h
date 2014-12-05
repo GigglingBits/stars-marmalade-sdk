@@ -19,7 +19,6 @@
 class GameFoundation : public Renderable {
 public:
 	enum BuffType {
-		eBuffTypeExtra,
 		eBuffTypeMagnet,
 		eBuffTypeShield,
 		eBuffTypeShoot

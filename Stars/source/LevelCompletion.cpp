@@ -214,6 +214,10 @@ void LevelCompletion::SaveResults() {
 	if (levelsettings.HighScore < score) {
 		levelsettings.HighScore = score;
 	}
+	int livesused = m_xCompletionInfo.GetLivesUsed();
+	if (livesused == 0) {
+		levelsettings.FullLifeCompletions += 1;
+	}
 	settings.Save();
 	
 	// update total score

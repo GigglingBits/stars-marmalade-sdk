@@ -29,7 +29,16 @@ private:
 	int m_iBuffsDeployed;
 	int m_iBuffsUsed;
 
+	int m_iLifesGranted;
 	int m_iLifesLeft;
+
+/*
+	int BirdKills;
+	int FullLifeCompletions;
+	int BuffMagentsUsed;
+	int BuffShieldsUsed;
+	int BuffShotsUsed;
+*/
 	
 	// scores
 	bool m_bEvaluated;
@@ -42,6 +51,7 @@ public:
 	void SetDustFillMax(float f);
 	void SetDustFillAmount(float f);
 
+	void SetNumberOfLifesGranted(int lives);
 	void SetNumberOfLifesLeft(int lives);
 	
 	void IncrementPathsStarted();
@@ -64,6 +74,7 @@ public:
 	float GetTotalPoints() const;
 
 	int GetLivesLeft() const;
+	int GetLivesUsed() const;
 	
 	int GetAchievedStars() const;
 	bool IsLevelAchieved() const;

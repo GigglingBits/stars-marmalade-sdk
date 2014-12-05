@@ -36,7 +36,7 @@ public:
 		int HighScore;
 		int Stars;
 		
-		int BirdsKills;
+		int BirdKills;
 		int FullLifeCompletions;
 		int BuffMagentsUsed;
 		int BuffShieldsUsed;
@@ -47,7 +47,7 @@ public:
 			HighScore = 0;
 			Stars = 0;
 
-			BirdsKills = 0;
+			BirdKills = 0;
 			FullLifeCompletions = 0;
 			BuffMagentsUsed = 0;
 			BuffShieldsUsed = 0;

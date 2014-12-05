@@ -120,7 +120,7 @@ bool UserSettings::Load(TiXmlHandle& settings, int fileformatversion) {
 				if (fileformatversion > 1) {
 					int birdkills = 0;
 					if (levelelem->Attribute(USER_SETTINGS_BIRDKILLS_ATTR, &birdkills)) {
-						level.BirdsKills = birdkills;
+						level.BirdKills = birdkills;
 					}
 					
 					int fulllifecompletions = 0;
@@ -202,7 +202,7 @@ bool UserSettings::Save(const std::string& filename) {
 			level->SetAttribute(USER_SETTINGS_PLAYCOUNT_ATTR, i->second.PlayCount);
 			level->SetAttribute(USER_SETTINGS_HIGHSCORE_ATTR, i->second.HighScore);
 			level->SetAttribute(USER_SETTINGS_STARS_ATTR, i->second.Stars);
-			level->SetAttribute(USER_SETTINGS_BIRDKILLS_ATTR, i->second.BirdsKills);
+			level->SetAttribute(USER_SETTINGS_BIRDKILLS_ATTR, i->second.BirdKills);
 			level->SetAttribute(USER_SETTINGS_FULLLIFECOMPLETIONS_ATTR, i->second.FullLifeCompletions);
 			level->SetAttribute(USER_SETTINGS_BUFFMAGNETS_ATTR, i->second.BuffMagentsUsed);
 			level->SetAttribute(USER_SETTINGS_BUFFSHIELDS_ATTR, i->second.BuffShieldsUsed);
@@ -247,7 +247,7 @@ std::string UserSettings::DataToString(const LevelSettings& settings, int filefo
 		
 		// file format version 2 and later
 		if (fileformatversion > 1) {
-			ss << "," << it->second.BirdsKills;
+			ss << "," << it->second.BirdKills;
 			ss << "," << it->second.FullLifeCompletions;
 			ss << "," << it->second.BuffMagentsUsed;
 			ss << "," << it->second.BuffShieldsUsed;
