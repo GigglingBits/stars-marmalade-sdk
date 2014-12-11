@@ -13,7 +13,12 @@ m_iBirdsKilled(0),
 m_iBirdsCollided(0),
 m_bEvaluated(false),
 m_fTotalPoints(0.0f),
-m_iLifesGranted(0) {
+m_iLifesGranted(0),
+m_iLifesLeft(0),
+m_iBuffsDeployed(0),
+m_iBuffMagnetsUsed(0),
+m_iBuffShieldsUsed(0),
+m_iBuffShotsUsed(0) {
 }
 
 void LevelCompletionInfo::SetDustFillMax(float f) {
@@ -36,12 +41,22 @@ void LevelCompletionInfo::SetNumberOfLifesGranted(int lives) {
 
 void LevelCompletionInfo::IncrementBuffsDeployed() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	m_iBuffsUsed++;
+	m_iBuffsDeployed++;
 }
 
-void LevelCompletionInfo::IncrementBuffsUsed() {
+void LevelCompletionInfo::IncrementBuffMagnetsUsed() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	m_iBuffsDeployed++;
+	m_iBuffMagnetsUsed++;
+}
+
+void LevelCompletionInfo::IncrementBuffShieldsUsed() {
+	IwAssert(MYAPP, !m_bEvaluated);
+	m_iBuffShieldsUsed++;
+}
+
+void LevelCompletionInfo::IncrementBuffShotsUsed() {
+	IwAssert(MYAPP, !m_bEvaluated);
+	m_iBuffShotsUsed++;
 }
 
 void LevelCompletionInfo::IncrementPathsStarted() {
@@ -101,7 +116,7 @@ void LevelCompletionInfo::Evaluate() {
 		if (m_iBirdsDeployed > 0 && m_iBirdsDeployed == m_iBirdsKilled) {
 			AddPoints("All enemies killed", m_fDustFillAmount / 2.0f);
 		}
-		if (m_iBuffsDeployed > 0 && m_iBuffsUsed == 0) {
+		if (m_iBuffsDeployed > 0 && m_iBuffMagnetsUsed == 0 && m_iBuffShieldsUsed == 0 && m_iBuffShotsUsed == 0) {
 			AddPoints("No buffs used", m_fDustFillAmount / 10.0f);
 		}
 	}
@@ -127,6 +142,21 @@ int LevelCompletionInfo::GetLivesLeft() const {
 int LevelCompletionInfo::GetBirdsKilled() const {
 	IwAssert(MYAPP, m_bEvaluated);
 	return m_iBirdsKilled;
+}
+
+int LevelCompletionInfo::GetBuffMagnetsUsed() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iBuffMagnetsUsed;
+}
+
+int LevelCompletionInfo::GetBuffShieldsUsed() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iBuffShieldsUsed;
+}
+
+int LevelCompletionInfo::GetBuffShotsUsed() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iBuffShotsUsed;
 }
 
 int LevelCompletionInfo::GetLivesUsed() const {

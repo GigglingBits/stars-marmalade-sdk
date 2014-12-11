@@ -219,8 +219,20 @@ void LevelCompletion::SaveResults() {
 			levelsettings.FullLifeCompletions ++;
 	}
 	int birdskilled = m_xCompletionInfo.GetBirdsKilled();
-	if (birdskilled == 0 && levelsettings.BirdKills < std::numeric_limits<int>::max()) {
-		levelsettings.BirdKills++;
+	if (birdskilled > 0 && levelsettings.BirdKills < std::numeric_limits<int>::max() - birdskilled) {
+		levelsettings.BirdKills += birdskilled;
+	}
+	int buffmagnetsused = m_xCompletionInfo.GetBuffMagnetsUsed();
+	if (buffmagnetsused > 0 && levelsettings.BuffMagnetsUsed < std::numeric_limits<int>::max() - buffmagnetsused) {
+		levelsettings.BuffMagnetsUsed += buffmagnetsused;
+	}
+	int buffshieldsused = m_xCompletionInfo.GetBuffShieldsUsed();
+	if (buffshieldsused > 0 && levelsettings.BuffShieldsUsed < std::numeric_limits<int>::max() - buffshieldsused) {
+		levelsettings.BuffShieldsUsed += buffshieldsused;
+	}
+	int buffshotsused = m_xCompletionInfo.GetBuffShotsUsed();
+	if (buffshotsused > 0 && levelsettings.BuffShotsUsed < std::numeric_limits<int>::max() - buffshotsused) {
+		levelsettings.BuffShotsUsed += buffshotsused;
 	}
 	settings.Save();
 	

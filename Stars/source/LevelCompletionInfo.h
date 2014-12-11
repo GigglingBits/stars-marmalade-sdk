@@ -27,16 +27,12 @@ private:
 	int m_iBirdsKilled;
 	
 	int m_iBuffsDeployed;
-	int m_iBuffsUsed;
+	int m_iBuffMagnetsUsed;
+	int m_iBuffShieldsUsed;
+	int m_iBuffShotsUsed;
 
 	int m_iLifesGranted;
 	int m_iLifesLeft;
-
-/*
-	int BuffMagentsUsed;
-	int BuffShieldsUsed;
-	int BuffShotsUsed;
-*/
 	
 	// scores
 	bool m_bEvaluated;
@@ -63,7 +59,9 @@ public:
 	void IncrementBirdsCollided();
 
 	void IncrementBuffsDeployed();
-	void IncrementBuffsUsed();
+	void IncrementBuffMagnetsUsed();
+	void IncrementBuffShieldsUsed();
+	void IncrementBuffShotsUsed();
 
 	void Evaluate();
 
@@ -75,6 +73,10 @@ public:
 	int GetLivesUsed() const;
 	
 	int GetBirdsKilled() const;
+
+	int GetBuffMagnetsUsed() const;
+	int GetBuffShieldsUsed() const;
+	int GetBuffShotsUsed() const;
 	
 	int GetAchievedStars() const;
 	bool IsLevelAchieved() const;

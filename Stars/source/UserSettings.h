@@ -38,7 +38,7 @@ public:
 		
 		int BirdKills;
 		int FullLifeCompletions;
-		int BuffMagentsUsed;
+		int BuffMagnetsUsed;
 		int BuffShieldsUsed;
 		int BuffShotsUsed;
 		
@@ -49,7 +49,7 @@ public:
 
 			BirdKills = 0;
 			FullLifeCompletions = 0;
-			BuffMagentsUsed = 0;
+			BuffMagnetsUsed = 0;
 			BuffShieldsUsed = 0;
 			BuffShotsUsed = 0;
 		}

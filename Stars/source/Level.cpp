@@ -558,16 +558,18 @@ void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation:
 	switch (bt) {
 		case GameFoundation::eBuffTypeMagnet:
 			m_xGame.ActivateMagnetBuff();
+			m_xCompletionInfo.IncrementBuffMagnetsUsed();
 			break;
 		case GameFoundation::eBuffTypeShield:
 			m_xGame.ActivateShieldBuff();
+			m_xCompletionInfo.IncrementBuffShieldsUsed();
 			break;
 		case GameFoundation::eBuffTypeShoot:
 			m_xGame.ActivateShootBuff();
+			m_xCompletionInfo.IncrementBuffShotsUsed();
 			break;
 		default:
 			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
 			break;
 	}
-	m_xCompletionInfo.IncrementBuffsUsed();
 }
