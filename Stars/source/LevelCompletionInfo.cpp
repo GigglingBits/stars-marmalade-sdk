@@ -8,9 +8,9 @@ m_iPathsStarted(0),
 m_iPathsAborted(0),
 m_iNuggetsDeployed(0),
 m_iNuggetsColleted(0),
-m_iEnemiesDeployed(0),
-m_iEnemiesKilled(0),
-m_iEnemiesCollided(0),
+m_iBirdsDeployed(0),
+m_iBirdsKilled(0),
+m_iBirdsCollided(0),
 m_bEvaluated(false),
 m_fTotalPoints(0.0f),
 m_iLifesGranted(0) {
@@ -64,19 +64,19 @@ void LevelCompletionInfo::IncrementNuggetsCollected() {
 	m_iNuggetsColleted++;
 }
 
-void LevelCompletionInfo::IncrementEnemiesKilled() {
+void LevelCompletionInfo::IncrementBirdsKilled() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	m_iEnemiesKilled++;
+	m_iBirdsKilled++;
 }
 
-void LevelCompletionInfo::IncrementEnemiesDeployed() {
+void LevelCompletionInfo::IncrementBirdsDeployed() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	m_iEnemiesDeployed++;
+	m_iBirdsDeployed++;
 }
 
-void LevelCompletionInfo::IncrementEnemiesCollided() {
+void LevelCompletionInfo::IncrementBirdsCollided() {
 	IwAssert(MYAPP, !m_bEvaluated);
-	m_iEnemiesCollided++;
+	m_iBirdsCollided++;
 }
 
 void LevelCompletionInfo::AddPoints(const std::string& text, float amount) {
@@ -95,10 +95,10 @@ void LevelCompletionInfo::Evaluate() {
 		if (m_iNuggetsDeployed > 0 && m_iNuggetsDeployed == m_iNuggetsColleted) {
 			AddPoints("All nuggets collected", m_fDustFillAmount / 5.0f);
 		}
-		if (m_iEnemiesDeployed > 0 && m_iEnemiesCollided <= 0) {
+		if (m_iBirdsDeployed > 0 && m_iBirdsCollided <= 0) {
 			AddPoints("All enemies dodged", m_fDustFillAmount / 5.0f);
 		}
-		if (m_iEnemiesDeployed > 0 && m_iEnemiesDeployed == m_iEnemiesKilled) {
+		if (m_iBirdsDeployed > 0 && m_iBirdsDeployed == m_iBirdsKilled) {
 			AddPoints("All enemies killed", m_fDustFillAmount / 2.0f);
 		}
 		if (m_iBuffsDeployed > 0 && m_iBuffsUsed == 0) {
@@ -122,6 +122,11 @@ float LevelCompletionInfo::GetTotalPoints() const {
 int LevelCompletionInfo::GetLivesLeft() const {
 	IwAssert(MYAPP, m_bEvaluated);
 	return m_iLifesLeft;
+}
+
+int LevelCompletionInfo::GetBirdsKilled() const {
+	IwAssert(MYAPP, m_bEvaluated);
+	return m_iBirdsKilled;
 }
 
 int LevelCompletionInfo::GetLivesUsed() const {

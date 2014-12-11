@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "FactoryManager.h"
 #include "Enemy.h"
+#include "Bird.h"
 #include "Buff.h"
 #include "Nugget.h"
 
@@ -466,8 +467,8 @@ void Level::SpriteAddedEventHandler(const GameFoundation& sender, const Sprite& 
 
 	if (dynamic_cast<const Nugget*>(&args)) {
 		m_xCompletionInfo.IncrementNuggetsDeployed();
-	} else if (dynamic_cast<const Enemy*>(&args)) {
-		m_xCompletionInfo.IncrementEnemiesDeployed();
+	} else if (dynamic_cast<const Bird*>(&args)) {
+		m_xCompletionInfo.IncrementBirdsDeployed();
 	} else if (dynamic_cast<const Buff*>(&args)) {
 		m_xCompletionInfo.IncrementBuffsDeployed();
 	}
@@ -482,12 +483,14 @@ void Level::SpriteRemovedEventHandler(const GameFoundation& sender, const GameFo
 		if (!args.outofbounds) {
 			m_xCompletionInfo.IncrementNuggetsCollected();
 		}
-	} else if (dynamic_cast<const Enemy*>(args.sprite)) {
+	} else if (const Enemy* enemy = dynamic_cast<const Enemy*>(args.sprite)) {
 		if (!args.outofbounds) {
-			m_xCompletionInfo.IncrementEnemiesKilled();
+			if (dynamic_cast<const Bird*>(enemy)) {
+				m_xCompletionInfo.IncrementBirdsKilled();
+			}
 		}
 	} else if (dynamic_cast<const Star*>(args.sprite)) {
-		m_xCompletionInfo.IncrementEnemiesCollided();
+		m_xCompletionInfo.IncrementBirdsCollided();
 	}
 }
 

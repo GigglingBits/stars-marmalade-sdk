@@ -22,10 +22,10 @@ private:
 	int m_iNuggetsDeployed;
 	int m_iNuggetsColleted;
 
-	int m_iEnemiesDeployed;
-	int m_iEnemiesCollided;
-	int m_iEnemiesKilled;
-
+	int m_iBirdsDeployed;
+	int m_iBirdsCollided;
+	int m_iBirdsKilled;
+	
 	int m_iBuffsDeployed;
 	int m_iBuffsUsed;
 
@@ -33,8 +33,6 @@ private:
 	int m_iLifesLeft;
 
 /*
-	int BirdKills;
-	int FullLifeCompletions;
 	int BuffMagentsUsed;
 	int BuffShieldsUsed;
 	int BuffShotsUsed;
@@ -60,9 +58,9 @@ public:
 	void IncrementNuggetsDeployed();
 	void IncrementNuggetsCollected();
 	
-	void IncrementEnemiesDeployed();
-	void IncrementEnemiesKilled();
-	void IncrementEnemiesCollided();
+	void IncrementBirdsDeployed();
+	void IncrementBirdsKilled();
+	void IncrementBirdsCollided();
 
 	void IncrementBuffsDeployed();
 	void IncrementBuffsUsed();
@@ -75,6 +73,8 @@ public:
 
 	int GetLivesLeft() const;
 	int GetLivesUsed() const;
+	
+	int GetBirdsKilled() const;
 	
 	int GetAchievedStars() const;
 	bool IsLevelAchieved() const;

@@ -28,8 +28,6 @@ GameFoundation::BuffType HudBuffButton::GetBuffType() {
 
 std::string HudBuffButton::GetSkinName(GameFoundation::BuffType bt) {
 	switch (bt) {
-		case GameFoundation::eBuffTypeExtra:
-			return "extra";
 		case GameFoundation::eBuffTypeMagnet:
 			return "magnet";
 		case GameFoundation::eBuffTypeShield:

@@ -215,8 +215,12 @@ void LevelCompletion::SaveResults() {
 		levelsettings.HighScore = score;
 	}
 	int livesused = m_xCompletionInfo.GetLivesUsed();
-	if (livesused == 0) {
-		levelsettings.FullLifeCompletions += 1;
+	if (livesused == 0 && levelsettings.FullLifeCompletions < std::numeric_limits<int>::max()) {
+			levelsettings.FullLifeCompletions ++;
+	}
+	int birdskilled = m_xCompletionInfo.GetBirdsKilled();
+	if (birdskilled == 0 && levelsettings.BirdKills < std::numeric_limits<int>::max()) {
+		levelsettings.BirdKills++;
 	}
 	settings.Save();
 	
