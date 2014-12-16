@@ -5,176 +5,59 @@
 Configuration* Configuration::s_pxInstance = NULL;
 
 Configuration::Configuration() {
-	char tmpstr[S3E_CONFIG_STRING_MAX] = {'\0'};
-	int tmpint = 0;
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "showstats", &tmpint)) {
-		ShowStats = tmpint == 1;
-	} else {
-		ShowStats = 0;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "showshapes", &tmpint)) {
-		ShowShapes = tmpint == 1;
-	} else {
-		ShowShapes = 0;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "unlockall", &tmpint)) {
-		UnlockAll = tmpint == 1;
-	} else {
-		UnlockAll = 0;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "resourceheapsize", &tmpint)) {
-		ResourceHeapSize = tmpint;
-	} else {
-		ResourceHeapSize = 0;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", "starbirthdelay", &tmpint)) {
-		StarBirthDelay = tmpint;
-	} else {
-		StarBirthDelay = 0;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "bodies", tmpstr)) {
-		BodiesFile = tmpstr;
-	} else {
-		BodiesFile = "bodies.xml";
-	}
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "levels", tmpstr)) {
-		LevelsFile = tmpstr;
-	} else {
-		LevelsFile = "levels.xml";
-	}
+	Read(ShowStats, "showstats", 0);
+	Read(ShowShapes, "showshapes", 0);
+	Read(UnlockAll, "unlockall", 0);
+	
+	Read(ResourceHeapSize, "resourceheapsize", 0);
+	
+	Read(StarBirthDelay, "starbirthdelay", 0);
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "intromovie", tmpstr)) {
-		IntroMovie = tmpstr;
-	} else {
-		IntroMovie = "music/introsong.mp3";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "menusong", tmpstr)) {
-		MenuSong = tmpstr;
-	} else {
-		MenuSong = "music/introsong.mp3";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "levelsong", tmpstr)) {
-		LevelSong = tmpstr;
-	} else {
-		LevelSong = "music/levelsong.mp3";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "appfont", tmpstr)) {
-		AppFont = tmpstr;
-	} else {
-		AppFont = "fonts/app.ttf";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "sysfont", tmpstr)) {
-		SysFont = tmpstr;
-	} else {
-		SysFont = "fonts/sys.ttf";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httpbodies", tmpstr)) {
-		HttpBodiesFile = tmpstr;
-	} else {
-		HttpBodiesFile = "";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "facebookpage", tmpstr)) {
-		FacebookPage = tmpstr;
-	} else {
-		FacebookPage = "";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "httplevels", tmpstr)) {
-		HttpLevelsFile = tmpstr;
-	} else {
-		HttpLevelsFile = "";
-	}
+	Read(BodiesFile, "bodies", "bodies.xml");
+	Read(LevelsFile, "levels", "levels.xml");
 
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "maxvisibleworldsize", tmpstr)) {
-		MaxVisibleWorldSize = atof(tmpstr);
-	} else {
-		MaxVisibleWorldSize = 20.0f;
-	}
+	Read(IntroMovie, "intromovie", "movies/intro.mp3");
+	Read(MenuSong, "menusong", "music/menusong.mp3");
+	Read(LevelSong, "levelsong", "music/levelsong.mp3");
+
+	Read(AppFont, "appfont", "fonts/app.ttf");
+	Read(SysFont, "sysfont", "fonts/sys.ttf");
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "worldmargin", tmpstr)) {
-		WorldMargin = atof(tmpstr);
-	} else {
-		WorldMargin = 5.0f;
-	}
+	Read(HttpBodiesFile, "httpbodies", "");
+	Read(HttpLevelsFile, "httplevels", "");
+
+	Read(FacebookPage, "facebookpage", "");
+
+	Read(MaxVisibleWorldSize, "maxvisibleworldsize", 20.0f);
+	Read(WorldMargin, "worldmargin", 5.0f);
+	Read(Gravity, "gravity", -9.81f);
+
+	Read(BuffSpeed, "buffspeed", 0.5f);
+	Read(BuffShieldDuration, "buffshieldduration", 1000);
+	Read(BuffMagnetDuration, "buffmagnetduration", 1000);
+	Read(BuffShootDuration, "buffshootduration", 1000);
+	Read(BuffShootCount, "buffshootcount", 1);
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "gravity", tmpstr)) {
-		Gravity = atof(tmpstr);
-	} else {
-		Gravity = -9.81f;
-	}
+	Read(PathSpeed, "pathspeed", 2.0f);
+	Read(PathMaxLength, "pathmaxlength", 10.0f);
+
+	Read(SettingsFile, "settingsfile", "settings.xml");
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffspeed", tmpstr)) {
-		BuffSpeed = atof(tmpstr);
-	} else {
-		BuffSpeed = 0.5f;
-	}
+	Read(FlurryKey, "flurrykey", "");
+	Read(LeaderboardKey, "leaderboardkey", "");
 	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshieldduration", tmpstr)) {
-		BuffShieldDuration = atoi(tmpstr);
-	} else {
-		BuffShieldDuration = 1000;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffmagnetduration", tmpstr)) {
-		BuffMagnetDuration = atoi(tmpstr);
-	} else {
-		BuffMagnetDuration = 1000;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshootduration", tmpstr)) {
-		BuffShootDuration = atoi(tmpstr);
-	} else {
-		BuffShootDuration = 1000;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "buffshootcount", tmpstr)) {
-		BuffShootCount = atoi(tmpstr);
-	} else {
-		BuffShootCount = 1;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathspeed", tmpstr)) {
-		PathSpeed = atof(tmpstr);
-	} else {
-		PathSpeed = 2.0f;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "pathmaxlength", tmpstr)) {
-		PathMaxLength = atof(tmpstr);
-	} else {
-		PathMaxLength = 10.0f;
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "settingsfile", tmpstr)) {
-		SettingsFile = tmpstr;
-	} else {
-		SettingsFile = "settings.xml";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "flurrykey", tmpstr)) {
-		FlurryKey = tmpstr;
-	} else {
-		FlurryKey = "";
-	}
-	
-	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", "leaderboardkey", tmpstr)) {
-		LeaderboardKey = tmpstr;
-	} else {
-		LeaderboardKey = "";
-	}
+	Read(AchievementBirdKillsKey, "achibirdkillskey", "");
+	Read(AchievementFullLifeCompletionsKey, "achifulllifekey", "");
+	Read(AchievementBuffMagnetsKey, "achibuffmagnetskey", "");
+	Read(AchievementBuffShieldsKey, "achibuffshieldskey", "");
+	Read(AchievementBuffShotsKey, "achibuffshotskey", "");
+
+	Read(AchievementBirdKillsValue, "achibirdkillsval", 1000);
+	Read(AchievementFullLifeCompletionsValue, "achifulllifeval", 1000);
+	Read(AchievementBuffMagnetsValue, "achibuffmagnetsval", 1000);
+	Read(AchievementBuffShieldsValue, "achibuffshieldsval", 1000);
+	Read(AchievementBuffShotsValue, "achibuffshotsval", 1000);
 }
 
 void Configuration::Initialize() {
@@ -193,5 +76,45 @@ Configuration& Configuration::GetInstance() {
 		s_pxInstance = new Configuration();
 	}
 	return *s_pxInstance;
+}
+
+bool Configuration::Read(float& val, const std::string& key, float def) {
+	static char tmpstr[S3E_CONFIG_STRING_MAX] = {'\0'};
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", key.c_str(), tmpstr)) {
+		val = atof(tmpstr);
+		return true;
+	}
+	val = def;
+	return false;
+}
+
+bool Configuration::Read(int& val, const std::string& key, int def) {
+	int tmpint;
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", key.c_str(), &tmpint)) {
+		val = tmpint;
+		return true;
+	}
+	val = def;
+	return false;
+}
+
+bool Configuration::Read(bool& val, const std::string& key, bool def) {
+	int tmpint;
+	if (S3E_RESULT_SUCCESS == s3eConfigGetInt("Game", key.c_str(), &tmpint)) {
+		val = tmpint == 1;
+		return true;
+	}
+	val = def;
+	return false;
+}
+
+bool Configuration::Read(std::string& val, const std::string& key, std::string def) {
+	static char tmpstr[S3E_CONFIG_STRING_MAX] = {'\0'};
+	if (S3E_RESULT_SUCCESS == s3eConfigGetString("Game", key.c_str(), tmpstr)) {
+		val = tmpstr;
+		return true;
+	}
+	val = def;
+	return false;
 }
 

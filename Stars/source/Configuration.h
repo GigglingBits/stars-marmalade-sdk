@@ -21,20 +21,20 @@ public:
 
 	int ResourceHeapSize;
 
-	double MaxVisibleWorldSize;
-	double WorldMargin;
-	double Gravity;
+	float MaxVisibleWorldSize;
+	float WorldMargin;
+	float Gravity;
 
 	int StarBirthDelay;
 	
-	double BuffSpeed;
+	float BuffSpeed;
 	int BuffShieldDuration;
 	int BuffMagnetDuration;
 	int BuffShootDuration;
 	int BuffShootCount;
 	
-	double PathSpeed;
-	double PathMaxLength;
+	float PathSpeed;
+	float PathMaxLength;
 
 	std::string BodiesFile;
 	std::string LevelsFile;
@@ -55,6 +55,24 @@ public:
 
 	std::string FlurryKey;
 	std::string LeaderboardKey;
+	
+	std::string AchievementFullLifeCompletionsKey;
+	std::string AchievementBirdKillsKey;
+	std::string AchievementBuffMagnetsKey;
+	std::string AchievementBuffShieldsKey;
+	std::string AchievementBuffShotsKey;
+
+	int AchievementFullLifeCompletionsValue;
+	int AchievementBirdKillsValue;
+	int AchievementBuffMagnetsValue;
+	int AchievementBuffShieldsValue;
+	int AchievementBuffShotsValue;
+	
+private:
+	bool Read(float& val, const std::string& key, float def = 0.0f);
+	bool Read(bool& val, const std::string& key, bool def = false);
+	bool Read(int& val, const std::string& key, int def = 0);
+	bool Read(std::string& val, const std::string& key, std::string def = "");
 };
 
 #endif

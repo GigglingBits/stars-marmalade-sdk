@@ -40,12 +40,33 @@ sysfont=fonts/Tempesta.ttf
 settingsfile=settings.xml
 
 {OS=iphone}
-flurrykey="DD6GS77SP2NSG6D9JVVQ"
-leaderboardkey="com.gigglingbits.stars.leaders"
+	flurrykey="DD6GS77SP2NSG6D9JVVQ"
+	leaderboardkey="com.gigglingbits.stars.leaders"
 {OS=android}
-flurrykey="XF7R4VWFXX6BVWYJPSTV"
-leaderboardkey="CgkI_NabrbgCEAIQAQ"
+	flurrykey="XF7R4VWFXX6BVWYJPSTV"
+	leaderboardkey="CgkI_NabrbgCEAIQAQ"
 {}
+
+achibirdkillsval=5
+achifulllifeval=5
+achibuffmagnetsval=5
+achibuffshieldsval=5
+achibuffshotsval=5
+
+{OS=iphone}
+	achifulllifekey="com.gigglingbits.stars.achi.fulllife.1"
+	achibirdkillskey="com.gigglingbits.stars.achi.birdkills.1"
+	achibuffmagnetskey="com.gigglingbits.stars.achi.buffmagnets.1"
+	achibuffshieldskey="com.gigglingbits.stars.achi.buffshields.1"
+	achibuffshotskey="com.gigglingbits.stars.achi.buffshots.1"
+{OS=android}
+	achifulllifekey=""
+	achibirdkillskey=""
+	achibuffmagnetskey=""
+	achibuffshieldskey=""
+	achibuffshotskey=""
+{}
+
 
 ####################################################
 [Util]
@@ -112,8 +133,8 @@ KeyAbsASK=T				# not used
 KeyAbsBSK=B				# not used
 
 {OS=android}
-KeyAbsGameA=Menu
-KeyAbsGameD=Back
+	KeyAbsGameA=Menu
+	KeyAbsGameD=Back
 {}
 
 ####################################################
