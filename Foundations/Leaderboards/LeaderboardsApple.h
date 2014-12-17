@@ -28,11 +28,15 @@ public:
 	virtual void SaveScore(const std::string& leaderboardid, unsigned long score);
 	virtual bool ShowLeaderboard(const std::string& leaderboardid);
 
+	virtual void SaveAchievement(const std::string& achievementid);
+	virtual bool ShowAchievements();
+
 private:
 	void Authenticate();
 
 	static void AuthenticationCallback(s3eIOSGameCenterError* error, void* userData);
 	static void SaveScoreCallback(s3eIOSGameCenterError* error);
+	static void SaveAchievementCallback(s3eIOSGameCenterError* error);
 
 	static const char* ErrorAsString(s3eIOSGameCenterError error);
 };

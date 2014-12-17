@@ -58,17 +58,44 @@ void LeaderboardsApple::SaveScore(const std::string& leaderboardid, unsigned lon
 }
 
 bool LeaderboardsApple::ShowLeaderboard(const std::string& leaderboardid) {
+	IW_CALLSTACK_SELF;
+
 	if (!IsAuthenticated()) {
-		IwError(("Game Center not authenticated. Cannot show LeaderboardsApple."));
+		IwError(("Game Center not authenticated. Cannot show leaderboards."));
 		return false;
 	}
 	
 	if (s3eIOSGameCenterLeaderboardShowGUI(leaderboardid.c_str(), S3E_IOSGAMECENTER_PLAYER_SCOPE_ALL_TIME) == S3E_RESULT_ERROR) {
-		IwAssertMsg(LEADERBOARDS, false, ("Cannot open Game Center UI"));
+		IwAssertMsg(LEADERBOARDS, false, ("Cannot open Game Center Leaderboards UI"));
 		return false;
 	}
 	
 	return true;
+}
+
+void LeaderboardsApple::SaveAchievement(const std::string& achievementid) {	
+	IW_CALLSTACK_SELF;
+	
+	if (IsAuthenticated()) {
+		s3eIOSGameCenterReportAchievement(achievementid.c_str(), 100, SaveAchievementCallback);
+	}
+}
+
+bool LeaderboardsApple::ShowAchievements() {
+	IW_CALLSTACK_SELF;
+
+	if (!IsAuthenticated()) {
+		IwError(("Game Center not authenticated. Cannot show achievements."));
+		return false;
+	}
+	
+	if (s3eIOSGameCenterAchievementsShowGUI() == S3E_RESULT_ERROR) {
+		IwAssertMsg(LEADERBOARDS, false, ("Cannot open Game Center Achievements UI"));
+		return false;
+	}
+	
+	return true;
+	
 }
 
 void LeaderboardsApple::Authenticate() {
@@ -97,6 +124,12 @@ void LeaderboardsApple::SaveScoreCallback(s3eIOSGameCenterError* error) {
 	IW_CALLSTACK_SELF;
 	
 	IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center score submission failed: %s", ErrorAsString(*error)));
+}
+
+void LeaderboardsApple::SaveAchievementCallback(s3eIOSGameCenterError* error) {
+	IW_CALLSTACK_SELF;
+	
+	IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center achievement submission failed: %s", ErrorAsString(*error)));
 }
 
 const char* LeaderboardsApple::ErrorAsString(s3eIOSGameCenterError error) {

@@ -64,3 +64,11 @@ bool LeaderboardsGoogle::ShowLeaderboard(const std::string& leaderboardid) {
 	s3eGPGShowLeaderboardUI(leaderboardid.c_str());
 	return true;
 }
+
+void LeaderboardsGoogle::SaveAchievement(const std::string& achievementid) {
+	
+}
+
+bool LeaderboardsGoogle::ShowAchievements() {
+	return false;
+}

@@ -23,3 +23,10 @@ void LeaderboardsNull::SaveScore(const std::string& leaderboardid, unsigned long
 bool LeaderboardsNull::ShowLeaderboard(const std::string& leaderboardid) {
 	return false;
 }
+
+void LeaderboardsNull::SaveAchievement(const std::string& achievementid) {
+}
+
+bool LeaderboardsNull::ShowAchievements() {
+	return false;
+}
