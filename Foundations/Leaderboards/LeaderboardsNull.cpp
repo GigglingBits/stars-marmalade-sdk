@@ -24,7 +24,7 @@ bool LeaderboardsNull::ShowLeaderboard(const std::string& leaderboardid) {
 	return false;
 }
 
-void LeaderboardsNull::SaveAchievement(const std::string& achievementid) {
+void LeaderboardsNull::SaveAchievement(const std::string& achievementid, uint8 percent) {
 }
 
 bool LeaderboardsNull::ShowAchievements() {

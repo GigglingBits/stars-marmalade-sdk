@@ -28,7 +28,7 @@ public:
 	virtual void SaveScore(const std::string& leaderboardid, unsigned long score);
 	virtual bool ShowLeaderboard(const std::string& leaderboardid);
 
-	virtual void SaveAchievement(const std::string& achievementid);
+	virtual void SaveAchievement(const std::string& achievementid, uint8 percent = 100);
 	virtual bool ShowAchievements();
 
 private:

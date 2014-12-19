@@ -73,11 +73,11 @@ bool LeaderboardsApple::ShowLeaderboard(const std::string& leaderboardid) {
 	return true;
 }
 
-void LeaderboardsApple::SaveAchievement(const std::string& achievementid) {	
+void LeaderboardsApple::SaveAchievement(const std::string& achievementid, uint8 percent) {
 	IW_CALLSTACK_SELF;
 	
 	if (IsAuthenticated()) {
-		s3eIOSGameCenterReportAchievement(achievementid.c_str(), 100, SaveAchievementCallback);
+		s3eIOSGameCenterReportAchievement(achievementid.c_str(), percent, SaveAchievementCallback);
 	}
 }
 

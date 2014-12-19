@@ -65,7 +65,7 @@ bool LeaderboardsGoogle::ShowLeaderboard(const std::string& leaderboardid) {
 	return true;
 }
 
-void LeaderboardsGoogle::SaveAchievement(const std::string& achievementid) {
+void LeaderboardsGoogle::SaveAchievement(const std::string& achievementid, uint8 percent) {
 	
 }
 
