@@ -10,7 +10,6 @@
 #include "SpineResource.h"
 #include "SoundEngine.h"
 #include "ResourceManager.h"
-#include "Adverts.h"
 #include "Analytics.h"
 #include "LocationServices.h"
 #include "DeviceInfo.h"
@@ -157,7 +156,6 @@ void Initialize() {
 	WriteAndShowLog("Loading integrations...");
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
 	s3eDebugRegister(S3E_DEBUG_ERROR, ErrorCallback, NULL);
-	Adverts::Initialize(Configuration::GetInstance().FlurryKey);
 	Leaderboards::Initialize();
 
 	WriteAndShowLog("Initializing app frameworks...");
@@ -186,7 +184,6 @@ void Terminate() {
 	SoundEngine::Terminate();
 
 	Leaderboards::Terminate();
-	Adverts::Terminate();
 	s3eDebugUnRegister(S3E_DEBUG_ERROR, ErrorCallback);
 	Analytics::Terminate();
 	ResourceManager::Terminate();

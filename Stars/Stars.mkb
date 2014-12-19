@@ -45,7 +45,6 @@ subprojects {
 	../Foundations/Physics
 	../Foundations/Sprites
 	../Foundations/Particles
-	../Foundations/Adverts
 	../Foundations/Analytics
 
 	../Extensions/s3eGyroscope
