@@ -86,7 +86,10 @@ private:
 	void ScheduleAwards(int starcount);
 	void ScheduleEnableStar();
 
-	void SaveResults();
+	void UpdateStats();
+	void SaveStats();
+
+	uint8 Percent(unsigned long base, unsigned long value);
 	
 private:
 	void EventTimerEventHandler(const MulticastEventTimer<EventArgs>& sender, const EventArgs& args);

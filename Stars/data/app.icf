@@ -47,11 +47,11 @@ settingsfile=settings.xml
 	leaderboardkey="CgkI_NabrbgCEAIQAQ"
 {}
 
-achibirdkillsval=5
-achifulllifeval=5
-achibuffmagnetsval=5
-achibuffshieldsval=5
-achibuffshotsval=5
+achibirdkillsval=10
+achifulllifeval=10
+achibuffmagnetsval=10
+achibuffshieldsval=10
+achibuffshotsval=10
 
 {OS=iphone}
 	achifulllifekey="com.gigglingbits.stars.achi.fulllife.1"

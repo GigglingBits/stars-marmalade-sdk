@@ -33,8 +33,9 @@ LevelCompletion::~LevelCompletion() {
 }
 
 void LevelCompletion::Initialize() {
-	SaveResults();
-
+	UpdateStats();
+	SaveStats();
+	
 	std::string startexture = m_xCompletionInfo.IsLevelAchieved() ? "completion_won" : "completion_lost";
 	if ((m_pxStar = FactoryManager::GetTextureFactory().Create(startexture))) {
 		m_pxStar->SelectFrame("main");
@@ -200,7 +201,7 @@ const LevelCompletionInfo& LevelCompletion::GetCompletionInfo() {
 	return m_xCompletionInfo;
 }
 
-void LevelCompletion::SaveResults() {
+void LevelCompletion::UpdateStats() {
 	UserSettings& settings = UserSettings::GetInstance();
 	UserSettings::LevelSetting& levelsettings = settings.GetLevel(m_sLevelId);
 
@@ -236,9 +237,39 @@ void LevelCompletion::SaveResults() {
 	}
 	settings.Save();
 	
-	// update total score
+}
+
+void LevelCompletion::SaveStats() {
+	UserSettings& settings = UserSettings::GetInstance();
+	Configuration& config = Configuration::GetInstance();
+	
+	// update total score on leader boards
 	Leaderboards& ld = Leaderboards::GetInstance();
-	ld.SaveScore(Configuration::GetInstance().LeaderboardKey, settings.GetTotalScore());
+	ld.SaveScore(config.LeaderboardKey, settings.GetTotalScore());
+	
+	// save achievements
+	ld.SaveAchievement(config.AchievementFullLifeCompletionsKey,
+					   Percent(config.AchievementFullLifeCompletionsValue, settings.GetFullLifeCompletionsCount()));
+	ld.SaveAchievement(config.AchievementBirdKillsKey,
+					   Percent(config.AchievementBirdKillsValue, settings.GetBirdsKilledCount()));
+	ld.SaveAchievement(config.AchievementBuffMagnetsKey,
+					   Percent(config.AchievementBuffMagnetsValue, settings.GetBuffMagnetsUsedCount()));
+	ld.SaveAchievement(config.AchievementBuffShieldsKey,
+					   Percent(config.AchievementBuffShieldsValue, settings.GetBuffShieldsUsedCount()));
+	ld.SaveAchievement(config.AchievementBuffShotsKey,
+					   Percent(config.AchievementBuffShotsValue, settings.GetBuffShotsUsedCount()));
+}
+
+uint8 LevelCompletion::Percent(unsigned long base, unsigned long value) {
+	if (value > base) {
+		return 100;
+	}
+	
+	if (value == 0) {
+		return 0;
+	}
+	
+	return (uint8)(((float)value / (float)base) * 100.0f);
 }
 
 void LevelCompletion::OnDoLayout(const CIwSVec2& screensize) {

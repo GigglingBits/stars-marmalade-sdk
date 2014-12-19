@@ -43,13 +43,58 @@ UserSettings::LevelSetting& UserSettings::GetLevel(const std::string& name) {
 	return m_xLevels[name];
 }
 
-unsigned long UserSettings::GetTotalScore() {
+unsigned long UserSettings::GetTotalScore() const {
 	unsigned long totalscore = 0;
-	UserSettings::LevelSettings::iterator it;
+	UserSettings::LevelSettings::const_iterator it;
 	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
 		totalscore += (*it).second.HighScore;
 	}
 	return totalscore;
+}
+
+unsigned long UserSettings::GetFullLifeCompletionsCount() const {
+	unsigned long totalcount = 0;
+	UserSettings::LevelSettings::const_iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalcount += (*it).second.FullLifeCompletions;
+	}
+	return totalcount;
+}
+
+unsigned long UserSettings::GetBirdsKilledCount() const {
+	unsigned long totalcount = 0;
+	UserSettings::LevelSettings::const_iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalcount += (*it).second.BirdKills;
+	}
+	return totalcount;
+}
+
+unsigned long UserSettings::GetBuffMagnetsUsedCount() const {
+	unsigned long totalcount = 0;
+	UserSettings::LevelSettings::const_iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalcount += (*it).second.BuffMagnetsUsed;
+	}
+	return totalcount;
+}
+
+unsigned long UserSettings::GetBuffShieldsUsedCount() const {
+	unsigned long totalcount = 0;
+	UserSettings::LevelSettings::const_iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalcount += (*it).second.BuffShieldsUsed;
+	}
+	return totalcount;
+}
+
+unsigned long UserSettings::GetBuffShotsUsedCount() const {
+	unsigned long totalcount = 0;
+	UserSettings::LevelSettings::const_iterator it;
+	for (it = m_xLevels.begin(); it != m_xLevels.end(); it++) {
+		totalcount += (*it).second.BuffShotsUsed;
+	}
+	return totalcount;
 }
 
 void UserSettings::Clear() {

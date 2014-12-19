@@ -75,7 +75,12 @@ public:
 	LevelSettings& GetLevels();
 	LevelSetting& GetLevel(const std::string& name);
 
-	unsigned long GetTotalScore();
+	unsigned long GetTotalScore() const;
+	unsigned long GetFullLifeCompletionsCount() const;
+	unsigned long GetBirdsKilledCount() const;
+	unsigned long GetBuffMagnetsUsedCount() const;
+	unsigned long GetBuffShieldsUsedCount() const;
+	unsigned long GetBuffShotsUsedCount() const;
 	
 	void Save();
 
