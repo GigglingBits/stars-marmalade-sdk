@@ -159,7 +159,7 @@ void TitleScreen::OpenLeaderboards() {
 	
 	if (!Leaderboards::GetInstance().IsAuthenticated()) {
 		IwError(("Could not open leaderboard UI; not authenticated."));
-		std::string msg = "You are not signed in to %s. You need to sign in to see the leaderboards.";
+		std::string msg = "You are not signed in to " + Leaderboards::GetInstance().GetMediaName() + ". You need to sign in to see the leaderboards.";
 		LogManager::GetInstance().WriteMessage(msg);
 		return;
 	}
