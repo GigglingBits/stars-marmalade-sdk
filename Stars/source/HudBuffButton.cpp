@@ -10,16 +10,22 @@
 #include "IwDebug.h"
 
 HudBuffButton::HudBuffButton(GameFoundation::BuffType bt) :
-Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_bIsUsed(false) {
+Button(eButtonCommandIdNone, s3eKeyFirst, bt), m_bIsUsed(false), m_iBuffLevel(0) {
 	SetTexture(FactoryManager::GetTextureFactory().Create("buff"));
 }
 
 HudBuffButton::~HudBuffButton() {
-	
 }
 
 bool HudBuffButton::CanUnload() {
 	return m_bIsUsed;
+}
+
+void HudBuffButton::IncrementLevel() {
+	m_iBuffLevel++;
+	std::ostringstream oss;
+	oss << m_iBuffLevel;
+	m_sBuffLevel = oss.str();
 }
 
 GameFoundation::BuffType HudBuffButton::GetBuffType() {
@@ -61,8 +67,18 @@ void HudBuffButton::OnStateChanged(bool enabled, bool pressed) {
 		return;
 	}
 	
-	GameFoundation::BuffType bt = GetBuffType();
-	BuffTrigger.Invoke(*this, bt);
+	BuffTriggerArgs args;
+	args.bufftype = GetBuffType();
+	args.bufflevel = m_iBuffLevel;
+	BuffTrigger.Invoke(*this, args);
 	
 	m_bIsUsed = true;
+}
+
+void HudBuffButton::OnRender(Renderer& renderer, const FrameData& frame) {
+	Button::OnRender(renderer, frame);
+	
+	if (!m_sBuffLevel.empty()) {
+		renderer.DrawText(m_sBuffLevel, GetPosition());
+	}
 }

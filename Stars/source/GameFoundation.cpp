@@ -443,26 +443,28 @@ void GameFoundation::EmitBuff(const CIwFVec2& pos, const Body::BuffProbabilities
 	EnqueueCreateBody(buff, pos, speed);
 }
 
-void GameFoundation::ActivateMagnetBuff() {
+void GameFoundation::ActivateMagnetBuff(int bufflevel) {
 	if (Star* star = GetStar()) {
-		star->BeginMagnet(Configuration::GetInstance().BuffMagnetDuration);
+		uint32 duration = Configuration::GetInstance().BuffMagnetDuration * (bufflevel < 0 ? bufflevel : 0);
+		star->BeginMagnet(duration);
 	}
 }
 
-void GameFoundation::ActivateShieldBuff() {
+void GameFoundation::ActivateShieldBuff(int bufflevel) {
 	if (Star* star = GetStar()) {
-		star->BeginShield(Configuration::GetInstance().BuffShieldDuration);
+		uint32 duration = Configuration::GetInstance().BuffShieldDuration * (bufflevel < 0 ? bufflevel : 0);
+		star->BeginShield(duration);
 	}
 }
 
-void GameFoundation::ActivateShootBuff() {
+void GameFoundation::ActivateShootBuff(int bufflevel) {
 	m_uiShootBuffTimer	= Configuration::GetInstance().BuffShootDuration;
 	m_xShootBuffCurtain.Close();
 
 	if (!m_pxStar) {
 		return;
 	}
-	
+
 	// find all enemies and their distances to star
 	EnemyRefs enemies;
 	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
@@ -477,7 +479,8 @@ void GameFoundation::ActivateShootBuff() {
 	}
 		
 	// remove farest enemies
-	while ((int)enemies.size() > Configuration::GetInstance().BuffShootCount) {
+	uint32 shootcount = Configuration::GetInstance().BuffShootCount * (bufflevel < 0 ? bufflevel : 0);
+	while ((int)enemies.size() > shootcount) {
 		EnemyRefs::iterator eraseit = enemies.end();
 		float distance = 0.0f;
 		for (EnemyRefs::iterator it = enemies.begin(); it != enemies.end(); it++) {

@@ -554,22 +554,22 @@ void Level::BuffCollectedHandler(const GameFoundation& sender, const GameFoundat
 	m_xCompletionInfo.IncrementBuffsDeployed();
 }
 
-void Level::BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt) {
-	switch (bt) {
+void Level::BuffTriggerHandler(const HudBuffPanel& sender, const HudBuffPanel::BuffTriggerArgs& args) {
+	switch (args.bufftype) {
 		case GameFoundation::eBuffTypeMagnet:
-			m_xGame.ActivateMagnetBuff();
+			m_xGame.ActivateMagnetBuff(args.bufflevel);
 			m_xCompletionInfo.IncrementBuffMagnetsUsed();
 			break;
 		case GameFoundation::eBuffTypeShield:
-			m_xGame.ActivateShieldBuff();
+			m_xGame.ActivateShieldBuff(args.bufflevel);
 			m_xCompletionInfo.IncrementBuffShieldsUsed();
 			break;
 		case GameFoundation::eBuffTypeShoot:
-			m_xGame.ActivateShootBuff();
+			m_xGame.ActivateShootBuff(args.bufflevel);
 			m_xCompletionInfo.IncrementBuffShotsUsed();
 			break;
 		default:
-			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", bt));
+			IwAssertMsg(MYAPP, false, ("Unknown buff type: %i", args.bufftype));
 			break;
 	}
 }

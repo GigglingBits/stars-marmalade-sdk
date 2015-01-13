@@ -156,7 +156,7 @@ private:
 	void SpriteRemovedEventHandler(const GameFoundation& sender, const GameFoundation::SpriteRemovedArgs& args);
 
 	void BuffCollectedHandler(const GameFoundation& sender, const GameFoundation::BuffType& bt);
-	void BuffTriggerHandler(const HudBuffPanel& sender, const GameFoundation::BuffType& bt);
+	void BuffTriggerHandler(const HudBuffPanel& sender, const HudBuffPanel::BuffTriggerArgs& args);
 };
 
 #endif

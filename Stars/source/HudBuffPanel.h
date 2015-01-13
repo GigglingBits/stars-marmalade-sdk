@@ -27,10 +27,14 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
-	void BuffTriggerHandler(const HudBuffButton& sender, const GameFoundation::BuffType& bt);
+	void BuffTriggerHandler(const HudBuffButton& sender, const HudBuffButton::BuffTriggerArgs& args);
 	
 public:
-	MulticastEvent<HudBuffPanel, GameFoundation::BuffType> BuffTrigger;
+	struct BuffTriggerArgs {
+		GameFoundation::BuffType bufftype;
+		int bufflevel;
+	};
+	MulticastEvent<HudBuffPanel, BuffTriggerArgs> BuffTrigger;
 };
 
 #endif

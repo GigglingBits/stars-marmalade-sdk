@@ -69,14 +69,15 @@ public:
 	void BeginMagnet(uint32 duration);
 	void EndMagnet(bool immediate = false);
 	bool HasMagnet();
-	
+
+	bool IsFollowingPath();
+
 private:
 	void AutoOrientTexture(bool allow);
 		
 	void EnableParticles();
 	void DisableParticles();
 	
-	bool IsFollowingPath();
 	void OnBeginFollowPath();
 	void OnEndFollowPath();
 	

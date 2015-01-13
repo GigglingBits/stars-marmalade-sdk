@@ -31,6 +31,8 @@ void HudBuffPanel::AddBuff(GameFoundation::BuffType bt) {
 	btn->BuffTrigger.AddListener(this, &HudBuffPanel::BuffTriggerHandler);
 	m_xBuffs.push_back(btn);
 	
+	// todo: add to existing, if avaiable
+	
 	InvalidateLayout();
 }
 
@@ -96,6 +98,9 @@ void HudBuffPanel::OnRender(Renderer& renderer, const FrameData& frame) {
 	}
 }
 
-void HudBuffPanel::BuffTriggerHandler(const HudBuffButton& sender, const GameFoundation::BuffType& bt) {
-	BuffTrigger.Invoke(*this, bt);
+void HudBuffPanel::BuffTriggerHandler(const HudBuffButton& sender, const HudBuffButton::BuffTriggerArgs& args) {
+	BuffTriggerArgs args2;
+	args2.bufftype = args.bufftype;
+	args2.bufflevel = args.bufflevel;
+	BuffTrigger.Invoke(*this, args2);
 }
