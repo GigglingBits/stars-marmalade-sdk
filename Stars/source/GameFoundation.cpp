@@ -150,6 +150,10 @@ void GameFoundation::OnRender(Renderer& renderer, const FrameData& frame) {
 	for (SpriteMap::iterator it = m_xSpriteMap.begin(); it != m_xSpriteMap.end(); ++it) {
 		it->second->Render(renderer, frame);
 	}
+	
+	// for debugging multi-collect
+	const static CIwRect r(10, 10, 50, 50);
+	renderer.DrawRect(r, 0, m_xDust.IsQueueing() ? 0xbb00ff00 : 0xbb0000ff);
 }
 
 void GameFoundation::UpdatePhysics(uint16 timestep) {

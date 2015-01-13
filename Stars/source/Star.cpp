@@ -8,7 +8,7 @@
  * Star main implementation
  **/
 Star::Star(const std::string& id, const b2BodyDef& bodydef, const b2FixtureDef& fixturedef, const TextureTemplate& texturedef) 
-	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxMotionState(NULL), m_pxParticles(NULL), m_bAutoOrient(false), m_uiShieldDuration(0), m_uiMagnetDuration(0) {
+	: CompositeBody(id, bodydef, fixturedef, texturedef), m_pxState(NULL), m_pxParticles(NULL), m_bAutoOrient(false), m_uiShieldDuration(0), m_uiMagnetDuration(0) {
 
 	GetBody().SetBullet(true); // improves collision detection
 
@@ -26,8 +26,8 @@ Star::~Star() {
 		delete m_pxParticles;
 	}
 	
-	if (m_pxMotionState) {
-		delete m_pxMotionState;
+	if (m_pxState) {
+		delete m_pxState;
 	}
 }
 
@@ -50,13 +50,13 @@ void Star::AutoOrientTexture(bool allow) {
 }
 
 void Star::Passify() {
-	GetMotionState().Passify();
+	GetState().Passify();
 }
 
 void Star::OnColliding(Body& body) {
 	IW_CALLSTACK_SELF;
 
-	GetMotionState().Collide(body);
+	GetState().Collide(body);
 	CompositeBody::OnColliding(body);
 }
 
@@ -70,7 +70,7 @@ void Star::OnChildColliding(Body& child, Body& body) {
 
 void Star::OnUpdate(const FrameData& frame) {
 	CompositeBody::OnUpdate(frame);
-	GetMotionState().Update(frame.GetSimulatedDurationMs());
+	GetState().Update(frame.GetSimulatedDurationMs());
 	
 	// particle system
 	if (m_pxParticles) {
@@ -160,13 +160,65 @@ void Star::FollowPath(const std::vector<CIwFVec2>& path) {
 	m_xPath.ImportPath(newpath, leadin.GetLength());
 	
 	// get the star to pollow
-	GetMotionState().FollowPath();
+	GetState().FollowPath();
+}
+
+void Star::CollectNugget(const CIwFVec2& pos, int amount) {
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeAdd;
+	args.amount = amount;
+	args.position = pos;
+	DustEvent.Invoke(*this, args);
+}
+
+void Star::BeginMultiCollect(const CIwFVec2& pos) {
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeBegin;
+	args.position = pos;
+	DustEvent.Invoke(*this, args);
+}
+
+void Star::CommitMultiCollect(const CIwFVec2& pos) {
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeCommit;
+	args.position = pos;
+	DustEvent.Invoke(*this, args);
+}
+
+void Star::CancelMultiCollect(const CIwFVec2& pos) {
+	DustEventArgs args;
+	args.eventtype = eDustEventTypeRollback;
+	args.position = pos;
+	DustEvent.Invoke(*this, args);
+}
+
+void Star::OnStateChanged(StateBase* oldstate, StateBase* newstate) {
+	bool fromfollow = oldstate ? dynamic_cast<FollowState*>(oldstate) : NULL;
+	if (fromfollow) {
+		OnEndFollowPath();
+	}
+	
+	bool tofollow = newstate ? dynamic_cast<FollowState*>(newstate) : NULL;
+	if (tofollow) {
+		OnBeginFollowPath();
+	}
 }
 
 bool Star::IsFollowingPath() {
-	// RRR: this should have been solved by checking the state, rather than
-	///     the type! But I didn't see a good way to test the state.
-	return m_xPath.IsWalking();
+	return m_pxState ? dynamic_cast<FollowState*>(m_pxState) : NULL;
+}
+
+void Star::OnBeginFollowPath() {
+	if (!HasMagnet()) {
+		BeginMultiCollect(GetPosition());
+	}
+}
+
+void Star::OnEndFollowPath() {
+	if (!HasMagnet()) {
+		CommitMultiCollect(GetPosition());
+	}
+	
 }
 
 void Star::BeginShield(uint32 duration) {
@@ -190,6 +242,10 @@ bool Star::HasShield() {
 }
 
 void Star::BeginMagnet(uint32 duration) {
+	if (!IsFollowingPath()) {
+		BeginMultiCollect(GetPosition());
+	}
+
 	m_uiMagnetDuration = duration;
 	if (Body* field = GetChild("magnet")) {
 		field->SetTextureFrame("on");
@@ -198,6 +254,10 @@ void Star::BeginMagnet(uint32 duration) {
 }
 
 void Star::EndMagnet(bool immediate) {
+	if (!IsFollowingPath()) {
+		CommitMultiCollect(GetPosition());
+	}
+
 	m_uiMagnetDuration = 0;
 	if (Body* field = GetChild("magnet")) {
 		field->SetTextureFrame("off");
@@ -233,14 +293,17 @@ void Star::DisableParticles() {
  **/
 void Star::SetState(Star::StateBase* newstate) {
 	IwAssertMsg(MYAPP, newstate, ("Empty state must not be set."));
-	if (m_pxMotionState) {
-		delete m_pxMotionState;
+
+	OnStateChanged(m_pxState, newstate);
+
+	if (m_pxState) {
+		delete m_pxState;
 	}
 	newstate->Initialize();
-	m_pxMotionState = newstate;
+	m_pxState = newstate;
 }
 
-Star::StateBase& Star::GetMotionState() {
-	IwAssertMsg(MYAPP, m_pxMotionState, ("Program error. State must not be empty."));
-	return *m_pxMotionState;
+Star::StateBase& Star::GetState() {
+	IwAssertMsg(MYAPP, m_pxState, ("Program error. State must not be empty."));
+	return *m_pxState;
 }

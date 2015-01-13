@@ -32,7 +32,7 @@ protected:
 	class FallingState;
 	
 private:
-	StateBase* m_pxMotionState;
+	StateBase* m_pxState;
 	
 	PathTracker m_xPath;
 	float m_fPathSpeed;
@@ -70,17 +70,25 @@ public:
 	void EndMagnet(bool immediate = false);
 	bool HasMagnet();
 	
-	bool IsFollowingPath();
-
 private:
 	void AutoOrientTexture(bool allow);
 		
 	void EnableParticles();
 	void DisableParticles();
 	
+	bool IsFollowingPath();
+	void OnBeginFollowPath();
+	void OnEndFollowPath();
+	
+	void CollectNugget(const CIwFVec2& pos, int amount);
+	void BeginMultiCollect(const CIwFVec2& pos);
+	void CommitMultiCollect(const CIwFVec2& pos);
+	void CancelMultiCollect(const CIwFVec2& pos);
+	
 	void SetState(StateBase* newstate);
-	StateBase& GetMotionState();
-
+	StateBase& GetState();
+	void OnStateChanged(StateBase* oldstate, StateBase* newstate);
+	
 protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 	

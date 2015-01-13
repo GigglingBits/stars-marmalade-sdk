@@ -92,12 +92,6 @@ public:
 	void ActivateShieldBuff();
 	void ActivateShootBuff();
 	
-	void BeginDustQueue();
-	void AddDust(const CIwFVec2& pos, int amount);
-	void CommitDustQueue(const CIwFVec2& pos);
-	void RollbackDustQueue(const CIwFVec2& pos);
-	void ClearDust();
-	
 	float GetDustQueuedAmount();
 	float GetDustQueuedPercent();
 
@@ -110,6 +104,12 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
+	void BeginDustQueue();
+	void AddDust(const CIwFVec2& pos, int amount);
+	void CommitDustQueue(const CIwFVec2& pos);
+	void RollbackDustQueue(const CIwFVec2& pos);
+	void ClearDust();
+
 	void CreatePointSplash(int amount, int bonusmultiplier, const CIwFVec2& position);
 
 	void CreateSplashText(std::string text, const CIwFVec2& position, uint32 colour, Renderer::FontType font);

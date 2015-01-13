@@ -76,22 +76,12 @@ void Star::RetractingState::FollowPath() {
 void Star::RetractingState::Collide(Body& body) {
 	IW_CALLSTACK_SELF;
 	if (Nugget* nugget = dynamic_cast<Nugget*>(&body)) {
-		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
-		
-		DustEventArgs args;
-		args.eventtype = eDustEventTypeAdd;
-		args.amount = nugget->GetDustAmount();
-		args.position = nugget->GetPosition();
-		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");		
+		m_rxContext.CollectNugget(nugget->GetPosition(), nugget->GetDustAmount());
 	} else if (!m_rxContext.HasShield()) {
 		if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
 			SoundEngine::GetInstance().PlaySoundEffect("Ouch");
-		
-			DustEventArgs args;
-			args.eventtype = eDustEventTypeRollback;
-			args.position = body.GetPosition();
-			m_rxContext.DustEvent.Invoke(m_rxContext, args);
-		
+			m_rxContext.CancelMultiCollect(body.GetPosition());
 			m_rxContext.m_xPath.ClearPath();
 			m_rxContext.SetState(new FallingState(m_rxContext));
 		}
@@ -117,12 +107,6 @@ void Star::FollowState::Initialize() {
 	m_rxContext.SetTextureFrame("followpath");
 	m_rxContext.EnableParticles();
 	m_rxContext.GetBody().SetLinearDamping(0.1f);
-	
-	DustEventArgs args;
-	args.eventtype = eDustEventTypeBegin;
-	args.position = m_rxContext.GetPosition();
-	m_rxContext.DustEvent.Invoke(m_rxContext, args);
-
 	m_rxContext.m_bAutoOrient = true;
 }
 
@@ -131,10 +115,6 @@ void Star::FollowState::Passify() {
 }
 
 void Star::FollowState::FollowPath() {
-	DustEventArgs args;
-	args.eventtype = eDustEventTypeCommit;
-	m_rxContext.DustEvent.Invoke(m_rxContext, args);
-
 	m_rxContext.SetState(new FollowState(m_rxContext));
 }
 
@@ -143,22 +123,12 @@ void Star::FollowState::Collide(Body& body) {
 	
 	if (Nugget* nugget = dynamic_cast<Nugget*>(&body)) {
 		SoundEngine::GetInstance().PlaySoundEffect("EatNugget");
-		
-		DustEventArgs args;
-		args.eventtype = eDustEventTypeAdd;
-		args.amount = nugget->GetDustAmount();
-		args.position = nugget->GetPosition();
-		m_rxContext.DustEvent.Invoke(m_rxContext, args);
+		m_rxContext.CollectNugget(nugget->GetPosition(), nugget->GetDustAmount());
 	} else if (!m_rxContext.HasShield()) {
 		if (dynamic_cast<Enemy*>(&body) || !body.GetId().compare("screech") || !body.GetId().compare("claws")) {
 			m_rxContext.SetTextureFrame("hurt");
 			SoundEngine::GetInstance().PlaySoundEffect("Ouch");
-		
-			DustEventArgs args;
-			args.eventtype = eDustEventTypeRollback;
-			args.position = body.GetPosition();
-			m_rxContext.DustEvent.Invoke(m_rxContext, args);
-		
+			m_rxContext.CancelMultiCollect(body.GetPosition());
 			m_rxContext.m_xPath.ClearPath();
 			m_rxContext.SetState(new FallingState(m_rxContext));
 		}
@@ -171,11 +141,6 @@ void Star::FollowState::Update(uint16 timestep) {
 	// end condition
 	PathTracker& path = m_rxContext.m_xPath;
 	if (!path.IsWalking()) {
-		DustEventArgs args;
-		args.eventtype = eDustEventTypeCommit;
-		args.position = m_rxContext.GetPosition();
-		m_rxContext.DustEvent.Invoke(m_rxContext, args);
-
 		m_rxContext.SetState(new RetractingState(m_rxContext));
 		return;
 	}
