@@ -4,6 +4,10 @@
 #include "IwUtil.h"
 #include "Debug.h"
 
+// PI is declaerd in both, IwGeomCore and spine/extension.h
+#ifdef PI
+	#undef PI
+#endif
 #include <spine/extension.h>
 
 extern "C" {

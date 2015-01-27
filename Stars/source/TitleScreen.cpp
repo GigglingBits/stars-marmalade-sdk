@@ -9,6 +9,10 @@
 #include "s3eOsExec.h"
 #include "s3eVideo.h"
 
+// PI is declaerd in both, IwGeomCore and spine/extension.h
+#ifdef PI
+	#undef PI
+#endif
 #include "spine/extension.h"
 
 TitleScreen::TitleScreen() :
