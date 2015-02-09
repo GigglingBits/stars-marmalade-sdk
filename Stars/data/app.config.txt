@@ -28,18 +28,6 @@ buffmagnetduration      Duration of the magnet buff in milliseconds
 buffshootduration		Duration o fthe shoot buff in milliseconds
 buffshootcount			Number of enemies the shoot buff can attack
 
-achibirdkillskey		Id of the bird kill achievement
-achifulllifekey			Id of the full life achievement
-achibuffmagnetskey		Id of the magnet buff achievement
-achibuffshieldskey		Id of the shield buff achievement
-achibuffshotskey		Id of the shot buff achievement
-
-achibirdkillsval		Value for the bird kills achievement
-achifulllifeval			Value for the full life achievement
-achibuffmagnetsval		Value for the magnet buff achievement
-achibuffshieldsval		Value for the shield buff achievement
-achibuffshotsval		Value for the shot buff achievement
-
 pathspeed				Speed of the star along the path in meters per second.
 pathmaxlength			Max length of the path in meters.
 
@@ -61,4 +49,21 @@ sysfont					TTF font used for system messages
 settingsfile			Name of the file to be used for storing user settings
 
 flurrykey				Flurry API key
-leaderboardkey			GameCenter Leaderboard key (aka category)
+
+
+suppressgamecenter		Do not use Game Center integration
+suppressgoogleplayservices	Do not use Google Play Services integration
+
+leaderboardkey			GameCenter/Google Play Services key for leaderboard
+
+achibirdkillskey		Id of the bird kill achievement
+achifulllifekey			Id of the full life achievement
+achibuffmagnetskey		Id of the magnet buff achievement
+achibuffshieldskey		Id of the shield buff achievement
+achibuffshotskey		Id of the shot buff achievement
+
+achibirdkillsval		Value for the bird kills achievement
+achifulllifeval			Value for the full life achievement
+achibuffmagnetsval		Value for the magnet buff achievement
+achibuffshieldsval		Value for the shield buff achievement
+achibuffshotsval		Value for the shot buff achievement

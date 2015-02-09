@@ -6,11 +6,6 @@
 	  android:installLocation="${INSTALLLOCATION}"
 	  >
   <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"${EXTRA_ATTRIBS}>
-    <!-- Required for Google Play game services: https://github.com/marmalade/s3eGooglePlayGames/wiki -->
-    <meta-data android:name="com.google.android.gms.games.APP_ID"
-	       android:value= "@string/app_id" />
-    <!-- Required for Google Play game services -->
-    
     <activity android:name=".${CLASSNAME}"
 	      android:label="@string/app_name"
 	      android:configChanges="locale|keyboardHidden|orientation|screenSize"
@@ -30,15 +25,10 @@
     </provider>
     ${EXTRA_APPLICATION_MANIFESTS}
   </application>
-  
-  <!-- Required for Google Play game services: https://github.com/marmalade/s3eGooglePlayGames/wiki -->
-  <uses-sdk
-      android:minSdkVersion="13"
-      android:targetSdkVersion="17" /> 
-  <!-- <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/> -->
-  <!-- Required for Google Play game services -->
-  
-  <supports-screens
+
+<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/>
+
+<supports-screens
       android:smallScreens="false"
       android:normalScreens="true"
       android:largeScreens="true"

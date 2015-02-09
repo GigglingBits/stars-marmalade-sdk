@@ -9,22 +9,29 @@
 
 Leaderboards* Leaderboards::s_pxInstance = NULL;
 
-void Leaderboards::Initialize() {
+void Leaderboards::Initialize(bool suppressgamecenter, bool suppressgoogleplay) {
 	IW_CALLSTACK_SELF;
-	
-	if (!s_pxInstance) {
+
+	// try Apple first
+	if (!s_pxInstance && !suppressgamecenter) {
 		s_pxInstance = new LeaderboardsApple();
-		if (s_pxInstance->IsAvailable()) {
-			return;
+		if (!s_pxInstance->IsAvailable()) {
+			delete s_pxInstance;
+			s_pxInstance = NULL;
 		}
-		delete s_pxInstance;
-		
+	}
+	
+	// Google next
+	if (!s_pxInstance && !suppressgoogleplay) {
 		s_pxInstance = new LeaderboardsGoogle();
-		if (s_pxInstance->IsAvailable()) {
-			return;
+		if (!s_pxInstance->IsAvailable()) {
+			delete s_pxInstance;
+			s_pxInstance = NULL;
 		}
-		delete s_pxInstance;
-		
+	}
+	
+	// NULL implementation, if nothing else works
+	if (!s_pxInstance) {
 		s_pxInstance = new LeaderboardsNull();
 	}
 }

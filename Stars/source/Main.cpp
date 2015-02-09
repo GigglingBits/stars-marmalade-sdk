@@ -156,7 +156,10 @@ void Initialize() {
 	WriteAndShowLog("Loading integrations...");
 	Analytics::Initialize(Configuration::GetInstance().FlurryKey);
 	s3eDebugRegister(S3E_DEBUG_ERROR, ErrorCallback, NULL);
-	Leaderboards::Initialize();
+
+	bool nogc = Configuration::GetInstance().SuppressGameCenter;
+	bool nogps = Configuration::GetInstance().SuppressGooglePlayServices;
+	Leaderboards::Initialize(nogc, nogps);
 
 	WriteAndShowLog("Initializing app frameworks...");
 	SoundEngine::Initialize();

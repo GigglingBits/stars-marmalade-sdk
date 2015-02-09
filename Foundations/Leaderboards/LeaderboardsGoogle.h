@@ -1,16 +1,16 @@
 #ifndef __LEADERBOARDSGOOGLE_H__
 #define __LEADERBOARDSGOOGLE_H__
 
-
 #include <string>
-
 #include "Leaderboards.h"
+#include "s3eGooglePlayServices.h"
 
 class LeaderboardsGoogle : public Leaderboards {
 	friend class Leaderboards;
 
 private:
 	bool m_bIsInitialized;
+	bool m_bIsAuthenticated;
 	
 protected:
 	LeaderboardsGoogle();
@@ -29,6 +29,15 @@ public:
 	
 	virtual void SaveAchievement(const std::string& achievementid, uint8 percent = 100);
 	virtual bool ShowAchievements();
+
+private:
+	void Authenticate();
+	
+	static const char* ErrorAsString(s3eGooglePlayServicesError error);
+
+	static void SignedInCallback(void* systemData, void* userData);
+	static void SignedOutCallback(void* systemData, void* userData);
+	static void ErrorCallback(void* systemData, void* userData);
 };
 
 #endif

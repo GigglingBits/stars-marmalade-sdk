@@ -54,6 +54,10 @@ public:
 	std::string SettingsFile;
 
 	std::string FlurryKey;
+
+	bool SuppressGameCenter;
+	bool SuppressGooglePlayServices;
+	
 	std::string LeaderboardKey;
 	
 	std::string AchievementFullLifeCompletionsKey;

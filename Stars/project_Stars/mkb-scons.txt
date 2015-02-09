@@ -1,2 +1,3 @@
 SCONS;build_stars_scons_x86;
+SCONS;build_stars_scons_aarch64;
 SCONS;build_stars_scons_arm;

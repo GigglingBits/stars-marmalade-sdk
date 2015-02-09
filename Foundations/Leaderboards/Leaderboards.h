@@ -12,7 +12,7 @@ protected:
 	virtual ~Leaderboards();
 	
 public:
-	static void Initialize();
+	static void Initialize(bool suppressgamecenter, bool suppressgoogleplay);
 	static void Terminate();
 	static Leaderboards& GetInstance();
 	

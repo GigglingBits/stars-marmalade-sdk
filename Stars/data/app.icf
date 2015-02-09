@@ -41,10 +41,8 @@ settingsfile=settings.xml
 
 {OS=iphone}
 	flurrykey="DD6GS77SP2NSG6D9JVVQ"
-	leaderboardkey="com.gigglingbits.stars.leaders"
 {OS=android}
 	flurrykey="XF7R4VWFXX6BVWYJPSTV"
-	leaderboardkey="CgkI_NabrbgCEAIQAQ"
 {}
 
 achibirdkillsval=10
@@ -54,12 +52,18 @@ achibuffshieldsval=10
 achibuffshotsval=10
 
 {OS=iphone}
+	suppressgamecenter=0
+	suppressgoogleplayservices=1
+	leaderboardkey="com.gigglingbits.stars.leaders"
 	achifulllifekey="com.gigglingbits.stars.achi.fulllife.1"
 	achibirdkillskey="com.gigglingbits.stars.achi.birdkills.1"
 	achibuffmagnetskey="com.gigglingbits.stars.achi.buffmagnets.1"
 	achibuffshieldskey="com.gigglingbits.stars.achi.buffshields.1"
 	achibuffshotskey="com.gigglingbits.stars.achi.buffshots.1"
 {OS=android}
+	suppressgamecenter=1
+	suppressgoogleplayservices=1
+	leaderboardkey="CgkI_NabrbgCEAIQAQ"
 	achifulllifekey=""
 	achibirdkillskey=""
 	achibuffmagnetskey=""

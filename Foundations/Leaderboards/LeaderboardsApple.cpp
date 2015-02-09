@@ -95,7 +95,6 @@ bool LeaderboardsApple::ShowAchievements() {
 	}
 	
 	return true;
-	
 }
 
 void LeaderboardsApple::Authenticate() {
@@ -116,7 +115,7 @@ void LeaderboardsApple::AuthenticationCallback(s3eIOSGameCenterError* error, voi
 		IwAssertMsg(LEADERBOARDS, S3E_IOSGAMECENTER_ERR_NONE == *error, ("Game Center authentication failed: %s", ErrorAsString(*error)));
 		ld->m_bIsAuthenticating = false;
 	} else {
-		IwAssertMsg(LEADERBOARDS, false, ("Ivalid leaderboard handle!"));
+		IwAssertMsg(LEADERBOARDS, false, ("Invalid leaderboard handle!"));
 	}
 }
 

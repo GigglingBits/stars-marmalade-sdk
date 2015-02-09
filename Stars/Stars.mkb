@@ -1,7 +1,7 @@
 #!/usr/bin/env mkb
 
 options {
-	strict
+	#strict
  	optimise-speed
 	# enable-exceptions
 	# builddir = build_temp
@@ -26,6 +26,9 @@ defines {
 
 deployments {
 	auto-derbh
+
+	# for Google Play Services
+	android-extra-strings='(gps_app_id,83846687612)'
 }
 
 packages {

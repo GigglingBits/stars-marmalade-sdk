@@ -45,6 +45,10 @@ Configuration::Configuration() {
 	Read(SettingsFile, "settingsfile", "settings.xml");
 	
 	Read(FlurryKey, "flurrykey", "");
+
+	Read(SuppressGameCenter, "suppressgamecenter", false);
+	Read(SuppressGooglePlayServices, "suppressgoogleplayservices", false);
+	
 	Read(LeaderboardKey, "leaderboardkey", "");
 	
 	Read(AchievementBirdKillsKey, "achibirdkillskey", "");

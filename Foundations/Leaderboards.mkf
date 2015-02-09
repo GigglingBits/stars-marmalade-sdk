@@ -1,8 +1,8 @@
 display_name "Foundation/Leaderboards"
 
 subprojects {
-	../Extensions/s3eGooglePlayGames
 	s3eIOSGameCenter
+s3eGooglePlayServices
 }
 
 includepaths {
