@@ -45,7 +45,7 @@ void TitleScreen::Initialize() {
 	
 	m_xBackground.Initialize();
 
-    m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("title_button"));
+    m_xButtonTitle.SetTexture(FactoryManager::GetTextureFactory().Create("button_title"));
 	m_xButtonTitle.SetTextureFrame("enter");
 	
 	m_bHasFacebookButton = s3eOSExecAvailable();

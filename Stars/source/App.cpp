@@ -97,9 +97,8 @@ void App::SetStartPage() {
 	
 	// checking, if the first level has been completed
 	LevelIterator lit;
-	LevelIterator::WorldId firstworld = lit.GetFirstWorld();
-	int firstlevel = lit.GetFirstLevelInWorld(firstworld);
-	UserSettings::LevelSetting& l = UserSettings::GetInstance().GetLevel(lit.GetLevelName(firstworld, firstlevel));
+	int firstlevel = lit.GetFirstLevel();
+	UserSettings::LevelSetting& l = UserSettings::GetInstance().GetLevel(lit.GetLevelName(firstlevel));
 
 	// if first level was never played, we start with showing the movie
 	if (l.PlayCount <= 0 && l.Stars <= 0) {
@@ -248,7 +247,6 @@ void App::ButtonReleasedEventHandler(const InputManager& sender, const InputMana
 		m_xPageManager.StartWorldMenu();
         
 	} else if (args.cmdid == eButtonCommandIdOpenLevelMenu) {
-        m_xPageManager.SetWorld((LevelIterator::WorldId)args.userdata);
 		m_xPageManager.StartLevelMenu();
         
 	} else if (args.cmdid == eButtonCommandIdOpenLevel) {

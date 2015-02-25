@@ -19,7 +19,6 @@ public:
 	PageManager();
 	~PageManager();
 
-    void SetWorld(LevelIterator::WorldId world);
     void SetLevel(int level);
 
     

@@ -15,34 +15,22 @@ class WorldMenu : public Page {
 private:
 	Camera m_xCamera;
 
-	LevelIterator::WorldId m_eWorld;
-	
 	CIwRect m_xTitlePos;
 	std::string m_sTitle;
 	
     ButtonEx m_xButtonPlanet;
-	Texture* m_apxButtonPlanetTextures[LevelIterator::eWorldIdMax];
-	
 	Button m_xButtonNext;
 	Button m_xButtonPrevious;
 
 	Button m_xButtonBack;
-	NaviPanel m_xNaviPanel;
 	
 	BackgroundParallax m_xBackground;
 
 public:
-	WorldMenu(LevelIterator::WorldId world);
+	WorldMenu();
 	virtual ~WorldMenu();
 
 	virtual void Initialize();
-
-private:
-	LevelIterator::WorldId GetNext(LevelIterator::WorldId world);
-	LevelIterator::WorldId GetPrevious(LevelIterator::WorldId world);
-
-    void ApplyWorld(LevelIterator::WorldId world);
-	bool CheckWorldOpen(LevelIterator::WorldId wold);
 	
 protected:
 	virtual void OnUpdate(const FrameData& frame);

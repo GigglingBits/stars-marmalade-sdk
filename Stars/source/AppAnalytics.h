@@ -7,7 +7,7 @@ class AppAnalytics {
 public:
 	void RegisterTitleScreenOpened();
 	void RegisterWorldMenuOpened();
-	void RegisterLevelMenuOpened(const std::string& id);
+	void RegisterLevelMenuOpened();
 
 	void RegisterLevelStarted(const std::string& id);
 	void RegisterLevelCompleted(const std::string& id, int score, int stars, bool achieved);

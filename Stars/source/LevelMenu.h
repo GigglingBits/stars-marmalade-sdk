@@ -25,14 +25,13 @@ private:
 	
 	NaviPanel m_xNaviPanel;
 
-	LevelIterator::WorldId m_eWorldId;
 	int m_iGroupId;
 	int m_iFirstUnachievedLevel;
 	
 	BackgroundParallax m_xBackground;
 
 public:
-	LevelMenu(LevelIterator::WorldId world);
+	LevelMenu();
 	virtual ~LevelMenu();
 
 	virtual void Initialize();
@@ -43,10 +42,10 @@ protected:
 	virtual void OnRender(Renderer& renderer, const FrameData& frame);
 
 private:
-	std::string GetLevelKey(LevelIterator::WorldId world, int level);
-	bool CheckLevelExists(LevelIterator::WorldId world, int level);
+	std::string GetLevelKey(int level);
+	bool CheckLevelExists(int level);
 	int GetFirstUnachievedLevel();
-	int GetAchievedStars(LevelIterator::WorldId world, int level);
+	int GetAchievedStars(int level);
 	
 	void EnableButtons(bool enable);
 	

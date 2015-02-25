@@ -47,7 +47,7 @@ Page* PageManager::CreateNextPage(Page* oldpage) {
 		const LevelCompletionInfo& info = level->GetCompletionInfo();
 		nextpage = new LevelCompletion(levelname, nextlevelname, info);
 	} else if (dynamic_cast<LevelCompletion*>(oldpage)) {
-		nextpage = new LevelMenu(m_xPageSettings.GetWorld());
+		nextpage = new LevelMenu();
 	} else if (dynamic_cast<IntroMovie*>(oldpage)) {
 		nextpage = new TitleScreen();
 	}
@@ -73,30 +73,16 @@ void PageManager::StartNextLevel() {
 	IW_CALLSTACK_SELF;
 
 	// get current state
-	LevelIterator::WorldId world = m_xPageSettings.GetWorld();
 	int level = m_xPageSettings.GetLevel();
 	
 	// iterate
 	LevelIterator it;
-	level = it.GetNextLevelInWorld(world, level);
+	level = it.GetNextLevel(level);
 	
 	// manage world transitions, etc
 	if (level == LEVELITERATOR_NO_LEVEL) {
 		// there seems to be no next level in that world; move to new world
-		m_xPageSettings.SetWorld(it.GetNextWorld(world));
-		m_xPageSettings.SetLevel(it.GetFirstLevelInWorld(m_xPageSettings.GetWorld()));
-		if (m_xPageSettings.GetWorld() != world) {
-			// moved to next world... but we currently have only one world...
-			// todo: when we have multiple worlds, this logic needs to be re-thought!
-			StartTitleScreen();
-		} else if (m_xPageSettings.GetWorld() == it.GetFirstWorld()) {
-			// the previous world was the final world; game completed
-			// todo: congratulation screen
-			StartTitleScreen();
-		} else {
-			IwAssertMsg(MYAPP, m_xPageSettings.GetLevel() != LEVELITERATOR_NO_LEVEL, ("No first level found in world '%s'!", it.GetWorldName(world).c_str()));
-			StartLevelMenu();
-		}
+		m_xPageSettings.SetLevel(it.GetFirstLevel());
 	} else {
 		// simply set next level
 		m_xPageSettings.SetLevel(level);
@@ -116,12 +102,12 @@ void PageManager::StartIntroMovie() {
 
 void PageManager::StartWorldMenu() {
 	IW_CALLSTACK_SELF;
-	SetNextPage(new WorldMenu(m_xPageSettings.GetWorld()));
+	SetNextPage(new WorldMenu());
 }
 
 void PageManager::StartLevelMenu() {
 	IW_CALLSTACK_SELF;
-	SetNextPage(new LevelMenu(m_xPageSettings.GetWorld()));
+	SetNextPage(new LevelMenu());
 }
 
 void PageManager::SetNextPage(Page* page) {
@@ -133,34 +119,26 @@ void PageManager::SetNextPage(Page* page) {
 	m_pxNextPage = page;
 }
 
-void PageManager::SetWorld(LevelIterator::WorldId world) {
-    m_xPageSettings.SetWorld(world);
-}
-
 void PageManager::SetLevel(int level) {
     m_xPageSettings.SetLevel(level);
 }
 
 std::string PageManager::GetCurrentLevelName() {
 	LevelIterator it;
-	return it.GetLevelName(
-						   m_xPageSettings.GetWorld(),
-						   m_xPageSettings.GetLevel());
+	return it.GetLevelName(m_xPageSettings.GetLevel());
 }
 
 std::string PageManager::GetNextLevelName() {
-	LevelIterator::WorldId world = m_xPageSettings.GetWorld();
 	int level = m_xPageSettings.GetLevel();
 	
 	LevelIterator it;
-	level = it.GetNextLevelInWorld(world, level);
+	level = it.GetNextLevel(level);
 	if (level == LEVELITERATOR_NO_LEVEL) {
 		// there seems to be no next level in that world; move to new world
-		world = it.GetNextWorld(world);
-		level = it.GetFirstLevelInWorld(world);
-		IwAssertMsg(MYAPP, level != LEVELITERATOR_NO_LEVEL, ("No first level found in world '%s'!", it.GetWorldName(world).c_str()));
+		level = it.GetFirstLevel();
+		IwAssertMsg(MYAPP, level != LEVELITERATOR_NO_LEVEL, ("No first level found!"));
 	}
-	return it.GetLevelName(world, level);
+	return it.GetLevelName(level);
 }
 
 void PageManager::OnUpdate(const FrameData& frame) {
@@ -225,7 +203,7 @@ void PageManager::ApplyNextPage() {
 		}
 		
 		// initialize the page
-		m_pxCurrentPage->SetBackground(m_xPageSettings.GetWorld());
+		m_pxCurrentPage->SetBackground(FactoryManager::GetTextureFactory().Create("background"));
 		m_pxCurrentPage->Initialize();
 		
 		// play music associated to the page
@@ -242,8 +220,7 @@ void PageManager::ApplyNextPage() {
 
 void PageManager::SubmitAnalytics(Page* oldpage, Page* newpage) {
 	LevelIterator i;
-	std::string worldid(i.GetWorldName(m_xPageSettings.GetWorld()));
-	std::string levelid(i.GetLevelName(m_xPageSettings.GetWorld(), m_xPageSettings.GetLevel()));
+	std::string levelid(i.GetLevelName(m_xPageSettings.GetLevel()));
 	
 	AppAnalytics a;
 	if (dynamic_cast<TitleScreen*>(newpage)) {
@@ -251,7 +228,7 @@ void PageManager::SubmitAnalytics(Page* oldpage, Page* newpage) {
 	} else if (dynamic_cast<WorldMenu*>(newpage)) {
 		a.RegisterWorldMenuOpened();
 	} else if (dynamic_cast<LevelMenu*>(newpage)) {
-		a.RegisterLevelMenuOpened(worldid);
+		a.RegisterLevelMenuOpened();
 	} else if (dynamic_cast<Level*>(newpage)) {
 		if (dynamic_cast<Level*>(oldpage)) {
 			a.RegisterLevelCancelled(levelid);

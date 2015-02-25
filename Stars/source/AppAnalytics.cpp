@@ -12,10 +12,8 @@ void AppAnalytics::RegisterWorldMenuOpened() {
 	Analytics::GetInstance().Log("World menu opened");
 }
 
-void AppAnalytics::RegisterLevelMenuOpened(const std::string& worldid) {
-	std::ostringstream oss;
-	oss << "Level menu opened: " << worldid;
-	Analytics::GetInstance().Log(oss.str());
+void AppAnalytics::RegisterLevelMenuOpened() {
+	Analytics::GetInstance().Log("Level menu opened");
 }
 
 void AppAnalytics::RegisterLevelStarted(const std::string& levelid) {

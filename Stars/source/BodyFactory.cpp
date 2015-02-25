@@ -9,10 +9,6 @@
 #include "Bird.h"
 #include "BirdScreecher.h"
 #include "BirdRipper.h"
-#include "Grunt.h"
-#include "GruntBully.h"
-#include "GruntGunner.h"
-#include "GruntUfo.h"
 #include "BuffMagnet.h"
 #include "BuffShield.h"
 #include "BuffShoot.h"
@@ -174,14 +170,6 @@ Body* BodyFactory::CreateInstance(const BodyTemplate& conf) {
 		p = new BirdScreecher(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetType().compare("bird")) {
 		p = new Bird(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("grunt")) {
-		p = new Grunt(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("grunt_bully")) {
-		p = new GruntBully(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("grunt_gunner")) {
-		p = new GruntGunner(instanceid, *bodydef, fixturedef, texturedef);
-	} else if (!copyconf.GetType().compare("grunt_ufo")) {
-		p = new GruntUfo(instanceid, *bodydef, fixturedef, texturedef);
 	} else if (!copyconf.GetChildren().empty()) {
 		p = new CompositeBody(instanceid, *bodydef, fixturedef, texturedef);
 	} else {

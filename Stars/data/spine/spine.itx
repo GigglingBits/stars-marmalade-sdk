@@ -7,17 +7,10 @@ SpineResource
 
 SpineResource
 {
-	name	"spine_planet_earth"
-	atlas	"spine/planet_earth/output/planet_earth.atlas"
-	json	"spine/planet_earth/output/planet_earth.json"
+	name	"spine_planet"
+	atlas	"spine/planet/output/planet.atlas"
+	json	"spine/planet/output/planet.json"
 }
-
-#SpineResource
-#{
-#	name	"spine_planet_mars"
-#	atlas	"spine/planet_mars/output/planet_mars.atlas"
-#	json	"spine/planet_mars/output/planet_mars.json"
-#}
 
 SpineResource
 {
@@ -80,32 +73,4 @@ SpineResource
 	name	"spine_buff_shield"
 	atlas	"spine/buff_shield/output/buff_shield.atlas"
 	json	"spine/buff_shield/output/buff_shield.json"
-}
-
-SpineResource
-{
-	name	"spine_grunt"
-	atlas	"spine/grunt/output/grunt.atlas"
-	json	"spine/grunt/output/grunt.json"
-}
-
-SpineResource
-{
-	name	"spine_grunt_bully"
-	atlas	"spine/grunt_bully/output/grunt_bully.atlas"
-	json	"spine/grunt_bully/output/grunt_bully.json"
-}
-
-SpineResource
-{
-	name	"spine_grunt_gunner"
-	atlas	"spine/grunt_gunner/output/grunt_gunner.atlas"
-	json	"spine/grunt_gunner/output/grunt_gunner.json"
-}
-
-SpineResource
-{
-	name	"spine_grunt_ufo"
-	atlas	"spine/grunt_ufo/output/grunt_ufo.atlas"
-	json	"spine/grunt_ufo/output/grunt_ufo.json"
 }

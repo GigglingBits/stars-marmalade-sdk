@@ -212,51 +212,6 @@
 				</body>
 			</child>
 		</body>
-		
-		<body id="grunt" type="grunt" resilience="1.0" >
-			<shape type="polygon">
-				<point x="-0.75" y="-0.75" />
-				<point x="0.75" y="-0.75" />
-				<point x="0.75" y="0.75" />
-				<point x="-0.75" y="0.75" />
-			</shape>
-			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_grunt" />
-		</body>
-
-		<body id="grunt_bully" type="grunt_bully" resilience="1.0" >
-			<shape type="polygon">
-				<point x="-0.75" y="-0.75" />
-				<point x="0.75" y="-0.75" />
-				<point x="0.75" y="0.75" />
-				<point x="-0.75" y="0.75" />
-			</shape>
-			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_grunt_bully" />
-		</body>
-
-		<body id="grunt_gunner" type="grunt_gunner" resilience="1.0" >
-			<shape type="polygon">
-				<point x="-0.75" y="-0.75" />
-				<point x="0.75" y="-0.75" />
-				<point x="0.75" y="0.75" />
-				<point x="-0.75" y="0.75" />
-			</shape>
-			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_grunt_gunner" />
-		</body>
-
-		<body id="grunt_ufo" type="grunt_ufo" resilience="1.0" >
-			<shape type="polygon">
-				<point x="-0.75" y="-0.75" />
-				<point x="0.75" y="-0.75" />
-				<point x="0.75" y="0.75" />
-				<point x="-0.75" y="0.75" />
-			</shape>
-			<fixture friction="0.0" restitution="2.0" density="1.8" />
-			<texture animation="spine_grunt_ufo" />
-		</body>
-
 	</bodies>
 	
 
@@ -387,20 +342,10 @@
 			<frame id="on" image="navidot_filled"/>
 			<frame id="off" image="navidot_empty"/>
 		</texture>
-		<texture id="button_earth_level">
-			<frame id="released" image="button_earth_level"/>
-			<frame id="pressed" image="button_earth_level"/>
-			<frame id="disabled" image="button_earth_level_locked"/>
-		</texture>
-		<texture id="button_mars_level">
-			<frame id="released" image="button_mars_level"/>
-			<frame id="pressed" image="button_mars_level"/>
-			<frame id="disabled" image="button_mars_level_locked"/>
-		</texture>
-		<texture id="button_jupiter_level">
-			<frame id="released" image="button_jupiter_level"/>
-			<frame id="pressed" image="button_jupiter_level"/>
-			<frame id="disabled" image="button_jupiter_level_locked"/>
+		<texture id="button_level">
+			<frame id="released" image="button_level"/>
+			<frame id="pressed" image="button_level"/>
+			<frame id="disabled" image="button_level_locked"/>
 		</texture>
 		<texture id="button_level_achieved_stars">
 			<frame id="0" image="button_level_0_star"/>
@@ -434,26 +379,12 @@
 		<texture id="completion_lost" animation="spine_completion_lost" />
 		<texture id="completion_award" animation="spine_completion_award" />
 		
-		<texture id="planet_earth" animation="spine_planet_earth" />
-		<!-- <texture id="planet_mars" animation="spine_planet_mars" /> -->
-		<texture id="planet_mars">
-			<frame id="released" image="world_mars"/>
-			<frame id="pressed" image="world_mars"/>
-			<frame id="disabled" image="world_mars_locked"/>
-		</texture>
-		<texture id="planet_jupiter">
-			<frame id="released" image="world_jupiter"/>
-			<frame id="pressed" image="world_jupiter"/>
-			<frame id="disabled" image="world_jupiter_locked"/>
-		</texture>
+		<texture id="button_planet" animation="spine_planet" />
+		<texture id="button_title" animation="spine_title"/>
 		
-		<texture id="title_button" animation="spine_title"/>
-		
+		<texture id="background" image="background" />
 		<texture id="background_stars" image="background_stars" />
 		<texture id="background_stars_far" image="background_stars_far" />
-		<texture id="background_stars_far_earth" image="background_stars_far_earth" />
-		<texture id="background_stars_far_mars" image="background_stars_far_mars" />
-		<texture id="background_stars_far_jupiter" image="background_stars_far_jupiter" />
 	</textures>
 	
 	<fixtures>

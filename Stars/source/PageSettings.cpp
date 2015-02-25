@@ -5,16 +5,7 @@
 #include "IwDebug.h"
 #include "Debug.h"
 
-PageSettings::PageSettings() :
-m_eSelectedWorld(LevelIterator::eWorldIdEarth), m_iSelectedLevel(0) {
-}
-
-LevelIterator::WorldId PageSettings::GetWorld() const {
-    return m_eSelectedWorld;
-}
-
-void PageSettings::SetWorld(LevelIterator::WorldId world) {
-    m_eSelectedWorld = world;
+PageSettings::PageSettings() : m_iSelectedLevel(0) {
 }
 
 int PageSettings::GetLevel() const {

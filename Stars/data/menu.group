@@ -5,6 +5,5 @@ CIwResGroup
 	shared true
 	
 	./spine/title/output/title.png
-	./spine/planet_earth/output/planet_earth.png
-#	./spine/planet_mars/output/planet_mars.png
+	./spine/planet/output/planet.png
 }

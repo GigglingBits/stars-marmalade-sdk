@@ -72,15 +72,6 @@ CIwSoundSpec
 
 CIwSoundSpec
 {
-	name		"GruntCollision"
-	data		"monster_grunt"
-	vol 		0.8
-	pitchMin	1.05
-	pitchMax	1.25
-}
-
-CIwSoundSpec
-{
 	name		"Screech"
 	data		"screech"
 	vol 		0.5

@@ -4,8 +4,6 @@
 #include "Main.h"
 #include "Window.h"
 
-#include "LevelIterator.h"
-
 class Page : public Window {
 public: 
 	enum CompletionState {
@@ -28,8 +26,6 @@ public:
 
 	const std::string& GetResourceGroupName();
 	const std::string& GetMusicFileName();
-	
-	void SetBackground(LevelIterator::WorldId world);
 	
 protected:
 	void SetCompletionState(CompletionState state);
