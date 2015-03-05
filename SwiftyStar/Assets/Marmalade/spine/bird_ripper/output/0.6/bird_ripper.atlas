@@ -1,0 +1,153 @@
+
+bird_ripper.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bigbluebird-beak-01
+  rotate: false
+  xy: 719, 726
+  size: 79, 49
+  orig: 79, 49
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-02
+  rotate: false
+  xy: 961, 862
+  size: 61, 55
+  orig: 61, 55
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-hurt-01
+  rotate: false
+  xy: 872, 898
+  size: 87, 124
+  orig: 87, 124
+  offset: 0, 0
+  index: -1
+bigbluebird-beak-hurt-02
+  rotate: false
+  xy: 719, 777
+  size: 116, 109
+  orig: 116, 109
+  offset: 0, 0
+  index: -1
+bigbluebird-body
+  rotate: false
+  xy: 2, 728
+  size: 502, 294
+  orig: 502, 294
+  offset: 0, 0
+  index: -1
+bigbluebird-body-detail
+  rotate: false
+  xy: 572, 552
+  size: 81, 37
+  orig: 81, 37
+  offset: 0, 0
+  index: -1
+bigbluebird-claws
+  rotate: true
+  xy: 186, 246
+  size: 139, 114
+  orig: 139, 114
+  offset: 0, 0
+  index: -1
+bigbluebird-claws-attack
+  rotate: false
+  xy: 2, 167
+  size: 182, 218
+  orig: 182, 218
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-closed
+  rotate: false
+  xy: 572, 591
+  size: 78, 65
+  orig: 78, 65
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-hurt
+  rotate: false
+  xy: 719, 888
+  size: 151, 134
+  orig: 151, 134
+  offset: 0, 0
+  index: -1
+bigbluebird-eye-open
+  rotate: true
+  xy: 426, 458
+  size: 78, 65
+  orig: 78, 65
+  offset: 0, 0
+  index: -1
+bigbluebird-hurt-patch
+  rotate: false
+  xy: 309, 420
+  size: 115, 116
+  orig: 115, 116
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-01
+  rotate: false
+  xy: 2, 2
+  size: 160, 163
+  orig: 160, 163
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-02
+  rotate: false
+  xy: 491, 658
+  size: 190, 68
+  orig: 190, 68
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-03
+  rotate: false
+  xy: 164, 2
+  size: 160, 163
+  orig: 160, 163
+  offset: 0, 0
+  index: -1
+bigbluebird-wing-hurt
+  rotate: false
+  xy: 506, 728
+  size: 211, 294
+  orig: 211, 294
+  offset: 0, 0
+  index: -1
+blue-feathers-01
+  rotate: false
+  xy: 186, 195
+  size: 109, 49
+  orig: 109, 49
+  offset: 0, 0
+  index: -1
+blue-feathers-02
+  rotate: false
+  xy: 961, 919
+  size: 61, 103
+  orig: 61, 103
+  offset: 0, 0
+  index: -1
+blue-feathers-03
+  rotate: false
+  xy: 309, 538
+  size: 180, 188
+  orig: 180, 188
+  offset: 0, 0
+  index: -1
+blue-feathers-04
+  rotate: false
+  xy: 491, 543
+  size: 79, 113
+  orig: 79, 113
+  offset: 0, 0
+  index: -1
+slice
+  rotate: false
+  xy: 2, 387
+  size: 305, 339
+  orig: 305, 339
+  offset: 0, 0
+  index: -1

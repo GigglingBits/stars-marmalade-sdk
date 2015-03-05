@@ -1,0 +1,97 @@
+
+planet.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue_bird2
+  rotate: false
+  xy: 2, 2
+  size: 77, 53
+  orig: 77, 53
+  offset: 0, 0
+  index: -1
+blue_bird3
+  rotate: false
+  xy: 734, 369
+  size: 145, 129
+  orig: 145, 129
+  offset: 0, 0
+  index: -1
+cloud1
+  rotate: false
+  xy: 445, 387
+  size: 287, 111
+  orig: 287, 111
+  offset: 0, 0
+  index: -1
+cloud2
+  rotate: false
+  xy: 445, 41
+  size: 146, 80
+  orig: 146, 80
+  offset: 0, 0
+  index: -1
+cloud3
+  rotate: true
+  xy: 621, 131
+  size: 112, 67
+  orig: 112, 67
+  offset: 0, 0
+  index: -1
+earth
+  rotate: false
+  xy: 2, 57
+  size: 441, 441
+  orig: 441, 441
+  offset: 0, 0
+  index: -1
+red_bird1
+  rotate: false
+  xy: 445, 123
+  size: 174, 120
+  orig: 174, 120
+  offset: 0, 0
+  index: -1
+speed strips_blue
+  rotate: false
+  xy: 881, 409
+  size: 108, 89
+  orig: 108, 89
+  offset: 0, 0
+  index: -1
+speed strips_red
+  rotate: false
+  xy: 445, 245
+  size: 224, 140
+  orig: 224, 140
+  offset: 0, 0
+  index: -1
+wave1
+  rotate: false
+  xy: 621, 124
+  size: 32, 5
+  orig: 32, 5
+  offset: 0, 0
+  index: -1
+wave2
+  rotate: true
+  xy: 593, 51
+  size: 70, 11
+  orig: 70, 11
+  offset: 0, 0
+  index: -1
+wave4
+  rotate: false
+  xy: 881, 400
+  size: 40, 7
+  orig: 40, 7
+  offset: 0, 0
+  index: -1
+wave6
+  rotate: true
+  xy: 991, 465
+  size: 33, 5
+  orig: 33, 5
+  offset: 0, 0
+  index: -1

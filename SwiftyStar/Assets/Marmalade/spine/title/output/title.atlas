@@ -1,0 +1,48 @@
+
+title.png
+size: 855,942
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bluebird
+  rotate: false
+  xy: 613, 704
+  size: 242, 238
+  orig: 242, 238
+  offset: 0, 0
+  index: -1
+meteor-brown-L
+  rotate: false
+  xy: 338, 459
+  size: 210, 230
+  orig: 210, 231
+  offset: 0, 0
+  index: -1
+meteor-brown-S
+  rotate: true
+  xy: 338, 273
+  size: 184, 197
+  orig: 184, 197
+  offset: 0, 0
+  index: -1
+redbird
+  rotate: false
+  xy: 2, 2
+  size: 304, 340
+  orig: 304, 340
+  offset: 0, 0
+  index: -1
+star
+  rotate: false
+  xy: 2, 344
+  size: 334, 345
+  orig: 353, 366
+  offset: 9, 11
+  index: -1
+title
+  rotate: false
+  xy: 2, 691
+  size: 609, 251
+  orig: 630, 266
+  offset: 11, 5
+  index: -1

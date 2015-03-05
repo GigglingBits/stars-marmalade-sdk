@@ -1,0 +1,132 @@
+
+bird.png
+size: 1022,249
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue-feathers-01
+  rotate: false
+  xy: 813, 217
+  size: 72, 32
+  orig: 72, 32
+  offset: 0, 0
+  index: -1
+blue-feathers-02
+  rotate: true
+  xy: 743, 208
+  size: 41, 68
+  orig: 41, 68
+  offset: 0, 0
+  index: -1
+blue-feathers-03
+  rotate: true
+  xy: 208, 21
+  size: 118, 123
+  orig: 120, 125
+  offset: 2, 0
+  index: -1
+blue-feathers-04
+  rotate: false
+  xy: 333, 63
+  size: 52, 76
+  orig: 53, 76
+  offset: 1, 0
+  index: -1
+littlebluebird-beak
+  rotate: false
+  xy: 393, 131
+  size: 41, 32
+  orig: 41, 32
+  offset: 0, 0
+  index: -1
+littlebluebird-beak-hurt
+  rotate: false
+  xy: 477, 176
+  size: 73, 73
+  orig: 73, 73
+  offset: 0, 0
+  index: -1
+littlebluebird-body
+  rotate: false
+  xy: 208, 141
+  size: 183, 108
+  orig: 188, 108
+  offset: 0, 0
+  index: -1
+littlebluebird-body-detail
+  rotate: false
+  xy: 743, 191
+  size: 31, 15
+  orig: 31, 15
+  offset: 0, 0
+  index: -1
+littlebluebird-claws
+  rotate: false
+  xy: 2, 2
+  size: 55, 19
+  orig: 55, 19
+  offset: 0, 0
+  index: -1
+littlebluebird-eye-closed
+  rotate: false
+  xy: 333, 23
+  size: 42, 38
+  orig: 42, 38
+  offset: 0, 0
+  index: -1
+littlebluebird-eye-hurt
+  rotate: false
+  xy: 393, 165
+  size: 82, 84
+  orig: 82, 84
+  offset: 0, 0
+  index: -1
+littlebluebird-eye-open
+  rotate: false
+  xy: 959, 211
+  size: 42, 38
+  orig: 42, 38
+  offset: 0, 0
+  index: -1
+littlebluebird-hurt
+  rotate: false
+  xy: 615, 186
+  size: 63, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+littlebluebird-tail
+  rotate: false
+  xy: 1003, 231
+  size: 19, 18
+  orig: 19, 18
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-01
+  rotate: false
+  xy: 680, 187
+  size: 61, 62
+  orig: 61, 62
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-02
+  rotate: false
+  xy: 887, 222
+  size: 70, 27
+  orig: 70, 27
+  offset: 0, 0
+  index: -1
+littlebluebird-wing-03
+  rotate: false
+  xy: 552, 177
+  size: 61, 72
+  orig: 61, 72
+  offset: 0, 0
+  index: -1
+slice
+  rotate: false
+  xy: 2, 23
+  size: 204, 226
+  orig: 204, 226
+  offset: 0, 0
+  index: -1

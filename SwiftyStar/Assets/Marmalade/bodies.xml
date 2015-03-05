@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ Design space
+ ============
+ The design space is the coordinate system used for designing objects and levels.
+ 
+ Origin:       Lower left
+ Orientation:  x is right, y is up
+ Units:        Meters
+ Rotation:     Radians, CCW
+ 
+ Polygons must be convex and be defined CCW.
+ 
+ 
+ Screen space
+ ============
+ The screen space is the coordinate system used by the display.
+ Origin:       top left
+ Orientation:  x is right, y is down
+ Units:        Meters
+ Rotation:     Radians, CCW?
+ 
+ 
+ Children and ports
+ ==================
+ Ports are used by joints. Unspecified ports are interpreted as the origin
+ of the body. Unspecified bodies are interpreted as the current body, i.e.
+ the bodie that owns the joint.
+ -->
+
+<root xmlns="http://www.gigglingbits.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.gigglinbits.com schema.xsd"
+	fileformatversion="3">
+	<bodies>
+		
+		<!-- infrastructure -->
+		<body id="bumper" type="static" resilience="0.8" revolve="0" drag="1">
+			<texture colour="0x77343423" />
+			<shape type="polygon">
+				<point x="-0.6" y="-0.75" />
+				<point x="0.6" y="-0.75" />
+				<point x="0.75" y="0.3" />
+				<point x="0.0" y="0.75" />
+				<point x="-0.75" y="0.3" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" />
+		</body>
+        
+		<body id="sledge" type="kinematic" texture="none" resilience="1.0">
+			<shape type="circle" width="0.1" />
+			<fixture friction="0.0" restitution="0.0" density="0.1" sensor="1" />
+		</body>
+		
+        <body id="softspot" type="dynamic" fixture="none" texture="none" resilience="1.0" revolve="0">
+			<fixture friction="1.0" restitution="1.0" density="1.0" sensor="1" />
+			<shape type="circle" width="0.5" />
+		</body>
+
+		<!-- gameplay -->
+        <body id="star" type="star" resilience="1.0" drag="1" collide="0" revolve="0">
+			<shape type="circle" width="1.3" />
+			<fixture friction="0.0" restitution="2.0" density="1.0" />
+			<texture animation="spine_star" />
+			<port id="shield_port" x="0.0" y="0.0" />
+			<port id="magnet_port" x="0.0" y="0.0" />
+			<child id="shield" port="shield_port" jointtype="weld">
+                <body id="shield" type="dynamic" resilience="1.0" collide="0">
+                    <fixture friction="1.0" restitution="1.0" density="0.00001" sensor="1" />
+                    <shape type="circle" width="2.1" />
+					<texture animation="spine_buff_shield" />
+                </body>
+            </child>
+			<child id="magnet" port="magnet_port" jointtype="weld">
+                <body id="magnet" type="dynamic" resilience="1.0" collide="0">
+                    <fixture friction="0.01" restitution="0.001" density="0.000001" sensor="1" />
+                    <shape type="circle" width="18.0" />
+					<texture>
+						<frame id="on" colour="0x00000000" />
+						<frame id="off" colour="0x00000000" />
+					</texture>
+                </body>
+            </child>
+		</body>
+
+		<body id="nugget_01" type="nugget" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_yellow" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" sensor="1" />
+		</body>
+		
+		<body id="nugget_02" type="nugget2" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_red" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" sensor="1" />
+		</body>
+		
+		<body id="nugget_03" type="nugget3" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_star_purple" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" sensor="1" />
+		</body>
+		
+		<body id="nugget_04" type="nugget4" resilience="1.0" revolve="1" drag="0">
+			<texture image="nugget_diamond_purple" />
+			<shape type="polygon">
+				<point x="-0.2" y="-0.2" />
+				<point x="0.2" y="-0.2" />
+				<point x="0.2" y="0.2" />
+				<point x="-0.2" y="0.2" />
+			</shape>
+			<fixture friction="0.6" restitution="0.5" density="1.0" sensor="1" />
+		</body>
+		
+		<body id="buff_magnet" type="buff_magnet" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
+			<shape type="circle" width="1.0" />
+		</body>
+		
+		<body id="buff_shield" type="buff_shield" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
+			<shape type="circle" width="1.0" />
+		</body>
+		
+		<body id="buff_shoot" type="buff_shoot" fixture="sensor" resilience="1.0" revolve="0" drag="1" collide="0">
+			<texture animation="spine_buffs" />
+			<shape type="circle" width="1.0" />
+		</body>
+		
+		<body id="bird" type="bird" resilience="1.0" >
+			<shape type="polygon">
+				<point x="-0.55" y="-0.3" />
+				<point x="0.25" y="-0.1" />
+				<point x="0.5" y="0.0" />
+				<point x="0.25" y="0.1" />
+				<point x="-0.55" y="0.3" />
+			</shape>
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_bird" />
+			<port id="a" x="0.45" y="0.1" />
+			<port id="b" x="0.55" y="-0.1" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
+		</body>
+
+		<body id="bird_screecher" type="bird_screecher" resilience="1.0" >
+			<shape type="polygon">
+				<point x="-0.8" y="-0.45" />
+				<point x="0.25" y="-0.15" />
+				<point x="0.8" y="0.0" />
+				<point x="0.25" y="0.15" />
+				<point x="-0.8" y="0.35" />
+			</shape>
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_bird_screecher" />
+			<port id="a" x="0.35" y="0.4" />
+			<port id="b" x="0.75" y="0.0" />
+			<port id="c" x="0.65" y="-0.2" />
+			<port id="d" x="-0.7" y="-0.1" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
+			<child id="softspot_c" body="softspot" port="c" jointtype="weld" />
+			<child id="screech" port="d" jointtype="weld">
+				<body id="screech" type="dynamic" fixture="none" texture="none" resilience="1.0" revolve="0" collide="0">
+					<fixture friction="1.0" restitution="1.0" density="0.1" sensor="1" />
+					<shape type="polygon">
+						<point x="-2.5" y="-0.8" />
+						<point x="-0.2" y="0.0" />
+						<point x="-2.5" y="0.8" />
+					</shape>
+				</body>
+			</child>
+		</body>
+		
+		<body id="bird_ripper" type="bird_ripper" resilience="1.0" >
+			<shape type="polygon">
+				<point x="-0.9" y="-0.20" />
+				<point x="0.1" y="-0.90" />
+				<point x="0.9" y="-0.5" />
+				<point x="0.8" y="0.5" />
+				<point x="-0.2" y="0.9" />
+			</shape>
+			<fixture friction="0.0" restitution="2.0" density="1.8" />
+			<texture animation="spine_bird_ripper" />
+			<port id="a" x="0.95" y="0.3" />
+			<port id="b" x="0.95" y="-0.1" />
+			<port id="c" x="0.95" y="-0.3" />
+			<port id="d" x="0.0" y="0.0" />
+			<child id="softspot_a" body="softspot" port="a" jointtype="weld" />
+			<child id="softspot_b" body="softspot" port="b" jointtype="weld" />
+			<child id="softspot_c" body="softspot" port="c" jointtype="weld" />
+			<child id="claws" port="d" jointtype="weld">
+				<body id="claws" type="dynamic" fixture="none" texture="none" resilience="1.0" revolve="0" collide="0">
+					<fixture friction="1.0" restitution="1.0" density="0.1" sensor="1" />
+					<shape type="circle" width="3.0" />
+				</body>
+			</child>
+		</body>
+	</bodies>
+	
+
+	<effects>
+		<effect id="star_collision" type="particles" duration="100">
+			<shape type="circle" width="0.1" />
+			<texture>
+				<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+				<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+				<frame id="03" image="particle_white_star_3" />
+			</texture>
+		</effect>
+		<effect id="buff_touch" type="particles" duration="100">
+			<shape type="circle" width="0.1" />
+			<texture>
+				<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+				<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+				<frame id="03" image="particle_white_star_3" />
+			</texture>
+		</effect>
+		<effect id="text" type="splashtext" texture="none" duration="1500">
+			<shape type="polygon">
+				<point x="-0.25" y="-0.2" />
+				<point x="0.25" y="-0.2" />
+				<point x="0.25" y="0.2" />
+				<point x="-0.25" y="0.2" />
+			</shape>
+		</effect>
+		<effect id="cloud01sky" duration="20000">
+			<shape type="rectangle" width="1.5" height="0.58" />
+			<texture image="cloud_01" />
+		</effect>
+		<effect id="cloud02sky" duration="20000">
+			<shape type="rectangle" width="1.0" height="0.58" />
+			<texture image="cloud_02" />
+		</effect>
+		<effect id="cloud03sky" duration="20000">
+			<shape type="rectangle" width="1.5" height="0.5050" />
+			<texture image="cloud_03" />
+		</effect>
+		<effect id="cloud04sky" duration="20000">
+			<shape type="rectangle" width="1.232" height="0.685" />
+			<texture image="cloud_04" />
+		</effect>
+		<effect id="cloud01far" duration="20000">
+			<shape type="rectangle" width="3.0" height="1.16" />
+			<texture image="cloud_01" />
+		</effect>
+		<effect id="cloud02far" duration="20000">
+			<shape type="rectangle" width="2.0" height="1.18" />
+			<texture image="cloud_02" />
+		</effect>
+		<effect id="cloud03far" duration="20000">
+			<shape type="rectangle" width="3.0" height="1.09" />
+			<texture image="cloud_03" />
+		</effect>
+		<effect id="cloud04far" duration="20000">
+			<shape type="rectangle" width="2.5" height="1.73" />
+			<texture image="cloud_04" />
+		</effect>
+		<effect id="cloud01near" duration="20000">
+			<shape type="rectangle" width="6.0" height="2.32" />
+			<texture image="cloud_01" />
+		</effect>
+		<effect id="cloud02near" duration="20000">
+			<shape type="rectangle" width="4.0" height="2.36" />
+			<texture image="cloud_02" />
+		</effect>
+		<effect id="cloud03near" duration="20000">
+			<shape type="rectangle" width="6.0" height="2.18" />
+			<texture image="cloud_03" />
+		</effect>
+		<effect id="cloud04near" duration="20000">
+			<shape type="rectangle" width="5.0" height="2.74" />
+			<texture image="cloud_04" />
+		</effect>
+	</effects>
+	
+	<textures>
+		<texture id="none" colour="0x00000000" />
+		<texture id="shade" colour="0x77343423" />
+		<texture id="white" colour="0xffffffff" />
+		
+		<texture id="path_point" image="path_point" />
+
+		<texture id="number_back" image="hud_number_back" />
+		
+		<texture id="stardustvial" image="hud_stardust_vial" />
+		<texture id="stardustsurface" image="hud_stardust_surface" />
+		<texture id="stardustsurface_queued" image="hud_stardust_surface_queued" />
+		<texture id="stardustvial_back" colour="0x6631353a" />
+				
+		<texture id="preamble_01" image="01" />
+		<texture id="preamble_02" image="02" />
+		<texture id="preamble_03" image="03" />
+		<texture id="preamble_04" image="04" />
+		<texture id="preamble_05" image="05_01" />
+		<texture id="preamble_06" image="06_01" />
+		<texture id="preamble_07" image="07_01" />
+		<texture id="preamble_08" image="08" />
+		
+		<texture id="particle_yellow_star">
+			<frame id="01" image="particle_yellow_star_1" duration="100" next="02" />
+			<frame id="02" image="particle_yellow_star_2" duration="100" next="03" />
+			<frame id="03" image="particle_yellow_star_3" duration="100" next="04" />
+			<frame id="04" image="particle_yellow_star_1" duration="100" next="05" />
+			<frame id="05" image="particle_yellow_star_2" duration="100" next="06" />
+			<frame id="06" image="particle_yellow_star_3" duration="100" next="07" />
+			<frame id="07" image="particle_yellow_star_4" duration="100" next="08" />
+			<frame id="08" image="particle_yellow_star_1" duration="100" next="09" />
+			<frame id="09" image="particle_yellow_star_5"/>
+		</texture>
+		
+		<texture id="particle_white_star">
+			<frame id="01" image="particle_white_star_1" duration="550" next="02" />
+			<frame id="02" image="particle_white_star_2" duration="50" next="03" />
+			<frame id="03" image="particle_white_star_3" />
+		</texture>
+
+		<texture id="button_facebook" image="button_facebook" />
+		<texture id="button_achievements" image="button_achievements" />
+		<texture id="button_leaderboards" image="button_leaderboards" />
+		
+		<texture id="button_options" image="button_options" />
+		<texture id="button_credits" image="button_credits" />
+		
+		<texture id="navipanel">
+			<frame id="on" image="navidot_filled"/>
+			<frame id="off" image="navidot_empty"/>
+		</texture>
+		<texture id="button_level">
+			<frame id="released" image="button_level"/>
+			<frame id="pressed" image="button_level"/>
+			<frame id="disabled" image="button_level_locked"/>
+		</texture>
+		<texture id="button_level_achieved_stars">
+			<frame id="0" image="button_level_0_star"/>
+			<frame id="1" image="button_level_1_star"/>
+			<frame id="2" image="button_level_2_star"/>
+			<frame id="3" image="button_level_3_star"/>
+		</texture>
+		<texture id="button_play" image="button_play" />
+
+		<texture id="buff" animation="spine_buffs" />
+		
+		<texture id="button_plain" image="button_plain" />
+		<texture id="button_movie" image="button_movie" />
+		<texture id="button_toggle_hud" image="button_toggle_hud" />
+		<texture id="button_restart" image="button_restart" />
+		<texture id="button_next" image="button_play" />
+		<texture id="button_quit" image="button_quit" />
+
+		<texture id="button_pause_retry" image="button_retry" />
+		<texture id="button_pause_menu" image="button_menu" />
+		<texture id="button_pause_reload" image="button_reload" />
+		<texture id="button_pause_reload_local" image="button_reload_local" />
+
+		<texture id="button_ads_watch" image="button_adwatch" />
+		<texture id="button_ads_remove" image="button_adremove" />
+
+		<texture id="button_arrow_left" image="button_arrow_left" />
+		<texture id="button_arrow_right" image="button_arrow_right" />
+		
+		<texture id="completion_won" animation="spine_completion_won" />
+		<texture id="completion_lost" animation="spine_completion_lost" />
+		<texture id="completion_award" animation="spine_completion_award" />
+		
+		<texture id="button_planet" animation="spine_planet" />
+		<texture id="button_title" animation="spine_title"/>
+		
+		<texture id="background" image="background" />
+		<texture id="background_stars" image="background_stars" />
+		<texture id="background_stars_far" image="background_stars_far" />
+	</textures>
+	
+	<fixtures>
+		<fixture id="none" friction="0.0" restitution="0.0" density="0.0" />
+		<fixture id="sensor" friction="0.0" restitution="0.0" density="0.1" sensor="1" />
+		<fixture id="rubber" friction="0.8" restitution="0.65" density="1.0" />
+		<fixture id="ground" friction="0.8" restitution="0.2" density="3.0" />
+	</fixtures>
+	
+	<shapes>
+		<shape id="wall" type="rectangle" width="1" height="20" />
+		<shape id="poly" type="polygon">
+			<point x="0" y="0" />
+			<point x="0.4" y="0" />
+			<point x="0" y="1.3" />
+		</shape>
+	</shapes>
+	
+</root>

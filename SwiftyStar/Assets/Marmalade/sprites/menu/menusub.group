@@ -1,0 +1,17 @@
+CIwResGroup
+{
+	name "menusub"
+
+	./button_arrow_left.png
+	./button_arrow_right.png
+	./navidot_filled.png
+	./navidot_empty.png
+
+	./button_level.png
+	./button_level_locked.png
+
+	./button_level_0_star.png
+	./button_level_1_star.png
+	./button_level_2_star.png
+	./button_level_3_star.png
+}

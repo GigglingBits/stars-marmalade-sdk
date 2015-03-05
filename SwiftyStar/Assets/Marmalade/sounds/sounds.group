@@ -1,0 +1,23 @@
+CIwResGroup
+{
+	name "sounds"
+
+	shared true
+
+	./collision.wav
+	./eat_01.wav
+	./ouch_01.wav
+
+	./screech.wav
+	./claws.wav
+
+	./level_win.wav
+
+	./27995_SFX_FoleyDroppingEmptyBulletShell.wav
+
+	./letsgo.wav
+	./06081_man_falling_2.wav
+	./09427_cartoon_bird_hit_scream.wav
+
+	./sounds.itx
+}

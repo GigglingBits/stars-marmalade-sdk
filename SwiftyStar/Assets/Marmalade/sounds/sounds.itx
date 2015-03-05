@@ -1,0 +1,110 @@
+CIwSoundSpec
+{
+	name		"ButtonPressed"
+	data		"27995_SFX_FoleyDroppingEmptyBulletShell"
+	vol 		0.8
+	pitchMin	1.05
+	pitchMax	1.25
+}
+
+CIwSoundSpec
+{
+	name		"EatNugget"
+	data		"eat_01"
+	vol 		0.3
+	pitchMin	0.7
+	pitchMax	1.0
+}
+
+CIwSoundSpec
+{
+	name		"Ouch"
+	data		"ouch_01"
+	vol 		0.7
+	pitchMin	0.9
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
+	name		"StarFall"
+	data		"06081_man_falling_2"
+	vol 		0.7
+	pitchMin	1.3
+	pitchMax	1.5
+}
+
+CIwSoundSpec
+{
+	name		"LetsGo"
+	data		"letsgo"
+	vol 		0.8
+	pitchMin	1.0
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
+	name		"Pop"
+	data		"eat_01"
+	vol 		0.08
+	pitchMin	1.0
+	pitchMax	2.0
+}
+
+CIwSoundSpec
+{
+	name		"Collision"
+	data		"collision"
+	vol 		0.3
+	pitchMin	0.7
+	pitchMax	1.3
+}
+
+CIwSoundSpec
+{
+	name		"BirdCollision"
+	data		"09427_cartoon_bird_hit_scream"
+	vol 		0.8
+	pitchMin	1.05
+	pitchMax	1.25
+}
+
+CIwSoundSpec
+{
+	name		"Screech"
+	data		"screech"
+	vol 		0.5
+	pitchMin	1.00
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
+	name		"Claws"
+	data		"claws"
+	vol 		0.2
+	pitchMin	1.00
+	pitchMax	1.2
+}
+
+CIwSoundSpec
+{
+	name		"level_win"
+	data		"level_win"
+	vol 		0.7
+	pitchMin	1.0
+	pitchMax	1.0
+}
+
+// Create a sound group, with max polyphony 2, for all the hits and kicks
+// CIwSoundGroup
+// {
+// 	name		"hits"
+// 	maxPolyphony 2
+// 	killOldest	true
+// 	addSpec		"NinjaHo"
+// 	addSpec		"colision"
+// 	addSpec		"shot"
+// }
+

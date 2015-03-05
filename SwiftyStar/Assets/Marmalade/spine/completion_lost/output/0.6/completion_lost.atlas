@@ -1,0 +1,97 @@
+
+completion_lost.png
+size: 710,506
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lost_star_01
+  rotate: false
+  xy: 397, 215
+  size: 46, 45
+  orig: 64, 51
+  offset: 15, 0
+  index: -1
+lost_star_02
+  rotate: false
+  xy: 2, 15
+  size: 64, 60
+  orig: 64, 60
+  offset: 0, 0
+  index: -1
+lost_star_03
+  rotate: false
+  xy: 648, 468
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+lost_star_04
+  rotate: false
+  xy: 2, 77
+  size: 245, 429
+  orig: 245, 506
+  offset: 0, 0
+  index: -1
+lost_star_05
+  rotate: false
+  xy: 249, 114
+  size: 146, 392
+  orig: 146, 392
+  offset: 0, 0
+  index: -1
+lost_star_06
+  rotate: false
+  xy: 648, 439
+  size: 22, 27
+  orig: 22, 27
+  offset: 0, 0
+  index: -1
+lost_star_07
+  rotate: false
+  xy: 249, 77
+  size: 41, 35
+  orig: 41, 35
+  offset: 0, 0
+  index: -1
+lost_star_08
+  rotate: false
+  xy: 688, 480
+  size: 22, 26
+  orig: 22, 26
+  offset: 0, 0
+  index: -1
+lost_star_09
+  rotate: false
+  xy: 445, 243
+  size: 49, 17
+  orig: 49, 17
+  offset: 0, 0
+  index: -1
+lost_star_10
+  rotate: false
+  xy: 68, 41
+  size: 35, 34
+  orig: 35, 34
+  offset: 0, 0
+  index: -1
+lost_star_11
+  rotate: false
+  xy: 397, 180
+  size: 35, 33
+  orig: 35, 33
+  offset: 0, 0
+  index: -1
+lost_star_12
+  rotate: false
+  xy: 2, 2
+  size: 11, 11
+  orig: 11, 11
+  offset: 0, 0
+  index: -1
+lost_star_13
+  rotate: false
+  xy: 397, 262
+  size: 249, 244
+  orig: 250, 244
+  offset: 0, 0
+  index: -1

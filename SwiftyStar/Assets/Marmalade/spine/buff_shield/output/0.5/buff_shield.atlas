@@ -1,0 +1,48 @@
+
+buff_shield.png
+size: 792,202
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shield_background
+  rotate: false
+  xy: 2, 34
+  size: 168, 168
+  orig: 168, 168
+  offset: 0, 0
+  index: -1
+shield_broke_01
+  rotate: false
+  xy: 663, 114
+  size: 129, 88
+  orig: 129, 88
+  offset: 0, 0
+  index: -1
+shield_broke_02
+  rotate: false
+  xy: 2, 2
+  size: 19, 30
+  orig: 19, 30
+  offset: 0, 0
+  index: -1
+shield_broke_06
+  rotate: true
+  xy: 495, 64
+  size: 138, 166
+  orig: 138, 166
+  offset: 0, 0
+  index: -1
+shield_broke_07
+  rotate: false
+  xy: 332, 53
+  size: 161, 149
+  orig: 161, 149
+  offset: 0, 0
+  index: -1
+shield_foreground
+  rotate: false
+  xy: 172, 42
+  size: 158, 160
+  orig: 158, 160
+  offset: 0, 0
+  index: -1

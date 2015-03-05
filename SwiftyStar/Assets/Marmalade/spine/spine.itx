@@ -1,0 +1,76 @@
+SpineResource
+{
+	name	"spine_title"
+	atlas	"spine/title/output/title.atlas"
+	json	"spine/title/output/title.json"
+}
+
+SpineResource
+{
+	name	"spine_planet"
+	atlas	"spine/planet/output/planet.atlas"
+	json	"spine/planet/output/planet.json"
+}
+
+SpineResource
+{
+	name	"spine_completion_won"
+	atlas	"spine/completion_won/output/completion_won.atlas"
+	json	"spine/completion_won/output/completion_won.json"
+}
+
+SpineResource
+{
+	name	"spine_completion_lost"
+	atlas	"spine/completion_lost/output/completion_lost.atlas"
+	json	"spine/completion_lost/output/completion_lost.json"
+}
+
+SpineResource
+{
+	name	"spine_completion_award"
+	atlas	"spine/completion_award/output/completion_award.atlas"
+	json	"spine/completion_award/output/completion_award.json"
+}
+
+SpineResource
+{
+	name	"spine_star"
+	atlas	"spine/star/output/star.atlas"
+	json	"spine/star/output/star.json"
+}
+
+SpineResource
+{
+	name	"spine_bird"
+	atlas	"spine/bird/output/bird.atlas"
+	json	"spine/bird/output/bird.json"
+}
+
+SpineResource
+{
+	name	"spine_bird_screecher"
+	atlas	"spine/bird_screecher/output/bird_screecher.atlas"
+	json	"spine/bird_screecher/output/bird_screecher.json"
+}
+
+SpineResource
+{
+	name	"spine_bird_ripper"
+	atlas	"spine/bird_ripper/output/bird_ripper.atlas"
+	json	"spine/bird_ripper/output/bird_ripper.json"
+}
+
+SpineResource
+{
+	name	"spine_buffs"
+	atlas	"spine/buffs/output/buffs.atlas"
+	json	"spine/buffs/output/buffs.json"
+}
+
+SpineResource
+{
+	name	"spine_buff_shield"
+	atlas	"spine/buff_shield/output/buff_shield.atlas"
+	json	"spine/buff_shield/output/buff_shield.json"
+}

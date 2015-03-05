@@ -27,6 +27,9 @@ Kidbook/dist/
 Rydendahl/build_temp/
 Rydendahl/deployments/
 
+SwiftyStar/Library
+SwiftyStar/Temp
+
 *.mkb.bak
 *.mkb~
 *.mkf~
@@ -34,8 +37,6 @@ Rydendahl/deployments/
 *.group~
 *.xml~
 Doxyfile~
-ident.free
-
 *.bak
-
 *.itx~
+

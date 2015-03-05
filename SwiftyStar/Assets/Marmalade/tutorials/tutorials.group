@@ -1,0 +1,18 @@
+CIwResGroup
+{
+	name "tutorials"
+
+	shared true
+
+	./01.png
+	./02.png
+	./03.png
+	./04.png
+	./05_01.png
+#	./05_02.png
+	./06_01.png
+#	./06_02.png
+	./07_01.png
+#	./07_02.png
+	./08.png
+}

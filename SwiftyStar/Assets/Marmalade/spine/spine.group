@@ -1,0 +1,8 @@
+CIwResGroup
+{
+	name "spine"
+	
+	shared true
+	
+	./spine.itx
+}

@@ -1,0 +1,41 @@
+CIwResGroup
+{
+	name "sprites"
+	
+	shared true
+
+	./image_missing.png
+
+	./menu/menusub.group
+
+	./background.png
+	./background_stars.png
+	./background_stars_far.png
+
+	./button_facebook.png
+	./button_achievements.png
+	./button_leaderboards.png
+
+	./button_adwatch.png
+	./button_adremove.png
+
+	./button_options.png
+	./button_menu.png
+	./button_movie.png
+	./button_credits.png
+	./button_play.png
+	./button_reload.png
+	./button_reload_local.png
+
+	./button_plain.png
+	./button_quit.png
+	./button_retry.png
+	./button_toggle_hud.png
+
+	./path_point.png
+
+	./cloud_01.png
+	./cloud_02.png
+	./cloud_03.png
+	./cloud_04.png
+}
