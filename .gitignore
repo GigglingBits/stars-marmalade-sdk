@@ -27,6 +27,7 @@ Kidbook/dist/
 Rydendahl/build_temp/
 Rydendahl/deployments/
 
+SwiftyStar/Builds
 SwiftyStar/Library
 SwiftyStar/Temp
 
@@ -39,4 +40,3 @@ SwiftyStar/Temp
 Doxyfile~
 *.bak
 *.itx~
-
