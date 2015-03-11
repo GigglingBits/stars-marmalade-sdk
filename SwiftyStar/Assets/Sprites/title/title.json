@@ -1,12 +1,12 @@
 {
-"skeleton": { "hash": "2dL2Bo/9MTzqUU71neWdSJ+SGxk", "spine": "2.1.17", "width": 2417.38, "height": 1367.29, "images": "./images/" },
+"skeleton": { "hash": "mVLsRPG9vItPN5ymgnMTcVgvnd4", "spine": "2.1.17", "width": 2417.38, "height": 1367.29 },
 "bones": [
-	{ "name": "root", "y": -87, "color": "9b9b9b00" },
-	{ "name": "bluebird", "parent": "root", "length": 312.53, "x": -379.95, "y": -35.99, "rotation": 122.52, "color": "9b9b9b00" },
-	{ "name": "meteor_L", "parent": "root", "length": 205.59, "x": -1126.27, "y": -202.47, "rotation": -25.65, "color": "9b9b9b00" },
-	{ "name": "meteor_S", "parent": "root", "length": 183.29, "x": 897.49, "y": 688.88, "rotation": -113.41, "color": "9b9b9b00" },
-	{ "name": "meteor_S_back", "parent": "root", "length": 337.91, "x": -985.01, "y": 737.29, "rotation": -89.09, "color": "9b9b9b00" },
-	{ "name": "redbird", "parent": "root", "length": 320.67, "x": 347.98, "y": -25.01, "rotation": 57.58, "color": "9b9b9b00" },
+	{ "name": "root", "y": -87 },
+	{ "name": "bluebird", "parent": "root", "length": 312.53, "x": -379.95, "y": -35.99, "rotation": 122.52 },
+	{ "name": "meteor_L", "parent": "root", "length": 205.59, "x": -1126.27, "y": -202.47, "rotation": -25.65 },
+	{ "name": "meteor_S", "parent": "root", "length": 183.29, "x": 897.49, "y": 688.88, "rotation": -113.41 },
+	{ "name": "meteor_S_back", "parent": "root", "length": 337.91, "x": -985.01, "y": 737.29, "rotation": -89.09 },
+	{ "name": "redbird", "parent": "root", "length": 320.67, "x": 347.98, "y": -25.01, "rotation": 57.58 },
 	{ "name": "star", "parent": "root", "length": 369.04, "x": -12.5, "y": 163, "rotation": 90.9 },
 	{ "name": "title", "parent": "root", "length": 189, "x": -13.49, "y": -163.6, "rotation": 90 }
 ],

@@ -1,48 +1,48 @@
 
 title.png
-size: 2048,2048
+size: 1024,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bluebird
   rotate: false
-  xy: 1221, 1402
-  size: 483, 475
-  orig: 483, 476
-  offset: 0, 1
+  xy: 491, 290
+  size: 193, 190
+  orig: 193, 190
+  offset: 0, 0
   index: -1
 meteor-brown-L
   rotate: false
-  xy: 671, 913
-  size: 419, 460
-  orig: 419, 462
+  xy: 686, 295
+  size: 168, 185
+  orig: 168, 185
   offset: 0, 0
   index: -1
 meteor-brown-S
-  rotate: true
-  xy: 671, 543
-  size: 368, 393
-  orig: 368, 393
+  rotate: false
+  xy: 856, 323
+  size: 147, 157
+  orig: 147, 157
   offset: 0, 0
   index: -1
 redbird
   rotate: false
-  xy: 2, 2
-  size: 607, 679
-  orig: 607, 680
+  xy: 270, 6
+  size: 243, 272
+  orig: 243, 272
   offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 2, 683
-  size: 667, 690
-  orig: 706, 731
-  offset: 19, 21
+  xy: 2, 2
+  size: 266, 276
+  orig: 282, 292
+  offset: 8, 8
   index: -1
 title
   rotate: false
-  xy: 2, 1375
-  size: 1217, 502
-  orig: 1260, 531
-  offset: 23, 9
+  xy: 2, 280
+  size: 487, 200
+  orig: 504, 212
+  offset: 9, 4
   index: -1
