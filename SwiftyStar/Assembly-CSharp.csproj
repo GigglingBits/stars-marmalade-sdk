@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\JustSomeRotation.cs" />
+     <Compile Include="Assets\Scripts\UIHelper.cs" />
      <Compile Include="Assets\spine-csharp\Animation.cs" />
      <Compile Include="Assets\spine-csharp\AnimationState.cs" />
      <Compile Include="Assets\spine-csharp\AnimationStateData.cs" />

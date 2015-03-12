@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "HHnC8/6oIsWrAc6swE7LyIrjk9c", "spine": "2.1.17", "width": 1057.08, "height": 1012.3, "images": "./images/" },
+"skeleton": { "hash": "QtWqlJ3LL1uwtPfMm8Tmhz511qM", "spine": "2.1.18", "width": 1057.08, "height": 1012.3 },
 "bones": [
 	{ "name": "root", "y": -30 },
 	{ "name": "big blue bird", "parent": "root", "length": 238.3, "x": 381.72, "y": 288.47, "rotation": -173.26 },

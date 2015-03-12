@@ -1,97 +1,97 @@
 
 planet.png
-size: 1024,512
+size: 512,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 blue_bird2
-  rotate: false
-  xy: 150, 29
-  size: 77, 53
-  orig: 77, 53
+  rotate: true
+  xy: 194, 11
+  size: 61, 42
+  orig: 61, 42
   offset: 0, 0
   index: -1
 blue_bird3
   rotate: false
-  xy: 712, 375
-  size: 145, 129
-  orig: 145, 129
+  xy: 339, 186
+  size: 116, 103
+  orig: 116, 103
   offset: 0, 0
   index: -1
 cloud1
   rotate: false
-  xy: 423, 393
-  size: 287, 111
-  orig: 287, 111
+  xy: 2, 74
+  size: 230, 89
+  orig: 230, 89
   offset: 0, 0
   index: -1
 cloud2
   rotate: false
-  xy: 2, 2
-  size: 146, 80
-  orig: 146, 80
+  xy: 2, 8
+  size: 117, 64
+  orig: 117, 64
   offset: 0, 0
   index: -1
 cloud3
   rotate: false
-  xy: 859, 437
-  size: 112, 67
-  orig: 112, 67
+  xy: 234, 109
+  size: 89, 54
+  orig: 89, 54
   offset: 0, 0
   index: -1
 earth
   rotate: false
-  xy: 2, 84
-  size: 419, 420
-  orig: 441, 441
-  offset: 11, 11
+  xy: 2, 165
+  size: 335, 336
+  orig: 353, 353
+  offset: 9, 9
   index: -1
 red_bird1
   rotate: false
-  xy: 423, 129
-  size: 174, 120
-  orig: 174, 120
+  xy: 339, 291
+  size: 139, 96
+  orig: 139, 96
   offset: 0, 0
   index: -1
 speed strips_blue
-  rotate: false
-  xy: 602, 302
-  size: 77, 89
-  orig: 108, 89
-  offset: 31, 0
+  rotate: true
+  xy: 121, 11
+  size: 61, 71
+  orig: 86, 71
+  offset: 25, 0
   index: -1
 speed strips_red
   rotate: false
-  xy: 423, 251
-  size: 177, 140
-  orig: 224, 140
-  offset: 47, 0
+  xy: 339, 389
+  size: 141, 112
+  orig: 179, 112
+  offset: 38, 0
   index: -1
 wave1
   rotate: false
-  xy: 602, 295
-  size: 32, 5
-  orig: 32, 5
+  xy: 2, 2
+  size: 25, 4
+  orig: 25, 4
   offset: 0, 0
   index: -1
 wave2
-  rotate: false
-  xy: 423, 116
-  size: 70, 11
-  orig: 70, 11
+  rotate: true
+  xy: 482, 445
+  size: 56, 8
+  orig: 56, 8
   offset: 0, 0
   index: -1
 wave4
   rotate: false
-  xy: 859, 428
-  size: 40, 7
-  orig: 40, 7
+  xy: 339, 179
+  size: 32, 5
+  orig: 32, 5
   offset: 0, 0
   index: -1
 wave6
-  rotate: false
-  xy: 973, 499
-  size: 33, 5
-  orig: 33, 5
+  rotate: true
+  xy: 457, 263
+  size: 26, 4
+  orig: 26, 4
   offset: 0, 0
   index: -1
