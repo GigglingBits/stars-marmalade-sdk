@@ -1,69 +1,69 @@
 
 buffs.png
-size: 512,256
+size: 512,128
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 extra_buff
   rotate: false
-  xy: 88, 41
-  size: 50, 50
-  orig: 50, 50
+  xy: 120, 5
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 extra_button
   rotate: false
-  xy: 2, 2
-  size: 84, 89
-  orig: 84, 89
+  xy: 120, 47
+  size: 67, 71
+  orig: 67, 71
   offset: 0, 0
   index: -1
 gradient_effect
   rotate: false
-  xy: 2, 93
-  size: 146, 146
-  orig: 150, 150
+  xy: 2, 2
+  size: 116, 116
+  orig: 120, 120
   offset: 2, 2
   index: -1
 magnet_buff
   rotate: false
-  xy: 150, 98
-  size: 50, 50
-  orig: 50, 50
+  xy: 396, 78
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 magnet_button
   rotate: false
-  xy: 150, 150
-  size: 84, 89
-  orig: 84, 89
+  xy: 189, 47
+  size: 67, 71
+  orig: 67, 71
   offset: 0, 0
   index: -1
 shield_buff
   rotate: false
-  xy: 408, 189
-  size: 50, 50
-  orig: 50, 50
+  xy: 162, 5
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 shield_button
   rotate: false
-  xy: 236, 150
-  size: 84, 89
-  orig: 84, 89
+  xy: 258, 47
+  size: 67, 71
+  orig: 67, 71
   offset: 0, 0
   index: -1
 shoot_buff
   rotate: false
-  xy: 460, 189
-  size: 50, 50
-  orig: 50, 50
+  xy: 438, 78
+  size: 40, 40
+  orig: 40, 40
   offset: 0, 0
   index: -1
 shoot_button
   rotate: false
-  xy: 322, 150
-  size: 84, 89
-  orig: 84, 89
+  xy: 327, 47
+  size: 67, 71
+  orig: 67, 71
   offset: 0, 0
   index: -1

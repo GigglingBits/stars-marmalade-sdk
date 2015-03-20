@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "H9ZVIIQj3l0+5dlatxfe3eIv89Y", "spine": "2.1.17", "width": 657.13, "height": 564.95, "images": "./images/" },
+"skeleton": { "hash": "n3LnPBubvcOFW6EwktMkoP9x/j8", "spine": "2.1.18", "width": 657.13, "height": 564.95 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "Beak/naeb", "parent": "root", "length": 51.42, "x": -104.61, "y": 71.65, "rotation": 176.84 },

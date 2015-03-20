@@ -58,6 +58,7 @@
      <Compile Include="Assets\spine-unity\Editor\SpineEditorUtilities.cs" />
      <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilityBoneInspector.cs" />
      <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilityInspector.cs" />
+     <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilitySubmeshRendererInspector.cs" />
      <None Include="Assets\spine-unity\Shaders\HiddenPass.shader" />
      <None Include="Assets\Archive (Marmalade)\levels.xml" />
      <None Include="Assets\Sprites\completion_won\completion_won.atlas.txt" />

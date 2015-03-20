@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "lAKmPfZfIq1Noz4q2VtkGRLyH2k", "spine": "2.1.17", "width": 231, "height": 282, "images": "" },
+"skeleton": { "hash": "tYP/Au7HdoaUU4Kg+wHR5Ky9Jz4", "spine": "2.1.18", "width": 231, "height": 282 },
 "bones": [
 	{ "name": "collision" },
 	{ "name": "partikler", "parent": "collision", "y": 20 }

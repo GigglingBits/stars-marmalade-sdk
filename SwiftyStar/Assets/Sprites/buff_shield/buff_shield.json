@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "9GwTocx3c/jszUZ9lgMzfTOuBHg", "spine": "2.1.17", "width": 706.69, "height": 743.06, "images": "./images/" },
+"skeleton": { "hash": "q1Bm1Wgm0mf0dNYKtxBpG3n3oUk", "spine": "2.1.18", "width": 706.69, "height": 743.06 },
 "bones": [
 	{ "name": "Torso", "y": 10 },
 	{ "name": "Normal_shield_background", "parent": "Torso" },

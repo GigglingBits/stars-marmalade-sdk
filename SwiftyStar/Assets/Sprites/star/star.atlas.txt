@@ -1,181 +1,181 @@
 
 star.png
-size: 1024,512
+size: 1024,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 happy-star-chin-wound
   rotate: false
-  xy: 487, 238
-  size: 62, 62
-  orig: 83, 68
-  offset: 21, 1
+  xy: 444, 57
+  size: 49, 50
+  orig: 66, 54
+  offset: 17, 0
   index: -1
 happystar-arm-L
   rotate: true
-  xy: 154, 50
-  size: 117, 94
-  orig: 117, 94
+  xy: 947, 96
+  size: 94, 75
+  orig: 94, 75
   offset: 0, 0
   index: -1
 happystar-arm-R
   rotate: true
-  xy: 260, 177
-  size: 113, 94
-  orig: 113, 94
+  xy: 367, 9
+  size: 90, 75
+  orig: 90, 75
   offset: 0, 0
   index: -1
 happystar-eyes-angry
   rotate: false
-  xy: 485, 302
-  size: 129, 65
-  orig: 147, 65
-  offset: 9, 0
+  xy: 499, 90
+  size: 104, 52
+  orig: 118, 52
+  offset: 7, 0
   index: -1
 happystar-eyes-angry-closed
   rotate: false
-  xy: 356, 231
-  size: 129, 65
-  orig: 147, 65
-  offset: 10, 0
+  xy: 261, 47
+  size: 104, 52
+  orig: 118, 52
+  offset: 8, 0
   index: -1
 happystar-eyes-closed
   rotate: false
-  xy: 2, 193
-  size: 150, 135
-  orig: 150, 135
+  xy: 2, 3
+  size: 120, 108
+  orig: 120, 108
   offset: 0, 0
   index: -1
 happystar-eyes-hit1
   rotate: false
-  xy: 2, 2
-  size: 145, 52
-  orig: 146, 52
-  offset: 1, 0
+  xy: 261, 101
+  size: 117, 41
+  orig: 117, 41
+  offset: 0, 0
   index: -1
 happystar-eyes-hit2
   rotate: false
-  xy: 175, 292
-  size: 159, 75
-  orig: 159, 76
+  xy: 824, 192
+  size: 127, 60
+  orig: 127, 61
   offset: 0, 1
   index: -1
 happystar-eyes-looking-totheplayer
   rotate: false
-  xy: 175, 369
-  size: 150, 135
-  orig: 150, 135
+  xy: 141, 144
+  size: 120, 108
+  orig: 120, 108
   offset: 0, 0
   index: -1
 happystar-eyes-lookingdown.png
   rotate: false
-  xy: 2, 56
-  size: 150, 135
-  orig: 150, 135
+  xy: 263, 144
+  size: 120, 108
+  orig: 120, 108
   offset: 0, 0
   index: -1
 happystar-eyes-lookingup
   rotate: false
-  xy: 327, 369
-  size: 150, 135
-  orig: 150, 135
+  xy: 385, 144
+  size: 120, 108
+  orig: 120, 108
   offset: 0, 0
   index: -1
 happystar-eyes-open
   rotate: false
-  xy: 479, 369
-  size: 150, 135
-  orig: 150, 135
+  xy: 507, 144
+  size: 120, 108
+  orig: 120, 108
   offset: 0, 0
   index: -1
 happystar-eyes-sad
   rotate: false
-  xy: 336, 298
-  size: 147, 69
-  orig: 147, 69
+  xy: 141, 87
+  size: 118, 55
+  orig: 118, 55
   offset: 0, 0
   index: -1
 happystar-eyes-sad-closed
   rotate: false
-  xy: 868, 382
-  size: 145, 41
-  orig: 146, 41
-  offset: 1, 0
+  xy: 380, 109
+  size: 117, 33
+  orig: 117, 33
+  offset: 0, 0
   index: -1
 happystar-eyes-sleepy
   rotate: false
-  xy: 868, 425
-  size: 151, 79
-  orig: 151, 79
+  xy: 824, 127
+  size: 121, 63
+  orig: 121, 63
   offset: 0, 0
   index: -1
 happystar-leg-L
   rotate: false
-  xy: 631, 382
-  size: 117, 122
-  orig: 117, 122
+  xy: 629, 155
+  size: 93, 97
+  orig: 93, 97
   offset: 0, 0
   index: -1
 happystar-leg-R
-  rotate: false
-  xy: 750, 382
-  size: 116, 122
-  orig: 116, 122
+  rotate: true
+  xy: 724, 160
+  size: 92, 98
+  orig: 92, 98
   offset: 0, 0
   index: -1
 happystar-mouth-angry
   rotate: false
-  xy: 356, 180
-  size: 131, 49
-  orig: 131, 49
+  xy: 261, 6
+  size: 104, 39
+  orig: 104, 39
   offset: 0, 0
   index: -1
 happystar-mouth-detail
-  rotate: true
-  xy: 729, 311
-  size: 21, 33
-  orig: 21, 33
+  rotate: false
+  xy: 605, 116
+  size: 16, 26
+  orig: 16, 26
   offset: 0, 0
   index: -1
 happystar-mouth-hit.png
-  rotate: false
-  xy: 551, 226
-  size: 75, 74
-  orig: 75, 74
+  rotate: true
+  xy: 953, 192
+  size: 60, 59
+  orig: 60, 59
   offset: 0, 0
   index: -1
 happystar-mouth-sad
-  rotate: false
-  xy: 729, 334
-  size: 65, 46
-  orig: 65, 46
+  rotate: true
+  xy: 222, 33
+  size: 52, 37
+  orig: 52, 37
   offset: 0, 0
   index: -1
 happystar-mouth-sleepy
-  rotate: true
-  xy: 796, 338
-  size: 42, 48
-  orig: 42, 48
+  rotate: false
+  xy: 444, 17
+  size: 33, 38
+  orig: 33, 38
   offset: 0, 0
   index: -1
 happystar-mouth-zzzz
   rotate: false
-  xy: 631, 300
-  size: 96, 80
-  orig: 96, 80
+  xy: 495, 24
+  size: 77, 64
+  orig: 77, 64
   offset: 0, 0
   index: -1
 happystar-top
-  rotate: false
-  xy: 154, 169
-  size: 104, 121
-  orig: 104, 121
+  rotate: true
+  xy: 124, 2
+  size: 83, 96
+  orig: 83, 96
   offset: 0, 0
   index: -1
 happystar-torso
   rotate: false
-  xy: 2, 330
-  size: 171, 174
-  orig: 171, 175
+  xy: 2, 113
+  size: 137, 139
+  orig: 137, 140
   offset: 0, 0
   index: -1

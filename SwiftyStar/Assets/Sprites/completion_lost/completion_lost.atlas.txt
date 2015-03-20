@@ -6,92 +6,92 @@ filter: Linear,Linear
 repeat: none
 lost_star_01
   rotate: false
-  xy: 2, 2
-  size: 39, 38
-  orig: 54, 43
-  offset: 13, 0
+  xy: 289, 115
+  size: 31, 30
+  orig: 43, 34
+  offset: 10, 0
   index: -1
 lost_star_02
   rotate: false
-  xy: 361, 72
-  size: 54, 50
-  orig: 54, 50
+  xy: 2, 39
+  size: 43, 40
+  orig: 43, 40
   offset: 0, 0
   index: -1
 lost_star_03
   rotate: false
-  xy: 417, 90
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 11
+  size: 25, 26
+  orig: 25, 26
   offset: 0, 0
   index: -1
 lost_star_04
   rotate: true
-  xy: 2, 42
-  size: 204, 357
-  orig: 204, 422
+  xy: 2, 81
+  size: 163, 285
+  orig: 163, 337
   offset: 0, 0
   index: -1
 lost_star_05
   rotate: true
-  xy: 361, 124
-  size: 122, 327
-  orig: 122, 327
+  xy: 289, 147
+  size: 97, 262
+  orig: 97, 262
   offset: 0, 0
   index: -1
 lost_star_06
   rotate: false
-  xy: 936, 223
-  size: 19, 23
-  orig: 19, 23
+  xy: 721, 200
+  size: 15, 18
+  orig: 15, 18
   offset: 0, 0
   index: -1
 lost_star_07
   rotate: false
-  xy: 899, 216
-  size: 35, 30
-  orig: 35, 30
+  xy: 721, 220
+  size: 28, 24
+  orig: 28, 24
   offset: 0, 0
   index: -1
 lost_star_08
   rotate: false
-  xy: 451, 100
-  size: 19, 22
-  orig: 19, 22
+  xy: 751, 226
+  size: 15, 18
+  orig: 15, 18
   offset: 0, 0
   index: -1
 lost_star_09
-  rotate: true
-  xy: 899, 173
-  size: 41, 15
-  orig: 41, 15
+  rotate: false
+  xy: 322, 133
+  size: 32, 12
+  orig: 32, 12
   offset: 0, 0
   index: -1
 lost_star_10
   rotate: false
-  xy: 361, 42
-  size: 30, 28
-  orig: 30, 28
+  xy: 47, 57
+  size: 24, 22
+  orig: 24, 22
   offset: 0, 0
   index: -1
 lost_star_11
   rotate: false
-  xy: 43, 12
-  size: 30, 28
-  orig: 30, 28
+  xy: 289, 91
+  size: 24, 22
+  orig: 24, 22
   offset: 0, 0
   index: -1
 lost_star_12
   rotate: false
-  xy: 417, 79
-  size: 10, 9
-  orig: 10, 9
+  xy: 2, 2
+  size: 8, 7
+  orig: 8, 7
   offset: 0, 0
   index: -1
 lost_star_13
   rotate: false
-  xy: 690, 42
-  size: 207, 204
-  orig: 208, 204
+  xy: 553, 81
+  size: 166, 163
+  orig: 166, 163
   offset: 0, 0
   index: -1

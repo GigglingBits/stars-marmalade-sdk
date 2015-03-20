@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "bN8Wp//hBs2W21nzuf3hGwHo3zM", "spine": "2.1.17", "width": 314.18, "height": 303.65, "images": "./images/" },
+"skeleton": { "hash": "11rZ13MfusRBe2qtCrAbjyPt66w", "spine": "2.1.18", "width": 314.18, "height": 303.65 },
 "bones": [
 	{ "name": "Torso", "y": 10 },
 	{ "name": "Arm_L", "parent": "Torso", "length": 145.04, "x": -8.16, "y": 4.48, "rotation": 167.13 },

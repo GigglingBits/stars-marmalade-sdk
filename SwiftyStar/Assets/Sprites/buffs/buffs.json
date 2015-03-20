@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "bUqbJ9qFkurCuCrvmErm7qWs/AQ", "spine": "2.1.17", "width": 167, "height": 178, "images": "./images/" },
+"skeleton": { "hash": "cobYjlHG0+4TWK0GFXlVWkJ41Tw", "spine": "2.1.18", "width": 167, "height": 178 },
 "bones": [
 	{ "name": "root" },
 	{ "name": "gradient", "parent": "root", "x": 10 }
@@ -38,7 +38,6 @@
 			"button": { "name": "magnet_button", "width": 167, "height": 178 }
 		}
 	},
-	"none": {},
 	"shield": {
 		"buff": {
 			"buff": { "name": "shield_buff", "scaleX": 1.5, "scaleY": 1.5, "width": 100, "height": 100 }
