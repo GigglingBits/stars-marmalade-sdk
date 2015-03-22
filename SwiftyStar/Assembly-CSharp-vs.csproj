@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CloudGenerator\Cloud.cs" />
      <Compile Include="Assets\CloudGenerator\CloudGenerator.cs" />
      <Compile Include="Assets\Scenes\UIHelper.cs" />
      <Compile Include="Assets\spine-csharp\Properties\AssemblyInfo.cs" />
