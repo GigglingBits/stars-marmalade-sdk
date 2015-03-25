@@ -1,15 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CloudGenerator/Resources/CloudLogic.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CloudGenerator/CloudGenerator.cs">
     <Files>
-      <File FileName="Assets/CloudGenerator/CloudGenerator.cs" Line="66" Column="1" />
-      <File FileName="Assets/CloudGenerator/Resources/CloudLogic.cs" Line="19" Column="1" />
+      <File FileName="Assets/CloudGenerator/CloudGenerator.cs" Line="39" Column="1" />
+      <File FileName="Assets/Scenes/UIHelper.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/oliver/Documents/GigglingBits/Development/trunk/SwiftyStar/Assets/CloudGenerator/Resources/CloudLogic.cs" line="18" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

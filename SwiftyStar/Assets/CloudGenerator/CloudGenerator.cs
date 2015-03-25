@@ -9,10 +9,13 @@ public class CloudGenerator : MonoBehaviour {
 
 	private float _countdown = CLOUD_INTERVAL_SEC;
 
-	private List<Sprite> _spriteList = new List<Sprite>();
-
+	public List<Sprite> _spriteList;
+	
 	public void Start () {
-		LoadSprites(_spriteList);
+		// if the list wasn't configured through the IDE
+		if (null == _spriteList) {
+			_spriteList = new List<Sprite>();
+		}
 	}
 	
 	public void Update () {
@@ -22,16 +25,12 @@ public class CloudGenerator : MonoBehaviour {
 			CreateNextCloud();
 		}
 	}
-
-	private void LoadSprites(List<Sprite> list) {
-		list.AddRange(Resources.LoadAll<Sprite> ("cloud01"));
-		list.AddRange(Resources.LoadAll<Sprite> ("cloud02"));
-		list.AddRange(Resources.LoadAll<Sprite> ("cloud03"));
-		list.AddRange(Resources.LoadAll<Sprite> ("cloud04"));
-	}
-
+	
 	private Sprite GetRandomSprite() {
-		return _spriteList[Random.Range(0, _spriteList.Count)];
+		if (_spriteList.Count > 0) {
+			return _spriteList[Random.Range(0, _spriteList.Count)];
+		}
+		return null;
 	}
 
 	private void CreateNextCloud() {
@@ -47,11 +46,11 @@ public class CloudGenerator : MonoBehaviour {
 			if (face != null) {
 				cloudname += string.IsNullOrEmpty (face.name) ? "_noname" : ("_" + face.name);
 			} else {
-				cloudname += "_err2";
+				cloudname += "_emptysprite";
 			}
 			renderer.sprite = face;
 		} else {
-			cloudname += "_err1";
+			cloudname += "_norenderer";
 		}
 		cloudname += "_" + (++_cloudCounter);
 		cloud.name = cloudname;
