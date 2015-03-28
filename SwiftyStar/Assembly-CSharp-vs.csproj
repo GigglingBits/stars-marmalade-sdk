@@ -95,6 +95,8 @@
      <Compile Include="Assets\Extensions\spine-unity\SpineAttributes.cs" />
      <Compile Include="Assets\Extensions\spine-unity\SpriteAttacher.cs" />
      <Compile Include="Assets\Extensions\spine-unity\SpriteCollectionAttachmentLoader.cs" />
+     <Compile Include="Assets\Game Logic\CameraAdjuster.cs" />
+     <Compile Include="Assets\Game Logic\GameFoundation.cs" />
      <Compile Include="Assets\Scenes\UIHelper.cs" />
      <None Include="Assets\Extensions\spine-unity\Shaders\HiddenPass.shader" />
      <None Include="Assets\Archive (Marmalade)\levels.xml" />
