@@ -46,20 +46,20 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\spine-unity\Editor\AtlasAssetInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\BoneFollowerInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\Menus.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SkeletonAnimationInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SkeletonAnimatorInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SkeletonBaker.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SkeletonDataAssetInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SkeletonRendererInspector.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SpineAttributeDrawers.cs" />
-     <Compile Include="Assets\spine-unity\Editor\SpineEditorUtilities.cs" />
-     <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilityBoneInspector.cs" />
-     <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilityInspector.cs" />
-     <Compile Include="Assets\spine-unity\SkeletonUtility\Editor\SkeletonUtilitySubmeshRendererInspector.cs" />
-     <None Include="Assets\spine-unity\Shaders\HiddenPass.shader" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\AtlasAssetInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\BoneFollowerInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\Menus.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SkeletonAnimationInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SkeletonAnimatorInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SkeletonBaker.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SkeletonDataAssetInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SkeletonRendererInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SpineAttributeDrawers.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\Editor\SpineEditorUtilities.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\SkeletonUtility\Editor\SkeletonUtilityBoneInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\SkeletonUtility\Editor\SkeletonUtilityInspector.cs" />
+     <Compile Include="Assets\Extensions\spine-unity\SkeletonUtility\Editor\SkeletonUtilitySubmeshRendererInspector.cs" />
+     <None Include="Assets\Extensions\spine-unity\Shaders\HiddenPass.shader" />
      <None Include="Assets\Archive (Marmalade)\levels.xml" />
      <None Include="Assets\Sprites\completion_won\completion_won.atlas.txt" />
      <None Include="Assets\Sprites\bird\bird.atlas.txt" />
@@ -69,13 +69,13 @@
      <None Include="Assets\Sprites\buff_shield\buff_shield.atlas.txt" />
      <None Include="Assets\Sprites\title\title.atlas.txt" />
      <None Include="Assets\Sprites\bird_ripper\bird_ripper.atlas.txt" />
-     <None Include="Assets\spine-unity\Shaders\Bones.shader" />
+     <None Include="Assets\Extensions\spine-unity\Shaders\Bones.shader" />
      <None Include="Assets\Sprites\bird_screecher\bird_screecher.atlas.txt" />
      <None Include="Assets\Sprites\buffs\buffs.atlas.txt" />
-     <None Include="Assets\spine-unity\Shaders\Skeleton.shader" />
+     <None Include="Assets\Extensions\spine-unity\Shaders\Skeleton.shader" />
      <None Include="Assets\Sprites\completion_award\completion_award.atlas.txt" />
      <None Include="Assets\Archive (Marmalade)\bodies.xml" />
-     <None Include="Assets\spine-unity\Shaders\SkeletonLit.shader" />
+     <None Include="Assets\Extensions\spine-unity\Shaders\SkeletonLit.shader" />
      <None Include="Assets\Sprites\star\star.atlas.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
