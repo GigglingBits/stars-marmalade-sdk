@@ -45,11 +45,15 @@ public class CloudLogic : MonoBehaviour {
 	}
 
 	void ConfigureLocation() {
-		Vector3 pos = transform.localPosition;
+
+//		Rect visibleworld = GetVisibleWorldSpace ();
+//		transform.position = visibleworld.center
+
+  		Vector3 pos = transform.localPosition;
 		pos.x = 8.0f;
 		pos.y = Random.Range (-8.0f, 8.0f);
 		transform.localPosition = pos;
-	}
+	}	
 
 	void Move() {
 		var pos = transform.localPosition;
@@ -62,5 +66,15 @@ public class CloudLogic : MonoBehaviour {
 		if (outofbounds) {
 			Destroy(gameObject);
 		}
+	}
+
+	Rect GetVisibleWorldSpace() {
+		Camera cam = Camera.main;
+		float halfheight = cam.orthographicSize;
+		float halfwidth = halfheight * cam.aspect;
+
+		Vector3 center = cam.ViewportToWorldPoint (new Vector3(0, 0, 0));
+
+		return new Rect (center.x - halfwidth, center.y + halfheight, 2.0f * halfwidth, 2.0f * halfheight);
 	}
 }
