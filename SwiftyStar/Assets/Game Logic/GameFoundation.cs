@@ -23,5 +23,4 @@ public class GameFoundation
 	{
 		worldSize = new Vector2 (12.0f, 8.0f);		
 	}
-
 }
