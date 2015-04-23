@@ -2,45 +2,49 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CloudGenerator : MonoBehaviour {
-
-	private const float CLOUD_INTERVAL_SEC = 2.0f; 
+public class CloudGenerator : MonoBehaviour
+{
+	
 	private int _cloudCounter = 0;
+	private float _countdown = 0;
 
-	private float _countdown = CLOUD_INTERVAL_SEC;
-
+	public float _interval = 2.0f; 
 	public List<Sprite> _spriteList;
 	
-	public void Start () {
+	public void Start ()
+	{
 		// if the list wasn't configured through the IDE
 		if (null == _spriteList) {
-			_spriteList = new List<Sprite>();
+			_spriteList = new List<Sprite> ();
 		}
 	}
 	
-	public void Update () {
+	public void Update ()
+	{
 		_countdown -= Time.deltaTime;
 		if (_countdown <= 0.0f) {
-			_countdown += CLOUD_INTERVAL_SEC;
-			CreateNextCloud();
+			_countdown += _interval;
+			CreateNextCloud ();
 		}
 	}
 	
-	private Sprite GetRandomSprite() {
+	private Sprite GetRandomSprite ()
+	{
 		if (_spriteList.Count > 0) {
-			return _spriteList[Random.Range(0, _spriteList.Count)];
+			return _spriteList [Random.Range (0, _spriteList.Count)];
 		}
 		return null;
 	}
 
-	private void CreateNextCloud() {
+	private void CreateNextCloud ()
+	{
 		// instantiate the cloud
 		var prefab = Resources.Load ("CloudPrefab");
-		GameObject cloud = Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject; 
+		GameObject cloud = Instantiate (prefab, new Vector3 (0, 0, 0), Quaternion.identity) as GameObject; 
 
 		// assign the visual appearance
 		string cloudname = "Cloud";
-		var renderer = cloud.GetComponent<SpriteRenderer>();
+		var renderer = cloud.GetComponent<SpriteRenderer> ();
 		if (renderer != null) {
 			Sprite face = GetRandomSprite ();
 			if (face != null) {
@@ -61,6 +65,6 @@ public class CloudGenerator : MonoBehaviour {
 		}
 
 		// editor cosmetics: oganize it as child of current component
-		cloud.transform.SetParent(this.transform);
+		cloud.transform.SetParent (this.transform);
 	}
 }

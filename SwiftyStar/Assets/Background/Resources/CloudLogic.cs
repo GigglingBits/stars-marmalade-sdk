@@ -2,79 +2,76 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CloudLogic : MonoBehaviour {
+public class CloudLogic : MonoBehaviour
+{
 
 	public float _cloudSpeedMetersPerSeconds = 1.0f; // m/s
 	public float _cloudScale = 1.0f; 
 
-	void Start () {
-		InitializeTransform();
+	private Vector2 _cloudSize = Vector2.zero;
+
+	public void Start ()
+	{
+		InitializeTransform ();
 	}
 	
-	void Update () {
+	public void Update ()
+	{
 		Move ();
 		ManageLyfecycle ();
 	}
 
-	void InitializeTransform() {
+	private void InitializeTransform ()
+	{
 		ConfigureDistance ();
-		ConfigureLocation ();
+
+		Vector3 size = GetSizeWorldSpace ();
+		_cloudSize.x = size.x;
+		_cloudSize.y = size.y;
+
+		ConfigureStartLocation (_cloudSize);
 	}
 	
-	void ConfigureDistance() {
-		float depthConstant;
-		switch (Random.Range (0, 3)) {
-		case 0: 
-			depthConstant = 1.0f;
-			break;
-		case 1:
-			depthConstant = 0.5f;
-			break;
-		default:
-			depthConstant = 0.133f;
-			break;
-		}
+	private void ConfigureDistance ()
+	{
+		float depth = Random.Range (0.133f, 1.0f);
+		_cloudSpeedMetersPerSeconds *= depth;
 
-		_cloudSpeedMetersPerSeconds *= depthConstant;
-
-		transform.localScale = new Vector3 (depthConstant * _cloudScale, depthConstant * _cloudScale, depthConstant * _cloudScale);
+		transform.localScale = new Vector3 (depth * _cloudScale, depth * _cloudScale, depth * _cloudScale);
 
 		Vector3 pos = transform.localPosition;
-		pos.z = -depthConstant;
+		pos.z = -depth;
 		transform.localPosition = pos;
 	}
 
-	void ConfigureLocation() {
+	Vector3 GetSizeWorldSpace ()
+	{
+		return gameObject.GetComponent<SpriteRenderer> ().bounds.size;
+	}
 
-//		Rect visibleworld = GetVisibleWorldSpace ();
-//		transform.position = visibleworld.center
+	void ConfigureStartLocation (Vector2 cloudSize)
+	{
+		float worldwidth = GameFoundation.instance.worldSize.x;
+		float worldheight = GameFoundation.instance.worldSize.y;
 
-  		Vector3 pos = transform.localPosition;
-		pos.x = 8.0f;
-		pos.y = Random.Range (-8.0f, 8.0f);
-		transform.localPosition = pos;
+		Vector3 pos = transform.position;
+		pos.x = worldwidth + cloudSize.x;
+		pos.y = Random.Range (0.0f + cloudSize.y, worldheight - cloudSize.y);
+		transform.position = pos;
 	}	
 
-	void Move() {
+	void Move ()
+	{
 		var pos = transform.localPosition;
 		pos.x -= _cloudSpeedMetersPerSeconds * Time.deltaTime;
 		transform.localPosition = pos;
 	}
 
-	void ManageLyfecycle() {
-		bool outofbounds = transform.localPosition.x < -8.0f;
+	void ManageLyfecycle ()
+	{
+		bool outofbounds = transform.position.x < -_cloudSize.x;
 		if (outofbounds) {
-			Destroy(gameObject);
+			Destroy (gameObject);
 		}
-	}
-
-	Rect GetVisibleWorldSpace() {
-		Camera cam = Camera.main;
-		float halfheight = cam.orthographicSize;
-		float halfwidth = halfheight * cam.aspect;
-
-		Vector3 center = cam.ViewportToWorldPoint (new Vector3(0, 0, 0));
-
-		return new Rect (center.x - halfwidth, center.y + halfheight, 2.0f * halfwidth, 2.0f * halfheight);
 	}
 }
