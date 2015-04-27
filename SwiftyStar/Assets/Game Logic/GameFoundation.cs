@@ -6,18 +6,17 @@ public class GameFoundation
 	public Vector2 worldSize { get; set; }
 
 	#region singleton
-	// singleton
-	private static GameFoundation _theGame;
-
+	private static GameFoundation _theInstance = null;
+	
 	public static GameFoundation instance {
 		get {
-			if (null == _theGame) {
-				_theGame = new GameFoundation ();
+			if (null == _theInstance) {
+				_theInstance = new GameFoundation ();
 			}
-			return _theGame;
+			return _theInstance;
 		}
 	}
-	#endregion singleton
+	#endregion
 
 	private GameFoundation ()
 	{
