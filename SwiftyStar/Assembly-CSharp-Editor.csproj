@@ -60,7 +60,7 @@
      <Compile Include="Assets\Extensions\spine-unity\SkeletonUtility\Editor\SkeletonUtilityInspector.cs" />
      <Compile Include="Assets\Extensions\spine-unity\SkeletonUtility\Editor\SkeletonUtilitySubmeshRendererInspector.cs" />
      <None Include="Assets\Extensions\spine-unity\Shaders\HiddenPass.shader" />
-     <None Include="Assets\Game Logic\Resources\levels.xml" />
+     <None Include="Assets\Game Logic\Resources\levels_config.xml" />
      <None Include="Assets\Sprites\completion_won\completion_won.atlas.txt" />
      <None Include="Assets\Sprites\bird\bird.atlas.txt" />
      <None Include="Assets\Sprites\completion_lost\completion_lost.atlas.txt" />
@@ -74,7 +74,7 @@
      <None Include="Assets\Sprites\buffs\buffs.atlas.txt" />
      <None Include="Assets\Extensions\spine-unity\Shaders\Skeleton.shader" />
      <None Include="Assets\Sprites\completion_award\completion_award.atlas.txt" />
-     <None Include="Assets\Game Logic\Resources\bodies.xml" />
+     <None Include="Assets\Game Logic\Resources\bodies_config.xml" />
      <None Include="Assets\Extensions\spine-unity\Shaders\SkeletonLit.shader" />
      <None Include="Assets\Sprites\star\star.atlas.txt" />
  <Reference Include="UnityEngine.UI">

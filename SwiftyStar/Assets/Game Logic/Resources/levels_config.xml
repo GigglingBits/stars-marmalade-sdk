@@ -38,17 +38,6 @@
 		<preamble name="earth_18">
 		 	Final level! Fight the last raging birds!
 		</preamble>
-		<!--
-		 <preamble name="earth_2" file="stories/intro.mp4">
-		 Catch all nuggets to get max points.
-		 </preamble>
-		 <preamble name="earth_3" file="rom://stories/dodge_objects/index.html">
-		 Beware of flying objects.
-		 </preamble>
-		 <preamble name="earth_4" texture="title_bg">
-		 Beware of flying objects.
-		 </preamble>
-		 -->
 	</preambles>
 	<levels>
 		<level name="earth_1" width="12.0" height="12.0" dustrequirement="300" lives="1">
