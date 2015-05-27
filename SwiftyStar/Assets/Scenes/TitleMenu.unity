@@ -128,7 +128,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 171320, guid: 5f70a4423aceb4fa4afc3dd11c491867, type: 2}
       propertyPath: m_Name
-      value: title animation
+      value: Title Animation
       objectReference: {fileID: 0}
     - target: {fileID: 462768, guid: 5f70a4423aceb4fa4afc3dd11c491867, type: 2}
       propertyPath: m_LocalScale.x
@@ -141,45 +141,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f70a4423aceb4fa4afc3dd11c491867, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &581152393
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 581152395}
-  - 114: {fileID: 581152394}
-  m_Layer: 0
-  m_Name: UIHelper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &581152394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 581152393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9631a371c321941fa85b646ceb29d5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &581152395
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 581152393}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -554, y: -311.5, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 848949276}
-  m_RootOrder: 3
 --- !u!1 &835167223
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +152,7 @@ GameObject:
   - 222: {fileID: 835167226}
   - 114: {fileID: 835167225}
   - 114: {fileID: 835167224}
+  - 114: {fileID: 835167228}
   m_Layer: 5
   m_Name: Button Open
   m_TagString: Untagged
@@ -237,16 +199,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 581152394}
-        m_MethodName: OpenGameModeMenuScene
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_MethodName: SendMessage
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: OpenLevelMenu
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -293,9 +255,21 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -130}
+  m_AnchoredPosition: {x: 0, y: -235}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &835167228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835167223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301c7850646b64fdb858ba935b8e21c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonId: OpenGameModeMenu
 --- !u!1 &848949275
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +301,6 @@ RectTransform:
   - {fileID: 2061723275}
   - {fileID: 1149058706}
   - {fileID: 835167227}
-  - {fileID: 581152395}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -732,7 +705,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f956c855e37e4002a52f12ff73a8fe3, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &2061723275
+--- !u!4 &2061723275 stripped
 Transform:
   m_PrefabParentObject: {fileID: 416716, guid: 5f956c855e37e4002a52f12ff73a8fe3, type: 2}
   m_PrefabInternal: {fileID: 2061723274}

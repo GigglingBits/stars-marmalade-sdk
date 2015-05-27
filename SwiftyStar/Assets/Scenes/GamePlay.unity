@@ -87,45 +87,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &59669255
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 59669257}
-  - 114: {fileID: 59669256}
-  m_Layer: 0
-  m_Name: UIHelper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &59669256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 59669255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9631a371c321941fa85b646ceb29d5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &59669257
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 59669255}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -554, y: -311.5, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2121340419}
-  m_RootOrder: 4
 --- !u!1 &153700968
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +493,7 @@ GameObject:
   - 222: {fileID: 1184118743}
   - 114: {fileID: 1184118742}
   - 114: {fileID: 1184118741}
+  - 114: {fileID: 1184118744}
   m_Layer: 5
   m_Name: Button Complete
   m_TagString: Untagged
@@ -554,7 +516,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 100, y: -130}
+  m_AnchoredPosition: {x: 100, y: -235}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1184118741
@@ -595,19 +557,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1184118742}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 59669256}
-        m_MethodName: OpenCompletionMenuScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1184118742
@@ -637,6 +587,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184118739}
+--- !u!114 &1184118744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1184118739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301c7850646b64fdb858ba935b8e21c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonId: OpenCompletionMenu
 --- !u!1 &1333069295
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +610,7 @@ GameObject:
   - 222: {fileID: 1333069299}
   - 114: {fileID: 1333069298}
   - 114: {fileID: 1333069297}
+  - 114: {fileID: 1333069300}
   m_Layer: 5
   m_Name: Button Back
   m_TagString: Untagged
@@ -670,7 +633,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -100, y: -130}
+  m_AnchoredPosition: {x: -100, y: -235}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1333069297
@@ -711,19 +674,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1333069298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 59669256}
-        m_MethodName: OpenLevelMenuScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1333069298
@@ -753,6 +704,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1333069295}
+--- !u!114 &1333069300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1333069295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301c7850646b64fdb858ba935b8e21c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonId: OpenLevelMenu
 --- !u!1 &1618813612
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +886,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f956c855e37e4002a52f12ff73a8fe3, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &2098493369
+--- !u!4 &2098493369 stripped
 Transform:
   m_PrefabParentObject: {fileID: 416716, guid: 5f956c855e37e4002a52f12ff73a8fe3, type: 2}
   m_PrefabInternal: {fileID: 2098493368}
@@ -959,7 +922,6 @@ RectTransform:
   - {fileID: 1618813613}
   - {fileID: 1333069296}
   - {fileID: 1184118740}
-  - {fileID: 59669257}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
