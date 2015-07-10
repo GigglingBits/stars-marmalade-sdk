@@ -4,12 +4,17 @@
 //////////////////////////////////////////////////////////////////////
 // Initialization
 //////////////////////////////////////////////////////////////////////
+function initializeMeemabApp() {
+	attachEventHandlers();
+
+	setData("meemab-base-url", "http://meemab.cloudapp.net/api");
+}
 
 
 //////////////////////////////////////////////////////////////////////
 // DOM handling and navigation
 //////////////////////////////////////////////////////////////////////
-function attachButtonHandler() {
+function attachEventHandlers() {
 	$(function() {
 		$("body").delegate(".meemabbutton", "click", function(){
 			onButtonClicked(this.id);
@@ -18,7 +23,7 @@ function attachButtonHandler() {
 }
 
 function onButtonClicked(buttonid) {
-	console.info("Button clicked: " + buttonid);
+	logInfo("Button clicked: " + buttonid);
 	switch (buttonid) {
 		case 'enter':
 			showPageContent('fragments/logon.html');
@@ -36,13 +41,13 @@ function onButtonClicked(buttonid) {
 
 function showPageContent(filename) {
 	$('#page').load(filename);
-	console.info("Loaded new page content: " + filename);
+	logInfo("Loaded new page content: " + filename);
 }
 
 function showMetricContent(buttonid) {
 	var filename = 'fragments/metrics/' + buttonid + '.html';
 	$('#contentpanel').load(filename);				
-	console.info("Loaded new metric content: " + filename);
+	logInfo("Loaded new metric content: " + filename);
 }
 
 
@@ -55,6 +60,49 @@ function getData(key) {
 
 function setData(key, data) {
 	return $(document).data(key, data);		
+}
+
+
+//////////////////////////////////////////////////////////////////////
+// AJAX
+//////////////////////////////////////////////////////////////////////
+function getServerData(resource, data) {
+	var request = {
+		url: getData("meemab-base-url") + resource,
+		type: "GET",
+		dataType: "JSON"
+	};
+	
+	logLastRequest(request);
+	
+	$.ajax(request)
+	.done(logLastResponse)
+	.fail(logLastResponse)
+	.always();
+}
+
+
+//////////////////////////////////////////////////////////////////////
+// debug/trace/log
+//////////////////////////////////////////////////////////////////////
+function logInfo(msg) {
+	console.info(msg);
+	$("#debug-log").before("<br>" + getFormattedTimestamp() + " " + msg);
+} 
+
+function logLastRequest(msg) {
+	console.info(msg);
+	$("#debug-last-request").html(getFormattedTimestamp() + " " + msg);
+} 
+
+function logLastResponse(msg) {
+	console.info(msg);
+	$("#debug-last-response").html(getFormattedTimestamp() + " " + msg);
+} 
+
+function getFormattedTimestamp() {
+    var date = new Date();
+    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 }
 
 //////////////////////////////////////////////////////////////////////
