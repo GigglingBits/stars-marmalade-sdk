@@ -7,7 +7,7 @@
 function initializeMeemabApp() {
 	attachEventHandlers();
 
-	setData("meemab-base-url", "http://meemab.cloudapp.net/api");
+	setData("meemab-base-url", "http://meemab.cloudapp.net/api/");
 }
 
 
@@ -29,10 +29,9 @@ function onButtonClicked(buttonid) {
 			showPageContent('fragments/logon.html');
 			break;					
 		case 'signup':
-			var accountName = queryAccountName();
-			setData("account", accountName);
-			updateSessionInfo();
-			showPageContent('fragments/main.html');
+			if (signIn()) {
+				showPageContent('fragments/main.html');				
+			}
 			break;	
 		default:
 			showMetricContent(buttonid);				
@@ -67,15 +66,11 @@ function setData(key, data) {
 // AJAX
 //////////////////////////////////////////////////////////////////////
 function getServerData(resource, data) {
-	var request = {
-		url: getData("meemab-base-url") + resource,
-		type: "GET",
-		dataType: "JSON"
-	};
+	var url = getData("meemab-base-url") + resource;
 	
-	logLastRequest(request);
+	logLastRequest({ url: url, data: data });
 	
-	$.ajax(request)
+	$.getJSON(url, data)
 	.done(logLastResponse)
 	.fail(logLastResponse)
 	.always();
@@ -86,18 +81,21 @@ function getServerData(resource, data) {
 // debug/trace/log
 //////////////////////////////////////////////////////////////////////
 function logInfo(msg) {
-	console.info(msg);
-	$("#debug-log").before("<br>" + getFormattedTimestamp() + " " + msg);
+	var strmsg = JSON.stringify(msg);
+	console.info(strmsg);
+	$("#debug-log").after("<br>" + getFormattedTimestamp() + " " + strmsg);
 } 
 
 function logLastRequest(msg) {
-	console.info(msg);
-	$("#debug-last-request").html(getFormattedTimestamp() + " " + msg);
+	var strmsg = JSON.stringify(msg);
+	console.info(strmsg);
+	$("#debug-last-request").html(getFormattedTimestamp() + " " + strmsg);
 } 
 
 function logLastResponse(msg) {
-	console.info(msg);
-	$("#debug-last-response").html(getFormattedTimestamp() + " " + msg);
+	var strmsg = JSON.stringify(msg);
+	console.info(strmsg);
+	$("#debug-last-response").html(getFormattedTimestamp() + " " + strmsg);
 } 
 
 function getFormattedTimestamp() {
@@ -108,6 +106,19 @@ function getFormattedTimestamp() {
 //////////////////////////////////////////////////////////////////////
 // Meemab helpers
 //////////////////////////////////////////////////////////////////////
+function signIn() {
+	var accountName = queryAccountName();
+	if (accountName == null || accountName == "") {
+		return false;
+	}
+	
+	createAccount(accountName);
+	
+	setData("account", accountName);
+	updateSessionInfo();
+	return true;
+}
+
 function queryAccountName() {
 	var person = '';
 	while (person == null || person == "") {
@@ -119,4 +130,16 @@ function queryAccountName() {
 function updateSessionInfo() {
 	$('#sessioninfo').html('User: ' + getData("account"));
 }
+
+//////////////////////////////////////////////////////////////////////
+// Meemab account management
+//////////////////////////////////////////////////////////////////////
+function createAccount(accountName) {
+	// check if account exists
+	logInfo("Creating account: " + accountName);
+	getServerData("Account", { AccountName: accountName });
+
+	// create if not exists
+}
+
 
