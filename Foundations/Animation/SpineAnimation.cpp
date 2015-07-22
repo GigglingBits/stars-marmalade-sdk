@@ -328,7 +328,7 @@ CIwTexture* SpineAnimation::GetStreams(int length, CIwFVec2 xys[], CIwFVec2 uvs[
 	int cursor = 0;
 	for (int slotid = 0; slotid < m_pxSkeleton->slotsCount; slotid++) {
 		if (spSlot* slot = m_pxSkeleton->drawOrder[slotid]) {
-			IwAssertMsg(MYAPP, 0 == slot->data->additiveBlending, ("Slot %i uses additive blending. Additive blending is not supported. Drawing errors may occur.", slotid));
+			IwAssertMsg(MYAPP, slot->data->blendMode == SP_BLEND_MODE_NORMAL, ("Slot %i uses unsupported blending mode. Additive blending is not supported. Drawing errors may occur.", slotid));
 			if (spAttachment* attachment = slot->attachment) {
 				if (attachment->type == SP_ATTACHMENT_REGION) {
 					if (spRegionAttachment* regionAttachment = (spRegionAttachment*)attachment) {
