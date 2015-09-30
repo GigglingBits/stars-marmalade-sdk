@@ -1,24 +1,28 @@
 <!doctype html>
 <html lang="en">
-	<head>
-	  	<meta charset="utf-8">
-	  	<title>Meemab Prototype</title>
-		<!--
+
+<head>
+	<meta charset="utf-8">
+	<title>Meemab Prototype</title>
+	<!--
 	  	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 		-->
-	  	<script src="scripts/jquery/jquery-1.10.2.js"></script>
-		<script src="scripts/scripts.js"></script>
-		<link rel="stylesheet" type="text/css" href="styles/styles.css" media="screen" />
-	</head>
-	<body>
-		<h1>Meemab Prototype</h1>
-		<div id="sessioninfo"></div>
-		<div id="page">
-			<h2>Welcome to Meemab</h2>
-			<p>Meemab helps you make shopping clothes more fun for yourself and for others.</p>
-			<p id="enter" class="meemabbutton">Enter</p>
-		</div>
+	<script src="scripts/jquery/jquery-1.10.2.js"></script>
+	<script src="scripts/scripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css" media="screen" />
+</head>
 
+<body>
+	<h1>Meemab Prototype</h1>
+
+	<div id="sessioninfo"></div>
+	<div id="page" class="page">
+		<h2>Welcome to Meemab</h2>
+		<p>Meemab helps you make shopping clothes more fun for yourself and for others.</p>
+		<p id="enter" class="meemabbutton">Enter</p>
+	</div>
+
+	<div id="debug" class="debug">
 		<h3>Last service request:</h3>
 		<div id="debug-last-request"></div>
 
@@ -27,12 +31,14 @@
 
 		<h3>Activity log:</h3>
 		<div id="debug-log"></div>
- 
-		<script language="javascript">
-			$(document).ready(function() {
+	</div>
+
+	<script language="javascript">
+		$(document).ready(function() {
 				initializeMeemabApp();
 			});
-		</script>
- 
-	</body>
+	</script>
+
+</body>
+
 </html>

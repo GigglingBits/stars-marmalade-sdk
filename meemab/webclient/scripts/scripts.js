@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////////
 function initializeMeemabApp() {
 	attachEventHandlers();
-
+	clearData();
 	setData("meemab-base-url", "http://meemab.cloudapp.net/api/");
 }
 
@@ -15,8 +15,8 @@ function initializeMeemabApp() {
 // DOM handling and navigation
 //////////////////////////////////////////////////////////////////////
 function attachEventHandlers() {
-	$(function() {
-		$("body").delegate(".meemabbutton", "click", function(){
+	$(function () {
+		$("body").delegate(".meemabbutton", "click", function () {
 			onButtonClicked(this.id);
 		});
 	});
@@ -27,14 +27,12 @@ function onButtonClicked(buttonid) {
 	switch (buttonid) {
 		case 'enter':
 			showPageContent('fragments/logon.html');
-			break;					
+			break;
 		case 'signup':
-			if (signIn()) {
-				showPageContent('fragments/main.html');				
-			}
-			break;	
+			signIn();
+			break;
 		default:
-			showMetricContent(buttonid);				
+			showMetricContent(buttonid);
 	}
 }
 
@@ -45,7 +43,7 @@ function showPageContent(filename) {
 
 function showMetricContent(buttonid) {
 	var filename = 'fragments/metrics/' + buttonid + '.html';
-	$('#contentpanel').load(filename);				
+	$('#contentpanel').load(filename);
 	logInfo("Loaded new metric content: " + filename);
 }
 
@@ -53,27 +51,16 @@ function showMetricContent(buttonid) {
 //////////////////////////////////////////////////////////////////////
 // State handling
 //////////////////////////////////////////////////////////////////////
+function clearData() {
+	return window.sessionStorage.clear;
+}
+
 function getData(key) {
-	return $(document).data(key);	
+	return window.sessionStorage[key];
 }
 
 function setData(key, data) {
-	return $(document).data(key, data);		
-}
-
-
-//////////////////////////////////////////////////////////////////////
-// AJAX
-//////////////////////////////////////////////////////////////////////
-function getServerData(resource, data) {
-	var url = getData("meemab-base-url") + resource;
-	
-	logLastRequest({ url: url, data: data });
-	
-	$.getJSON(url, data)
-	.done(logLastResponse)
-	.fail(logLastResponse)
-	.always();
+	window.sessionStorage.setItem(key, data);
 }
 
 
@@ -84,62 +71,130 @@ function logInfo(msg) {
 	var strmsg = JSON.stringify(msg);
 	console.info(strmsg);
 	$("#debug-log").after("<br>" + getFormattedTimestamp() + " " + strmsg);
-} 
+}
 
 function logLastRequest(msg) {
 	var strmsg = JSON.stringify(msg);
 	console.info(strmsg);
 	$("#debug-last-request").html(getFormattedTimestamp() + " " + strmsg);
-} 
+}
 
 function logLastResponse(msg) {
 	var strmsg = JSON.stringify(msg);
 	console.info(strmsg);
 	$("#debug-last-response").html(getFormattedTimestamp() + " " + strmsg);
-} 
+}
 
 function getFormattedTimestamp() {
     var date = new Date();
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 }
 
+
 //////////////////////////////////////////////////////////////////////
-// Meemab helpers
+// AJAX helper
 //////////////////////////////////////////////////////////////////////
-function signIn() {
-	var accountName = queryAccountName();
-	if (accountName == null || accountName == "") {
-		return false;
-	}
-	
-	createAccount(accountName);
-	
+function getServerData(resource, params, body) {
+	var url = getData("meemab-base-url") + resource + "?" + $.param(params);
+
+	logLastRequest({ url: url, data: body });
+
+	return $.getJSON(url, body)
+		.always(logLastResponse);
+}
+
+function createServerData(resource, params, body) {
+	var url = getData("meemab-base-url") + resource + "?" + $.param(params);
+
+	logLastRequest({ url: url, data: body });
+
+	return $.post(url, body)
+		.always(logLastResponse);
+}
+
+function updateServerData(resource, body) {
+	var url = getData("meemab-base-url") + resource + "?" + $.param(params);
+
+	logLastRequest({ url: url, data: body });
+
+	return $.put(url, body)
+		.always(logLastResponse);
+}
+
+
+//////////////////////////////////////////////////////////////////////
+// Sign-in handling
+//////////////////////////////////////////////////////////////////////
+function setAccountName(accountName) {
 	setData("account", accountName);
-	updateSessionInfo();
+	$('#sessioninfo').html('User: ' + getData("account"));
+}
+
+function getAccountName() {
+	var accountName = getData("account");
+	if (accountName == null || accountName.toString() == "") {
+		accountName = queryAccountName();
+	}
+	setData("account", accountName);
+	return accountName;
+}
+
+function signIn() {
+	var accountName = getAccountName();
+	checkAccount(accountName);
 	return true;
 }
 
 function queryAccountName() {
-	var person = '';
-	while (person == null || person == "") {
-		person = prompt('Please enter your account name', 'peter.pan@meemab.com');
+	var account = "";
+	while (account == null || account == "") {
+		account = prompt('Please enter your account name', 'peter.pan@meemab.com');
 	}
-	return person;
+	return account;
 }
 
-function updateSessionInfo() {
-	$('#sessioninfo').html('User: ' + getData("account"));
-}
-
-//////////////////////////////////////////////////////////////////////
-// Meemab account management
-//////////////////////////////////////////////////////////////////////
-function createAccount(accountName) {
+function checkAccount(accountName) {
 	// check if account exists
 	logInfo("Creating account: " + accountName);
-	getServerData("Account", { AccountName: accountName });
-
-	// create if not exists
+	getServerData("Account", { AccountName: accountName }).fail(onCheckAccountFailure).done(onCheckAccountSucceeded);
+	
+	// ignore the result, if the account is found
+	// only the error case is interesting for now
 }
 
+function onCheckAccountFailure(response) {
+	if (response.status == 404) {
+		logInfo("Account is unknown or lookup failed. Trying to create account...");
+		createAccount(getAccountName());
+	}
+}
 
+function onCheckAccountSucceeded() {
+	logInfo("Account already exists.");	
+	authenticationCompleted();
+}
+
+function createAccount(accountName) {
+	var data = {
+		"AccountName": accountName,
+		"Email": accountName,
+		"Gender": "M",
+		"BirthDate": "1976-01-23T07:11:26.1045798+00:00",
+		"Country": "Denmark"
+	}
+	createServerData("Account", { AccountName: accountName}, data).fail(onCreateAccountFailed).done(onCreateAccountSucceeded);
+}
+
+function onCreateAccountSucceeded() {
+	logInfo("Account creation succeeded.");	
+	authenticationCompleted();
+}
+
+function onCreateAccountFailed(response) {
+	logInfo("Account creation failed: " + JSON.stringify(status));
+}
+
+function authenticationCompleted() {
+	setAccountName(getData("account"));	
+	showPageContent('fragments/main.html');
+}
