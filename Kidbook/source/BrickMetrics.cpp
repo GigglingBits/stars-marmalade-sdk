@@ -5,6 +5,9 @@ BrickMetrics::BrickMetrics(BaseBrick& brick) : m_rxBrick(brick) {
 	m_bBusyFlag = false;
 }
 
+BrickMetrics::~BrickMetrics() {
+}
+
 bool BrickMetrics::OnUpdate(bool first) {
 	m_xUpdateWatch.Start();
 	m_bBusyFlag = m_rxBrick.Update(first);

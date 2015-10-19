@@ -21,6 +21,8 @@ private:
 
 public:
 	Spectator(PageMap& map);
+	virtual ~Spectator();
+
 	void Move(Direction dir);
 	Page* GetPage(Direction dir);
 

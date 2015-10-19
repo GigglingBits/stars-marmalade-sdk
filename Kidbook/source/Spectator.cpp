@@ -13,6 +13,9 @@ Spectator::Spectator(PageMap& map) : m_rxMap(map) {
 	ActivateAll();
 }
 
+Spectator::~Spectator() {
+}
+
 inline void Spectator::UpdatePageReferences() {
 	m_apxPages[eCenter] =		&m_rxMap.GetImage(m_iColCursor, m_iRowCursor);
 	m_apxPages[eRight] =		&m_rxMap.GetImage(m_iColCursor + 1, m_iRowCursor); 

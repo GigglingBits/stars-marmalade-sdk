@@ -37,7 +37,7 @@ private:
 
 public:
 	Page();
-	~Page();
+	virtual ~Page();
 
 	bool IsActive();
 	void SetActive(bool active);

@@ -23,7 +23,7 @@ private:
 
 public:
 	Button(uint8 id);
-	~Button();
+	virtual ~Button();
 
 	uint8 GetId();
 

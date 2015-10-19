@@ -12,7 +12,7 @@ private:
 
 public:
 	Welcome();
-	~Welcome();
+	virtual ~Welcome();
 
 	void ScrollDown();
 	void ScrollUp();

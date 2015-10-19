@@ -27,7 +27,7 @@ private:
 	
 public:
 	Controller();
-	~Controller();
+	virtual ~Controller();
 
 	void Initialize();
 

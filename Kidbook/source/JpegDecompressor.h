@@ -42,7 +42,7 @@ private:
 	char* m_pxOutputData;
 	int m_iOutputSize;
 
-	BUF_SOURCE_MGR m_xBufSourceMgr;
+	//BUF_SOURCE_MGR m_xBufSourceMgr;
 	jpeg_error_mgr m_xError;
 	jpeg_decompress_struct m_xCompressionInfo;
 

@@ -15,6 +15,7 @@ private:
 
 public:
 	BrickMetrics(BaseBrick& brick);
+	virtual ~BrickMetrics();
 
 	bool OnUpdate(bool first);
 	void OnRender(const CIwSVec2& screensize, const CIwRect& itemregion);
