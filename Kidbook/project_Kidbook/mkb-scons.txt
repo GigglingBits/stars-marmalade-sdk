@@ -1,2 +1,5 @@
-SCONS;build_kidbook_scons_x86;
-SCONS;build_kidbook_scons_arm;
+SCONS;./build/;
+SCONS;./build/;
+SCONS;./build/;
+SCONS;./build/;
+SCONS;./build/;

@@ -1,1 +1,1 @@
-XCODE;build_kidbook_xcode;
+XCODE;./build/;

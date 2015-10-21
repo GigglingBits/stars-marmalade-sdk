@@ -131,9 +131,11 @@ void BufferedAnimTexture::CopyConvertXY() {
 		m_apxXYConverted[i].x = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].x);
 		m_apxXYConverted[i].y = TypeConverter::SafeFloatToInt<float, int16>(m_apxXYBuffer[i].y);
 	}
+
+	// clear remaining vertices for better debugging
 	for (int i = m_iBufferedVertCount; i < m_iBufferLength; i++) {
-		m_apxXYConverted[i].x = NAN;
-		m_apxXYConverted[i].y = NAN;
+		m_apxXYConverted[i].x = 0;
+		m_apxXYConverted[i].y = 0;
 	}
 }
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env mkb
 options {
-	strict
+	# strict
+	builddir='./build/'
 }
 
 subprojects {
@@ -14,18 +15,6 @@ defines {
 }
 
 deployments {
-	name='Kidbook'
-	caption='Kidbook'
-	manufacturer='Giggling Bits'
-	provider='Oliver C. Lanz'
-	copyright='2010-2013'
-
-	version-major=1
-	version-minor=7
-	version-revision=4
-
-	icon='marketing/icons/'
-	
 	app-icf=data/app.icf
 	embed-icf='1'
 
@@ -33,7 +22,7 @@ deployments {
 
 	["iOS"]
 	iphone
-	iphone-appid='com.marmalade.kidbook.animals'
+	iphone-appid='com.gigglingbits.kidbook.animals'
 	iphone-splash=marketing/splashscreens/splashscreen-320x480.png
 	iphone-enable-4inch-retina='1'
 	iphone-prerendered-icon='0'
@@ -51,7 +40,6 @@ deployments {
 
 	["Blackberry"]
 	playbook
-
 	blackberry-author='Giggling Bits'
 	blackberry-authorid='gYAAgBPNfjf8Ah_MRwCSAMjlL5U'
 	blackberry-cskpass='123456'

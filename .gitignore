@@ -7,10 +7,6 @@ Stars/build_*
 Stars/doxygen/output
 Stars/run_Stars*
 
-Kidpuzzle/build_kidpuzzle_vc11/
-Kidpuzzle/build_kidpuzzle_xcode/
-Kidpuzzle/artwork/
-
 Gnomes/build_gnomes_vc11/
 Gnomes/build_gnomes_xcode/
 Gnomes/artwork/
@@ -20,7 +16,7 @@ Warships/app/build_warships_xcode/
 Warships/server/Server/bin/
 Warships/server/Server/obj/
 
-Kidbook/build_kidbook_*/
+Kidbook/build/
 Kidbook/originals/
 Kidbook/dist/
 
