@@ -244,7 +244,7 @@
 	}
 
 	//////////////////////////////////////////////////////////////////////
-	// Metric capture
+	// Measure capture
 	//////////////////////////////////////////////////////////////////////
 	function showMeasurement(metric) {
 		logInfo("Show metric: " + metric);
@@ -257,8 +257,29 @@
 		$("#contentpanel").empty().append(
 			$('<p>Enter your measurement here. The new measurement is sent to the server when you leave the field.</p>')	
 		).append(
-			$('<div>' + metric + ':<input id="measurement" type="text" value="' + measure + '"></input></div>')	
+			$('<div>' + metric + ':<input id="measurement" type="text" name="' + metric + '" value="' + measure + '"></input></div>')	
+		);
+
+		// save handler		
+		$("#measurement").focusout(
+			function(focusout) {
+				updateMeasure(focusout.target.name, focusout.target.value);
+			}
 		);
 	}	
+
+	function updateMeasure(metric, measure) {
+		// update cached measures
+		var meemab = getData("meemab-measures");
+		var oldmeasure = meemab ? meemab[metric] : "";
+		
+		if (oldmeasure != measure) {
+			logInfo('Updating measure for "' + metric + '": "' + oldmeasure + '" -> "' + measure + '"');
+			// todo: meemab.metric = measure;
+			// todo: send meemab.metric to server
+		} else {
+			logInfo('Keeping measure for "' + metric + '": "' + oldmeasure + '"');			
+		}		
+	}
 
 })(window, jQuery);
