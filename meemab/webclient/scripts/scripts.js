@@ -5,38 +5,36 @@
     "use strict";
 
 	//////////////////////////////////////////////////////////////////////
-	// Initialization
+	// Initialize document
 	//////////////////////////////////////////////////////////////////////
     $(function () {
+		// event handlers
+		$("body").delegate(".meemabbutton", "click", function () {
+			onButtonClicked(this.id, this.textContent);
+		});
+		 
         // initialize meemab app
-		attachEventHandlers();
 		clearData();
 		setData("meemab-base-url", "http://meemab.cloudapp.net/api/");
+
+		// start page
+		showPageContent('pages/logon.html');
     });
 
 
 	//////////////////////////////////////////////////////////////////////
 	// DOM handling and navigation
 	//////////////////////////////////////////////////////////////////////
-	function attachEventHandlers() {
-		$(function () {
-			$("body").delegate(".meemabbutton", "click", function () {
-				onButtonClicked(this.id);
-			});
-		});
-	}
-
-	function onButtonClicked(buttonid) {
-		logInfo("Button clicked: " + buttonid);
-		switch (buttonid) {
-			case 'enter':
-				showPageContent('fragments/logon.html');
-				break;
-			case 'signup':
+	function onButtonClicked(buttonId, textContent) {
+		logInfo("Button clicked: " + buttonId);
+		switch (buttonId) {
+			case 'signin':
 				signIn();
 				break;
-			default:
-				showMetricContent(buttonid);
+			case 'showmetric':
+				showMeasurement(textContent);
+				break;
+			default:			
 		}
 	}
 
@@ -45,18 +43,12 @@
 		logInfo("Loaded new page content: " + filename);
 	}
 
-	function showMetricContent(buttonid) {
-		var filename = 'fragments/metrics/' + buttonid + '.html';
-		$('#contentpanel').load(filename);
-		logInfo("Loaded new metric content: " + filename);
-	}
-
 
 	//////////////////////////////////////////////////////////////////////
 	// State handling
 	//////////////////////////////////////////////////////////////////////
 	function clearData() {
-		return window.sessionStorage.clear;
+		return window.sessionStorage.clear();
 	}
 
 	function getData(key) {
@@ -88,7 +80,7 @@
 
 
 	//////////////////////////////////////////////////////////////////////
-	// AJAX helper
+	// AJAX helpers
 	//////////////////////////////////////////////////////////////////////
 	function getServerData(resource, params, body) {
 		var url = getData("meemab-base-url") + resource + "?" + $.param(params);
@@ -122,16 +114,16 @@
 	// Sign-in handling
 	//////////////////////////////////////////////////////////////////////
 	function setAccountName(accountName) {
-		setData("account", accountName);
-		$('#sessioninfo').html('User: ' + getData("account"));
+		setData("meemab-account", accountName);
+		$('#sessioninfo').html('User: ' + getData("meemab-account"));
 	}
 
 	function getAccountName() {
-		var accountName = getData("account");
+		var accountName = getData("meemab-account");
 		if (accountName == null || accountName.toString() == "") {
 			accountName = queryAccountName();
 		}
-		setData("account", accountName);
+		setData("meemab-account", accountName);
 		return accountName;
 	}
 
@@ -152,7 +144,11 @@
 	function checkAccount(accountName) {
 		// check if account exists
 		logInfo("Creating account: " + accountName);
-		getServerData("Account", { AccountName: accountName }).fail(onCheckAccountFailure).done(onCheckAccountSucceeded);
+		getServerData("Account", { AccountName: accountName }).fail(
+			onCheckAccountFailure
+		).done(
+			onCheckAccountSucceeded
+		);
 		
 		// ignore the result, if the account is found
 		// only the error case is interesting for now
@@ -178,26 +174,72 @@
 			"BirthDate": "1976-01-23T07:11:26.1045798+00:00",
 			"Country": "Denmark"
 		}
-		createServerData("Account", { AccountName: accountName}, data).fail(onCreateAccountFailed).done(onCreateAccountSucceeded);
-	}
-
-	function onCreateAccountSucceeded() {
-		logInfo("Account creation succeeded.");	
-		authenticationCompleted();
-	}
-
-	function onCreateAccountFailed(response) {
-		logInfo("Account creation failed: " + JSON.stringify(status));
+		createServerData("Account", { AccountName: accountName}, data).fail(
+			function () {
+				logInfo("Account creation failed: " + JSON.stringify(status));		
+			}
+		).done(
+			function () {
+				logInfo("Account creation succeeded.");	
+				authenticationCompleted();
+			}
+		);
 	}
 
 	function authenticationCompleted() {
-		setAccountName(getData("account"));	
-		showPageContent('fragments/main.html');
+		setAccountName(getData("meemab-account"));	
+		logInfo("Authentication done.");
+		buildMeemab();
+		showPageContent('pages/capture.html');
 	}
 
 	//////////////////////////////////////////////////////////////////////
 	// Meemab up- and download
 	//////////////////////////////////////////////////////////////////////
+	function buildMeemab() {
+        $("#menupanel").empty().append(
+        	$('<p>Loading your meemab...</p>')	
+		);
 
+		// get the meemab from the server		
+		getServerData("Measures", { AccountName: getData("meemab-account")}).fail(
+			function () {
+		        $("#contentpanel").empty().append(
+					$('<p>Failed: Meemab not found.</p>')	
+				);
+			}
+		).then(
+			function (meemab) {
+				$("#contentpanel").empty().append(
+					$('<p>Meemab loaded.</p>')
+				);
+				setData("meemab-measures", meemab);
+			}
+		);
+
+		// get the list of measurables for the menu
+		getServerData("Measurables", {}).fail(
+			function () {
+		        $("#menupanel").empty().append(
+					$('<p>Failed: measurables was not loaded.</p>')	
+				);
+			}
+		).then(showMenuPanel);
+	}
+
+	function showMenuPanel(measurables) {
+        $("#menupanel").empty().append(
+        	$('<p>Select a metric:</p>')	
+		);
+		measurables.forEach(function(measurable) {
+            $("#menupanel").append(
+                 $('<p id="showmetric" class="meemabbutton">' + measurable + '</p>')
+            );
+        });
+	}
+
+	function showMeasurement(metric) {
+		logInfo("Show metric: " + metric);		
+	}	
 
 })(window, jQuery);
