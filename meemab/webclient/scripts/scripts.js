@@ -224,7 +224,12 @@
 					$('<p>Failed: measurables was not loaded.</p>')	
 				);
 			}
-		).then(showMenuPanel);
+		).then(
+			function (measurables) {
+				setData("meemab-measurables", measurables);
+				showMenuPanel(measurables);
+			}
+		);
 	}
 
 	function showMenuPanel(measurables) {
@@ -238,8 +243,22 @@
         });
 	}
 
+	//////////////////////////////////////////////////////////////////////
+	// Metric capture
+	//////////////////////////////////////////////////////////////////////
 	function showMeasurement(metric) {
-		logInfo("Show metric: " + metric);		
+		logInfo("Show metric: " + metric);
+
+		// get cached measures
+		var meemab = getData("meemab-measures");
+		var measure = meemab ? meemab[metric] : "please enter...";
+		
+		// enable data capture
+		$("#contentpanel").empty().append(
+			$('<p>Enter your measurement here. The new measurement is sent to the server when you leave the field.</p>')	
+		).append(
+			$('<div>' + metric + ':<input id="measurement" type="text" value="' + measure + '"></input></div>')	
+		);
 	}	
 
 })(window, jQuery);
