@@ -263,7 +263,13 @@
 		// save handler		
 		$("#measurement").focusout(
 			function(focusout) {
-				updateMeasure(focusout.target.name, focusout.target.value);
+				var newmeasure = focusout.target.value;
+				if (newmeasure != measure) {
+					logInfo('Updating measure for "' + metric + '": "' + measure + '" -> "' + newmeasure + '"');
+					updateMeasure(metric, newmeasure);
+				} else {
+					logInfo('Keeping measure for "' + metric + '": "' + measure + '"');						
+				}
 			}
 		);
 	}	
@@ -271,15 +277,13 @@
 	function updateMeasure(metric, measure) {
 		// update cached measures
 		var meemab = getData("meemab-measures");
-		var oldmeasure = meemab ? meemab[metric] : "";
+		var oldmeasure = meemab[metric];
 		
-		if (oldmeasure != measure) {
-			logInfo('Updating measure for "' + metric + '": "' + oldmeasure + '" -> "' + measure + '"');
-			// todo: meemab.metric = measure;
-			// todo: send meemab.metric to server
+		if (oldmeasure == null) {
+			// create measure
 		} else {
-			logInfo('Keeping measure for "' + metric + '": "' + oldmeasure + '"');			
-		}		
+			// update measure
+		}
 	}
 
 })(window, jQuery);
