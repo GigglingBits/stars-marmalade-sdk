@@ -15,21 +15,23 @@ defines {
 }
 
 deployments {
-	app-icf=data/app.icf
-	embed-icf='1'
+    #app-icf=data/app.icf
+    #embed-icf='1'
 
 	networking=0
 
 	["iOS"]
-	iphone
-	iphone-appid='com.gigglingbits.kidbook.animals'
-	iphone-splash=marketing/splashscreens/splashscreen-320x480.png
-	iphone-enable-4inch-retina='1'
-	iphone-prerendered-icon='0'
-	assets='HighRes'
+    #iphone
+    #iphone-appid='com.gigglingbits.kidbook.animals'
+	#iphone-splash='marketing/splashscreens/splashscreen-320x480.png'
+	#iphone-enable-4inch-retina='1'
+	#iphone-prerendered-icon='0'
+	iphone-icon="marketing/icons/icon_57x57.png"
+	iphone-icon-ipad="marketing/icons/icon_72x72.png"
+	assets='XHighRes'
 
 	["Android"]
-	android
+	#android
 	android-pkgname='com.marmalade.kidbook.animals'
 	android-manifest=deploy/android/AndroidManifest.xml
 	android-keystore=deploy/android/my-release-key.keystore
@@ -39,7 +41,7 @@ deployments {
 	assets='HighRes'
 
 	["Blackberry"]
-	playbook
+	#playbook
 	blackberry-author='Giggling Bits'
 	blackberry-authorid='gYAAgBPNfjf8Ah_MRwCSAMjlL5U'
 	blackberry-cskpass='123456'
@@ -50,7 +52,7 @@ deployments {
 	assets='HighRes'
 
 	["Windows(x86)"]
-	win32
+	#win32
 	assets='XHighRes'
 }
 
