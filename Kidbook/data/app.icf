@@ -5,9 +5,18 @@
 MemSizeDebug=10000000
 MemSize=18000000
 
-IOSDispScaleFactor=200
-
 DispFixRot=2
+
+{OS=iphone}
+	SplashscreenBkR=255
+	SplashscreenBkG=255
+	SplashscreenBkB=255
+	SplashscreenWidth=600
+	SplashscreenHeight=371
+	SplashscreenFile=splashscreen-large.jpg
+	SplashscreenMinTime=1300
+
+	IOSDispScaleFactor=200
 
 {OS=android}
 	SplashscreenBkR=255
@@ -48,6 +57,9 @@ DispFixRot=2
 
 {}
 
+# Allow the audio from your app to be mixed with any already playing on the device
+AudioAllowBackground=1
+ 
 
 ####################################################
 [Util]

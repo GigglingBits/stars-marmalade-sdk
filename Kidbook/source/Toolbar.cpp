@@ -53,7 +53,7 @@ bool Toolbar::OnUpdate(bool first) {
 
 void Toolbar::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 	// calculate button geometry
-	const int margin = 8;
+	const int margin = 15;
 	const int count = m_xButtons.size();
 
 	if (count <= 0) {

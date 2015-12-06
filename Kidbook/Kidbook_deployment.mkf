@@ -1,0 +1,81 @@
+#Deployment options edited by the Hub
+#Please do not edit manually as this file is rewritten by the Hub
+
+deployments
+{
+    ["android (default)"]
+    icon = "marketing/icons"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2013"
+    version = "1.7.4"
+
+    ["android-fat (default)"]
+    icon = "marketing/icons"
+    splashscreen = "marketing/splashscreens"
+    splashscreen-use-all = "1"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2015"
+    version = "1.8.0"
+
+    ["bb10 (default)"]
+    icon = "marketing/icons"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2013"
+    version = "1.7.4"
+
+    ["iphone (default)"]
+    #platforms iphone
+    icon = "marketing/icons"
+    splashscreen = "marketing/splashscreens"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2015"
+    version = "1.8.4"
+    iphone-appid = "com.gigglingbits.kidbook.animals"
+    iphone-minimum-ios-version = "6.0"
+    iphone-bundle-localisations = ""
+    iphone-icon-dir = "marketing/icons"
+    iphone-launch-dir = ""
+    iphone-nosign = "0"
+    iphone-sign-for-distribution = "1"
+    iphone-provisioning-profile = "deploy/iOS/distribution.mobileprovision"
+    iphone-signing-identity = ""
+    iphone-testflight = "1"
+
+    ["iphone-fat (default)"]
+    #platforms iphone
+    icon = "marketing/icons"
+    splashscreen = "marketing/splashscreens"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2015"
+    version = "1.8.6"
+    iphone-appid = "com.gigglingbits.kidbook.animals"
+    iphone-minimum-ios-version = "6.0"
+    iphone-bundle-localisations = ""
+    iphone-icon-dir = "marketing/icons"
+    iphone-launch-dir = ""
+    iphone-nosign = "0"
+    iphone-sign-for-distribution = "1"
+    iphone-provisioning-profile = "deploy/iOS/distribution.mobileprovision"
+    iphone-signing-identity = ""
+    iphone-testflight = "1"
+
+    ["playbook (default)"]
+    icon = "marketing/icons"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2013"
+    version = "1.7.4"
+
+    ["wp8 (default)"]
+    icon = "marketing/icons"
+    embed-icf = "1"
+    provider = "Oliver C. Lanz"
+    copyright = "2010-2013"
+    version = "1.7.4"
+
+}

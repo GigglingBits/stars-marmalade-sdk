@@ -7,6 +7,6 @@ CIwResGroup
 		name "Font"
 
 		ttf ".\fonts\comic.ttf"
-		ttfPointSize 16
+		ttfPointSize 26
 	}
 }

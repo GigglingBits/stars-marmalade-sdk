@@ -132,6 +132,7 @@ files {
 assets {
 	(data)
 	splashscreen.jpg
+	splashscreen-large.jpg
 	PageMap.xml
 	help.txt
 
@@ -174,3 +175,6 @@ deployments
 	["Windows(x86)"]
 	["iOS"]
 }
+
+#Hub deployment options, please do not add anything below this line
+subproject Kidbook_deployment

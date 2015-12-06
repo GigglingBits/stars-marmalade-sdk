@@ -74,7 +74,7 @@ void Page::SetThumbnail(const std::string& filename) {
 }
 
 const CIwRect Page::CalculateTextPosition(const CIwSVec2& screensize, const CIwRect& imageregion) {
-	int height = std::min(std::min(screensize.x, screensize.y) / 5, 100);
+	int height = std::min(std::min(screensize.x, screensize.y) / 6, 150);
 	return CIwRect(
 			imageregion.x, 
 			imageregion.y + imageregion.h - height, 
@@ -131,7 +131,7 @@ bool Page::OnUpdate(bool first) {
 void Page::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 	// shrink image to create a frame
 	CIwRect imageregion(itemregion);
-	static int margin = std::min<int>(screensize.x, screensize.y) / 100;
+	static int margin = std::min<int>(screensize.x, screensize.y) / 150;
 	imageregion.x += margin, imageregion.y += margin;
 	imageregion.w -= 2 * margin, imageregion.h -= 2 * margin;
 

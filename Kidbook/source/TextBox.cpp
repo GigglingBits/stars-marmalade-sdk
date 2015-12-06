@@ -64,7 +64,7 @@ void TextBox::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion) {
 	if (m_bShow) {
 		Iw2DFinishDrawing();
 		// text
-		const int margin = 10;
+		const int margin = 20;
 		IwGxFontSetCol(0xff000000);
 		IwGxFontSetRect(CIwRect(
 			itemregion.x + margin, 

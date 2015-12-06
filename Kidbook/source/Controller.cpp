@@ -175,7 +175,7 @@ void Controller::OnRender(const CIwSVec2& screensize, const CIwRect& itemregion)
 	m_pxSpectator->Render(screensize, spectatorregion);
 
 	// render app toolbar
-	int height = std::min(std::min(screensize.x, screensize.y) / 6, 100);
+	int height = std::min(std::min(screensize.x, screensize.y) / 6, 150);
 	int width = m_xAppToolbar.GetButtonCount() * height;
 	m_xAppToolbar.Render(
 		screensize, 
